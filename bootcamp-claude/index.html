@@ -100,7 +100,7 @@
   <div class="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-5 text-sm md:text-base">
     <span class="font-semibold text-center">⚡ Sábado 6 de junio · Medellín · <span id="cupos-restantes">10 cupos</span></span>
     <button onclick="abrirModal()" class="bg-black text-white font-bold px-5 py-2 rounded-md hover:bg-azul transition text-sm whitespace-nowrap shadow-lg btn-lift flex-shrink-0">
-      Aplicar para mi cupo →
+      🔥 Aplicar para mi cupo
     </button>
   </div>
 </div>
@@ -109,8 +109,8 @@
 <!-- HERO                                          -->
 <!-- ============================================ -->
 <section class="bg-white py-12 md:py-20 px-4">
-  <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-10 items-center">
-    <div>
+  <div class="max-w-6xl mx-auto grid md:grid-cols-1 gap-10 items-center">
+    <div class="max-w-3xl mx-auto">
       <!-- LOGO HERO con zoom CSS para verse rectangular y más grande -->
       <div class="mb-8 overflow-hidden relative" style="height: 80px; width: 240px;">
         <img src="imagenes/logo-negro-amarillo-blanco.png" alt="Joako Estratega" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(1.8); max-width: none; height: 100%;">
@@ -132,21 +132,18 @@
         </a>
       </div>
       <p class="mt-4 text-sm opacity-60">📅 Sábado 6 de junio · 🕘 9:00 am a 4:00 pm · 📍 Medellín</p>
+
+      <!-- BANDA DE PRECIO EN HERO -->
+      <div class="mt-6 inline-flex items-center gap-3 bg-amarillo text-black px-5 py-3 rounded-lg flex-wrap shadow-lg">
+        <span class="font-headline text-2xl">$997.000 COP</span>
+        <span class="bg-black text-amarillo text-xs font-bold px-2 py-1 rounded">PRIMER BOOTCAMP</span>
+      </div>
     </div>
-    <div>
-      <!-- VIDEO DEL HERO. 2 opciones:                                          -->
-      <!-- OPCIÓN A (recomendada): YouTube no listado embebido. Reemplaza VIDEO_ID por el id de tu video -->
-      <!-- OPCIÓN B: video local en /videos/hero-bootcamp.mp4 (descomenta si lo prefieres)             -->
 
+    <!-- VIDEO DEL HERO oculto temporalmente. Para activarlo: borra "hidden" abajo, cambia md:grid-cols-1 por md:grid-cols-2 arriba, y reemplaza VIDEO_ID -->
+    <div class="hidden">
       <div class="aspect-video bg-black rounded-lg overflow-hidden shadow-xl">
-        <!-- OPCIÓN A: YouTube -->
         <iframe class="w-full h-full" src="https://www.youtube.com/embed/VIDEO_ID?autoplay=0&rel=0" title="Bootcamp Claude" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-
-        <!-- OPCIÓN B: video local. Descomenta y elimina el iframe de arriba si la prefieres
-        <video controls poster="imagenes/hero-poster.jpg" class="w-full h-full object-cover">
-          <source src="videos/hero-bootcamp.mp4" type="video/mp4">
-        </video>
-        -->
       </div>
     </div>
   </div>
@@ -156,11 +153,7 @@
 <!-- BARRA DE CREDIBILIDAD                          -->
 <!-- ============================================ -->
 <section class="bg-black text-white py-8 px-4">
-  <div class="max-w-6xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
-    <div>
-      <p class="font-headline text-3xl text-amarillo">50.000</p>
-      <p class="text-sm opacity-60">Asistentes Feria EFFIX</p>
-    </div>
+  <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
     <div>
       <p class="font-headline text-3xl text-amarillo">+500K USD</p>
       <p class="text-sm opacity-60">Gestionados en pauta</p>
@@ -218,8 +211,8 @@
         </ul>
         <p class="font-bold border-l-4 border-amarillo pl-4">Mientras la mayoría escribe prompts sueltos a ChatGPT, tú vas a construir el sistema completo. El mismo que opero yo y mis clientes esta semana.</p>
       </div>
-      <div>
-        <!-- IMAGEN: captura de pantalla de Claude Code corriendo en tu computador con agentes visibles -->
+      <!-- IMAGEN claude-corriendo.png oculta temporalmente. Para activar: quita "hidden" abajo -->
+      <div class="hidden">
         <img src="imagenes/claude-corriendo.png" alt="Claude Code corriendo con agentes" class="w-full rounded-lg shadow-2xl border-4 border-amarillo">
       </div>
     </div>
@@ -278,7 +271,7 @@
     </h2>
     <div class="grid md:grid-cols-2 gap-8">
       <div>
-        <h3 class="font-headline text-xl text-amarillo mb-4">EN TU COMPUTADOR</h3>
+        <h3 class="font-headline text-xl text-amarillo mb-4">TU SISTEMA INSTALADO</h3>
         <ul class="space-y-3">
           <li class="flex gap-3"><span class="text-amarillo font-bold">✓</span> Claude Code instalado, configurado y listo</li>
           <li class="flex gap-3"><span class="text-amarillo font-bold">✓</span> Estructura del Método MPV organizada para tu negocio</li>
@@ -289,15 +282,14 @@
         </ul>
       </div>
       <div>
-        <h3 class="font-headline text-xl text-amarillo mb-4">POR FUERA DEL COMPUTADOR</h3>
+        <h3 class="font-headline text-xl text-amarillo mb-4">ACOMPAÑAMIENTO QUE NO TERMINA</h3>
         <ul class="space-y-3">
           <li class="flex gap-3"><span class="text-amarillo font-bold">✓</span> Curso digital paso a paso en video, acceso permanente</li>
           <li class="flex gap-3"><span class="text-amarillo font-bold">✓</span> Acceso al grupo WhatsApp privado del bootcamp (sin límite de tiempo)</li>
           <li class="flex gap-3"><span class="text-amarillo font-bold">✓</span> Constancia de participación</li>
-          <li class="flex gap-3"><span class="text-amarillo font-bold">✓</span> Almuerzo y café incluidos durante el día</li>
         </ul>
-        <!-- IMAGEN/GIF: parrilla generándose automáticamente. Idealmente GIF corto -->
-        <img src="imagenes/parrilla-demo.gif" alt="Parrilla generándose en automático" class="mt-6 rounded-lg border-2 border-amarillo">
+        <!-- IMAGEN parrilla-demo.gif oculta temporalmente. Para activar: quita "hidden" abajo -->
+        <img src="imagenes/parrilla-demo.gif" alt="Parrilla generándose en automático" class="mt-6 rounded-lg border-2 border-amarillo hidden">
       </div>
     </div>
   </div>
@@ -307,9 +299,9 @@
 <!-- QUIÉN SOY                                     -->
 <!-- ============================================ -->
 <section class="py-16 md:py-24 px-4 bg-white">
-  <div class="max-w-5xl mx-auto grid md:grid-cols-2 gap-12 items-center">
-    <div>
-      <!-- IMAGEN: foto profesional tuya en tarima Feria EFFIX o Grupo EFFI -->
+  <div class="max-w-3xl mx-auto">
+    <!-- IMAGEN joako-effi.jpg oculta temporalmente. Para activar: cambia max-w-3xl mx-auto por max-w-5xl mx-auto grid md:grid-cols-2 gap-12 items-center, y quita "hidden" del div siguiente -->
+    <div class="hidden">
       <img src="imagenes/joako-effi.jpg" alt="Joako en tarima de Feria EFFIX" class="w-full rounded-lg shadow-xl">
     </div>
     <div>
@@ -318,7 +310,7 @@
         Joaquín Rojas,<br><span class="text-azul">estratega de marketing digital</span>
       </h2>
       <p class="text-lg mb-6">
-        Estratega de la <strong>Feria EFFIX</strong> (50.000 asistentes), la feria de ecommerce hispano más grande del continente. Ingeniero mecatrónico con especialización en <strong>lean manufacturing</strong>: no veo el marketing como arte creativo, lo veo como proceso industrial.
+        Estratega de la <strong>Feria EFFIX</strong>, la feria de ecommerce hispano más grande del continente. Ingeniero mecatrónico con especialización en <strong>lean manufacturing</strong>: no veo el marketing como arte creativo, lo veo como proceso industrial.
       </p>
       <ul class="space-y-3 mb-6">
         <li class="flex gap-3 items-start"><span class="text-amarillo font-bold text-xl flex-shrink-0">●</span> <span><strong>+500.000 USD</strong> gestionados en pauta Meta</span></li>
@@ -444,15 +436,44 @@
 <!-- ============================================ -->
 <section id="cta-aplicar" class="bg-amarillo py-16 md:py-24 px-4">
   <div class="max-w-3xl mx-auto text-center">
+
+    <!-- COMPARATIVA DE PRECIO -->
+    <div class="bg-white rounded-2xl p-6 md:p-8 mb-10 shadow-xl text-left">
+      <p class="font-secondary text-black text-sm mb-4 text-center opacity-60">LO QUE PAGARÍAS POR ESTO EN OTRO LADO</p>
+      <ul class="space-y-3 text-base md:text-lg mb-4">
+        <li class="flex justify-between gap-4 border-b border-gray-200 pb-3"><span>Curso de IA en plataforma online</span><span class="font-bold">$1.500.000</span></li>
+        <li class="flex justify-between gap-4 border-b border-gray-200 pb-3"><span>Mentor 1-a-1 en marketing con IA (3 sesiones)</span><span class="font-bold">$2.400.000</span></li>
+        <li class="flex justify-between gap-4 border-b border-gray-200 pb-3"><span>Agencia para que opere tu marketing 1 mes</span><span class="font-bold">$6.000.000</span></li>
+        <li class="flex justify-between gap-4 pt-2"><span class="font-bold">Total acumulado</span><span class="font-bold text-azul">$9.900.000</span></li>
+      </ul>
+      <p class="text-center text-sm md:text-base font-bold mt-4">Aquí pagas <span class="text-azul">una décima parte</span>. Sin mensualidades. Y sales operando.</p>
+    </div>
+
     <p class="font-secondary text-black text-xl mb-2">INVERSIÓN ÚNICA</p>
-    <h2 class="font-headline text-5xl md:text-7xl mb-6">$997.000 <span class="text-3xl">COP</span></h2>
-    <p class="text-lg mb-8 max-w-xl mx-auto">Incluye todo lo de la lista anterior. Sin mensualidades, sin renovaciones, sin sorpresas.</p>
-    <button onclick="abrirModal()" class="bg-black text-white font-bold py-5 px-12 rounded-lg text-xl hover:bg-azul transition mb-6 btn-lift pulse-negro">
-      Aplicar para mi cupo
+    <h2 class="font-headline text-5xl md:text-7xl mb-4">$997.000 <span class="text-3xl">COP</span></h2>
+    <p class="text-lg mb-4 max-w-xl mx-auto">Pago único. Sin mensualidades, sin renovaciones, sin sorpresas.</p>
+
+    <!-- URGENCIA REAL: precio solo del primer bootcamp -->
+    <div class="bg-black text-white rounded-lg p-5 mb-8 max-w-xl mx-auto">
+      <p class="font-bold text-amarillo mb-2">⚡ Este es el primer bootcamp presencial</p>
+      <p class="text-sm">Después de este, el bootcamp presencial sube a <strong>$1.997.000</strong> y este precio quedará disponible solo en la versión virtual pregrabada. Si quieres aprender en persona conmigo a este valor, este es el momento.</p>
+    </div>
+
+    <!-- BONO DE DECISIÓN RÁPIDA -->
+    <div class="bg-black text-white rounded-lg p-5 mb-8 max-w-xl mx-auto">
+      <p class="font-bold text-amarillo mb-1">🎁 Bono por decisión rápida</p>
+      <p class="text-sm">Si reservas en las próximas <strong>48 horas</strong>, te incluyo una <strong>sesión virtual 1-a-1 de 30 minutos</strong> conmigo después del bootcamp para revisar tu sistema en acción.</p>
+    </div>
+
+    <button onclick="abrirModal()" class="bg-black text-white font-bold py-5 px-12 rounded-lg text-xl hover:bg-azul transition mb-8 btn-lift pulse-negro">
+      Aplicar para mi cupo →
     </button>
-    <div class="bg-black text-white rounded-lg p-6 mt-8 max-w-2xl mx-auto">
-      <p class="font-headline text-xl text-amarillo mb-2">🛡 Garantía de instalación</p>
-      <p>El día termina contigo y tu sistema corriendo. Si por causas técnicas algo no quedó listo, te acompañamos virtualmente hasta que opere.</p>
+
+    <!-- GARANTÍA DESTACADA -->
+    <div class="bg-black text-white rounded-2xl p-6 md:p-8 max-w-2xl mx-auto border-4 border-black shadow-2xl">
+      <div class="text-5xl mb-3">🛡</div>
+      <p class="font-headline text-xl md:text-2xl text-amarillo mb-3">Garantía de instalación</p>
+      <p class="text-sm md:text-base">El día termina contigo y tu sistema corriendo. Si por causas técnicas algo no quedó listo, <strong>te acompañamos virtualmente hasta que opere</strong>. Sin letra chica.</p>
     </div>
   </div>
 </section>
