@@ -1,0 +1,48 @@
+CARPETA DE VIDEOS — Bootcamp Claude
+====================================
+
+Solo necesitas un archivo aquí SI eliges la opción de video local.
+
+OPCIÓN RECOMENDADA: YouTube no listado (más rápido para los visitantes)
+======================================================================
+1. Subes tu video a YouTube como "No listado" (no se verá en búsquedas).
+2. Copias el ID del video. El ID son los caracteres después de "v=".
+   Ejemplo: si la URL es https://www.youtube.com/watch?v=ABC123xyz
+   El ID es: ABC123xyz
+3. Abres el archivo index.html con un editor de texto.
+4. Buscas la palabra: VIDEO_ID
+5. La reemplazas por el ID que copiaste.
+6. Guardas y subes el index.html actualizado.
+
+OPCIÓN ALTERNATIVA: video local en esta carpeta
+================================================
+Si prefieres tener el video en tu propio repo (más pesado):
+
+1. Sube el archivo aquí con este nombre exacto:
+   hero-bootcamp.mp4
+
+2. En el index.html, busca el comentario:
+   "OPCIÓN B: video local. Descomenta y elimina el iframe de arriba si la prefieres"
+
+3. Sigue las instrucciones del comentario:
+   - Eliminas el bloque <iframe>...</iframe>
+   - Descomentas el bloque <video>...</video> (quitas <!-- y -->)
+
+4. También sube hero-poster.jpg a la carpeta /imagenes/.
+
+ESPECIFICACIONES DEL VIDEO:
+- Duración: 45 a 60 segundos máximo (no más).
+- Tú a cámara presentando la oferta del bootcamp.
+- Subtítulos siempre activos (puedes generarlos con CapCut, Submagic o Veed).
+- Vertical o cuadrado funcionan, pero horizontal 16:9 es lo más limpio.
+- Audio limpio (usa micrófono de solapa).
+- Resolución mínima: 1080p.
+- Formato: MP4 (H.264 + AAC).
+- Peso ideal: menor a 50 MB.
+
+ESTRUCTURA DEL VIDEO RECOMENDADA:
+0-3 seg:   Hook directo. "Si llevas meses oyendo de IA y sigues haciendo todo a mano..."
+3-15 seg:  Problema. "El problema no es la IA. Es que no tienes sistema."
+15-35 seg: Solución. "El sábado 6 de junio en Medellín te enseño a instalar Claude Code y dejar tu marketing operando con IA."
+35-50 seg: Qué te llevas concreto. "Sales con Claude instalado, agentes corriendo, primera parrilla automática."
+50-60 seg: CTA. "Aplica abajo. 10 cupos. Sábado 6 de junio."

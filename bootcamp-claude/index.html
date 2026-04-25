@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bootcamp Claude · Tu marketing operando con IA · Joako Estratega</title>
+<meta name="description" content="Bootcamp presencial en Medellín. Sales con Claude Code instalado, tus agentes corriendo y tu primera parrilla automatizada. Sábado 6 de junio.">
+
+<!-- Tailwind CDN -->
+<script src="https://cdn.tailwindcss.com"></script>
+
+<!-- Google Fonts: Montserrat (headline). Pattanakarn no está en Google Fonts, se reemplaza con Bebas Neue como fallback secundaria -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;900&family=Bebas+Neue&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --azul: #2B2FCC;
+    --amarillo: #F8B400;
+    --negro: #000000;
+    --blanco: #FFFFFF;
+  }
+  body { font-family: 'Montserrat', sans-serif; color: #000; }
+  .font-headline { font-family: 'Montserrat', sans-serif; font-weight: 900; }
+  .font-secondary { font-family: 'Bebas Neue', sans-serif; letter-spacing: 0.02em; }
+  .bg-azul { background-color: var(--azul); }
+  .bg-amarillo { background-color: var(--amarillo); }
+  .text-azul { color: var(--azul); }
+  .text-amarillo { color: var(--amarillo); }
+  .border-azul { border-color: var(--azul); }
+  .border-amarillo { border-color: var(--amarillo); }
+  html { scroll-behavior: smooth; }
+  .opacity-60 { opacity: 0.6; }
+
+  /* Modal */
+  .modal-bg { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.7); z-index: 100; align-items: center; justify-content: center; padding: 1rem; }
+  .modal-bg.active { display: flex; }
+  .modal-box { background: white; max-width: 500px; width: 100%; border-radius: 12px; padding: 2rem; max-height: 90vh; overflow-y: auto; }
+
+  /* FAQ accordion */
+  .faq-item { border-bottom: 1px solid #e5e5e5; }
+  .faq-question { cursor: pointer; padding: 1.25rem 0; display: flex; justify-content: space-between; align-items: center; }
+  .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; }
+  .faq-item.open .faq-answer { max-height: 500px; padding-bottom: 1.25rem; }
+  .faq-item.open .faq-arrow { transform: rotate(45deg); }
+  .faq-arrow { transition: transform 0.3s; font-size: 1.5rem; line-height: 1; }
+
+  /* Sticky bottom mobile */
+  .sticky-mobile { display: none; }
+  @media (max-width: 768px) { .sticky-mobile { display: block; } body { padding-bottom: 5rem; } }
+
+  /* WhatsApp flotante */
+  .wa-float { position: fixed; bottom: 1.5rem; right: 1.5rem; z-index: 50; box-shadow: 0 4px 12px rgba(0,0,0,0.2); }
+  @media (max-width: 768px) { .wa-float { bottom: 5.5rem; } }
+</style>
+</head>
+<body class="bg-white">
+
+<!-- ============================================ -->
+<!-- BARRA DE URGENCIA STICKY                       -->
+<!-- EDITAR: cambia "10 cupos" según se vayan vendiendo -->
+<!-- ============================================ -->
+<div class="bg-amarillo text-black py-2 px-4 text-center text-sm md:text-base font-semibold sticky top-0 z-40">
+  ⚡ Sábado 6 de junio · Medellín · <span id="cupos-restantes">10 cupos disponibles</span> ·
+  <a href="#cta-aplicar" class="underline font-bold">Aplica para tu cupo</a>
+</div>
+
+<!-- ============================================ -->
+<!-- HERO                                          -->
+<!-- ============================================ -->
+<section class="bg-white py-12 md:py-20 px-4">
+  <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-10 items-center">
+    <div>
+      <!-- LOGO: versión "Logo negro - amarillo fondo blanco" -->
+      <img src="imagenes/logo-negro-amarillo-blanco.png" alt="Joako Estratega" class="h-12 mb-6">
+
+      <p class="font-secondary text-azul text-xl md:text-2xl mb-3">BOOTCAMP CLAUDE · MARKETING CON IA</p>
+      <h1 class="font-headline text-4xl md:text-6xl leading-tight mb-6">
+        Tu marketing entero, <br><span class="text-azul">operando con IA.</span><br>En un solo día.
+      </h1>
+      <p class="text-lg md:text-xl mb-8 text-black opacity-60">
+        Sales con Claude Code instalado en tu computador, tus agentes corriendo y tu primera parrilla de contenido saliendo en automático. El mismo sistema que opero yo y mis clientes de agencia.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4">
+        <button onclick="abrirModal()" class="bg-azul text-white font-bold py-4 px-8 rounded-lg text-lg hover:opacity-90 transition">
+          Aplicar para mi cupo
+        </button>
+        <a href="#que-te-llevas" class="border-2 border-black text-black font-bold py-4 px-8 rounded-lg text-lg text-center hover:bg-black hover:text-white transition">
+          Ver qué te llevas
+        </a>
+      </div>
+      <p class="mt-4 text-sm opacity-60">📅 Sábado 6 de junio · 🕘 9:00 am a 4:00 pm · 📍 Medellín</p>
+    </div>
+    <div>
+      <!-- VIDEO DEL HERO. 2 opciones:                                          -->
+      <!-- OPCIÓN A (recomendada): YouTube no listado embebido. Reemplaza VIDEO_ID por el id de tu video -->
+      <!-- OPCIÓN B: video local en /videos/hero-bootcamp.mp4 (descomenta si lo prefieres)             -->
+
+      <div class="aspect-video bg-black rounded-lg overflow-hidden shadow-xl">
+        <!-- OPCIÓN A: YouTube -->
+        <iframe class="w-full h-full" src="https://www.youtube.com/embed/VIDEO_ID?autoplay=0&rel=0" title="Bootcamp Claude" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+        <!-- OPCIÓN B: video local. Descomenta y elimina el iframe de arriba si la prefieres
+        <video controls poster="imagenes/hero-poster.jpg" class="w-full h-full object-cover">
+          <source src="videos/hero-bootcamp.mp4" type="video/mp4">
+        </video>
+        -->
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================ -->
+<!-- BARRA DE CREDIBILIDAD                          -->
+<!-- ============================================ -->
+<section class="bg-black text-white py-8 px-4">
+  <div class="max-w-6xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+    <div>
+      <p class="font-headline text-3xl text-amarillo">50.000</p>
+      <p class="text-sm opacity-60">Asistentes Feria EFFIX</p>
+    </div>
+    <div>
+      <p class="font-headline text-3xl text-amarillo">+500K USD</p>
+      <p class="text-sm opacity-60">Gestionados en pauta</p>
+    </div>
+    <div>
+      <p class="font-headline text-3xl text-amarillo">5</p>
+      <p class="text-sm opacity-60">Marcas activas hoy</p>
+    </div>
+    <div>
+      <p class="font-headline text-3xl text-amarillo">4 países</p>
+      <p class="text-sm opacity-60">Colombia, México, Ecuador, USA</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================ -->
+<!-- ESPEJO DEL DOLOR                              -->
+<!-- ============================================ -->
+<section class="py-16 md:py-24 px-4 bg-white">
+  <div class="max-w-4xl mx-auto">
+    <h2 class="font-headline text-3xl md:text-5xl mb-8 text-center leading-tight">
+      Llevas meses oyendo de IA y sigues<br>haciendo todo a mano.
+    </h2>
+    <div class="space-y-4 text-lg">
+      <p class="border-l-4 border-amarillo pl-4">Pruebas un prompt y otro y otro, y al final el contenido sigue sonando genérico.</p>
+      <p class="border-l-4 border-amarillo pl-4">Te dicen que ChatGPT te ahorra tiempo, pero terminas reescribiendo todo lo que entrega.</p>
+      <p class="border-l-4 border-amarillo pl-4">Sabes que tu competencia automatiza algo, pero no entiendes qué.</p>
+      <p class="border-l-4 border-amarillo pl-4">Pagas suscripciones de IA que casi no usas porque no sabes cómo encajan en tu negocio.</p>
+    </div>
+    <p class="font-headline text-xl md:text-2xl mt-10 text-center">
+      El problema no es la IA. <span class="text-azul">Es que la estás usando sin sistema.</span>
+    </p>
+  </div>
+</section>
+
+<!-- ============================================ -->
+<!-- REVELACIÓN - Qué es Claude Code                -->
+<!-- ============================================ -->
+<section class="bg-azul text-white py-16 md:py-24 px-4">
+  <div class="max-w-5xl mx-auto">
+    <!-- LOGO: versión "Logo blanco - amarillo fondo azul" -->
+    <img src="imagenes/logo-blanco-amarillo-fondo-azul.png" alt="Joako Estratega" class="h-10 mb-8 mx-auto">
+
+    <h2 class="font-headline text-3xl md:text-5xl mb-6 text-center leading-tight">
+      Claude Code no es ChatGPT.<br><span class="text-amarillo">Y eso lo cambia todo.</span>
+    </h2>
+    <div class="grid md:grid-cols-2 gap-8 mt-12">
+      <div class="space-y-4 text-lg">
+        <p>Claude Code es la IA profesional que opera <strong>dentro de tu computador</strong>, no en una pestaña del navegador.</p>
+        <p>Vive en tus archivos. Lee tu documentación. Y opera con <strong class="text-amarillo">agentes especializados</strong> que tú entrenas para que conozcan tu negocio como nadie.</p>
+        <p>Mientras la mayoría escribe prompts sueltos a ChatGPT, en este bootcamp aprendes a construir un sistema de agentes que documenta tu empresa, escribe tu contenido y arma tu parrilla en automático.</p>
+        <p class="font-bold">Esto es lo mismo que opero yo en Joako Estratega y en mis clientes. No es teoría. Es el sistema que ya está corriendo.</p>
+      </div>
+      <div>
+        <!-- IMAGEN: captura de pantalla de Claude Code corriendo en tu computador con agentes visibles -->
+        <img src="imagenes/claude-corriendo.png" alt="Claude Code corriendo con agentes" class="w-full rounded-lg shadow-2xl border-4 border-amarillo">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================ -->
+<!-- BULLETS QUE MATAN OBJECIONES                  -->
+<!-- ============================================ -->
+<section class="py-16 md:py-24 px-4 bg-white">
+  <div class="max-w-5xl mx-auto">
+    <h2 class="font-headline text-3xl md:text-5xl mb-12 text-center leading-tight">
+      Antes de seguir,<br>esto seguro lo estás pensando
+    </h2>
+    <div class="grid md:grid-cols-2 gap-6">
+      <div class="border-2 border-azul rounded-lg p-6">
+        <p class="font-headline text-xl text-azul mb-2">No necesitas saber programar</p>
+        <p>Si sabes escribir un correo, puedes operar Claude Code. Cero código.</p>
+      </div>
+      <div class="border-2 border-azul rounded-lg p-6">
+        <p class="font-headline text-xl text-azul mb-2">No es un curso más</p>
+        <p>Es una instalación en vivo. Sales con tu sistema funcionando, no con apuntes.</p>
+      </div>
+      <div class="border-2 border-azul rounded-lg p-6">
+        <p class="font-headline text-xl text-azul mb-2">Funciona en cualquier negocio</p>
+        <p>Servicio, producto físico, marca personal, mentoría, agencia. Lo aplicamos al tuyo en vivo.</p>
+      </div>
+      <div class="border-2 border-azul rounded-lg p-6">
+        <p class="font-headline text-xl text-azul mb-2">Lo hacemos juntos en tu PC</p>
+        <p>No te quedas solo con un PDF que después no aplicas. Sales con todo corriendo.</p>
+      </div>
+      <div class="border-2 border-azul rounded-lg p-6">
+        <p class="font-headline text-xl text-azul mb-2">No pierdes tiempo si ya usas IA</p>
+        <p>Lo que sabes hoy se ordena dentro de un sistema que escala.</p>
+      </div>
+      <div class="border-2 border-azul rounded-lg p-6">
+        <p class="font-headline text-xl text-azul mb-2">Cupo limitado a 10 personas</p>
+        <p>Para que cada uno salga con su sistema corriendo, no en grupo masivo.</p>
+      </div>
+    </div>
+    <div class="text-center mt-12">
+      <button onclick="abrirModal()" class="bg-azul text-white font-bold py-4 px-10 rounded-lg text-lg hover:opacity-90 transition">
+        Aplicar para mi cupo
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================ -->
+<!-- QUÉ TE LLEVAS                                 -->
+<!-- ============================================ -->
+<section id="que-te-llevas" class="bg-black text-white py-16 md:py-24 px-4">
+  <div class="max-w-5xl mx-auto">
+    <h2 class="font-headline text-3xl md:text-5xl mb-12 text-center leading-tight">
+      Al final del día,<br><span class="text-amarillo">tu computador queda con esto operando</span>
+    </h2>
+    <div class="grid md:grid-cols-2 gap-8">
+      <div>
+        <h3 class="font-headline text-xl text-amarillo mb-4">EN TU COMPUTADOR</h3>
+        <ul class="space-y-3">
+          <li class="flex gap-3"><span class="text-amarillo font-bold">✓</span> Claude Code instalado, configurado y listo</li>
+          <li class="flex gap-3"><span class="text-amarillo font-bold">✓</span> Estructura del Método MPV organizada para tu negocio</li>
+          <li class="flex gap-3"><span class="text-amarillo font-bold">✓</span> 2 agentes corriendo: documentador + agente de contenido</li>
+          <li class="flex gap-3"><span class="text-amarillo font-bold">✓</span> Tu 06-contexto-ia.md (cerebro digital del negocio) generado en vivo</li>
+          <li class="flex gap-3"><span class="text-amarillo font-bold">✓</span> Tu primera parrilla semanal saliendo automáticamente</li>
+          <li class="flex gap-3"><span class="text-amarillo font-bold">✓</span> Plantillas de prompts y agentes listas para reutilizar</li>
+        </ul>
+      </div>
+      <div>
+        <h3 class="font-headline text-xl text-amarillo mb-4">POR FUERA DEL COMPUTADOR</h3>
+        <ul class="space-y-3">
+          <li class="flex gap-3"><span class="text-amarillo font-bold">✓</span> Curso digital paso a paso en video, acceso permanente</li>
+          <li class="flex gap-3"><span class="text-amarillo font-bold">✓</span> Acceso al grupo WhatsApp privado del bootcamp (sin límite de tiempo)</li>
+          <li class="flex gap-3"><span class="text-amarillo font-bold">✓</span> Constancia de participación</li>
+          <li class="flex gap-3"><span class="text-amarillo font-bold">✓</span> Almuerzo y café incluidos durante el día</li>
+        </ul>
+        <!-- IMAGEN/GIF: parrilla generándose automáticamente. Idealmente GIF corto -->
+        <img src="imagenes/parrilla-demo.gif" alt="Parrilla generándose en automático" class="mt-6 rounded-lg border-2 border-amarillo">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================ -->
+<!-- QUIÉN SOY                                     -->
+<!-- ============================================ -->
+<section class="py-16 md:py-24 px-4 bg-white">
+  <div class="max-w-5xl mx-auto grid md:grid-cols-2 gap-12 items-center">
+    <div>
+      <!-- IMAGEN: foto profesional tuya en tarima Feria EFFIX o Grupo EFFI -->
+      <img src="imagenes/joako-effi.jpg" alt="Joako en tarima de Feria EFFIX" class="w-full rounded-lg shadow-xl">
+    </div>
+    <div>
+      <p class="font-secondary text-azul text-xl mb-2">QUIÉN TE VA A ENSEÑAR</p>
+      <h2 class="font-headline text-3xl md:text-5xl mb-6 leading-tight">
+        Joaquín Rojas,<br><span class="text-azul">estratega de marketing digital</span>
+      </h2>
+      <div class="space-y-4 text-lg">
+        <p>Estratega oficial activo de <strong>Feria EFFIX</strong>, la feria de ecommerce hispano más grande del continente (50.000 asistentes por edición). Trabajo con marcas reales que venden todos los días en Colombia, México y Ecuador.</p>
+        <p>He gestionado más de <strong>500.000 USD en pauta Meta</strong> y construí el <strong>Método MPV</strong>: un sistema de 4 fases (Diagnóstico → Mensaje → Captación → Cierre) que opero con un sistema de agentes en Claude Code.</p>
+        <p>Mi formación de ingeniero mecatrónico y especialista en lean manufacturing me lleva a ver el marketing como un proceso industrial, no como arte creativo. Por eso construyo sistemas, no campañas sueltas.</p>
+        <p class="font-bold">Lo que te enseño en el bootcamp es exactamente lo que está corriendo en mi negocio y en el de mis clientes esta semana.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================ -->
+<!-- TEMARIO                                       -->
+<!-- ============================================ -->
+<section class="bg-amarillo py-16 md:py-24 px-4">
+  <div class="max-w-4xl mx-auto">
+    <p class="font-secondary text-black text-xl mb-2 text-center">EL DÍA HORA POR HORA</p>
+    <h2 class="font-headline text-3xl md:text-5xl mb-12 text-center leading-tight">Temario del bootcamp</h2>
+    <div class="bg-white rounded-lg shadow-xl overflow-hidden">
+      <table class="w-full">
+        <tbody>
+          <tr class="border-b"><td class="p-4 font-bold text-azul w-32">9:00</td><td class="p-4">Bienvenida y qué es Claude Code</td></tr>
+          <tr class="border-b bg-gray-50"><td class="p-4 font-bold text-azul">9:30</td><td class="p-4">Bloque 1: IA aplicada al Método MPV</td></tr>
+          <tr class="border-b"><td class="p-4 font-bold text-azul">10:30</td><td class="p-4">Bloque 2: Construye la documentación de tu negocio</td></tr>
+          <tr class="border-b bg-gray-50"><td class="p-4 font-bold text-azul">11:30</td><td class="p-4">Bloque 3: Instalación de Claude Code y estructura base</td></tr>
+          <tr class="border-b"><td class="p-4 font-bold text-azul">12:30</td><td class="p-4">Almuerzo</td></tr>
+          <tr class="border-b bg-gray-50"><td class="p-4 font-bold text-azul">13:30</td><td class="p-4">Bloque 4: Agentes corriendo sobre tu propio negocio</td></tr>
+          <tr class="border-b"><td class="p-4 font-bold text-azul">15:00</td><td class="p-4">Bloque 5: Tu primera parrilla automatizada</td></tr>
+          <tr><td class="p-4 font-bold text-azul">16:00</td><td class="p-4">Cierre y siguientes pasos</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================ -->
+<!-- PARA QUIÉN ES / NO ES                         -->
+<!-- ============================================ -->
+<section class="py-16 md:py-24 px-4 bg-white">
+  <div class="max-w-5xl mx-auto">
+    <h2 class="font-headline text-3xl md:text-5xl mb-12 text-center leading-tight">¿Es este bootcamp para ti?</h2>
+    <div class="grid md:grid-cols-2 gap-8">
+      <div class="border-2 border-azul rounded-lg p-8">
+        <h3 class="font-headline text-2xl text-azul mb-4">SÍ es para ti si...</h3>
+        <ul class="space-y-3">
+          <li class="flex gap-3"><span class="text-azul font-bold">✓</span> Tienes un negocio en operación generando ingresos hoy</li>
+          <li class="flex gap-3"><span class="text-azul font-bold">✓</span> Quieres dejar de operar tu marketing a mano y construir un sistema con IA</li>
+          <li class="flex gap-3"><span class="text-azul font-bold">✓</span> Vas a aplicar lo aprendido inmediatamente</li>
+          <li class="flex gap-3"><span class="text-azul font-bold">✓</span> Tienes laptop propia y manejas básico de archivos</li>
+        </ul>
+      </div>
+      <div class="border-2 border-gray-300 rounded-lg p-8 bg-gray-50">
+        <h3 class="font-headline text-2xl text-gray-600 mb-4">No es para ti si...</h3>
+        <ul class="space-y-3 text-gray-700">
+          <li class="flex gap-3"><span class="font-bold">·</span> Estás explorando ideas y aún no tienes negocio operando</li>
+          <li class="flex gap-3"><span class="font-bold">·</span> Buscas un curso para guardar y ver después (este es de instalación)</li>
+          <li class="flex gap-3"><span class="font-bold">·</span> No tienes tiempo de aplicar en las semanas siguientes</li>
+        </ul>
+        <p class="mt-4 text-sm">Si estás en duda, escríbeme directo y te ayudo a decidir si es el momento correcto.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================ -->
+<!-- PRE-REQUISITOS                                -->
+<!-- ============================================ -->
+<section class="bg-gray-100 py-16 md:py-24 px-4">
+  <div class="max-w-4xl mx-auto">
+    <p class="font-secondary text-azul text-xl mb-2 text-center">QUÉ NECESITAS TRAER</p>
+    <h2 class="font-headline text-3xl md:text-5xl mb-10 text-center leading-tight">Pre-requisitos técnicos</h2>
+    <div class="bg-white rounded-lg p-8 shadow-lg space-y-4 text-lg">
+      <p class="flex gap-3"><span class="text-azul font-bold">1.</span> Laptop Windows 10+ o Mac (8 GB RAM mínimo, 10 GB libres)</p>
+      <p class="flex gap-3"><span class="text-azul font-bold">2.</span> <strong>Suscripción Claude Pro activa</strong> (20 USD/mes, vinculada a tu cuenta)</p>
+      <p class="flex gap-3"><span class="text-azul font-bold">3.</span> Cuenta Google activa</p>
+      <p class="flex gap-3"><span class="text-azul font-bold">4.</span> Información básica de tu negocio (te enviamos cuestionario después de pagar)</p>
+    </div>
+    <p class="mt-6 text-center text-sm opacity-60 max-w-2xl mx-auto">Te enviamos paso a paso por video 7 días antes del bootcamp. Si no cumples algún requisito al iniciar el día, no podemos ejecutar la instalación contigo en vivo. Por eso pedimos validación previa antes del pago.</p>
+  </div>
+</section>
+
+<!-- ============================================ -->
+<!-- LOGÍSTICA                                     -->
+<!-- ============================================ -->
+<section class="bg-black text-white py-16 md:py-24 px-4">
+  <div class="max-w-5xl mx-auto">
+    <h2 class="font-headline text-3xl md:text-5xl mb-12 text-center leading-tight">
+      Logística <span class="text-amarillo">del día</span>
+    </h2>
+    <div class="grid grid-cols-2 md:grid-cols-5 gap-6 text-center">
+      <div class="border border-amarillo rounded-lg p-6">
+        <p class="text-3xl mb-2">📅</p>
+        <p class="font-bold">Sábado</p>
+        <p>6 de junio 2026</p>
+      </div>
+      <div class="border border-amarillo rounded-lg p-6">
+        <p class="text-3xl mb-2">🕘</p>
+        <p class="font-bold">9:00 am</p>
+        <p>a 4:00 pm</p>
+      </div>
+      <div class="border border-amarillo rounded-lg p-6">
+        <p class="text-3xl mb-2">📍</p>
+        <p class="font-bold">Medellín</p>
+        <p class="text-xs opacity-60">Dirección al confirmar inscripción</p>
+      </div>
+      <div class="border border-amarillo rounded-lg p-6">
+        <p class="text-3xl mb-2">🪑</p>
+        <p class="font-bold">10 cupos</p>
+        <p>Máximo</p>
+      </div>
+      <div class="border border-amarillo rounded-lg p-6">
+        <p class="text-3xl mb-2">🍽</p>
+        <p class="font-bold">Almuerzo</p>
+        <p>Incluido</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================ -->
+<!-- INVERSIÓN + GARANTÍA + CTA                    -->
+<!-- ============================================ -->
+<section id="cta-aplicar" class="bg-amarillo py-16 md:py-24 px-4">
+  <div class="max-w-3xl mx-auto text-center">
+    <p class="font-secondary text-black text-xl mb-2">INVERSIÓN ÚNICA</p>
+    <h2 class="font-headline text-5xl md:text-7xl mb-6">$997.000 <span class="text-3xl">COP</span></h2>
+    <p class="text-lg mb-8 max-w-xl mx-auto">Incluye todo lo de la lista anterior. Sin mensualidades, sin renovaciones, sin sorpresas.</p>
+    <button onclick="abrirModal()" class="bg-black text-white font-bold py-5 px-12 rounded-lg text-xl hover:bg-azul transition mb-6">
+      Aplicar para mi cupo
+    </button>
+    <div class="bg-black text-white rounded-lg p-6 mt-8 max-w-2xl mx-auto">
+      <p class="font-headline text-xl text-amarillo mb-2">🛡 Garantía de instalación</p>
+      <p>El día termina contigo y tu sistema corriendo. Si por causas técnicas algo no quedó listo, te acompañamos virtualmente hasta que opere.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================ -->
+<!-- FAQ                                           -->
+<!-- ============================================ -->
+<section class="py-16 md:py-24 px-4 bg-white">
+  <div class="max-w-3xl mx-auto">
+    <h2 class="font-headline text-3xl md:text-5xl mb-12 text-center leading-tight">Preguntas frecuentes</h2>
+    <div>
+      <div class="faq-item">
+        <div class="faq-question" onclick="toggleFaq(this)">
+          <span class="font-bold text-lg">¿Esto reemplaza ChatGPT?</span>
+          <span class="faq-arrow text-azul">+</span>
+        </div>
+        <div class="faq-answer"><p>No, lo complementa. Claude Code opera donde ChatGPT no llega: en tus archivos, con memoria persistente y con agentes especializados que conocen tu negocio.</p></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question" onclick="toggleFaq(this)">
+          <span class="font-bold text-lg">¿Necesito saber programar?</span>
+          <span class="faq-arrow text-azul">+</span>
+        </div>
+        <div class="faq-answer"><p>No. Claude Code se opera en lenguaje natural. Si sabes escribir un correo, puedes operarlo. El bootcamp asume que partes desde cero.</p></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question" onclick="toggleFaq(this)">
+          <span class="font-bold text-lg">¿Habrá más bootcamps?</span>
+          <span class="faq-arrow text-azul">+</span>
+        </div>
+        <div class="faq-answer"><p>Sí. Bootcamp Meta Ads viene en julio. Próximas ciudades según demanda (Bogotá, Cali).</p></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question" onclick="toggleFaq(this)">
+          <span class="font-bold text-lg">¿Hay descuento si vamos varios?</span>
+          <span class="faq-arrow text-azul">+</span>
+        </div>
+        <div class="faq-answer"><p>Sí. Segundo cupo del mismo negocio paga 50%. Escríbeme directo por WhatsApp y lo coordinamos.</p></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question" onclick="toggleFaq(this)">
+          <span class="font-bold text-lg">¿Qué pasa si no puedo asistir el día?</span>
+          <span class="faq-arrow text-azul">+</span>
+        </div>
+        <div class="faq-answer"><p>Si avisas con 7 días de anticipación, te paso al siguiente bootcamp. Si avisas después, tienes el material pregrabado y podemos coordinar instalación virtual.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================ -->
+<!-- CTA FINAL                                     -->
+<!-- ============================================ -->
+<section class="bg-azul text-white py-20 px-4 text-center">
+  <div class="max-w-3xl mx-auto">
+    <h2 class="font-headline text-3xl md:text-5xl mb-6 leading-tight">10 cupos. Sábado 6 de junio.<br><span class="text-amarillo">Medellín.</span></h2>
+    <p class="text-lg mb-8 opacity-90">Sales con tu sistema corriendo. No con apuntes.</p>
+    <button onclick="abrirModal()" class="bg-amarillo text-black font-bold py-5 px-12 rounded-lg text-xl hover:opacity-90 transition">
+      Aplicar para mi cupo
+    </button>
+  </div>
+</section>
+
+<!-- ============================================ -->
+<!-- FOOTER                                        -->
+<!-- ============================================ -->
+<footer class="bg-black text-white py-10 px-4">
+  <div class="max-w-5xl mx-auto text-center">
+    <!-- LOGO: versión "Logo blanco - amarillo fondo negro" -->
+    <img src="imagenes/logo-blanco-amarillo-fondo-negro.png" alt="Joako Estratega" class="h-10 mx-auto mb-4">
+    <p class="text-sm opacity-60 mb-2">© 2026 Joako Estratega · Todos los derechos reservados</p>
+    <p class="text-sm opacity-60">
+      <a href="https://wa.me/573028662556" class="underline">WhatsApp directo</a> ·
+      <a href="mailto:joakoestratega@gmail.com" class="underline">joakoestratega@gmail.com</a>
+    </p>
+  </div>
+</footer>
+
+<!-- ============================================ -->
+<!-- BOTÓN FLOTANTE WHATSAPP                       -->
+<!-- ============================================ -->
+<a href="https://wa.me/573028662556?text=Hola%20Joako,%20quiero%20información%20del%20bootcamp%20Claude" target="_blank" class="wa-float bg-green-500 text-white rounded-full p-4 hover:bg-green-600 transition">
+  <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="currentColor">
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+  </svg>
+</a>
+
+<!-- ============================================ -->
+<!-- STICKY BOTTOM MÓVIL                           -->
+<!-- ============================================ -->
+<div class="sticky-mobile fixed bottom-0 left-0 right-0 bg-azul text-white p-3 z-40 shadow-lg">
+  <button onclick="abrirModal()" class="w-full bg-amarillo text-black font-bold py-3 rounded-lg">
+    Aplicar para mi cupo · $997.000 COP
+  </button>
+</div>
+
+<!-- ============================================ -->
+<!-- MODAL DE VALIDACIÓN                           -->
+<!-- ============================================ -->
+<div id="modal" class="modal-bg" onclick="if(event.target===this) cerrarModal()">
+  <div class="modal-box">
+    <div class="flex justify-between items-start mb-4">
+      <h3 class="font-headline text-2xl">Antes de continuar</h3>
+      <button onclick="cerrarModal()" class="text-2xl leading-none">&times;</button>
+    </div>
+    <p class="mb-6 text-sm opacity-80">Necesitamos confirmar que cumples los requisitos para garantizar tu inversión. Marca cada casilla:</p>
+    <div class="space-y-4 mb-6">
+      <label class="flex gap-3 items-start cursor-pointer">
+        <input type="checkbox" class="req-check mt-1" onchange="validarReqs()">
+        <span>Tengo laptop con 8 GB RAM (Windows 10+ o Mac)</span>
+      </label>
+      <label class="flex gap-3 items-start cursor-pointer">
+        <input type="checkbox" class="req-check mt-1" onchange="validarReqs()">
+        <span>Voy a activar suscripción Claude Pro (20 USD/mes) antes del bootcamp</span>
+      </label>
+      <label class="flex gap-3 items-start cursor-pointer">
+        <input type="checkbox" class="req-check mt-1" onchange="validarReqs()">
+        <span>Tengo un negocio en operación generando ingresos hoy</span>
+      </label>
+      <label class="flex gap-3 items-start cursor-pointer">
+        <input type="checkbox" class="req-check mt-1" onchange="validarReqs()">
+        <span>Tengo el sábado 6 de junio disponible (9 am a 4 pm)</span>
+      </label>
+    </div>
+
+    <!-- Botón de pago: aparece solo si los 4 checks están marcados -->
+    <div id="pago-ok" style="display:none;">
+      <a href="{{LINK_WOMPI}}" class="block w-full bg-azul text-white font-bold py-4 rounded-lg text-center text-lg hover:opacity-90">
+        Continuar al pago · $997.000 COP
+      </a>
+      <p class="text-xs text-center mt-3 opacity-60">Pago seguro vía Wompi · PSE, Nequi, Daviplata o tarjeta</p>
+    </div>
+
+    <!-- Mensaje alterno si no cumple todos -->
+    <div id="pago-no" class="bg-gray-100 p-4 rounded-lg text-sm">
+      <p class="font-bold mb-2">Aún no marcaste los 4 requisitos</p>
+      <p>Si tienes dudas o un caso particular, escríbeme por WhatsApp y lo revisamos juntos antes de comprometerte.</p>
+      <a href="https://wa.me/573028662556?text=Hola%20Joako,%20tengo%20una%20duda%20del%20bootcamp" class="block mt-3 bg-green-500 text-white font-bold py-3 rounded-lg text-center">
+        Hablemos por WhatsApp
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================ -->
+<!-- SCRIPTS                                       -->
+<!-- ============================================ -->
+<script>
+  function abrirModal() {
+    document.getElementById('modal').classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+  function cerrarModal() {
+    document.getElementById('modal').classList.remove('active');
+    document.body.style.overflow = '';
+  }
+  function validarReqs() {
+    const checks = document.querySelectorAll('.req-check');
+    const allChecked = Array.from(checks).every(c => c.checked);
+    document.getElementById('pago-ok').style.display = allChecked ? 'block' : 'none';
+    document.getElementById('pago-no').style.display = allChecked ? 'none' : 'block';
+  }
+  function toggleFaq(el) {
+    el.parentElement.classList.toggle('open');
+  }
+</script>
+
+</body>
+</html>

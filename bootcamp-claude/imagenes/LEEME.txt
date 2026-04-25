@@ -1,0 +1,48 @@
+CARPETA DE IMÁGENES — Bootcamp Claude
+======================================
+
+Esta carpeta debe contener los siguientes archivos con ESTOS nombres exactos.
+Si cambias un nombre, la landing no va a cargar la imagen.
+
+ARCHIVOS REQUERIDOS:
+
+1. logo-negro-amarillo-blanco.png
+   Logo de Joako Estratega versión negro + amarillo sobre fondo blanco.
+   Se usa en el HERO (parte superior de la página).
+   Tienes este archivo en: CLIENTES/joako-estratega/CONOCIMIENTOS/SOBRE JOAKO ESTRATEGA/
+
+2. logo-blanco-amarillo-fondo-azul.png
+   Logo versión blanco + amarillo sobre fondo azul.
+   Se usa en la sección "Claude Code no es ChatGPT" (fondo azul).
+
+3. logo-blanco-amarillo-fondo-negro.png
+   Logo versión blanco + amarillo sobre fondo negro.
+   Se usa en el FOOTER de la página.
+
+4. claude-corriendo.png
+   Captura de pantalla real de Claude Code corriendo en tu computador,
+   mostrando agentes trabajando. Tomar con buena resolución.
+
+5. parrilla-demo.gif
+   GIF corto (5-10 segundos) mostrando el sistema generando una parrilla
+   en automático. Se puede grabar la pantalla con:
+   - Windows: Xbox Game Bar (Win+G) y luego convertir a GIF con ezgif.com
+   - Mac: QuickTime + ffmpeg, o herramienta tipo Kap
+   Tamaño recomendado: ancho máximo 600px, peso menor a 5 MB.
+
+6. joako-effi.jpg
+   Foto profesional tuya en tarima de Feria EFFIX o Grupo EFFI.
+   Resolución mínima: 1200x800 pixeles.
+   Si no tienes, usa otra foto profesional de calidad.
+
+OPCIONAL:
+
+7. hero-poster.jpg (solo si vas a usar video local en lugar de YouTube)
+   Imagen estática que se ve antes de hacer play al video del hero.
+   Resolución: 1920x1080 pixeles.
+
+NOTAS:
+- Todos los nombres de archivo en minúsculas, sin tildes, sin espacios.
+- Formatos aceptados: .png, .jpg, .gif (no .heic, no .webp).
+- Optimiza el peso: cada imagen menor a 500 KB ideal.
+- Para optimizar usa tinypng.com o squoosh.app antes de subir.
