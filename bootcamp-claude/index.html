@@ -16,12 +16,16 @@
 
 <style>
   :root {
-    --azul: #2B2FCC;
+    --azul: #21209C;
     --amarillo: #F8B400;
-    --negro: #000000;
+    --negro: #0F0F14;
     --blanco: #FFFFFF;
   }
-  body { font-family: 'Montserrat', sans-serif; color: #000; }
+  body { font-family: 'Montserrat', sans-serif; color: #0F0F14; }
+  /* Override Tailwind bg-black y text-black para usar el negro de marca */
+  .bg-black { background-color: #0F0F14 !important; }
+  .text-black { color: #0F0F14 !important; }
+  .border-black { border-color: #0F0F14 !important; }
   .font-headline { font-family: 'Montserrat', sans-serif; font-weight: 900; }
   .font-secondary { font-family: 'Bebas Neue', sans-serif; letter-spacing: 0.02em; }
   .bg-azul { background-color: var(--azul); }
@@ -53,6 +57,37 @@
   /* WhatsApp flotante */
   .wa-float { position: fixed; bottom: 1.5rem; right: 1.5rem; z-index: 50; box-shadow: 0 4px 12px rgba(0,0,0,0.2); }
   @media (max-width: 768px) { .wa-float { bottom: 5.5rem; } }
+
+  /* Animación pulse para CTAs principales */
+  @keyframes pulse-azul {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(43, 47, 204, 0.55); }
+    50% { box-shadow: 0 0 0 16px rgba(43, 47, 204, 0); }
+  }
+  .pulse-azul { animation: pulse-azul 2s infinite; }
+
+  @keyframes pulse-amarillo {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(248, 180, 0, 0.7); }
+    50% { box-shadow: 0 0 0 18px rgba(248, 180, 0, 0); }
+  }
+  .pulse-amarillo { animation: pulse-amarillo 2s infinite; }
+
+  @keyframes pulse-negro {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.6); }
+    50% { box-shadow: 0 0 0 16px rgba(0, 0, 0, 0); }
+  }
+  .pulse-negro { animation: pulse-negro 2s infinite; }
+
+  /* Animación pulse WhatsApp flotante */
+  @keyframes pulse-wa {
+    0%, 100% { box-shadow: 0 4px 12px rgba(0,0,0,0.2), 0 0 0 0 rgba(34, 197, 94, 0.5); }
+    50% { box-shadow: 0 4px 12px rgba(0,0,0,0.2), 0 0 0 14px rgba(34, 197, 94, 0); }
+  }
+  .wa-float { animation: pulse-wa 2.5s infinite; }
+
+  /* Hover lift para todos los botones */
+  .btn-lift { transition: all 0.25s ease; }
+  .btn-lift:hover { transform: translateY(-3px) scale(1.04); box-shadow: 0 12px 28px rgba(0,0,0,0.45); }
+  .btn-lift:active { transform: translateY(0) scale(0.98); }
 </style>
 </head>
 <body class="bg-white">
@@ -61,9 +96,13 @@
 <!-- BARRA DE URGENCIA STICKY                       -->
 <!-- EDITAR: cambia "10 cupos" según se vayan vendiendo -->
 <!-- ============================================ -->
-<div class="bg-amarillo text-black py-2 px-4 text-center text-sm md:text-base font-semibold sticky top-0 z-40">
-  ⚡ Sábado 6 de junio · Medellín · <span id="cupos-restantes">10 cupos disponibles</span> ·
-  <a href="#cta-aplicar" class="underline font-bold">Aplica para tu cupo</a>
+<div class="bg-amarillo text-black py-3 px-4 sticky top-0 z-40 shadow-md">
+  <div class="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-5 text-sm md:text-base">
+    <span class="font-semibold text-center">⚡ Sábado 6 de junio · Medellín · <span id="cupos-restantes">10 cupos</span></span>
+    <button onclick="abrirModal()" class="bg-black text-white font-bold px-5 py-2 rounded-md hover:bg-azul transition text-sm whitespace-nowrap shadow-lg btn-lift flex-shrink-0">
+      Aplicar para mi cupo →
+    </button>
+  </div>
 </div>
 
 <!-- ============================================ -->
@@ -72,8 +111,10 @@
 <section class="bg-white py-12 md:py-20 px-4">
   <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-10 items-center">
     <div>
-      <!-- LOGO: versión "Logo negro - amarillo fondo blanco" -->
-      <img src="imagenes/logo-negro-amarillo-blanco.png" alt="Joako Estratega" class="h-12 mb-6">
+      <!-- LOGO HERO con zoom CSS para verse rectangular y más grande -->
+      <div class="mb-8 overflow-hidden relative" style="height: 80px; width: 240px;">
+        <img src="imagenes/logo-negro-amarillo-blanco.png" alt="Joako Estratega" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(1.8); max-width: none; height: 100%;">
+      </div>
 
       <p class="font-secondary text-azul text-xl md:text-2xl mb-3">BOOTCAMP CLAUDE · MARKETING CON IA</p>
       <h1 class="font-headline text-4xl md:text-6xl leading-tight mb-6">
@@ -83,10 +124,10 @@
         Sales con Claude Code instalado en tu computador, tus agentes corriendo y tu primera parrilla de contenido saliendo en automático. El mismo sistema que opero yo y mis clientes de agencia.
       </p>
       <div class="flex flex-col sm:flex-row gap-4">
-        <button onclick="abrirModal()" class="bg-azul text-white font-bold py-4 px-8 rounded-lg text-lg hover:opacity-90 transition">
+        <button onclick="abrirModal()" class="bg-azul text-white font-bold py-4 px-8 rounded-lg text-lg hover:opacity-90 transition btn-lift pulse-azul">
           Aplicar para mi cupo
         </button>
-        <a href="#que-te-llevas" class="border-2 border-black text-black font-bold py-4 px-8 rounded-lg text-lg text-center hover:bg-black hover:text-white transition">
+        <a href="#que-te-llevas" class="border-2 border-black text-black font-bold py-4 px-8 rounded-lg text-lg text-center hover:bg-black hover:text-white transition btn-lift">
           Ver qué te llevas
         </a>
       </div>
@@ -160,18 +201,22 @@
 <!-- ============================================ -->
 <section class="bg-azul text-white py-16 md:py-24 px-4">
   <div class="max-w-5xl mx-auto">
-    <!-- LOGO: versión "Logo blanco - amarillo fondo azul" -->
-    <img src="imagenes/logo-blanco-amarillo-fondo-azul.png" alt="Joako Estratega" class="h-10 mb-8 mx-auto">
+    <!-- LOGO sección Claude con zoom CSS, fondo azul del logo se mezcla con fondo azul de la sección -->
+    <div class="mx-auto mb-10 overflow-hidden relative" style="height: 75px; width: 220px;">
+      <img src="imagenes/logo-blanco-amarillo-fondo-azul.png" alt="Joako Estratega" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(1.8); max-width: none; height: 100%;">
+    </div>
 
     <h2 class="font-headline text-3xl md:text-5xl mb-6 text-center leading-tight">
       Claude Code no es ChatGPT.<br><span class="text-amarillo">Y eso lo cambia todo.</span>
     </h2>
     <div class="grid md:grid-cols-2 gap-8 mt-12">
-      <div class="space-y-4 text-lg">
-        <p>Claude Code es la IA profesional que opera <strong>dentro de tu computador</strong>, no en una pestaña del navegador.</p>
-        <p>Vive en tus archivos. Lee tu documentación. Y opera con <strong class="text-amarillo">agentes especializados</strong> que tú entrenas para que conozcan tu negocio como nadie.</p>
-        <p>Mientras la mayoría escribe prompts sueltos a ChatGPT, en este bootcamp aprendes a construir un sistema de agentes que documenta tu empresa, escribe tu contenido y arma tu parrilla en automático.</p>
-        <p class="font-bold">Esto es lo mismo que opero yo en Joako Estratega y en mis clientes. No es teoría. Es el sistema que ya está corriendo.</p>
+      <div class="text-lg">
+        <ul class="space-y-5 mb-6">
+          <li class="flex gap-3"><span class="text-amarillo font-bold text-xl flex-shrink-0">→</span> <span><strong class="text-amarillo">Vive dentro de tu computador</strong>, no en una pestaña del navegador.</span></li>
+          <li class="flex gap-3"><span class="text-amarillo font-bold text-xl flex-shrink-0">→</span> <span><strong class="text-amarillo">Lee tus archivos y tu documentación</strong> para entender tu negocio sin que tengas que repetirlo cada vez.</span></li>
+          <li class="flex gap-3"><span class="text-amarillo font-bold text-xl flex-shrink-0">→</span> <span><strong class="text-amarillo">Opera con agentes especializados</strong> que tú entrenas una vez y trabajan para siempre con tu negocio.</span></li>
+        </ul>
+        <p class="font-bold border-l-4 border-amarillo pl-4">Mientras la mayoría escribe prompts sueltos a ChatGPT, tú vas a construir el sistema completo. El mismo que opero yo y mis clientes esta semana.</p>
       </div>
       <div>
         <!-- IMAGEN: captura de pantalla de Claude Code corriendo en tu computador con agentes visibles -->
@@ -216,7 +261,7 @@
       </div>
     </div>
     <div class="text-center mt-12">
-      <button onclick="abrirModal()" class="bg-azul text-white font-bold py-4 px-10 rounded-lg text-lg hover:opacity-90 transition">
+      <button onclick="abrirModal()" class="bg-azul text-white font-bold py-4 px-10 rounded-lg text-lg hover:opacity-90 transition btn-lift pulse-azul">
         Aplicar para mi cupo
       </button>
     </div>
@@ -272,12 +317,16 @@
       <h2 class="font-headline text-3xl md:text-5xl mb-6 leading-tight">
         Joaquín Rojas,<br><span class="text-azul">estratega de marketing digital</span>
       </h2>
-      <div class="space-y-4 text-lg">
-        <p>Estratega oficial activo de <strong>Feria EFFIX</strong>, la feria de ecommerce hispano más grande del continente (50.000 asistentes por edición). Trabajo con marcas reales que venden todos los días en Colombia, México y Ecuador.</p>
-        <p>He gestionado más de <strong>500.000 USD en pauta Meta</strong> y construí el <strong>Método MPV</strong>: un sistema de 4 fases (Diagnóstico → Mensaje → Captación → Cierre) que opero con un sistema de agentes en Claude Code.</p>
-        <p>Mi formación de ingeniero mecatrónico y especialista en lean manufacturing me lleva a ver el marketing como un proceso industrial, no como arte creativo. Por eso construyo sistemas, no campañas sueltas.</p>
-        <p class="font-bold">Lo que te enseño en el bootcamp es exactamente lo que está corriendo en mi negocio y en el de mis clientes esta semana.</p>
-      </div>
+      <p class="text-lg mb-6">
+        Estratega de la <strong>Feria EFFIX</strong> (50.000 asistentes), la feria de ecommerce hispano más grande del continente. Ingeniero mecatrónico con especialización en <strong>lean manufacturing</strong>: no veo el marketing como arte creativo, lo veo como proceso industrial.
+      </p>
+      <ul class="space-y-3 mb-6">
+        <li class="flex gap-3 items-start"><span class="text-amarillo font-bold text-xl flex-shrink-0">●</span> <span><strong>+500.000 USD</strong> gestionados en pauta Meta</span></li>
+        <li class="flex gap-3 items-start"><span class="text-amarillo font-bold text-xl flex-shrink-0">●</span> <span>Marcas activas en <strong>4 países</strong>: Colombia, México, Ecuador y USA</span></li>
+        <li class="flex gap-3 items-start"><span class="text-amarillo font-bold text-xl flex-shrink-0">●</span> <span>Creador del <strong>Método MPV</strong> (4 fases + anillo de optimización)</span></li>
+        <li class="flex gap-3 items-start"><span class="text-amarillo font-bold text-xl flex-shrink-0">●</span> <span>Sistema de <strong>agentes en Claude Code</strong> que opera el método cada día</span></li>
+      </ul>
+      <p class="font-bold border-l-4 border-azul pl-4">Lo que te enseño en el bootcamp es el mismo sistema que está corriendo con mis clientes esta semana. Lo aplicamos al tuyo en vivo el sábado.</p>
     </div>
   </div>
 </section>
@@ -398,7 +447,7 @@
     <p class="font-secondary text-black text-xl mb-2">INVERSIÓN ÚNICA</p>
     <h2 class="font-headline text-5xl md:text-7xl mb-6">$997.000 <span class="text-3xl">COP</span></h2>
     <p class="text-lg mb-8 max-w-xl mx-auto">Incluye todo lo de la lista anterior. Sin mensualidades, sin renovaciones, sin sorpresas.</p>
-    <button onclick="abrirModal()" class="bg-black text-white font-bold py-5 px-12 rounded-lg text-xl hover:bg-azul transition mb-6">
+    <button onclick="abrirModal()" class="bg-black text-white font-bold py-5 px-12 rounded-lg text-xl hover:bg-azul transition mb-6 btn-lift pulse-negro">
       Aplicar para mi cupo
     </button>
     <div class="bg-black text-white rounded-lg p-6 mt-8 max-w-2xl mx-auto">
@@ -461,7 +510,7 @@
   <div class="max-w-3xl mx-auto">
     <h2 class="font-headline text-3xl md:text-5xl mb-6 leading-tight">10 cupos. Sábado 6 de junio.<br><span class="text-amarillo">Medellín.</span></h2>
     <p class="text-lg mb-8 opacity-90">Sales con tu sistema corriendo. No con apuntes.</p>
-    <button onclick="abrirModal()" class="bg-amarillo text-black font-bold py-5 px-12 rounded-lg text-xl hover:opacity-90 transition">
+    <button onclick="abrirModal()" class="bg-amarillo text-black font-bold py-5 px-12 rounded-lg text-xl hover:opacity-90 transition btn-lift pulse-amarillo">
       Aplicar para mi cupo
     </button>
   </div>
@@ -472,8 +521,10 @@
 <!-- ============================================ -->
 <footer class="bg-black text-white py-10 px-4">
   <div class="max-w-5xl mx-auto text-center">
-    <!-- LOGO: versión "Logo blanco - amarillo fondo negro" -->
-    <img src="imagenes/logo-blanco-amarillo-fondo-negro.png" alt="Joako Estratega" class="h-10 mx-auto mb-4">
+    <!-- LOGO footer con zoom CSS -->
+    <div class="mx-auto mb-6 overflow-hidden relative" style="height: 60px; width: 180px;">
+      <img src="imagenes/logo-blanco-amarillo-fondo-negro.png" alt="Joako Estratega" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(1.8); max-width: none; height: 100%;">
+    </div>
     <p class="text-sm opacity-60 mb-2">© 2026 Joako Estratega · Todos los derechos reservados</p>
     <p class="text-sm opacity-60">
       <a href="https://wa.me/573028662556" class="underline">WhatsApp directo</a> ·
@@ -531,7 +582,7 @@
 
     <!-- Botón de pago: aparece solo si los 4 checks están marcados -->
     <div id="pago-ok" style="display:none;">
-      <a href="{{LINK_WOMPI}}" class="block w-full bg-azul text-white font-bold py-4 rounded-lg text-center text-lg hover:opacity-90">
+      <a href="{{LINK_WOMPI}}" class="block w-full bg-azul text-white font-bold py-4 rounded-lg text-center text-lg hover:opacity-90 btn-lift pulse-azul">
         Continuar al pago · $997.000 COP
       </a>
       <p class="text-xs text-center mt-3 opacity-60">Pago seguro vía Wompi · PSE, Nequi, Daviplata o tarjeta</p>
@@ -541,7 +592,7 @@
     <div id="pago-no" class="bg-gray-100 p-4 rounded-lg text-sm">
       <p class="font-bold mb-2">Aún no marcaste los 4 requisitos</p>
       <p>Si tienes dudas o un caso particular, escríbeme por WhatsApp y lo revisamos juntos antes de comprometerte.</p>
-      <a href="https://wa.me/573028662556?text=Hola%20Joako,%20tengo%20una%20duda%20del%20bootcamp" class="block mt-3 bg-green-500 text-white font-bold py-3 rounded-lg text-center">
+      <a href="https://wa.me/573028662556?text=Hola%20Joako,%20tengo%20una%20duda%20del%20bootcamp" class="block mt-3 bg-green-500 text-white font-bold py-3 rounded-lg text-center btn-lift">
         Hablemos por WhatsApp
       </a>
     </div>
