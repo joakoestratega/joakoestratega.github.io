@@ -573,48 +573,75 @@
 </div>
 
 <!-- ============================================ -->
-<!-- MODAL DE VALIDACIÓN                           -->
+<!-- MODAL FORMULARIO DE APLICACIÓN                -->
 <!-- ============================================ -->
 <div id="modal" class="modal-bg" onclick="if(event.target===this) cerrarModal()">
   <div class="modal-box">
     <div class="flex justify-between items-start mb-4">
-      <h3 class="font-headline text-2xl">Antes de continuar</h3>
+      <h3 class="font-headline text-2xl">Aplicar para mi cupo</h3>
       <button onclick="cerrarModal()" class="text-2xl leading-none">&times;</button>
     </div>
-    <p class="mb-6 text-sm opacity-80">Necesitamos confirmar que cumples los requisitos para garantizar tu inversión. Marca cada casilla:</p>
-    <div class="space-y-4 mb-6">
-      <label class="flex gap-3 items-start cursor-pointer">
-        <input type="checkbox" class="req-check mt-1" onchange="validarReqs()">
-        <span>Tengo laptop con 8 GB RAM (Windows 10+ o Mac)</span>
-      </label>
-      <label class="flex gap-3 items-start cursor-pointer">
-        <input type="checkbox" class="req-check mt-1" onchange="validarReqs()">
-        <span>Voy a activar suscripción Claude Pro (20 USD/mes) antes del bootcamp</span>
-      </label>
-      <label class="flex gap-3 items-start cursor-pointer">
-        <input type="checkbox" class="req-check mt-1" onchange="validarReqs()">
-        <span>Tengo un negocio en operación generando ingresos hoy</span>
-      </label>
-      <label class="flex gap-3 items-start cursor-pointer">
-        <input type="checkbox" class="req-check mt-1" onchange="validarReqs()">
-        <span>Tengo el sábado 6 de junio disponible (9 am a 4 pm)</span>
-      </label>
+    <p class="mb-5 text-sm opacity-80">Confirma tus datos y los requisitos. Después continúas al pago.</p>
+
+    <form id="form-aplicacion" class="space-y-4">
+      <div>
+        <label class="text-sm font-bold block mb-1">Nombre completo *</label>
+        <input type="text" name="nombre" required class="w-full border border-gray-300 rounded-md px-3 py-2 text-sm">
+      </div>
+      <div>
+        <label class="text-sm font-bold block mb-1">WhatsApp (con indicativo) *</label>
+        <input type="tel" name="whatsapp" required placeholder="573001234567" class="w-full border border-gray-300 rounded-md px-3 py-2 text-sm">
+      </div>
+      <div>
+        <label class="text-sm font-bold block mb-1">Email *</label>
+        <input type="email" name="email" required class="w-full border border-gray-300 rounded-md px-3 py-2 text-sm">
+      </div>
+      <div>
+        <label class="text-sm font-bold block mb-1">¿Qué vendes en tu negocio? *</label>
+        <textarea name="negocio" required rows="2" class="w-full border border-gray-300 rounded-md px-3 py-2 text-sm"></textarea>
+      </div>
+
+      <div class="border-t border-gray-200 pt-4 space-y-3">
+        <p class="text-sm font-bold">Confirma los requisitos:</p>
+        <label class="flex gap-3 items-start cursor-pointer text-sm">
+          <input type="checkbox" name="req_laptop" required class="req-check mt-1">
+          <span>Tengo laptop con 8 GB RAM (Windows 10+ o Mac)</span>
+        </label>
+        <label class="flex gap-3 items-start cursor-pointer text-sm">
+          <input type="checkbox" name="req_claude" required class="req-check mt-1">
+          <span>Voy a activar suscripción Claude Pro (20 USD/mes) antes del bootcamp</span>
+        </label>
+        <label class="flex gap-3 items-start cursor-pointer text-sm">
+          <input type="checkbox" name="req_negocio" required class="req-check mt-1">
+          <span>Tengo un negocio en operación generando ingresos hoy</span>
+        </label>
+        <label class="flex gap-3 items-start cursor-pointer text-sm">
+          <input type="checkbox" name="req_fecha" required class="req-check mt-1">
+          <span>Tengo el sábado 6 de junio disponible (9 am a 4 pm)</span>
+        </label>
+      </div>
+
+      <button type="submit" id="btn-submit" class="w-full bg-azul text-white font-bold py-4 rounded-lg text-lg hover:opacity-90 btn-lift pulse-azul mt-4">
+        Quiero mi cupo
+      </button>
+
+      <p class="text-xs text-center opacity-60">Después de enviar, continúas al pago seguro vía Wompi · PSE, Nequi, Daviplata o tarjeta</p>
+    </form>
+
+    <!-- Mensaje de éxito (oculto por default) -->
+    <div id="form-exito" style="display:none;" class="text-center py-6">
+      <div class="text-5xl mb-3">✅</div>
+      <h4 class="font-headline text-xl mb-2">¡Datos registrados!</h4>
+      <p class="text-sm opacity-80 mb-5">Te estamos redirigiendo al pago seguro...</p>
+      <div class="animate-pulse">Redirigiendo en 2 segundos...</div>
     </div>
 
-    <!-- Botón de pago: aparece solo si los 4 checks están marcados -->
-    <div id="pago-ok" style="display:none;">
-      <a href="{{LINK_WOMPI}}" class="block w-full bg-azul text-white font-bold py-4 rounded-lg text-center text-lg hover:opacity-90 btn-lift pulse-azul">
-        Continuar al pago · $997.000 COP
-      </a>
-      <p class="text-xs text-center mt-3 opacity-60">Pago seguro vía Wompi · PSE, Nequi, Daviplata o tarjeta</p>
-    </div>
-
-    <!-- Mensaje alterno si no cumple todos -->
-    <div id="pago-no" class="bg-gray-100 p-4 rounded-lg text-sm">
-      <p class="font-bold mb-2">Aún no marcaste los 4 requisitos</p>
-      <p>Si tienes dudas o un caso particular, escríbeme por WhatsApp y lo revisamos juntos antes de comprometerte.</p>
-      <a href="https://wa.me/573028662556?text=Hola%20Joako,%20tengo%20una%20duda%20del%20bootcamp" class="block mt-3 bg-green-500 text-white font-bold py-3 rounded-lg text-center btn-lift">
-        Hablemos por WhatsApp
+    <!-- Mensaje de error (oculto por default) -->
+    <div id="form-error" style="display:none;" class="bg-red-100 border border-red-400 text-red-800 p-4 rounded-lg text-sm mt-4">
+      <p class="font-bold mb-1">Hubo un problema enviando tus datos</p>
+      <p>Por favor escríbeme por WhatsApp para coordinar tu cupo:</p>
+      <a href="https://wa.me/573028662556?text=Hola%20Joako,%20quiero%20aplicar%20al%20bootcamp" class="block mt-3 bg-green-500 text-white font-bold py-3 rounded-lg text-center btn-lift">
+        Escribir por WhatsApp
       </a>
     </div>
   </div>
@@ -624,23 +651,79 @@
 <!-- SCRIPTS                                       -->
 <!-- ============================================ -->
 <script>
+  // ============================================
+  // CONFIGURACIÓN — REEMPLAZA ESTOS 2 VALORES
+  // ============================================
+  const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzl3mJGo_ySG5Tl0HEWM8Ebbcuv1hAHxZ7NQlmPPpZ-OB23IHT6k8COYQLDxZXShwZ5/exec';
+  const LINK_PAGO_WOMPI = '{{LINK_WOMPI}}';
+  // ============================================
+
   function abrirModal() {
     document.getElementById('modal').classList.add('active');
     document.body.style.overflow = 'hidden';
+    // Reset form state
+    document.getElementById('form-aplicacion').style.display = 'block';
+    document.getElementById('form-exito').style.display = 'none';
+    document.getElementById('form-error').style.display = 'none';
   }
   function cerrarModal() {
     document.getElementById('modal').classList.remove('active');
     document.body.style.overflow = '';
   }
-  function validarReqs() {
-    const checks = document.querySelectorAll('.req-check');
-    const allChecked = Array.from(checks).every(c => c.checked);
-    document.getElementById('pago-ok').style.display = allChecked ? 'block' : 'none';
-    document.getElementById('pago-no').style.display = allChecked ? 'none' : 'block';
-  }
   function toggleFaq(el) {
     el.parentElement.classList.toggle('open');
   }
+
+  // ============================================
+  // FORMULARIO DE APLICACIÓN — Envío a Google Apps Script
+  // ============================================
+  document.getElementById('form-aplicacion').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const btn = document.getElementById('btn-submit');
+    const originalText = btn.textContent;
+    btn.disabled = true;
+    btn.textContent = 'Enviando...';
+
+    const formData = new FormData(e.target);
+    const data = {
+      nombre: formData.get('nombre'),
+      whatsapp: formData.get('whatsapp'),
+      email: formData.get('email'),
+      negocio: formData.get('negocio'),
+      req_laptop: formData.get('req_laptop') ? 'Sí' : 'No',
+      req_claude: formData.get('req_claude') ? 'Sí' : 'No',
+      req_negocio: formData.get('req_negocio') ? 'Sí' : 'No',
+      req_fecha: formData.get('req_fecha') ? 'Sí' : 'No',
+      producto: 'Bootcamp Claude · 6 junio 2026',
+      origen: window.location.href,
+      timestamp: new Date().toISOString()
+    };
+
+    try {
+      // Enviar a Apps Script (text/plain evita preflight CORS)
+      await fetch(APPS_SCRIPT_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+        body: JSON.stringify(data)
+      });
+
+      // Mostrar éxito
+      document.getElementById('form-aplicacion').style.display = 'none';
+      document.getElementById('form-exito').style.display = 'block';
+
+      // Redirigir a Wompi después de 2 segundos
+      setTimeout(() => {
+        window.location.href = LINK_PAGO_WOMPI;
+      }, 2000);
+
+    } catch (error) {
+      console.error('Error:', error);
+      btn.disabled = false;
+      btn.textContent = originalText;
+      document.getElementById('form-error').style.display = 'block';
+    }
+  });
 </script>
 
 </body>
