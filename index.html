@@ -3,8 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Joako Estratega · Marketing digital con IA</title>
-<meta name="description" content="Estratega de marketing digital. Construyo sistemas que venden con el Método MPV.">
+<title>Joako Estratega · Construyo sistemas que venden por internet</title>
+<meta name="description" content="Estratega de la Feria EFFIX. Enseño a emprendedores a construir su propio sistema de ventas por internet con el Método MPV. Bootcamps, comunidad gratuita, agencia.">
+
+<!-- Open Graph -->
+<meta property="og:title" content="Joako Estratega · Construyo sistemas que venden">
+<meta property="og:description" content="El 80% de cualquier venta está en el Mensaje Principal de Venta. Aprende a construirlo.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://joakoestratega.com">
 
 <script src="https://cdn.tailwindcss.com"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -12,95 +18,467 @@
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;900&family=Bebas+Neue&display=swap" rel="stylesheet">
 
 <style>
+  :root {
+    --azul: #21209C;
+    --amarillo: #F8B400;
+    --negro: #0F0F14;
+    --blanco: #FFFFFF;
+  }
+  html { scroll-behavior: smooth; }
   html, body { background-color: #0F0F14; }
   body { font-family: 'Montserrat', sans-serif; color: #fff; min-height: 100vh; position: relative; overflow-x: hidden; }
-  /* Gradiente dorado decorativo en capa separada para no afectar el área del logo */
+
+  /* Gradiente dorado decorativo en capa separada */
   body::before {
     content: '';
     position: fixed;
     top: -200px;
     left: 50%;
     transform: translateX(-50%);
-    width: 800px;
-    height: 800px;
-    background: radial-gradient(circle, rgba(248, 180, 0, 0.18) 0%, transparent 70%);
+    width: 900px;
+    height: 900px;
+    background: radial-gradient(circle, rgba(248, 180, 0, 0.14) 0%, transparent 70%);
     pointer-events: none;
     z-index: 0;
   }
   body > * { position: relative; z-index: 1; }
+
   .font-headline { font-family: 'Montserrat', sans-serif; font-weight: 900; }
   .font-secondary { font-family: 'Bebas Neue', sans-serif; letter-spacing: 0.05em; }
+
   .text-dorado { color: #F8B400; }
   .bg-dorado { background-color: #F8B400; }
   .border-dorado { border-color: #F8B400; }
+  .text-azul { color: #21209C; }
+  .bg-azul { background-color: #21209C; }
+  .border-azul { border-color: #21209C; }
 
-  /* Animación pulse para CTA principal */
+  /* Animaciones */
   @keyframes pulse-dorado {
     0%, 100% { box-shadow: 0 0 0 0 rgba(248, 180, 0, 0.6); }
     50% { box-shadow: 0 0 0 18px rgba(248, 180, 0, 0); }
   }
   .pulse-cta { animation: pulse-dorado 2s infinite; }
 
-  /* Animación pulse WhatsApp */
   @keyframes pulse-wa {
     0%, 100% { box-shadow: 0 4px 12px rgba(0,0,0,0.3), 0 0 0 0 rgba(34, 197, 94, 0.5); }
     50% { box-shadow: 0 4px 12px rgba(0,0,0,0.3), 0 0 0 14px rgba(34, 197, 94, 0); }
   }
   .pulse-wa { animation: pulse-wa 2.5s infinite; }
 
-  /* Hover lift para todos los botones */
   .btn-lift { transition: all 0.25s ease; }
   .btn-lift:hover { transform: translateY(-3px) scale(1.04); box-shadow: 0 12px 28px rgba(0,0,0,0.45); }
   .btn-lift:active { transform: translateY(0) scale(0.98); }
+
+  /* Card hover */
+  .service-card { transition: all 0.3s ease; }
+  .service-card:hover { transform: translateY(-6px); border-color: #F8B400; }
+
+  /* WhatsApp flotante */
+  .wa-float {
+    position: fixed; bottom: 1.5rem; right: 1.5rem; z-index: 50;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    animation: pulse-wa 2.5s infinite;
+  }
+
+  /* Sticky bottom mobile */
+  .sticky-mobile { display: none; }
+  @media (max-width: 768px) {
+    .sticky-mobile { display: block; }
+    body { padding-bottom: 5rem; }
+    .wa-float { bottom: 5.5rem; }
+  }
+
+  /* Reveal on scroll */
+  .reveal { opacity: 0; transform: translateY(30px); transition: all 0.7s ease; }
+  .reveal.active { opacity: 1; transform: translateY(0); }
 </style>
 </head>
-<body class="min-h-screen flex items-center justify-center px-4 py-12">
+<body>
 
-<div class="max-w-4xl mx-auto text-center w-full">
-
-  <!-- LOGO con zoom CSS para verse rectangular y más grande, recortando el cuadrado de fondo extra -->
-  <div class="mx-auto mb-12 overflow-hidden relative" style="height: 90px; width: 280px;">
-    <img src="bootcamp-claude/imagenes/logo-blanco-amarillo-fondo-negro.png" alt="Joako Estratega" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(1.8); max-width: none; height: 100%;">
-  </div>
-
-  <p class="font-secondary text-dorado text-2xl md:text-3xl mb-6 tracking-widest">JOAQUÍN ROJAS · ESTRATEGA</p>
-
-  <h1 class="font-headline text-5xl md:text-7xl leading-none mb-8">
-    Construyo<br>sistemas<br>que <span class="text-dorado">venden.</span>
-  </h1>
-
-  <div class="w-24 h-1 bg-dorado mx-auto mb-10"></div>
-
-  <p class="text-lg md:text-2xl mb-14 text-gray-300 max-w-2xl mx-auto leading-relaxed">
-    Estratega de la Feria EFFIX. Trabajo con marcas reales que venden todos los días en Colombia, México, Ecuador y USA con el <span class="text-dorado font-bold">Método MPV</span>.
-  </p>
-
-  <!-- Card del bootcamp -->
-  <div class="bg-white text-black rounded-2xl p-8 md:p-10 mb-10 max-w-2xl mx-auto shadow-2xl border-4 border-dorado">
-    <p class="font-secondary text-sm md:text-base mb-3 opacity-60 tracking-widest">PRÓXIMO BOOTCAMP PRESENCIAL</p>
-    <h2 class="font-headline text-3xl md:text-4xl mb-4 leading-tight">
-      Bootcamp Claude<br><span class="text-base md:text-lg font-normal opacity-70">Marketing con IA</span>
-    </h2>
-    <div class="flex justify-center gap-6 text-sm md:text-base mb-6 flex-wrap">
-      <span>📅 Sábado 6 de junio</span>
-      <span>📍 Medellín</span>
-      <span>🪑 10 cupos</span>
-    </div>
-    <a href="bootcamp-claude/" class="inline-block bg-black text-white font-bold py-4 px-10 rounded-lg hover:bg-dorado hover:text-black transition text-lg btn-lift pulse-cta">
-      Ver detalles y aplicar
+<!-- ============================================ -->
+<!-- BARRA DE URGENCIA STICKY                       -->
+<!-- ============================================ -->
+<div class="bg-dorado text-black py-3 px-4 sticky top-0 z-40 shadow-md">
+  <div class="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-5 text-sm md:text-base">
+    <span class="font-semibold text-center">⚡ Cada viernes analizo en vivo por qué un negocio no está vendiendo. Únete gratis.</span>
+    <a href="comunidad/" class="bg-black text-white font-bold px-5 py-2 rounded-md hover:bg-azul transition text-sm whitespace-nowrap shadow-lg btn-lift flex-shrink-0">
+      Entrar a la comunidad
     </a>
   </div>
-
-  <!-- WhatsApp directo -->
-  <p class="text-sm text-gray-400 mb-3">¿Tienes una pregunta?</p>
-  <a href="https://wa.me/573028662556?text=Hola%20Joako" class="inline-flex items-center gap-3 bg-green-500 text-white font-bold py-3 px-7 rounded-lg hover:bg-green-600 transition btn-lift pulse-wa">
-    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-    Escríbeme por WhatsApp
-  </a>
-
-  <p class="mt-16 text-xs opacity-40">© 2026 Joako Estratega · Medellín, Colombia</p>
-
 </div>
+
+<!-- ============================================ -->
+<!-- HERO                                          -->
+<!-- ============================================ -->
+<section class="px-4 pt-12 md:pt-20 pb-16 md:pb-24">
+  <div class="max-w-5xl mx-auto text-center">
+
+    <!-- LOGO -->
+    <div class="mx-auto mb-10 overflow-hidden relative" style="height: 80px; width: 240px;">
+      <img src="bootcamp-claude/imagenes/logo-blanco-amarillo-fondo-negro.png" alt="Joako Estratega" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(1.8); max-width: none; height: 100%;">
+    </div>
+
+    <p class="font-secondary text-dorado text-xl md:text-2xl mb-5 tracking-widest">JOAQUÍN ROJAS · ESTRATEGA</p>
+
+    <h1 class="font-headline text-4xl md:text-7xl leading-none mb-6">
+      Construyo<br>sistemas<br>que <span class="text-dorado">venden.</span>
+    </h1>
+
+    <div class="w-24 h-1 bg-dorado mx-auto mb-8"></div>
+
+    <p class="text-lg md:text-2xl mb-3 text-gray-200 max-w-3xl mx-auto leading-relaxed">
+      El 80% de cualquier venta por internet está en el <span class="text-dorado font-bold">Mensaje Principal de Venta</span>.
+    </p>
+    <p class="text-base md:text-lg mb-12 text-gray-400 max-w-2xl mx-auto leading-relaxed">
+      Soy ingeniero mecatrónico especialista en lean manufacturing. Aplico ese pensamiento al marketing digital. Estratega de la Feria EFFIX. Trabajo con marcas que venden todos los días en Colombia, México, Ecuador y USA.
+    </p>
+
+    <!-- DOBLE CTA: principal comunidad + secundario bootcamp -->
+    <div class="flex flex-col sm:flex-row gap-4 justify-center items-center mb-6">
+      <a href="comunidad/" class="bg-dorado text-black font-bold py-4 px-8 rounded-lg hover:bg-yellow-400 transition text-lg btn-lift pulse-cta w-full sm:w-auto">
+        Únete gratis a la comunidad
+      </a>
+      <a href="bootcamp-claude/" class="bg-transparent border-2 border-white text-white font-bold py-4 px-8 rounded-lg hover:bg-white hover:text-black transition text-lg btn-lift w-full sm:w-auto">
+        Ver Bootcamp Claude →
+      </a>
+    </div>
+    <p class="text-sm text-gray-500">Sin tarjeta. Sin compromiso. Solo conocimiento real.</p>
+
+  </div>
+</section>
+
+<!-- ============================================ -->
+<!-- BANDA DE CREDIBILIDAD                          -->
+<!-- ============================================ -->
+<section class="bg-black/40 border-y border-white/10 py-10 px-4">
+  <div class="max-w-5xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+    <div>
+      <p class="font-headline text-3xl md:text-4xl text-dorado">+4 años</p>
+      <p class="text-xs md:text-sm text-gray-400 mt-1 uppercase tracking-wider">construyendo sistemas de ventas</p>
+    </div>
+    <div>
+      <p class="font-headline text-3xl md:text-4xl text-dorado">$500K+</p>
+      <p class="text-xs md:text-sm text-gray-400 mt-1 uppercase tracking-wider">USD gestionados en Meta Ads</p>
+    </div>
+    <div>
+      <p class="font-headline text-3xl md:text-4xl text-dorado">EFFIX</p>
+      <p class="text-xs md:text-sm text-gray-400 mt-1 uppercase tracking-wider">estratega oficial</p>
+    </div>
+    <div>
+      <p class="font-headline text-3xl md:text-4xl text-dorado">Método MPV</p>
+      <p class="text-xs md:text-sm text-gray-400 mt-1 uppercase tracking-wider">sistema propietario probado</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================ -->
+<!-- ESPEJO DEL DOLOR                               -->
+<!-- ============================================ -->
+<section class="px-4 py-16 md:py-24">
+  <div class="max-w-4xl mx-auto">
+    <p class="font-secondary text-dorado text-sm md:text-base mb-3 tracking-widest text-center">SI TE PASA ESTO, ESTÁS EN EL LUGAR CORRECTO</p>
+    <h2 class="font-headline text-3xl md:text-5xl text-center mb-12 leading-tight">
+      Llevas meses pagando pauta<br>y no llegas al <span class="text-dorado">punto de equilibrio.</span>
+    </h2>
+
+    <div class="grid md:grid-cols-2 gap-5">
+      <div class="bg-black/60 border border-white/10 p-6 rounded-xl">
+        <p class="text-dorado font-bold mb-2">El Efecto Montaña Rusa</p>
+        <p class="text-gray-300 text-sm leading-relaxed">Un día 100 ventas. Tres días después, 5. No sabes qué cambió. Vives con ansiedad por el futuro del negocio.</p>
+      </div>
+      <div class="bg-black/60 border border-white/10 p-6 rounded-xl">
+        <p class="text-dorado font-bold mb-2">La Esclavitud del Administrador</p>
+        <p class="text-gray-300 text-sm leading-relaxed">Si no abres el Business Manager cada hora a "tocar" campañas, sientes que todo se detiene.</p>
+      </div>
+      <div class="bg-black/60 border border-white/10 p-6 rounded-xl">
+        <p class="text-dorado font-bold mb-2">La Rentabilidad Mentirosa</p>
+        <p class="text-gray-300 text-sm leading-relaxed">Facturas mucho. Pero cuando pagas pauta, producto y costos, te queda casi lo mismo que antes.</p>
+      </div>
+      <div class="bg-black/60 border border-white/10 p-6 rounded-xl">
+        <p class="text-dorado font-bold mb-2">Probaste agencias y nada</p>
+        <p class="text-gray-300 text-sm leading-relaxed">Te cobraron mensualidad tras mensualidad. Algunas funcionaron un mes. Después, otra vez en cero.</p>
+      </div>
+    </div>
+
+    <div class="mt-12 max-w-3xl mx-auto bg-azul/30 border-2 border-azul p-6 md:p-8 rounded-xl text-center">
+      <p class="font-headline text-xl md:text-2xl mb-3">El problema no es Meta Ads. Tampoco es la plataforma, ni el presupuesto.</p>
+      <p class="text-gray-200 leading-relaxed">Es el <span class="text-dorado font-bold">Mensaje Principal de Venta</span>. La narrativa que atraviesa el creativo, la página y el cierre. El 80% de la decisión de compra. Y casi nadie lo está enseñando.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================ -->
+<!-- SERVICIOS — BENTO                              -->
+<!-- ============================================ -->
+<section id="servicios" class="px-4 py-16 md:py-24 bg-black/40">
+  <div class="max-w-6xl mx-auto">
+    <p class="font-secondary text-dorado text-sm md:text-base mb-3 tracking-widest text-center">QUÉ TENGO PARA TI</p>
+    <h2 class="font-headline text-3xl md:text-5xl text-center mb-4 leading-tight">
+      4 formas de aprender<br>a vender por internet.
+    </h2>
+    <p class="text-center text-gray-400 max-w-2xl mx-auto mb-14 text-base md:text-lg">
+      Empieza gratis con la comunidad. Sube de nivel cuando estés listo.
+    </p>
+
+    <div class="grid md:grid-cols-2 gap-6">
+
+      <!-- COMUNIDAD GRATUITA -->
+      <a href="comunidad/" class="service-card bg-black border-2 border-white/10 rounded-2xl p-8 block group">
+        <div class="flex items-start justify-between mb-4">
+          <span class="bg-green-500 text-black font-bold text-xs px-3 py-1 rounded-full">GRATIS</span>
+          <span class="text-3xl">💬</span>
+        </div>
+        <h3 class="font-headline text-2xl md:text-3xl mb-3 group-hover:text-dorado transition">Comunidad gratuita</h3>
+        <p class="text-gray-300 text-sm md:text-base mb-5 leading-relaxed">
+          Grupo de WhatsApp + sesión en vivo cada viernes. Trae tu negocio y te digo en vivo por qué no está vendiendo.
+        </p>
+        <ul class="text-sm text-gray-400 space-y-2 mb-6">
+          <li class="flex gap-2"><span class="text-dorado">→</span> Análisis en vivo de casos reales</li>
+          <li class="flex gap-2"><span class="text-dorado">→</span> Acceso directo a mí cada semana</li>
+          <li class="flex gap-2"><span class="text-dorado">→</span> Sin pagos, sin compromisos</li>
+        </ul>
+        <span class="inline-block bg-dorado text-black font-bold py-3 px-6 rounded-lg group-hover:bg-yellow-400 transition btn-lift">
+          Quiero entrar →
+        </span>
+      </a>
+
+      <!-- BOOTCAMP CLAUDE -->
+      <a href="bootcamp-claude/" class="service-card bg-black border-2 border-white/10 rounded-2xl p-8 block group">
+        <div class="flex items-start justify-between mb-4">
+          <span class="bg-dorado text-black font-bold text-xs px-3 py-1 rounded-full">PRESENCIAL · MEDELLÍN</span>
+          <span class="text-3xl">🤖</span>
+        </div>
+        <h3 class="font-headline text-2xl md:text-3xl mb-3 group-hover:text-dorado transition">Bootcamp Claude</h3>
+        <p class="text-gray-300 text-sm md:text-base mb-5 leading-relaxed">
+          Marketing operando con IA. Sales con Claude Code instalado, tus agentes corriendo y tu primera parrilla automatizada.
+        </p>
+        <ul class="text-sm text-gray-400 space-y-2 mb-6">
+          <li class="flex gap-2"><span class="text-dorado">→</span> 1 día completo presencial</li>
+          <li class="flex gap-2"><span class="text-dorado">→</span> Cupos limitados</li>
+          <li class="flex gap-2"><span class="text-dorado">→</span> Constancia de participación</li>
+        </ul>
+        <span class="inline-block bg-white text-black font-bold py-3 px-6 rounded-lg group-hover:bg-dorado transition btn-lift">
+          Ver detalles y aplicar →
+        </span>
+      </a>
+
+      <!-- BOOTCAMP META ADS -->
+      <a href="bootcamp-meta-ads/" class="service-card bg-black border-2 border-white/10 rounded-2xl p-8 block group">
+        <div class="flex items-start justify-between mb-4">
+          <span class="bg-azul text-white font-bold text-xs px-3 py-1 rounded-full">PRÓXIMAMENTE · LISTA DE ESPERA</span>
+          <span class="text-3xl">📊</span>
+        </div>
+        <h3 class="font-headline text-2xl md:text-3xl mb-3 group-hover:text-dorado transition">Bootcamp Meta Ads</h3>
+        <p class="text-gray-300 text-sm md:text-base mb-5 leading-relaxed">
+          Aprende a operar pauta paga como las agencias. Mensaje, creativo, segmentación, escalado y optimización. Sin botón mágico.
+        </p>
+        <ul class="text-sm text-gray-400 space-y-2 mb-6">
+          <li class="flex gap-2"><span class="text-dorado">→</span> Pauta operada en vivo</li>
+          <li class="flex gap-2"><span class="text-dorado">→</span> Estructura completa de cuentas</li>
+          <li class="flex gap-2"><span class="text-dorado">→</span> Te aviso cuando abra fecha</li>
+        </ul>
+        <span class="inline-block bg-white text-black font-bold py-3 px-6 rounded-lg group-hover:bg-dorado transition btn-lift">
+          Quiero estar en la lista →
+        </span>
+      </a>
+
+      <!-- AGENCIA -->
+      <a href="agencia/" class="service-card bg-black border-2 border-white/10 rounded-2xl p-8 block group">
+        <div class="flex items-start justify-between mb-4">
+          <span class="bg-white text-black font-bold text-xs px-3 py-1 rounded-full">EQUIPO DEDICADO DE ESPECIALISTAS</span>
+          <span class="text-3xl">🎯</span>
+        </div>
+        <h3 class="font-headline text-2xl md:text-3xl mb-3 group-hover:text-dorado transition">Agencia</h3>
+        <p class="text-gray-300 text-sm md:text-base mb-5 leading-relaxed">
+          Para negocios que no quieren aprender a operar la pauta y prefieren un equipo especialista que ejecute. Mensaje, pauta, captación y cierre con el Método MPV.
+        </p>
+        <ul class="text-sm text-gray-400 space-y-2 mb-6">
+          <li class="flex gap-2"><span class="text-dorado">→</span> Equipo dedicado por cuenta: estratega, media buyer, creativo y analista</li>
+          <li class="flex gap-2"><span class="text-dorado">→</span> Máximo 5 cuentas por especialista para garantizar foco</li>
+          <li class="flex gap-2"><span class="text-dorado">→</span> Yo lidero la estrategia. Mi equipo ejecuta el método</li>
+        </ul>
+        <span class="inline-block bg-white text-black font-bold py-3 px-6 rounded-lg group-hover:bg-dorado transition btn-lift">
+          Conocer la propuesta →
+        </span>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============================================ -->
+<!-- QUIÉN SOY                                      -->
+<!-- ============================================ -->
+<section class="px-4 py-16 md:py-24">
+  <div class="max-w-5xl mx-auto grid md:grid-cols-2 gap-10 items-center">
+
+    <div>
+      <p class="font-secondary text-dorado text-sm md:text-base mb-3 tracking-widest">QUIÉN SOY</p>
+      <h2 class="font-headline text-3xl md:text-5xl mb-6 leading-tight">
+        El estratega<br>que piensa como <span class="text-dorado">ingeniero.</span>
+      </h2>
+      <div class="space-y-4 text-gray-300 leading-relaxed text-base md:text-lg">
+        <p>Soy <span class="text-white font-bold">Joaquín Rojas</span>, estratega experto en marketing digital. Construyo y opero sistemas de ventas por internet para marcas que ya facturan en Colombia, México, Ecuador y Estados Unidos.</p>
+        <p>Mi formación de base es <span class="text-white font-bold">ingeniería mecatrónica con especialización en lean manufacturing y gerencia de proyectos</span>. Por eso no veo el marketing como una pila de tácticas sueltas, sino como un sistema con cuellos de botella, palancas y procesos que se optimizan.</p>
+        <p>Llegué a esto después de quebrar un ecommerce que facturaba 10M de pesos diarios. Pasé dos años buscando <span class="text-dorado font-bold">por qué algunos negocios venden por internet y otros no</span>. Pagué más de 10.000 USD en mentorías y trabajé junto a los mejores.</p>
+        <p>El descubrimiento es que el problema no es la pauta, ni la plataforma, ni el presupuesto. Es el <span class="text-dorado font-bold">Mensaje Principal de Venta</span>. Y ese descubrimiento es lo que convertí en el Método MPV: el sistema que hoy aplico, escalo y enseño.</p>
+        <p class="border-l-4 border-dorado pl-4 italic text-white">"Yo ya pagué el precio de no saberlo. Mis clientes no tienen que pagar ese mismo precio."</p>
+      </div>
+    </div>
+
+    <div class="rounded-2xl overflow-hidden border-2 border-dorado">
+      <img src="bootcamp-claude/imagenes/joako-effi.png" alt="Joaquín Rojas en la Feria EFFIX" class="w-full h-auto block">
+    </div>
+
+  </div>
+</section>
+
+<!-- ============================================ -->
+<!-- MÉTODO MPV                                     -->
+<!-- ============================================ -->
+<section class="px-4 py-16 md:py-24 bg-azul/20 border-y border-white/10">
+  <div class="max-w-5xl mx-auto text-center">
+    <p class="font-secondary text-dorado text-sm md:text-base mb-3 tracking-widest">EL MÉTODO QUE OPERA TODO</p>
+    <h2 class="font-headline text-3xl md:text-5xl mb-6 leading-tight">
+      Método <span class="text-dorado">MPV.</span>
+    </h2>
+    <p class="text-gray-200 max-w-3xl mx-auto mb-12 text-base md:text-lg leading-relaxed">
+      Construye un sistema de ventas por internet donde el 80% del trabajo ya esté hecho antes de gastar un dólar en pauta. Y el 20% restante sea solo ejecutar.
+    </p>
+
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto">
+      <div class="bg-black/60 border border-dorado/40 p-5 rounded-xl">
+        <p class="font-secondary text-dorado text-2xl mb-2">FASE 1</p>
+        <p class="font-headline text-lg mb-2">Diagnóstico</p>
+        <p class="text-xs text-gray-400">¿Qué vendes y a quién?</p>
+      </div>
+      <div class="bg-black/60 border-2 border-dorado p-5 rounded-xl relative">
+        <span class="absolute -top-3 left-1/2 -translate-x-1/2 bg-dorado text-black text-xs font-bold px-3 py-1 rounded-full whitespace-nowrap">CENTRO</span>
+        <p class="font-secondary text-dorado text-2xl mb-2">FASE 2</p>
+        <p class="font-headline text-lg mb-2">Mensaje</p>
+        <p class="text-xs text-gray-400">¿Por qué te van a comprar a ti?</p>
+      </div>
+      <div class="bg-black/60 border border-dorado/40 p-5 rounded-xl">
+        <p class="font-secondary text-dorado text-2xl mb-2">FASE 3</p>
+        <p class="font-headline text-lg mb-2">Captación</p>
+        <p class="text-xs text-gray-400">¿Cómo llega a quien compra?</p>
+      </div>
+      <div class="bg-black/60 border border-dorado/40 p-5 rounded-xl">
+        <p class="font-secondary text-dorado text-2xl mb-2">FASE 4</p>
+        <p class="font-headline text-lg mb-2">Cierre</p>
+        <p class="text-xs text-gray-400">¿Cómo se vuelve cliente?</p>
+      </div>
+    </div>
+
+    <p class="mt-10 text-sm text-gray-400 max-w-2xl mx-auto">
+      Anillo exterior: <span class="text-white">optimización continua</span> con principios de lean manufacturing. La misma lógica que mejora una línea de producción aplicada a un sistema de ventas.
+    </p>
+  </div>
+</section>
+
+<!-- ============================================ -->
+<!-- TESTIMONIOS                                    -->
+<!-- ============================================ -->
+<section class="px-4 py-16 md:py-24">
+  <div class="max-w-6xl mx-auto">
+    <p class="font-secondary text-dorado text-sm md:text-base mb-3 tracking-widest text-center">LO QUE DICEN LOS QUE YA APLICARON</p>
+    <h2 class="font-headline text-3xl md:text-5xl text-center mb-12 leading-tight">
+      Esto no es teoría.<br>Es <span class="text-dorado">resultado real.</span>
+    </h2>
+
+    <!-- GRID DE TESTIMONIOS — IMÁGENES DE WHATSAPP/CAPTURAS -->
+    <!-- IMPORTANTE: subir las imágenes a /imagenes/testimonios/ con nombres test-1.jpg, test-2.jpg, etc -->
+    <div class="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
+      <div class="bg-white rounded-xl overflow-hidden shadow-2xl border-2 border-white/20">
+        <img src="imagenes/testimonios/test-1.jpg" alt="Testimonio 1" class="w-full h-auto block" onerror="this.parentElement.classList.add('hidden')">
+      </div>
+      <div class="bg-white rounded-xl overflow-hidden shadow-2xl border-2 border-white/20">
+        <img src="imagenes/testimonios/test-2.jpg" alt="Testimonio 2" class="w-full h-auto block" onerror="this.parentElement.classList.add('hidden')">
+      </div>
+      <div class="bg-white rounded-xl overflow-hidden shadow-2xl border-2 border-white/20">
+        <img src="imagenes/testimonios/test-3.jpg" alt="Testimonio 3" class="w-full h-auto block" onerror="this.parentElement.classList.add('hidden')">
+      </div>
+      <div class="bg-white rounded-xl overflow-hidden shadow-2xl border-2 border-white/20">
+        <img src="imagenes/testimonios/test-4.jpg" alt="Testimonio 4" class="w-full h-auto block" onerror="this.parentElement.classList.add('hidden')">
+      </div>
+      <div class="bg-white rounded-xl overflow-hidden shadow-2xl border-2 border-white/20">
+        <img src="imagenes/testimonios/test-5.jpg" alt="Testimonio 5" class="w-full h-auto block" onerror="this.parentElement.classList.add('hidden')">
+      </div>
+      <div class="bg-white rounded-xl overflow-hidden shadow-2xl border-2 border-white/20">
+        <img src="imagenes/testimonios/test-6.jpg" alt="Testimonio 6" class="w-full h-auto block" onerror="this.parentElement.classList.add('hidden')">
+      </div>
+    </div>
+
+    <p class="text-center text-xs text-gray-500 mt-6">Resultados reales de clientes y estudiantes. Los nombres y datos sensibles están protegidos.</p>
+  </div>
+</section>
+
+<!-- ============================================ -->
+<!-- CTA FINAL                                      -->
+<!-- ============================================ -->
+<section class="px-4 py-20 md:py-28">
+  <div class="max-w-4xl mx-auto text-center">
+    <p class="font-secondary text-dorado text-xl md:text-2xl mb-5 tracking-widest">EL PRIMER PASO ES GRATIS</p>
+    <h2 class="font-headline text-4xl md:text-6xl mb-6 leading-none">
+      Trae tu negocio<br>al <span class="text-dorado">viernes en vivo.</span>
+    </h2>
+    <p class="text-base md:text-xl text-gray-300 max-w-2xl mx-auto mb-10 leading-relaxed">
+      Cada semana analizo casos reales. Si tu negocio no está vendiendo, te digo por qué. Sin cobrarte nada.
+    </p>
+
+    <a href="comunidad/" class="inline-block bg-dorado text-black font-bold py-5 px-10 rounded-lg hover:bg-yellow-400 transition text-lg md:text-xl btn-lift pulse-cta">
+      Quiero entrar a la comunidad gratis
+    </a>
+    <p class="mt-4 text-sm text-gray-500">Sin tarjeta. Sin compromiso. Sales cuando quieras.</p>
+  </div>
+</section>
+
+<!-- ============================================ -->
+<!-- FOOTER                                        -->
+<!-- ============================================ -->
+<footer class="border-t border-white/10 px-4 py-10">
+  <div class="max-w-5xl mx-auto text-center">
+    <div class="mx-auto mb-6 overflow-hidden relative" style="height: 60px; width: 180px;">
+      <img src="bootcamp-claude/imagenes/logo-blanco-amarillo-fondo-negro.png" alt="Joako Estratega" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(1.8); max-width: none; height: 100%;">
+    </div>
+    <div class="flex flex-wrap justify-center gap-6 text-sm text-gray-400 mb-6">
+      <a href="comunidad/" class="hover:text-dorado transition">Comunidad</a>
+      <a href="bootcamp-claude/" class="hover:text-dorado transition">Bootcamp Claude</a>
+      <a href="bootcamp-meta-ads/" class="hover:text-dorado transition">Bootcamp Meta Ads</a>
+      <a href="agencia/" class="hover:text-dorado transition">Agencia</a>
+      <a href="https://wa.me/573028662556?text=Hola%20Joako" class="hover:text-dorado transition">WhatsApp</a>
+    </div>
+    <p class="text-xs text-gray-500">© 2026 Joako Estratega · Medellín, Colombia · Hecho con cariño y mucho café.</p>
+  </div>
+</footer>
+
+<!-- ============================================ -->
+<!-- WHATSAPP FLOTANTE                              -->
+<!-- ============================================ -->
+<a href="https://wa.me/573028662556?text=Hola%20Joako%2C%20vi%20tu%20página%20web%20y%20quiero%20más%20información" target="_blank" rel="noopener" class="wa-float bg-green-500 hover:bg-green-600 text-white rounded-full w-14 h-14 flex items-center justify-center" aria-label="Escríbeme por WhatsApp">
+  <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+
+<!-- ============================================ -->
+<!-- STICKY BOTTOM MOBILE                           -->
+<!-- ============================================ -->
+<div class="sticky-mobile fixed bottom-0 left-0 right-0 bg-black border-t-2 border-dorado p-3 z-40 shadow-2xl">
+  <a href="comunidad/" class="block bg-dorado text-black font-bold py-3 px-4 rounded-lg text-center text-base">
+    Únete gratis a la comunidad →
+  </a>
+</div>
+
+<script>
+  // Reveal on scroll
+  const observerOptions = { threshold: 0.1 };
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) entry.target.classList.add('active');
+    });
+  }, observerOptions);
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
 
 </body>
 </html>

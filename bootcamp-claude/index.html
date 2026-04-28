@@ -3,16 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Joako Estratega · Construyo sistemas que venden por internet</title>
-<meta name="description" content="Estratega de la Feria EFFIX. Enseño a emprendedores a construir su propio sistema de ventas por internet con el Método MPV. Bootcamps, comunidad gratuita, agencia.">
+<title>Bootcamp Claude · Tu marketing operando con IA · Joako Estratega</title>
+<meta name="description" content="Bootcamp presencial en Medellín. Sales con Claude Code instalado, tus agentes corriendo y tu primera parrilla automatizada. Sábado 6 de junio.">
 
-<!-- Open Graph -->
-<meta property="og:title" content="Joako Estratega · Construyo sistemas que venden">
-<meta property="og:description" content="El 80% de cualquier venta está en el Mensaje Principal de Venta. Aprende a construirlo.">
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://joakoestratega.com">
-
+<!-- Tailwind CDN -->
 <script src="https://cdn.tailwindcss.com"></script>
+
+<!-- Google Fonts: Montserrat (headline). Pattanakarn no está en Google Fonts, se reemplaza con Bebas Neue como fallback secundaria -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;900&family=Bebas+Neue&display=swap" rel="stylesheet">
@@ -24,460 +21,706 @@
     --negro: #0F0F14;
     --blanco: #FFFFFF;
   }
-  html { scroll-behavior: smooth; }
-  html, body { background-color: #0F0F14; }
-  body { font-family: 'Montserrat', sans-serif; color: #fff; min-height: 100vh; position: relative; overflow-x: hidden; }
-
-  /* Gradiente dorado decorativo en capa separada */
-  body::before {
-    content: '';
-    position: fixed;
-    top: -200px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 900px;
-    height: 900px;
-    background: radial-gradient(circle, rgba(248, 180, 0, 0.14) 0%, transparent 70%);
-    pointer-events: none;
-    z-index: 0;
-  }
-  body > * { position: relative; z-index: 1; }
-
+  body { font-family: 'Montserrat', sans-serif; color: #0F0F14; }
+  /* Override Tailwind bg-black y text-black para usar el negro de marca */
+  .bg-black { background-color: #0F0F14 !important; }
+  .text-black { color: #0F0F14 !important; }
+  .border-black { border-color: #0F0F14 !important; }
   .font-headline { font-family: 'Montserrat', sans-serif; font-weight: 900; }
-  .font-secondary { font-family: 'Bebas Neue', sans-serif; letter-spacing: 0.05em; }
+  .font-secondary { font-family: 'Bebas Neue', sans-serif; letter-spacing: 0.02em; }
+  .bg-azul { background-color: var(--azul); }
+  .bg-amarillo { background-color: var(--amarillo); }
+  .text-azul { color: var(--azul); }
+  .text-amarillo { color: var(--amarillo); }
+  .border-azul { border-color: var(--azul); }
+  .border-amarillo { border-color: var(--amarillo); }
+  html { scroll-behavior: smooth; }
+  .opacity-60 { opacity: 0.6; }
 
-  .text-dorado { color: #F8B400; }
-  .bg-dorado { background-color: #F8B400; }
-  .border-dorado { border-color: #F8B400; }
-  .text-azul { color: #21209C; }
-  .bg-azul { background-color: #21209C; }
-  .border-azul { border-color: #21209C; }
+  /* Modal */
+  .modal-bg { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.7); z-index: 100; align-items: center; justify-content: center; padding: 1rem; }
+  .modal-bg.active { display: flex; }
+  .modal-box { background: white; max-width: 500px; width: 100%; border-radius: 12px; padding: 2rem; max-height: 90vh; overflow-y: auto; }
 
-  /* Animaciones */
-  @keyframes pulse-dorado {
-    0%, 100% { box-shadow: 0 0 0 0 rgba(248, 180, 0, 0.6); }
-    50% { box-shadow: 0 0 0 18px rgba(248, 180, 0, 0); }
-  }
-  .pulse-cta { animation: pulse-dorado 2s infinite; }
-
-  @keyframes pulse-wa {
-    0%, 100% { box-shadow: 0 4px 12px rgba(0,0,0,0.3), 0 0 0 0 rgba(34, 197, 94, 0.5); }
-    50% { box-shadow: 0 4px 12px rgba(0,0,0,0.3), 0 0 0 14px rgba(34, 197, 94, 0); }
-  }
-  .pulse-wa { animation: pulse-wa 2.5s infinite; }
-
-  .btn-lift { transition: all 0.25s ease; }
-  .btn-lift:hover { transform: translateY(-3px) scale(1.04); box-shadow: 0 12px 28px rgba(0,0,0,0.45); }
-  .btn-lift:active { transform: translateY(0) scale(0.98); }
-
-  /* Card hover */
-  .service-card { transition: all 0.3s ease; }
-  .service-card:hover { transform: translateY(-6px); border-color: #F8B400; }
-
-  /* WhatsApp flotante */
-  .wa-float {
-    position: fixed; bottom: 1.5rem; right: 1.5rem; z-index: 50;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-    animation: pulse-wa 2.5s infinite;
-  }
+  /* FAQ accordion */
+  .faq-item { border-bottom: 1px solid #e5e5e5; }
+  .faq-question { cursor: pointer; padding: 1.25rem 0; display: flex; justify-content: space-between; align-items: center; }
+  .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; }
+  .faq-item.open .faq-answer { max-height: 500px; padding-bottom: 1.25rem; }
+  .faq-item.open .faq-arrow { transform: rotate(45deg); }
+  .faq-arrow { transition: transform 0.3s; font-size: 1.5rem; line-height: 1; }
 
   /* Sticky bottom mobile */
   .sticky-mobile { display: none; }
-  @media (max-width: 768px) {
-    .sticky-mobile { display: block; }
-    body { padding-bottom: 5rem; }
-    .wa-float { bottom: 5.5rem; }
-  }
+  @media (max-width: 768px) { .sticky-mobile { display: block; } body { padding-bottom: 5rem; } }
 
-  /* Reveal on scroll */
-  .reveal { opacity: 0; transform: translateY(30px); transition: all 0.7s ease; }
-  .reveal.active { opacity: 1; transform: translateY(0); }
+  /* WhatsApp flotante */
+  .wa-float { position: fixed; bottom: 1.5rem; right: 1.5rem; z-index: 50; box-shadow: 0 4px 12px rgba(0,0,0,0.2); }
+  @media (max-width: 768px) { .wa-float { bottom: 5.5rem; } }
+
+  /* Animación pulse para CTAs principales */
+  @keyframes pulse-azul {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(43, 47, 204, 0.55); }
+    50% { box-shadow: 0 0 0 16px rgba(43, 47, 204, 0); }
+  }
+  .pulse-azul { animation: pulse-azul 2s infinite; }
+
+  @keyframes pulse-amarillo {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(248, 180, 0, 0.7); }
+    50% { box-shadow: 0 0 0 18px rgba(248, 180, 0, 0); }
+  }
+  .pulse-amarillo { animation: pulse-amarillo 2s infinite; }
+
+  @keyframes pulse-negro {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.6); }
+    50% { box-shadow: 0 0 0 16px rgba(0, 0, 0, 0); }
+  }
+  .pulse-negro { animation: pulse-negro 2s infinite; }
+
+  /* Animación pulse WhatsApp flotante */
+  @keyframes pulse-wa {
+    0%, 100% { box-shadow: 0 4px 12px rgba(0,0,0,0.2), 0 0 0 0 rgba(34, 197, 94, 0.5); }
+    50% { box-shadow: 0 4px 12px rgba(0,0,0,0.2), 0 0 0 14px rgba(34, 197, 94, 0); }
+  }
+  .wa-float { animation: pulse-wa 2.5s infinite; }
+
+  /* Hover lift para todos los botones */
+  .btn-lift { transition: all 0.25s ease; }
+  .btn-lift:hover { transform: translateY(-3px) scale(1.04); box-shadow: 0 12px 28px rgba(0,0,0,0.45); }
+  .btn-lift:active { transform: translateY(0) scale(0.98); }
 </style>
 </head>
-<body>
+<body class="bg-white">
 
 <!-- ============================================ -->
 <!-- BARRA DE URGENCIA STICKY                       -->
+<!-- EDITAR: cambia "10 cupos" según se vayan vendiendo -->
 <!-- ============================================ -->
-<div class="bg-dorado text-black py-3 px-4 sticky top-0 z-40 shadow-md">
+<div class="bg-amarillo text-black py-3 px-4 sticky top-0 z-40 shadow-md">
   <div class="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-5 text-sm md:text-base">
-    <span class="font-semibold text-center">⚡ Cada viernes analizo en vivo por qué un negocio no está vendiendo. Únete gratis.</span>
-    <a href="comunidad/" class="bg-black text-white font-bold px-5 py-2 rounded-md hover:bg-azul transition text-sm whitespace-nowrap shadow-lg btn-lift flex-shrink-0">
-      Entrar a la comunidad
-    </a>
+    <span class="font-semibold text-center">⚡ Sábado 6 de junio · Medellín · <span id="cupos-restantes">10 cupos</span></span>
+    <button onclick="abrirModal()" class="bg-black text-white font-bold px-5 py-2 rounded-md hover:bg-azul transition text-sm whitespace-nowrap shadow-lg btn-lift flex-shrink-0">
+      🔥 Aplicar para mi cupo
+    </button>
   </div>
 </div>
 
 <!-- ============================================ -->
 <!-- HERO                                          -->
 <!-- ============================================ -->
-<section class="px-4 pt-12 md:pt-20 pb-16 md:pb-24">
-  <div class="max-w-5xl mx-auto text-center">
+<section class="bg-white py-12 md:py-20 px-4">
+  <div class="max-w-6xl mx-auto grid md:grid-cols-1 gap-10 items-center">
+    <div class="max-w-3xl mx-auto">
+      <!-- LOGO HERO con zoom CSS para verse rectangular y más grande -->
+      <div class="mb-8 overflow-hidden relative" style="height: 80px; width: 240px;">
+        <img src="imagenes/logo-negro-amarillo-blanco.png" alt="Joako Estratega" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(1.8); max-width: none; height: 100%;">
+      </div>
 
-    <!-- LOGO -->
-    <div class="mx-auto mb-10 overflow-hidden relative" style="height: 80px; width: 240px;">
-      <img src="bootcamp-claude/imagenes/logo-blanco-amarillo-fondo-negro.png" alt="Joako Estratega" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(1.8); max-width: none; height: 100%;">
+      <p class="font-secondary text-azul text-xl md:text-2xl mb-3">BOOTCAMP CLAUDE · MARKETING CON IA</p>
+      <h1 class="font-headline text-4xl md:text-6xl leading-tight mb-6">
+        Tu marketing entero, <br><span class="text-azul">operando con IA.</span><br>En un solo día.
+      </h1>
+      <p class="text-lg md:text-xl mb-8 text-black opacity-60">
+        Sales con Claude Code instalado en tu computador, tus agentes corriendo y tu primera parrilla de contenido saliendo en automático. El mismo sistema que opero yo y mis clientes de agencia.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4">
+        <button onclick="abrirModal()" class="bg-azul text-white font-bold py-4 px-8 rounded-lg text-lg hover:opacity-90 transition btn-lift pulse-azul">
+          Aplicar para mi cupo
+        </button>
+        <a href="#que-te-llevas" class="border-2 border-black text-black font-bold py-4 px-8 rounded-lg text-lg text-center hover:bg-black hover:text-white transition btn-lift">
+          Ver qué te llevas
+        </a>
+      </div>
+      <p class="mt-4 text-sm opacity-60">📅 Sábado 6 de junio · 🕘 9:00 am a 4:00 pm · 📍 Medellín</p>
+
+      <!-- BANDA DE PRECIO EN HERO -->
+      <div class="mt-6 inline-flex items-center gap-3 bg-amarillo text-black px-5 py-3 rounded-lg flex-wrap shadow-lg">
+        <span class="font-headline text-2xl">$997.000 COP</span>
+        <span class="bg-black text-amarillo text-xs font-bold px-2 py-1 rounded">PRIMER BOOTCAMP</span>
+      </div>
     </div>
 
-    <p class="font-secondary text-dorado text-xl md:text-2xl mb-5 tracking-widest">JOAQUÍN ROJAS · ESTRATEGA</p>
-
-    <h1 class="font-headline text-4xl md:text-7xl leading-none mb-6">
-      Construyo<br>sistemas<br>que <span class="text-dorado">venden.</span>
-    </h1>
-
-    <div class="w-24 h-1 bg-dorado mx-auto mb-8"></div>
-
-    <p class="text-lg md:text-2xl mb-3 text-gray-200 max-w-3xl mx-auto leading-relaxed">
-      El 80% de cualquier venta por internet está en el <span class="text-dorado font-bold">Mensaje Principal de Venta</span>.
-    </p>
-    <p class="text-base md:text-lg mb-12 text-gray-400 max-w-2xl mx-auto leading-relaxed">
-      Soy ingeniero mecatrónico especialista en lean manufacturing. Aplico ese pensamiento al marketing digital. Estratega de la Feria EFFIX. Trabajo con marcas que venden todos los días en Colombia, México, Ecuador y USA.
-    </p>
-
-    <!-- DOBLE CTA: principal comunidad + secundario bootcamp -->
-    <div class="flex flex-col sm:flex-row gap-4 justify-center items-center mb-6">
-      <a href="comunidad/" class="bg-dorado text-black font-bold py-4 px-8 rounded-lg hover:bg-yellow-400 transition text-lg btn-lift pulse-cta w-full sm:w-auto">
-        Únete gratis a la comunidad
-      </a>
-      <a href="bootcamp-claude/" class="bg-transparent border-2 border-white text-white font-bold py-4 px-8 rounded-lg hover:bg-white hover:text-black transition text-lg btn-lift w-full sm:w-auto">
-        Ver Bootcamp Claude →
-      </a>
-    </div>
-    <p class="text-sm text-gray-500">Sin tarjeta. Sin compromiso. Solo conocimiento real.</p>
-
-  </div>
-</section>
-
-<!-- ============================================ -->
-<!-- BANDA DE CREDIBILIDAD                          -->
-<!-- ============================================ -->
-<section class="bg-black/40 border-y border-white/10 py-10 px-4">
-  <div class="max-w-5xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
-    <div>
-      <p class="font-headline text-3xl md:text-4xl text-dorado">+4 años</p>
-      <p class="text-xs md:text-sm text-gray-400 mt-1 uppercase tracking-wider">construyendo sistemas de ventas</p>
-    </div>
-    <div>
-      <p class="font-headline text-3xl md:text-4xl text-dorado">$500K+</p>
-      <p class="text-xs md:text-sm text-gray-400 mt-1 uppercase tracking-wider">USD gestionados en Meta Ads</p>
-    </div>
-    <div>
-      <p class="font-headline text-3xl md:text-4xl text-dorado">EFFIX</p>
-      <p class="text-xs md:text-sm text-gray-400 mt-1 uppercase tracking-wider">estratega oficial</p>
-    </div>
-    <div>
-      <p class="font-headline text-3xl md:text-4xl text-dorado">Método MPV</p>
-      <p class="text-xs md:text-sm text-gray-400 mt-1 uppercase tracking-wider">sistema propietario probado</p>
+    <!-- VIDEO DEL HERO oculto temporalmente. Para activarlo: borra "hidden" abajo, cambia md:grid-cols-1 por md:grid-cols-2 arriba, y reemplaza VIDEO_ID -->
+    <div class="hidden">
+      <div class="aspect-video bg-black rounded-lg overflow-hidden shadow-xl">
+        <iframe class="w-full h-full" src="https://www.youtube.com/embed/VIDEO_ID?autoplay=0&rel=0" title="Bootcamp Claude" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      </div>
     </div>
   </div>
 </section>
 
 <!-- ============================================ -->
-<!-- ESPEJO DEL DOLOR                               -->
+<!-- BARRA DE CREDIBILIDAD                          -->
 <!-- ============================================ -->
-<section class="px-4 py-16 md:py-24">
+<section class="bg-black text-white py-8 px-4">
+  <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
+    <div>
+      <p class="font-headline text-3xl text-amarillo">+500K USD</p>
+      <p class="text-sm opacity-60">Gestionados en pauta</p>
+    </div>
+    <div>
+      <p class="font-headline text-3xl text-amarillo">5</p>
+      <p class="text-sm opacity-60">Marcas activas hoy</p>
+    </div>
+    <div>
+      <p class="font-headline text-3xl text-amarillo">4 países</p>
+      <p class="text-sm opacity-60">Colombia, México, Ecuador, USA</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================ -->
+<!-- ESPEJO DEL DOLOR                              -->
+<!-- ============================================ -->
+<section class="py-16 md:py-24 px-4 bg-white">
   <div class="max-w-4xl mx-auto">
-    <p class="font-secondary text-dorado text-sm md:text-base mb-3 tracking-widest text-center">SI TE PASA ESTO, ESTÁS EN EL LUGAR CORRECTO</p>
-    <h2 class="font-headline text-3xl md:text-5xl text-center mb-12 leading-tight">
-      Llevas meses pagando pauta<br>y no llegas al <span class="text-dorado">punto de equilibrio.</span>
+    <h2 class="font-headline text-3xl md:text-5xl mb-8 text-center leading-tight">
+      Llevas meses oyendo de IA y sigues<br>haciendo todo a mano.
     </h2>
+    <div class="space-y-4 text-lg">
+      <p class="border-l-4 border-amarillo pl-4">Pruebas un prompt y otro y otro, y al final el contenido sigue sonando genérico.</p>
+      <p class="border-l-4 border-amarillo pl-4">Te dicen que ChatGPT te ahorra tiempo, pero terminas reescribiendo todo lo que entrega.</p>
+      <p class="border-l-4 border-amarillo pl-4">Sabes que tu competencia automatiza algo, pero no entiendes qué.</p>
+      <p class="border-l-4 border-amarillo pl-4">Pagas suscripciones de IA que casi no usas porque no sabes cómo encajan en tu negocio.</p>
+    </div>
+    <p class="font-headline text-xl md:text-2xl mt-10 text-center">
+      El problema no es la IA. <span class="text-azul">Es que la estás usando sin sistema.</span>
+    </p>
+  </div>
+</section>
 
-    <div class="grid md:grid-cols-2 gap-5">
-      <div class="bg-black/60 border border-white/10 p-6 rounded-xl">
-        <p class="text-dorado font-bold mb-2">El Efecto Montaña Rusa</p>
-        <p class="text-gray-300 text-sm leading-relaxed">Un día 100 ventas. Tres días después, 5. No sabes qué cambió. Vives con ansiedad por el futuro del negocio.</p>
-      </div>
-      <div class="bg-black/60 border border-white/10 p-6 rounded-xl">
-        <p class="text-dorado font-bold mb-2">La Esclavitud del Administrador</p>
-        <p class="text-gray-300 text-sm leading-relaxed">Si no abres el Business Manager cada hora a "tocar" campañas, sientes que todo se detiene.</p>
-      </div>
-      <div class="bg-black/60 border border-white/10 p-6 rounded-xl">
-        <p class="text-dorado font-bold mb-2">La Rentabilidad Mentirosa</p>
-        <p class="text-gray-300 text-sm leading-relaxed">Facturas mucho. Pero cuando pagas pauta, producto y costos, te queda casi lo mismo que antes.</p>
-      </div>
-      <div class="bg-black/60 border border-white/10 p-6 rounded-xl">
-        <p class="text-dorado font-bold mb-2">Probaste agencias y nada</p>
-        <p class="text-gray-300 text-sm leading-relaxed">Te cobraron mensualidad tras mensualidad. Algunas funcionaron un mes. Después, otra vez en cero.</p>
-      </div>
+<!-- ============================================ -->
+<!-- REVELACIÓN - Qué es Claude Code                -->
+<!-- ============================================ -->
+<section class="bg-azul text-white py-16 md:py-24 px-4">
+  <div class="max-w-5xl mx-auto">
+    <!-- LOGO sección Claude con zoom CSS, fondo azul del logo se mezcla con fondo azul de la sección -->
+    <div class="mx-auto mb-10 overflow-hidden relative" style="height: 75px; width: 220px;">
+      <img src="imagenes/logo-blanco-amarillo-fondo-azul.png" alt="Joako Estratega" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(1.8); max-width: none; height: 100%;">
     </div>
 
-    <div class="mt-12 max-w-3xl mx-auto bg-azul/30 border-2 border-azul p-6 md:p-8 rounded-xl text-center">
-      <p class="font-headline text-xl md:text-2xl mb-3">El problema no es Meta Ads. Tampoco es la plataforma, ni el presupuesto.</p>
-      <p class="text-gray-200 leading-relaxed">Es el <span class="text-dorado font-bold">Mensaje Principal de Venta</span>. La narrativa que atraviesa el creativo, la página y el cierre. El 80% de la decisión de compra. Y casi nadie lo está enseñando.</p>
+    <h2 class="font-headline text-3xl md:text-5xl mb-6 text-center leading-tight">
+      Claude Code no es ChatGPT.<br><span class="text-amarillo">Y eso lo cambia todo.</span>
+    </h2>
+    <div class="grid md:grid-cols-2 gap-8 mt-12">
+      <div class="text-lg">
+        <ul class="space-y-5 mb-6">
+          <li class="flex gap-3"><span class="text-amarillo font-bold text-xl flex-shrink-0">→</span> <span><strong class="text-amarillo">Vive dentro de tu computador</strong>, no en una pestaña del navegador.</span></li>
+          <li class="flex gap-3"><span class="text-amarillo font-bold text-xl flex-shrink-0">→</span> <span><strong class="text-amarillo">Lee tus archivos y tu documentación</strong> para entender tu negocio sin que tengas que repetirlo cada vez.</span></li>
+          <li class="flex gap-3"><span class="text-amarillo font-bold text-xl flex-shrink-0">→</span> <span><strong class="text-amarillo">Opera con agentes especializados</strong> que tú entrenas una vez y trabajan para siempre con tu negocio.</span></li>
+        </ul>
+        <p class="font-bold border-l-4 border-amarillo pl-4">Mientras la mayoría escribe prompts sueltos a ChatGPT, tú vas a construir el sistema completo. El mismo que opero yo y mis clientes esta semana.</p>
+      </div>
+      <div>
+        <img src="imagenes/claude-corriendo.png" alt="Claude Code corriendo con agentes" class="w-full rounded-lg shadow-2xl border-4 border-amarillo">
+      </div>
     </div>
   </div>
 </section>
 
 <!-- ============================================ -->
-<!-- SERVICIOS — BENTO                              -->
+<!-- BULLETS QUE MATAN OBJECIONES                  -->
 <!-- ============================================ -->
-<section id="servicios" class="px-4 py-16 md:py-24 bg-black/40">
-  <div class="max-w-6xl mx-auto">
-    <p class="font-secondary text-dorado text-sm md:text-base mb-3 tracking-widest text-center">QUÉ TENGO PARA TI</p>
-    <h2 class="font-headline text-3xl md:text-5xl text-center mb-4 leading-tight">
-      4 formas de aprender<br>a vender por internet.
+<section class="py-16 md:py-24 px-4 bg-white">
+  <div class="max-w-5xl mx-auto">
+    <h2 class="font-headline text-3xl md:text-5xl mb-12 text-center leading-tight">
+      Antes de seguir,<br>esto seguro lo estás pensando
     </h2>
-    <p class="text-center text-gray-400 max-w-2xl mx-auto mb-14 text-base md:text-lg">
-      Empieza gratis con la comunidad. Sube de nivel cuando estés listo.
-    </p>
-
     <div class="grid md:grid-cols-2 gap-6">
-
-      <!-- COMUNIDAD GRATUITA -->
-      <a href="comunidad/" class="service-card bg-black border-2 border-white/10 rounded-2xl p-8 block group">
-        <div class="flex items-start justify-between mb-4">
-          <span class="bg-green-500 text-black font-bold text-xs px-3 py-1 rounded-full">GRATIS</span>
-          <span class="text-3xl">💬</span>
-        </div>
-        <h3 class="font-headline text-2xl md:text-3xl mb-3 group-hover:text-dorado transition">Comunidad gratuita</h3>
-        <p class="text-gray-300 text-sm md:text-base mb-5 leading-relaxed">
-          Grupo de WhatsApp + sesión en vivo cada viernes. Trae tu negocio y te digo en vivo por qué no está vendiendo.
-        </p>
-        <ul class="text-sm text-gray-400 space-y-2 mb-6">
-          <li class="flex gap-2"><span class="text-dorado">→</span> Análisis en vivo de casos reales</li>
-          <li class="flex gap-2"><span class="text-dorado">→</span> Acceso directo a mí cada semana</li>
-          <li class="flex gap-2"><span class="text-dorado">→</span> Sin pagos, sin compromisos</li>
-        </ul>
-        <span class="inline-block bg-dorado text-black font-bold py-3 px-6 rounded-lg group-hover:bg-yellow-400 transition btn-lift">
-          Quiero entrar →
-        </span>
-      </a>
-
-      <!-- BOOTCAMP CLAUDE -->
-      <a href="bootcamp-claude/" class="service-card bg-black border-2 border-white/10 rounded-2xl p-8 block group">
-        <div class="flex items-start justify-between mb-4">
-          <span class="bg-dorado text-black font-bold text-xs px-3 py-1 rounded-full">PRESENCIAL · MEDELLÍN</span>
-          <span class="text-3xl">🤖</span>
-        </div>
-        <h3 class="font-headline text-2xl md:text-3xl mb-3 group-hover:text-dorado transition">Bootcamp Claude</h3>
-        <p class="text-gray-300 text-sm md:text-base mb-5 leading-relaxed">
-          Marketing operando con IA. Sales con Claude Code instalado, tus agentes corriendo y tu primera parrilla automatizada.
-        </p>
-        <ul class="text-sm text-gray-400 space-y-2 mb-6">
-          <li class="flex gap-2"><span class="text-dorado">→</span> 1 día completo presencial</li>
-          <li class="flex gap-2"><span class="text-dorado">→</span> Cupos limitados</li>
-          <li class="flex gap-2"><span class="text-dorado">→</span> Constancia de participación</li>
-        </ul>
-        <span class="inline-block bg-white text-black font-bold py-3 px-6 rounded-lg group-hover:bg-dorado transition btn-lift">
-          Ver detalles y aplicar →
-        </span>
-      </a>
-
-      <!-- BOOTCAMP META ADS -->
-      <a href="bootcamp-meta-ads/" class="service-card bg-black border-2 border-white/10 rounded-2xl p-8 block group">
-        <div class="flex items-start justify-between mb-4">
-          <span class="bg-azul text-white font-bold text-xs px-3 py-1 rounded-full">PRÓXIMAMENTE · LISTA DE ESPERA</span>
-          <span class="text-3xl">📊</span>
-        </div>
-        <h3 class="font-headline text-2xl md:text-3xl mb-3 group-hover:text-dorado transition">Bootcamp Meta Ads</h3>
-        <p class="text-gray-300 text-sm md:text-base mb-5 leading-relaxed">
-          Aprende a operar pauta paga como las agencias. Mensaje, creativo, segmentación, escalado y optimización. Sin botón mágico.
-        </p>
-        <ul class="text-sm text-gray-400 space-y-2 mb-6">
-          <li class="flex gap-2"><span class="text-dorado">→</span> Pauta operada en vivo</li>
-          <li class="flex gap-2"><span class="text-dorado">→</span> Estructura completa de cuentas</li>
-          <li class="flex gap-2"><span class="text-dorado">→</span> Te aviso cuando abra fecha</li>
-        </ul>
-        <span class="inline-block bg-white text-black font-bold py-3 px-6 rounded-lg group-hover:bg-dorado transition btn-lift">
-          Quiero estar en la lista →
-        </span>
-      </a>
-
-      <!-- AGENCIA -->
-      <a href="agencia/" class="service-card bg-black border-2 border-white/10 rounded-2xl p-8 block group">
-        <div class="flex items-start justify-between mb-4">
-          <span class="bg-white text-black font-bold text-xs px-3 py-1 rounded-full">EQUIPO DEDICADO DE ESPECIALISTAS</span>
-          <span class="text-3xl">🎯</span>
-        </div>
-        <h3 class="font-headline text-2xl md:text-3xl mb-3 group-hover:text-dorado transition">Agencia</h3>
-        <p class="text-gray-300 text-sm md:text-base mb-5 leading-relaxed">
-          Para negocios que no quieren aprender a operar la pauta y prefieren un equipo especialista que ejecute. Mensaje, pauta, captación y cierre con el Método MPV.
-        </p>
-        <ul class="text-sm text-gray-400 space-y-2 mb-6">
-          <li class="flex gap-2"><span class="text-dorado">→</span> Equipo dedicado por cuenta: estratega, media buyer, creativo y analista</li>
-          <li class="flex gap-2"><span class="text-dorado">→</span> Máximo 5 cuentas por especialista para garantizar foco</li>
-          <li class="flex gap-2"><span class="text-dorado">→</span> Yo lidero la estrategia. Mi equipo ejecuta el método</li>
-        </ul>
-        <span class="inline-block bg-white text-black font-bold py-3 px-6 rounded-lg group-hover:bg-dorado transition btn-lift">
-          Conocer la propuesta →
-        </span>
-      </a>
-
+      <div class="border-2 border-azul rounded-lg p-6">
+        <p class="font-headline text-xl text-azul mb-2">No necesitas saber programar</p>
+        <p>Si sabes escribir un correo, puedes operar Claude Code. Cero código.</p>
+      </div>
+      <div class="border-2 border-azul rounded-lg p-6">
+        <p class="font-headline text-xl text-azul mb-2">No es un curso más</p>
+        <p>Es una instalación en vivo. Sales con tu sistema funcionando, no con apuntes.</p>
+      </div>
+      <div class="border-2 border-azul rounded-lg p-6">
+        <p class="font-headline text-xl text-azul mb-2">Funciona en cualquier negocio</p>
+        <p>Servicio, producto físico, marca personal, mentoría, agencia. Lo aplicamos al tuyo en vivo.</p>
+      </div>
+      <div class="border-2 border-azul rounded-lg p-6">
+        <p class="font-headline text-xl text-azul mb-2">Lo hacemos juntos en tu PC</p>
+        <p>No te quedas solo con un PDF que después no aplicas. Sales con todo corriendo.</p>
+      </div>
+      <div class="border-2 border-azul rounded-lg p-6">
+        <p class="font-headline text-xl text-azul mb-2">No pierdes tiempo si ya usas IA</p>
+        <p>Lo que sabes hoy se ordena dentro de un sistema que escala.</p>
+      </div>
+      <div class="border-2 border-azul rounded-lg p-6">
+        <p class="font-headline text-xl text-azul mb-2">Cupo limitado a 10 personas</p>
+        <p>Para que cada uno salga con su sistema corriendo, no en grupo masivo.</p>
+      </div>
+    </div>
+    <div class="text-center mt-12">
+      <button onclick="abrirModal()" class="bg-azul text-white font-bold py-4 px-10 rounded-lg text-lg hover:opacity-90 transition btn-lift pulse-azul">
+        Aplicar para mi cupo
+      </button>
     </div>
   </div>
 </section>
 
 <!-- ============================================ -->
-<!-- QUIÉN SOY                                      -->
+<!-- QUÉ TE LLEVAS                                 -->
 <!-- ============================================ -->
-<section class="px-4 py-16 md:py-24">
-  <div class="max-w-5xl mx-auto grid md:grid-cols-2 gap-10 items-center">
+<section id="que-te-llevas" class="bg-black text-white py-16 md:py-24 px-4">
+  <div class="max-w-5xl mx-auto">
+    <h2 class="font-headline text-3xl md:text-5xl mb-12 text-center leading-tight">
+      Al final del día,<br><span class="text-amarillo">tu computador queda con esto operando</span>
+    </h2>
+    <div class="grid md:grid-cols-2 gap-8">
+      <div>
+        <h3 class="font-headline text-xl text-amarillo mb-4">TU SISTEMA INSTALADO</h3>
+        <ul class="space-y-3">
+          <li class="flex gap-3"><span class="text-amarillo font-bold">✓</span> Claude Code instalado, configurado y listo</li>
+          <li class="flex gap-3"><span class="text-amarillo font-bold">✓</span> Estructura del Método MPV organizada para tu negocio</li>
+          <li class="flex gap-3"><span class="text-amarillo font-bold">✓</span> 2 agentes corriendo: documentador + agente de contenido</li>
+          <li class="flex gap-3"><span class="text-amarillo font-bold">✓</span> Tu 06-contexto-ia.md (cerebro digital del negocio) generado en vivo</li>
+          <li class="flex gap-3"><span class="text-amarillo font-bold">✓</span> Tu primera parrilla semanal saliendo automáticamente</li>
+          <li class="flex gap-3"><span class="text-amarillo font-bold">✓</span> Plantillas de prompts y agentes listas para reutilizar</li>
+        </ul>
+      </div>
+      <div>
+        <h3 class="font-headline text-xl text-amarillo mb-4">ACOMPAÑAMIENTO QUE NO TERMINA</h3>
+        <ul class="space-y-3">
+          <li class="flex gap-3"><span class="text-amarillo font-bold">✓</span> Curso digital paso a paso en video, acceso permanente</li>
+          <li class="flex gap-3"><span class="text-amarillo font-bold">✓</span> Acceso al grupo WhatsApp privado del bootcamp (sin límite de tiempo)</li>
+          <li class="flex gap-3"><span class="text-amarillo font-bold">✓</span> Constancia de participación</li>
+        </ul>
+        <img src="imagenes/parrilla-demo.gif" alt="Parrilla generándose en automático" class="mt-6 rounded-lg border-2 border-amarillo">
+      </div>
+    </div>
+  </div>
+</section>
 
+<!-- ============================================ -->
+<!-- QUIÉN SOY                                     -->
+<!-- ============================================ -->
+<section class="py-16 md:py-24 px-4 bg-white">
+  <div class="max-w-5xl mx-auto grid md:grid-cols-2 gap-12 items-center">
     <div>
-      <p class="font-secondary text-dorado text-sm md:text-base mb-3 tracking-widest">QUIÉN SOY</p>
+      <img src="imagenes/joako-effi.png" alt="Joako en tarima de Feria EFFIX" class="w-full rounded-lg shadow-xl">
+    </div>
+    <div>
+      <p class="font-secondary text-azul text-xl mb-2">QUIÉN TE VA A ENSEÑAR</p>
       <h2 class="font-headline text-3xl md:text-5xl mb-6 leading-tight">
-        El estratega<br>que piensa como <span class="text-dorado">ingeniero.</span>
+        Joaquín Rojas,<br><span class="text-azul">estratega de marketing digital</span>
       </h2>
-      <div class="space-y-4 text-gray-300 leading-relaxed text-base md:text-lg">
-        <p>Soy <span class="text-white font-bold">Joaquín Rojas</span>, estratega experto en marketing digital. Construyo y opero sistemas de ventas por internet para marcas que ya facturan en Colombia, México, Ecuador y Estados Unidos.</p>
-        <p>Mi formación de base es <span class="text-white font-bold">ingeniería mecatrónica con especialización en lean manufacturing y gerencia de proyectos</span>. Por eso no veo el marketing como una pila de tácticas sueltas, sino como un sistema con cuellos de botella, palancas y procesos que se optimizan.</p>
-        <p>Llegué a esto después de quebrar un ecommerce que facturaba 10M de pesos diarios. Pasé dos años buscando <span class="text-dorado font-bold">por qué algunos negocios venden por internet y otros no</span>. Pagué más de 10.000 USD en mentorías y trabajé junto a los mejores.</p>
-        <p>El descubrimiento es que el problema no es la pauta, ni la plataforma, ni el presupuesto. Es el <span class="text-dorado font-bold">Mensaje Principal de Venta</span>. Y ese descubrimiento es lo que convertí en el Método MPV: el sistema que hoy aplico, escalo y enseño.</p>
-        <p class="border-l-4 border-dorado pl-4 italic text-white">"Yo ya pagué el precio de no saberlo. Mis clientes no tienen que pagar ese mismo precio."</p>
-      </div>
+      <p class="text-lg mb-6">
+        Estratega de la <strong>Feria EFFIX</strong>, la feria de ecommerce hispano más grande del continente. Ingeniero mecatrónico con especialización en <strong>lean manufacturing</strong>: no veo el marketing como arte creativo, lo veo como proceso industrial.
+      </p>
+      <ul class="space-y-3 mb-6">
+        <li class="flex gap-3 items-start"><span class="text-amarillo font-bold text-xl flex-shrink-0">●</span> <span><strong>+500.000 USD</strong> gestionados en pauta Meta</span></li>
+        <li class="flex gap-3 items-start"><span class="text-amarillo font-bold text-xl flex-shrink-0">●</span> <span>Marcas activas en <strong>4 países</strong>: Colombia, México, Ecuador y USA</span></li>
+        <li class="flex gap-3 items-start"><span class="text-amarillo font-bold text-xl flex-shrink-0">●</span> <span>Creador del <strong>Método MPV</strong> (4 fases + anillo de optimización)</span></li>
+        <li class="flex gap-3 items-start"><span class="text-amarillo font-bold text-xl flex-shrink-0">●</span> <span>Sistema de <strong>agentes en Claude Code</strong> que opera el método cada día</span></li>
+      </ul>
+      <p class="font-bold border-l-4 border-azul pl-4">Lo que te enseño en el bootcamp es el mismo sistema que está corriendo con mis clientes esta semana. Lo aplicamos al tuyo en vivo el sábado.</p>
     </div>
-
-    <div class="rounded-2xl overflow-hidden border-2 border-dorado">
-      <img src="bootcamp-claude/imagenes/joako-effi.png" alt="Joaquín Rojas en la Feria EFFIX" class="w-full h-auto block">
-    </div>
-
   </div>
 </section>
 
 <!-- ============================================ -->
-<!-- MÉTODO MPV                                     -->
+<!-- TEMARIO                                       -->
 <!-- ============================================ -->
-<section class="px-4 py-16 md:py-24 bg-azul/20 border-y border-white/10">
-  <div class="max-w-5xl mx-auto text-center">
-    <p class="font-secondary text-dorado text-sm md:text-base mb-3 tracking-widest">EL MÉTODO QUE OPERA TODO</p>
-    <h2 class="font-headline text-3xl md:text-5xl mb-6 leading-tight">
-      Método <span class="text-dorado">MPV.</span>
-    </h2>
-    <p class="text-gray-200 max-w-3xl mx-auto mb-12 text-base md:text-lg leading-relaxed">
-      Construye un sistema de ventas por internet donde el 80% del trabajo ya esté hecho antes de gastar un dólar en pauta. Y el 20% restante sea solo ejecutar.
-    </p>
-
-    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto">
-      <div class="bg-black/60 border border-dorado/40 p-5 rounded-xl">
-        <p class="font-secondary text-dorado text-2xl mb-2">FASE 1</p>
-        <p class="font-headline text-lg mb-2">Diagnóstico</p>
-        <p class="text-xs text-gray-400">¿Qué vendes y a quién?</p>
-      </div>
-      <div class="bg-black/60 border-2 border-dorado p-5 rounded-xl relative">
-        <span class="absolute -top-3 left-1/2 -translate-x-1/2 bg-dorado text-black text-xs font-bold px-3 py-1 rounded-full whitespace-nowrap">CENTRO</span>
-        <p class="font-secondary text-dorado text-2xl mb-2">FASE 2</p>
-        <p class="font-headline text-lg mb-2">Mensaje</p>
-        <p class="text-xs text-gray-400">¿Por qué te van a comprar a ti?</p>
-      </div>
-      <div class="bg-black/60 border border-dorado/40 p-5 rounded-xl">
-        <p class="font-secondary text-dorado text-2xl mb-2">FASE 3</p>
-        <p class="font-headline text-lg mb-2">Captación</p>
-        <p class="text-xs text-gray-400">¿Cómo llega a quien compra?</p>
-      </div>
-      <div class="bg-black/60 border border-dorado/40 p-5 rounded-xl">
-        <p class="font-secondary text-dorado text-2xl mb-2">FASE 4</p>
-        <p class="font-headline text-lg mb-2">Cierre</p>
-        <p class="text-xs text-gray-400">¿Cómo se vuelve cliente?</p>
-      </div>
+<section class="bg-amarillo py-16 md:py-24 px-4">
+  <div class="max-w-4xl mx-auto">
+    <p class="font-secondary text-black text-xl mb-2 text-center">EL DÍA HORA POR HORA</p>
+    <h2 class="font-headline text-3xl md:text-5xl mb-12 text-center leading-tight">Temario del bootcamp</h2>
+    <div class="bg-white rounded-lg shadow-xl overflow-hidden">
+      <table class="w-full">
+        <tbody>
+          <tr class="border-b"><td class="p-4 font-bold text-azul w-32">9:00</td><td class="p-4">Bienvenida y qué es Claude Code</td></tr>
+          <tr class="border-b bg-gray-50"><td class="p-4 font-bold text-azul">9:30</td><td class="p-4">Bloque 1: IA aplicada al Método MPV</td></tr>
+          <tr class="border-b"><td class="p-4 font-bold text-azul">10:30</td><td class="p-4">Bloque 2: Construye la documentación de tu negocio</td></tr>
+          <tr class="border-b bg-gray-50"><td class="p-4 font-bold text-azul">11:30</td><td class="p-4">Bloque 3: Instalación de Claude Code y estructura base</td></tr>
+          <tr class="border-b"><td class="p-4 font-bold text-azul">12:30</td><td class="p-4">Almuerzo</td></tr>
+          <tr class="border-b bg-gray-50"><td class="p-4 font-bold text-azul">13:30</td><td class="p-4">Bloque 4: Agentes corriendo sobre tu propio negocio</td></tr>
+          <tr class="border-b"><td class="p-4 font-bold text-azul">15:00</td><td class="p-4">Bloque 5: Tu primera parrilla automatizada</td></tr>
+          <tr><td class="p-4 font-bold text-azul">16:00</td><td class="p-4">Cierre y siguientes pasos</td></tr>
+        </tbody>
+      </table>
     </div>
-
-    <p class="mt-10 text-sm text-gray-400 max-w-2xl mx-auto">
-      Anillo exterior: <span class="text-white">optimización continua</span> con principios de lean manufacturing. La misma lógica que mejora una línea de producción aplicada a un sistema de ventas.
-    </p>
   </div>
 </section>
 
 <!-- ============================================ -->
-<!-- TESTIMONIOS                                    -->
+<!-- PARA QUIÉN ES / NO ES                         -->
 <!-- ============================================ -->
-<section class="px-4 py-16 md:py-24">
-  <div class="max-w-6xl mx-auto">
-    <p class="font-secondary text-dorado text-sm md:text-base mb-3 tracking-widest text-center">LO QUE DICEN LOS QUE YA APLICARON</p>
-    <h2 class="font-headline text-3xl md:text-5xl text-center mb-12 leading-tight">
-      Esto no es teoría.<br>Es <span class="text-dorado">resultado real.</span>
-    </h2>
-
-    <!-- GRID DE TESTIMONIOS — IMÁGENES DE WHATSAPP/CAPTURAS -->
-    <!-- IMPORTANTE: subir las imágenes a /imagenes/testimonios/ con nombres test-1.jpg, test-2.jpg, etc -->
-    <div class="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
-      <div class="bg-white rounded-xl overflow-hidden shadow-2xl border-2 border-white/20">
-        <img src="imagenes/testimonios/test-1.jpg" alt="Testimonio 1" class="w-full h-auto block" onerror="this.parentElement.classList.add('hidden')">
+<section class="py-16 md:py-24 px-4 bg-white">
+  <div class="max-w-5xl mx-auto">
+    <h2 class="font-headline text-3xl md:text-5xl mb-12 text-center leading-tight">¿Es este bootcamp para ti?</h2>
+    <div class="grid md:grid-cols-2 gap-8">
+      <div class="border-2 border-azul rounded-lg p-8">
+        <h3 class="font-headline text-2xl text-azul mb-4">SÍ es para ti si...</h3>
+        <ul class="space-y-3">
+          <li class="flex gap-3"><span class="text-azul font-bold">✓</span> Tienes un negocio en operación generando ingresos hoy</li>
+          <li class="flex gap-3"><span class="text-azul font-bold">✓</span> Quieres dejar de operar tu marketing a mano y construir un sistema con IA</li>
+          <li class="flex gap-3"><span class="text-azul font-bold">✓</span> Vas a aplicar lo aprendido inmediatamente</li>
+          <li class="flex gap-3"><span class="text-azul font-bold">✓</span> Tienes laptop propia y manejas básico de archivos</li>
+        </ul>
       </div>
-      <div class="bg-white rounded-xl overflow-hidden shadow-2xl border-2 border-white/20">
-        <img src="imagenes/testimonios/test-2.jpg" alt="Testimonio 2" class="w-full h-auto block" onerror="this.parentElement.classList.add('hidden')">
-      </div>
-      <div class="bg-white rounded-xl overflow-hidden shadow-2xl border-2 border-white/20">
-        <img src="imagenes/testimonios/test-3.jpg" alt="Testimonio 3" class="w-full h-auto block" onerror="this.parentElement.classList.add('hidden')">
-      </div>
-      <div class="bg-white rounded-xl overflow-hidden shadow-2xl border-2 border-white/20">
-        <img src="imagenes/testimonios/test-4.jpg" alt="Testimonio 4" class="w-full h-auto block" onerror="this.parentElement.classList.add('hidden')">
-      </div>
-      <div class="bg-white rounded-xl overflow-hidden shadow-2xl border-2 border-white/20">
-        <img src="imagenes/testimonios/test-5.jpg" alt="Testimonio 5" class="w-full h-auto block" onerror="this.parentElement.classList.add('hidden')">
-      </div>
-      <div class="bg-white rounded-xl overflow-hidden shadow-2xl border-2 border-white/20">
-        <img src="imagenes/testimonios/test-6.jpg" alt="Testimonio 6" class="w-full h-auto block" onerror="this.parentElement.classList.add('hidden')">
+      <div class="border-2 border-gray-300 rounded-lg p-8 bg-gray-50">
+        <h3 class="font-headline text-2xl text-gray-600 mb-4">No es para ti si...</h3>
+        <ul class="space-y-3 text-gray-700">
+          <li class="flex gap-3"><span class="font-bold">·</span> Estás explorando ideas y aún no tienes negocio operando</li>
+          <li class="flex gap-3"><span class="font-bold">·</span> Buscas un curso para guardar y ver después (este es de instalación)</li>
+          <li class="flex gap-3"><span class="font-bold">·</span> No tienes tiempo de aplicar en las semanas siguientes</li>
+        </ul>
+        <p class="mt-4 text-sm">Si estás en duda, escríbeme directo y te ayudo a decidir si es el momento correcto.</p>
       </div>
     </div>
-
-    <p class="text-center text-xs text-gray-500 mt-6">Resultados reales de clientes y estudiantes. Los nombres y datos sensibles están protegidos.</p>
   </div>
 </section>
 
 <!-- ============================================ -->
-<!-- CTA FINAL                                      -->
+<!-- PRE-REQUISITOS                                -->
 <!-- ============================================ -->
-<section class="px-4 py-20 md:py-28">
-  <div class="max-w-4xl mx-auto text-center">
-    <p class="font-secondary text-dorado text-xl md:text-2xl mb-5 tracking-widest">EL PRIMER PASO ES GRATIS</p>
-    <h2 class="font-headline text-4xl md:text-6xl mb-6 leading-none">
-      Trae tu negocio<br>al <span class="text-dorado">viernes en vivo.</span>
-    </h2>
-    <p class="text-base md:text-xl text-gray-300 max-w-2xl mx-auto mb-10 leading-relaxed">
-      Cada semana analizo casos reales. Si tu negocio no está vendiendo, te digo por qué. Sin cobrarte nada.
-    </p>
+<section class="bg-gray-100 py-16 md:py-24 px-4">
+  <div class="max-w-4xl mx-auto">
+    <p class="font-secondary text-azul text-xl mb-2 text-center">QUÉ NECESITAS TRAER</p>
+    <h2 class="font-headline text-3xl md:text-5xl mb-10 text-center leading-tight">Pre-requisitos técnicos</h2>
+    <div class="bg-white rounded-lg p-8 shadow-lg space-y-4 text-lg">
+      <p class="flex gap-3"><span class="text-azul font-bold">1.</span> Laptop Windows 10+ o Mac (8 GB RAM mínimo, 10 GB libres)</p>
+      <p class="flex gap-3"><span class="text-azul font-bold">2.</span> <strong>Suscripción Claude Pro activa</strong> (20 USD/mes, vinculada a tu cuenta)</p>
+      <p class="flex gap-3"><span class="text-azul font-bold">3.</span> Cuenta Google activa</p>
+      <p class="flex gap-3"><span class="text-azul font-bold">4.</span> Información básica de tu negocio (te enviamos cuestionario después de pagar)</p>
+    </div>
+    <p class="mt-6 text-center text-sm opacity-60 max-w-2xl mx-auto">Te enviamos paso a paso por video 7 días antes del bootcamp. Si no cumples algún requisito al iniciar el día, no podemos ejecutar la instalación contigo en vivo. Por eso pedimos validación previa antes del pago.</p>
+  </div>
+</section>
 
-    <a href="comunidad/" class="inline-block bg-dorado text-black font-bold py-5 px-10 rounded-lg hover:bg-yellow-400 transition text-lg md:text-xl btn-lift pulse-cta">
-      Quiero entrar a la comunidad gratis
-    </a>
-    <p class="mt-4 text-sm text-gray-500">Sin tarjeta. Sin compromiso. Sales cuando quieras.</p>
+<!-- ============================================ -->
+<!-- LOGÍSTICA                                     -->
+<!-- ============================================ -->
+<section class="bg-black text-white py-16 md:py-24 px-4">
+  <div class="max-w-5xl mx-auto">
+    <h2 class="font-headline text-3xl md:text-5xl mb-12 text-center leading-tight">
+      Logística <span class="text-amarillo">del día</span>
+    </h2>
+    <div class="grid grid-cols-2 md:grid-cols-5 gap-6 text-center">
+      <div class="border border-amarillo rounded-lg p-6">
+        <p class="text-3xl mb-2">📅</p>
+        <p class="font-bold">Sábado</p>
+        <p>6 de junio 2026</p>
+      </div>
+      <div class="border border-amarillo rounded-lg p-6">
+        <p class="text-3xl mb-2">🕘</p>
+        <p class="font-bold">9:00 am</p>
+        <p>a 4:00 pm</p>
+      </div>
+      <div class="border border-amarillo rounded-lg p-6">
+        <p class="text-3xl mb-2">📍</p>
+        <p class="font-bold">Medellín</p>
+        <p class="text-xs opacity-60">Dirección al confirmar inscripción</p>
+      </div>
+      <div class="border border-amarillo rounded-lg p-6">
+        <p class="text-3xl mb-2">🪑</p>
+        <p class="font-bold">10 cupos</p>
+        <p>Máximo</p>
+      </div>
+      <div class="border border-amarillo rounded-lg p-6">
+        <p class="text-3xl mb-2">🍽</p>
+        <p class="font-bold">Almuerzo</p>
+        <p>Incluido</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================ -->
+<!-- INVERSIÓN + GARANTÍA + CTA                    -->
+<!-- ============================================ -->
+<section id="cta-aplicar" class="bg-amarillo py-16 md:py-24 px-4">
+  <div class="max-w-3xl mx-auto text-center">
+
+    <!-- COMPARATIVA DE PRECIO -->
+    <div class="bg-white rounded-2xl p-6 md:p-8 mb-10 shadow-xl text-left">
+      <p class="font-secondary text-black text-sm mb-4 text-center opacity-60">LO QUE PAGARÍAS POR ESTO EN OTRO LADO</p>
+      <ul class="space-y-3 text-base md:text-lg mb-4">
+        <li class="flex justify-between gap-4 border-b border-gray-200 pb-3"><span>Curso de IA en plataforma online</span><span class="font-bold">$1.500.000</span></li>
+        <li class="flex justify-between gap-4 border-b border-gray-200 pb-3"><span>Mentor 1-a-1 en marketing con IA (3 sesiones)</span><span class="font-bold">$2.400.000</span></li>
+        <li class="flex justify-between gap-4 border-b border-gray-200 pb-3"><span>Agencia para que opere tu marketing 1 mes</span><span class="font-bold">$6.000.000</span></li>
+        <li class="flex justify-between gap-4 pt-2"><span class="font-bold">Total acumulado</span><span class="font-bold text-azul">$9.900.000</span></li>
+      </ul>
+      <p class="text-center text-sm md:text-base font-bold mt-4">Aquí pagas <span class="text-azul">una décima parte</span>. Sin mensualidades. Y sales operando.</p>
+    </div>
+
+    <p class="font-secondary text-black text-xl mb-2">INVERSIÓN ÚNICA</p>
+    <h2 class="font-headline text-5xl md:text-7xl mb-4">$997.000 <span class="text-3xl">COP</span></h2>
+    <p class="text-lg mb-4 max-w-xl mx-auto">Pago único. Sin mensualidades, sin renovaciones, sin sorpresas.</p>
+
+    <!-- URGENCIA REAL: precio solo del primer bootcamp -->
+    <div class="bg-black text-white rounded-lg p-5 mb-8 max-w-xl mx-auto">
+      <p class="font-bold text-amarillo mb-2">⚡ Este es el primer bootcamp presencial</p>
+      <p class="text-sm">Después de este, el bootcamp presencial sube a <strong>$1.997.000</strong> y este precio quedará disponible solo en la versión virtual pregrabada. Si quieres aprender en persona conmigo a este valor, este es el momento.</p>
+    </div>
+
+    <!-- BONO DE DECISIÓN RÁPIDA -->
+    <div class="bg-black text-white rounded-lg p-5 mb-8 max-w-xl mx-auto">
+      <p class="font-bold text-amarillo mb-1">🎁 Bono por decisión rápida</p>
+      <p class="text-sm">Si reservas en las próximas <strong>48 horas</strong>, te incluyo una <strong>sesión virtual 1-a-1 de 30 minutos</strong> conmigo después del bootcamp para revisar tu sistema en acción.</p>
+    </div>
+
+    <button onclick="abrirModal()" class="bg-black text-white font-bold py-5 px-12 rounded-lg text-xl hover:bg-azul transition mb-8 btn-lift pulse-negro">
+      Aplicar para mi cupo
+    </button>
+
+    <!-- GARANTÍA DESTACADA -->
+    <div class="bg-black text-white rounded-2xl p-6 md:p-8 max-w-2xl mx-auto border-4 border-black shadow-2xl">
+      <div class="text-5xl mb-3">🛡</div>
+      <p class="font-headline text-xl md:text-2xl text-amarillo mb-3">Garantía de instalación</p>
+      <p class="text-sm md:text-base">El día termina contigo y tu sistema corriendo. Si por causas técnicas algo no quedó listo, <strong>te acompañamos virtualmente hasta que opere</strong>. Sin letra chica.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================ -->
+<!-- FAQ                                           -->
+<!-- ============================================ -->
+<section class="py-16 md:py-24 px-4 bg-white">
+  <div class="max-w-3xl mx-auto">
+    <h2 class="font-headline text-3xl md:text-5xl mb-12 text-center leading-tight">Preguntas frecuentes</h2>
+    <div>
+      <div class="faq-item">
+        <div class="faq-question" onclick="toggleFaq(this)">
+          <span class="font-bold text-lg">¿Esto reemplaza ChatGPT?</span>
+          <span class="faq-arrow text-azul">+</span>
+        </div>
+        <div class="faq-answer"><p>No, lo complementa. Claude Code opera donde ChatGPT no llega: en tus archivos, con memoria persistente y con agentes especializados que conocen tu negocio.</p></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question" onclick="toggleFaq(this)">
+          <span class="font-bold text-lg">¿Necesito saber programar?</span>
+          <span class="faq-arrow text-azul">+</span>
+        </div>
+        <div class="faq-answer"><p>No. Claude Code se opera en lenguaje natural. Si sabes escribir un correo, puedes operarlo. El bootcamp asume que partes desde cero.</p></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question" onclick="toggleFaq(this)">
+          <span class="font-bold text-lg">¿Habrá más bootcamps?</span>
+          <span class="faq-arrow text-azul">+</span>
+        </div>
+        <div class="faq-answer"><p>Sí. Bootcamp Meta Ads viene en julio. Próximas ciudades según demanda (Bogotá, Cali).</p></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question" onclick="toggleFaq(this)">
+          <span class="font-bold text-lg">¿Hay descuento si vamos varios?</span>
+          <span class="faq-arrow text-azul">+</span>
+        </div>
+        <div class="faq-answer"><p>Sí. Segundo cupo del mismo negocio paga 50%. Escríbeme directo por WhatsApp y lo coordinamos.</p></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question" onclick="toggleFaq(this)">
+          <span class="font-bold text-lg">¿Qué pasa si no puedo asistir el día?</span>
+          <span class="faq-arrow text-azul">+</span>
+        </div>
+        <div class="faq-answer"><p>Si avisas con 7 días de anticipación, te paso al siguiente bootcamp. Si avisas después, tienes el material pregrabado y podemos coordinar instalación virtual.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================ -->
+<!-- CTA FINAL                                     -->
+<!-- ============================================ -->
+<section class="bg-azul text-white py-20 px-4 text-center">
+  <div class="max-w-3xl mx-auto">
+    <h2 class="font-headline text-3xl md:text-5xl mb-6 leading-tight">10 cupos. Sábado 6 de junio.<br><span class="text-amarillo">Medellín.</span></h2>
+    <p class="text-lg mb-8 opacity-90">Sales con tu sistema corriendo. No con apuntes.</p>
+    <button onclick="abrirModal()" class="bg-amarillo text-black font-bold py-5 px-12 rounded-lg text-xl hover:opacity-90 transition btn-lift pulse-amarillo">
+      Aplicar para mi cupo
+    </button>
   </div>
 </section>
 
 <!-- ============================================ -->
 <!-- FOOTER                                        -->
 <!-- ============================================ -->
-<footer class="border-t border-white/10 px-4 py-10">
+<footer class="bg-black text-white py-10 px-4">
   <div class="max-w-5xl mx-auto text-center">
+    <!-- LOGO footer con zoom CSS -->
     <div class="mx-auto mb-6 overflow-hidden relative" style="height: 60px; width: 180px;">
-      <img src="bootcamp-claude/imagenes/logo-blanco-amarillo-fondo-negro.png" alt="Joako Estratega" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(1.8); max-width: none; height: 100%;">
+      <img src="imagenes/logo-blanco-amarillo-fondo-negro.png" alt="Joako Estratega" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(1.8); max-width: none; height: 100%;">
     </div>
-    <div class="flex flex-wrap justify-center gap-6 text-sm text-gray-400 mb-6">
-      <a href="comunidad/" class="hover:text-dorado transition">Comunidad</a>
-      <a href="bootcamp-claude/" class="hover:text-dorado transition">Bootcamp Claude</a>
-      <a href="bootcamp-meta-ads/" class="hover:text-dorado transition">Bootcamp Meta Ads</a>
-      <a href="agencia/" class="hover:text-dorado transition">Agencia</a>
-      <a href="https://wa.me/573028662556?text=Hola%20Joako" class="hover:text-dorado transition">WhatsApp</a>
-    </div>
-    <p class="text-xs text-gray-500">© 2026 Joako Estratega · Medellín, Colombia · Hecho con cariño y mucho café.</p>
+    <p class="text-sm opacity-60 mb-2">© 2026 Joako Estratega · Todos los derechos reservados</p>
+    <p class="text-sm opacity-60">
+      <a href="https://wa.me/573028662556" class="underline">WhatsApp directo</a> ·
+      <a href="mailto:joakoestratega@gmail.com" class="underline">joakoestratega@gmail.com</a>
+    </p>
   </div>
 </footer>
 
 <!-- ============================================ -->
-<!-- WHATSAPP FLOTANTE                              -->
+<!-- BOTÓN FLOTANTE WHATSAPP                       -->
 <!-- ============================================ -->
-<a href="https://wa.me/573028662556?text=Hola%20Joako%2C%20vi%20tu%20página%20web%20y%20quiero%20más%20información" target="_blank" rel="noopener" class="wa-float bg-green-500 hover:bg-green-600 text-white rounded-full w-14 h-14 flex items-center justify-center" aria-label="Escríbeme por WhatsApp">
-  <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+<a href="https://wa.me/573028662556?text=Hola%20Joako,%20quiero%20información%20del%20bootcamp%20Claude" target="_blank" class="wa-float bg-green-500 text-white rounded-full p-4 hover:bg-green-600 transition">
+  <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="currentColor">
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+  </svg>
 </a>
 
 <!-- ============================================ -->
-<!-- STICKY BOTTOM MOBILE                           -->
+<!-- STICKY BOTTOM MÓVIL                           -->
 <!-- ============================================ -->
-<div class="sticky-mobile fixed bottom-0 left-0 right-0 bg-black border-t-2 border-dorado p-3 z-40 shadow-2xl">
-  <a href="comunidad/" class="block bg-dorado text-black font-bold py-3 px-4 rounded-lg text-center text-base">
-    Únete gratis a la comunidad →
-  </a>
+<div class="sticky-mobile fixed bottom-0 left-0 right-0 bg-azul text-white p-3 z-40 shadow-lg">
+  <button onclick="abrirModal()" class="w-full bg-amarillo text-black font-bold py-3 rounded-lg">
+    Aplicar para mi cupo · $997.000 COP
+  </button>
 </div>
 
+<!-- ============================================ -->
+<!-- MODAL FORMULARIO DE APLICACIÓN                -->
+<!-- ============================================ -->
+<div id="modal" class="modal-bg" onclick="if(event.target===this) cerrarModal()">
+  <div class="modal-box">
+    <div class="flex justify-between items-start mb-4">
+      <h3 class="font-headline text-2xl">Aplicar para mi cupo</h3>
+      <button onclick="cerrarModal()" class="text-2xl leading-none">&times;</button>
+    </div>
+    <p class="mb-5 text-sm opacity-80">Confirma tus datos y los requisitos. Después continúas al pago.</p>
+
+    <form id="form-aplicacion" class="space-y-4">
+      <div>
+        <label class="text-sm font-bold block mb-1">Nombre completo *</label>
+        <input type="text" name="nombre" required class="w-full border border-gray-300 rounded-md px-3 py-2 text-sm">
+      </div>
+      <div>
+        <label class="text-sm font-bold block mb-1">WhatsApp (con indicativo) *</label>
+        <input type="tel" name="whatsapp" required placeholder="573001234567" class="w-full border border-gray-300 rounded-md px-3 py-2 text-sm">
+      </div>
+      <div>
+        <label class="text-sm font-bold block mb-1">Email *</label>
+        <input type="email" name="email" required class="w-full border border-gray-300 rounded-md px-3 py-2 text-sm">
+      </div>
+      <div>
+        <label class="text-sm font-bold block mb-1">¿Qué vendes en tu negocio? *</label>
+        <textarea name="negocio" required rows="2" class="w-full border border-gray-300 rounded-md px-3 py-2 text-sm"></textarea>
+      </div>
+
+      <div class="border-t border-gray-200 pt-4 space-y-3">
+        <p class="text-sm font-bold">Confirma los requisitos:</p>
+        <label class="flex gap-3 items-start cursor-pointer text-sm">
+          <input type="checkbox" name="req_laptop" required class="req-check mt-1">
+          <span>Tengo laptop con 8 GB RAM (Windows 10+ o Mac)</span>
+        </label>
+        <label class="flex gap-3 items-start cursor-pointer text-sm">
+          <input type="checkbox" name="req_claude" required class="req-check mt-1">
+          <span>Voy a activar suscripción Claude Pro (20 USD/mes) antes del bootcamp</span>
+        </label>
+        <label class="flex gap-3 items-start cursor-pointer text-sm">
+          <input type="checkbox" name="req_negocio" required class="req-check mt-1">
+          <span>Tengo un negocio en operación generando ingresos hoy</span>
+        </label>
+        <label class="flex gap-3 items-start cursor-pointer text-sm">
+          <input type="checkbox" name="req_fecha" required class="req-check mt-1">
+          <span>Tengo el sábado 6 de junio disponible (9 am a 4 pm)</span>
+        </label>
+      </div>
+
+      <button type="submit" id="btn-submit" class="w-full bg-azul text-white font-bold py-4 rounded-lg text-lg hover:opacity-90 btn-lift pulse-azul mt-4">
+        Quiero mi cupo
+      </button>
+
+      <p class="text-xs text-center opacity-60">Después de enviar, continúas al pago seguro vía Wompi · PSE, Nequi, Daviplata o tarjeta</p>
+    </form>
+
+    <!-- Mensaje de éxito (oculto por default) -->
+    <div id="form-exito" style="display:none;" class="text-center py-6">
+      <div class="text-5xl mb-3">✅</div>
+      <h4 class="font-headline text-xl mb-2">¡Datos registrados!</h4>
+      <p class="text-sm opacity-80 mb-5">Te estamos redirigiendo al pago seguro...</p>
+      <div class="animate-pulse">Redirigiendo en 2 segundos...</div>
+    </div>
+
+    <!-- Mensaje de error (oculto por default) -->
+    <div id="form-error" style="display:none;" class="bg-red-100 border border-red-400 text-red-800 p-4 rounded-lg text-sm mt-4">
+      <p class="font-bold mb-1">Hubo un problema enviando tus datos</p>
+      <p>Por favor escríbeme por WhatsApp para coordinar tu cupo:</p>
+      <a href="https://wa.me/573028662556?text=Hola%20Joako,%20quiero%20aplicar%20al%20bootcamp" class="block mt-3 bg-green-500 text-white font-bold py-3 rounded-lg text-center btn-lift">
+        Escribir por WhatsApp
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================ -->
+<!-- SCRIPTS                                       -->
+<!-- ============================================ -->
 <script>
-  // Reveal on scroll
-  const observerOptions = { threshold: 0.1 };
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) entry.target.classList.add('active');
-    });
-  }, observerOptions);
-  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  // ============================================
+  // CONFIGURACIÓN — REEMPLAZA ESTOS 2 VALORES
+  // ============================================
+  const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzl3mJGo_ySG5Tl0HEWM8Ebbcuv1hAHxZ7NQlmPPpZ-OB23IHT6k8COYQLDxZXShwZ5/exec';
+  const LINK_PAGO_WOMPI = 'https://checkout.wompi.co/l/bpXT4N';
+  // ============================================
+
+  function abrirModal() {
+    document.getElementById('modal').classList.add('active');
+    document.body.style.overflow = 'hidden';
+    // Reset form state
+    document.getElementById('form-aplicacion').style.display = 'block';
+    document.getElementById('form-exito').style.display = 'none';
+    document.getElementById('form-error').style.display = 'none';
+  }
+  function cerrarModal() {
+    document.getElementById('modal').classList.remove('active');
+    document.body.style.overflow = '';
+  }
+  function toggleFaq(el) {
+    el.parentElement.classList.toggle('open');
+  }
+
+  // ============================================
+  // FORMULARIO DE APLICACIÓN — Envío a Google Apps Script
+  // ============================================
+  document.getElementById('form-aplicacion').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const btn = document.getElementById('btn-submit');
+    const originalText = btn.textContent;
+    btn.disabled = true;
+    btn.textContent = 'Enviando...';
+
+    const formData = new FormData(e.target);
+    const data = {
+      nombre: formData.get('nombre'),
+      whatsapp: formData.get('whatsapp'),
+      email: formData.get('email'),
+      negocio: formData.get('negocio'),
+      req_laptop: formData.get('req_laptop') ? 'Sí' : 'No',
+      req_claude: formData.get('req_claude') ? 'Sí' : 'No',
+      req_negocio: formData.get('req_negocio') ? 'Sí' : 'No',
+      req_fecha: formData.get('req_fecha') ? 'Sí' : 'No',
+      producto: 'Bootcamp Claude · 6 junio 2026',
+      origen: window.location.href,
+      timestamp: new Date().toISOString()
+    };
+
+    try {
+      // Enviar a Apps Script (text/plain evita preflight CORS)
+      await fetch(APPS_SCRIPT_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+        body: JSON.stringify(data)
+      });
+
+      // Mostrar éxito
+      document.getElementById('form-aplicacion').style.display = 'none';
+      document.getElementById('form-exito').style.display = 'block';
+
+      // Redirigir a Wompi después de 2 segundos
+      setTimeout(() => {
+        window.location.href = LINK_PAGO_WOMPI;
+      }, 2000);
+
+    } catch (error) {
+      console.error('Error:', error);
+      btn.disabled = false;
+      btn.textContent = originalText;
+      document.getElementById('form-error').style.display = 'block';
+    }
+  });
 </script>
 
 </body>

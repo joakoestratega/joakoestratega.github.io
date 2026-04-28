@@ -1,0 +1,59 @@
+CARPETA DE TESTIMONIOS — Home Joako Estratega
+==============================================
+
+Aquí van las capturas de pantalla de testimonios reales que se muestran
+en la sección "Lo que dicen los que ya aplicaron" de la home.
+
+ARCHIVOS QUE LA PÁGINA ESPERA:
+
+1. test-1.jpg
+2. test-2.jpg
+3. test-3.jpg
+4. test-4.jpg
+5. test-5.jpg
+6. test-6.jpg
+
+QUÉ TIPO DE IMAGEN SUBIR:
+
+- Capturas de WhatsApp de clientes felices
+- Comentarios de Instagram, LinkedIn o YouTube positivos
+- DMs con resultados concretos
+- Fotos en eventos donde te mencionaron
+- Capturas de mensajes pidiéndote ayuda con su negocio
+
+REGLAS IMPORTANTES (privacidad):
+
+- Tapa nombre completo si la persona no autorizó (deja solo el primer nombre o iniciales)
+- TAPA siempre el número de WhatsApp completo (puedes dejar los últimos 3 dígitos solo)
+- Tapa fotos de perfil de personas que no dieron permiso explícito
+- Los emojis y texto del mensaje sí se ven, esos son los que generan confianza
+- Si la persona dio permiso público (post en sus historias, tag), puedes mostrar todo
+
+CÓMO TAPAR DATOS RÁPIDO:
+
+- En el celular: edita la imagen → herramienta de pincel → tapa los datos sensibles
+- En PC: Paint, Photoshop, Photopea (gratis online), o cualquier editor
+- También sirve recortar la imagen para dejar solo el mensaje
+
+FORMATO RECOMENDADO:
+
+- Formato: .jpg (más liviano que .png para fotos)
+- Tamaño máximo: 800 KB por imagen (usa tinypng.com si pesa más)
+- Resolución mínima: 600 px de ancho
+- Orientación: vertical (capturas de WhatsApp ya vienen así)
+
+SI TIENES MÁS DE 6 TESTIMONIOS:
+
+Súbelos como test-7.jpg, test-8.jpg, etc. Después dime cuántos tienes y
+agrego más espacios en la home para que se vean todos.
+
+SI TIENES MENOS DE 6:
+
+Sube los que tengas con esos nombres (test-1, test-2, ...). Los slots
+sin imagen se ocultan automáticamente, no rompe la página.
+
+PRO-TIP:
+
+Si las capturas son muy diferentes en tamaño/calidad, el muro queda raro.
+Antes de subir, recórtalas todas a un mismo aspect ratio (4:5 o 1:1
+funcionan bien para Instagram-style).

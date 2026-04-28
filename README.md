@@ -1,6 +1,6 @@
 # Sitio Joako Estratega · Carpeta lista para GitHub Pages
 
-Esta carpeta está lista para subir a GitHub Pages y conectar con dominio joakoestratega.com.
+Esta carpeta es el sitio completo de **joakoestratega.com**. Contiene la home principal, las 4 sub-páginas de servicios y todo lo necesario para subirlo a GitHub Pages.
 
 ---
 
@@ -10,100 +10,131 @@ Esta carpeta está lista para subir a GitHub Pages y conectar con dominio joakoe
 LANDINGS/  (esto es lo que subes a GitHub)
 │
 ├── CNAME                                 ← Vincula joakoestratega.com con GitHub Pages
-├── index.html                            ← Home del dominio (joakoestratega.com)
+├── index.html                            ← HOME nueva: hub de servicios
+├── apps-script.gs                        ← Captura de leads multi-producto
+├── SETUP-CAPTURA-DATOS.md                ← Guía para configurar Apps Script
+├── README.md                             ← Este archivo
 │
-└── bootcamp-claude/                      ← Landing del bootcamp Claude
-    ├── index.html                        ← La landing completa
-    ├── imagenes/
-    │   ├── LEEME.txt
-    │   ├── logo-negro-amarillo-blanco.png       (✅ ya está)
-    │   ├── logo-blanco-amarillo-fondo-azul.png  (✅ ya está)
-    │   └── logo-blanco-amarillo-fondo-negro.png (✅ ya está)
-    └── videos/
-        └── LEEME.txt
+├── imagenes/
+│   └── testimonios/
+│       ├── LEEME.txt                     ← Instrucciones para subir testimonios
+│       └── test-1.jpg ... test-6.jpg     ← Subir tus capturas de WhatsApp
+│
+├── comunidad/                            ← Sub-página comunidad gratuita
+│   └── index.html                        ← Va directo al WhatsApp del grupo
+│
+├── bootcamp-claude/                      ← Bootcamp Claude (ya existente)
+│   ├── index.html
+│   ├── imagenes/   (logos, joako-effi, claude-corriendo, parrilla-demo)
+│   ├── videos/
+│   └── gracias/
+│
+├── bootcamp-meta-ads/                    ← Bootcamp Meta Ads (NUEVO)
+│   └── index.html                        ← Con formulario de waitlist
+│
+└── agencia/                              ← Agencia (NUEVO)
+    └── index.html                        ← Con formulario de aplicación
 ```
+
+---
 
 ## URLs que vas a tener al aire
 
 | URL pública | Qué muestra |
 |-------------|-------------|
-| https://joakoestratega.com | Home simple con tu logo y botón al bootcamp |
-| https://joakoestratega.com/bootcamp-claude | Landing completa del bootcamp |
-| https://wa.me/573028662556 | Tu WhatsApp directo (ya integrado en ambas páginas) |
+| https://joakoestratega.com | **Home nueva** con los 4 servicios |
+| https://joakoestratega.com/comunidad | Sub-página de la comunidad gratuita (CTA al WhatsApp) |
+| https://joakoestratega.com/bootcamp-claude | Landing del bootcamp Claude (ya existente) |
+| https://joakoestratega.com/bootcamp-meta-ads | Landing del bootcamp Meta Ads + waitlist |
+| https://joakoestratega.com/agencia | Página de la agencia + formulario de aplicación |
 
 ---
 
-## ARCHIVOS QUE TIENES QUE SUBIR (lo que falta)
+## QUÉ FALTA HACER ANTES DE SUBIR
 
-Los 3 logos ya están copiados y listos. Solo te faltan **3 imágenes adicionales** y **1 video**:
+### 1. Subir testimonios
 
-### En `bootcamp-claude/imagenes/`
-- `claude-corriendo.png` — Captura de Claude Code corriendo en tu PC con agentes visibles
-- `parrilla-demo.gif` — GIF corto (5-10 seg) del sistema generando parrilla
-- `joako-effi.jpg` — Foto profesional tuya en tarima de Feria EFFIX o Grupo EFFI
+Carpeta: `imagenes/testimonios/`
 
-### En `bootcamp-claude/videos/` (opcional)
-Solo si vas con video local en lugar de YouTube. Ver instrucciones en `bootcamp-claude/videos/LEEME.txt`.
+Sube de 1 a 6 capturas de WhatsApp/comentarios con los nombres `test-1.jpg`, `test-2.jpg`, etc. Si tienes más de 6, dime cuántos y agrego más slots en la home. Si tienes menos, no pasa nada: los slots vacíos se ocultan solos.
 
----
+**Importante:** tapa números de WhatsApp y nombres completos si las personas no autorizaron mostrarlos. Ver `imagenes/testimonios/LEEME.txt` para los detalles.
 
-## EDICIONES PENDIENTES EN EL HTML
+### 2. Configurar el Apps Script (captura de leads)
 
-Antes de subir, abre `bootcamp-claude/index.html` con cualquier editor de texto y reemplaza:
+Una sola vez. Sirve para los formularios de Bootcamp Claude, Meta Ads waitlist y Agencia.
 
-1. **`{{LINK_WOMPI}}`** → tu link real de pago Wompi
-2. **`VIDEO_ID`** → ID de tu video de YouTube (o cambia a video local)
-3. **`Dirección al confirmar inscripción`** → cuando confirmes el lugar exacto
+Pasos completos en `SETUP-CAPTURA-DATOS.md`. Resumen:
+
+1. Crea un Google Sheets nuevo (o usa el existente del bootcamp Claude)
+2. Copia su ID (la parte larga del URL)
+3. Abre `apps-script.gs` en este proyecto y reemplaza:
+   - `PEGA_AQUI_EL_ID_DE_TU_GOOGLE_SHEETS` por el ID real
+   - `joakoestratega@gmail.com` ya está, déjalo así (o cámbialo si quieres recibir alertas en otro correo)
+4. Entra a [script.google.com](https://script.google.com) → Nuevo proyecto → Pega el código → Guarda
+5. **Implementar → Nueva implementación** → Tipo: Aplicación web
+   - Ejecutar como: Yo (tu cuenta)
+   - Tener acceso: Cualquier persona
+6. Copia el URL que termina en `/exec`
+7. Pega ese URL en los siguientes archivos donde dice `PEGA_AQUI_EL_URL_DE_TU_APPS_SCRIPT`:
+   - `bootcamp-meta-ads/index.html`
+   - `agencia/index.html`
+   - `bootcamp-claude/index.html` (si todavía no estaba conectado)
+
+El script crea hojas separadas automáticamente:
+- "Leads Bootcamp Claude"
+- "Lista Espera Meta Ads"
+- "Aplicaciones Agencia"
+
+### 3. (Opcional) Editar fechas o cupos del bootcamp Claude
+
+El bootcamp Claude ya tiene la fecha "Sábado 6 de junio". Si cambia, edita `bootcamp-claude/index.html`.
 
 ---
 
 ## PASO A PASO PARA PUBLICAR
 
-### Paso 1. Crea el repositorio en GitHub
+### Paso 1. Repositorio en GitHub
 
-1. Entra a https://github.com con tu cuenta (si no tienes, créala en 5 minutos)
-2. Click en **"New"** o ve a https://github.com/new
-3. Configura:
-   - **Repository name:** `joakoestratega-landing`
-   - **Visibility:** Public (necesario para GitHub Pages gratis)
-   - **NO marques** "Add README", "Add .gitignore", "Add license"
-4. Click en **"Create repository"**
+Si ya existe `joakoestratega-landing` (o como lo hayas llamado), salta al paso 2.
 
-### Paso 2. Sube el contenido de la carpeta `LANDINGS/` al repo
+Si es la primera vez:
+1. Entra a [github.com/new](https://github.com/new)
+2. Repository name: `joakoestratega-landing`
+3. Visibility: **Public** (necesario para GitHub Pages gratis)
+4. NO marques "Add README" ni nada extra
+5. Create repository
+
+### Paso 2. Subir el contenido
 
 **Opción A — GitHub Desktop (recomendado si no usas terminal)**
-1. Descarga GitHub Desktop: https://desktop.github.com
-2. Inicia sesión y clona el repo recién creado
-3. Copia **TODO lo que hay dentro de `LANDINGS/`** (no la carpeta, el contenido) a la carpeta clonada del repo
-4. En GitHub Desktop verás los archivos pendientes
-5. Mensaje de commit: "Primera versión del sitio"
-6. Click "Commit to main" → "Push origin"
+
+1. Si ya tienes el repo clonado, abre la carpeta local
+2. **Borra el contenido viejo** del repo (excepto la carpeta `.git`)
+3. Copia TODO el contenido de `LANDINGS/` (no la carpeta, su contenido) al repo local
+4. GitHub Desktop muestra los cambios → Commit message: "Sitio nuevo con hub + 4 servicios"
+5. Push origin
 
 **Opción B — Web directa**
-1. En el repo recién creado, click en **"uploading an existing file"**
-2. Arrastra todo el contenido de `LANDINGS/`
-3. Mensaje: "Primera versión del sitio"
-4. Click "Commit changes"
 
-### Paso 3. Activa GitHub Pages
+1. En el repo, borra los archivos viejos (Settings o desde la web)
+2. Sube los nuevos arrastrándolos
+3. Commit changes
 
-1. En tu repositorio: **Settings** → **Pages** (menú izquierdo)
-2. En "Build and deployment":
-   - **Source:** Deploy from a branch
-   - **Branch:** main
-   - **Folder:** / (root)
-3. Click **Save**
-4. GitHub te dará URL temporal tipo: `https://tu-usuario.github.io/joakoestratega-landing`
-5. Espera 1-2 minutos a que se publique. Ya puedes verla en esa URL.
+### Paso 3. GitHub Pages (si no estaba activo)
 
-### Paso 4. Conecta tu dominio joakoestratega.com (Hostinger)
+1. Settings → Pages
+2. Source: Deploy from a branch
+3. Branch: `main`, Folder: `/ (root)`
+4. Save
+5. En 1-2 minutos sale al aire
 
-#### 4.1 — En Hostinger (configurar DNS)
-1. Entra a https://hpanel.hostinger.com
-2. **Dominios** → **joakoestratega.com** → **Administrar**
-3. Busca **DNS / Nameservers** o **Editor de Zona DNS**
-4. **Borra** los registros A o CNAME existentes en `@` y `www` que apunten a otros sitios
-5. **Crea 4 registros tipo A** (uno por cada IP):
+### Paso 4. Dominio joakoestratega.com (Hostinger)
+
+Si ya estaba conectado al bootcamp Claude, el dominio sigue funcionando, no tienes que tocar nada. La nueva home reemplaza la anterior automáticamente.
+
+Si no estaba:
+- DNS Hostinger:
 
 | Tipo | Nombre | Apunta a (Valor) | TTL |
 |------|--------|------------------|-----|
@@ -111,72 +142,52 @@ Antes de subir, abre `bootcamp-claude/index.html` con cualquier editor de texto 
 | A | @ | 185.199.109.153 | 3600 |
 | A | @ | 185.199.110.153 | 3600 |
 | A | @ | 185.199.111.153 | 3600 |
-
-6. **Crea 1 registro CNAME** para www:
-
-| Tipo | Nombre | Apunta a | TTL |
-|------|--------|----------|-----|
 | CNAME | www | tu-usuario.github.io | 3600 |
 
-(Reemplaza `tu-usuario` por tu username real de GitHub)
-
-7. Guarda los cambios.
-
-#### 4.2 — En GitHub (configurar dominio personalizado)
-1. Vuelve a **Settings → Pages** en tu repositorio
-2. En **Custom domain** escribe: `joakoestratega.com`
-3. Click **Save**
-4. GitHub valida el DNS automáticamente (10 min a 24 horas).
-5. Cuando aparezca check verde "DNS check successful", **marca "Enforce HTTPS"**.
-
-El archivo `CNAME` que ya está en la carpeta tiene `joakoestratega.com` adentro, GitHub lo reconoce solo.
-
-### Paso 5. Verifica
-
-Después de 24-48 horas máximo:
-- https://joakoestratega.com → Home con botón al bootcamp
-- https://joakoestratega.com/bootcamp-claude → Landing completa
-- https://www.joakoestratega.com → debe redirigir a la versión sin www
-- Candado verde de HTTPS activo
+- En GitHub: Settings → Pages → Custom domain: `joakoestratega.com` → Save → Espera el check verde → Marca "Enforce HTTPS"
 
 ---
 
-## CHECKLIST FINAL ANTES DE LANZAR
+## CHECKLIST FINAL
 
-- [ ] Subí las 3 imágenes faltantes a `bootcamp-claude/imagenes/`
-- [ ] Subí o configuré el video del hero (YouTube o local)
-- [ ] Reemplacé `{{LINK_WOMPI}}` con mi link real de Wompi
-- [ ] Reemplacé `VIDEO_ID` con el ID real de YouTube
-- [ ] Cuando confirmé el lugar, edité "Dirección al confirmar inscripción"
-- [ ] Creé el repositorio `joakoestratega-landing` en GitHub
-- [ ] Subí todo el contenido de la carpeta LANDINGS al repo
-- [ ] Activé GitHub Pages (Settings → Pages → main branch)
-- [ ] Configuré los 4 registros A en Hostinger
-- [ ] Configuré el CNAME para www en Hostinger
-- [ ] Agregué `joakoestratega.com` en Settings → Pages → Custom domain
-- [ ] Esperé propagación DNS (1-48 horas)
-- [ ] Activé "Enforce HTTPS" en GitHub
-- [ ] Verifiqué https://joakoestratega.com y https://joakoestratega.com/bootcamp-claude
+- [ ] Subí mis testimonios a `imagenes/testimonios/` (test-1.jpg, test-2.jpg, ...)
+- [ ] Configuré el Apps Script y copié el URL `/exec`
+- [ ] Pegué el URL en `bootcamp-meta-ads/index.html` (donde dice `PEGA_AQUI_EL_URL_DE_TU_APPS_SCRIPT`)
+- [ ] Pegué el URL en `agencia/index.html` (mismo lugar)
+- [ ] Subí todo el contenido al repo de GitHub
+- [ ] Verifiqué que las 5 URLs funcionan:
+  - [ ] joakoestratega.com (home nueva)
+  - [ ] joakoestratega.com/comunidad
+  - [ ] joakoestratega.com/bootcamp-claude
+  - [ ] joakoestratega.com/bootcamp-meta-ads
+  - [ ] joakoestratega.com/agencia
+- [ ] Probé que los formularios guardan en Google Sheets (anótate tú primero como prueba)
+- [ ] Probé el botón verde de la comunidad y abre el grupo de WhatsApp
 
 ---
 
-## ¿CÓMO HACER CAMBIOS DESPUÉS?
+## CÓMO HACER CAMBIOS DESPUÉS
 
-Cuando vendas un cupo y quieras cambiar "10 cupos" por "9 cupos":
+Cualquier cambio (precio, fecha, copy, agregar testimonio, abrir fecha del Bootcamp Meta Ads):
 
 **Con GitHub Desktop:**
 1. Abre la carpeta clonada
-2. Edita `bootcamp-claude/index.html` con un editor
-3. Busca la palabra (ej: "10 cupos disponibles")
-4. Cambia por "9 cupos disponibles"
-5. Guarda → GitHub Desktop muestra el cambio → Commit → Push
+2. Edita el archivo correspondiente con cualquier editor
+3. Guarda → GitHub Desktop muestra el cambio → Commit → Push
+4. En 1-2 minutos sale al aire
 
 **Desde GitHub web:**
-1. Entra a tu repo → `bootcamp-claude/index.html`
-2. Click en el lápiz (Edit)
-3. Cambia el texto
-4. Click "Commit changes"
-5. En 1-2 minutos sale al aire
+1. Entra al repo → archivo → lápiz (Edit)
+2. Cambia el texto
+3. Commit changes
+
+---
+
+## PRÓXIMOS PASOS RECOMENDADOS
+
+1. **Cuando tengas fecha del Bootcamp Meta Ads:** convierte la página de waitlist en landing de venta. Avísame y la actualizo.
+2. **Si tu bootcamp Claude tiene varias ediciones:** podemos crear sub-páginas tipo `/bootcamp-claude/agosto-2026/` para distintas fechas.
+3. **Página de "casos" o "cómo trabajo":** si ganas más testimonios públicos con permiso, podemos hacer una página dedicada con casos detallados.
 
 ---
 
