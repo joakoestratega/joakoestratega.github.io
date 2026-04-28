@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bootcamp Meta Ads · Lista de espera · Joako Estratega</title>
+<meta name="description" content="Aprende a operar pauta paga como las agencias. Mensaje, creativo, segmentación y escalado en Meta Ads. Déjame tus datos y te aviso cuando abra fecha.">
+
+<meta property="og:title" content="Bootcamp Meta Ads · Joako Estratega">
+<meta property="og:description" content="Aprende a operar pauta como las agencias. Lista de espera abierta.">
+<meta property="og:type" content="website">
+
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;900&family=Bebas+Neue&display=swap" rel="stylesheet">
+
+<style>
+  html, body { background-color: #0F0F14; }
+  body { font-family: 'Montserrat', sans-serif; color: #fff; min-height: 100vh; position: relative; overflow-x: hidden; }
+  body::before {
+    content: '';
+    position: fixed;
+    top: -200px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 800px;
+    height: 800px;
+    background: radial-gradient(circle, rgba(33, 32, 156, 0.25) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 0;
+  }
+  body > * { position: relative; z-index: 1; }
+  html { scroll-behavior: smooth; }
+
+  .font-headline { font-family: 'Montserrat', sans-serif; font-weight: 900; }
+  .font-secondary { font-family: 'Bebas Neue', sans-serif; letter-spacing: 0.05em; }
+  .text-dorado { color: #F8B400; }
+  .bg-dorado { background-color: #F8B400; }
+  .border-dorado { border-color: #F8B400; }
+  .text-azul { color: #21209C; }
+  .bg-azul { background-color: #21209C; }
+  .border-azul { border-color: #21209C; }
+
+  @keyframes pulse-dorado {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(248, 180, 0, 0.6); }
+    50% { box-shadow: 0 0 0 18px rgba(248, 180, 0, 0); }
+  }
+  .pulse-cta { animation: pulse-dorado 2s infinite; }
+
+  .btn-lift { transition: all 0.25s ease; }
+  .btn-lift:hover { transform: translateY(-3px) scale(1.04); box-shadow: 0 12px 28px rgba(0,0,0,0.45); }
+  .btn-lift:active { transform: translateY(0) scale(0.98); }
+
+  /* Modal */
+  .modal-bg { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.85); z-index: 100; align-items: center; justify-content: center; padding: 1rem; }
+  .modal-bg.active { display: flex; }
+  .modal-box { background: white; color: #0F0F14; max-width: 500px; width: 100%; border-radius: 16px; padding: 2rem; max-height: 90vh; overflow-y: auto; }
+
+  /* WhatsApp flotante */
+  .wa-float {
+    position: fixed; bottom: 1.5rem; right: 1.5rem; z-index: 50;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  }
+  @media (max-width: 768px) {
+    .wa-float { bottom: 5.5rem; }
+    body { padding-bottom: 5rem; }
+  }
+  @keyframes pulse-wa {
+    0%, 100% { box-shadow: 0 4px 12px rgba(0,0,0,0.3), 0 0 0 0 rgba(34, 197, 94, 0.5); }
+    50% { box-shadow: 0 4px 12px rgba(0,0,0,0.3), 0 0 0 14px rgba(34, 197, 94, 0); }
+  }
+  .wa-float { animation: pulse-wa 2.5s infinite; }
+
+  /* Sticky bottom mobile */
+  .sticky-mobile { display: none; }
+  @media (max-width: 768px) { .sticky-mobile { display: block; } }
+
+  .check::before { content: "✓"; color: #F8B400; font-weight: bold; margin-right: 0.6rem; font-size: 1.2em; }
+</style>
+</head>
+<body>
+
+<!-- BARRA DE URGENCIA STICKY -->
+<div class="bg-dorado text-black py-3 px-4 sticky top-0 z-40 shadow-md">
+  <div class="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-5 text-sm md:text-base">
+    <span class="font-semibold text-center">📋 Sin fecha confirmada todavía. Cupos limitados cuando abramos. Anótate y te aviso primero.</span>
+    <button onclick="abrirModal()" class="bg-black text-white font-bold px-5 py-2 rounded-md hover:bg-azul transition text-sm whitespace-nowrap shadow-lg btn-lift flex-shrink-0">
+      Anotarme a la lista
+    </button>
+  </div>
+</div>
+
+<!-- BARRA SUPERIOR -->
+<div class="border-b border-white/10 px-4 py-3">
+  <div class="max-w-5xl mx-auto flex items-center justify-between">
+    <a href="../" class="text-sm text-gray-400 hover:text-dorado transition">← Volver a Joako Estratega</a>
+    <a href="https://wa.me/573028662556?text=Hola%20Joako%2C%20tengo%20una%20duda%20del%20Bootcamp%20Meta%20Ads" class="text-sm text-green-400 hover:text-green-300 transition hidden md:inline">¿Dudas? Escríbeme</a>
+  </div>
+</div>
+
+<!-- HERO -->
+<section class="px-4 pt-12 md:pt-20 pb-12 md:pb-16">
+  <div class="max-w-4xl mx-auto text-center">
+
+    <span class="inline-block bg-azul text-white font-bold text-xs px-4 py-1.5 rounded-full mb-6 tracking-wider">PRÓXIMAMENTE · LISTA DE ESPERA ABIERTA</span>
+
+    <h1 class="font-headline text-4xl md:text-6xl leading-none mb-6">
+      Bootcamp <span class="text-dorado">Meta Ads.</span>
+    </h1>
+
+    <p class="font-secondary text-dorado text-xl md:text-2xl mb-6 tracking-widest">OPERA PAUTA COMO LAS AGENCIAS QUE COBRAN $1.500 USD/MES</p>
+
+    <div class="w-24 h-1 bg-dorado mx-auto mb-8"></div>
+
+    <p class="text-lg md:text-xl text-gray-200 max-w-3xl mx-auto mb-8 leading-relaxed">
+      Aprende a estructurar campañas, escribir creativos que sí venden, segmentar bien, escalar sin quemar presupuesto y leer la cuenta como un operador real. Sin botones mágicos. Sin gurús.
+    </p>
+
+    <button onclick="abrirModal()" class="bg-dorado text-black font-bold py-5 px-10 rounded-lg hover:bg-yellow-400 transition text-lg md:text-xl btn-lift pulse-cta">
+      Anotarme en la lista de espera
+    </button>
+    <p class="text-sm text-gray-500 mt-4">Sin tarjeta. Te aviso primero cuando abra la fecha.</p>
+
+  </div>
+</section>
+
+<!-- ESPEJO DEL DOLOR -->
+<section class="px-4 py-16 md:py-20 bg-black/40 border-y border-white/10">
+  <div class="max-w-4xl mx-auto">
+    <p class="font-secondary text-dorado text-sm md:text-base mb-3 tracking-widest text-center">SI ESTO TE PASA, ESTÁS EN EL LUGAR CORRECTO</p>
+    <h2 class="font-headline text-3xl md:text-5xl text-center mb-12 leading-tight">
+      Pagas pauta cada día.<br>Y sigues sin entender <span class="text-dorado">qué funciona.</span>
+    </h2>
+
+    <div class="grid md:grid-cols-2 gap-5">
+      <div class="bg-black/60 border border-white/10 p-6 rounded-xl">
+        <p class="text-dorado font-bold mb-2">Tus campañas mueren a los 3 días</p>
+        <p class="text-gray-300 text-sm leading-relaxed">Un creativo funciona unos días y desaparece. Estás creando contenido en rueda de hámster sin saber por qué unos sí y otros no.</p>
+      </div>
+      <div class="bg-black/60 border border-white/10 p-6 rounded-xl">
+        <p class="text-dorado font-bold mb-2">No sabes qué métrica mover</p>
+        <p class="text-gray-300 text-sm leading-relaxed">CPM, CTR, CPL, ROAS. Las miras todas y al final no entiendes cuál mueve la aguja del negocio.</p>
+      </div>
+      <div class="bg-black/60 border border-white/10 p-6 rounded-xl">
+        <p class="text-dorado font-bold mb-2">Subes presupuesto y todo empeora</p>
+        <p class="text-gray-300 text-sm leading-relaxed">Cada vez que escalas, el costo por venta sube y la rentabilidad cae. No sabes cómo escalar sin quemar la cuenta.</p>
+      </div>
+      <div class="bg-black/60 border border-white/10 p-6 rounded-xl">
+        <p class="text-dorado font-bold mb-2">Pagas a una agencia y dependes de ella</p>
+        <p class="text-gray-300 text-sm leading-relaxed">Te cobran mensual. Si te vas, no te llevas el conocimiento. Si te quedas, no entiendes qué hacen con tu dinero.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- QUÉ VAS A APRENDER -->
+<section class="px-4 py-16 md:py-20">
+  <div class="max-w-5xl mx-auto">
+    <p class="font-secondary text-dorado text-sm md:text-base mb-3 tracking-widest text-center">QUÉ VAS A APRENDER</p>
+    <h2 class="font-headline text-3xl md:text-5xl text-center mb-12 leading-tight">
+      El sistema completo<br>de <span class="text-dorado">operación de pauta.</span>
+    </h2>
+
+    <div class="grid md:grid-cols-2 gap-5">
+      <div class="bg-black/60 border border-dorado/30 p-6 rounded-xl">
+        <span class="font-secondary text-dorado text-3xl block mb-2">01</span>
+        <p class="font-headline text-xl mb-2">Mensaje Principal de Venta</p>
+        <p class="text-gray-300 text-sm leading-relaxed">Las 4 condiciones que activan la decisión de compra. Sin esto, ninguna campaña funciona por más presupuesto que tenga.</p>
+      </div>
+      <div class="bg-black/60 border border-dorado/30 p-6 rounded-xl">
+        <span class="font-secondary text-dorado text-3xl block mb-2">02</span>
+        <p class="font-headline text-xl mb-2">Creativos que paran el scroll</p>
+        <p class="text-gray-300 text-sm leading-relaxed">Estructura de hooks, ganchos, tipos de creativo y cómo montar una librería para no quedarte nunca sin material.</p>
+      </div>
+      <div class="bg-black/60 border border-dorado/30 p-6 rounded-xl">
+        <span class="font-secondary text-dorado text-3xl block mb-2">03</span>
+        <p class="font-headline text-xl mb-2">Estructura de cuenta</p>
+        <p class="text-gray-300 text-sm leading-relaxed">Campañas, conjuntos y anuncios bien armados. Cómo separar prueba de escalado. Qué automatizar y qué no.</p>
+      </div>
+      <div class="bg-black/60 border border-dorado/30 p-6 rounded-xl">
+        <span class="font-secondary text-dorado text-3xl block mb-2">04</span>
+        <p class="font-headline text-xl mb-2">Segmentación real</p>
+        <p class="text-gray-300 text-sm leading-relaxed">Por qué los intereses ya no funcionan como antes. Cómo dejar trabajar al algoritmo y cuándo intervenir.</p>
+      </div>
+      <div class="bg-black/60 border border-dorado/30 p-6 rounded-xl">
+        <span class="font-secondary text-dorado text-3xl block mb-2">05</span>
+        <p class="font-headline text-xl mb-2">Escalar sin quemar</p>
+        <p class="text-gray-300 text-sm leading-relaxed">Cómo subir presupuesto sin que el costo por venta se dispare. La diferencia entre escalar vertical y horizontal.</p>
+      </div>
+      <div class="bg-black/60 border border-dorado/30 p-6 rounded-xl">
+        <span class="font-secondary text-dorado text-3xl block mb-2">06</span>
+        <p class="font-headline text-xl mb-2">Lectura de cuenta</p>
+        <p class="text-gray-300 text-sm leading-relaxed">Qué métricas mirar primero, cuáles ignorar y cómo decidir qué hacer mañana con tu campaña sin emoción.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DIFERENCIAL -->
+<section class="px-4 py-16 md:py-20 bg-azul/20 border-y border-white/10" style="background-color: rgba(33, 32, 156, 0.2);">
+  <div class="max-w-4xl mx-auto text-center">
+    <p class="font-secondary text-dorado text-sm md:text-base mb-3 tracking-widest">EL DIFERENCIAL</p>
+    <h2 class="font-headline text-3xl md:text-5xl mb-6 leading-tight">
+      No te enseño <span class="text-dorado">tácticas de YouTube.</span><br>Te muestro la operación real.
+    </h2>
+    <p class="text-gray-200 max-w-3xl mx-auto mb-10 text-base md:text-lg leading-relaxed">
+      Vamos a abrir cuentas reales. Cuentas mías y de mis clientes. Vas a ver cómo se opera de verdad: qué pruebo primero, cómo decido apagar un anuncio, cómo escribo el creativo cuando uno muere, cómo escalo cuando algo funciona.
+    </p>
+    <div class="grid md:grid-cols-3 gap-5 max-w-3xl mx-auto">
+      <div>
+        <p class="font-headline text-3xl md:text-4xl text-dorado">$500K+</p>
+        <p class="text-xs md:text-sm text-gray-400 mt-1 uppercase tracking-wider">USD gestionados</p>
+      </div>
+      <div>
+        <p class="font-headline text-3xl md:text-4xl text-dorado">EFFIX</p>
+        <p class="text-xs md:text-sm text-gray-400 mt-1 uppercase tracking-wider">estratega oficial</p>
+      </div>
+      <div>
+        <p class="font-headline text-3xl md:text-4xl text-dorado">+4 años</p>
+        <p class="text-xs md:text-sm text-gray-400 mt-1 uppercase tracking-wider">operando pauta diaria</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PARA QUIÉN ES -->
+<section class="px-4 py-16 md:py-20">
+  <div class="max-w-4xl mx-auto">
+    <p class="font-secondary text-dorado text-sm md:text-base mb-3 tracking-widest text-center">FILTRO HONESTO</p>
+    <h2 class="font-headline text-3xl md:text-5xl text-center mb-12 leading-tight">
+      Es para ti si...
+    </h2>
+
+    <ul class="space-y-4 text-gray-200 text-base md:text-lg max-w-3xl mx-auto">
+      <li class="check">Tienes un negocio activo (ecommerce, servicios, infoproducto, marca personal)</li>
+      <li class="check">Ya pautas o estás listo para invertir presupuesto serio en pauta</li>
+      <li class="check">Quieres dejar de depender de agencias y operar tú mismo</li>
+      <li class="check">Te interesa entender el oficio, no solo apretar botones</li>
+      <li class="check">Estás dispuesto a aplicar lo que aprendas el mismo día</li>
+    </ul>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="px-4 py-16 md:py-20 bg-black/40 border-y border-white/10">
+  <div class="max-w-3xl mx-auto">
+    <p class="font-secondary text-dorado text-sm md:text-base mb-3 tracking-widest text-center">PREGUNTAS FRECUENTES</p>
+    <h2 class="font-headline text-3xl md:text-5xl text-center mb-12 leading-tight">
+      Antes de anotarte.
+    </h2>
+
+    <div class="space-y-4">
+      <details class="bg-black/60 border border-white/10 p-5 rounded-xl">
+        <summary class="font-bold cursor-pointer text-white">¿Cuándo es el bootcamp?</summary>
+        <p class="text-gray-300 mt-3 text-sm leading-relaxed">Aún no tengo fecha confirmada. Por eso esta página es lista de espera. Cuando abra fecha, te aviso a ti primero por WhatsApp y email, antes que a nadie en redes.</p>
+      </details>
+      <details class="bg-black/60 border border-white/10 p-5 rounded-xl">
+        <summary class="font-bold cursor-pointer text-white">¿Va a ser presencial o virtual?</summary>
+        <p class="text-gray-300 mt-3 text-sm leading-relaxed">Estoy definiendo el formato según la demanda real. Por eso pregunto en el formulario qué modalidad prefieres. Si la mayoría pide presencial en una ciudad, esa será la primera fecha.</p>
+      </details>
+      <details class="bg-black/60 border border-white/10 p-5 rounded-xl">
+        <summary class="font-bold cursor-pointer text-white">¿Cuánto va a costar?</summary>
+        <p class="text-gray-300 mt-3 text-sm leading-relaxed">El precio definitivo lo confirmo cuando abra fecha. Quienes estén en la lista de espera tendrán precio preferencial antes de que abra al público.</p>
+      </details>
+      <details class="bg-black/60 border border-white/10 p-5 rounded-xl">
+        <summary class="font-bold cursor-pointer text-white">¿Sirve si todavía no tengo negocio?</summary>
+        <p class="text-gray-300 mt-3 text-sm leading-relaxed">Idealmente ya tienes uno o estás muy cerca de lanzar. Si vas a empezar de cero, te recomiendo entrar primero a la <a href="../comunidad/" class="text-dorado underline">comunidad gratuita</a> y validar el negocio antes de invertir en pauta.</p>
+      </details>
+      <details class="bg-black/60 border border-white/10 p-5 rounded-xl">
+        <summary class="font-bold cursor-pointer text-white">¿Anotarme me obliga a comprar?</summary>
+        <p class="text-gray-300 mt-3 text-sm leading-relaxed">No. Solo me deja saber que te interesa, qué tipo de negocio tienes y qué necesitas aprender. Cuando abra fecha decides si entras o no. Cero compromiso.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- CTA FINAL -->
+<section class="px-4 py-20 md:py-28 text-center">
+  <div class="max-w-3xl mx-auto">
+    <h2 class="font-headline text-4xl md:text-6xl mb-6 leading-none">
+      Anótate.<br>Te aviso <span class="text-dorado">primero.</span>
+    </h2>
+    <p class="text-base md:text-xl text-gray-300 max-w-2xl mx-auto mb-10 leading-relaxed">
+      Cuando abra la fecha, los de la lista de espera entran primero y con precio preferencial.
+    </p>
+
+    <button onclick="abrirModal()" class="bg-dorado text-black font-bold py-5 px-10 rounded-lg hover:bg-yellow-400 transition text-lg md:text-xl btn-lift pulse-cta">
+      Anotarme en la lista
+    </button>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="border-t border-white/10 px-4 py-10 text-center">
+  <div class="max-w-4xl mx-auto">
+    <div class="flex flex-wrap justify-center gap-6 text-sm text-gray-400 mb-4">
+      <a href="../" class="hover:text-dorado transition">Inicio</a>
+      <a href="../comunidad/" class="hover:text-dorado transition">Comunidad</a>
+      <a href="../bootcamp-claude/" class="hover:text-dorado transition">Bootcamp Claude</a>
+      <a href="../agencia/" class="hover:text-dorado transition">Agencia</a>
+    </div>
+    <p class="text-xs text-gray-500">© 2026 Joako Estratega · Medellín, Colombia</p>
+  </div>
+</footer>
+
+<!-- WHATSAPP FLOTANTE -->
+<a href="https://wa.me/573028662556?text=Hola%20Joako%2C%20tengo%20una%20duda%20del%20Bootcamp%20Meta%20Ads" target="_blank" rel="noopener" class="wa-float bg-green-500 hover:bg-green-600 text-white rounded-full w-14 h-14 flex items-center justify-center" aria-label="Escríbeme por WhatsApp">
+  <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+
+<!-- STICKY BOTTOM MOBILE -->
+<div class="sticky-mobile fixed bottom-0 left-0 right-0 bg-black border-t-2 border-dorado p-3 z-40 shadow-2xl">
+  <button onclick="abrirModal()" class="w-full bg-dorado text-black font-bold py-3 px-4 rounded-lg text-center text-base">
+    Anotarme en la lista →
+  </button>
+</div>
+
+<!-- ============================================ -->
+<!-- MODAL DE WAITLIST                              -->
+<!-- ============================================ -->
+<div id="modal" class="modal-bg" onclick="cerrarModal(event)">
+  <div class="modal-box" onclick="event.stopPropagation()">
+    <div class="flex justify-between items-start mb-5">
+      <h3 class="font-headline text-2xl">Anótate a la lista</h3>
+      <button onclick="cerrarModal()" class="text-2xl text-gray-500 hover:text-black leading-none">×</button>
+    </div>
+
+    <p class="text-sm text-gray-600 mb-6">Cuando abra fecha te aviso primero por WhatsApp y email. Sin compromiso.</p>
+
+    <form id="waitlistForm" class="space-y-4">
+      <div>
+        <label class="block text-sm font-bold mb-1">Nombre completo</label>
+        <input type="text" name="nombre" required class="w-full border-2 border-gray-300 rounded-lg px-4 py-3 focus:border-azul focus:outline-none">
+      </div>
+      <div>
+        <label class="block text-sm font-bold mb-1">WhatsApp (con indicativo)</label>
+        <input type="tel" name="whatsapp" required placeholder="+57 300 000 0000" class="w-full border-2 border-gray-300 rounded-lg px-4 py-3 focus:border-azul focus:outline-none">
+      </div>
+      <div>
+        <label class="block text-sm font-bold mb-1">Email</label>
+        <input type="email" name="email" required class="w-full border-2 border-gray-300 rounded-lg px-4 py-3 focus:border-azul focus:outline-none">
+      </div>
+      <div>
+        <label class="block text-sm font-bold mb-1">¿Qué vendes?</label>
+        <textarea name="negocio" required rows="2" placeholder="Ej: ecommerce de ropa femenina, servicios de odontología, curso de finanzas..." class="w-full border-2 border-gray-300 rounded-lg px-4 py-3 focus:border-azul focus:outline-none resize-none"></textarea>
+      </div>
+      <div>
+        <label class="block text-sm font-bold mb-1">¿Cuánto inviertes en pauta al mes hoy?</label>
+        <select name="presupuesto" required class="w-full border-2 border-gray-300 rounded-lg px-4 py-3 focus:border-azul focus:outline-none bg-white">
+          <option value="">Selecciona</option>
+          <option value="0">Aún no pauto</option>
+          <option value="<500">Menos de $500 USD</option>
+          <option value="500-1500">Entre $500 y $1.500 USD</option>
+          <option value="1500-5000">Entre $1.500 y $5.000 USD</option>
+          <option value="5000+">Más de $5.000 USD</option>
+        </select>
+      </div>
+      <div>
+        <label class="block text-sm font-bold mb-1">¿Modalidad preferida?</label>
+        <select name="modalidad" required class="w-full border-2 border-gray-300 rounded-lg px-4 py-3 focus:border-azul focus:outline-none bg-white">
+          <option value="">Selecciona</option>
+          <option value="presencial">Presencial (Medellín o donde abras)</option>
+          <option value="virtual">Virtual (en vivo por Zoom)</option>
+          <option value="cualquiera">Cualquiera de las dos</option>
+        </select>
+      </div>
+
+      <button type="submit" class="w-full bg-dorado text-black font-bold py-4 rounded-lg hover:bg-yellow-400 transition text-lg btn-lift">
+        Anotarme en la lista
+      </button>
+      <p class="text-xs text-gray-500 text-center">Sin compromiso. Sin tarjeta. Solo aviso cuando abra fecha.</p>
+    </form>
+
+    <div id="modalSuccess" class="hidden text-center py-6">
+      <div class="text-5xl mb-3">🎉</div>
+      <h3 class="font-headline text-2xl mb-2">¡Estás dentro!</h3>
+      <p class="text-gray-700 mb-4">Cuando abra fecha del Bootcamp Meta Ads te escribo primero a tu WhatsApp.</p>
+      <p class="text-sm text-gray-500 mb-6">Mientras tanto, entra a la comunidad gratuita los viernes. Es donde armo el contenido del bootcamp.</p>
+      <a href="../comunidad/" class="inline-block bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-6 rounded-lg btn-lift">
+        Entrar a la comunidad gratis →
+      </a>
+    </div>
+  </div>
+</div>
+
+<script>
+  function abrirModal() { document.getElementById('modal').classList.add('active'); }
+  function cerrarModal(e) {
+    if (e && e.target.id !== 'modal' && e.target.tagName !== 'BUTTON') return;
+    document.getElementById('modal').classList.remove('active');
+  }
+
+  // ============================================
+  // ENVÍO A APPS SCRIPT
+  // ============================================
+  // 1. Despliega apps-script.gs en Google Apps Script (script.google.com) como Web App
+  // 2. Pega el URL aquí
+  const APPS_SCRIPT_URL = 'PEGA_AQUI_EL_URL_DE_TU_APPS_SCRIPT';
+
+  document.getElementById('waitlistForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const formData = new FormData(e.target);
+    const data = Object.fromEntries(formData.entries());
+    data.producto = 'Bootcamp Meta Ads (Waitlist)';
+    data.origen = window.location.href;
+
+    // Mostrar éxito de inmediato (UX óptima, no bloqueamos por la red)
+    document.getElementById('waitlistForm').classList.add('hidden');
+    document.getElementById('modalSuccess').classList.remove('hidden');
+
+    // POST a Apps Script en segundo plano
+    try {
+      await fetch(APPS_SCRIPT_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+      });
+    } catch (error) {
+      console.error('Error enviando lead:', error);
+      // El usuario ya vio el mensaje de éxito, así que silenciamos.
+      // Si quieres, descomenta para fallback a WhatsApp:
+      // window.location.href = 'https://wa.me/573028662556?text=Hola%20Joako%2C%20quiero%20anotarme%20al%20Bootcamp%20Meta%20Ads';
+    }
+  });
+</script>
+
+</body>
+</html>

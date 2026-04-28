@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Agencia · Joako Estratega · Equipo de especialistas para tu sistema de ventas</title>
+<meta name="description" content="Equipo de especialistas dedicado a tu negocio. Estratega, media buyer, creativo y analista. Cada uno opera máximo 5 cuentas para garantizar foco. Operamos con el Método MPV.">
+
+<meta property="og:title" content="Agencia Joako Estratega · Equipo de especialistas">
+<meta property="og:description" content="Sistema completo de ventas operado por un equipo dedicado, no por una sola persona.">
+<meta property="og:type" content="website">
+
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;900&family=Bebas+Neue&display=swap" rel="stylesheet">
+
+<style>
+  html, body { background-color: #0F0F14; }
+  body { font-family: 'Montserrat', sans-serif; color: #fff; min-height: 100vh; position: relative; overflow-x: hidden; }
+  body::before {
+    content: '';
+    position: fixed;
+    top: -200px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 800px;
+    height: 800px;
+    background: radial-gradient(circle, rgba(248, 180, 0, 0.15) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 0;
+  }
+  body > * { position: relative; z-index: 1; }
+  html { scroll-behavior: smooth; }
+
+  .font-headline { font-family: 'Montserrat', sans-serif; font-weight: 900; }
+  .font-secondary { font-family: 'Bebas Neue', sans-serif; letter-spacing: 0.05em; }
+  .text-dorado { color: #F8B400; }
+  .bg-dorado { background-color: #F8B400; }
+  .border-dorado { border-color: #F8B400; }
+  .text-azul { color: #21209C; }
+  .bg-azul { background-color: #21209C; }
+  .border-azul { border-color: #21209C; }
+
+  @keyframes pulse-dorado {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(248, 180, 0, 0.6); }
+    50% { box-shadow: 0 0 0 18px rgba(248, 180, 0, 0); }
+  }
+  .pulse-cta { animation: pulse-dorado 2s infinite; }
+
+  .btn-lift { transition: all 0.25s ease; }
+  .btn-lift:hover { transform: translateY(-3px) scale(1.04); box-shadow: 0 12px 28px rgba(0,0,0,0.45); }
+  .btn-lift:active { transform: translateY(0) scale(0.98); }
+
+  /* Modal */
+  .modal-bg { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.85); z-index: 100; align-items: center; justify-content: center; padding: 1rem; }
+  .modal-bg.active { display: flex; }
+  .modal-box { background: white; color: #0F0F14; max-width: 540px; width: 100%; border-radius: 16px; padding: 2rem; max-height: 90vh; overflow-y: auto; }
+
+  /* WhatsApp flotante */
+  .wa-float {
+    position: fixed; bottom: 1.5rem; right: 1.5rem; z-index: 50;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  }
+  @media (max-width: 768px) {
+    .wa-float { bottom: 5.5rem; }
+    body { padding-bottom: 5rem; }
+  }
+  @keyframes pulse-wa {
+    0%, 100% { box-shadow: 0 4px 12px rgba(0,0,0,0.3), 0 0 0 0 rgba(34, 197, 94, 0.5); }
+    50% { box-shadow: 0 4px 12px rgba(0,0,0,0.3), 0 0 0 14px rgba(34, 197, 94, 0); }
+  }
+  .wa-float { animation: pulse-wa 2.5s infinite; }
+
+  /* Sticky bottom mobile */
+  .sticky-mobile { display: none; }
+  @media (max-width: 768px) { .sticky-mobile { display: block; } }
+
+  .check::before { content: "✓"; color: #F8B400; font-weight: bold; margin-right: 0.6rem; font-size: 1.2em; }
+  .x-mark::before { content: "✗"; color: #ef4444; font-weight: bold; margin-right: 0.6rem; font-size: 1.2em; }
+</style>
+</head>
+<body>
+
+<!-- BARRA DE URGENCIA STICKY -->
+<div class="bg-dorado text-black py-3 px-4 sticky top-0 z-40 shadow-md">
+  <div class="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-5 text-sm md:text-base">
+    <span class="font-semibold text-center">⚡ Aceptamos cuentas nuevas solo cuando hay equipo disponible. Cupos limitados al mes.</span>
+    <button onclick="abrirModal()" class="bg-black text-white font-bold px-5 py-2 rounded-md hover:bg-azul transition text-sm whitespace-nowrap shadow-lg btn-lift flex-shrink-0">
+      Aplicar a la agencia
+    </button>
+  </div>
+</div>
+
+<!-- BARRA SUPERIOR -->
+<div class="border-b border-white/10 px-4 py-3">
+  <div class="max-w-5xl mx-auto flex items-center justify-between">
+    <a href="../" class="text-sm text-gray-400 hover:text-dorado transition">← Volver a Joako Estratega</a>
+    <a href="https://wa.me/573028662556?text=Hola%20Joako%2C%20quiero%20saber%20de%20la%20agencia" class="text-sm text-green-400 hover:text-green-300 transition hidden md:inline">¿Dudas? Escríbenos</a>
+  </div>
+</div>
+
+<!-- HERO -->
+<section class="px-4 pt-12 md:pt-20 pb-12 md:pb-16">
+  <div class="max-w-4xl mx-auto text-center">
+
+    <span class="inline-block bg-white text-black font-bold text-xs px-4 py-1.5 rounded-full mb-6 tracking-wider">EQUIPO DEDICADO DE ESPECIALISTAS · NO ES FREELANCE NI EQUIPO TERCERIZADO</span>
+
+    <h1 class="font-headline text-4xl md:text-6xl leading-none mb-6">
+      Tu sistema de ventas,<br>operado por un<br><span class="text-dorado">equipo dedicado.</span>
+    </h1>
+
+    <div class="w-24 h-1 bg-dorado mx-auto mb-8"></div>
+
+    <p class="text-lg md:text-xl text-gray-200 max-w-3xl mx-auto mb-8 leading-relaxed">
+      Para negocios que ya venden y quieren escalar sin meterse en la operación de pauta. Yo lidero la estrategia. Mi equipo de especialistas ejecuta el Método MPV en tu cuenta cada día. Mensaje, pauta, captación y cierre.
+    </p>
+
+    <button onclick="abrirModal()" class="bg-dorado text-black font-bold py-5 px-10 rounded-lg hover:bg-yellow-400 transition text-lg md:text-xl btn-lift pulse-cta">
+      Aplicar a la agencia
+    </button>
+    <p class="text-sm text-gray-500 mt-4">Te respondemos personalmente en menos de 24 horas hábiles.</p>
+
+  </div>
+</section>
+
+<!-- DIFERENCIAL DEL MODELO -->
+<section class="px-4 py-16 md:py-20 bg-black/40 border-y border-white/10">
+  <div class="max-w-5xl mx-auto">
+    <p class="font-secondary text-dorado text-sm md:text-base mb-3 tracking-widest text-center">POR QUÉ NO SOMOS UNA AGENCIA MÁS</p>
+    <h2 class="font-headline text-3xl md:text-5xl text-center mb-12 leading-tight">
+      No somos freelancers.<br>No somos una <span class="text-dorado">agencia genérica.</span>
+    </h2>
+
+    <div class="grid md:grid-cols-3 gap-5">
+      <div class="bg-black/60 border border-white/10 p-7 rounded-xl">
+        <p class="font-secondary text-dorado text-3xl mb-3">vs.</p>
+        <p class="font-headline text-xl mb-3">Un freelancer</p>
+        <p class="text-gray-300 text-sm leading-relaxed">Una sola persona haciendo de todo: estrategia, creativo, pauta, reportes. Cuando se enferma o se satura, tu cuenta se detiene. Aquí tienes un equipo completo, no a una persona corriendo en círculos.</p>
+      </div>
+      <div class="bg-black/60 border border-white/10 p-7 rounded-xl">
+        <p class="font-secondary text-dorado text-3xl mb-3">vs.</p>
+        <p class="font-headline text-xl mb-3">Una agencia genérica</p>
+        <p class="text-gray-300 text-sm leading-relaxed">Operadores juniors aplicando plantillas a 30 cuentas a la vez. Reportes automatizados, sin estrategia real. Aquí cada especialista atiende máximo 5 cuentas y cada cuenta tiene un estratega que la piensa.</p>
+      </div>
+      <div class="bg-black/60 border-2 border-dorado p-7 rounded-xl">
+        <p class="font-secondary text-dorado text-3xl mb-3">✓</p>
+        <p class="font-headline text-xl mb-3">Joako Estratega Agencia</p>
+        <p class="text-gray-300 text-sm leading-relaxed">Equipo dedicado por cuenta. Yo lidero la estrategia. Mis especialistas operan con el Método MPV. Foco real, metodología propia y resultados medibles.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CÓMO TRABAJAMOS -->
+<section class="px-4 py-16 md:py-20">
+  <div class="max-w-5xl mx-auto">
+    <p class="font-secondary text-dorado text-sm md:text-base mb-3 tracking-widest text-center">CÓMO TRABAJA EL EQUIPO</p>
+    <h2 class="font-headline text-3xl md:text-5xl text-center mb-12 leading-tight">
+      Un equipo dedicado.<br>Cuatro <span class="text-dorado">roles especialistas.</span>
+    </h2>
+
+    <div class="grid md:grid-cols-2 gap-5 mb-10">
+      <div class="bg-black/60 border border-dorado/30 p-7 rounded-xl">
+        <span class="font-secondary text-dorado text-3xl block mb-3">01</span>
+        <p class="font-headline text-xl mb-3">Estratega</p>
+        <p class="text-gray-300 text-sm leading-relaxed">Diseña el Mensaje Principal de Venta de tu negocio, define la oferta y el rumbo de la cuenta. Yo lidero personalmente esta capa en cada cliente nuevo.</p>
+      </div>
+      <div class="bg-black/60 border border-dorado/30 p-7 rounded-xl">
+        <span class="font-secondary text-dorado text-3xl block mb-3">02</span>
+        <p class="font-headline text-xl mb-3">Media buyer</p>
+        <p class="text-gray-300 text-sm leading-relaxed">Opera la pauta cada día: estructura de cuenta, segmentación, escalado, optimización. Especialista certificado en Meta, Google y TikTok.</p>
+      </div>
+      <div class="bg-black/60 border border-dorado/30 p-7 rounded-xl">
+        <span class="font-secondary text-dorado text-3xl block mb-3">03</span>
+        <p class="font-headline text-xl mb-3">Creativo</p>
+        <p class="text-gray-300 text-sm leading-relaxed">Construye los anuncios que paran el scroll y la página donde aterriza el tráfico. Coherencia visual y narrativa con el mensaje estratégico.</p>
+      </div>
+      <div class="bg-black/60 border border-dorado/30 p-7 rounded-xl">
+        <span class="font-secondary text-dorado text-3xl block mb-3">04</span>
+        <p class="font-headline text-xl mb-3">Analista de cuenta</p>
+        <p class="text-gray-300 text-sm leading-relaxed">Lee los datos cada semana, identifica cuellos de botella y propone ajustes. Es el contacto directo del cliente para reportes y rendición de cuentas.</p>
+      </div>
+    </div>
+
+    <div class="bg-azul/30 border-2 border-dorado p-6 md:p-8 rounded-xl text-center" style="background-color: rgba(33, 32, 156, 0.3);">
+      <p class="font-headline text-xl md:text-2xl mb-3">Cada especialista atiende <span class="text-dorado">máximo 5 cuentas.</span></p>
+      <p class="text-gray-200 leading-relaxed text-sm md:text-base">No saturamos al equipo. Esta regla es lo que diferencia tener un especialista pensando tu cuenta de tener un operador genérico ejecutando una plantilla.</p>
+    </div>
+  </div>
+</section>
+
+<!-- LO QUE INCLUYE -->
+<section class="px-4 py-16 md:py-20 bg-black/40 border-y border-white/10">
+  <div class="max-w-5xl mx-auto">
+    <p class="font-secondary text-dorado text-sm md:text-base mb-3 tracking-widest text-center">QUÉ INCLUYE EL SERVICIO</p>
+    <h2 class="font-headline text-3xl md:text-5xl text-center mb-12 leading-tight">
+      Sistema completo<br>operado con <span class="text-dorado">Método MPV.</span>
+    </h2>
+
+    <div class="grid md:grid-cols-2 gap-5">
+      <div class="bg-black/60 border border-white/10 p-7 rounded-xl">
+        <p class="font-headline text-lg mb-2 text-dorado">Mensaje Principal de Venta</p>
+        <p class="text-gray-300 text-sm leading-relaxed">Construimos desde cero la narrativa transversal del negocio. Las 4 condiciones del Mensaje Principal de Venta aplicadas a tu producto, tu mercado y tu cliente real.</p>
+      </div>
+      <div class="bg-black/60 border border-white/10 p-7 rounded-xl">
+        <p class="font-headline text-lg mb-2 text-dorado">Pauta operada cada día</p>
+        <p class="text-gray-300 text-sm leading-relaxed">Estructura de campañas, escritura de creativos, segmentación, escalado y optimización diaria. Operación activa, no piloto automático.</p>
+      </div>
+      <div class="bg-black/60 border border-white/10 p-7 rounded-xl">
+        <p class="font-headline text-lg mb-2 text-dorado">Página de captación</p>
+        <p class="text-gray-300 text-sm leading-relaxed">Diseñamos la landing donde aterriza el tráfico. Coherente con el mensaje y optimizada para que el visitante no se quede a mitad del camino.</p>
+      </div>
+      <div class="bg-black/60 border border-white/10 p-7 rounded-xl">
+        <p class="font-headline text-lg mb-2 text-dorado">Sistema de cierre</p>
+        <p class="text-gray-300 text-sm leading-relaxed">Estructuramos la conversación que convierte el lead en cliente. Guion para WhatsApp o el canal donde cierras. Tu equipo lo ejecuta con un libreto claro.</p>
+      </div>
+      <div class="bg-black/60 border border-white/10 p-7 rounded-xl">
+        <p class="font-headline text-lg mb-2 text-dorado">Reportes y rendición de cuentas</p>
+        <p class="text-gray-300 text-sm leading-relaxed">Cada semana revisamos qué está pasando con la cuenta, qué ajustar y por qué. Sin métricas de vanidad, sin humo.</p>
+      </div>
+      <div class="bg-black/60 border border-white/10 p-7 rounded-xl">
+        <p class="font-headline text-lg mb-2 text-dorado">Optimización continua</p>
+        <p class="text-gray-300 text-sm leading-relaxed">Aplicamos principios de lean manufacturing al sistema. Identificamos cuellos de botella, los corregimos y dejamos el sistema funcionando cada vez mejor.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VALIDACIÓN -->
+<section class="px-4 py-16 md:py-20">
+  <div class="max-w-5xl mx-auto">
+    <p class="font-secondary text-dorado text-sm md:text-base mb-3 tracking-widest text-center">YA ESTÁ FUNCIONANDO</p>
+    <h2 class="font-headline text-3xl md:text-5xl text-center mb-12 leading-tight">
+      Esto no es promesa.<br>Es lo que <span class="text-dorado">ya operamos cada día.</span>
+    </h2>
+
+    <div class="grid md:grid-cols-2 gap-6 items-center">
+      <div class="rounded-2xl overflow-hidden border-2 border-dorado">
+        <img src="../bootcamp-claude/imagenes/joako-effi.png" alt="Joaquín Rojas en la Feria EFFIX" class="w-full h-auto block">
+      </div>
+      <div>
+        <p class="font-secondary text-dorado text-xl mb-3">CASO PÚBLICO</p>
+        <h3 class="font-headline text-2xl md:text-3xl mb-4">Feria EFFIX</h3>
+        <p class="text-gray-300 leading-relaxed mb-6">
+          Estratega oficial de la Feria EFFIX, el evento ecommerce hispano más grande del mercado. Nuestro equipo trabaja con su organización construyendo el mensaje, las campañas de pauta y el sistema de captación de cada edición.
+        </p>
+        <p class="text-gray-400 text-sm mb-6">
+          El resto de nuestros clientes son privados. Por contrato, sus números y nombres se mantienen anónimos. Pero la mecánica es la misma: equipo dedicado operando con el Método MPV.
+        </p>
+        <div class="grid grid-cols-3 gap-3">
+          <div class="bg-black/60 border border-white/10 p-3 rounded-xl text-center">
+            <p class="font-headline text-xl text-dorado">$500K+</p>
+            <p class="text-xs text-gray-400 mt-1 uppercase tracking-wider">USD operados</p>
+          </div>
+          <div class="bg-black/60 border border-white/10 p-3 rounded-xl text-center">
+            <p class="font-headline text-xl text-dorado">4 países</p>
+            <p class="text-xs text-gray-400 mt-1 uppercase tracking-wider">CO · MX · EC · USA</p>
+          </div>
+          <div class="bg-black/60 border border-white/10 p-3 rounded-xl text-center">
+            <p class="font-headline text-xl text-dorado">+4 años</p>
+            <p class="text-xs text-gray-400 mt-1 uppercase tracking-wider">en pauta diaria</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- INVERSIÓN -->
+<section class="px-4 py-16 md:py-20 bg-azul/20 border-y border-white/10" style="background-color: rgba(33, 32, 156, 0.2);">
+  <div class="max-w-3xl mx-auto text-center">
+    <p class="font-secondary text-dorado text-sm md:text-base mb-3 tracking-widest">INVERSIÓN</p>
+    <h2 class="font-headline text-3xl md:text-5xl mb-8 leading-tight">
+      Adaptada a tu<br><span class="text-dorado">negocio.</span>
+    </h2>
+
+    <div class="bg-black/60 border-2 border-dorado rounded-2xl p-8 mb-6 text-left">
+      <p class="text-gray-200 leading-relaxed mb-4">
+        Cada cuenta es distinta. La inversión depende del tamaño del equipo asignado, la complejidad del mensaje, los canales y el volumen de operación. Por eso no publicamos un precio único.
+      </p>
+      <p class="text-gray-200 leading-relaxed mb-4">
+        En la primera conversación entendemos tu negocio, evaluamos si encaja con nuestro modelo y te enviamos una propuesta clara con el alcance y la inversión correspondiente.
+      </p>
+      <p class="text-gray-200 leading-relaxed">
+        Aparte de eso, tú pones el presupuesto de pauta (lo que se invierte directamente en Meta, Google, TikTok, donde corresponda).
+      </p>
+    </div>
+
+    <p class="text-base md:text-lg text-gray-300 italic">
+      "No competimos por precio. Competimos por resultado. Por eso aceptamos solo a quienes les hacen sentido los dos."
+    </p>
+  </div>
+</section>
+
+<!-- PARA QUIÉN ES / NO ES -->
+<section class="px-4 py-16 md:py-20">
+  <div class="max-w-5xl mx-auto">
+    <p class="font-secondary text-dorado text-sm md:text-base mb-3 tracking-widest text-center">FILTRO HONESTO</p>
+    <h2 class="font-headline text-3xl md:text-5xl text-center mb-12 leading-tight">
+      No trabajamos<br>con cualquiera.
+    </h2>
+
+    <div class="grid md:grid-cols-2 gap-6">
+      <div class="bg-green-500/10 border-2 border-green-500 rounded-2xl p-8">
+        <h3 class="font-headline text-2xl mb-5 text-green-400">SÍ trabajamos contigo si...</h3>
+        <ul class="space-y-3 text-gray-200">
+          <li class="check">Tienes un negocio serio que ya está vendiendo</li>
+          <li class="check">Tienes presupuesto real para pauta y operación profesional</li>
+          <li class="check">El producto o servicio aporta valor real al cliente final</li>
+          <li class="check">Quieres construir marca rentable y sostenible</li>
+          <li class="check">Confías en el proceso y dejas operar al equipo sin tocar la cuenta cada hora</li>
+        </ul>
+      </div>
+
+      <div class="bg-red-500/10 border-2 border-red-500 rounded-2xl p-8">
+        <h3 class="font-headline text-2xl mb-5 text-red-400">NO trabajamos contigo si...</h3>
+        <ul class="space-y-3 text-gray-200">
+          <li class="x-mark">Vendes algo que no aporta valor real</li>
+          <li class="x-mark">Cambias de idea de negocio cada mes</li>
+          <li class="x-mark">Buscas resultados garantizados de la noche a la mañana</li>
+          <li class="x-mark">Buscas "el más barato del mercado"</li>
+          <li class="x-mark">No respetas el proceso ni los acuerdos</li>
+        </ul>
+      </div>
+    </div>
+
+    <p class="text-center text-gray-400 mt-8 text-sm max-w-3xl mx-auto">
+      Cada cuenta lleva nuestro nombre. Por eso no aceptamos cualquier proyecto.
+    </p>
+  </div>
+</section>
+
+<!-- ALTERNATIVA -->
+<section class="px-4 py-16 md:py-20 bg-black/40 border-y border-white/10">
+  <div class="max-w-3xl mx-auto text-center">
+    <p class="font-secondary text-dorado text-sm md:text-base mb-3 tracking-widest">¿AÚN NO ENCAJAS?</p>
+    <h2 class="font-headline text-3xl md:text-5xl mb-6 leading-tight">
+      Aprende tú mismo<br>con los <span class="text-dorado">bootcamps.</span>
+    </h2>
+    <p class="text-gray-300 max-w-2xl mx-auto mb-8 text-base md:text-lg leading-relaxed">
+      Si todavía no estás en la etapa de delegar la operación, el primer paso es aprender el método tú mismo. La agencia es para quienes ya pasaron esa etapa o no quieren meterse en la operación.
+    </p>
+    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+      <a href="../bootcamp-claude/" class="bg-white text-black font-bold py-3 px-6 rounded-lg hover:bg-dorado transition btn-lift">
+        Bootcamp Claude →
+      </a>
+      <a href="../bootcamp-meta-ads/" class="bg-white text-black font-bold py-3 px-6 rounded-lg hover:bg-dorado transition btn-lift">
+        Bootcamp Meta Ads →
+      </a>
+      <a href="../comunidad/" class="bg-green-500 text-white font-bold py-3 px-6 rounded-lg hover:bg-green-600 transition btn-lift">
+        Comunidad gratis →
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- CTA FINAL -->
+<section class="px-4 py-20 md:py-28 text-center">
+  <div class="max-w-3xl mx-auto">
+    <h2 class="font-headline text-4xl md:text-6xl mb-6 leading-none">
+      Si encajas,<br>te <span class="text-dorado">contestamos.</span>
+    </h2>
+    <p class="text-base md:text-xl text-gray-300 max-w-2xl mx-auto mb-10 leading-relaxed">
+      Llena el formulario. Lo revisamos personalmente. Si tu caso encaja con nuestro modelo, agendamos una llamada para ver el negocio juntos y enviarte una propuesta.
+    </p>
+
+    <button onclick="abrirModal()" class="bg-dorado text-black font-bold py-5 px-10 rounded-lg hover:bg-yellow-400 transition text-lg md:text-xl btn-lift pulse-cta">
+      Aplicar a la agencia
+    </button>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="border-t border-white/10 px-4 py-10 text-center">
+  <div class="max-w-4xl mx-auto">
+    <div class="flex flex-wrap justify-center gap-6 text-sm text-gray-400 mb-4">
+      <a href="../" class="hover:text-dorado transition">Inicio</a>
+      <a href="../comunidad/" class="hover:text-dorado transition">Comunidad</a>
+      <a href="../bootcamp-claude/" class="hover:text-dorado transition">Bootcamp Claude</a>
+      <a href="../bootcamp-meta-ads/" class="hover:text-dorado transition">Bootcamp Meta Ads</a>
+    </div>
+    <p class="text-xs text-gray-500">© 2026 Joako Estratega · Medellín, Colombia</p>
+  </div>
+</footer>
+
+<!-- WHATSAPP FLOTANTE -->
+<a href="https://wa.me/573028662556?text=Hola%20Joako%2C%20quiero%20saber%20de%20la%20agencia" target="_blank" rel="noopener" class="wa-float bg-green-500 hover:bg-green-600 text-white rounded-full w-14 h-14 flex items-center justify-center" aria-label="Escríbenos por WhatsApp">
+  <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+
+<!-- STICKY BOTTOM MOBILE -->
+<div class="sticky-mobile fixed bottom-0 left-0 right-0 bg-black border-t-2 border-dorado p-3 z-40 shadow-2xl">
+  <button onclick="abrirModal()" class="w-full bg-dorado text-black font-bold py-3 px-4 rounded-lg text-center text-base">
+    Aplicar a la agencia →
+  </button>
+</div>
+
+<!-- ============================================ -->
+<!-- MODAL DE APLICACIÓN                            -->
+<!-- ============================================ -->
+<div id="modal" class="modal-bg" onclick="cerrarModal(event)">
+  <div class="modal-box" onclick="event.stopPropagation()">
+    <div class="flex justify-between items-start mb-5">
+      <h3 class="font-headline text-2xl">Aplicar a la agencia</h3>
+      <button onclick="cerrarModal()" class="text-2xl text-gray-500 hover:text-black leading-none">×</button>
+    </div>
+
+    <p class="text-sm text-gray-600 mb-6">Lo revisamos personalmente. Si encaja, te respondemos en menos de 24h hábiles.</p>
+
+    <form id="agenciaForm" class="space-y-4">
+      <div>
+        <label class="block text-sm font-bold mb-1">Nombre completo</label>
+        <input type="text" name="nombre" required class="w-full border-2 border-gray-300 rounded-lg px-4 py-3 focus:border-azul focus:outline-none">
+      </div>
+      <div>
+        <label class="block text-sm font-bold mb-1">WhatsApp (con indicativo)</label>
+        <input type="tel" name="whatsapp" required placeholder="+57 300 000 0000" class="w-full border-2 border-gray-300 rounded-lg px-4 py-3 focus:border-azul focus:outline-none">
+      </div>
+      <div>
+        <label class="block text-sm font-bold mb-1">Email</label>
+        <input type="email" name="email" required class="w-full border-2 border-gray-300 rounded-lg px-4 py-3 focus:border-azul focus:outline-none">
+      </div>
+      <div>
+        <label class="block text-sm font-bold mb-1">Nombre del negocio + qué vende</label>
+        <textarea name="negocio" required rows="3" placeholder="Ej: 'Marca X, ecommerce de ropa para mujer en Colombia. Vendemos vestidos de noche desde hace 3 años.'" class="w-full border-2 border-gray-300 rounded-lg px-4 py-3 focus:border-azul focus:outline-none resize-none"></textarea>
+      </div>
+      <div>
+        <label class="block text-sm font-bold mb-1">¿Cuánto facturas al mes hoy? (USD)</label>
+        <select name="facturacion" required class="w-full border-2 border-gray-300 rounded-lg px-4 py-3 focus:border-azul focus:outline-none bg-white">
+          <option value="">Selecciona</option>
+          <option value="<5k">Menos de $5.000 USD</option>
+          <option value="5k-15k">Entre $5.000 y $15.000 USD</option>
+          <option value="15k-50k">Entre $15.000 y $50.000 USD</option>
+          <option value="50k+">Más de $50.000 USD</option>
+        </select>
+      </div>
+      <div>
+        <label class="block text-sm font-bold mb-1">¿Cuánto inviertes en pauta al mes hoy? (USD)</label>
+        <select name="presupuesto" required class="w-full border-2 border-gray-300 rounded-lg px-4 py-3 focus:border-azul focus:outline-none bg-white">
+          <option value="">Selecciona</option>
+          <option value="0">Aún no pauto</option>
+          <option value="<1500">Menos de $1.500 USD</option>
+          <option value="1500-5000">Entre $1.500 y $5.000 USD</option>
+          <option value="5000-15000">Entre $5.000 y $15.000 USD</option>
+          <option value="15000+">Más de $15.000 USD</option>
+        </select>
+      </div>
+      <div>
+        <label class="block text-sm font-bold mb-1">¿Por qué quieres trabajar con la agencia?</label>
+        <textarea name="motivo" required rows="3" placeholder="Cuéntanos en pocas palabras qué problema esperas resolver." class="w-full border-2 border-gray-300 rounded-lg px-4 py-3 focus:border-azul focus:outline-none resize-none"></textarea>
+      </div>
+
+      <button type="submit" class="w-full bg-dorado text-black font-bold py-4 rounded-lg hover:bg-yellow-400 transition text-lg btn-lift">
+        Enviar aplicación
+      </button>
+      <p class="text-xs text-gray-500 text-center">Si encajas, te contestamos en menos de 24h hábiles.</p>
+    </form>
+
+    <div id="modalSuccess" class="hidden text-center py-6">
+      <div class="text-5xl mb-3">📩</div>
+      <h3 class="font-headline text-2xl mb-2">Aplicación recibida</h3>
+      <p class="text-gray-700 mb-4">La revisamos personalmente. Si encaja con nuestro modelo, te escribimos a tu WhatsApp en menos de 24h hábiles.</p>
+      <p class="text-sm text-gray-500 mb-6">Si la respuesta es que aún no es momento, te lo decimos claro y te orientamos qué hacer primero.</p>
+      <a href="https://wa.me/573028662556?text=Hola%20Joako%2C%20acabo%20de%20aplicar%20a%20la%20agencia" target="_blank" rel="noopener" class="inline-block bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-6 rounded-lg btn-lift">
+        Avisarme en WhatsApp →
+      </a>
+    </div>
+  </div>
+</div>
+
+<script>
+  function abrirModal() { document.getElementById('modal').classList.add('active'); }
+  function cerrarModal(e) {
+    if (e && e.target.id !== 'modal' && e.target.tagName !== 'BUTTON') return;
+    document.getElementById('modal').classList.remove('active');
+  }
+
+  // Apps Script URL: pegar el mismo URL del script desplegado
+  const APPS_SCRIPT_URL = 'PEGA_AQUI_EL_URL_DE_TU_APPS_SCRIPT';
+
+  document.getElementById('agenciaForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const formData = new FormData(e.target);
+    const data = Object.fromEntries(formData.entries());
+    data.producto = 'Aplicación Agencia';
+    data.origen = window.location.href;
+
+    document.getElementById('agenciaForm').classList.add('hidden');
+    document.getElementById('modalSuccess').classList.remove('hidden');
+
+    try {
+      await fetch(APPS_SCRIPT_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+      });
+    } catch (error) {
+      console.error('Error enviando aplicación:', error);
+    }
+  });
+</script>
+
+</body>
+</html>
