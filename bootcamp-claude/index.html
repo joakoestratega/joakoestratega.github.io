@@ -6,13 +6,19 @@
 <title>Bootcamp Claude · Tu marketing operando con IA · Joako Estratega</title>
 <meta name="description" content="Bootcamp presencial en Medellín. Sales con Claude Code instalado, tus agentes corriendo y tu primera parrilla automatizada. Sábado 6 de junio.">
 
-<!-- Tailwind CDN -->
-<script src="https://cdn.tailwindcss.com"></script>
-
-<!-- Google Fonts: Montserrat (headline). Pattanakarn no está en Google Fonts, se reemplaza con Bebas Neue como fallback secundaria -->
+<!-- Pre-conexión temprana a CDNs externos para acelerar carga -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://cdn.tailwindcss.com">
+<link rel="dns-prefetch" href="https://script.google.com">
+<link rel="dns-prefetch" href="https://checkout.wompi.co">
+<link rel="dns-prefetch" href="https://wa.me">
+
+<!-- Google Fonts: Montserrat + Bebas Neue. Display swap para no bloquear render. -->
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;900&family=Bebas+Neue&display=swap" rel="stylesheet">
+
+<!-- Tailwind CDN. ⚠ AVISO PARA PRODUCCIÓN: cambiar por build compilado (~30 KB) para mejorar velocidad de carga. Hoy pesa ~3 MB. -->
+<script src="https://cdn.tailwindcss.com"></script>
 
 <style>
   :root {
@@ -38,9 +44,10 @@
   .opacity-60 { opacity: 0.6; }
 
   /* Modal */
-  .modal-bg { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.7); z-index: 100; align-items: center; justify-content: center; padding: 1rem; }
+  .modal-bg { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.7); z-index: 100; align-items: center; justify-content: center; padding: 0.5rem; }
   .modal-bg.active { display: flex; }
-  .modal-box { background: white; max-width: 500px; width: 100%; border-radius: 12px; padding: 2rem; max-height: 90vh; overflow-y: auto; }
+  .modal-box { background: white; max-width: 500px; width: 100%; border-radius: 12px; padding: 1.25rem; max-height: 95vh; overflow-y: auto; }
+  @media (min-width: 640px) { .modal-box { padding: 2rem; } .modal-bg { padding: 1rem; } }
 
   /* FAQ accordion */
   .faq-item { border-bottom: 1px solid #e5e5e5; }
@@ -52,7 +59,7 @@
 
   /* Sticky bottom mobile */
   .sticky-mobile { display: none; }
-  @media (max-width: 768px) { .sticky-mobile { display: block; } body { padding-bottom: 5rem; } }
+  @media (max-width: 768px) { .sticky-mobile { display: block; } body { padding-bottom: 6.5rem; } }
 
   /* WhatsApp flotante */
   .wa-float { position: fixed; bottom: 1.5rem; right: 1.5rem; z-index: 50; box-shadow: 0 4px 12px rgba(0,0,0,0.2); }
@@ -84,10 +91,92 @@
   }
   .wa-float { animation: pulse-wa 2.5s infinite; }
 
+  /* Card del bono: glow animado para que llame la atención */
+  @keyframes bono-glow {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(248, 180, 0, 0.65), 0 12px 30px rgba(248, 180, 0, 0.18); }
+    50% { box-shadow: 0 0 0 22px rgba(248, 180, 0, 0), 0 12px 30px rgba(248, 180, 0, 0.18); }
+  }
+  .bono-glow { animation: bono-glow 2.5s infinite; }
+
+  /* Badge del bono inclinado con bounce sutil para llamar la atención */
+  @keyframes bono-badge-bounce {
+    0%, 100% { transform: rotate(8deg) scale(1); }
+    50% { transform: rotate(8deg) scale(1.08); }
+  }
+  .bono-badge { transform: rotate(8deg); animation: bono-badge-bounce 1.6s ease-in-out infinite; }
+
+  /* Barra superior negra del bono (debajo de la amarilla) */
+  .bono-bar { background: linear-gradient(90deg, #0F0F14 0%, #21209C 100%); }
+
+  /* Latido del countdown gigante */
+  @keyframes countdown-tick {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.03); }
+  }
+  .countdown-big { animation: countdown-tick 1s ease-in-out infinite; }
+
+  /* Optimización mobile: reducir animaciones para ahorrar CPU/batería */
+  @media (max-width: 768px) {
+    .pulse-azul, .pulse-amarillo, .pulse-negro { animation-duration: 3.5s; }
+    .wa-float { animation-duration: 4s; }
+    .bono-glow { animation-duration: 3.5s; }
+  }
+
+  /* Respetar preferencia de usuarios sensibles a movimiento */
+  @media (prefers-reduced-motion: reduce) {
+    .pulse-azul, .pulse-amarillo, .pulse-negro, .wa-float,
+    .bono-glow, .bono-badge, .countdown-big, .btn-lift {
+      animation: none !important;
+      transition: none !important;
+    }
+    .btn-lift:hover { transform: none !important; }
+  }
+
   /* Hover lift para todos los botones */
   .btn-lift { transition: all 0.25s ease; }
   .btn-lift:hover { transform: translateY(-3px) scale(1.04); box-shadow: 0 12px 28px rgba(0,0,0,0.45); }
   .btn-lift:active { transform: translateY(0) scale(0.98); }
+
+  /* Protección de imágenes: no draggable, no select, no menú contextual */
+  img { user-select: none; -webkit-user-drag: none; -webkit-user-select: none; -moz-user-select: none; }
+
+  /* Organigrama del equipo */
+  .org-ceo { background: linear-gradient(135deg, #F8B400 0%, #d99800 100%); }
+  .org-arrow-down { width: 3px; height: 32px; background: #F8B400; margin: 0 auto; }
+  .org-card { background: #0F0F14; border: 2px solid #F8B400; transition: transform 0.25s ease; }
+  .org-card:hover { transform: translateY(-4px); }
+  .org-card-num { background: #F8B400; color: #0F0F14; }
+
+  /* Diagrama MPV lineal (4 fases en fila + barra Mejora Continua) */
+  .mpv-fases { display: flex; align-items: stretch; justify-content: center; gap: 8px; flex-wrap: wrap; max-width: 1100px; margin: 0 auto; }
+  .mpv-fase { background: transparent; border: 2px solid #F8B400; border-radius: 14px; padding: 18px 14px; text-align: center; min-width: 150px; flex: 1 1 150px; max-width: 200px; display: flex; flex-direction: column; justify-content: center; }
+  .mpv-fase-num { font-family: 'Montserrat', sans-serif; font-weight: 900; font-size: 12px; letter-spacing: 2px; color: #F8B400; margin-bottom: 6px; }
+  .mpv-fase-titulo { font-family: 'Montserrat', sans-serif; font-weight: 900; font-size: 22px; letter-spacing: 1.5px; color: #FFFFFF; }
+  .mpv-fase-destacada { background: #F8B400; border-color: #F8B400; flex: 1.6 1 220px; max-width: 290px; padding: 22px 18px; box-shadow: 0 18px 38px rgba(248, 180, 0, 0.25); }
+  .mpv-fase-num-dark { color: #0F0F14; }
+  .mpv-fase-titulo-dark { color: #0F0F14; font-size: 28px; }
+  .mpv-fase-divider { width: 50%; height: 2px; background: #0F0F14; margin: 10px auto; opacity: 0.4; }
+  .mpv-condiciones { list-style: none; padding: 0; margin: 0; text-align: center; font-family: 'Montserrat', sans-serif; font-weight: 700; color: #0F0F14; font-size: 14px; line-height: 1.7; }
+  .mpv-arrow { display: flex; align-items: center; justify-content: center; font-size: 38px; color: #F8B400; font-weight: 900; min-width: 18px; }
+  .mpv-mejora-bar { max-width: 1100px; margin: 22px auto 8px; background: #F8B400; color: #0F0F14; border-radius: 999px; padding: 14px 28px; display: flex; align-items: center; justify-content: center; gap: 18px; box-shadow: 0 10px 24px rgba(248, 180, 0, 0.18); }
+  .mpv-mejora-icon { font-size: 26px; font-weight: 900; }
+  .mpv-mejora-text { font-family: 'Montserrat', sans-serif; font-weight: 900; font-size: 18px; letter-spacing: 4px; }
+  .mpv-mejora-sub { text-align: center; font-size: 14px; color: #FFFFFF; opacity: 0.7; max-width: 720px; margin: 0 auto 0; padding: 0 1rem; font-style: italic; }
+  @media (max-width: 768px) {
+    .mpv-fases { flex-direction: column; align-items: center; }
+    .mpv-fase { width: 100%; max-width: 320px; }
+    .mpv-fase-destacada { max-width: 320px; }
+    .mpv-arrow { transform: rotate(90deg); font-size: 30px; }
+    .mpv-mejora-text { font-size: 14px; letter-spacing: 2px; }
+  }
+
+  /* Selector de método de pago en modal */
+  .pay-option { border: 2px solid #e5e5e5; transition: all 0.2s ease; cursor: pointer; }
+  .pay-option:hover { border-color: #21209C; transform: translateY(-2px); box-shadow: 0 8px 20px rgba(33, 32, 156, 0.15); }
+  .pay-detail { background: #faf9f5; border: 2px dashed #F8B400; }
+  .copy-btn { background: #0F0F14; color: #F8B400; cursor: pointer; transition: all 0.2s; }
+  .copy-btn:hover { background: #21209C; color: white; }
+  .copy-btn.copied { background: #16a34a; color: white; }
 </style>
 </head>
 <body class="bg-white">
@@ -96,31 +185,41 @@
 <!-- BARRA DE URGENCIA STICKY                       -->
 <!-- EDITAR: cambia "10 cupos" según se vayan vendiendo -->
 <!-- ============================================ -->
-<div class="bg-amarillo text-black py-3 px-4 sticky top-0 z-40 shadow-md">
-  <div class="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-5 text-sm md:text-base">
-    <span class="font-semibold text-center">⚡ Sábado 6 de junio · Medellín · <span id="cupos-restantes">10 cupos</span></span>
-    <button onclick="abrirModal()" class="bg-black text-white font-bold px-5 py-2 rounded-md hover:bg-azul transition text-sm whitespace-nowrap shadow-lg btn-lift flex-shrink-0">
-      🔥 Aplicar para mi cupo
-    </button>
+<div class="sticky top-0 z-40">
+  <!-- Barra principal: amarilla, una sola línea en todos los tamaños -->
+  <div class="bg-amarillo text-black py-2 md:py-3 px-3 shadow-md">
+    <div class="max-w-6xl mx-auto flex flex-row items-center justify-center gap-3 md:gap-5 text-xs sm:text-sm md:text-base">
+      <span class="font-semibold whitespace-nowrap">⚡ <span class="hidden sm:inline">Sábado 6 de junio · Medellín · </span><span id="cupos-restantes">10 cupos</span></span>
+      <button onclick="abrirModal()" class="bg-black text-white font-bold px-3 py-1.5 sm:px-5 sm:py-2 rounded-md hover:bg-azul transition text-xs sm:text-sm whitespace-nowrap shadow-lg btn-lift flex-shrink-0">
+        🔥 <span class="hidden sm:inline">Aplicar para mi cupo</span><span class="sm:hidden">Aplicar</span>
+      </button>
+    </div>
+  </div>
+  <!-- Sub-barra del bono: una sola línea, ultra compacta en mobile -->
+  <div id="bono-bar" class="bono-bar text-white py-1.5 md:py-2 px-3 shadow-md" style="display:none;">
+    <div class="max-w-6xl mx-auto flex flex-row items-center justify-center gap-2 md:gap-3 text-xs md:text-sm">
+      <span class="font-semibold whitespace-nowrap">🎁 <strong class="text-amarillo">BONO</strong><span class="hidden md:inline"> · 2h mentoría 1-a-1 conmigo</span><span class="hidden sm:inline"> · termina</span></span>
+      <span id="bono-countdown-bar" class="bg-amarillo text-black font-headline px-2 py-0.5 md:px-3 md:py-1 rounded tabular-nums tracking-wider text-xs md:text-base whitespace-nowrap">--:--:--</span>
+    </div>
   </div>
 </div>
 
 <!-- ============================================ -->
 <!-- HERO                                          -->
 <!-- ============================================ -->
-<section class="bg-white py-12 md:py-20 px-4">
+<section class="bg-white py-8 md:py-20 px-4">
   <div class="max-w-6xl mx-auto grid md:grid-cols-1 gap-10 items-center">
     <div class="max-w-3xl mx-auto">
       <!-- LOGO HERO con zoom CSS para verse rectangular y más grande -->
-      <div class="mb-8 overflow-hidden relative" style="height: 80px; width: 240px;">
-        <img src="imagenes/logo-negro-amarillo-blanco.png" alt="Joako Estratega" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(1.8); max-width: none; height: 100%;">
+      <div class="mb-5 md:mb-8 overflow-hidden relative" style="height: 80px; width: 240px;">
+        <img src="imagenes/logo-negro-amarillo-blanco.png" alt="Joako Estratega" fetchpriority="high" decoding="async" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(1.8); max-width: none; height: 100%;">
       </div>
 
-      <p class="font-secondary text-azul text-xl md:text-2xl mb-3">BOOTCAMP CLAUDE · MARKETING CON IA</p>
-      <h1 class="font-headline text-4xl md:text-6xl leading-tight mb-6">
+      <p class="font-secondary text-azul text-lg md:text-2xl mb-2 md:mb-3">BOOTCAMP CLAUDE · MARKETING CON IA</p>
+      <h1 class="font-headline text-3xl sm:text-4xl md:text-6xl leading-tight mb-4 md:mb-6">
         Tu marketing entero, <br><span class="text-azul">operando con IA.</span><br>En un solo día.
       </h1>
-      <p class="text-lg md:text-xl mb-8 text-black opacity-60">
+      <p class="text-base md:text-xl mb-6 md:mb-8 text-black opacity-60">
         Sales con Claude Code instalado en tu computador, tus agentes corriendo y tu primera parrilla de contenido saliendo en automático. El mismo sistema que opero yo y mis clientes de agencia.
       </p>
       <div class="flex flex-col sm:flex-row gap-4">
@@ -196,7 +295,7 @@
   <div class="max-w-5xl mx-auto">
     <!-- LOGO sección Claude con zoom CSS, fondo azul del logo se mezcla con fondo azul de la sección -->
     <div class="mx-auto mb-10 overflow-hidden relative" style="height: 75px; width: 220px;">
-      <img src="imagenes/logo-blanco-amarillo-fondo-azul.png" alt="Joako Estratega" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(1.8); max-width: none; height: 100%;">
+      <img src="imagenes/logo-blanco-amarillo-fondo-azul.png" alt="Joako Estratega" loading="lazy" decoding="async" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(1.8); max-width: none; height: 100%;">
     </div>
 
     <h2 class="font-headline text-3xl md:text-5xl mb-6 text-center leading-tight">
@@ -212,7 +311,191 @@
         <p class="font-bold border-l-4 border-amarillo pl-4">Mientras la mayoría escribe prompts sueltos a ChatGPT, tú vas a construir el sistema completo. El mismo que opero yo y mis clientes esta semana.</p>
       </div>
       <div>
-        <img src="imagenes/claude-corriendo.png" alt="Claude Code corriendo con agentes" class="w-full rounded-lg shadow-2xl border-4 border-amarillo">
+        <img src="imagenes/claude-corriendo.png" alt="Claude Code corriendo con agentes" loading="lazy" decoding="async" class="w-full rounded-lg shadow-2xl border-4 border-amarillo">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================ -->
+<!-- TU EQUIPO DE MARKETING INTERNO                -->
+<!-- ============================================ -->
+<section class="bg-white py-16 md:py-24 px-4">
+  <div class="max-w-6xl mx-auto">
+    <p class="font-secondary text-azul text-xl mb-2 text-center">LO QUE INSTALAS EL SÁBADO</p>
+    <h2 class="font-headline text-3xl md:text-5xl mb-6 text-center leading-tight">
+      Sales con un <span class="text-azul">equipo de 6 empleados</span><br>especializados trabajando para ti
+    </h2>
+    <p class="text-center text-lg max-w-3xl mx-auto mb-12 opacity-80">No agentes raros que no entiendes. Empleados con rol claro, jefe (tú) y disponibilidad 24/7.</p>
+
+    <!-- CEO (cliente) arriba -->
+    <div class="flex justify-center mb-2">
+      <div class="org-ceo rounded-2xl p-6 text-center shadow-2xl max-w-xs">
+        <p class="text-xs font-bold uppercase tracking-widest opacity-80">CEO del negocio</p>
+        <p class="font-headline text-2xl md:text-3xl mt-1">TÚ</p>
+        <p class="text-sm opacity-80 mt-1">El que toma las decisiones</p>
+      </div>
+    </div>
+
+    <!-- Línea conectora -->
+    <div class="org-arrow-down"></div>
+    <p class="text-center text-sm font-bold text-azul uppercase tracking-widest mb-6">tu equipo</p>
+
+    <!-- Grid de 6 agentes -->
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 max-w-5xl mx-auto">
+
+      <div class="org-card rounded-xl p-6 text-white">
+        <div class="flex justify-between items-start mb-3">
+          <div class="org-card-num w-9 h-9 rounded-full flex items-center justify-center font-headline text-base">01</div>
+          <span class="text-xs text-amarillo font-bold uppercase tracking-wider opacity-80">Memoria</span>
+        </div>
+        <h3 class="font-headline text-xl text-amarillo mb-2 leading-tight">Tu memoria del negocio</h3>
+        <p class="text-sm opacity-90 mb-3">Guarda tu voz, oferta, cliente ideal, historia y MPV en archivos vivos. Cuando un agente nuevo entra, este lo pone al día en 30 segundos.</p>
+        <p class="text-xs opacity-60 italic">Entrega: documentos de texto con todo lo que define tu empresa.</p>
+      </div>
+
+      <div class="org-card rounded-xl p-6 text-white">
+        <div class="flex justify-between items-start mb-3">
+          <div class="org-card-num w-9 h-9 rounded-full flex items-center justify-center font-headline text-base">02</div>
+          <span class="text-xs text-amarillo font-bold uppercase tracking-wider opacity-80">Marca</span>
+        </div>
+        <h3 class="font-headline text-xl text-amarillo mb-2 leading-tight">Tu director de marca</h3>
+        <p class="text-sm opacity-90 mb-3">Asegura que cada pieza salga con tu identidad: tono, paleta, palabras prohibidas, qué decir y qué no. Detiene el "esto no suena a mí".</p>
+        <p class="text-xs opacity-60 italic">Entrega: guidelines escritas y revisión de textos.</p>
+      </div>
+
+      <div class="org-card rounded-xl p-6 text-white">
+        <div class="flex justify-between items-start mb-3">
+          <div class="org-card-num w-9 h-9 rounded-full flex items-center justify-center font-headline text-base">03</div>
+          <span class="text-xs text-amarillo font-bold uppercase tracking-wider opacity-80">Redes</span>
+        </div>
+        <h3 class="font-headline text-xl text-amarillo mb-2 leading-tight">Tu redactor de redes</h3>
+        <p class="text-sm opacity-90 mb-3">Escribe ideas y guiones de reels, textos de cada slide del carrusel, captions e historias. La parrilla semanal sale completa.</p>
+        <p class="text-xs opacity-60 italic">Entrega: textos listos para grabar y montar. No graba video ni diseña carrusel.</p>
+      </div>
+
+      <div class="org-card rounded-xl p-6 text-white">
+        <div class="flex justify-between items-start mb-3">
+          <div class="org-card-num w-9 h-9 rounded-full flex items-center justify-center font-headline text-base">04</div>
+          <span class="text-xs text-amarillo font-bold uppercase tracking-wider opacity-80">Pauta</span>
+        </div>
+        <h3 class="font-headline text-xl text-amarillo mb-2 leading-tight">Tu copy de pauta</h3>
+        <p class="text-sm opacity-90 mb-3">Hooks, copys de anuncios, guiones para grabar pauta, textos de páginas. Todo alineado al Mensaje Principal de Venta.</p>
+        <p class="text-xs opacity-60 italic">Entrega: textos para anuncios. No edita videos ni hace miniaturas.</p>
+      </div>
+
+      <div class="org-card rounded-xl p-6 text-white">
+        <div class="flex justify-between items-start mb-3">
+          <div class="org-card-num w-9 h-9 rounded-full flex items-center justify-center font-headline text-base">05</div>
+          <span class="text-xs text-amarillo font-bold uppercase tracking-wider opacity-80">Operaciones</span>
+        </div>
+        <h3 class="font-headline text-xl text-amarillo mb-2 leading-tight">Tu jefe de operaciones IA</h3>
+        <p class="text-sm opacity-90 mb-3">Cuando descubres una tarea repetitiva, este construye un empleado nuevo para automatizarla. Tu equipo crece solo.</p>
+        <p class="text-xs opacity-60 italic">Entrega: agentes nuevos a la medida de tu negocio.</p>
+      </div>
+
+      <div class="org-card rounded-xl p-6 text-white">
+        <div class="flex justify-between items-start mb-3">
+          <div class="org-card-num w-9 h-9 rounded-full flex items-center justify-center font-headline text-base">06</div>
+          <span class="text-xs text-amarillo font-bold uppercase tracking-wider opacity-80">Auditoría</span>
+        </div>
+        <h3 class="font-headline text-xl text-amarillo mb-2 leading-tight">Tu auditor del equipo</h3>
+        <p class="text-sm opacity-90 mb-3">Revisa que cada empleado siga alineado al negocio. Si cambia tu oferta, actualiza a todos en cascada para que ninguno quede desfasado.</p>
+        <p class="text-xs opacity-60 italic">Entrega: agentes actualizados y consistentes entre sí.</p>
+      </div>
+
+    </div>
+
+    <!-- Comparativa de costo equivalente -->
+    <div class="max-w-3xl mx-auto mt-14 bg-azul text-white rounded-2xl p-6 md:p-8 shadow-xl">
+      <p class="font-secondary text-amarillo text-sm mb-4 text-center opacity-90">SI ESTE EQUIPO FUERA HUMANO</p>
+      <ul class="space-y-3 text-base md:text-lg mb-4">
+        <li class="flex justify-between gap-4 border-b border-white border-opacity-20 pb-3"><span>Community manager (medio tiempo)</span><span class="font-bold">$1.500.000/mes</span></li>
+        <li class="flex justify-between gap-4 border-b border-white border-opacity-20 pb-3"><span>Copywriter de pauta (freelance)</span><span class="font-bold">$1.800.000/mes</span></li>
+        <li class="flex justify-between gap-4 border-b border-white border-opacity-20 pb-3"><span>Coordinador de marca (consultor)</span><span class="font-bold">$1.200.000/mes</span></li>
+        <li class="flex justify-between gap-4 pt-2"><span class="font-bold text-amarillo">Costo mensual estimado</span><span class="font-headline text-amarillo text-2xl">$4.500.000</span></li>
+      </ul>
+      <p class="text-center text-sm md:text-base mt-4 opacity-90">Tu equipo IA hace el trabajo de los tres y dos roles más, por <strong class="text-amarillo">$997.000 una vez</strong>. Sin nómina, sin renuncias, sin lunes festivos.</p>
+    </div>
+
+    <div class="text-center mt-12">
+      <button onclick="abrirModal()" class="bg-azul text-white font-bold py-4 px-10 rounded-lg text-lg hover:opacity-90 transition btn-lift pulse-azul">
+        Aplicar para mi cupo
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================ -->
+<!-- EL MÉTODO QUE VAS A APLICAR — Diagrama MPV    -->
+<!-- ============================================ -->
+<section class="bg-black text-white py-16 md:py-24 px-4">
+  <div class="max-w-5xl mx-auto">
+    <p class="font-secondary text-amarillo text-xl mb-2 text-center">EL MÉTODO QUE TU EQUIPO VA A OPERAR</p>
+    <h2 class="font-headline text-3xl md:text-5xl mb-6 text-center leading-tight">
+      Método MPV: <span class="text-amarillo">el sistema de 4 fases</span><br>que ordena tu marketing entero
+    </h2>
+    <p class="text-center text-base md:text-lg max-w-3xl mx-auto mb-10 opacity-80">
+      Tu equipo no improvisa. Cada agente sabe en qué fase del método trabaja. El centro siempre es el <strong class="text-amarillo">Mensaje Principal de Venta</strong>: la razón por la que un cliente decide comprarte a ti y no al de al lado.
+    </p>
+
+    <!-- Diagrama lineal: 4 fases una tras otra con Mensaje destacado -->
+    <div class="mpv-fases">
+      <div class="mpv-fase">
+        <div class="mpv-fase-num">FASE 1</div>
+        <div class="mpv-fase-titulo">DIAGNÓSTICO</div>
+      </div>
+      <div class="mpv-arrow">›</div>
+
+      <div class="mpv-fase mpv-fase-destacada">
+        <div class="mpv-fase-num mpv-fase-num-dark">FASE 2 · NÚCLEO</div>
+        <div class="mpv-fase-titulo mpv-fase-titulo-dark">MENSAJE</div>
+        <div class="mpv-fase-divider"></div>
+        <ul class="mpv-condiciones">
+          <li>Dolor claro</li>
+          <li>Fácil de usar</li>
+          <li>Resultados rápidos</li>
+          <li>Garantía</li>
+        </ul>
+      </div>
+      <div class="mpv-arrow">›</div>
+
+      <div class="mpv-fase">
+        <div class="mpv-fase-num">FASE 3</div>
+        <div class="mpv-fase-titulo">CAPTACIÓN</div>
+      </div>
+      <div class="mpv-arrow">›</div>
+
+      <div class="mpv-fase">
+        <div class="mpv-fase-num">FASE 4</div>
+        <div class="mpv-fase-titulo">CIERRE</div>
+      </div>
+    </div>
+
+    <!-- Barra que envuelve a las 4 fases -->
+    <div class="mpv-mejora-bar">
+      <span class="mpv-mejora-icon">⟲</span>
+      <span class="mpv-mejora-text">MEJORA CONTINUA</span>
+      <span class="mpv-mejora-icon">⟳</span>
+    </div>
+    <p class="mpv-mejora-sub">Sobre las 4 fases corre permanentemente un ciclo de medición y ajuste. Lean manufacturing aplicado al marketing: medir, eliminar lo que no convierte, repetir.</p>
+
+    <div class="grid md:grid-cols-2 gap-5 max-w-3xl mx-auto mt-12">
+      <div class="border-l-4 border-amarillo pl-4">
+        <p class="font-bold text-amarillo">Diagnóstico</p>
+        <p class="text-sm opacity-80">Qué vendes realmente y a quién.</p>
+      </div>
+      <div class="border-l-4 border-amarillo pl-4">
+        <p class="font-bold text-amarillo">Mensaje</p>
+        <p class="text-sm opacity-80">Por qué te compran a ti y no al otro.</p>
+      </div>
+      <div class="border-l-4 border-amarillo pl-4">
+        <p class="font-bold text-amarillo">Captación</p>
+        <p class="text-sm opacity-80">Cómo llega tu mensaje al que sí compra.</p>
+      </div>
+      <div class="border-l-4 border-amarillo pl-4">
+        <p class="font-bold text-amarillo">Cierre</p>
+        <p class="text-sm opacity-80">Cómo el interesado se vuelve cliente sin que lo persigas.</p>
       </div>
     </div>
   </div>
@@ -274,7 +557,7 @@
         <ul class="space-y-3">
           <li class="flex gap-3"><span class="text-amarillo font-bold">✓</span> Claude Code instalado, configurado y listo</li>
           <li class="flex gap-3"><span class="text-amarillo font-bold">✓</span> Estructura del Método MPV organizada para tu negocio</li>
-          <li class="flex gap-3"><span class="text-amarillo font-bold">✓</span> 2 agentes corriendo: documentador + agente de contenido</li>
+          <li class="flex gap-3"><span class="text-amarillo font-bold">✓</span> Tus 6 empleados IA corriendo: memoria, marca, redes, pauta, operaciones y auditor</li>
           <li class="flex gap-3"><span class="text-amarillo font-bold">✓</span> Tu 06-contexto-ia.md (cerebro digital del negocio) generado en vivo</li>
           <li class="flex gap-3"><span class="text-amarillo font-bold">✓</span> Tu primera parrilla semanal saliendo automáticamente</li>
           <li class="flex gap-3"><span class="text-amarillo font-bold">✓</span> Plantillas de prompts y agentes listas para reutilizar</li>
@@ -287,7 +570,7 @@
           <li class="flex gap-3"><span class="text-amarillo font-bold">✓</span> Acceso al grupo WhatsApp privado del bootcamp (sin límite de tiempo)</li>
           <li class="flex gap-3"><span class="text-amarillo font-bold">✓</span> Constancia de participación</li>
         </ul>
-        <img src="imagenes/parrilla-demo.gif" alt="Parrilla generándose en automático" class="mt-6 rounded-lg border-2 border-amarillo">
+        <img src="imagenes/parrilla-demo.gif" alt="Parrilla generándose en automático" loading="lazy" decoding="async" class="mt-6 rounded-lg border-2 border-amarillo">
       </div>
     </div>
   </div>
@@ -299,7 +582,7 @@
 <section class="py-16 md:py-24 px-4 bg-white">
   <div class="max-w-5xl mx-auto grid md:grid-cols-2 gap-12 items-center">
     <div>
-      <img src="imagenes/joako-effi.png" alt="Joako en tarima de Feria EFFIX" class="w-full rounded-lg shadow-xl">
+      <img src="imagenes/joako-effi.png" alt="Joako en tarima de Feria EFFIX" loading="lazy" decoding="async" class="w-full rounded-lg shadow-xl">
     </div>
     <div>
       <p class="font-secondary text-azul text-xl mb-2">QUIÉN TE VA A ENSEÑAR</p>
@@ -456,10 +739,32 @@
       <p class="text-sm">Después de este, el bootcamp presencial sube a <strong>$1.997.000</strong> y este precio quedará disponible solo en la versión virtual pregrabada. Si quieres aprender en persona conmigo a este valor, este es el momento.</p>
     </div>
 
-    <!-- BONO DE DECISIÓN RÁPIDA -->
-    <div class="bg-black text-white rounded-lg p-5 mb-8 max-w-xl mx-auto">
-      <p class="font-bold text-amarillo mb-1">🎁 Bono por decisión rápida</p>
-      <p class="text-sm">Si reservas en las próximas <strong>48 horas</strong>, te incluyo una <strong>sesión virtual 1-a-1 de 30 minutos</strong> conmigo después del bootcamp para revisar tu sistema en acción.</p>
+    <!-- BONO POR DECISIÓN RÁPIDA con conteo regresivo real (48h desde primera visita) -->
+    <div id="bono-card" class="relative max-w-2xl mx-auto mb-10" style="display:none;">
+      <!-- Badge animado en esquina superior derecha -->
+      <div class="bono-badge absolute -top-4 -right-4 bg-amarillo text-black border-2 border-black font-headline text-xs md:text-sm px-4 py-2 rounded-full shadow-xl z-10">
+        🎁 BONO ACTIVO
+      </div>
+
+      <div class="bono-glow bg-black text-white border-4 border-amarillo rounded-2xl p-6 md:p-10 text-left">
+        <p class="text-xs md:text-sm font-bold uppercase tracking-widest text-amarillo mb-2">SOLO POR TIEMPO LIMITADO</p>
+        <h3 class="font-headline text-2xl md:text-4xl text-white leading-tight mb-4">
+          <span class="text-amarillo">2 horas</span> de mentoría 1-a-1<br>conmigo, sin costo extra
+        </h3>
+        <p class="text-sm md:text-base mb-6 opacity-90">
+          Si reservas tu cupo antes de que termine el contador, después del bootcamp te incluyo una <strong class="text-amarillo">sesión privada de 2 horas conmigo</strong>. Ahí revisamos tu sistema en acción, te ayudo a desbloquear lo que no esté funcionando y refinamos tu Mensaje Principal de Venta.
+        </p>
+        <p class="text-xs md:text-sm opacity-70 mb-6">
+          <em>Esta sesión por separado vale <strong class="text-amarillo">$600.000 COP</strong>. Va incluida si pagas dentro del contador.</em>
+        </p>
+
+        <!-- Countdown gigante -->
+        <div class="bg-amarillo text-black rounded-xl p-5 text-center">
+          <p class="text-xs md:text-sm font-bold uppercase tracking-widest mb-2">El bono termina en</p>
+          <p id="bono-countdown" class="countdown-big font-headline text-5xl md:text-7xl tabular-nums tracking-wider">--:--:--</p>
+          <p class="text-xs mt-2 opacity-70">horas : minutos : segundos</p>
+        </div>
+      </div>
     </div>
 
     <button onclick="abrirModal()" class="bg-black text-white font-bold py-5 px-12 rounded-lg text-xl hover:bg-azul transition mb-8 btn-lift pulse-negro">
@@ -541,7 +846,7 @@
   <div class="max-w-5xl mx-auto text-center">
     <!-- LOGO footer con zoom CSS -->
     <div class="mx-auto mb-6 overflow-hidden relative" style="height: 60px; width: 180px;">
-      <img src="imagenes/logo-blanco-amarillo-fondo-negro.png" alt="Joako Estratega" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(1.8); max-width: none; height: 100%;">
+      <img src="imagenes/logo-blanco-amarillo-fondo-negro.png" alt="Joako Estratega" loading="lazy" decoding="async" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(1.8); max-width: none; height: 100%;">
     </div>
     <p class="text-sm opacity-60 mb-2">© 2026 Joako Estratega · Todos los derechos reservados</p>
     <p class="text-sm opacity-60">
@@ -563,9 +868,10 @@
 <!-- ============================================ -->
 <!-- STICKY BOTTOM MÓVIL                           -->
 <!-- ============================================ -->
-<div class="sticky-mobile fixed bottom-0 left-0 right-0 bg-azul text-white p-3 z-40 shadow-lg">
-  <button onclick="abrirModal()" class="w-full bg-amarillo text-black font-bold py-3 rounded-lg">
-    Aplicar para mi cupo · $997.000 COP
+<div class="sticky-mobile fixed bottom-0 left-0 right-0 bg-azul text-white p-2.5 z-40 shadow-lg">
+  <button onclick="abrirModal()" class="w-full bg-amarillo text-black font-bold py-3 rounded-lg leading-tight">
+    <span class="block text-base">Aplicar para mi cupo · $997.000</span>
+    <span id="sticky-bono-line" class="block text-xs font-semibold opacity-90 mt-0.5" style="display:none;">🎁 Incluye 2h mentoría 1-a-1 si reservas en <span id="sticky-bono-countdown">--:--:--</span></span>
   </button>
 </div>
 
@@ -619,18 +925,109 @@
       </div>
 
       <button type="submit" id="btn-submit" class="w-full bg-azul text-white font-bold py-4 rounded-lg text-lg hover:opacity-90 btn-lift pulse-azul mt-4">
-        Quiero mi cupo
+        Continuar al pago
       </button>
 
-      <p class="text-xs text-center opacity-60">Después de enviar, continúas al pago seguro vía Wompi · PSE, Nequi, Daviplata o tarjeta</p>
+      <p class="text-xs text-center opacity-60">En el siguiente paso eliges cómo prefieres pagar.</p>
     </form>
 
-    <!-- Mensaje de éxito (oculto por default) -->
-    <div id="form-exito" style="display:none;" class="text-center py-6">
-      <div class="text-5xl mb-3">✅</div>
-      <h4 class="font-headline text-xl mb-2">¡Datos registrados!</h4>
-      <p class="text-sm opacity-80 mb-5">Te estamos redirigiendo al pago seguro...</p>
-      <div class="animate-pulse">Redirigiendo en 2 segundos...</div>
+    <!-- Paso 2: Selector de método de pago (oculto por default) -->
+    <div id="form-pago" style="display:none;">
+      <div class="text-center py-3 mb-4">
+        <div class="text-4xl mb-2">✅</div>
+        <h4 class="font-headline text-xl mb-1">Datos registrados</h4>
+        <p class="text-sm opacity-80">Ahora elige cómo pagar tu cupo.</p>
+      </div>
+
+      <div class="space-y-3">
+        <button type="button" onclick="abrirPagoDirecto()" class="pay-option w-full bg-white rounded-lg p-4 text-left flex items-center gap-3">
+          <span class="text-3xl">📲</span>
+          <div class="flex-1">
+            <p class="font-headline text-base">Pagar por Nequi, BRE-B o transferencia</p>
+            <p class="text-xs opacity-60">Bancolombia, Davivienda, BBVA y otros bancos. Confirmas con comprobante.</p>
+          </div>
+          <span class="text-xl text-azul">›</span>
+        </button>
+
+        <button type="button" onclick="irAWompi()" class="pay-option w-full bg-white rounded-lg p-4 text-left flex items-center gap-3">
+          <span class="text-3xl">💳</span>
+          <div class="flex-1">
+            <p class="font-headline text-base">Pagar con tarjeta de crédito o débito</p>
+            <p class="text-xs opacity-60">Pago seguro a través de Wompi.</p>
+          </div>
+          <span class="text-xl text-azul">›</span>
+        </button>
+      </div>
+
+      <p class="text-xs text-center opacity-60 mt-5">Cualquier método te asegura tu cupo. La diferencia es solo cómo prefieres pagar.</p>
+    </div>
+
+    <!-- Paso 3: Pago directo con datos (oculto por default) -->
+    <div id="form-pago-directo" style="display:none;">
+      <button type="button" onclick="volverASelector()" class="text-sm text-azul mb-3 flex items-center gap-1 hover:underline">‹ Volver</button>
+      <h4 class="font-headline text-xl mb-1">Pago directo · $997.000 COP</h4>
+      <p class="text-sm opacity-80 mb-4">Transfiere desde tu app bancaria y envíanos el comprobante por WhatsApp para confirmar tu cupo.</p>
+
+      <!-- Opción A: QR Bancolombia (escaneable desde cualquier app de banco con BRE-B) -->
+      <div class="pay-detail rounded-lg p-4 mb-3">
+        <p class="font-bold text-sm mb-2 flex items-center gap-2"><span class="bg-amarillo text-black text-xs font-headline px-2 py-1 rounded">A</span> QR Bancolombia</p>
+        <p class="text-xs opacity-70 mb-3">Escanea desde la app de cualquier banco que tengas.</p>
+        <img src="imagenes/qr-bre-b.png" alt="QR Bancolombia · Joako Estratega" loading="lazy" decoding="async" class="w-full max-w-xs mx-auto rounded-md" draggable="false" oncontextmenu="return false;">
+      </div>
+
+      <!-- Opción B: BRE-B (llave manual) -->
+      <div class="pay-detail rounded-lg p-4 mb-3">
+        <p class="font-bold text-sm mb-2 flex items-center gap-2"><span class="bg-amarillo text-black text-xs font-headline px-2 py-1 rounded">B</span> BRE-B</p>
+        <p class="text-xs opacity-70 mb-3">Si tu banco soporta BRE-B, transfiere directo a esta llave.</p>
+        <div class="flex items-center justify-between gap-2 bg-white border border-gray-300 rounded-md px-3 py-2">
+          <div class="text-xs">
+            <p class="opacity-60">Llave BRE-B</p>
+            <p class="font-bold text-sm">3124146643</p>
+          </div>
+          <button type="button" onclick="copiarTexto('3124146643', this)" class="copy-btn text-xs font-bold px-3 py-2 rounded">Copiar</button>
+        </div>
+      </div>
+
+      <!-- Opción C: Nequi -->
+      <div class="pay-detail rounded-lg p-4 mb-3">
+        <p class="font-bold text-sm mb-2 flex items-center gap-2"><span class="bg-amarillo text-black text-xs font-headline px-2 py-1 rounded">C</span> Nequi</p>
+        <div class="flex items-center justify-between gap-2 bg-white border border-gray-300 rounded-md px-3 py-2">
+          <div class="text-xs">
+            <p class="opacity-60">Número Nequi</p>
+            <p class="font-bold text-sm">3124146643</p>
+          </div>
+          <button type="button" onclick="copiarTexto('3124146643', this)" class="copy-btn text-xs font-bold px-3 py-2 rounded">Copiar</button>
+        </div>
+      </div>
+
+      <!-- Opción D: Transferencia bancaria tradicional -->
+      <div class="pay-detail rounded-lg p-4 mb-4">
+        <p class="font-bold text-sm mb-2 flex items-center gap-2"><span class="bg-amarillo text-black text-xs font-headline px-2 py-1 rounded">D</span> Transferencia bancaria</p>
+        <div class="text-xs space-y-1 mb-3">
+          <p><span class="opacity-60">Banco:</span> <strong>Bancolombia</strong></p>
+          <p><span class="opacity-60">Tipo:</span> <strong>Cuenta de ahorros</strong></p>
+          <p><span class="opacity-60">Titular:</span> <strong>Joaquín Rojas Peña</strong></p>
+        </div>
+        <div class="flex items-center justify-between gap-2 bg-white border border-gray-300 rounded-md px-3 py-2">
+          <div class="text-xs">
+            <p class="opacity-60">Número de cuenta</p>
+            <p class="font-bold text-sm">525-420474-37</p>
+          </div>
+          <button type="button" onclick="copiarTexto('52542047437', this)" class="copy-btn text-xs font-bold px-3 py-2 rounded">Copiar</button>
+        </div>
+      </div>
+
+      <!-- Aviso de urgencia real -->
+      <div class="bg-amarillo text-black rounded-lg p-3 mb-4 text-xs">
+        <p class="font-bold mb-1">⚠ Tienes 24 horas para enviar el comprobante</p>
+        <p class="opacity-80">Si no recibimos confirmación en ese plazo, tu cupo se libera al siguiente interesado. Solo hay 10 cupos.</p>
+      </div>
+
+      <!-- Botón único: WhatsApp con mensaje pre-redactado -->
+      <a id="btn-whatsapp-comprobante" href="#" target="_blank" class="block w-full bg-green-500 text-white font-bold py-4 rounded-lg text-center btn-lift">
+        Enviar comprobante por WhatsApp
+      </a>
+      <p class="text-xs text-center opacity-60 mt-3">Mándanos el pantallazo y te confirmamos tu cupo el mismo día.</p>
     </div>
 
     <!-- Mensaje de error (oculto por default) -->
@@ -655,12 +1052,69 @@
   const LINK_PAGO_WOMPI = 'https://checkout.wompi.co/l/bpXT4N';
   // ============================================
 
+  // Estado del lead que vamos enviando al Apps Script
+  let leadParcialEnviado = false;
+  let datosUltimoLead = null;
+
+  // ============================================
+  // BONO POR DECISIÓN RÁPIDA — Conteo regresivo de 48h
+  // El timestamp de inicio se guarda en localStorage en la primera visita
+  // y persiste entre refrescos y sesiones del mismo navegador.
+  // ============================================
+  const BONO_DURACION_MS = 48 * 60 * 60 * 1000; // 48 horas
+  const BONO_KEY = 'bootcamp_claude_bono_inicio';
+
+  function inicioBono() {
+    let inicio = parseInt(localStorage.getItem(BONO_KEY), 10);
+    if (!inicio || isNaN(inicio)) {
+      inicio = Date.now();
+      try { localStorage.setItem(BONO_KEY, String(inicio)); } catch (e) {}
+    }
+    return inicio;
+  }
+
+  function bonoAplica() {
+    return (Date.now() - inicioBono()) < BONO_DURACION_MS;
+  }
+
+  function actualizarContadorBono() {
+    const card = document.getElementById('bono-card');
+    const display = document.getElementById('bono-countdown');
+    const bar = document.getElementById('bono-bar');
+    const barDisplay = document.getElementById('bono-countdown-bar');
+    const stickyLine = document.getElementById('sticky-bono-line');
+    const stickyDisplay = document.getElementById('sticky-bono-countdown');
+    const restante = BONO_DURACION_MS - (Date.now() - inicioBono());
+    if (restante <= 0) {
+      if (card) card.style.display = 'none';
+      if (bar) bar.style.display = 'none';
+      if (stickyLine) stickyLine.style.display = 'none';
+      return;
+    }
+    if (card) card.style.display = 'block';
+    if (bar) bar.style.display = 'block';
+    if (stickyLine) stickyLine.style.display = 'block';
+    const totalSec = Math.floor(restante / 1000);
+    const h = String(Math.floor(totalSec / 3600)).padStart(2, '0');
+    const m = String(Math.floor((totalSec % 3600) / 60)).padStart(2, '0');
+    const s = String(totalSec % 60).padStart(2, '0');
+    const formato = `${h}:${m}:${s}`;
+    if (display) display.textContent = formato;
+    if (barDisplay) barDisplay.textContent = formato;
+    if (stickyDisplay) stickyDisplay.textContent = formato;
+  }
+
+  inicioBono();
+  actualizarContadorBono();
+  setInterval(actualizarContadorBono, 1000);
+
   function abrirModal() {
     document.getElementById('modal').classList.add('active');
     document.body.style.overflow = 'hidden';
-    // Reset form state
+    // Reset de pantallas del modal
     document.getElementById('form-aplicacion').style.display = 'block';
-    document.getElementById('form-exito').style.display = 'none';
+    document.getElementById('form-pago').style.display = 'none';
+    document.getElementById('form-pago-directo').style.display = 'none';
     document.getElementById('form-error').style.display = 'none';
   }
   function cerrarModal() {
@@ -671,8 +1125,68 @@
     el.parentElement.classList.toggle('open');
   }
 
+  function abrirPagoDirecto() {
+    document.getElementById('form-pago').style.display = 'none';
+    document.getElementById('form-pago-directo').style.display = 'block';
+  }
+  function volverASelector() {
+    document.getElementById('form-pago-directo').style.display = 'none';
+    document.getElementById('form-pago').style.display = 'block';
+  }
+  function irAWompi() {
+    window.location.href = LINK_PAGO_WOMPI;
+  }
+
+  // Copiar texto al portapapeles + feedback visual en el botón
+  function copiarTexto(texto, btn) {
+    if (navigator.clipboard) {
+      navigator.clipboard.writeText(texto).then(() => marcarCopiado(btn));
+    } else {
+      const ta = document.createElement('textarea');
+      ta.value = texto; document.body.appendChild(ta);
+      ta.select(); document.execCommand('copy'); document.body.removeChild(ta);
+      marcarCopiado(btn);
+    }
+  }
+  function marcarCopiado(btn) {
+    const original = btn.textContent;
+    btn.classList.add('copied'); btn.textContent = '✓ Copiado';
+    setTimeout(() => { btn.classList.remove('copied'); btn.textContent = original; }, 1800);
+  }
+
   // ============================================
-  // FORMULARIO DE APLICACIÓN — Envío a Google Apps Script
+  // CAPTURA PARCIAL — onblur en WhatsApp
+  // Si el cliente escribe nombre + WhatsApp pero no completa, igual queda registro
+  // ============================================
+  function enviarLeadParcial() {
+    if (leadParcialEnviado) return;
+    const form = document.getElementById('form-aplicacion');
+    const fd = new FormData(form);
+    const nombre = (fd.get('nombre') || '').trim();
+    const wa = (fd.get('whatsapp') || '').trim();
+    if (!nombre || wa.length < 7) return;
+    const data = {
+      nombre,
+      whatsapp: wa,
+      email: (fd.get('email') || '').trim(),
+      negocio: (fd.get('negocio') || '').trim(),
+      estado: 'Lead parcial',
+      producto: 'Bootcamp Claude · 6 junio 2026',
+      origen: window.location.href,
+      timestamp: new Date().toISOString()
+    };
+    fetch(APPS_SCRIPT_URL, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+      body: JSON.stringify(data)
+    }).then(() => { leadParcialEnviado = true; }).catch(() => {});
+  }
+  // El listener engancha cuando el WhatsApp pierde foco
+  document.querySelector('input[name="whatsapp"]').addEventListener('blur', enviarLeadParcial);
+
+  // ============================================
+  // FORMULARIO COMPLETO — Envío a Apps Script + selector de pago
   // ============================================
   document.getElementById('form-aplicacion').addEventListener('submit', async (e) => {
     e.preventDefault();
@@ -691,13 +1205,15 @@
       req_claude: formData.get('req_claude') ? 'Sí' : 'No',
       req_negocio: formData.get('req_negocio') ? 'Sí' : 'No',
       req_fecha: formData.get('req_fecha') ? 'Sí' : 'No',
+      aplica_bono: bonoAplica() ? 'Sí (sesión 1-a-1 de 2 horas, valor $600.000)' : 'No',
+      estado: 'Aplicación completa',
       producto: 'Bootcamp Claude · 6 junio 2026',
       origen: window.location.href,
       timestamp: new Date().toISOString()
     };
+    datosUltimoLead = data;
 
     try {
-      // Enviar a Apps Script (text/plain evita preflight CORS)
       await fetch(APPS_SCRIPT_URL, {
         method: 'POST',
         mode: 'no-cors',
@@ -705,14 +1221,15 @@
         body: JSON.stringify(data)
       });
 
-      // Mostrar éxito
-      document.getElementById('form-aplicacion').style.display = 'none';
-      document.getElementById('form-exito').style.display = 'block';
+      // Construir mensaje de WhatsApp pre-redactado para envío de comprobante
+      const nombre = data.nombre || '';
+      const wa = '573028662556';
+      const msg = `Hola Joako, completé el formulario para el Bootcamp Claude del 6 de junio. Soy ${nombre}. Acabo de pagar $997.000 por transferencia / Nequi / BRE-B. Adjunto comprobante.`;
+      document.getElementById('btn-whatsapp-comprobante').href = `https://wa.me/${wa}?text=${encodeURIComponent(msg)}`;
 
-      // Redirigir a Wompi después de 2 segundos
-      setTimeout(() => {
-        window.location.href = LINK_PAGO_WOMPI;
-      }, 2000);
+      // Pasar al selector de método de pago (sin espera de 2 segundos)
+      document.getElementById('form-aplicacion').style.display = 'none';
+      document.getElementById('form-pago').style.display = 'block';
 
     } catch (error) {
       console.error('Error:', error);
@@ -720,6 +1237,16 @@
       btn.textContent = originalText;
       document.getElementById('form-error').style.display = 'block';
     }
+  });
+
+  // ============================================
+  // PROTECCIÓN DE IMÁGENES — bloquear menú contextual
+  // (No oculta el código fuente. Es protección contra usuarios casuales.)
+  // ============================================
+  document.querySelectorAll('img').forEach(img => {
+    img.addEventListener('contextmenu', e => e.preventDefault());
+    img.addEventListener('dragstart', e => e.preventDefault());
+    img.setAttribute('draggable', 'false');
   });
 </script>
 
