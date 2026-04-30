@@ -59,7 +59,7 @@
 
   /* Sticky bottom mobile */
   .sticky-mobile { display: none; }
-  @media (max-width: 768px) { .sticky-mobile { display: block; } body { padding-bottom: 6.5rem; } }
+  @media (max-width: 768px) { .sticky-mobile { display: block; } body { padding-bottom: 5rem; } }
 
   /* WhatsApp flotante */
   .wa-float { position: fixed; bottom: 1.5rem; right: 1.5rem; z-index: 50; box-shadow: 0 4px 12px rgba(0,0,0,0.2); }
@@ -185,21 +185,22 @@
 <!-- BARRA DE URGENCIA STICKY                       -->
 <!-- EDITAR: cambia "10 cupos" según se vayan vendiendo -->
 <!-- ============================================ -->
+<!-- Banners superiores. Mobile: solo barra del bono (refuerzo de urgencia). Desktop: barra amarilla + barra del bono. -->
 <div class="sticky top-0 z-40">
-  <!-- Barra principal: amarilla, una sola línea en todos los tamaños -->
-  <div class="bg-amarillo text-black py-2 md:py-3 px-3 shadow-md">
-    <div class="max-w-6xl mx-auto flex flex-row items-center justify-center gap-3 md:gap-5 text-xs sm:text-sm md:text-base">
-      <span class="font-semibold whitespace-nowrap">⚡ <span class="hidden sm:inline">Sábado 6 de junio · Medellín · </span><span id="cupos-restantes">10 cupos</span></span>
-      <button onclick="abrirModal()" class="bg-black text-white font-bold px-3 py-1.5 sm:px-5 sm:py-2 rounded-md hover:bg-azul transition text-xs sm:text-sm whitespace-nowrap shadow-lg btn-lift flex-shrink-0">
-        🔥 <span class="hidden sm:inline">Aplicar para mi cupo</span><span class="sm:hidden">Aplicar</span>
+  <!-- Barra amarilla: solo desktop. En mobile el CTA vive en el sticky bottom -->
+  <div class="hidden md:block bg-amarillo text-black py-3 px-3 shadow-md">
+    <div class="max-w-6xl mx-auto flex flex-row items-center justify-center gap-5 text-base">
+      <span class="font-semibold whitespace-nowrap">⚡ Sábado 6 de junio · Medellín · <span id="cupos-restantes">10 cupos</span></span>
+      <button onclick="abrirModal()" class="bg-black text-white font-bold px-5 py-2 rounded-md hover:bg-azul transition text-sm whitespace-nowrap shadow-lg btn-lift flex-shrink-0">
+        🔥 Aplicar para mi cupo
       </button>
     </div>
   </div>
-  <!-- Sub-barra del bono: una sola línea, ultra compacta en mobile -->
-  <div id="bono-bar" class="bono-bar text-white py-1.5 md:py-2 px-3 shadow-md" style="display:none;">
-    <div class="max-w-6xl mx-auto flex flex-row items-center justify-center gap-2 md:gap-3 text-xs md:text-sm">
-      <span class="font-semibold whitespace-nowrap">🎁 <strong class="text-amarillo">BONO</strong><span class="hidden md:inline"> · 2h mentoría 1-a-1 conmigo</span><span class="hidden sm:inline"> · termina</span></span>
-      <span id="bono-countdown-bar" class="bg-amarillo text-black font-headline px-2 py-0.5 md:px-3 md:py-1 rounded tabular-nums tracking-wider text-xs md:text-base whitespace-nowrap">--:--:--</span>
+  <!-- Barra del bono: visible en mobile y desktop. Comunica el VALOR (2h mentoría 1-a-1) en una sola línea. Se oculta sola cuando expira el contador. -->
+  <div id="bono-bar" class="bono-bar text-white py-2 px-3 shadow-md" style="display:none;">
+    <div class="max-w-6xl mx-auto flex flex-row items-center justify-center gap-2 md:gap-3 text-xs md:text-sm flex-wrap">
+      <span class="font-semibold text-center">🎁 <strong class="text-amarillo">+2h mentoría 1-a-1 conmigo</strong> si reservas en</span>
+      <span id="bono-countdown-bar" class="bg-amarillo text-black font-headline px-2 py-0.5 md:px-3 md:py-1 rounded tabular-nums tracking-wider text-sm md:text-base whitespace-nowrap">--:--:--</span>
     </div>
   </div>
 </div>
@@ -207,71 +208,45 @@
 <!-- ============================================ -->
 <!-- HERO                                          -->
 <!-- ============================================ -->
-<section class="bg-white py-8 md:py-20 px-4">
-  <div class="max-w-6xl mx-auto grid md:grid-cols-1 gap-10 items-center">
-    <div class="max-w-3xl mx-auto">
-      <!-- LOGO HERO con zoom CSS para verse rectangular y más grande -->
-      <div class="mb-5 md:mb-8 overflow-hidden relative" style="height: 80px; width: 240px;">
-        <img src="imagenes/logo-negro-amarillo-blanco.png" alt="Joako Estratega" fetchpriority="high" decoding="async" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(1.8); max-width: none; height: 100%;">
-      </div>
+<section class="bg-white py-7 md:py-16 px-4">
+  <div class="max-w-3xl mx-auto">
+    <!-- H1 con narrativa diferencial: empleados IA, no "marketing con IA" genérico -->
+    <h1 class="font-headline text-3xl sm:text-4xl md:text-6xl leading-tight mb-4 md:mb-5">
+      Tu equipo de <span class="text-azul">empleados IA</span>,<br>instalado en <span class="text-azul">1 día</span>.
+    </h1>
 
-      <p class="font-secondary text-azul text-lg md:text-2xl mb-2 md:mb-3">BOOTCAMP CLAUDE · MARKETING CON IA</p>
-      <h1 class="font-headline text-3xl sm:text-4xl md:text-6xl leading-tight mb-4 md:mb-6">
-        Tu marketing entero, <br><span class="text-azul">operando con IA.</span><br>En un solo día.
-      </h1>
-      <p class="text-base md:text-xl mb-6 md:mb-8 text-black opacity-60">
-        Sales con Claude Code instalado en tu computador, tus agentes corriendo y tu primera parrilla de contenido saliendo en automático. El mismo sistema que opero yo y mis clientes de agencia.
-      </p>
-      <div class="flex flex-col sm:flex-row gap-4">
-        <button onclick="abrirModal()" class="bg-azul text-white font-bold py-4 px-8 rounded-lg text-lg hover:opacity-90 transition btn-lift pulse-azul">
-          Aplicar para mi cupo
-        </button>
-        <a href="#que-te-llevas" class="border-2 border-black text-black font-bold py-4 px-8 rounded-lg text-lg text-center hover:bg-black hover:text-white transition btn-lift">
-          Ver qué te llevas
-        </a>
-      </div>
-      <p class="mt-4 text-sm opacity-60">📅 Sábado 6 de junio · 🕘 9:00 am a 4:00 pm · 📍 Medellín</p>
+    <!-- Sub: ataca dolor de mensualidades + cierra la promesa -->
+    <p class="text-base md:text-xl mb-5 md:mb-7 text-black opacity-75 leading-snug">
+      Operan tu marketing entero por ti. <strong>Pago único, sin mensualidades.</strong> Te enseño a crear los empleados que necesites cuando los necesites.
+    </p>
 
-      <!-- BANDA DE PRECIO EN HERO -->
-      <div class="mt-6 inline-flex items-center gap-3 bg-amarillo text-black px-5 py-3 rounded-lg flex-wrap shadow-lg">
-        <span class="font-headline text-2xl">$997.000 COP</span>
-        <span class="bg-black text-amarillo text-xs font-bold px-2 py-1 rounded">PRIMER BOOTCAMP</span>
-      </div>
-    </div>
+    <!-- CTA principal con escasez + precio integrado -->
+    <button onclick="abrirModal()" class="w-full sm:w-auto bg-azul text-white font-bold py-4 px-8 rounded-lg text-base md:text-lg hover:opacity-90 transition btn-lift pulse-azul">
+      Reservar uno de los 10 cupos · $997.000
+    </button>
 
-    <!-- VIDEO DEL HERO oculto temporalmente. Para activarlo: borra "hidden" abajo, cambia md:grid-cols-1 por md:grid-cols-2 arriba, y reemplaza VIDEO_ID -->
-    <div class="hidden">
-      <div class="aspect-video bg-black rounded-lg overflow-hidden shadow-xl">
-        <iframe class="w-full h-full" src="https://www.youtube.com/embed/VIDEO_ID?autoplay=0&rel=0" title="Bootcamp Claude" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-      </div>
+    <!-- 4 condiciones MPV en bullets compactos. Una sola línea cada uno. -->
+    <ul class="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-2 mt-6 text-sm md:text-base">
+      <li class="flex gap-2"><span class="text-amarillo font-bold">✓</span> <span><strong>Aplicado a TU negocio</strong> en vivo, no teoría</span></li>
+      <li class="flex gap-2"><span class="text-amarillo font-bold">✓</span> <span><strong>Sin código.</strong> Si sabes escribir un correo, puedes operarlos</span></li>
+      <li class="flex gap-2"><span class="text-amarillo font-bold">✓</span> <span><strong>En 1 día</strong> sales con todo corriendo</span></li>
+      <li class="flex gap-2"><span class="text-amarillo font-bold">✓</span> <span><strong>Garantía:</strong> sigo contigo hasta que opere</span></li>
+    </ul>
+
+    <!-- Mini info logística + trust signal -->
+    <div class="mt-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 text-xs md:text-sm opacity-70">
+      <span>📅 Sábado 6 de junio · 9:00 am - 4:00 pm · Medellín</span>
+      <span>+500K USD gestionados · 4 países</span>
     </div>
   </div>
 </section>
 
-<!-- ============================================ -->
-<!-- BARRA DE CREDIBILIDAD                          -->
-<!-- ============================================ -->
-<section class="bg-black text-white py-8 px-4">
-  <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
-    <div>
-      <p class="font-headline text-3xl text-amarillo">+500K USD</p>
-      <p class="text-sm opacity-60">Gestionados en pauta</p>
-    </div>
-    <div>
-      <p class="font-headline text-3xl text-amarillo">5</p>
-      <p class="text-sm opacity-60">Marcas activas hoy</p>
-    </div>
-    <div>
-      <p class="font-headline text-3xl text-amarillo">4 países</p>
-      <p class="text-sm opacity-60">Colombia, México, Ecuador, USA</p>
-    </div>
-  </div>
-</section>
+<!-- Barra de credibilidad eliminada: la info se integró en una línea del hero para no duplicar. La sección "Quién soy" más abajo refuerza credenciales con detalle. -->
 
 <!-- ============================================ -->
 <!-- ESPEJO DEL DOLOR                              -->
 <!-- ============================================ -->
-<section class="py-16 md:py-24 px-4 bg-white">
+<section class="py-12 md:py-20 px-4 bg-gray-50">
   <div class="max-w-4xl mx-auto">
     <h2 class="font-headline text-3xl md:text-5xl mb-8 text-center leading-tight">
       Llevas meses oyendo de IA y sigues<br>haciendo todo a mano.
@@ -291,13 +266,8 @@
 <!-- ============================================ -->
 <!-- REVELACIÓN - Qué es Claude Code                -->
 <!-- ============================================ -->
-<section class="bg-azul text-white py-16 md:py-24 px-4">
+<section class="bg-azul text-white py-12 md:py-20 px-4">
   <div class="max-w-5xl mx-auto">
-    <!-- LOGO sección Claude con zoom CSS, fondo azul del logo se mezcla con fondo azul de la sección -->
-    <div class="mx-auto mb-10 overflow-hidden relative" style="height: 75px; width: 220px;">
-      <img src="imagenes/logo-blanco-amarillo-fondo-azul.png" alt="Joako Estratega" loading="lazy" decoding="async" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(1.8); max-width: none; height: 100%;">
-    </div>
-
     <h2 class="font-headline text-3xl md:text-5xl mb-6 text-center leading-tight">
       Claude Code no es ChatGPT.<br><span class="text-amarillo">Y eso lo cambia todo.</span>
     </h2>
@@ -320,7 +290,7 @@
 <!-- ============================================ -->
 <!-- TU EQUIPO DE MARKETING INTERNO                -->
 <!-- ============================================ -->
-<section class="bg-white py-16 md:py-24 px-4">
+<section class="bg-white py-12 md:py-20 px-4">
   <div class="max-w-6xl mx-auto">
     <p class="font-secondary text-azul text-xl mb-2 text-center">LO QUE INSTALAS EL SÁBADO</p>
     <h2 class="font-headline text-3xl md:text-5xl mb-6 text-center leading-tight">
@@ -429,7 +399,7 @@
 <!-- ============================================ -->
 <!-- EL MÉTODO QUE VAS A APLICAR — Diagrama MPV    -->
 <!-- ============================================ -->
-<section class="bg-black text-white py-16 md:py-24 px-4">
+<section class="bg-black text-white py-12 md:py-20 px-4">
   <div class="max-w-5xl mx-auto">
     <p class="font-secondary text-amarillo text-xl mb-2 text-center">EL MÉTODO QUE TU EQUIPO VA A OPERAR</p>
     <h2 class="font-headline text-3xl md:text-5xl mb-6 text-center leading-tight">
@@ -504,7 +474,7 @@
 <!-- ============================================ -->
 <!-- BULLETS QUE MATAN OBJECIONES                  -->
 <!-- ============================================ -->
-<section class="py-16 md:py-24 px-4 bg-white">
+<section class="py-12 md:py-20 px-4 bg-white">
   <div class="max-w-5xl mx-auto">
     <h2 class="font-headline text-3xl md:text-5xl mb-12 text-center leading-tight">
       Antes de seguir,<br>esto seguro lo estás pensando
@@ -546,7 +516,7 @@
 <!-- ============================================ -->
 <!-- QUÉ TE LLEVAS                                 -->
 <!-- ============================================ -->
-<section id="que-te-llevas" class="bg-black text-white py-16 md:py-24 px-4">
+<section id="que-te-llevas" class="bg-black text-white py-12 md:py-20 px-4">
   <div class="max-w-5xl mx-auto">
     <h2 class="font-headline text-3xl md:text-5xl mb-12 text-center leading-tight">
       Al final del día,<br><span class="text-amarillo">tu computador queda con esto operando</span>
@@ -579,7 +549,7 @@
 <!-- ============================================ -->
 <!-- QUIÉN SOY                                     -->
 <!-- ============================================ -->
-<section class="py-16 md:py-24 px-4 bg-white">
+<section class="py-12 md:py-20 px-4 bg-white">
   <div class="max-w-5xl mx-auto grid md:grid-cols-2 gap-12 items-center">
     <div>
       <img src="imagenes/joako-effi.png" alt="Joako en tarima de Feria EFFIX" loading="lazy" decoding="async" class="w-full rounded-lg shadow-xl">
@@ -606,7 +576,7 @@
 <!-- ============================================ -->
 <!-- TEMARIO                                       -->
 <!-- ============================================ -->
-<section class="bg-amarillo py-16 md:py-24 px-4">
+<section class="bg-amarillo py-12 md:py-20 px-4">
   <div class="max-w-4xl mx-auto">
     <p class="font-secondary text-black text-xl mb-2 text-center">EL DÍA HORA POR HORA</p>
     <h2 class="font-headline text-3xl md:text-5xl mb-12 text-center leading-tight">Temario del bootcamp</h2>
@@ -630,7 +600,7 @@
 <!-- ============================================ -->
 <!-- PARA QUIÉN ES / NO ES                         -->
 <!-- ============================================ -->
-<section class="py-16 md:py-24 px-4 bg-white">
+<section class="py-12 md:py-20 px-4 bg-white">
   <div class="max-w-5xl mx-auto">
     <h2 class="font-headline text-3xl md:text-5xl mb-12 text-center leading-tight">¿Es este bootcamp para ti?</h2>
     <div class="grid md:grid-cols-2 gap-8">
@@ -659,7 +629,7 @@
 <!-- ============================================ -->
 <!-- PRE-REQUISITOS                                -->
 <!-- ============================================ -->
-<section class="bg-gray-100 py-16 md:py-24 px-4">
+<section class="bg-gray-100 py-12 md:py-20 px-4">
   <div class="max-w-4xl mx-auto">
     <p class="font-secondary text-azul text-xl mb-2 text-center">QUÉ NECESITAS TRAER</p>
     <h2 class="font-headline text-3xl md:text-5xl mb-10 text-center leading-tight">Pre-requisitos técnicos</h2>
@@ -676,7 +646,7 @@
 <!-- ============================================ -->
 <!-- LOGÍSTICA                                     -->
 <!-- ============================================ -->
-<section class="bg-black text-white py-16 md:py-24 px-4">
+<section class="bg-black text-white py-12 md:py-20 px-4">
   <div class="max-w-5xl mx-auto">
     <h2 class="font-headline text-3xl md:text-5xl mb-12 text-center leading-tight">
       Logística <span class="text-amarillo">del día</span>
@@ -714,7 +684,7 @@
 <!-- ============================================ -->
 <!-- INVERSIÓN + GARANTÍA + CTA                    -->
 <!-- ============================================ -->
-<section id="cta-aplicar" class="bg-amarillo py-16 md:py-24 px-4">
+<section id="cta-aplicar" class="bg-amarillo py-12 md:py-20 px-4">
   <div class="max-w-3xl mx-auto text-center">
 
     <!-- COMPARATIVA DE PRECIO -->
@@ -783,7 +753,7 @@
 <!-- ============================================ -->
 <!-- FAQ                                           -->
 <!-- ============================================ -->
-<section class="py-16 md:py-24 px-4 bg-white">
+<section class="py-12 md:py-20 px-4 bg-white">
   <div class="max-w-3xl mx-auto">
     <h2 class="font-headline text-3xl md:text-5xl mb-12 text-center leading-tight">Preguntas frecuentes</h2>
     <div>
@@ -868,10 +838,9 @@
 <!-- ============================================ -->
 <!-- STICKY BOTTOM MÓVIL                           -->
 <!-- ============================================ -->
-<div class="sticky-mobile fixed bottom-0 left-0 right-0 bg-azul text-white p-2.5 z-40 shadow-lg">
-  <button onclick="abrirModal()" class="w-full bg-amarillo text-black font-bold py-3 rounded-lg leading-tight">
-    <span class="block text-base">Aplicar para mi cupo · $997.000</span>
-    <span id="sticky-bono-line" class="block text-xs font-semibold opacity-90 mt-0.5" style="display:none;">🎁 Incluye 2h mentoría 1-a-1 si reservas en <span id="sticky-bono-countdown">--:--:--</span></span>
+<div class="sticky-mobile fixed bottom-0 left-0 right-0 bg-azul text-white p-3 z-40 shadow-lg">
+  <button onclick="abrirModal()" class="w-full bg-amarillo text-black font-bold py-3 rounded-lg text-base">
+    Reservar mi cupo · $997.000 COP
   </button>
 </div>
 
@@ -1082,18 +1051,14 @@
     const display = document.getElementById('bono-countdown');
     const bar = document.getElementById('bono-bar');
     const barDisplay = document.getElementById('bono-countdown-bar');
-    const stickyLine = document.getElementById('sticky-bono-line');
-    const stickyDisplay = document.getElementById('sticky-bono-countdown');
     const restante = BONO_DURACION_MS - (Date.now() - inicioBono());
     if (restante <= 0) {
       if (card) card.style.display = 'none';
       if (bar) bar.style.display = 'none';
-      if (stickyLine) stickyLine.style.display = 'none';
       return;
     }
     if (card) card.style.display = 'block';
     if (bar) bar.style.display = 'block';
-    if (stickyLine) stickyLine.style.display = 'block';
     const totalSec = Math.floor(restante / 1000);
     const h = String(Math.floor(totalSec / 3600)).padStart(2, '0');
     const m = String(Math.floor((totalSec % 3600) / 60)).padStart(2, '0');
@@ -1101,7 +1066,6 @@
     const formato = `${h}:${m}:${s}`;
     if (display) display.textContent = formato;
     if (barDisplay) barDisplay.textContent = formato;
-    if (stickyDisplay) stickyDisplay.textContent = formato;
   }
 
   inicioBono();
