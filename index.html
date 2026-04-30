@@ -109,41 +109,38 @@
 </div>
 
 <!-- ============================================ -->
-<!-- HERO                                          -->
+<!-- HERO MPV-driven                               -->
 <!-- ============================================ -->
-<section class="px-4 pt-12 md:pt-20 pb-16 md:pb-24">
-  <div class="max-w-5xl mx-auto text-center">
+<section class="px-4 pt-8 md:pt-16 pb-12 md:pb-20">
+  <div class="max-w-3xl mx-auto">
 
-    <!-- LOGO -->
-    <div class="mx-auto mb-10 overflow-hidden relative" style="height: 80px; width: 240px;">
-      <img src="bootcamp-claude/imagenes/logo-blanco-amarillo-fondo-negro.png" alt="Joako Estratega" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(1.8); max-width: none; height: 100%;">
-    </div>
-
-    <p class="font-secondary text-dorado text-xl md:text-2xl mb-5 tracking-widest">JOAQUÍN ROJAS · ESTRATEGA</p>
-
-    <h1 class="font-headline text-4xl md:text-7xl leading-none mb-6">
-      Construyo<br>sistemas<br>que <span class="text-dorado">venden.</span>
+    <!-- H1: ataca dolor + promesa transformación -->
+    <h1 class="font-headline text-3xl sm:text-4xl md:text-6xl leading-tight mb-4 md:mb-5">
+      Tu negocio ya factura.<br>Falta el <span class="text-dorado">sistema que venda</span> sin ti.
     </h1>
 
-    <div class="w-24 h-1 bg-dorado mx-auto mb-8"></div>
-
-    <p class="text-lg md:text-2xl mb-3 text-gray-200 max-w-3xl mx-auto leading-relaxed">
-      El 80% de cualquier venta por internet está en el <span class="text-dorado font-bold">Mensaje Principal de Venta</span>.
-    </p>
-    <p class="text-base md:text-lg mb-12 text-gray-400 max-w-2xl mx-auto leading-relaxed">
-      Soy ingeniero mecatrónico especialista en lean manufacturing. Aplico ese pensamiento al marketing digital. Estratega de la Feria EFFIX. Trabajo con marcas que venden todos los días en Colombia, México, Ecuador y USA.
+    <!-- Subtítulo: posiciona a Joako sin opacar al visitante + ofrece entrada gratis -->
+    <p class="text-base md:text-xl mb-6 md:mb-7 text-gray-200 leading-snug">
+      Soy Joaquín Rojas. Construyo sistemas de ventas por internet con el <strong class="text-dorado">Método MPV</strong>. Empieza gratis: tráeme tu negocio al viernes en vivo y te digo qué ajustar primero.
     </p>
 
-    <!-- DOBLE CTA: principal comunidad + secundario bootcamp -->
-    <div class="flex flex-col sm:flex-row gap-4 justify-center items-center mb-6">
-      <a href="comunidad/" class="bg-dorado text-black font-bold py-4 px-8 rounded-lg hover:bg-yellow-400 transition text-lg btn-lift pulse-cta w-full sm:w-auto">
-        Únete gratis a la comunidad
-      </a>
-      <a href="bootcamp-claude/" class="bg-transparent border-2 border-white text-white font-bold py-4 px-8 rounded-lg hover:bg-white hover:text-black transition text-lg btn-lift w-full sm:w-auto">
-        Ver Bootcamp Claude →
-      </a>
-    </div>
-    <p class="text-sm text-gray-500">Sin tarjeta. Sin compromiso. Solo conocimiento real.</p>
+    <!-- CTA principal único: comunidad gratis (lead magnet) -->
+    <a href="comunidad/" class="block sm:inline-block bg-dorado text-black font-bold py-4 px-8 rounded-lg hover:bg-yellow-400 transition text-base md:text-lg btn-lift pulse-cta text-center">
+      Quiero entrar a la comunidad gratis
+    </a>
+
+    <!-- 4 condiciones MPV en bullets compactos -->
+    <ul class="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-2 mt-6 text-sm md:text-base text-gray-200">
+      <li class="flex gap-2"><span class="text-dorado font-bold">✓</span> <span>Para dueños <strong>cansados de improvisar</strong> marketing</span></li>
+      <li class="flex gap-2"><span class="text-dorado font-bold">✓</span> <span><strong>Sin 20 herramientas.</strong> Solo el orden correcto</span></li>
+      <li class="flex gap-2"><span class="text-dorado font-bold">✓</span> <span><strong>Esta semana</strong> ya tienes el primer ajuste útil</span></li>
+      <li class="flex gap-2"><span class="text-dorado font-bold">✓</span> <span><strong>100% gratis.</strong> Sales cuando quieras</span></li>
+    </ul>
+
+    <!-- Trust signal mínimo -->
+    <p class="mt-6 text-xs md:text-sm text-gray-400">
+      Estratega oficial Feria EFFIX · +500K USD operados · Colombia, México, Ecuador y USA
+    </p>
 
   </div>
 </section>
@@ -377,42 +374,7 @@
   </div>
 </section>
 
-<!-- ============================================ -->
-<!-- TESTIMONIOS                                    -->
-<!-- ============================================ -->
-<section class="px-4 py-16 md:py-24">
-  <div class="max-w-6xl mx-auto">
-    <p class="font-secondary text-dorado text-sm md:text-base mb-3 tracking-widest text-center">LO QUE DICEN LOS QUE YA APLICARON</p>
-    <h2 class="font-headline text-3xl md:text-5xl text-center mb-12 leading-tight">
-      Esto no es teoría.<br>Es <span class="text-dorado">resultado real.</span>
-    </h2>
-
-    <!-- GRID DE TESTIMONIOS — IMÁGENES DE WHATSAPP/CAPTURAS -->
-    <!-- IMPORTANTE: subir las imágenes a /imagenes/testimonios/ con nombres test-1.jpg, test-2.jpg, etc -->
-    <div class="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
-      <div class="bg-white rounded-xl overflow-hidden shadow-2xl border-2 border-white/20">
-        <img src="imagenes/testimonios/test-1.jpg" alt="Testimonio 1" class="w-full h-auto block" onerror="this.parentElement.classList.add('hidden')">
-      </div>
-      <div class="bg-white rounded-xl overflow-hidden shadow-2xl border-2 border-white/20">
-        <img src="imagenes/testimonios/test-2.jpg" alt="Testimonio 2" class="w-full h-auto block" onerror="this.parentElement.classList.add('hidden')">
-      </div>
-      <div class="bg-white rounded-xl overflow-hidden shadow-2xl border-2 border-white/20">
-        <img src="imagenes/testimonios/test-3.jpg" alt="Testimonio 3" class="w-full h-auto block" onerror="this.parentElement.classList.add('hidden')">
-      </div>
-      <div class="bg-white rounded-xl overflow-hidden shadow-2xl border-2 border-white/20">
-        <img src="imagenes/testimonios/test-4.jpg" alt="Testimonio 4" class="w-full h-auto block" onerror="this.parentElement.classList.add('hidden')">
-      </div>
-      <div class="bg-white rounded-xl overflow-hidden shadow-2xl border-2 border-white/20">
-        <img src="imagenes/testimonios/test-5.jpg" alt="Testimonio 5" class="w-full h-auto block" onerror="this.parentElement.classList.add('hidden')">
-      </div>
-      <div class="bg-white rounded-xl overflow-hidden shadow-2xl border-2 border-white/20">
-        <img src="imagenes/testimonios/test-6.jpg" alt="Testimonio 6" class="w-full h-auto block" onerror="this.parentElement.classList.add('hidden')">
-      </div>
-    </div>
-
-    <p class="text-center text-xs text-gray-500 mt-6">Resultados reales de clientes y estudiantes. Los nombres y datos sensibles están protegidos.</p>
-  </div>
-</section>
+<!-- Sección de testimonios eliminada hasta tener imágenes reales. Cuando las tengas, súbelas a `imagenes/testimonios/test-1.jpg` ... `test-6.jpg` y restauramos esta sección. -->
 
 <!-- ============================================ -->
 <!-- CTA FINAL                                      -->

@@ -40,6 +40,8 @@ function doPost(e) {
     const data = JSON.parse(e.postData.contents);
     const producto = data.producto || 'default';
     const nombreHoja = HOJAS_POR_PRODUCTO[producto] || HOJAS_POR_PRODUCTO['default'];
+    const estadoLead = data.estado || 'Aplicó';
+    const esParcial = estadoLead === 'Lead parcial';
 
     const ss = SpreadsheetApp.openById(SHEET_ID);
     let sheet = ss.getSheetByName(nombreHoja);
@@ -47,7 +49,7 @@ function doPost(e) {
     // Si la hoja no existe, la crea con headers dinámicos según el payload
     if (!sheet) {
       sheet = ss.insertSheet(nombreHoja);
-      const headers = ['Fecha', ...Object.keys(data), 'Estado'];
+      const headers = ['Fecha', ...Object.keys(data).filter(k => k !== 'estado'), 'Estado'];
       sheet.appendRow(headers);
       sheet.getRange(1, 1, 1, headers.length)
         .setBackground('#21209C')
@@ -61,13 +63,13 @@ function doPost(e) {
     const headers = sheet.getRange(1, 1, 1, lastCol).getValues()[0];
     const fila = headers.map(header => {
       if (header === 'Fecha') return new Date();
-      if (header === 'Estado') return 'Aplicó';
+      if (header === 'Estado') return estadoLead;
       return data[header] !== undefined ? data[header] : '';
     });
 
     // Si llegan campos nuevos que no están en headers, los agregamos al final
     const headersSet = new Set(headers);
-    const camposNuevos = Object.keys(data).filter(k => !headersSet.has(k));
+    const camposNuevos = Object.keys(data).filter(k => k !== 'estado' && !headersSet.has(k));
     if (camposNuevos.length > 0) {
       camposNuevos.forEach(campo => {
         sheet.getRange(1, sheet.getLastColumn() + 1).setValue(campo)
@@ -78,10 +80,18 @@ function doPost(e) {
 
     sheet.appendRow(fila);
 
-    // Email de notificación
-    const asunto = `🔥 Nuevo lead: ${producto}`;
-    const cuerpo = construirCuerpoEmail(data, producto);
-    GmailApp.sendEmail(EMAIL_NOTIFICACION, asunto, cuerpo);
+    // Pintar la fila si es lead parcial (amarillo claro) para distinguirla en la hoja
+    if (esParcial) {
+      const lastRow = sheet.getLastRow();
+      sheet.getRange(lastRow, 1, 1, sheet.getLastColumn()).setBackground('#FFF4CC');
+    }
+
+    // Email solo para leads completos. Los parciales se acumulan en la hoja sin spamear.
+    if (!esParcial) {
+      const asunto = `🔥 Nuevo lead: ${producto}`;
+      const cuerpo = construirCuerpoEmail(data, producto);
+      GmailApp.sendEmail(EMAIL_NOTIFICACION, asunto, cuerpo);
+    }
 
     return ContentService
       .createTextOutput(JSON.stringify({ success: true, message: 'Lead guardado en ' + nombreHoja }))

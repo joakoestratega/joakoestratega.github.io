@@ -893,8 +893,22 @@
         </label>
       </div>
 
+      <!-- Código de descuento (opcional, colapsado por defecto) -->
+      <div class="border-t border-gray-200 pt-3 mt-2">
+        <button type="button" id="toggle-codigo" onclick="toggleCodigoDescuento()" class="text-xs text-azul font-semibold hover:underline">
+          ¿Tienes un código de descuento?
+        </button>
+        <div id="codigo-wrapper" style="display:none;" class="mt-2">
+          <div class="flex gap-2">
+            <input type="text" id="codigo-descuento" placeholder="Ingresa tu código" class="flex-1 border border-gray-300 rounded-md px-3 py-2 text-sm uppercase tracking-wider">
+            <button type="button" id="aplicar-codigo-btn" onclick="aplicarCodigoDescuento()" class="bg-azul text-white font-bold px-4 py-2 rounded-md text-sm whitespace-nowrap">Aplicar</button>
+          </div>
+          <p id="codigo-mensaje" style="display:none;" class="mt-2 text-xs"></p>
+        </div>
+      </div>
+
       <button type="submit" id="btn-submit" class="w-full bg-azul text-white font-bold py-4 rounded-lg text-lg hover:opacity-90 btn-lift pulse-azul mt-4">
-        Continuar al pago
+        Continuar al pago · <span id="btn-submit-precio">$997.000</span>
       </button>
 
       <p class="text-xs text-center opacity-60">En el siguiente paso eliges cómo prefieres pagar.</p>
@@ -905,7 +919,13 @@
       <div class="text-center py-3 mb-4">
         <div class="text-4xl mb-2">✅</div>
         <h4 class="font-headline text-xl mb-1">Datos registrados</h4>
-        <p class="text-sm opacity-80">Ahora elige cómo pagar tu cupo.</p>
+        <p class="text-sm opacity-80">Ahora elige cómo pagar tu cupo · <span id="pago-precio" class="font-bold">$997.000 COP</span></p>
+      </div>
+
+      <!-- Aviso solo visible cuando hay descuento aplicado -->
+      <div id="descuento-aviso" style="display:none;" class="bg-green-50 border-2 border-green-500 rounded-lg p-3 mb-4 text-xs">
+        <p class="font-bold text-green-700 mb-1">✓ Descuento aplicado</p>
+        <p class="text-green-700">El precio con descuento solo aplica para pago por transferencia, Nequi o BRE-B. Por eso esta vez no está disponible la opción de tarjeta.</p>
       </div>
 
       <div class="space-y-3">
@@ -918,7 +938,7 @@
           <span class="text-xl text-azul">›</span>
         </button>
 
-        <button type="button" onclick="irAWompi()" class="pay-option w-full bg-white rounded-lg p-4 text-left flex items-center gap-3">
+        <button type="button" id="btn-pago-tarjeta" onclick="irAWompi()" class="pay-option w-full bg-white rounded-lg p-4 text-left flex items-center gap-3">
           <span class="text-3xl">💳</span>
           <div class="flex-1">
             <p class="font-headline text-base">Pagar con tarjeta de crédito o débito</p>
@@ -934,7 +954,7 @@
     <!-- Paso 3: Pago directo con datos (oculto por default) -->
     <div id="form-pago-directo" style="display:none;">
       <button type="button" onclick="volverASelector()" class="text-sm text-azul mb-3 flex items-center gap-1 hover:underline">‹ Volver</button>
-      <h4 class="font-headline text-xl mb-1">Pago directo · $997.000 COP</h4>
+      <h4 class="font-headline text-xl mb-1">Pago directo · <span id="pago-directo-precio">$997.000 COP</span></h4>
       <p class="text-sm opacity-80 mb-4">Transfiere desde tu app bancaria y envíanos el comprobante por WhatsApp para confirmar tu cupo.</p>
 
       <!-- Opción A: QR Bancolombia (escaneable desde cualquier app de banco con BRE-B) -->
@@ -1026,6 +1046,62 @@
   let datosUltimoLead = null;
 
   // ============================================
+  // CÓDIGO DE DESCUENTO
+  // ============================================
+  const PRECIO_BASE = 997000;
+  const CODIGOS_DESCUENTO = {
+    'SOYESTRATEGA': { porcentaje: 20, label: 'SOYESTRATEGA · 20% off' }
+  };
+  let codigoAplicado = null; // null o objeto del código
+
+  function formatearPrecio(valor) {
+    return '$' + valor.toLocaleString('es-CO');
+  }
+
+  function precioFinal() {
+    if (!codigoAplicado) return PRECIO_BASE;
+    return Math.round(PRECIO_BASE * (1 - codigoAplicado.porcentaje / 100));
+  }
+
+  function toggleCodigoDescuento() {
+    const wrapper = document.getElementById('codigo-wrapper');
+    const toggle = document.getElementById('toggle-codigo');
+    if (wrapper.style.display === 'none') {
+      wrapper.style.display = 'block';
+      toggle.textContent = 'Ocultar campo de código';
+    } else {
+      wrapper.style.display = 'none';
+      toggle.textContent = '¿Tienes un código de descuento?';
+    }
+  }
+
+  function aplicarCodigoDescuento() {
+    const input = document.getElementById('codigo-descuento');
+    const mensaje = document.getElementById('codigo-mensaje');
+    const codigo = (input.value || '').trim().toUpperCase();
+    mensaje.style.display = 'block';
+
+    if (!codigo) {
+      mensaje.innerHTML = '<span class="text-red-600 font-bold">Escribe un código primero.</span>';
+      return;
+    }
+
+    if (CODIGOS_DESCUENTO[codigo]) {
+      codigoAplicado = { codigo, ...CODIGOS_DESCUENTO[codigo] };
+      const final = precioFinal();
+      mensaje.innerHTML = '<span class="text-green-700 font-bold">✓ Descuento del ' + codigoAplicado.porcentaje + '% aplicado.</span> Precio final: <strong>' + formatearPrecio(final) + ' COP</strong>. Solo aplica con pago por transferencia, Nequi o BRE-B.';
+      input.disabled = true;
+      input.classList.add('bg-green-50', 'border-green-500');
+      document.getElementById('aplicar-codigo-btn').style.display = 'none';
+      // Actualizar precio en botón submit
+      const precioSpan = document.getElementById('btn-submit-precio');
+      if (precioSpan) precioSpan.innerHTML = '<s class="opacity-60">' + formatearPrecio(PRECIO_BASE) + '</s> ' + formatearPrecio(final);
+    } else {
+      mensaje.innerHTML = '<span class="text-red-600 font-bold">Código no válido.</span> Verifica que esté bien escrito.';
+    }
+  }
+
+  // ============================================
   // BONO POR DECISIÓN RÁPIDA — Conteo regresivo de 48h
   // El timestamp de inicio se guarda en localStorage en la primera visita
   // y persiste entre refrescos y sesiones del mismo navegador.
@@ -1080,6 +1156,7 @@
     document.getElementById('form-pago').style.display = 'none';
     document.getElementById('form-pago-directo').style.display = 'none';
     document.getElementById('form-error').style.display = 'none';
+    // Si el cliente ya aplicó código, lo respetamos. No reseteamos.
   }
   function cerrarModal() {
     document.getElementById('modal').classList.remove('active');
@@ -1098,7 +1175,30 @@
     document.getElementById('form-pago').style.display = 'block';
   }
   function irAWompi() {
+    // Wompi solo aplica con precio base. Si hay descuento, esta función no debería llamarse.
+    if (codigoAplicado) return;
     window.location.href = LINK_PAGO_WOMPI;
+  }
+
+  // Configurar el paso 2 (selector) según haya o no descuento
+  function configurarPasoPago() {
+    const final = precioFinal();
+    const precioSelector = document.getElementById('pago-precio');
+    const precioDirecto = document.getElementById('pago-directo-precio');
+    const tarjetaBtn = document.getElementById('btn-pago-tarjeta');
+    const aviso = document.getElementById('descuento-aviso');
+
+    if (codigoAplicado) {
+      if (precioSelector) precioSelector.innerHTML = '<s class="opacity-60">' + formatearPrecio(PRECIO_BASE) + '</s> ' + formatearPrecio(final) + ' COP';
+      if (precioDirecto) precioDirecto.innerHTML = '<s class="opacity-60 text-base">' + formatearPrecio(PRECIO_BASE) + '</s> ' + formatearPrecio(final) + ' COP';
+      if (tarjetaBtn) tarjetaBtn.style.display = 'none';
+      if (aviso) aviso.style.display = 'block';
+    } else {
+      if (precioSelector) precioSelector.textContent = formatearPrecio(PRECIO_BASE) + ' COP';
+      if (precioDirecto) precioDirecto.textContent = formatearPrecio(PRECIO_BASE) + ' COP';
+      if (tarjetaBtn) tarjetaBtn.style.display = 'flex';
+      if (aviso) aviso.style.display = 'none';
+    }
   }
 
   // Copiar texto al portapapeles + feedback visual en el botón
@@ -1160,6 +1260,7 @@
     btn.textContent = 'Enviando...';
 
     const formData = new FormData(e.target);
+    const final = precioFinal();
     const data = {
       nombre: formData.get('nombre'),
       whatsapp: formData.get('whatsapp'),
@@ -1170,6 +1271,9 @@
       req_negocio: formData.get('req_negocio') ? 'Sí' : 'No',
       req_fecha: formData.get('req_fecha') ? 'Sí' : 'No',
       aplica_bono: bonoAplica() ? 'Sí (sesión 1-a-1 de 2 horas, valor $600.000)' : 'No',
+      codigo_descuento: codigoAplicado ? codigoAplicado.codigo : '',
+      descuento_porcentaje: codigoAplicado ? codigoAplicado.porcentaje + '%' : '0%',
+      precio_final: formatearPrecio(final),
       estado: 'Aplicación completa',
       producto: 'Bootcamp Claude · 6 junio 2026',
       origen: window.location.href,
@@ -1188,10 +1292,13 @@
       // Construir mensaje de WhatsApp pre-redactado para envío de comprobante
       const nombre = data.nombre || '';
       const wa = '573028662556';
-      const msg = `Hola Joako, completé el formulario para el Bootcamp Claude del 6 de junio. Soy ${nombre}. Acabo de pagar $997.000 por transferencia / Nequi / BRE-B. Adjunto comprobante.`;
+      const montoTexto = formatearPrecio(precioFinal());
+      const codigoTexto = codigoAplicado ? ' (con código ' + codigoAplicado.codigo + ', ' + codigoAplicado.porcentaje + '% off)' : '';
+      const msg = `Hola Joako, completé el formulario para el Bootcamp Claude del 6 de junio. Soy ${nombre}. Acabo de pagar ${montoTexto}${codigoTexto} por transferencia / Nequi / BRE-B. Adjunto comprobante.`;
       document.getElementById('btn-whatsapp-comprobante').href = `https://wa.me/${wa}?text=${encodeURIComponent(msg)}`;
 
-      // Pasar al selector de método de pago (sin espera de 2 segundos)
+      // Configurar selector según haya descuento, mostrar paso 2 sin espera
+      configurarPasoPago();
       document.getElementById('form-aplicacion').style.display = 'none';
       document.getElementById('form-pago').style.display = 'block';
 
