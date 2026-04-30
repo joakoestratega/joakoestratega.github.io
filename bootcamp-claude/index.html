@@ -233,10 +233,35 @@
       <li class="flex gap-2"><span class="text-amarillo font-bold">✓</span> <span><strong>Garantía:</strong> sigo contigo hasta que opere</span></li>
     </ul>
 
-    <!-- Mini info logística + trust signal -->
-    <div class="mt-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 text-xs md:text-sm opacity-70">
+    <!-- Frase de seguridad. Solo afirma el control. NO menciona claves/datos sensibles para no activar el miedo. -->
+    <div class="mt-5 bg-black text-white rounded-lg px-4 py-3 flex gap-3 items-start">
+      <span class="text-amarillo text-xl flex-shrink-0">🔒</span>
+      <p class="text-sm md:text-base leading-snug"><strong class="text-amarillo">Tú mandas, no la IA.</strong> El sistema vive en tu computador y solo accede a lo que tú le autorizas.</p>
+    </div>
+
+    <!-- Mini info logística -->
+    <div class="mt-6 text-xs md:text-sm opacity-70">
       <span>📅 Sábado 6 de junio · 9:00 am - 4:00 pm · Medellín</span>
-      <span>+500K USD gestionados · 4 países</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================ -->
+<!-- BARRA DE CREDIBILIDAD                          -->
+<!-- ============================================ -->
+<section class="bg-black text-white py-8 px-4">
+  <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
+    <div>
+      <p class="font-headline text-3xl text-amarillo">+500K USD</p>
+      <p class="text-sm opacity-60">Gestionados en pauta</p>
+    </div>
+    <div>
+      <p class="font-headline text-3xl text-amarillo">5</p>
+      <p class="text-sm opacity-60">Marcas activas hoy</p>
+    </div>
+    <div>
+      <p class="font-headline text-3xl text-amarillo">4 países</p>
+      <p class="text-sm opacity-60">Colombia, México, Ecuador, USA</p>
     </div>
   </div>
 </section>
@@ -278,7 +303,7 @@
           <li class="flex gap-3"><span class="text-amarillo font-bold text-xl flex-shrink-0">→</span> <span><strong class="text-amarillo">Lee tus archivos y tu documentación</strong> para entender tu negocio sin que tengas que repetirlo cada vez.</span></li>
           <li class="flex gap-3"><span class="text-amarillo font-bold text-xl flex-shrink-0">→</span> <span><strong class="text-amarillo">Opera con agentes especializados</strong> que tú entrenas una vez y trabajan para siempre con tu negocio.</span></li>
         </ul>
-        <p class="font-bold border-l-4 border-amarillo pl-4">Mientras la mayoría escribe prompts sueltos a ChatGPT, tú vas a construir el sistema completo. El mismo que opero yo y mis clientes esta semana.</p>
+        <p class="font-bold border-l-4 border-amarillo pl-4">Mientras la mayoría escribe prompts sueltos a ChatGPT, tú vas a construir el sistema completo. El mismo que opero yo con mis clientes.</p>
       </div>
       <div>
         <img src="imagenes/claude-corriendo.png" alt="Claude Code corriendo con agentes" loading="lazy" decoding="async" class="w-full rounded-lg shadow-2xl border-4 border-amarillo">
@@ -504,6 +529,10 @@
         <p class="font-headline text-xl text-azul mb-2">Cupo limitado a 10 personas</p>
         <p>Para que cada uno salga con su sistema corriendo, no en grupo masivo.</p>
       </div>
+      <div class="border-2 border-azul rounded-lg p-6 md:col-span-2 bg-azul bg-opacity-5">
+        <p class="font-headline text-xl text-azul mb-2">🔒 Tú decides a qué accede</p>
+        <p>Claude Code vive en tu computador, no en una nube remota. Solo accede a las carpetas y archivos que tú le autorizas. Tú decides qué ve y qué no, conmigo configurándolo el sábado en vivo.</p>
+      </div>
     </div>
     <div class="text-center mt-12">
       <button onclick="abrirModal()" class="bg-azul text-white font-bold py-4 px-10 rounded-lg text-lg hover:opacity-90 transition btn-lift pulse-azul">
@@ -528,7 +557,7 @@
           <li class="flex gap-3"><span class="text-amarillo font-bold">✓</span> Claude Code instalado, configurado y listo</li>
           <li class="flex gap-3"><span class="text-amarillo font-bold">✓</span> Estructura del Método MPV organizada para tu negocio</li>
           <li class="flex gap-3"><span class="text-amarillo font-bold">✓</span> Tus 6 empleados IA corriendo: memoria, marca, redes, pauta, operaciones y auditor</li>
-          <li class="flex gap-3"><span class="text-amarillo font-bold">✓</span> Tu 06-contexto-ia.md (cerebro digital del negocio) generado en vivo</li>
+          <li class="flex gap-3"><span class="text-amarillo font-bold">✓</span> El cerebro digital de tu negocio, generado en vivo</li>
           <li class="flex gap-3"><span class="text-amarillo font-bold">✓</span> Tu primera parrilla semanal saliendo automáticamente</li>
           <li class="flex gap-3"><span class="text-amarillo font-bold">✓</span> Plantillas de prompts y agentes listas para reutilizar</li>
         </ul>
@@ -557,18 +586,21 @@
     <div>
       <p class="font-secondary text-azul text-xl mb-2">QUIÉN TE VA A ENSEÑAR</p>
       <h2 class="font-headline text-3xl md:text-5xl mb-6 leading-tight">
-        Joaquín Rojas,<br><span class="text-azul">estratega de marketing digital</span>
+        Joaquín Rojas.<br>El estratega que <span class="text-azul">piensa como ingeniero.</span>
       </h2>
+      <p class="text-lg mb-4">
+        Soy ingeniero mecatrónico con especialización en <strong>lean manufacturing</strong>. Por eso no veo tu marketing como arte creativo, lo veo como un <strong>proceso industrial con cuellos de botella, palancas y desperdicios que se eliminan</strong>.
+      </p>
       <p class="text-lg mb-6">
-        Estratega de la <strong>Feria EFFIX</strong>, la feria de ecommerce hispano más grande del continente. Ingeniero mecatrónico con especialización en <strong>lean manufacturing</strong>: no veo el marketing como arte creativo, lo veo como proceso industrial.
+        Esa lente de ingeniería es la que aplico al diseño del Método MPV y a los sistemas de agentes que opero con mis clientes todos los días. No vendo motivación. Vendo procesos que producen resultados medibles.
       </p>
       <ul class="space-y-3 mb-6">
+        <li class="flex gap-3 items-start"><span class="text-amarillo font-bold text-xl flex-shrink-0">●</span> <span>Estratega de la <strong>Feria EFFIX</strong>, la feria de ecommerce hispano más grande del continente</span></li>
         <li class="flex gap-3 items-start"><span class="text-amarillo font-bold text-xl flex-shrink-0">●</span> <span><strong>+500.000 USD</strong> gestionados en pauta Meta</span></li>
         <li class="flex gap-3 items-start"><span class="text-amarillo font-bold text-xl flex-shrink-0">●</span> <span>Marcas activas en <strong>4 países</strong>: Colombia, México, Ecuador y USA</span></li>
-        <li class="flex gap-3 items-start"><span class="text-amarillo font-bold text-xl flex-shrink-0">●</span> <span>Creador del <strong>Método MPV</strong> (4 fases + anillo de optimización)</span></li>
-        <li class="flex gap-3 items-start"><span class="text-amarillo font-bold text-xl flex-shrink-0">●</span> <span>Sistema de <strong>agentes en Claude Code</strong> que opera el método cada día</span></li>
+        <li class="flex gap-3 items-start"><span class="text-amarillo font-bold text-xl flex-shrink-0">●</span> <span>Creador del <strong>Método MPV</strong> y del sistema de agentes en Claude Code que lo opera</span></li>
       </ul>
-      <p class="font-bold border-l-4 border-azul pl-4">Lo que te enseño en el bootcamp es el mismo sistema que está corriendo con mis clientes esta semana. Lo aplicamos al tuyo en vivo el sábado.</p>
+      <p class="font-bold border-l-4 border-azul pl-4">Lo que te enseño en el bootcamp es el mismo sistema que opero yo con mis clientes. Lo aplicamos al tuyo en vivo el sábado.</p>
     </div>
   </div>
 </section>
@@ -777,13 +809,6 @@
           <span class="faq-arrow text-azul">+</span>
         </div>
         <div class="faq-answer"><p>Sí. Bootcamp Meta Ads viene en julio. Próximas ciudades según demanda (Bogotá, Cali).</p></div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-question" onclick="toggleFaq(this)">
-          <span class="font-bold text-lg">¿Hay descuento si vamos varios?</span>
-          <span class="faq-arrow text-azul">+</span>
-        </div>
-        <div class="faq-answer"><p>Sí. Segundo cupo del mismo negocio paga 50%. Escríbeme directo por WhatsApp y lo coordinamos.</p></div>
       </div>
       <div class="faq-item">
         <div class="faq-question" onclick="toggleFaq(this)">
