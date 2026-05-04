@@ -99,11 +99,12 @@
 <!-- ============================================ -->
 <!-- BARRA DE URGENCIA STICKY                       -->
 <!-- ============================================ -->
+<!-- Barra superior. Hoy promueve el evento más urgente: Bootcamp Claude. Cuando pase el 6 junio, cambiar al siguiente evento (bootcamp Meta Ads u otro). -->
 <div class="bg-dorado text-black py-3 px-4 sticky top-0 z-40 shadow-md">
-  <div class="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-5 text-sm md:text-base">
-    <span class="font-semibold text-center">⚡ Cada viernes analizo en vivo por qué un negocio no está vendiendo. Únete gratis.</span>
-    <a href="comunidad/" class="bg-black text-white font-bold px-5 py-2 rounded-md hover:bg-azul transition text-sm whitespace-nowrap shadow-lg btn-lift flex-shrink-0">
-      Entrar a la comunidad
+  <div class="max-w-6xl mx-auto flex flex-row items-center justify-center gap-3 md:gap-5 text-xs sm:text-sm md:text-base">
+    <span class="font-semibold whitespace-nowrap">🔥 <span class="hidden sm:inline">Bootcamp presencial · Sábado 6 de junio · Medellín · </span>10 cupos</span>
+    <a href="bootcamp-claude/" class="bg-black text-white font-bold px-3 py-1.5 sm:px-5 sm:py-2 rounded-md hover:bg-azul transition text-xs sm:text-sm whitespace-nowrap shadow-lg btn-lift flex-shrink-0">
+      <span class="hidden sm:inline">Ver bootcamp</span><span class="sm:hidden">Ver</span>
     </a>
   </div>
 </div>
@@ -220,6 +221,36 @@
 
     <div class="grid md:grid-cols-2 gap-6">
 
+      <!-- BOOTCAMP CLAUDE — Destacado (próximo evento, urgencia activa) -->
+      <a href="bootcamp-claude/" class="service-card bg-gradient-to-br from-dorado/20 to-black border-2 border-dorado rounded-2xl p-8 block group md:col-span-2 relative overflow-hidden">
+        <div class="absolute top-4 right-4 bg-dorado text-black font-bold text-xs px-3 py-1 rounded-full animate-pulse">
+          PRÓXIMO EVENTO · 6 JUNIO
+        </div>
+        <div class="grid md:grid-cols-2 gap-6 items-center">
+          <div>
+            <span class="bg-dorado text-black font-bold text-xs px-3 py-1 rounded-full inline-block mb-3">PRESENCIAL · MEDELLÍN</span>
+            <h3 class="font-headline text-2xl md:text-4xl mb-3 group-hover:text-dorado transition leading-tight">
+              Bootcamp <span class="text-dorado">Claude</span>
+            </h3>
+            <p class="text-gray-200 text-base md:text-lg mb-4 leading-relaxed">
+              Te enseño a instalar una IA en tu computador y a crear tus propios <strong class="text-dorado">empleados digitales</strong> ajustados a tu negocio. Sin saber programar.
+            </p>
+            <ul class="text-sm text-gray-300 space-y-2 mb-6">
+              <li class="flex gap-2"><span class="text-dorado">→</span> Sábado 6 de junio · 9 am a 4 pm · Medellín</li>
+              <li class="flex gap-2"><span class="text-dorado">→</span> Solo 10 cupos. Sales con todo corriendo</li>
+              <li class="flex gap-2"><span class="text-dorado">→</span> Pago único · sin mensualidades</li>
+              <li class="flex gap-2"><span class="text-dorado">→</span> Garantía de instalación: si algo no quedó listo, sigo contigo virtual</li>
+            </ul>
+            <span class="inline-block bg-dorado text-black font-bold py-3 px-6 rounded-lg group-hover:bg-yellow-400 transition btn-lift">
+              Reservar mi cupo →
+            </span>
+          </div>
+          <div class="hidden md:flex justify-center">
+            <span class="text-9xl opacity-20">🤖</span>
+          </div>
+        </div>
+      </a>
+
       <!-- COMUNIDAD GRATUITA -->
       <a href="comunidad/" class="service-card bg-black border-2 border-white/10 rounded-2xl p-8 block group">
         <div class="flex items-start justify-between mb-4">
@@ -237,26 +268,6 @@
         </ul>
         <span class="inline-block bg-dorado text-black font-bold py-3 px-6 rounded-lg group-hover:bg-yellow-400 transition btn-lift">
           Quiero entrar →
-        </span>
-      </a>
-
-      <!-- BOOTCAMP CLAUDE -->
-      <a href="bootcamp-claude/" class="service-card bg-black border-2 border-white/10 rounded-2xl p-8 block group">
-        <div class="flex items-start justify-between mb-4">
-          <span class="bg-dorado text-black font-bold text-xs px-3 py-1 rounded-full">PRESENCIAL · MEDELLÍN</span>
-          <span class="text-3xl">🤖</span>
-        </div>
-        <h3 class="font-headline text-2xl md:text-3xl mb-3 group-hover:text-dorado transition">Bootcamp Claude</h3>
-        <p class="text-gray-300 text-sm md:text-base mb-5 leading-relaxed">
-          Marketing operando con IA. Sales con Claude Code instalado, tus agentes corriendo y tu primera parrilla automatizada.
-        </p>
-        <ul class="text-sm text-gray-400 space-y-2 mb-6">
-          <li class="flex gap-2"><span class="text-dorado">→</span> 1 día completo presencial</li>
-          <li class="flex gap-2"><span class="text-dorado">→</span> Cupos limitados</li>
-          <li class="flex gap-2"><span class="text-dorado">→</span> Constancia de participación</li>
-        </ul>
-        <span class="inline-block bg-white text-black font-bold py-3 px-6 rounded-lg group-hover:bg-dorado transition btn-lift">
-          Ver detalles y aplicar →
         </span>
       </a>
 
@@ -424,10 +435,11 @@
 
 <!-- ============================================ -->
 <!-- STICKY BOTTOM MOBILE                           -->
+<!-- Hoy promueve el Bootcamp (próximo evento). Después del 6 junio cambiar al siguiente evento o a comunidad. -->
 <!-- ============================================ -->
 <div class="sticky-mobile fixed bottom-0 left-0 right-0 bg-black border-t-2 border-dorado p-3 z-40 shadow-2xl">
-  <a href="comunidad/" class="block bg-dorado text-black font-bold py-3 px-4 rounded-lg text-center text-base">
-    Únete gratis a la comunidad →
+  <a href="bootcamp-claude/" class="block bg-dorado text-black font-bold py-3 px-4 rounded-lg text-center text-base">
+    🔥 Reservar cupo bootcamp · 6 junio →
   </a>
 </div>
 
