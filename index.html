@@ -92,6 +92,63 @@
   /* Reveal on scroll */
   .reveal { opacity: 0; transform: translateY(30px); transition: all 0.7s ease; }
   .reveal.active { opacity: 1; transform: translateY(0); }
+
+  /* Marquee de logos: silueta blanca uniforme sobre el fondo oscuro de la página.
+     Cada logo va en un "slot" de altura fija para uniformar lo visual. */
+  .logos-marquee { overflow: hidden; position: relative; }
+  .logos-marquee::before,
+  .logos-marquee::after {
+    content: '';
+    position: absolute;
+    top: 0; bottom: 0;
+    width: 80px;
+    z-index: 2;
+    pointer-events: none;
+  }
+  .logos-marquee::before { left: 0; background: linear-gradient(to right, #0F0F14, transparent); }
+  .logos-marquee::after  { right: 0; background: linear-gradient(to left,  #0F0F14, transparent); }
+  .logos-track {
+    display: flex;
+    width: max-content;
+    animation: marquee-right 22s linear infinite;
+    align-items: center;
+  }
+  .logos-track:hover { animation-play-state: paused; }
+  .logo-slot {
+    flex-shrink: 0;
+    height: 56px;
+    width: 180px;
+    margin: 0 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0.7;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+  }
+  .logo-slot:hover {
+    opacity: 1;
+    transform: scale(1.05);
+  }
+  .logo-slot img {
+    max-height: 100%;
+    max-width: 100%;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+  }
+  /* Algunos logos son anchos por naturaleza (Luque, Academia) — les damos slot mayor */
+  .logo-slot.wide { width: 240px; }
+  /* Wake Up es estrecho — lo damos slot menor para que no quede aire enorme */
+  .logo-slot.narrow { width: 110px; }
+  @keyframes marquee-right {
+    0%   { transform: translateX(-33.333%); }
+    100% { transform: translateX(0); }
+  }
+  @media (max-width: 768px) {
+    .logo-slot { height: 40px; width: 140px; margin: 0 18px; }
+    .logo-slot.wide { width: 180px; }
+    .logo-slot.narrow { width: 80px; }
+  }
 </style>
 </head>
 <body>
@@ -113,36 +170,91 @@
 <!-- HERO MPV-driven                               -->
 <!-- ============================================ -->
 <section class="px-4 pt-8 md:pt-16 pb-12 md:pb-20">
-  <div class="max-w-3xl mx-auto">
+  <div class="max-w-6xl mx-auto grid md:grid-cols-5 gap-8 md:gap-12 items-center">
 
-    <!-- H1: ataca dolor + promesa transformación -->
-    <h1 class="font-headline text-3xl sm:text-4xl md:text-6xl leading-tight mb-4 md:mb-5">
-      Tu negocio ya factura.<br>Falta el <span class="text-dorado">sistema que venda</span> sin ti.
-    </h1>
+    <!-- Columna texto (3/5) -->
+    <div class="md:col-span-3">
 
-    <!-- Subtítulo: posiciona a Joako sin opacar al visitante + ofrece entrada gratis -->
-    <p class="text-base md:text-xl mb-6 md:mb-7 text-gray-200 leading-snug">
-      Soy Joaquín Rojas. Construyo sistemas de ventas por internet con el <strong class="text-dorado">Método MPV</strong>. Empieza gratis: tráeme tu negocio al viernes en vivo y te digo qué ajustar primero.
-    </p>
+      <!-- H1: dolor literal en la voz del cliente final (Andrés) -->
+      <h1 class="font-headline text-3xl sm:text-4xl md:text-6xl leading-tight mb-4 md:mb-5">
+        Llevas meses pagando pauta y <span class="text-dorado">no llegas al punto de equilibrio.</span>
+      </h1>
 
-    <!-- CTA principal único: comunidad gratis (lead magnet) -->
-    <a href="comunidad/" class="block sm:inline-block bg-dorado text-black font-bold py-4 px-8 rounded-lg hover:bg-yellow-400 transition text-base md:text-lg btn-lift pulse-cta text-center">
-      Quiero entrar a la comunidad gratis
-    </a>
+      <!-- Subtítulo: nombra el problema real + invita gratis -->
+      <p class="text-base md:text-xl mb-6 md:mb-7 text-gray-200 leading-snug">
+        Soy Joako Estratega. El 80% del problema no es Meta, ni el presupuesto: es el <strong class="text-dorado">Mensaje Principal de Venta</strong>. Tráeme tu negocio al viernes en vivo y te digo qué ajustar primero. Gratis.
+      </p>
 
-    <!-- 4 condiciones MPV en bullets compactos -->
-    <ul class="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-2 mt-6 text-sm md:text-base text-gray-200">
-      <li class="flex gap-2"><span class="text-dorado font-bold">✓</span> <span>Para dueños <strong>cansados de improvisar</strong> marketing</span></li>
-      <li class="flex gap-2"><span class="text-dorado font-bold">✓</span> <span><strong>Sin 20 herramientas.</strong> Solo el orden correcto</span></li>
-      <li class="flex gap-2"><span class="text-dorado font-bold">✓</span> <span><strong>Esta semana</strong> ya tienes el primer ajuste útil</span></li>
-      <li class="flex gap-2"><span class="text-dorado font-bold">✓</span> <span><strong>100% gratis.</strong> Sales cuando quieras</span></li>
-    </ul>
+      <!-- CTA principal único: comunidad gratis (lead magnet) -->
+      <a href="comunidad/" class="block sm:inline-block bg-dorado text-black font-bold py-4 px-8 rounded-lg hover:bg-yellow-400 transition text-base md:text-lg btn-lift pulse-cta text-center">
+        Quiero entrar a la comunidad gratis
+      </a>
 
-    <!-- Trust signal mínimo -->
-    <p class="mt-6 text-xs md:text-sm text-gray-400">
-      Estratega oficial Feria EFFIX · +500K USD operados · Colombia, México, Ecuador y USA
-    </p>
+      <!-- 4 condiciones MPV en bullets compactos -->
+      <ul class="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-2 mt-6 text-sm md:text-base text-gray-200">
+        <li class="flex gap-2"><span class="text-dorado font-bold">✓</span> <span>Para dueños <strong>cansados de improvisar</strong> marketing</span></li>
+        <li class="flex gap-2"><span class="text-dorado font-bold">✓</span> <span><strong>Sin 20 herramientas.</strong> Solo el orden correcto</span></li>
+        <li class="flex gap-2"><span class="text-dorado font-bold">✓</span> <span><strong>Esta semana</strong> ya tienes el primer ajuste útil</span></li>
+        <li class="flex gap-2"><span class="text-dorado font-bold">✓</span> <span><strong>100% gratis.</strong> Sales cuando quieras</span></li>
+      </ul>
 
+    </div>
+
+    <!-- Columna foto (2/5) - Joaquín en tarima Feria EFFIX 2025 -->
+    <div class="md:col-span-2">
+      <div class="relative rounded-2xl overflow-hidden border-2 border-dorado shadow-2xl">
+        <picture>
+          <source srcset="imagenes/validacion/08-tarima-effix-hero.webp" type="image/webp">
+          <img src="imagenes/validacion/08-tarima-effix-hero.jpg" alt="Joako Estratega en la tarima de Feria EFFIX 2025" class="w-full h-auto block" loading="eager">
+        </picture>
+        <!-- Caption discreto sobre la imagen -->
+        <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/90 to-transparent p-4">
+          <p class="text-xs md:text-sm text-white font-semibold">Tarima Feria EFFIX 2025 · Medellín</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============================================ -->
+<!-- LOGOS EN LOS QUE HE TRABAJADO Y ESTADO        -->
+<!-- Marquee animado. Mezcla clientes directos    -->
+<!-- (EFFIX, Sanavit, AdSchool, Academia del      -->
+<!-- Estratega) con eventos donde estuve vía      -->
+<!-- AdSchool (Wake Up, Luque Business Summit).   -->
+<!-- ============================================ -->
+<section class="py-8 md:py-10 border-y border-white/10 bg-black/30">
+  <p class="text-center text-xs md:text-sm text-gray-500 uppercase tracking-widest mb-5 px-4">
+    Donde he estado · Eventos y marcas
+  </p>
+  <div class="logos-marquee">
+    <div class="logos-track">
+      <!-- Set 1 -->
+      <div class="logo-slot"><img src="imagenes/logos/feria-effix-w.png" alt="Feria EFFIX"></div>
+      <div class="logo-slot wide"><img src="imagenes/logos/wake-up-w.png" alt="Wake Up Conferences"></div>
+      <div class="logo-slot wide"><img src="imagenes/logos/luque-w.png" alt="Luque Business Summit"></div>
+      <div class="logo-slot"><img src="imagenes/logos/adschool-w.png" alt="AdSchool"></div>
+      <div class="logo-slot"><img src="imagenes/logos/sanavit-w.png" alt="Sanavit"></div>
+      <div class="logo-slot wide"><img src="imagenes/logos/academia-estratega-w.png" alt="Academia del Estratega"></div>
+      <div class="logo-slot"><img src="imagenes/logos/neomentes-w.png" alt="Neomentes"></div>
+      <!-- Set 2 -->
+      <div class="logo-slot"><img src="imagenes/logos/feria-effix-w.png" alt="Feria EFFIX"></div>
+      <div class="logo-slot wide"><img src="imagenes/logos/wake-up-w.png" alt="Wake Up Conferences"></div>
+      <div class="logo-slot wide"><img src="imagenes/logos/luque-w.png" alt="Luque Business Summit"></div>
+      <div class="logo-slot"><img src="imagenes/logos/adschool-w.png" alt="AdSchool"></div>
+      <div class="logo-slot"><img src="imagenes/logos/sanavit-w.png" alt="Sanavit"></div>
+      <div class="logo-slot wide"><img src="imagenes/logos/academia-estratega-w.png" alt="Academia del Estratega"></div>
+      <div class="logo-slot"><img src="imagenes/logos/neomentes-w.png" alt="Neomentes"></div>
+      <!-- Set 3 (triplicado para loop continuo sin huecos) -->
+      <div class="logo-slot"><img src="imagenes/logos/feria-effix-w.png" alt="Feria EFFIX"></div>
+      <div class="logo-slot wide"><img src="imagenes/logos/wake-up-w.png" alt="Wake Up Conferences"></div>
+      <div class="logo-slot wide"><img src="imagenes/logos/luque-w.png" alt="Luque Business Summit"></div>
+      <div class="logo-slot"><img src="imagenes/logos/adschool-w.png" alt="AdSchool"></div>
+      <div class="logo-slot"><img src="imagenes/logos/sanavit-w.png" alt="Sanavit"></div>
+      <div class="logo-slot wide"><img src="imagenes/logos/academia-estratega-w.png" alt="Academia del Estratega"></div>
+      <div class="logo-slot"><img src="imagenes/logos/neomentes-w.png" alt="Neomentes"></div>
+    </div>
   </div>
 </section>
 
@@ -160,13 +272,41 @@
       <p class="text-xs md:text-sm text-gray-400 mt-1 uppercase tracking-wider">USD gestionados en Meta Ads</p>
     </div>
     <div>
-      <p class="font-headline text-3xl md:text-4xl text-dorado">EFFIX</p>
+      <p class="font-headline text-3xl md:text-4xl text-dorado">Feria EFFIX</p>
       <p class="text-xs md:text-sm text-gray-400 mt-1 uppercase tracking-wider">estratega oficial</p>
     </div>
     <div>
       <p class="font-headline text-3xl md:text-4xl text-dorado">Método MPV</p>
       <p class="text-xs md:text-sm text-gray-400 mt-1 uppercase tracking-wider">sistema propietario probado</p>
     </div>
+  </div>
+</section>
+
+<!-- ============================================ -->
+<!-- QUIÉN SOY (movido arriba para que la cara    -->
+<!-- de Joako aparezca antes de servicios)        -->
+<!-- ============================================ -->
+<section class="px-4 py-16 md:py-24">
+  <div class="max-w-5xl mx-auto grid md:grid-cols-2 gap-10 items-center">
+
+    <div>
+      <p class="font-secondary text-dorado text-sm md:text-base mb-3 tracking-widest">QUIÉN SOY</p>
+      <h2 class="font-headline text-3xl md:text-5xl mb-6 leading-tight">
+        El estratega<br>que piensa como <span class="text-dorado">ingeniero.</span>
+      </h2>
+      <div class="space-y-4 text-gray-300 leading-relaxed text-base md:text-lg">
+        <p>Soy <span class="text-white font-bold">Joako Estratega</span>, experto en marketing digital. Construyo y opero sistemas de ventas por internet para marcas que ya facturan en Colombia, México, Ecuador y Estados Unidos.</p>
+        <p>Mi formación de base es <span class="text-white font-bold">ingeniería mecatrónica con especialización en lean manufacturing y gerencia de proyectos</span>. Por eso no veo el marketing como una pila de tácticas sueltas, sino como un sistema con cuellos de botella, palancas y procesos que se mejoran.</p>
+        <p>Llegué a esto después de quebrar un ecommerce que facturaba 10M de pesos diarios. Pasé dos años buscando <span class="text-dorado font-bold">por qué algunos negocios venden por internet y otros no</span>. Pagué más de 10.000 USD en mentorías y trabajé junto a los mejores.</p>
+        <p>El descubrimiento es que el problema no es la pauta, ni la plataforma, ni el presupuesto. Es el <span class="text-dorado font-bold">Mensaje Principal de Venta</span>. Y ese descubrimiento es lo que convertí en el Método MPV: el sistema que hoy aplico, escalo y enseño.</p>
+        <p class="border-l-4 border-dorado pl-4 italic text-white">"Yo ya pagué el precio de no saberlo. Mis clientes no tienen que pagar ese mismo precio."</p>
+      </div>
+    </div>
+
+    <div class="rounded-2xl overflow-hidden border-2 border-dorado">
+      <img src="bootcamp-claude/imagenes/joako-effi.png" alt="Joako Estratega en la Feria EFFIX" class="w-full h-auto block">
+    </div>
+
   </div>
 </section>
 
@@ -246,7 +386,7 @@
             </span>
           </div>
           <div class="hidden md:flex justify-center">
-            <span class="text-9xl opacity-20">🤖</span>
+            <img src="bootcamp-claude/imagenes/parrilla-demo.gif" alt="Sistema generando una parrilla en automático con Claude" class="rounded-lg border-2 border-dorado/40 max-h-80 w-auto shadow-2xl" loading="lazy">
           </div>
         </div>
       </a>
@@ -316,29 +456,116 @@
 </section>
 
 <!-- ============================================ -->
-<!-- QUIÉN SOY                                      -->
+<!-- RECONOCIMIENTOS Y EVENTOS                      -->
+<!-- Galería de validación: certificados +         -->
+<!-- referentes del nicho. Prueba dura para        -->
+<!-- Andrés (cliente final).                       -->
 <!-- ============================================ -->
 <section class="px-4 py-16 md:py-24">
-  <div class="max-w-5xl mx-auto grid md:grid-cols-2 gap-10 items-center">
+  <div class="max-w-6xl mx-auto">
+    <p class="font-secondary text-dorado text-sm md:text-base mb-3 tracking-widest text-center">RECONOCIMIENTOS Y REFERENTES</p>
+    <h2 class="font-headline text-3xl md:text-5xl text-center mb-4 leading-tight">
+      Donde he estado.<br>Con quién <span class="text-dorado">he construido.</span>
+    </h2>
+    <p class="text-center text-gray-400 max-w-2xl mx-auto mb-14 text-base md:text-lg">
+      No es teoría. Son tarimas, certificados y referentes reales del marketing digital en Latinoamérica.
+    </p>
 
-    <div>
-      <p class="font-secondary text-dorado text-sm md:text-base mb-3 tracking-widest">QUIÉN SOY</p>
-      <h2 class="font-headline text-3xl md:text-5xl mb-6 leading-tight">
-        El estratega<br>que piensa como <span class="text-dorado">ingeniero.</span>
-      </h2>
-      <div class="space-y-4 text-gray-300 leading-relaxed text-base md:text-lg">
-        <p>Soy <span class="text-white font-bold">Joaquín Rojas</span>, estratega experto en marketing digital. Construyo y opero sistemas de ventas por internet para marcas que ya facturan en Colombia, México, Ecuador y Estados Unidos.</p>
-        <p>Mi formación de base es <span class="text-white font-bold">ingeniería mecatrónica con especialización en lean manufacturing y gerencia de proyectos</span>. Por eso no veo el marketing como una pila de tácticas sueltas, sino como un sistema con cuellos de botella, palancas y procesos que se optimizan.</p>
-        <p>Llegué a esto después de quebrar un ecommerce que facturaba 10M de pesos diarios. Pasé dos años buscando <span class="text-dorado font-bold">por qué algunos negocios venden por internet y otros no</span>. Pagué más de 10.000 USD en mentorías y trabajé junto a los mejores.</p>
-        <p>El descubrimiento es que el problema no es la pauta, ni la plataforma, ni el presupuesto. Es el <span class="text-dorado font-bold">Mensaje Principal de Venta</span>. Y ese descubrimiento es lo que convertí en el Método MPV: el sistema que hoy aplico, escalo y enseño.</p>
-        <p class="border-l-4 border-dorado pl-4 italic text-white">"Yo ya pagué el precio de no saberlo. Mis clientes no tienen que pagar ese mismo precio."</p>
-      </div>
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-5">
+
+      <!-- Foto 1: Reconocimiento Academia del Estratega -->
+      <figure class="group relative rounded-xl overflow-hidden border border-white/10 hover:border-dorado transition">
+        <picture>
+          <source srcset="imagenes/validacion/01-academia-reconocimiento.webp" type="image/webp">
+          <img src="imagenes/validacion/01-academia-reconocimiento.jpg" alt="Reconocimiento Academia del Estratega - Joako Estratega" class="w-full h-full object-cover aspect-[4/5]" loading="lazy">
+        </picture>
+        <figcaption class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-3 md:p-4">
+          <p class="text-xs md:text-sm text-white font-bold leading-tight">Reconocimiento</p>
+          <p class="text-xs text-gray-300">Academia del Estratega</p>
+        </figcaption>
+      </figure>
+
+      <!-- Foto 2: Con Juan Carmona en Feria EFFIX -->
+      <figure class="group relative rounded-xl overflow-hidden border border-white/10 hover:border-dorado transition">
+        <picture>
+          <source srcset="imagenes/validacion/05-con-juan-carmona-effix.webp" type="image/webp">
+          <img src="imagenes/validacion/05-con-juan-carmona-effix.jpg" alt="Joako Estratega con Juan Carmona en Feria EFFIX 2025" class="w-full h-full object-cover aspect-[4/5]" loading="lazy">
+        </picture>
+        <figcaption class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-3 md:p-4">
+          <p class="text-xs md:text-sm text-white font-bold leading-tight">Con Juan Carmona</p>
+          <p class="text-xs text-gray-300">Feria EFFIX 2025</p>
+        </figcaption>
+      </figure>
+
+      <!-- Foto 3: Con Jhei Trujillo -->
+      <figure class="group relative rounded-xl overflow-hidden border border-white/10 hover:border-dorado transition">
+        <picture>
+          <source srcset="imagenes/validacion/04-con-jhei-trujillo.webp" type="image/webp">
+          <img src="imagenes/validacion/04-con-jhei-trujillo.jpg" alt="Joako Estratega con Jhei Trujillo" class="w-full h-full object-cover aspect-[4/5]" loading="lazy">
+        </picture>
+        <figcaption class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-3 md:p-4">
+          <p class="text-xs md:text-sm text-white font-bold leading-tight">Con Jhei Trujillo</p>
+          <p class="text-xs text-gray-300">Academia del Estratega</p>
+        </figcaption>
+      </figure>
+
+      <!-- Foto 4: Certificado 2025 con Mónica -->
+      <figure class="group relative rounded-xl overflow-hidden border border-white/10 hover:border-dorado transition">
+        <picture>
+          <source srcset="imagenes/validacion/07-con-monica-cert-2025.webp" type="image/webp">
+          <img src="imagenes/validacion/07-con-monica-cert-2025.jpg" alt="Joako Estratega recibiendo certificado 2025 Academia del Estratega" class="w-full h-full object-cover aspect-[4/5]" loading="lazy">
+        </picture>
+        <figcaption class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-3 md:p-4">
+          <p class="text-xs md:text-sm text-white font-bold leading-tight">Certificado 2025</p>
+          <p class="text-xs text-gray-300">Academia del Estratega</p>
+        </figcaption>
+      </figure>
+
+      <!-- Foto 5: Conversatorio EFFIX -->
+      <figure class="group relative rounded-xl overflow-hidden border border-white/10 hover:border-dorado transition">
+        <picture>
+          <source srcset="imagenes/validacion/03-conversatorio-effix.webp" type="image/webp">
+          <img src="imagenes/validacion/03-conversatorio-effix.jpg" alt="Joako Estratega en conversatorio Feria EFFIX 2025" class="w-full h-full object-cover aspect-[4/5]" loading="lazy">
+        </picture>
+        <figcaption class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-3 md:p-4">
+          <p class="text-xs md:text-sm text-white font-bold leading-tight">"No es magia, es estrategia"</p>
+          <p class="text-xs text-gray-300">Conversatorio · Feria EFFIX 2025</p>
+        </figcaption>
+      </figure>
+
+      <!-- Foto 6: Con mentores y certificado -->
+      <figure class="group relative rounded-xl overflow-hidden border border-white/10 hover:border-dorado transition">
+        <picture>
+          <source srcset="imagenes/validacion/06-con-mentores-certificado.webp" type="image/webp">
+          <img src="imagenes/validacion/06-con-mentores-certificado.jpg" alt="Joako Estratega con mentores y certificado" class="w-full h-full object-cover aspect-[4/5]" loading="lazy">
+        </picture>
+        <figcaption class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-3 md:p-4">
+          <p class="text-xs md:text-sm text-white font-bold leading-tight">Backstage de evento</p>
+          <p class="text-xs text-gray-300">Junto a mentores y referentes</p>
+        </figcaption>
+      </figure>
+
+      <!-- Foto 7: Certificado en tarima -->
+      <figure class="group relative rounded-xl overflow-hidden border border-white/10 hover:border-dorado transition">
+        <picture>
+          <source srcset="imagenes/validacion/02-certificados-estudio.webp" type="image/webp">
+          <img src="imagenes/validacion/02-certificados-estudio.jpg" alt="Joako Estratega con certificados en tarima" class="w-full h-full object-cover aspect-[4/5]" loading="lazy">
+        </picture>
+        <figcaption class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-3 md:p-4">
+          <p class="text-xs md:text-sm text-white font-bold leading-tight">Certificación oficial</p>
+          <p class="text-xs text-gray-300">Programas de marketing digital</p>
+        </figcaption>
+      </figure>
+
+      <!-- Tarjeta CTA suave en lugar de la 8va foto: invita a la comunidad -->
+      <a href="comunidad/" class="group relative rounded-xl overflow-hidden border-2 border-dorado bg-gradient-to-br from-dorado/20 to-black aspect-[4/5] flex flex-col items-center justify-center p-4 md:p-6 text-center hover:bg-dorado/30 transition">
+        <p class="font-headline text-xl md:text-2xl text-white mb-3 leading-tight">¿Quieres que tu negocio sea el siguiente caso?</p>
+        <span class="bg-dorado text-black font-bold py-2 px-4 rounded-lg text-sm group-hover:bg-yellow-400 transition">
+          Entrar gratis →
+        </span>
+      </a>
+
     </div>
-
-    <div class="rounded-2xl overflow-hidden border-2 border-dorado">
-      <img src="bootcamp-claude/imagenes/joako-effi.png" alt="Joaquín Rojas en la Feria EFFIX" class="w-full h-auto block">
-    </div>
-
   </div>
 </section>
 
@@ -380,7 +607,7 @@
     </div>
 
     <p class="mt-10 text-sm text-gray-400 max-w-2xl mx-auto">
-      Anillo exterior: <span class="text-white">optimización continua</span> con principios de lean manufacturing. La misma lógica que mejora una línea de producción aplicada a un sistema de ventas.
+      Por encima de las 4 fases, una capa de <span class="text-white">mejora continua</span> con principios de lean manufacturing. La misma lógica que afina una línea de producción, aplicada a un sistema de ventas.
     </p>
   </div>
 </section>
