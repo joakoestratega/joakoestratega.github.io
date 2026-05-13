@@ -28,7 +28,7 @@ El Apps Script crea una hoja distinta por producto, sin que tengas que tocar nad
 
 | Producto | Hoja en Sheets | Campos |
 |---|---|---|
-| Plano MPV ($50 USD) | `Leads Plano MPV` | nombre, whatsapp, email, profesión, situación, mensaje |
+| Asesoría MPV | `Leads Asesoría MPV` | nombre, whatsapp, email, profesión, situación, mensaje |
 | Comunidad WhatsApp (gratis) | `Leads Comunidad` | nombre, whatsapp, profesión |
 | Newsletter Método MPV | `Leads Método MPV` | nombre, email, profesión |
 | Contacto desde Home | `Contactos Home` | (lo que llegue) |
@@ -80,8 +80,8 @@ Además, los **leads parciales** (visitas que llenaron nombre + WhatsApp/email p
 En 6 archivos hay que reemplazar `PEGA_AQUI_EL_URL_DE_TU_APPS_SCRIPT` por el URL `/exec` que copiaste:
 
 - `index.html`
-- `plano-mpv/index.html`
-- `plano-mpv/gracias/index.html`
+- `asesoria-mpv/index.html`
+- `asesoria-mpv/gracias/index.html`
 - `comunidad/index.html`
 - `comunidad/gracias/index.html`
 - `metodo-mpv/index.html`
@@ -115,17 +115,17 @@ Si algo falla, abre la consola del navegador (F12) y mira el error. Lo más com�
 
 ## Cómo agregar un producto nuevo después
 
-Si más adelante creas un nuevo formulario (ej: para vender el Constructor MPV con su propia landing), solo tienes que:
+Si más adelante creas un nuevo formulario (ej: para vender el Implementación MPV con su propia landing), solo tienes que:
 
 1. En tu landing nueva, ponle al `<form>` el atributo `data-form="Nombre del Producto"`.
 2. En `apps-script.gs`, agrega una entrada al objeto `HOJAS_POR_PRODUCTO`:
    ```javascript
    const HOJAS_POR_PRODUCTO = {
-     'Plano MPV': 'Leads Plano MPV',
+     'Asesoría MPV': 'Leads Asesoría MPV',
      'Comunidad WhatsApp': 'Leads Comunidad',
      'Newsletter Método MPV': 'Leads Método MPV',
      'Contacto Home': 'Contactos Home',
-     'Constructor MPV': 'Leads Constructor',  // ← nuevo
+     'Implementación MPV': 'Leads Constructor',  // ← nuevo
      'default': 'Leads Generales'
    };
    ```

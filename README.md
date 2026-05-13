@@ -1,6 +1,6 @@
 # Sitio Joako Estratega · joakoestratega.com
 
-Sistema de 4 páginas conectadas, listas para subir a GitHub Pages. Construidas sobre el modelo nuevo (mayo 2026): mujeres con servicio profesional propio (abogadas, psicólogas, coaches, terapeutas, consultoras) · escalera Plano MPV · Constructor MPV · MPV en Operación · más comunidad de WhatsApp gratuita como puerta de entrada.
+Sistema de 4 páginas conectadas, listas para subir a GitHub Pages. Construidas sobre el modelo nuevo (mayo 2026): mujeres con servicio profesional propio (abogadas, psicólogas, coaches, terapeutas, consultoras) · escalera Asesoría MPV · Implementación MPV · Acompañamiento MPV · más comunidad de WhatsApp gratuita como puerta de entrada.
 
 ---
 
@@ -26,8 +26,8 @@ LANDINGS/                              ← esto es lo que subes a GitHub Pages
 │   ├── validacion/                    ← 8 fotos profesionales (.jpg + .webp)
 │   └── testimonios/                   ← (vacía, por llenar con capturas)
 │
-├── plano-mpv/
-│   ├── index.html                     ← landing del producto $50 USD (la crítica)
+├── asesoria-mpv/
+│   ├── index.html                     ← landing del producto $200.000 COP (la crítica)
 │   └── gracias/index.html
 │
 ├── comunidad/
@@ -46,12 +46,12 @@ LANDINGS/                              ← esto es lo que subes a GitHub Pages
 
 | URL | Función |
 |---|---|
-| `https://joakoestratega.com/` | Home institucional. Presenta a Joako, escalera de productos, Método MPV resumido, validación. CTA principal: Plano MPV |
-| `https://joakoestratega.com/plano-mpv/` | Landing de venta del producto $50 USD. La página que más debe convertir |
+| `https://joakoestratega.com/` | Home institucional. Presenta a Joako, escalera de productos, Método MPV resumido, validación. CTA principal: Asesoría MPV |
+| `https://joakoestratega.com/asesoria-mpv/` | Landing de venta del producto $200.000 COP. La página que más debe convertir |
 | `https://joakoestratega.com/comunidad/` | Lead magnet del grupo de WhatsApp gratis |
 | `https://joakoestratega.com/metodo-mpv/` | Pilar de autoridad: explica las 4 condiciones del Método MPV. Captura email para newsletter mensual |
 
-Páginas de gracias (no indexables): `/plano-mpv/gracias/`, `/comunidad/gracias/`.
+Páginas de gracias (no indexables): `/asesoria-mpv/gracias/`, `/comunidad/gracias/`.
 
 ---
 
@@ -72,15 +72,15 @@ Sin este paso, los formularios no guardan datos.
 5. Copia el URL que termina en `/exec`.
 6. Pega ese URL en los 4 archivos donde dice `PEGA_AQUI_EL_URL_DE_TU_APPS_SCRIPT`:
    - `index.html`
-   - `plano-mpv/index.html`
-   - `plano-mpv/gracias/index.html`
+   - `asesoria-mpv/index.html`
+   - `asesoria-mpv/gracias/index.html`
    - `comunidad/index.html`
    - `comunidad/gracias/index.html`
    - `metodo-mpv/index.html`
 
    Es el bloque `<script>window.JOAKO = {...}</script>` arriba en cada archivo. Cambia 1 valor en 6 archivos. Tarda 2 minutos.
 
-7. El script crea hojas separadas automáticamente por producto: `Leads Plano MPV`, `Leads Comunidad`, `Leads Método MPV`, `Contactos Home`, `Leads Generales`.
+7. El script crea hojas separadas automáticamente por producto: `Leads Asesoría MPV`, `Leads Comunidad`, `Leads Método MPV`, `Contactos Home`, `Leads Generales`.
 
 Detalles completos en `SETUP-CAPTURA-DATOS.md`.
 
@@ -183,7 +183,7 @@ El sistema está pensado para mejorar a partir de datos:
 1. **Semana 1-2 después de publicar:** revisa Microsoft Clarity. Mira las grabaciones de las primeras 50 visitas. Verás dónde la gente se pierde, qué no leen, qué los confunde.
 2. **Cada lunes:** abre Google Sheets de leads. ¿Cuántos llenaron formulario? ¿Cuáles parcialmente? ¿De qué hojas vienen?
 3. **Cada 2 semanas:** mira en GA4 los eventos `cta_click` agrupados por `cta_id`. Los CTAs con más clicks son los que están funcionando. Los que nadie toca, se cambian o se quitan.
-4. **Cuando quieras hacer un cambio fuerte (cambiar headline, cambiar precio, cambiar el orden de las secciones):** primero copia la página actual a `/plano-mpv/v2/` para hacer split test manual con tráfico de pauta dividido 50/50.
+4. **Cuando quieras hacer un cambio fuerte (cambiar headline, cambiar precio, cambiar el orden de las secciones):** primero copia la página actual a `/asesoria-mpv/v2/` para hacer split test manual con tráfico de pauta dividido 50/50.
 
 Cuando vayas a iterar, avísame y te ayudo con la decisión.
 

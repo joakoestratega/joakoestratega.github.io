@@ -26,7 +26,9 @@ const EMAIL_NOTIFICACION = 'joakoestratega@gmail.com';
 // Mapa producto → nombre de hoja en Google Sheets
 // Actualizado 2026-05-11 con la escalera vigente.
 const HOJAS_POR_PRODUCTO = {
-  'Plano MPV': 'Leads Plano MPV',
+  'Asesoría MPV': 'Leads Asesoría MPV',
+  'Implementación MPV': 'Leads Implementación MPV',
+  'Acompañamiento MPV': 'Leads Acompañamiento MPV',
   'Comunidad WhatsApp': 'Leads Comunidad',
   'Newsletter Método MPV': 'Leads Método MPV',
   'Contacto Home': 'Contactos Home',
