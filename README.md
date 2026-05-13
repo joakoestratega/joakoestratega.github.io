@@ -1,194 +1,217 @@
-# Sitio Joako Estratega · Carpeta lista para GitHub Pages
+# Sitio Joako Estratega · joakoestratega.com
 
-Esta carpeta es el sitio completo de **joakoestratega.com**. Contiene la home principal, las 4 sub-páginas de servicios y todo lo necesario para subirlo a GitHub Pages.
+Sistema de 4 páginas conectadas, listas para subir a GitHub Pages. Construidas sobre el modelo nuevo (mayo 2026): mujeres con servicio profesional propio (abogadas, psicólogas, coaches, terapeutas, consultoras) · escalera Plano MPV · Constructor MPV · MPV en Operación · más comunidad de WhatsApp gratuita como puerta de entrada.
 
 ---
 
-## Estructura final
+## Estructura del sitio
 
 ```
-LANDINGS/  (esto es lo que subes a GitHub)
+LANDINGS/                              ← esto es lo que subes a GitHub Pages
 │
-├── CNAME                                 ← Vincula joakoestratega.com con GitHub Pages
-├── index.html                            ← HOME nueva: hub de servicios
-├── apps-script.gs                        ← Captura de leads multi-producto
-├── SETUP-CAPTURA-DATOS.md                ← Guía para configurar Apps Script
-├── README.md                             ← Este archivo
+├── CNAME                              ← joakoestratega.com (vincula dominio)
+├── index.html                         ← HOME institucional
+├── sitemap.xml                        ← para Google + GEO
+├── robots.txt                         ← reglas de indexación
+├── apps-script.gs                     ← captura de leads multi-producto
+├── SETUP-CAPTURA-DATOS.md             ← guía Apps Script + Sheets
+├── README.md                          ← este archivo
+│
+├── assets/
+│   ├── styles.css                     ← sistema de diseño compartido
+│   └── main.js                        ← analytics + form handlers
 │
 ├── imagenes/
-│   └── testimonios/
-│       ├── LEEME.txt                     ← Instrucciones para subir testimonios
-│       └── test-1.jpg ... test-6.jpg     ← Subir tus capturas de WhatsApp
+│   ├── logos/                         ← 7 logos de validación pública
+│   ├── validacion/                    ← 8 fotos profesionales (.jpg + .webp)
+│   └── testimonios/                   ← (vacía, por llenar con capturas)
 │
-├── comunidad/                            ← Sub-página comunidad gratuita
-│   └── index.html                        ← Va directo al WhatsApp del grupo
+├── plano-mpv/
+│   ├── index.html                     ← landing del producto $50 USD (la crítica)
+│   └── gracias/index.html
 │
-├── bootcamp-claude/                      ← Bootcamp Claude (ya existente)
-│   ├── index.html
-│   ├── imagenes/   (logos, joako-effi, claude-corriendo, parrilla-demo)
-│   ├── videos/
-│   └── gracias/
+├── comunidad/
+│   ├── index.html                     ← lead magnet WhatsApp gratis
+│   └── gracias/index.html
 │
-├── bootcamp-meta-ads/                    ← Bootcamp Meta Ads (NUEVO)
-│   └── index.html                        ← Con formulario de waitlist
+├── metodo-mpv/
+│   └── index.html                     ← autoridad SEO + GEO + newsletter
 │
-└── agencia/                              ← Agencia (NUEVO)
-    └── index.html                        ← Con formulario de aplicación
+└── _archivo-modelo-viejo-2026-04/     ← landings anteriores (no se publican)
 ```
 
 ---
 
-## URLs que vas a tener al aire
+## URLs públicas finales
 
-| URL pública | Qué muestra |
-|-------------|-------------|
-| https://joakoestratega.com | **Home nueva** con los 4 servicios |
-| https://joakoestratega.com/comunidad | Sub-página de la comunidad gratuita (CTA al WhatsApp) |
-| https://joakoestratega.com/bootcamp-claude | Landing del bootcamp Claude (ya existente) |
-| https://joakoestratega.com/bootcamp-meta-ads | Landing del bootcamp Meta Ads + waitlist |
-| https://joakoestratega.com/agencia | Página de la agencia + formulario de aplicación |
+| URL | Función |
+|---|---|
+| `https://joakoestratega.com/` | Home institucional. Presenta a Joako, escalera de productos, Método MPV resumido, validación. CTA principal: Plano MPV |
+| `https://joakoestratega.com/plano-mpv/` | Landing de venta del producto $50 USD. La página que más debe convertir |
+| `https://joakoestratega.com/comunidad/` | Lead magnet del grupo de WhatsApp gratis |
+| `https://joakoestratega.com/metodo-mpv/` | Pilar de autoridad: explica las 4 condiciones del Método MPV. Captura email para newsletter mensual |
 
----
-
-## QUÉ FALTA HACER ANTES DE SUBIR
-
-### 1. Subir testimonios
-
-Carpeta: `imagenes/testimonios/`
-
-Sube de 1 a 6 capturas de WhatsApp/comentarios con los nombres `test-1.jpg`, `test-2.jpg`, etc. Si tienes más de 6, dime cuántos y agrego más slots en la home. Si tienes menos, no pasa nada: los slots vacíos se ocultan solos.
-
-**Importante:** tapa números de WhatsApp y nombres completos si las personas no autorizaron mostrarlos. Ver `imagenes/testimonios/LEEME.txt` para los detalles.
-
-### 2. Configurar el Apps Script (captura de leads)
-
-Una sola vez. Sirve para los formularios de Bootcamp Claude, Meta Ads waitlist y Agencia.
-
-Pasos completos en `SETUP-CAPTURA-DATOS.md`. Resumen:
-
-1. Crea un Google Sheets nuevo (o usa el existente del bootcamp Claude)
-2. Copia su ID (la parte larga del URL)
-3. Abre `apps-script.gs` en este proyecto y reemplaza:
-   - `PEGA_AQUI_EL_ID_DE_TU_GOOGLE_SHEETS` por el ID real
-   - `joakoestratega@gmail.com` ya está, déjalo así (o cámbialo si quieres recibir alertas en otro correo)
-4. Entra a [script.google.com](https://script.google.com) → Nuevo proyecto → Pega el código → Guarda
-5. **Implementar → Nueva implementación** → Tipo: Aplicación web
-   - Ejecutar como: Yo (tu cuenta)
-   - Tener acceso: Cualquier persona
-6. Copia el URL que termina en `/exec`
-7. Pega ese URL en los siguientes archivos donde dice `PEGA_AQUI_EL_URL_DE_TU_APPS_SCRIPT`:
-   - `bootcamp-meta-ads/index.html`
-   - `agencia/index.html`
-   - `bootcamp-claude/index.html` (si todavía no estaba conectado)
-
-El script crea hojas separadas automáticamente:
-- "Leads Bootcamp Claude"
-- "Lista Espera Meta Ads"
-- "Aplicaciones Agencia"
-
-### 3. (Opcional) Editar fechas o cupos del bootcamp Claude
-
-El bootcamp Claude ya tiene la fecha "Sábado 6 de junio". Si cambia, edita `bootcamp-claude/index.html`.
+Páginas de gracias (no indexables): `/plano-mpv/gracias/`, `/comunidad/gracias/`.
 
 ---
 
-## PASO A PASO PARA PUBLICAR
+## Pendientes ANTES de publicar
 
-### Paso 1. Repositorio en GitHub
+### 1. Apps Script (captura de leads)
 
-Si ya existe `joakoestratega-landing` (o como lo hayas llamado), salta al paso 2.
+Sin este paso, los formularios no guardan datos.
 
-Si es la primera vez:
-1. Entra a [github.com/new](https://github.com/new)
-2. Repository name: `joakoestratega-landing`
-3. Visibility: **Public** (necesario para GitHub Pages gratis)
-4. NO marques "Add README" ni nada extra
-5. Create repository
+1. Crea un Google Sheets nuevo (o usa el del bootcamp viejo). Copia su ID (la parte larga del URL).
+2. Abre `apps-script.gs` y reemplaza:
+   - `PEGA_AQUI_EL_ID_DE_TU_GOOGLE_SHEETS` → tu ID real.
+   - `joakoestratega@gmail.com` ya está. Cámbialo si quieres recibir alertas en otro correo.
+3. Entra a [script.google.com](https://script.google.com) → Nuevo proyecto → pega el código → Guarda.
+4. **Implementar → Nueva implementación** → Aplicación web.
+   - Ejecutar como: Yo (tu cuenta).
+   - Tener acceso: Cualquier persona.
+5. Copia el URL que termina en `/exec`.
+6. Pega ese URL en los 4 archivos donde dice `PEGA_AQUI_EL_URL_DE_TU_APPS_SCRIPT`:
+   - `index.html`
+   - `plano-mpv/index.html`
+   - `plano-mpv/gracias/index.html`
+   - `comunidad/index.html`
+   - `comunidad/gracias/index.html`
+   - `metodo-mpv/index.html`
 
-### Paso 2. Subir el contenido
+   Es el bloque `<script>window.JOAKO = {...}</script>` arriba en cada archivo. Cambia 1 valor en 6 archivos. Tarda 2 minutos.
 
-**Opción A — GitHub Desktop (recomendado si no usas terminal)**
+7. El script crea hojas separadas automáticamente por producto: `Leads Plano MPV`, `Leads Comunidad`, `Leads Método MPV`, `Contactos Home`, `Leads Generales`.
 
-1. Si ya tienes el repo clonado, abre la carpeta local
-2. **Borra el contenido viejo** del repo (excepto la carpeta `.git`)
-3. Copia TODO el contenido de `LANDINGS/` (no la carpeta, su contenido) al repo local
-4. GitHub Desktop muestra los cambios → Commit message: "Sitio nuevo con hub + 4 servicios"
-5. Push origin
+Detalles completos en `SETUP-CAPTURA-DATOS.md`.
 
-**Opción B — Web directa**
+### 2. Link del grupo de WhatsApp
 
-1. En el repo, borra los archivos viejos (Settings o desde la web)
-2. Sube los nuevos arrastrándolos
-3. Commit changes
+En el mismo bloque `window.JOAKO = {...}` de los 6 archivos, reemplaza:
+- `WHATSAPP_COMUNIDAD: 'https://chat.whatsapp.com/PEGA_LINK_GRUPO'` → link real del grupo.
+- `WHATSAPP_DIRECTO: 'https://wa.me/573XXXXXXXXX'` → tu WhatsApp personal.
 
-### Paso 3. GitHub Pages (si no estaba activo)
+### 3. Analytics (opcional pero recomendado)
 
-1. Settings → Pages
-2. Source: Deploy from a branch
-3. Branch: `main`, Folder: `/ (root)`
-4. Save
-5. En 1-2 minutos sale al aire
+En el mismo bloque, agrega los IDs cuando los tengas. Si están vacíos, simplemente no se carga ese tracker:
 
-### Paso 4. Dominio joakoestratega.com (Hostinger)
+```javascript
+GA4_ID: 'G-XXXXXXXXXX',          // Google Analytics 4
+META_PIXEL_ID: '1234567890',     // Meta (Facebook) Pixel
+CLARITY_ID: 'abcdef1234'         // Microsoft Clarity (mapas de calor + grabaciones)
+```
 
-Si ya estaba conectado al bootcamp Claude, el dominio sigue funcionando, no tienes que tocar nada. La nueva home reemplaza la anterior automáticamente.
+**Stack recomendado (todos gratis):**
+- **GA4:** crea propiedad en analytics.google.com → copia ID.
+- **Meta Pixel:** Business Manager → Eventos → Crea pixel → copia ID.
+- **Clarity:** clarity.microsoft.com → crea proyecto → copia ID.
 
-Si no estaba:
-- DNS Hostinger:
+### 4. Imágenes de testimonios (opcional)
 
-| Tipo | Nombre | Apunta a (Valor) | TTL |
-|------|--------|------------------|-----|
+Carpeta `imagenes/testimonios/` está vacía. Cuando tengas capturas de WhatsApp/comentarios reales, súbelas y avísame para conectarlas a las landings.
+
+### 5. Foto profesional del hero (opcional)
+
+Hoy todas las landings usan fotos del banco de validación (tarima EFFIX, conversatorios). Cuando tengas fotos profesionales nuevas tipo "estratega trabajando", podemos cambiar las del hero por algo más cercano a la mujer profesional que te mira a los ojos. Lo puedes ir haciendo después.
+
+---
+
+## Eventos que se trackean automáticamente
+
+Cuando GA4/Meta Pixel/Clarity están configurados, `main.js` dispara estos eventos sin que tengas que tocar nada:
+
+| Evento | Cuándo dispara |
+|---|---|
+| `cta_click` | Click en cualquier botón con `data-cta="..."` |
+| `scroll_depth` | Scroll del 25/50/75/100% de la página |
+| `time_on_page` | A los 30s, 60s y 180s en la página |
+| `form_start` | Primer click en cualquier campo del formulario |
+| `form_complete` | Envío exitoso del formulario |
+| `form_abandon` | Cierre de página con formulario tocado pero no enviado |
+| `faq_open` | Apertura de cada pregunta del FAQ |
+| `video_play` / `video_50` / `video_complete` | Reproducción de videos con `data-video="..."` |
+| `lead_complete` | Carga de página de gracias (mejor evento de conversión) |
+| Lead parcial automático | Si la usuaria llena nombre + WhatsApp/email pero no envía, el sistema guarda igualmente el dato (en hoja con marca amarilla) |
+
+---
+
+## Cómo publicar en GitHub Pages
+
+### Si el repo ya existe (caso normal — Joako ya tenía joakoestratega.com en GitHub)
+
+**Opción A — GitHub Desktop:**
+1. Abre la carpeta local del repo.
+2. Borra TODO el contenido viejo (excepto `.git`).
+3. Copia el contenido de `LANDINGS/` (no la carpeta — su contenido) al repo.
+4. Commit message: `Sitio nuevo · modelo mayo 2026 · 4 landings interconectadas`.
+5. Push origin.
+
+**Opción B — Git CLI:**
+```bash
+cd /ruta/a/repo
+rm -rf *
+cp -r "ruta/a/LANDINGS/"* .
+git add .
+git commit -m "Sitio nuevo · modelo mayo 2026 · 4 landings interconectadas"
+git push origin main
+```
+
+En 1-2 minutos GitHub Pages reconstruye el sitio.
+
+### Si necesitas crear el repo desde cero
+
+1. github.com/new → nombre: `joakoestratega.github.io` (o el que ya tenías) → Public.
+2. Sube el contenido de `LANDINGS/`.
+3. Settings → Pages → Source: `main` branch, root.
+4. Settings → Pages → Custom domain: `joakoestratega.com` → Save → Enforce HTTPS.
+
+DNS Hostinger (si no estaba):
+
+| Tipo | Nombre | Valor | TTL |
+|---|---|---|---|
 | A | @ | 185.199.108.153 | 3600 |
 | A | @ | 185.199.109.153 | 3600 |
 | A | @ | 185.199.110.153 | 3600 |
 | A | @ | 185.199.111.153 | 3600 |
 | CNAME | www | tu-usuario.github.io | 3600 |
 
-- En GitHub: Settings → Pages → Custom domain: `joakoestratega.com` → Save → Espera el check verde → Marca "Enforce HTTPS"
+---
+
+## Cómo iterar después (CRO)
+
+El sistema está pensado para mejorar a partir de datos:
+
+1. **Semana 1-2 después de publicar:** revisa Microsoft Clarity. Mira las grabaciones de las primeras 50 visitas. Verás dónde la gente se pierde, qué no leen, qué los confunde.
+2. **Cada lunes:** abre Google Sheets de leads. ¿Cuántos llenaron formulario? ¿Cuáles parcialmente? ¿De qué hojas vienen?
+3. **Cada 2 semanas:** mira en GA4 los eventos `cta_click` agrupados por `cta_id`. Los CTAs con más clicks son los que están funcionando. Los que nadie toca, se cambian o se quitan.
+4. **Cuando quieras hacer un cambio fuerte (cambiar headline, cambiar precio, cambiar el orden de las secciones):** primero copia la página actual a `/plano-mpv/v2/` para hacer split test manual con tráfico de pauta dividido 50/50.
+
+Cuando vayas a iterar, avísame y te ayudo con la decisión.
 
 ---
 
-## CHECKLIST FINAL
+## Checklist final antes de promocionar
 
-- [ ] Subí mis testimonios a `imagenes/testimonios/` (test-1.jpg, test-2.jpg, ...)
-- [ ] Configuré el Apps Script y copié el URL `/exec`
-- [ ] Pegué el URL en `bootcamp-meta-ads/index.html` (donde dice `PEGA_AQUI_EL_URL_DE_TU_APPS_SCRIPT`)
-- [ ] Pegué el URL en `agencia/index.html` (mismo lugar)
-- [ ] Subí todo el contenido al repo de GitHub
-- [ ] Verifiqué que las 5 URLs funcionan:
-  - [ ] joakoestratega.com (home nueva)
-  - [ ] joakoestratega.com/comunidad
-  - [ ] joakoestratega.com/bootcamp-claude
-  - [ ] joakoestratega.com/bootcamp-meta-ads
-  - [ ] joakoestratega.com/agencia
-- [ ] Probé que los formularios guardan en Google Sheets (anótate tú primero como prueba)
-- [ ] Probé el botón verde de la comunidad y abre el grupo de WhatsApp
+- [ ] Configuré Apps Script y pegué el URL `/exec` en los 6 archivos.
+- [ ] Cambié `WHATSAPP_COMUNIDAD` por el link real del grupo en los 6 archivos.
+- [ ] Cambié `WHATSAPP_DIRECTO` por mi número real en los 6 archivos.
+- [ ] Subí todo a GitHub.
+- [ ] Probé las 4 URLs en el celular y en el computador.
+- [ ] Llené yo misma cada formulario para verificar que llega a Google Sheets.
+- [ ] Confirmé que el botón "Entrar al grupo" abre el WhatsApp real.
+- [ ] (Opcional) Configuré GA4, Meta Pixel y Clarity.
+- [ ] (Opcional) Subí 3-6 testimonios a `imagenes/testimonios/`.
 
 ---
 
-## CÓMO HACER CAMBIOS DESPUÉS
+## Cómo hacer cambios después
 
-Cualquier cambio (precio, fecha, copy, agregar testimonio, abrir fecha del Bootcamp Meta Ads):
+Para editar copy, precio, fechas o agregar contenido nuevo, abre el archivo `.html` correspondiente con cualquier editor:
 
-**Con GitHub Desktop:**
-1. Abre la carpeta clonada
-2. Edita el archivo correspondiente con cualquier editor
-3. Guarda → GitHub Desktop muestra el cambio → Commit → Push
-4. En 1-2 minutos sale al aire
+- Edita texto entre etiquetas (no toques las clases CSS ni las etiquetas).
+- Guarda → commit → push → 1-2 min y está al aire.
 
-**Desde GitHub web:**
-1. Entra al repo → archivo → lápiz (Edit)
-2. Cambia el texto
-3. Commit changes
+Si el cambio es grande (cambiar arquitectura, agregar página nueva, mover bloques), avísame y lo hago yo.
 
 ---
 
-## PRÓXIMOS PASOS RECOMENDADOS
-
-1. **Cuando tengas fecha del Bootcamp Meta Ads:** convierte la página de waitlist en landing de venta. Avísame y la actualizo.
-2. **Si tu bootcamp Claude tiene varias ediciones:** podemos crear sub-páginas tipo `/bootcamp-claude/agosto-2026/` para distintas fechas.
-3. **Página de "casos" o "cómo trabajo":** si ganas más testimonios públicos con permiso, podemos hacer una página dedicada con casos detallados.
-
----
-
-Cualquier error en el proceso, escríbeme.
+*Sitio creado: 2026-05-11. Versión: v1 modelo mayo 2026.*

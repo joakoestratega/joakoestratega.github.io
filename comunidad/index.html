@@ -3,213 +3,308 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Comunidad gratuita · Joako Estratega · Cada viernes en vivo</title>
-<meta name="description" content="Únete gratis al grupo de WhatsApp. Cada viernes analizo en vivo por qué un negocio no está vendiendo por internet. Trae el tuyo.">
-
-<meta property="og:title" content="Comunidad gratuita Joako Estratega">
-<meta property="og:description" content="Cada viernes analizo en vivo por qué un negocio no está vendiendo. Únete gratis.">
+<title>Comunidad WhatsApp · Estrategia los viernes en vivo · Joako Estratega</title>
+<meta name="description" content="Cada viernes hago un live estratégico de 45 min con un caso real, una estrategia aplicada y preguntas en vivo. Solo dentro del grupo de WhatsApp. Es gratis.">
+<meta property="og:title" content="Comunidad WhatsApp Joako Estratega · Estrategia los viernes en vivo">
+<meta property="og:description" content="Live estratégico cada viernes. Casos reales. Q&A directo. Gratis.">
 <meta property="og:type" content="website">
-
-<script src="https://cdn.tailwindcss.com"></script>
+<meta property="og:url" content="https://joakoestratega.com/comunidad/">
+<meta property="og:image" content="https://joakoestratega.com/imagenes/validacion/03-conversatorio-effix.webp">
+<link rel="canonical" href="https://joakoestratega.com/comunidad/">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;900&family=Bebas+Neue&display=swap" rel="stylesheet">
-
-<style>
-  html, body { background-color: #0F0F14; }
-  body { font-family: 'Montserrat', sans-serif; color: #fff; min-height: 100vh; position: relative; overflow-x: hidden; }
-  body::before {
-    content: '';
-    position: fixed;
-    top: -200px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 800px;
-    height: 800px;
-    background: radial-gradient(circle, rgba(34, 197, 94, 0.12) 0%, transparent 70%);
-    pointer-events: none;
-    z-index: 0;
-  }
-  body > * { position: relative; z-index: 1; }
-  html { scroll-behavior: smooth; }
-
-  .font-headline { font-family: 'Montserrat', sans-serif; font-weight: 900; }
-  .font-secondary { font-family: 'Bebas Neue', sans-serif; letter-spacing: 0.05em; }
-  .text-dorado { color: #F8B400; }
-  .bg-dorado { background-color: #F8B400; }
-  .border-dorado { border-color: #F8B400; }
-
-  @keyframes pulse-wa {
-    0%, 100% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.6); }
-    50% { box-shadow: 0 0 0 24px rgba(34, 197, 94, 0); }
-  }
-  .pulse-wa-cta { animation: pulse-wa 2s infinite; }
-
-  .btn-lift { transition: all 0.25s ease; }
-  .btn-lift:hover { transform: translateY(-3px) scale(1.04); box-shadow: 0 12px 28px rgba(0,0,0,0.45); }
-  .btn-lift:active { transform: translateY(0) scale(0.98); }
-
-  .check::before { content: "✓"; color: #22c55e; font-weight: bold; margin-right: 0.6rem; font-size: 1.2em; }
-  .x-mark::before { content: "✗"; color: #ef4444; font-weight: bold; margin-right: 0.6rem; font-size: 1.2em; }
-</style>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&family=Bebas+Neue&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/styles.css">
+<script>
+  window.JOAKO = {
+    APPS_SCRIPT_URL: 'PEGA_AQUI_EL_URL_DE_TU_APPS_SCRIPT',
+    GA4_ID: '', META_PIXEL_ID: '', CLARITY_ID: ''
+  };
+</script>
 </head>
 <body>
 
-<!-- BARRA SUPERIOR — VOLVER A HOME -->
-<div class="border-b border-white/10 px-4 py-3">
-  <div class="max-w-5xl mx-auto flex items-center justify-between">
-    <a href="../" class="text-sm text-gray-400 hover:text-dorado transition">← Volver a Joako Estratega</a>
-    <a href="https://wa.me/573028662556?text=Hola%20Joako" class="text-sm text-green-400 hover:text-green-300 transition hidden md:inline">¿Dudas? Escríbeme</a>
+<div class="barra-urgencia">
+  <div class="barra-urgencia-inner">
+    <span>💬 Live cada viernes · 7 pm hora Colombia · Gratis</span>
+    <a href="#unirme" class="btn-mini" data-cta="barra_unirme">Entrar al grupo</a>
   </div>
 </div>
 
-<!-- HERO MPV-driven -->
-<section class="px-4 pt-8 md:pt-16 pb-10 md:pb-16">
-  <div class="max-w-3xl mx-auto">
-
-    <span class="inline-block bg-green-500 text-black font-bold text-xs px-4 py-1.5 rounded-full mb-5 tracking-wider">100% GRATIS · GRUPO DE WHATSAPP</span>
-
-    <h1 class="font-headline text-3xl sm:text-4xl md:text-6xl leading-tight mb-4 md:mb-5">
-      Tráeme tu negocio cada viernes. <span class="text-dorado">En vivo te digo</span> por qué no vende.
-    </h1>
-
-    <p class="text-base md:text-xl mb-6 text-gray-200 leading-snug">
-      Grupo gratuito de WhatsApp. La consultoría que mi <strong class="text-dorado">agencia cobra a $1.500 USD/mes</strong>, aquí la doy abierta para validar mi método y construir comunidad.
-    </p>
-
-    <a href="https://chat.whatsapp.com/Cxh4sRUI5pVGTD1h8efEyp" target="_blank" rel="noopener" class="inline-flex items-center gap-3 bg-green-500 hover:bg-green-600 text-white font-bold py-4 px-8 rounded-lg transition text-base md:text-lg btn-lift pulse-wa-cta">
-      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-      Entrar al grupo de WhatsApp
+<header class="site-header">
+  <div class="header-inner">
+    <a href="../index.html" class="logo">
+      <img src="../imagenes/logos/joako-estratega-logo.png" alt="Joako Estratega">
     </a>
+    <nav class="nav">
+      <a href="../index.html#sistema">Sistema</a>
+      <a href="../metodo-mpv/index.html">Método MPV</a>
+      <a href="../plano-mpv/index.html">Plano MPV</a>
+      <a href="#unirme" data-cta="header_unirme" style="background: var(--dorado); color: var(--negro); padding: 10px 18px; border-radius: 8px; font-weight: 800;">Unirme</a>
+    </nav>
+    <button class="menu-toggle" aria-label="Menú" onclick="document.querySelector('.nav').classList.toggle('open')">☰</button>
+  </div>
+</header>
 
-    <!-- 4 condiciones MPV -->
-    <ul class="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-2 mt-6 text-sm md:text-base text-gray-200">
-      <li class="flex gap-2"><span class="text-dorado font-bold">✓</span> <span>Para quienes <strong>pierden plata en pauta</strong> y no saben dónde está la fuga</span></li>
-      <li class="flex gap-2"><span class="text-dorado font-bold">✓</span> <span><strong>Un toque y estás dentro.</strong> Es WhatsApp, no plataforma rara</span></li>
-      <li class="flex gap-2"><span class="text-dorado font-bold">✓</span> <span>Esta misma semana traes tu caso al viernes y <strong>sales con un ajuste claro</strong></span></li>
-      <li class="flex gap-2"><span class="text-dorado font-bold">✓</span> <span><strong>100% gratis.</strong> Sin tarjeta. Sales cuando quieras</span></li>
-    </ul>
-
-    <!-- Trust signal -->
-    <p class="mt-6 text-xs md:text-sm text-gray-400">
-      Estratega oficial Feria EFFIX · +500K USD operados · Sesiones públicas todos los viernes
-    </p>
-
+<section class="hero">
+  <div class="hero-inner">
+    <div>
+      <span class="section-tag">Comunidad WhatsApp · Gratis · Cupo abierto</span>
+      <h1>Trae tu negocio al <span class="destaca">viernes en vivo.</span></h1>
+      <p class="lead">Únete a la comunidad de WhatsApp donde aplico el <strong>Método MPV</strong> en negocios reales cada viernes a las 7 pm (hora Colombia). 45 minutos de estrategia + Q&A directo conmigo. Sin pauta, sin filtros, sin guion ensayado.</p>
+      <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+        <a href="#unirme" class="btn btn-primary btn-lg btn-lift pulse-cta" data-cta="hero_unirme">Quiero entrar al grupo</a>
+        <a href="#que-pasa" class="btn btn-secondary btn-lg btn-lift" data-cta="hero_ver_que_pasa">Ver qué pasa adentro</a>
+      </div>
+      <ul class="hero-bullets">
+        <li><strong>Viernes 7 pm</strong> hora Colombia</li>
+        <li><strong>45 min</strong> caso + estrategia + Q&amp;A</li>
+        <li><strong>$0</strong> y siempre será así</li>
+        <li><strong>Sales</strong> cuando quieras</li>
+      </ul>
+    </div>
+    <div class="hero-visual">
+      <picture>
+        <source srcset="../imagenes/validacion/03-conversatorio-effix.webp" type="image/webp">
+        <img src="../imagenes/validacion/03-conversatorio-effix.jpg" alt="Joako Estratega en mesa estratégica" loading="eager">
+      </picture>
+      <div class="caption">Conversatorio Feria EFFIX 2025</div>
+    </div>
   </div>
 </section>
 
-<!-- QUÉ ES -->
-<section class="px-4 py-16 md:py-20 bg-black/40 border-y border-white/10">
-  <div class="max-w-4xl mx-auto">
-    <p class="font-secondary text-dorado text-sm md:text-base mb-3 tracking-widest text-center">QUÉ VAS A ENCONTRAR DENTRO</p>
-    <h2 class="font-headline text-3xl md:text-5xl text-center mb-12 leading-tight">
-      Es la <span class="text-dorado">consultoría más cara</span><br>que he dado, gratis.
-    </h2>
+<section class="logos-marquee" style="padding: 30px 0;">
+  <p class="logos-marquee-label">El mismo estratega que asesora a estas marcas y eventos</p>
+  <div class="logos-marquee-wrap">
+    <div class="logos-track">
+      <div class="logo-slot"><img src="../imagenes/logos/feria-effix-w.png" alt="Feria EFFIX"></div>
+      <div class="logo-slot wide"><img src="../imagenes/logos/wake-up-w.png" alt="Wake Up"></div>
+      <div class="logo-slot wide"><img src="../imagenes/logos/luque-w.png" alt="Luque"></div>
+      <div class="logo-slot"><img src="../imagenes/logos/adschool-w.png" alt="AdSchool"></div>
+      <div class="logo-slot"><img src="../imagenes/logos/sanavit-w.png" alt="Sanavit"></div>
+      <div class="logo-slot wide"><img src="../imagenes/logos/academia-estratega-w.png" alt="Academia del Estratega"></div>
+      <div class="logo-slot"><img src="../imagenes/logos/neomentes-w.png" alt="Neomentes"></div>
+      <div class="logo-slot"><img src="../imagenes/logos/feria-effix-w.png" alt="Feria EFFIX"></div>
+      <div class="logo-slot wide"><img src="../imagenes/logos/wake-up-w.png" alt="Wake Up"></div>
+      <div class="logo-slot wide"><img src="../imagenes/logos/luque-w.png" alt="Luque"></div>
+      <div class="logo-slot"><img src="../imagenes/logos/adschool-w.png" alt="AdSchool"></div>
+      <div class="logo-slot"><img src="../imagenes/logos/sanavit-w.png" alt="Sanavit"></div>
+      <div class="logo-slot wide"><img src="../imagenes/logos/academia-estratega-w.png" alt="Academia del Estratega"></div>
+      <div class="logo-slot"><img src="../imagenes/logos/neomentes-w.png" alt="Neomentes"></div>
+      <div class="logo-slot"><img src="../imagenes/logos/feria-effix-w.png" alt="Feria EFFIX"></div>
+      <div class="logo-slot wide"><img src="../imagenes/logos/wake-up-w.png" alt="Wake Up"></div>
+      <div class="logo-slot wide"><img src="../imagenes/logos/luque-w.png" alt="Luque"></div>
+      <div class="logo-slot"><img src="../imagenes/logos/adschool-w.png" alt="AdSchool"></div>
+      <div class="logo-slot"><img src="../imagenes/logos/sanavit-w.png" alt="Sanavit"></div>
+      <div class="logo-slot wide"><img src="../imagenes/logos/academia-estratega-w.png" alt="Academia del Estratega"></div>
+      <div class="logo-slot"><img src="../imagenes/logos/neomentes-w.png" alt="Neomentes"></div>
+    </div>
+  </div>
+</section>
 
-    <div class="grid md:grid-cols-2 gap-5">
-      <div class="bg-black/60 border border-green-500/30 p-6 rounded-xl">
-        <div class="text-4xl mb-3">🔴</div>
-        <p class="font-headline text-xl mb-2">Sesión en vivo cada viernes</p>
-        <p class="text-gray-300 text-sm leading-relaxed">Análisis de casos reales. Tú traes tu negocio, yo te digo en vivo qué está fallando. Sin filtros, sin promesas mágicas.</p>
+<section id="que-pasa">
+  <div class="container">
+    <div class="section-centered">
+      <span class="section-tag">Qué pasa adentro</span>
+      <h2 class="section-title">No es un grupo de spam. <span class="text-dorado">Es estrategia aplicada cada semana.</span></h2>
+    </div>
+    <div class="pasos-grid">
+      <div class="paso-card">
+        <span class="paso-num">L</span>
+        <h4>Lunes · Audio resumen</h4>
+        <p>Audio de 60-90 segundos con la idea más importante del live anterior. Para que se quede masticada en tu cabeza.</p>
       </div>
-      <div class="bg-black/60 border border-green-500/30 p-6 rounded-xl">
-        <div class="text-4xl mb-3">💬</div>
-        <p class="font-headline text-xl mb-2">Acceso directo a mí</p>
-        <p class="text-gray-300 text-sm leading-relaxed">Preguntas, dudas, casos puntuales. Lo que las agencias cobran $1.500 USD al mes por contestar, aquí lo respondo.</p>
+      <div class="paso-card">
+        <span class="paso-num">M</span>
+        <h4>Miércoles · Caso real</h4>
+        <p>Un caso de una clienta o un negocio que estoy revisando. Qué hace mal, qué cambiaría, por qué.</p>
       </div>
-      <div class="bg-black/60 border border-green-500/30 p-6 rounded-xl">
-        <div class="text-4xl mb-3">📚</div>
-        <p class="font-headline text-xl mb-2">Recursos del Método MPV</p>
-        <p class="text-gray-300 text-sm leading-relaxed">Plantillas, marcos, ejemplos reales de mensaje, creativo, página y cierre. El sistema completo, en pedazos digeribles.</p>
+      <div class="paso-card">
+        <span class="paso-num">V</span>
+        <h4>Viernes · Recordatorio</h4>
+        <p>En la mañana te aviso de qué va el live de la noche para que llegues con la pregunta lista.</p>
       </div>
-      <div class="bg-black/60 border border-green-500/30 p-6 rounded-xl">
-        <div class="text-4xl mb-3">🤝</div>
-        <p class="font-headline text-xl mb-2">Comunidad de emprendedores</p>
-        <p class="text-gray-300 text-sm leading-relaxed">Negocios que ya están vendiendo. Aprendes de sus casos. Compartes el tuyo. Nadie te juzga porque todos pasamos por lo mismo.</p>
+      <div class="paso-card">
+        <span class="paso-num">V</span>
+        <h4>Viernes 7 pm · Live</h4>
+        <p>45 minutos. Caso real + estrategia paso a paso + Q&amp;A directo conmigo. Si no puedes en vivo, queda grabado.</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- SESIÓN DEL VIERNES DESTACADA -->
-<section class="px-4 py-16 md:py-20">
-  <div class="max-w-4xl mx-auto bg-azul/20 border-2 border-dorado rounded-2xl p-8 md:p-12 text-center" style="background-color: rgba(33, 32, 156, 0.2);">
-    <p class="font-secondary text-dorado text-xl md:text-2xl mb-4 tracking-widest">🔴 LA JOYA DE LA COMUNIDAD</p>
-    <h2 class="font-headline text-3xl md:text-5xl mb-6 leading-tight">
-      "Tráeme tu negocio<br>y te digo <span class="text-dorado">por qué no vende."</span>
-    </h2>
-    <p class="text-gray-200 max-w-2xl mx-auto mb-6 text-base md:text-lg leading-relaxed">
-      Cada viernes en vivo. Tomo casos reales, los reviso públicamente y muestro qué está roto en el mensaje, la pauta o el cierre. Si es el tuyo, te ahorras meses de probar a ciegas.
-    </p>
-    <p class="text-sm text-gray-400 italic">"Una sesión vale más que tres meses de YouTube." — comentario de un miembro</p>
+<section style="background: rgba(0,0,0,0.3);">
+  <div class="container">
+    <div class="section-centered">
+      <span class="section-tag">Lo que cambia con el grupo</span>
+      <h2 class="section-title">Vas a dejar de consumir contenido y a empezar a <span class="text-dorado">aplicar estrategia.</span></h2>
+    </div>
+    <div class="antes-despues">
+      <div class="antes-card">
+        <h4>Antes</h4>
+        <ul>
+          <li>Consumes posts y reels que no te llevan a ningún lado</li>
+          <li>Sigues a 50 personas y no aplicas lo de ninguna</li>
+          <li>Cada idea nueva te confunde más</li>
+          <li>No tienes a nadie real con quien resolver dudas</li>
+        </ul>
+      </div>
+      <div class="despues-card">
+        <h4>Después</h4>
+        <ul>
+          <li>Tienes una hora a la semana de estrategia aplicada en vivo</li>
+          <li>Ves cómo se piensa un caso real, no teoría</li>
+          <li>Preguntas tu situación concreta y te respondo</li>
+          <li>Conoces a otras profesionales en tu mismo proceso</li>
+        </ul>
+      </div>
+    </div>
   </div>
 </section>
 
-<!-- PARA QUIÉN ES / NO ES -->
-<section class="px-4 py-16 md:py-20 bg-black/40 border-y border-white/10">
-  <div class="max-w-5xl mx-auto">
-    <p class="font-secondary text-dorado text-sm md:text-base mb-3 tracking-widest text-center">FILTRO HONESTO</p>
-    <h2 class="font-headline text-3xl md:text-5xl text-center mb-12 leading-tight">
-      ¿Esta comunidad<br>es <span class="text-dorado">para ti?</span>
-    </h2>
+<section>
+  <div class="container section-centered">
+    <span class="section-tag">Reglas claras</span>
+    <h2 class="section-title">3 reglas <span class="text-dorado">para que el grupo funcione.</span></h2>
+    <div class="metodo-grid" style="grid-template-columns: repeat(3, 1fr); max-width: 900px; margin: 36px auto 0;">
+      <div class="metodo-card">
+        <div class="metodo-num">1</div>
+        <h4>Cero promoción de servicios</h4>
+        <p>El que vende su servicio en el grupo se va. Es para aprender, no para captar clientes ajenos.</p>
+      </div>
+      <div class="metodo-card">
+        <div class="metodo-num">2</div>
+        <h4>Preguntas concretas</h4>
+        <p>Pregunta sobre tu caso real con datos. Yo respondo con estrategia clara, no con teoría genérica.</p>
+      </div>
+      <div class="metodo-card">
+        <div class="metodo-num">3</div>
+        <h4>Respeto entre todas</h4>
+        <p>Acá hay desde dueñas que facturan poco hasta agencias. Todas merecen el mismo trato.</p>
+      </div>
+    </div>
+  </div>
+</section>
 
-    <div class="grid md:grid-cols-2 gap-6">
-      <div class="bg-green-500/10 border-2 border-green-500 rounded-2xl p-8">
-        <h3 class="font-headline text-2xl mb-5 text-green-400">SÍ, si...</h3>
-        <ul class="space-y-3 text-gray-200">
-          <li class="check">Tienes un negocio activo (o muy cerca de lanzarlo)</li>
-          <li class="check">Quieres aprender a vender por internet sin depender de agencias</li>
-          <li class="check">Estás dispuesto a ejecutar lo que aprendes</li>
-          <li class="check">Te interesa el Mensaje Principal de Venta más que las "tácticas mágicas"</li>
-          <li class="check">Quieres rodearte de gente seria que también está construyendo</li>
+<section id="unirme" style="background: rgba(0,0,0,0.3);">
+  <div class="container">
+    <div class="dos-columnas">
+      <div>
+        <span class="section-tag">Entrar al grupo</span>
+        <h2 class="section-title">Déjame tus datos y te <span class="text-dorado">mando el link.</span></h2>
+        <p style="color: var(--gris-1); font-size: 17px; line-height: 1.6;">Solo te pido nombre y WhatsApp. Te mando el link al grupo de inmediato y un mensaje de bienvenida con lo más importante para sacarle provecho.</p>
+        <ul class="lista-check mt-3">
+          <li>Acceso inmediato al grupo</li>
+          <li>Audio de bienvenida con cómo aprovecharlo</li>
+          <li>Te aviso del próximo live</li>
+          <li>Sin spam, sin promociones diarias</li>
         </ul>
       </div>
 
-      <div class="bg-red-500/10 border-2 border-red-500 rounded-2xl p-8">
-        <h3 class="font-headline text-2xl mb-5 text-red-400">NO, si...</h3>
-        <ul class="space-y-3 text-gray-200">
-          <li class="x-mark">Buscas hacerte rico de la noche a la mañana</li>
-          <li class="x-mark">Cambias de idea de negocio cada semana</li>
-          <li class="x-mark">Quieres que alguien te dé el "botón mágico"</li>
-          <li class="x-mark">No estás dispuesto a ejecutar nada</li>
-          <li class="x-mark">Vienes a vender o spamear el grupo</li>
-        </ul>
+      <div>
+        <form class="form-bloque" data-form="Comunidad WhatsApp" data-success="gracias/index.html">
+          <h3>Únete a la comunidad</h3>
+          <p class="form-sub">Te llega el link al grupo en menos de 5 minutos por WhatsApp.</p>
+
+          <label for="nombre">Nombre</label>
+          <input id="nombre" name="nombre" type="text" required autocomplete="name">
+
+          <label for="whatsapp">WhatsApp (con indicativo país)</label>
+          <input id="whatsapp" name="whatsapp" type="tel" required autocomplete="tel" placeholder="+57 300 123 4567">
+
+          <label for="profesion">¿A qué te dedicas?</label>
+          <input id="profesion" name="profesion" type="text" placeholder="Ej: psicóloga, abogada, coach...">
+
+          <button type="submit" class="btn btn-primary btn-block btn-lg btn-lift" data-cta="form_unirme_comunidad">Unirme al grupo</button>
+
+          <small class="legal">Al enviar aceptas que te contacte por WhatsApp con contenido del grupo. Cero promociones diarias.</small>
+        </form>
       </div>
     </div>
   </div>
 </section>
 
-<!-- CTA FINAL -->
-<section class="px-4 py-20 md:py-28 text-center">
-  <div class="max-w-3xl mx-auto">
-    <h2 class="font-headline text-4xl md:text-6xl mb-6 leading-none">
-      Es <span class="text-dorado">gratis.</span><br>Y vale más<br>que muchos cursos pagos.
-    </h2>
-    <p class="text-base md:text-xl text-gray-300 max-w-2xl mx-auto mb-10 leading-relaxed">
-      Un toque. Estás dentro. Sales cuando quieras.
-    </p>
-
-    <a href="https://chat.whatsapp.com/Cxh4sRUI5pVGTD1h8efEyp" target="_blank" rel="noopener" class="inline-flex items-center gap-3 bg-green-500 hover:bg-green-600 text-white font-bold py-5 px-10 rounded-lg transition text-lg md:text-xl btn-lift pulse-wa-cta">
-      <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-      Unirme al grupo gratis
-    </a>
-
-    <p class="text-xs text-gray-500 mt-6">Si el link no abre, copia y pega: <span class="text-gray-300 break-all">chat.whatsapp.com/Cxh4sRUI5pVGTD1h8efEyp</span></p>
+<section>
+  <div class="container section-centered">
+    <span class="section-tag">Lo que más me preguntan</span>
+    <h2 class="section-title">Preguntas frecuentes</h2>
+    <div class="faq-list" style="text-align: left;">
+      <details class="faq-item">
+        <summary>¿Es realmente gratis?</summary>
+        <p>Sí. No tienes que pagar nada para entrar ni para quedarte. La comunidad es mi laboratorio público.</p>
+      </details>
+      <details class="faq-item">
+        <summary>¿Vas a venderme algo todo el tiempo?</summary>
+        <p>No. Si después de un tiempo decides comprar el Plano MPV o algún otro producto, perfecto. Si no, te quedas y aprovechas el contenido. No spameo a la comunidad.</p>
+      </details>
+      <details class="faq-item">
+        <summary>¿Qué pasa si no puedo ir al live en vivo?</summary>
+        <p>Queda grabado en el grupo y puedes verlo cuando quieras. La conversación de Q&amp;A queda escrita ahí también.</p>
+      </details>
+      <details class="faq-item">
+        <summary>¿Hay un cupo máximo?</summary>
+        <p>Por ahora no. Si llegamos a un punto donde la conversación se vuelve impersonal, abriré un segundo grupo o cerraré entrada. Lo aviso con tiempo.</p>
+      </details>
+      <details class="faq-item">
+        <summary>¿Por qué los viernes a las 7 pm hora Colombia?</summary>
+        <p>Funciona bien para Colombia, México centro, Ecuador, Perú y Chile. Si estás en España o muy al sur, te queda en horario alto pero la grabación queda lista para el sábado.</p>
+      </details>
+    </div>
   </div>
 </section>
 
-<!-- FOOTER -->
-<footer class="border-t border-white/10 px-4 py-10 text-center">
-  <div class="max-w-4xl mx-auto">
-    <div class="flex flex-wrap justify-center gap-6 text-sm text-gray-400 mb-4">
-      <a href="../" class="hover:text-dorado transition">Inicio</a>
-      <a href="../bootcamp-claude/" class="hover:text-dorado transition">Bootcamp Claude</a>
-      <a href="../bootcamp-meta-ads/" class="hover:text-dorado transition">Bootcamp Meta Ads</a>
-      <a href="../agencia/" class="hover:text-dorado transition">Agencia</a>
+<section class="cta-final">
+  <div class="container section-centered">
+    <span class="section-tag">Decisión simple</span>
+    <h2 class="section-title">No tienes que decidir nada hoy. <span class="text-dorado">Solo entra y mira.</span></h2>
+    <p class="section-subtitle">Si después de 2 viernes no te aporta nada, te sales del grupo. Pero si entra estrategia donde antes había scroll, lo vas a sentir rápido.</p>
+    <a href="#unirme" class="btn btn-primary btn-lg btn-lift pulse-cta" data-cta="cta_final_unirme">Quiero entrar al grupo</a>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div>
+      <div class="logo-footer"><img src="../imagenes/logos/joako-estratega-logo.png" alt="Joako Estratega"></div>
+      <p>Estratega oficial de la Feria EFFIX. Construyo sistemas de ventas por internet con el Método MPV.</p>
     </div>
-    <p class="text-xs text-gray-500">© 2026 Joako Estratega · Medellín, Colombia</p>
+    <div>
+      <h5>Productos</h5>
+      <ul>
+        <li><a href="../plano-mpv/index.html">Plano MPV · $200.000</a></li>
+        <li><a href="../index.html#productos">Constructor MPV</a></li>
+        <li><a href="../index.html#contacto">MPV en Operación</a></li>
+      </ul>
+    </div>
+    <div>
+      <h5>Recursos</h5>
+      <ul>
+        <li><a href="index.html">Comunidad WhatsApp</a></li>
+        <li><a href="../metodo-mpv/index.html">Método MPV</a></li>
+      </ul>
+    </div>
+    <div>
+      <h5>Contacto</h5>
+      <ul>
+        <li><a href="https://wa.me/573028662556?text=Hola%20Joako">WhatsApp directo</a></li>
+        <li><a href="mailto:joakoestratega@gmail.com">joakoestratega@gmail.com</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 Joaquín Rojas Peña · Joako Estratega</span>
+    <span>Hecho con cariño y mucho café.</span>
   </div>
 </footer>
 
+<a href="https://wa.me/573028662556?text=Hola%20Joako%2C%20quiero%20entrar%20a%20la%20comunidad" target="_blank" rel="noopener" class="wa-float" aria-label="WhatsApp" data-cta="wa_float">
+  <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+
+<div class="sticky-mobile">
+  <a href="#unirme" class="btn btn-primary btn-block" data-cta="sticky_mobile_unirme">Entrar al grupo · gratis →</a>
+</div>
+
+<script src="../assets/main.js" defer></script>
 </body>
 </html>

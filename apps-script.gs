@@ -24,10 +24,12 @@ const SHEET_ID = 'PEGA_AQUI_EL_ID_DE_TU_GOOGLE_SHEETS';
 const EMAIL_NOTIFICACION = 'joakoestratega@gmail.com';
 
 // Mapa producto → nombre de hoja en Google Sheets
+// Actualizado 2026-05-11 con la escalera vigente.
 const HOJAS_POR_PRODUCTO = {
-  'Bootcamp Claude': 'Leads Bootcamp Claude',
-  'Bootcamp Meta Ads (Waitlist)': 'Lista Espera Meta Ads',
-  'Aplicación Agencia': 'Aplicaciones Agencia',
+  'Plano MPV': 'Leads Plano MPV',
+  'Comunidad WhatsApp': 'Leads Comunidad',
+  'Newsletter Método MPV': 'Leads Método MPV',
+  'Contacto Home': 'Contactos Home',
   'default': 'Leads Generales'
 };
 

@@ -3,232 +3,92 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Joako Estratega · Construyo sistemas que venden por internet</title>
-<meta name="description" content="Estratega de la Feria EFFIX. Enseño a emprendedores a construir su propio sistema de ventas por internet con el Método MPV. Bootcamps, comunidad gratuita, agencia.">
+<title>Joako Estratega · Construyo el sistema de ventas por internet de tu negocio</title>
+<meta name="description" content="Estratega oficial de la Feria EFFIX. Ayudo a abogadas, psicólogas, coaches y consultoras a construir el Mensaje Principal de Venta y vender por internet con un sistema, no con improvisación.">
+<meta name="author" content="Joaquín Rojas Peña — Joako Estratega">
 
-<!-- Open Graph -->
-<meta property="og:title" content="Joako Estratega · Construyo sistemas que venden">
-<meta property="og:description" content="El 80% de cualquier venta está en el Mensaje Principal de Venta. Aprende a construirlo.">
+<meta property="og:title" content="Joako Estratega · Sistema de ventas por internet con Método MPV">
+<meta property="og:description" content="El 80% del problema no es la pauta. Es el Mensaje Principal de Venta. Te enseño cómo construirlo.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://joakoestratega.com">
+<meta property="og:image" content="https://joakoestratega.com/imagenes/validacion/08-tarima-effix-hero.webp">
+<meta name="twitter:card" content="summary_large_image">
 
-<script src="https://cdn.tailwindcss.com"></script>
+<link rel="canonical" href="https://joakoestratega.com/">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;900&family=Bebas+Neue&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&family=Bebas+Neue&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/styles.css">
 
-<style>
-  :root {
-    --azul: #21209C;
-    --amarillo: #F8B400;
-    --negro: #0F0F14;
-    --blanco: #FFFFFF;
-  }
-  html { scroll-behavior: smooth; }
-  html, body { background-color: #0F0F14; }
-  body { font-family: 'Montserrat', sans-serif; color: #fff; min-height: 100vh; position: relative; overflow-x: hidden; }
-
-  /* Gradiente dorado decorativo en capa separada */
-  body::before {
-    content: '';
-    position: fixed;
-    top: -200px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 900px;
-    height: 900px;
-    background: radial-gradient(circle, rgba(248, 180, 0, 0.14) 0%, transparent 70%);
-    pointer-events: none;
-    z-index: 0;
-  }
-  body > * { position: relative; z-index: 1; }
-
-  .font-headline { font-family: 'Montserrat', sans-serif; font-weight: 900; }
-  .font-secondary { font-family: 'Bebas Neue', sans-serif; letter-spacing: 0.05em; }
-
-  .text-dorado { color: #F8B400; }
-  .bg-dorado { background-color: #F8B400; }
-  .border-dorado { border-color: #F8B400; }
-  .text-azul { color: #21209C; }
-  .bg-azul { background-color: #21209C; }
-  .border-azul { border-color: #21209C; }
-
-  /* Animaciones */
-  @keyframes pulse-dorado {
-    0%, 100% { box-shadow: 0 0 0 0 rgba(248, 180, 0, 0.6); }
-    50% { box-shadow: 0 0 0 18px rgba(248, 180, 0, 0); }
-  }
-  .pulse-cta { animation: pulse-dorado 2s infinite; }
-
-  @keyframes pulse-wa {
-    0%, 100% { box-shadow: 0 4px 12px rgba(0,0,0,0.3), 0 0 0 0 rgba(34, 197, 94, 0.5); }
-    50% { box-shadow: 0 4px 12px rgba(0,0,0,0.3), 0 0 0 14px rgba(34, 197, 94, 0); }
-  }
-  .pulse-wa { animation: pulse-wa 2.5s infinite; }
-
-  .btn-lift { transition: all 0.25s ease; }
-  .btn-lift:hover { transform: translateY(-3px) scale(1.04); box-shadow: 0 12px 28px rgba(0,0,0,0.45); }
-  .btn-lift:active { transform: translateY(0) scale(0.98); }
-
-  /* Card hover */
-  .service-card { transition: all 0.3s ease; }
-  .service-card:hover { transform: translateY(-6px); border-color: #F8B400; }
-
-  /* WhatsApp flotante */
-  .wa-float {
-    position: fixed; bottom: 1.5rem; right: 1.5rem; z-index: 50;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-    animation: pulse-wa 2.5s infinite;
-  }
-
-  /* Sticky bottom mobile */
-  .sticky-mobile { display: none; }
-  @media (max-width: 768px) {
-    .sticky-mobile { display: block; }
-    body { padding-bottom: 5rem; }
-    .wa-float { bottom: 5.5rem; }
-  }
-
-  /* Reveal on scroll */
-  .reveal { opacity: 0; transform: translateY(30px); transition: all 0.7s ease; }
-  .reveal.active { opacity: 1; transform: translateY(0); }
-
-  /* Marquee de logos: silueta blanca uniforme sobre el fondo oscuro de la página.
-     Cada logo va en un "slot" de altura fija para uniformar lo visual. */
-  .logos-marquee { overflow: hidden; position: relative; }
-  .logos-marquee::before,
-  .logos-marquee::after {
-    content: '';
-    position: absolute;
-    top: 0; bottom: 0;
-    width: 80px;
-    z-index: 2;
-    pointer-events: none;
-  }
-  .logos-marquee::before { left: 0; background: linear-gradient(to right, #0F0F14, transparent); }
-  .logos-marquee::after  { right: 0; background: linear-gradient(to left,  #0F0F14, transparent); }
-  .logos-track {
-    display: flex;
-    width: max-content;
-    animation: marquee-right 22s linear infinite;
-    align-items: center;
-  }
-  .logos-track:hover { animation-play-state: paused; }
-  .logo-slot {
-    flex-shrink: 0;
-    height: 56px;
-    width: 180px;
-    margin: 0 28px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    opacity: 0.7;
-    transition: opacity 0.3s ease, transform 0.3s ease;
-  }
-  .logo-slot:hover {
-    opacity: 1;
-    transform: scale(1.05);
-  }
-  .logo-slot img {
-    max-height: 100%;
-    max-width: 100%;
-    width: auto;
-    height: auto;
-    object-fit: contain;
-  }
-  /* Algunos logos son anchos por naturaleza (Luque, Academia) — les damos slot mayor */
-  .logo-slot.wide { width: 240px; }
-  /* Wake Up es estrecho — lo damos slot menor para que no quede aire enorme */
-  .logo-slot.narrow { width: 110px; }
-  @keyframes marquee-right {
-    0%   { transform: translateX(-33.333%); }
-    100% { transform: translateX(0); }
-  }
-  @media (max-width: 768px) {
-    .logo-slot { height: 40px; width: 140px; margin: 0 18px; }
-    .logo-slot.wide { width: 180px; }
-    .logo-slot.narrow { width: 80px; }
-  }
-</style>
+<script>
+  window.JOAKO = {
+    APPS_SCRIPT_URL: 'PEGA_AQUI_EL_URL_DE_TU_APPS_SCRIPT',
+    GA4_ID: '',
+    META_PIXEL_ID: '',
+    CLARITY_ID: ''
+  };
+</script>
 </head>
 <body>
 
-<!-- ============================================ -->
-<!-- BARRA DE URGENCIA STICKY                       -->
-<!-- ============================================ -->
-<!-- Barra superior. Hoy promueve el evento más urgente: Bootcamp Claude. Cuando pase el 6 junio, cambiar al siguiente evento (bootcamp Meta Ads u otro). -->
-<div class="bg-dorado text-black py-3 px-4 sticky top-0 z-40 shadow-md">
-  <div class="max-w-6xl mx-auto flex flex-row items-center justify-center gap-3 md:gap-5 text-xs sm:text-sm md:text-base">
-    <span class="font-semibold whitespace-nowrap">🔥 <span class="hidden sm:inline">Bootcamp presencial · Sábado 6 de junio · Medellín · </span>10 cupos</span>
-    <a href="bootcamp-claude/" class="bg-black text-white font-bold px-3 py-1.5 sm:px-5 sm:py-2 rounded-md hover:bg-azul transition text-xs sm:text-sm whitespace-nowrap shadow-lg btn-lift flex-shrink-0">
-      <span class="hidden sm:inline">Ver bootcamp</span><span class="sm:hidden">Ver</span>
-    </a>
+<!-- BARRA SUPERIOR -->
+<div class="barra-urgencia">
+  <div class="barra-urgencia-inner">
+    <span>💬 Comunidad gratuita · Sesión en vivo cada viernes · Trae tu negocio</span>
+    <a href="comunidad/index.html" class="btn-mini" data-cta="barra_comunidad">Entrar gratis</a>
   </div>
 </div>
 
-<!-- ============================================ -->
-<!-- HERO MPV-driven                               -->
-<!-- ============================================ -->
-<section class="px-4 pt-8 md:pt-16 pb-12 md:pb-20">
-  <div class="max-w-6xl mx-auto grid md:grid-cols-5 gap-8 md:gap-12 items-center">
+<!-- HEADER -->
+<header class="site-header">
+  <div class="header-inner">
+    <a href="index.html" class="logo">
+      <img src="imagenes/logos/joako-estratega-logo.png" alt="Joako Estratega">
+    </a>
+    <nav class="nav">
+      <a href="#sistema">Sistema</a>
+      <a href="#productos">Productos</a>
+      <a href="metodo-mpv/index.html">Método MPV</a>
+      <a href="comunidad/index.html">Comunidad</a>
+      <a href="plano-mpv/index.html" data-cta="header_plano_mpv" style="background: var(--dorado); color: var(--negro); padding: 10px 18px; border-radius: 8px; font-weight: 800;">Empezar</a>
+    </nav>
+    <button class="menu-toggle" aria-label="Menú" onclick="document.querySelector('.nav').classList.toggle('open')">☰</button>
+  </div>
+</header>
 
-    <!-- Columna texto (3/5) -->
-    <div class="md:col-span-3">
-
-      <!-- H1: dolor literal en la voz del cliente final (Andrés) -->
-      <h1 class="font-headline text-3xl sm:text-4xl md:text-6xl leading-tight mb-4 md:mb-5">
-        Llevas meses pagando pauta y <span class="text-dorado">no llegas al punto de equilibrio.</span>
-      </h1>
-
-      <!-- Subtítulo: nombra el problema real + invita gratis -->
-      <p class="text-base md:text-xl mb-6 md:mb-7 text-gray-200 leading-snug">
-        Soy Joako Estratega. El 80% del problema no es Meta, ni el presupuesto: es el <strong class="text-dorado">Mensaje Principal de Venta</strong>. Tráeme tu negocio al viernes en vivo y te digo qué ajustar primero. Gratis.
-      </p>
-
-      <!-- CTA principal único: comunidad gratis (lead magnet) -->
-      <a href="comunidad/" class="block sm:inline-block bg-dorado text-black font-bold py-4 px-8 rounded-lg hover:bg-yellow-400 transition text-base md:text-lg btn-lift pulse-cta text-center">
-        Quiero entrar a la comunidad gratis
-      </a>
-
-      <!-- 4 condiciones MPV en bullets compactos -->
-      <ul class="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-2 mt-6 text-sm md:text-base text-gray-200">
-        <li class="flex gap-2"><span class="text-dorado font-bold">✓</span> <span>Para dueños <strong>cansados de improvisar</strong> marketing</span></li>
-        <li class="flex gap-2"><span class="text-dorado font-bold">✓</span> <span><strong>Sin 20 herramientas.</strong> Solo el orden correcto</span></li>
-        <li class="flex gap-2"><span class="text-dorado font-bold">✓</span> <span><strong>Esta semana</strong> ya tienes el primer ajuste útil</span></li>
-        <li class="flex gap-2"><span class="text-dorado font-bold">✓</span> <span><strong>100% gratis.</strong> Sales cuando quieras</span></li>
-      </ul>
-
-    </div>
-
-    <!-- Columna foto (2/5) - Joaquín en tarima Feria EFFIX 2025 -->
-    <div class="md:col-span-2">
-      <div class="relative rounded-2xl overflow-hidden border-2 border-dorado shadow-2xl">
-        <picture>
-          <source srcset="imagenes/validacion/08-tarima-effix-hero.webp" type="image/webp">
-          <img src="imagenes/validacion/08-tarima-effix-hero.jpg" alt="Joako Estratega en la tarima de Feria EFFIX 2025" class="w-full h-auto block" loading="eager">
-        </picture>
-        <!-- Caption discreto sobre la imagen -->
-        <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/90 to-transparent p-4">
-          <p class="text-xs md:text-sm text-white font-semibold">Tarima Feria EFFIX 2025 · Medellín</p>
-        </div>
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div>
+      <span class="section-tag">Estratega oficial de Feria EFFIX</span>
+      <h1>Vendes tu servicio, pero te cuesta hacerlo crecer <span class="destaca">por internet.</span></h1>
+      <p class="lead">Soy <strong>Joako Estratega</strong>. Ayudo a abogadas, psicólogas, coaches, terapeutas y consultoras a construir el <strong>Mensaje Principal de Venta</strong> y montar el sistema que vende por ti, sin que tengas que vivir pegada al celular.</p>
+      <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+        <a href="plano-mpv/index.html" class="btn btn-primary btn-lg btn-lift pulse-cta" data-cta="hero_plano_mpv">Construir mi mensaje en 7 días</a>
+        <a href="comunidad/index.html" class="btn btn-secondary btn-lg btn-lift" data-cta="hero_comunidad">Entrar a la comunidad gratis</a>
       </div>
+      <ul class="hero-bullets">
+        <li>Para dueñas <strong>cansadas de improvisar</strong> el marketing</li>
+        <li><strong>Sin 20 herramientas.</strong> Solo el orden correcto</li>
+        <li><strong>Esta semana</strong> ya tienes el primer ajuste útil</li>
+        <li><strong>Empieza gratis.</strong> Sales cuando quieras</li>
+      </ul>
     </div>
 
+    <div class="hero-visual">
+      <picture>
+        <source srcset="imagenes/validacion/08-tarima-effix-hero.webp" type="image/webp">
+        <img src="imagenes/validacion/08-tarima-effix-hero.jpg" alt="Joako Estratega en la tarima de Feria EFFIX 2025" loading="eager">
+      </picture>
+      <div class="caption">Tarima Feria EFFIX 2025 · Medellín</div>
+    </div>
   </div>
 </section>
 
-<!-- ============================================ -->
-<!-- LOGOS EN LOS QUE HE TRABAJADO Y ESTADO        -->
-<!-- Marquee animado. Mezcla clientes directos    -->
-<!-- (EFFIX, Sanavit, AdSchool, Academia del      -->
-<!-- Estratega) con eventos donde estuve vía      -->
-<!-- AdSchool (Wake Up, Luque Business Summit).   -->
-<!-- ============================================ -->
-<section class="py-8 md:py-10 border-y border-white/10 bg-black/30">
-  <p class="text-center text-xs md:text-sm text-gray-500 uppercase tracking-widest mb-5 px-4">
-    Donde he estado · Eventos y marcas
-  </p>
-  <div class="logos-marquee">
+<!-- LOGOS MARQUEE -->
+<section class="logos-marquee" style="padding: 36px 0;">
+  <p class="logos-marquee-label">Donde he estado · Eventos y marcas con las que he trabajado</p>
+  <div class="logos-marquee-wrap">
     <div class="logos-track">
       <!-- Set 1 -->
       <div class="logo-slot"><img src="imagenes/logos/feria-effix-w.png" alt="Feria EFFIX"></div>
@@ -246,7 +106,7 @@
       <div class="logo-slot"><img src="imagenes/logos/sanavit-w.png" alt="Sanavit"></div>
       <div class="logo-slot wide"><img src="imagenes/logos/academia-estratega-w.png" alt="Academia del Estratega"></div>
       <div class="logo-slot"><img src="imagenes/logos/neomentes-w.png" alt="Neomentes"></div>
-      <!-- Set 3 (triplicado para loop continuo sin huecos) -->
+      <!-- Set 3 -->
       <div class="logo-slot"><img src="imagenes/logos/feria-effix-w.png" alt="Feria EFFIX"></div>
       <div class="logo-slot wide"><img src="imagenes/logos/wake-up-w.png" alt="Wake Up Conferences"></div>
       <div class="logo-slot wide"><img src="imagenes/logos/luque-w.png" alt="Luque Business Summit"></div>
@@ -258,428 +118,368 @@
   </div>
 </section>
 
-<!-- ============================================ -->
-<!-- BANDA DE CREDIBILIDAD                          -->
-<!-- ============================================ -->
-<section class="bg-black/40 border-y border-white/10 py-10 px-4">
-  <div class="max-w-5xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+<!-- BANDA CREDIBILIDAD -->
+<section class="credibilidad" style="padding: 38px 0;">
+  <div class="credibilidad-grid">
     <div>
-      <p class="font-headline text-3xl md:text-4xl text-dorado">+4 años</p>
-      <p class="text-xs md:text-sm text-gray-400 mt-1 uppercase tracking-wider">construyendo sistemas de ventas</p>
+      <p class="stat-num">+4 años</p>
+      <p class="stat-label">construyendo sistemas de ventas</p>
     </div>
     <div>
-      <p class="font-headline text-3xl md:text-4xl text-dorado">$500K+</p>
-      <p class="text-xs md:text-sm text-gray-400 mt-1 uppercase tracking-wider">USD gestionados en Meta Ads</p>
+      <p class="stat-num">$500K+</p>
+      <p class="stat-label">USD gestionados en Meta Ads</p>
     </div>
     <div>
-      <p class="font-headline text-3xl md:text-4xl text-dorado">Feria EFFIX</p>
-      <p class="text-xs md:text-sm text-gray-400 mt-1 uppercase tracking-wider">estratega oficial</p>
+      <p class="stat-num">Feria EFFIX</p>
+      <p class="stat-label">estratega oficial</p>
     </div>
     <div>
-      <p class="font-headline text-3xl md:text-4xl text-dorado">Método MPV</p>
-      <p class="text-xs md:text-sm text-gray-400 mt-1 uppercase tracking-wider">sistema propietario probado</p>
+      <p class="stat-num">Método MPV</p>
+      <p class="stat-label">sistema propietario probado</p>
     </div>
   </div>
 </section>
 
-<!-- ============================================ -->
-<!-- QUIÉN SOY (movido arriba para que la cara    -->
-<!-- de Joako aparezca antes de servicios)        -->
-<!-- ============================================ -->
-<section class="px-4 py-16 md:py-24">
-  <div class="max-w-5xl mx-auto grid md:grid-cols-2 gap-10 items-center">
-
-    <div>
-      <p class="font-secondary text-dorado text-sm md:text-base mb-3 tracking-widest">QUIÉN SOY</p>
-      <h2 class="font-headline text-3xl md:text-5xl mb-6 leading-tight">
-        El estratega<br>que piensa como <span class="text-dorado">ingeniero.</span>
-      </h2>
-      <div class="space-y-4 text-gray-300 leading-relaxed text-base md:text-lg">
-        <p>Soy <span class="text-white font-bold">Joako Estratega</span>, experto en marketing digital. Construyo y opero sistemas de ventas por internet para marcas que ya facturan en Colombia, México, Ecuador y Estados Unidos.</p>
-        <p>Mi formación de base es <span class="text-white font-bold">ingeniería mecatrónica con especialización en lean manufacturing y gerencia de proyectos</span>. Por eso no veo el marketing como una pila de tácticas sueltas, sino como un sistema con cuellos de botella, palancas y procesos que se mejoran.</p>
-        <p>Llegué a esto después de quebrar un ecommerce que facturaba 10M de pesos diarios. Pasé dos años buscando <span class="text-dorado font-bold">por qué algunos negocios venden por internet y otros no</span>. Pagué más de 10.000 USD en mentorías y trabajé junto a los mejores.</p>
-        <p>El descubrimiento es que el problema no es la pauta, ni la plataforma, ni el presupuesto. Es el <span class="text-dorado font-bold">Mensaje Principal de Venta</span>. Y ese descubrimiento es lo que convertí en el Método MPV: el sistema que hoy aplico, escalo y enseño.</p>
-        <p class="border-l-4 border-dorado pl-4 italic text-white">"Yo ya pagué el precio de no saberlo. Mis clientes no tienen que pagar ese mismo precio."</p>
+<!-- ESPEJO DEL DOLOR -->
+<section>
+  <div class="container">
+    <div class="section-centered">
+      <span class="section-tag">Si te pasa esto, estás en el lugar correcto</span>
+      <h2 class="section-title">Sabes lo que vendes. Lo que no sabes es <span class="text-dorado">cómo venderlo en internet.</span></h2>
+    </div>
+    <div class="dolor-grid">
+      <div class="dolor-card">
+        <h4>El efecto montaña rusa</h4>
+        <p>Una semana llegan tres clientas y crees que despegaste. Las dos siguientes nada. No sabes qué hiciste bien ni qué hiciste mal.</p>
+      </div>
+      <div class="dolor-card">
+        <h4>Vives pegada al celular</h4>
+        <p>Si dejas de publicar tres días, sientes que el negocio se cae. Estás cansada. No tienes vida fuera del celular.</p>
+      </div>
+      <div class="dolor-card">
+        <h4>Te dijeron precio y desaparecieron</h4>
+        <p>Llegan a preguntar tarifa, contestas y se esfuman. La conversación siempre termina en plata, no en confianza.</p>
+      </div>
+      <div class="dolor-card">
+        <h4>Probaste pauta y se quemó</h4>
+        <p>Pagaste anuncios, llegaron contactos tibios, ninguno cerró. Sentiste que perdiste plata sin entender por qué.</p>
+      </div>
+      <div class="dolor-card">
+        <h4>Te asesoran personas que no entienden tu servicio</h4>
+        <p>Coaches con plantillas que sirven para cualquiera. Tú necesitas a alguien que entienda que vender una sesión no es vender un curso de Instagram.</p>
+      </div>
+      <div class="dolor-card">
+        <h4>Tienes seguidoras, no clientas</h4>
+        <p>Tu cuenta crece, te dan likes, te comentan "qué bonito". Pero no llega ningún WhatsApp pidiendo agendar.</p>
       </div>
     </div>
-
-    <div class="rounded-2xl overflow-hidden border-2 border-dorado">
-      <img src="bootcamp-claude/imagenes/joako-effi.png" alt="Joako Estratega en la Feria EFFIX" class="w-full h-auto block">
-    </div>
-
-  </div>
-</section>
-
-<!-- ============================================ -->
-<!-- ESPEJO DEL DOLOR                               -->
-<!-- ============================================ -->
-<section class="px-4 py-16 md:py-24">
-  <div class="max-w-4xl mx-auto">
-    <p class="font-secondary text-dorado text-sm md:text-base mb-3 tracking-widest text-center">SI TE PASA ESTO, ESTÁS EN EL LUGAR CORRECTO</p>
-    <h2 class="font-headline text-3xl md:text-5xl text-center mb-12 leading-tight">
-      Llevas meses pagando pauta<br>y no llegas al <span class="text-dorado">punto de equilibrio.</span>
-    </h2>
-
-    <div class="grid md:grid-cols-2 gap-5">
-      <div class="bg-black/60 border border-white/10 p-6 rounded-xl">
-        <p class="text-dorado font-bold mb-2">El Efecto Montaña Rusa</p>
-        <p class="text-gray-300 text-sm leading-relaxed">Un día 100 ventas. Tres días después, 5. No sabes qué cambió. Vives con ansiedad por el futuro del negocio.</p>
-      </div>
-      <div class="bg-black/60 border border-white/10 p-6 rounded-xl">
-        <p class="text-dorado font-bold mb-2">La Esclavitud del Administrador</p>
-        <p class="text-gray-300 text-sm leading-relaxed">Si no abres el Business Manager cada hora a "tocar" campañas, sientes que todo se detiene.</p>
-      </div>
-      <div class="bg-black/60 border border-white/10 p-6 rounded-xl">
-        <p class="text-dorado font-bold mb-2">La Rentabilidad Mentirosa</p>
-        <p class="text-gray-300 text-sm leading-relaxed">Facturas mucho. Pero cuando pagas pauta, producto y costos, te queda casi lo mismo que antes.</p>
-      </div>
-      <div class="bg-black/60 border border-white/10 p-6 rounded-xl">
-        <p class="text-dorado font-bold mb-2">Probaste agencias y nada</p>
-        <p class="text-gray-300 text-sm leading-relaxed">Te cobraron mensualidad tras mensualidad. Algunas funcionaron un mes. Después, otra vez en cero.</p>
-      </div>
-    </div>
-
-    <div class="mt-12 max-w-3xl mx-auto bg-azul/30 border-2 border-azul p-6 md:p-8 rounded-xl text-center">
-      <p class="font-headline text-xl md:text-2xl mb-3">El problema no es Meta Ads. Tampoco es la plataforma, ni el presupuesto.</p>
-      <p class="text-gray-200 leading-relaxed">Es el <span class="text-dorado font-bold">Mensaje Principal de Venta</span>. La narrativa que atraviesa el creativo, la página y el cierre. El 80% de la decisión de compra. Y casi nadie lo está enseñando.</p>
+    <div class="dolor-mensaje">
+      <p>El problema no es la pauta. Tampoco la plataforma, ni el presupuesto. Es el <strong>Mensaje Principal de Venta</strong>: la idea que atraviesa el creativo, la página y la conversación. El 80% de la decisión de compra. Y casi nadie te lo está enseñando.</p>
     </div>
   </div>
 </section>
 
-<!-- ============================================ -->
-<!-- SERVICIOS — BENTO                              -->
-<!-- ============================================ -->
-<section id="servicios" class="px-4 py-16 md:py-24 bg-black/40">
-  <div class="max-w-6xl mx-auto">
-    <p class="font-secondary text-dorado text-sm md:text-base mb-3 tracking-widest text-center">QUÉ TENGO PARA TI</p>
-    <h2 class="font-headline text-3xl md:text-5xl text-center mb-4 leading-tight">
-      4 formas de aprender<br>a vender por internet.
-    </h2>
-    <p class="text-center text-gray-400 max-w-2xl mx-auto mb-14 text-base md:text-lg">
-      Empieza gratis con la comunidad. Sube de nivel cuando estés listo.
-    </p>
-
-    <div class="grid md:grid-cols-2 gap-6">
-
-      <!-- BOOTCAMP CLAUDE — Destacado (próximo evento, urgencia activa) -->
-      <a href="bootcamp-claude/" class="service-card bg-gradient-to-br from-dorado/20 to-black border-2 border-dorado rounded-2xl p-8 block group md:col-span-2 relative overflow-hidden">
-        <div class="absolute top-4 right-4 bg-dorado text-black font-bold text-xs px-3 py-1 rounded-full animate-pulse">
-          PRÓXIMO EVENTO · 6 JUNIO
-        </div>
-        <div class="grid md:grid-cols-2 gap-6 items-center">
-          <div>
-            <span class="bg-dorado text-black font-bold text-xs px-3 py-1 rounded-full inline-block mb-3">PRESENCIAL · MEDELLÍN</span>
-            <h3 class="font-headline text-2xl md:text-4xl mb-3 group-hover:text-dorado transition leading-tight">
-              Bootcamp <span class="text-dorado">Claude</span>
-            </h3>
-            <p class="text-gray-200 text-base md:text-lg mb-4 leading-relaxed">
-              Te enseño a instalar una IA en tu computador y a crear tus propios <strong class="text-dorado">empleados digitales</strong> ajustados a tu negocio. Sin saber programar.
-            </p>
-            <ul class="text-sm text-gray-300 space-y-2 mb-6">
-              <li class="flex gap-2"><span class="text-dorado">→</span> Sábado 6 de junio · 9 am a 4 pm · Medellín</li>
-              <li class="flex gap-2"><span class="text-dorado">→</span> Solo 10 cupos. Sales con todo corriendo</li>
-              <li class="flex gap-2"><span class="text-dorado">→</span> Pago único · sin mensualidades</li>
-              <li class="flex gap-2"><span class="text-dorado">→</span> Garantía de instalación: si algo no quedó listo, sigo contigo virtual</li>
-            </ul>
-            <span class="inline-block bg-dorado text-black font-bold py-3 px-6 rounded-lg group-hover:bg-yellow-400 transition btn-lift">
-              Reservar mi cupo →
-            </span>
-          </div>
-          <div class="hidden md:flex justify-center">
-            <img src="bootcamp-claude/imagenes/parrilla-demo.gif" alt="Sistema generando una parrilla en automático con Claude" class="rounded-lg border-2 border-dorado/40 max-h-80 w-auto shadow-2xl" loading="lazy">
-          </div>
-        </div>
-      </a>
-
-      <!-- COMUNIDAD GRATUITA -->
-      <a href="comunidad/" class="service-card bg-black border-2 border-white/10 rounded-2xl p-8 block group">
-        <div class="flex items-start justify-between mb-4">
-          <span class="bg-green-500 text-black font-bold text-xs px-3 py-1 rounded-full">GRATIS</span>
-          <span class="text-3xl">💬</span>
-        </div>
-        <h3 class="font-headline text-2xl md:text-3xl mb-3 group-hover:text-dorado transition">Comunidad gratuita</h3>
-        <p class="text-gray-300 text-sm md:text-base mb-5 leading-relaxed">
-          Grupo de WhatsApp + sesión en vivo cada viernes. Trae tu negocio y te digo en vivo por qué no está vendiendo.
-        </p>
-        <ul class="text-sm text-gray-400 space-y-2 mb-6">
-          <li class="flex gap-2"><span class="text-dorado">→</span> Análisis en vivo de casos reales</li>
-          <li class="flex gap-2"><span class="text-dorado">→</span> Acceso directo a mí cada semana</li>
-          <li class="flex gap-2"><span class="text-dorado">→</span> Sin pagos, sin compromisos</li>
-        </ul>
-        <span class="inline-block bg-dorado text-black font-bold py-3 px-6 rounded-lg group-hover:bg-yellow-400 transition btn-lift">
-          Quiero entrar →
-        </span>
-      </a>
-
-      <!-- BOOTCAMP META ADS -->
-      <a href="bootcamp-meta-ads/" class="service-card bg-black border-2 border-white/10 rounded-2xl p-8 block group">
-        <div class="flex items-start justify-between mb-4">
-          <span class="bg-azul text-white font-bold text-xs px-3 py-1 rounded-full">PRÓXIMAMENTE · LISTA DE ESPERA</span>
-          <span class="text-3xl">📊</span>
-        </div>
-        <h3 class="font-headline text-2xl md:text-3xl mb-3 group-hover:text-dorado transition">Bootcamp Meta Ads</h3>
-        <p class="text-gray-300 text-sm md:text-base mb-5 leading-relaxed">
-          Aprende a operar pauta paga como las agencias. Mensaje, creativo, segmentación, escalado y optimización. Sin botón mágico.
-        </p>
-        <ul class="text-sm text-gray-400 space-y-2 mb-6">
-          <li class="flex gap-2"><span class="text-dorado">→</span> Pauta operada en vivo</li>
-          <li class="flex gap-2"><span class="text-dorado">→</span> Estructura completa de cuentas</li>
-          <li class="flex gap-2"><span class="text-dorado">→</span> Te aviso cuando abra fecha</li>
-        </ul>
-        <span class="inline-block bg-white text-black font-bold py-3 px-6 rounded-lg group-hover:bg-dorado transition btn-lift">
-          Quiero estar en la lista →
-        </span>
-      </a>
-
-      <!-- AGENCIA -->
-      <a href="agencia/" class="service-card bg-black border-2 border-white/10 rounded-2xl p-8 block group">
-        <div class="flex items-start justify-between mb-4">
-          <span class="bg-white text-black font-bold text-xs px-3 py-1 rounded-full">EQUIPO DEDICADO DE ESPECIALISTAS</span>
-          <span class="text-3xl">🎯</span>
-        </div>
-        <h3 class="font-headline text-2xl md:text-3xl mb-3 group-hover:text-dorado transition">Agencia</h3>
-        <p class="text-gray-300 text-sm md:text-base mb-5 leading-relaxed">
-          Para negocios que no quieren aprender a operar la pauta y prefieren un equipo especialista que ejecute. Mensaje, pauta, captación y cierre con el Método MPV.
-        </p>
-        <ul class="text-sm text-gray-400 space-y-2 mb-6">
-          <li class="flex gap-2"><span class="text-dorado">→</span> Equipo dedicado por cuenta: estratega, media buyer, creativo y analista</li>
-          <li class="flex gap-2"><span class="text-dorado">→</span> Máximo 5 cuentas por especialista para garantizar foco</li>
-          <li class="flex gap-2"><span class="text-dorado">→</span> Yo lidero la estrategia. Mi equipo ejecuta el método</li>
-        </ul>
-        <span class="inline-block bg-white text-black font-bold py-3 px-6 rounded-lg group-hover:bg-dorado transition btn-lift">
-          Conocer la propuesta →
-        </span>
-      </a>
-
+<!-- 4 FASES DEL SISTEMA -->
+<section id="sistema" class="fases-section">
+  <div class="container">
+    <div class="section-centered">
+      <span class="section-tag">El sistema completo · 4 fases</span>
+      <h2 class="section-title">No vendes más por publicar más. <span class="text-dorado">Vendes más por tener un sistema.</span></h2>
+      <p class="section-subtitle">Toda venta por internet pasa por las mismas 4 fases. Si una falla, no importa cuánto inviertas en las otras.</p>
     </div>
+    <div class="fases-grid">
+      <div class="fase-card">
+        <div class="fase-num">FASE 1</div>
+        <h4>Diagnóstico</h4>
+        <p>¿Qué vendes y a quién?</p>
+      </div>
+      <div class="fase-card centro">
+        <div class="fase-num">FASE 2</div>
+        <h4>Mensaje</h4>
+        <p>¿Por qué te van a comprar a ti?</p>
+      </div>
+      <div class="fase-card">
+        <div class="fase-num">FASE 3</div>
+        <h4>Captación</h4>
+        <p>¿Cómo llega quien sí compra?</p>
+      </div>
+      <div class="fase-card">
+        <div class="fase-num">FASE 4</div>
+        <h4>Cierre</h4>
+        <p>¿Cómo se vuelve clienta?</p>
+      </div>
+    </div>
+    <p class="fases-pie">Por encima de las 4 fases hay una capa de <strong>mejora continua</strong>: medimos, ajustamos y volvemos a probar. La misma lógica que afina una línea de producción, aplicada a tu negocio.</p>
   </div>
 </section>
 
-<!-- ============================================ -->
-<!-- RECONOCIMIENTOS Y EVENTOS                      -->
-<!-- Galería de validación: certificados +         -->
-<!-- referentes del nicho. Prueba dura para        -->
-<!-- Andrés (cliente final).                       -->
-<!-- ============================================ -->
-<section class="px-4 py-16 md:py-24">
-  <div class="max-w-6xl mx-auto">
-    <p class="font-secondary text-dorado text-sm md:text-base mb-3 tracking-widest text-center">RECONOCIMIENTOS Y REFERENTES</p>
-    <h2 class="font-headline text-3xl md:text-5xl text-center mb-4 leading-tight">
-      Donde he estado.<br>Con quién <span class="text-dorado">he construido.</span>
-    </h2>
-    <p class="text-center text-gray-400 max-w-2xl mx-auto mb-14 text-base md:text-lg">
-      No es teoría. Son tarimas, certificados y referentes reales del marketing digital en Latinoamérica.
-    </p>
-
-    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-5">
-
-      <!-- Foto 1: Reconocimiento Academia del Estratega -->
-      <figure class="group relative rounded-xl overflow-hidden border border-white/10 hover:border-dorado transition">
-        <picture>
-          <source srcset="imagenes/validacion/01-academia-reconocimiento.webp" type="image/webp">
-          <img src="imagenes/validacion/01-academia-reconocimiento.jpg" alt="Reconocimiento Academia del Estratega - Joako Estratega" class="w-full h-full object-cover aspect-[4/5]" loading="lazy">
-        </picture>
-        <figcaption class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-3 md:p-4">
-          <p class="text-xs md:text-sm text-white font-bold leading-tight">Reconocimiento</p>
-          <p class="text-xs text-gray-300">Academia del Estratega</p>
-        </figcaption>
-      </figure>
-
-      <!-- Foto 2: Con Juan Carmona en Feria EFFIX -->
-      <figure class="group relative rounded-xl overflow-hidden border border-white/10 hover:border-dorado transition">
+<!-- QUIÉN SOY -->
+<section>
+  <div class="container">
+    <div class="quien-soy">
+      <div>
+        <span class="section-tag">Quién soy</span>
+        <h2 class="section-title">El estratega que piensa <span class="text-dorado">como ingeniero.</span></h2>
+        <p>Soy <strong>Joako Estratega</strong>. Construyo y opero sistemas de ventas por internet para marcas que ya facturan en Colombia, México, Ecuador y Estados Unidos.</p>
+        <p>Mi formación de base es <strong>ingeniería mecatrónica con especialización en lean manufacturing y gerencia de proyectos</strong>. Por eso no veo el marketing como una pila de tácticas sueltas, sino como un sistema con cuellos de botella, palancas y procesos que se afinan.</p>
+        <p>Llegué a esto después de quebrar un ecommerce que facturaba 10 millones de pesos diarios. Pasé dos años buscando <span class="text-dorado" style="font-weight: 700;">por qué algunos negocios venden por internet y otros no</span>. Pagué más de 10.000 USD en mentorías y trabajé al lado de los mejores.</p>
+        <p>El descubrimiento es que el problema no es la pauta, ni la plataforma, ni el presupuesto. Es el <span class="text-dorado" style="font-weight: 700;">Mensaje Principal de Venta</span>. Y eso es lo que convertí en el Método MPV: el sistema que hoy aplico, escalo y enseño.</p>
+        <div class="cita">"Yo ya pagué el precio de no saberlo. Mis clientas no tienen que pagar ese mismo precio."</div>
+      </div>
+      <div class="quien-soy-img">
         <picture>
           <source srcset="imagenes/validacion/05-con-juan-carmona-effix.webp" type="image/webp">
-          <img src="imagenes/validacion/05-con-juan-carmona-effix.jpg" alt="Joako Estratega con Juan Carmona en Feria EFFIX 2025" class="w-full h-full object-cover aspect-[4/5]" loading="lazy">
+          <img src="imagenes/validacion/05-con-juan-carmona-effix.jpg" alt="Joako Estratega con Juan Carmona en Feria EFFIX">
         </picture>
-        <figcaption class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-3 md:p-4">
-          <p class="text-xs md:text-sm text-white font-bold leading-tight">Con Juan Carmona</p>
-          <p class="text-xs text-gray-300">Feria EFFIX 2025</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ESCALERA DE PRODUCTOS -->
+<section id="productos" style="background: rgba(0,0,0,0.3);">
+  <div class="container">
+    <div class="section-centered">
+      <span class="section-tag">Trabajemos juntas</span>
+      <h2 class="section-title">3 niveles de acompañamiento. <span class="text-dorado">Tú decides hasta dónde.</span></h2>
+      <p class="section-subtitle">Empezamos por construir tu mensaje. Si funciona, lo escalamos. Si quieres delegarlo todo, también.</p>
+    </div>
+
+    <div class="escalera-grid">
+
+      <div class="escalera-card destacado">
+        <span class="esc-badge">Empieza aquí · Toda relación arranca aquí</span>
+        <h3 class="esc-titulo">Plano MPV</h3>
+        <p>2 sesiones + tu Mensaje Principal de Venta listo en PDF para usar en pauta, landing y contenido.</p>
+        <div class="esc-precio">$200.000<span style="font-size: 16px; color: var(--gris-3); margin-left: 4px;">COP</span></div>
+        <div class="esc-precio-sub">Pago único</div>
+        <ul>
+          <li>Sesión 1 de 90 min: diagnóstico + dolor + ángulo</li>
+          <li>Sesión 2 de 60 min: ajustes + plan de uso</li>
+          <li>PDF Plano MPV personalizado</li>
+          <li>Garantía de devolución de los $200.000</li>
+        </ul>
+        <a href="plano-mpv/index.html" class="btn btn-primary btn-block btn-lift" data-cta="escalera_plano_mpv">Construir mi Plano</a>
+      </div>
+
+      <div class="escalera-card">
+        <span class="esc-badge">Siguiente nivel</span>
+        <h3 class="esc-titulo">Constructor MPV</h3>
+        <p>Entrega el Plano MPV listo + landing de captura + automatización en ManyChat que filtra y atiende los DM de Instagram + guion de contenido para 2 semanas.</p>
+        <div class="esc-precio" style="font-size: 22px; color: var(--blanco);">Cotización en sesión</div>
+        <div class="esc-precio-sub">30 días de trabajo</div>
+        <ul>
+          <li>Todo lo del Plano MPV incluido</li>
+          <li>Landing de captura lista para tu dominio</li>
+          <li>Automatización en ManyChat (filtro y setter de DM Instagram)</li>
+          <li>Guion de contenido para 2 semanas</li>
+          <li>3 sesiones de implementación</li>
+        </ul>
+        <p style="font-size: 12px; color: var(--gris-3); margin-top: -10px;">Disponible solo para quienes ya tomaron el Plano MPV.</p>
+        <a href="plano-mpv/index.html" class="btn btn-azul btn-block btn-lift" data-cta="escalera_constructor">Empezar por el Plano</a>
+      </div>
+
+      <div class="escalera-card">
+        <span class="esc-badge">Para escalar</span>
+        <h3 class="esc-titulo">MPV en Operación</h3>
+        <p>Acompañamiento mensual del marketing completo de tu negocio: mensaje vivo, pauta, contenido y la automatización en ManyChat operando a diario.</p>
+        <div class="esc-precio" style="font-size: 22px; color: var(--blanco);">Cotización en sesión</div>
+        <div class="esc-precio-sub">Servicio mensual</div>
+        <ul>
+          <li>Estrategia mensual + revisión semanal</li>
+          <li>Pauta operada por especialistas</li>
+          <li>Contenido orgánico estratégico</li>
+          <li>ManyChat siempre afinado al mensaje vigente</li>
+          <li>Reporte mensual con números reales</li>
+        </ul>
+        <p style="font-size: 12px; color: var(--gris-3); margin-top: -10px;">Disponible solo para quienes ya tomaron el Plano MPV.</p>
+        <a href="plano-mpv/index.html" class="btn btn-azul btn-block btn-lift" data-cta="escalera_operacion">Empezar por el Plano</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- GALERÍA DE VALIDACIÓN -->
+<section>
+  <div class="container">
+    <div class="section-centered">
+      <span class="section-tag">Reconocimientos y referentes</span>
+      <h2 class="section-title">Donde he estado. <span class="text-dorado">Con quién he construido.</span></h2>
+      <p class="section-subtitle">No es teoría. Son tarimas, certificados y referentes reales del marketing digital en hispanohablantes.</p>
+    </div>
+
+    <div class="validacion-grid">
+      <figure class="validacion-figure">
+        <picture>
+          <source srcset="imagenes/validacion/01-academia-reconocimiento.webp" type="image/webp">
+          <img src="imagenes/validacion/01-academia-reconocimiento.jpg" alt="Reconocimiento Academia del Estratega" loading="lazy">
+        </picture>
+        <figcaption>
+          <div class="vc-titulo">Reconocimiento</div>
+          <div class="vc-sub">Academia del Estratega</div>
         </figcaption>
       </figure>
 
-      <!-- Foto 3: Con Jhei Trujillo -->
-      <figure class="group relative rounded-xl overflow-hidden border border-white/10 hover:border-dorado transition">
+      <figure class="validacion-figure">
+        <picture>
+          <source srcset="imagenes/validacion/05-con-juan-carmona-effix.webp" type="image/webp">
+          <img src="imagenes/validacion/05-con-juan-carmona-effix.jpg" alt="Joako con Juan Carmona en Feria EFFIX" loading="lazy">
+        </picture>
+        <figcaption>
+          <div class="vc-titulo">Con Juan Carmona</div>
+          <div class="vc-sub">Feria EFFIX 2025</div>
+        </figcaption>
+      </figure>
+
+      <figure class="validacion-figure">
         <picture>
           <source srcset="imagenes/validacion/04-con-jhei-trujillo.webp" type="image/webp">
-          <img src="imagenes/validacion/04-con-jhei-trujillo.jpg" alt="Joako Estratega con Jhei Trujillo" class="w-full h-full object-cover aspect-[4/5]" loading="lazy">
+          <img src="imagenes/validacion/04-con-jhei-trujillo.jpg" alt="Joako con Jhei Trujillo" loading="lazy">
         </picture>
-        <figcaption class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-3 md:p-4">
-          <p class="text-xs md:text-sm text-white font-bold leading-tight">Con Jhei Trujillo</p>
-          <p class="text-xs text-gray-300">Academia del Estratega</p>
+        <figcaption>
+          <div class="vc-titulo">Con Jhei Trujillo</div>
+          <div class="vc-sub">Academia del Estratega</div>
         </figcaption>
       </figure>
 
-      <!-- Foto 4: Certificado 2025 con Mónica -->
-      <figure class="group relative rounded-xl overflow-hidden border border-white/10 hover:border-dorado transition">
+      <figure class="validacion-figure">
         <picture>
           <source srcset="imagenes/validacion/07-con-monica-cert-2025.webp" type="image/webp">
-          <img src="imagenes/validacion/07-con-monica-cert-2025.jpg" alt="Joako Estratega recibiendo certificado 2025 Academia del Estratega" class="w-full h-full object-cover aspect-[4/5]" loading="lazy">
+          <img src="imagenes/validacion/07-con-monica-cert-2025.jpg" alt="Certificado 2025 con Mónica" loading="lazy">
         </picture>
-        <figcaption class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-3 md:p-4">
-          <p class="text-xs md:text-sm text-white font-bold leading-tight">Certificado 2025</p>
-          <p class="text-xs text-gray-300">Academia del Estratega</p>
+        <figcaption>
+          <div class="vc-titulo">Certificado 2025</div>
+          <div class="vc-sub">Academia del Estratega</div>
         </figcaption>
       </figure>
 
-      <!-- Foto 5: Conversatorio EFFIX -->
-      <figure class="group relative rounded-xl overflow-hidden border border-white/10 hover:border-dorado transition">
+      <figure class="validacion-figure">
         <picture>
           <source srcset="imagenes/validacion/03-conversatorio-effix.webp" type="image/webp">
-          <img src="imagenes/validacion/03-conversatorio-effix.jpg" alt="Joako Estratega en conversatorio Feria EFFIX 2025" class="w-full h-full object-cover aspect-[4/5]" loading="lazy">
+          <img src="imagenes/validacion/03-conversatorio-effix.jpg" alt="Conversatorio Feria EFFIX" loading="lazy">
         </picture>
-        <figcaption class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-3 md:p-4">
-          <p class="text-xs md:text-sm text-white font-bold leading-tight">"No es magia, es estrategia"</p>
-          <p class="text-xs text-gray-300">Conversatorio · Feria EFFIX 2025</p>
+        <figcaption>
+          <div class="vc-titulo">"No es magia, es estrategia"</div>
+          <div class="vc-sub">Conversatorio · Feria EFFIX 2025</div>
         </figcaption>
       </figure>
 
-      <!-- Foto 6: Con mentores y certificado -->
-      <figure class="group relative rounded-xl overflow-hidden border border-white/10 hover:border-dorado transition">
+      <figure class="validacion-figure">
         <picture>
           <source srcset="imagenes/validacion/06-con-mentores-certificado.webp" type="image/webp">
-          <img src="imagenes/validacion/06-con-mentores-certificado.jpg" alt="Joako Estratega con mentores y certificado" class="w-full h-full object-cover aspect-[4/5]" loading="lazy">
+          <img src="imagenes/validacion/06-con-mentores-certificado.jpg" alt="Joako con mentores y certificado" loading="lazy">
         </picture>
-        <figcaption class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-3 md:p-4">
-          <p class="text-xs md:text-sm text-white font-bold leading-tight">Backstage de evento</p>
-          <p class="text-xs text-gray-300">Junto a mentores y referentes</p>
+        <figcaption>
+          <div class="vc-titulo">Backstage de evento</div>
+          <div class="vc-sub">Junto a mentores y referentes</div>
         </figcaption>
       </figure>
 
-      <!-- Foto 7: Certificado en tarima -->
-      <figure class="group relative rounded-xl overflow-hidden border border-white/10 hover:border-dorado transition">
+      <figure class="validacion-figure">
         <picture>
           <source srcset="imagenes/validacion/02-certificados-estudio.webp" type="image/webp">
-          <img src="imagenes/validacion/02-certificados-estudio.jpg" alt="Joako Estratega con certificados en tarima" class="w-full h-full object-cover aspect-[4/5]" loading="lazy">
+          <img src="imagenes/validacion/02-certificados-estudio.jpg" alt="Joako con certificados en tarima" loading="lazy">
         </picture>
-        <figcaption class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-3 md:p-4">
-          <p class="text-xs md:text-sm text-white font-bold leading-tight">Certificación oficial</p>
-          <p class="text-xs text-gray-300">Programas de marketing digital</p>
+        <figcaption>
+          <div class="vc-titulo">Certificación oficial</div>
+          <div class="vc-sub">Programas de marketing digital</div>
         </figcaption>
       </figure>
 
-      <!-- Tarjeta CTA suave en lugar de la 8va foto: invita a la comunidad -->
-      <a href="comunidad/" class="group relative rounded-xl overflow-hidden border-2 border-dorado bg-gradient-to-br from-dorado/20 to-black aspect-[4/5] flex flex-col items-center justify-center p-4 md:p-6 text-center hover:bg-dorado/30 transition">
-        <p class="font-headline text-xl md:text-2xl text-white mb-3 leading-tight">¿Quieres que tu negocio sea el siguiente caso?</p>
-        <span class="bg-dorado text-black font-bold py-2 px-4 rounded-lg text-sm group-hover:bg-yellow-400 transition">
-          Entrar gratis →
-        </span>
+      <a href="comunidad/index.html" class="validacion-cta" data-cta="galeria_comunidad">
+        <p>¿Quieres que tu negocio sea el siguiente caso?</p>
+        <span class="btn btn-primary">Entrar gratis →</span>
       </a>
-
     </div>
   </div>
 </section>
 
-<!-- ============================================ -->
-<!-- MÉTODO MPV                                     -->
-<!-- ============================================ -->
-<section class="px-4 py-16 md:py-24 bg-azul/20 border-y border-white/10">
-  <div class="max-w-5xl mx-auto text-center">
-    <p class="font-secondary text-dorado text-sm md:text-base mb-3 tracking-widest">EL MÉTODO QUE OPERA TODO</p>
-    <h2 class="font-headline text-3xl md:text-5xl mb-6 leading-tight">
-      Método <span class="text-dorado">MPV.</span>
-    </h2>
-    <p class="text-gray-200 max-w-3xl mx-auto mb-12 text-base md:text-lg leading-relaxed">
-      Construye un sistema de ventas por internet donde el 80% del trabajo ya esté hecho antes de gastar un dólar en pauta. Y el 20% restante sea solo ejecutar.
-    </p>
-
-    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto">
-      <div class="bg-black/60 border border-dorado/40 p-5 rounded-xl">
-        <p class="font-secondary text-dorado text-2xl mb-2">FASE 1</p>
-        <p class="font-headline text-lg mb-2">Diagnóstico</p>
-        <p class="text-xs text-gray-400">¿Qué vendes y a quién?</p>
+<!-- COMUNIDAD CTA -->
+<section style="background: rgba(0,0,0,0.3);">
+  <div class="container">
+    <div class="dos-columnas">
+      <div>
+        <span class="section-tag">Empieza aquí · gratis</span>
+        <h2 class="section-title">Trae tu negocio al <span class="text-dorado">viernes en vivo.</span></h2>
+        <p style="color: var(--gris-1); font-size: 17px; line-height: 1.6;">Cada viernes hago un live de 45 min con un caso real, una estrategia aplicada y preguntas en vivo. Solo dentro del grupo. Sin pauta, sin filtros, sin guion ensayado.</p>
+        <ul class="lista-check mt-2">
+          <li>Live estratégico cada viernes</li>
+          <li>Casos reales (mis clientas, no genéricos)</li>
+          <li>Recursos prácticos cada semana</li>
+          <li>Q&amp;A directo conmigo</li>
+        </ul>
+        <a href="comunidad/index.html" class="btn btn-primary btn-lg btn-lift mt-3" data-cta="bloque_comunidad">Quiero entrar a la comunidad</a>
       </div>
-      <div class="bg-black/60 border-2 border-dorado p-5 rounded-xl relative">
-        <span class="absolute -top-3 left-1/2 -translate-x-1/2 bg-dorado text-black text-xs font-bold px-3 py-1 rounded-full whitespace-nowrap">CENTRO</span>
-        <p class="font-secondary text-dorado text-2xl mb-2">FASE 2</p>
-        <p class="font-headline text-lg mb-2">Mensaje</p>
-        <p class="text-xs text-gray-400">¿Por qué te van a comprar a ti?</p>
-      </div>
-      <div class="bg-black/60 border border-dorado/40 p-5 rounded-xl">
-        <p class="font-secondary text-dorado text-2xl mb-2">FASE 3</p>
-        <p class="font-headline text-lg mb-2">Captación</p>
-        <p class="text-xs text-gray-400">¿Cómo llega a quien compra?</p>
-      </div>
-      <div class="bg-black/60 border border-dorado/40 p-5 rounded-xl">
-        <p class="font-secondary text-dorado text-2xl mb-2">FASE 4</p>
-        <p class="font-headline text-lg mb-2">Cierre</p>
-        <p class="text-xs text-gray-400">¿Cómo se vuelve cliente?</p>
+      <div>
+        <picture>
+          <source srcset="imagenes/validacion/03-conversatorio-effix.webp" type="image/webp">
+          <img src="imagenes/validacion/03-conversatorio-effix.jpg" alt="Joako en mesa estratégica Feria EFFIX" style="border-radius: var(--radius-lg); border: 2px solid var(--dorado);">
+        </picture>
       </div>
     </div>
-
-    <p class="mt-10 text-sm text-gray-400 max-w-2xl mx-auto">
-      Por encima de las 4 fases, una capa de <span class="text-white">mejora continua</span> con principios de lean manufacturing. La misma lógica que afina una línea de producción, aplicada a un sistema de ventas.
-    </p>
   </div>
 </section>
 
-<!-- Sección de testimonios eliminada hasta tener imágenes reales. Cuando las tengas, súbelas a `imagenes/testimonios/test-1.jpg` ... `test-6.jpg` y restauramos esta sección. -->
-
-<!-- ============================================ -->
-<!-- CTA FINAL                                      -->
-<!-- ============================================ -->
-<section class="px-4 py-20 md:py-28">
-  <div class="max-w-4xl mx-auto text-center">
-    <p class="font-secondary text-dorado text-xl md:text-2xl mb-5 tracking-widest">EL PRIMER PASO ES GRATIS</p>
-    <h2 class="font-headline text-4xl md:text-6xl mb-6 leading-none">
-      Trae tu negocio<br>al <span class="text-dorado">viernes en vivo.</span>
-    </h2>
-    <p class="text-base md:text-xl text-gray-300 max-w-2xl mx-auto mb-10 leading-relaxed">
-      Cada semana analizo casos reales. Si tu negocio no está vendiendo, te digo por qué. Sin cobrarte nada.
-    </p>
-
-    <a href="comunidad/" class="inline-block bg-dorado text-black font-bold py-5 px-10 rounded-lg hover:bg-yellow-400 transition text-lg md:text-xl btn-lift pulse-cta">
-      Quiero entrar a la comunidad gratis
-    </a>
-    <p class="mt-4 text-sm text-gray-500">Sin tarjeta. Sin compromiso. Sales cuando quieras.</p>
+<!-- CTA FINAL -->
+<section id="contacto" class="cta-final">
+  <div class="container section-centered">
+    <span class="section-tag">El primer paso es gratis</span>
+    <h2 class="section-title">¿Lista para tener un mensaje <span class="text-dorado">que vende solo?</span></h2>
+    <p class="section-subtitle">Empieza por el Plano MPV de $200.000 COP. Si necesitas algo más grande, lo conversamos directo en la sesión.</p>
+    <div style="display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; margin-top: 18px;">
+      <a href="plano-mpv/index.html" class="btn btn-primary btn-lg btn-lift pulse-cta" data-cta="cta_final_plano">Construir mi Plano MPV</a>
+      <a href="https://wa.me/573028662556?text=Hola%20Joako%2C%20vi%20tu%20p%C3%A1gina%20web%20y%20quiero%20m%C3%A1s%20informaci%C3%B3n" class="btn btn-secondary btn-lg btn-lift" data-cta="cta_final_whatsapp">Escribirme por WhatsApp</a>
+    </div>
   </div>
 </section>
 
-<!-- ============================================ -->
-<!-- FOOTER                                        -->
-<!-- ============================================ -->
-<footer class="border-t border-white/10 px-4 py-10">
-  <div class="max-w-5xl mx-auto text-center">
-    <div class="mx-auto mb-6 overflow-hidden relative" style="height: 60px; width: 180px;">
-      <img src="bootcamp-claude/imagenes/logo-blanco-amarillo-fondo-negro.png" alt="Joako Estratega" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(1.8); max-width: none; height: 100%;">
+<!-- FOOTER -->
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div>
+      <div class="logo-footer"><img src="imagenes/logos/joako-estratega-logo.png" alt="Joako Estratega"></div>
+      <p>Estratega oficial de la Feria EFFIX. Construyo sistemas de ventas por internet con el Método MPV.</p>
     </div>
-    <div class="flex flex-wrap justify-center gap-6 text-sm text-gray-400 mb-6">
-      <a href="comunidad/" class="hover:text-dorado transition">Comunidad</a>
-      <a href="bootcamp-claude/" class="hover:text-dorado transition">Bootcamp Claude</a>
-      <a href="bootcamp-meta-ads/" class="hover:text-dorado transition">Bootcamp Meta Ads</a>
-      <a href="agencia/" class="hover:text-dorado transition">Agencia</a>
-      <a href="https://wa.me/573028662556?text=Hola%20Joako" class="hover:text-dorado transition">WhatsApp</a>
+    <div>
+      <h5>Productos</h5>
+      <ul>
+        <li><a href="plano-mpv/index.html">Plano MPV · $200.000</a></li>
+        <li><a href="plano-mpv/index.html">Constructor MPV</a></li>
+        <li><a href="plano-mpv/index.html">MPV en Operación</a></li>
+      </ul>
     </div>
-    <p class="text-xs text-gray-500">© 2026 Joako Estratega · Medellín, Colombia · Hecho con cariño y mucho café.</p>
+    <div>
+      <h5>Recursos</h5>
+      <ul>
+        <li><a href="comunidad/index.html">Comunidad WhatsApp</a></li>
+        <li><a href="metodo-mpv/index.html">Método MPV</a></li>
+      </ul>
+    </div>
+    <div>
+      <h5>Contacto</h5>
+      <ul>
+        <li><a href="https://wa.me/573028662556?text=Hola%20Joako">WhatsApp directo</a></li>
+        <li><a href="mailto:joakoestratega@gmail.com">joakoestratega@gmail.com</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 Joaquín Rojas Peña · Joako Estratega · Medellín, Colombia</span>
+    <span>Hecho con cariño y mucho café.</span>
   </div>
 </footer>
 
-<!-- ============================================ -->
-<!-- WHATSAPP FLOTANTE                              -->
-<!-- ============================================ -->
-<a href="https://wa.me/573028662556?text=Hola%20Joako%2C%20vi%20tu%20página%20web%20y%20quiero%20más%20información" target="_blank" rel="noopener" class="wa-float bg-green-500 hover:bg-green-600 text-white rounded-full w-14 h-14 flex items-center justify-center" aria-label="Escríbeme por WhatsApp">
+<!-- WHATSAPP FLOTANTE -->
+<a href="https://wa.me/573028662556?text=Hola%20Joako%2C%20vi%20tu%20p%C3%A1gina%20web%20y%20quiero%20m%C3%A1s%20informaci%C3%B3n" target="_blank" rel="noopener" class="wa-float" aria-label="Escríbeme por WhatsApp" data-cta="wa_float">
   <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
 </a>
 
-<!-- ============================================ -->
-<!-- STICKY BOTTOM MOBILE                           -->
-<!-- Hoy promueve el Bootcamp (próximo evento). Después del 6 junio cambiar al siguiente evento o a comunidad. -->
-<!-- ============================================ -->
-<div class="sticky-mobile fixed bottom-0 left-0 right-0 bg-black border-t-2 border-dorado p-3 z-40 shadow-2xl">
-  <a href="bootcamp-claude/" class="block bg-dorado text-black font-bold py-3 px-4 rounded-lg text-center text-base">
-    🔥 Reservar cupo bootcamp · 6 junio →
-  </a>
+<!-- STICKY MOBILE -->
+<div class="sticky-mobile">
+  <a href="plano-mpv/index.html" class="btn btn-primary btn-block" data-cta="sticky_mobile_plano">Construir mi mensaje · $200.000 →</a>
 </div>
 
-<script>
-  // Reveal on scroll
-  const observerOptions = { threshold: 0.1 };
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) entry.target.classList.add('active');
-    });
-  }, observerOptions);
-  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-</script>
-
+<script src="assets/main.js" defer></script>
 </body>
 </html>

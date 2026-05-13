@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>¡Listo! · Aplicación recibida · Joako Estratega</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&family=Bebas+Neue&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/styles.css">
+<script>
+  window.JOAKO = {
+    APPS_SCRIPT_URL: 'PEGA_AQUI_EL_URL_DE_TU_APPS_SCRIPT',
+    GA4_ID: '', META_PIXEL_ID: '', CLARITY_ID: ''
+  };
+</script>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-inner">
+    <a href="../../index.html" class="logo">
+      <img src="../../imagenes/logos/joako-estratega-logo.png" alt="Joako Estratega">
+    </a>
+    <nav class="nav">
+      <a href="../../index.html">Inicio</a>
+      <a href="../../comunidad/index.html">Comunidad</a>
+      <a href="../../metodo-mpv/index.html">Método</a>
+    </nav>
+  </div>
+</header>
+
+<section class="gracias-page">
+  <div>
+    <div class="icono-grande">✅</div>
+    <h1>¡Recibí tu aplicación!</h1>
+    <p>Te contacto por WhatsApp en menos de 24 horas para coordinar la sesión 1 y enviarte el link de pago de los $200.000.</p>
+
+    <div class="siguiente-paso">
+      <h3>MIENTRAS TANTO · 1 cosa que sí o sí debes hacer</h3>
+      <p style="margin-top: 8px;">Únete al grupo de WhatsApp gratuito. Ahí publico cada viernes una estrategia aplicada en vivo + casos reales. Es donde empieza todo.</p>
+      <a href="../../comunidad/index.html" class="btn btn-azul btn-lift mt-3" data-cta="gracias_plano_comunidad">Entrar a la comunidad</a>
+    </div>
+
+    <div style="margin-top: 40px; padding-top: 30px; border-top: 1px solid var(--linea); max-width: 600px;">
+      <p style="font-size: 14px; color: var(--gris-3);">¿No te llega el WhatsApp en 24h? Escríbeme directo y resolvemos.</p>
+      <a href="https://wa.me/573028662556?text=Hola%20Joako%2C%20apliqu%C3%A9%20al%20Plano%20MPV" class="btn btn-secondary btn-lift mt-2" data-cta="gracias_plano_wa_directo">Escribirme directo</a>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div>
+      <div class="logo-footer"><img src="../../imagenes/logos/joako-estratega-logo.png" alt="Joako Estratega"></div>
+      <p>Estratega oficial de la Feria EFFIX. Construyo sistemas de ventas por internet con el Método MPV.</p>
+    </div>
+    <div>
+      <h5>Productos</h5>
+      <ul>
+        <li><a href="../index.html">Plano MPV · $200.000</a></li>
+        <li><a href="../../index.html#productos">Constructor MPV</a></li>
+      </ul>
+    </div>
+    <div>
+      <h5>Recursos</h5>
+      <ul>
+        <li><a href="../../comunidad/index.html">Comunidad WhatsApp</a></li>
+        <li><a href="../../metodo-mpv/index.html">Método MPV</a></li>
+      </ul>
+    </div>
+    <div>
+      <h5>Contacto</h5>
+      <ul>
+        <li><a href="https://wa.me/573028662556?text=Hola%20Joako">WhatsApp directo</a></li>
+        <li><a href="mailto:joakoestratega@gmail.com">joakoestratega@gmail.com</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 Joaquín Rojas Peña · Joako Estratega</span>
+  </div>
+</footer>
+
+<script src="../../assets/main.js" defer></script>
+<script>
+  if (window.JOAKO && typeof window.JOAKO.track === 'function') {
+    window.addEventListener('load', () => {
+      window.JOAKO.track('lead_complete', { producto: 'Plano MPV', valor: 50, meta_event_name: 'Lead' });
+    });
+  }
+</script>
+</body>
+</html>

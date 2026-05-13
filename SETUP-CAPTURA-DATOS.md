@@ -1,180 +1,147 @@
 # Setup de captura de datos · Google Apps Script + Sheets
 
-Sistema propio de captura de leads para tus landings. Sin servicios externos, gratis para siempre, datos en tu propia cuenta Google.
+Sistema propio de captura de leads para las 4 landings. Sin servicios externos, gratis para siempre, datos en tu propia cuenta Google. Una sola configuración sirve para todos los formularios.
 
 ---
 
 ## Cómo funciona
 
 ```
-1. Usuario llena formulario en la landing
+1. Visitante llena formulario en la landing
         ↓
-2. JavaScript envía datos a tu Google Apps Script
+2. main.js envía los datos a tu Apps Script (en background, sin recargar)
         ↓
-3. Apps Script guarda los datos en tu Google Sheets
+3. Apps Script identifica el producto y lo guarda en la hoja correcta
         ↓
-4. Te llega email automático con cada lead nuevo
+4. Te llega email automático con cada lead nuevo (excepto leads parciales)
         ↓
-5. Usuario es redirigido a Wompi para pagar
+5. Visitante es redirigido a la página de gracias correspondiente
         ↓
-6. Cruzas la lista de leads con los pagos de Wompi
+6. Página de gracias dispara el evento de conversión en GA4 / Meta Pixel
 ```
 
 ---
 
-## Setup paso a paso (30 minutos, una sola vez)
+## Hojas que se crean automáticamente
+
+El Apps Script crea una hoja distinta por producto, sin que tengas que tocar nada. La estructura final:
+
+| Producto | Hoja en Sheets | Campos |
+|---|---|---|
+| Plano MPV ($50 USD) | `Leads Plano MPV` | nombre, whatsapp, email, profesión, situación, mensaje |
+| Comunidad WhatsApp (gratis) | `Leads Comunidad` | nombre, whatsapp, profesión |
+| Newsletter Método MPV | `Leads Método MPV` | nombre, email, profesión |
+| Contacto desde Home | `Contactos Home` | (lo que llegue) |
+| Cualquier otro | `Leads Generales` | (lo que llegue) |
+
+Además, los **leads parciales** (visitas que llenaron nombre + WhatsApp/email pero NO enviaron) quedan registrados con fila pintada de amarillo. Eso te permite recuperar gente que se fue a mitad del formulario.
+
+---
+
+## Setup paso a paso (15 minutos, una sola vez)
 
 ### Paso 1. Crear la Google Sheets
 
-1. Ve a https://sheets.google.com
-2. Click en **"+ En blanco"** para crear una nueva
-3. Renómbrala: `Leads Joako Estratega`
-4. Mira la URL del navegador. Va a verse así:
-   ```
-   https://docs.google.com/spreadsheets/d/AQUÍ_VA_EL_ID/edit
-   ```
-5. **Copia el ID** (la parte entre `/d/` y `/edit`). Lo necesitas en el siguiente paso.
+1. Ve a [sheets.google.com](https://sheets.google.com).
+2. Click en **+ En blanco**.
+3. Renombra: `Leads Joako Estratega`.
+4. Mira la URL: `https://docs.google.com/spreadsheets/d/AQUÍ_VA_EL_ID/edit`
+5. **Copia el ID** (parte entre `/d/` y `/edit`). Lo usas en el paso siguiente.
 
 ### Paso 2. Crear el Apps Script
 
-1. En tu Google Sheets, click en **Extensiones → Apps Script**
-2. Se abre un editor de código en una pestaña nueva
-3. Borra todo el código que aparece por default
-4. Abre el archivo `apps-script.gs` que está en esta carpeta
-5. **Copia TODO el contenido** y pégalo en el editor de Apps Script
-6. Reemplaza estas líneas al inicio con tus datos:
+1. En tu Sheets: **Extensiones → Apps Script**.
+2. Borra el código que aparece por defecto.
+3. Abre el archivo `apps-script.gs` de esta carpeta.
+4. Copia TODO el contenido y pégalo en el editor.
+5. Edita las primeras líneas con tus datos:
    ```javascript
    const SHEET_ID = 'PEGA_AQUI_EL_ID_DE_TU_GOOGLE_SHEETS';
-   const NOMBRE_HOJA = 'Leads Bootcamp Claude';
    const EMAIL_NOTIFICACION = 'joakoestratega@gmail.com';
    ```
-   - `SHEET_ID`: el ID que copiaste en el Paso 1
-   - `NOMBRE_HOJA`: déjalo así o ponle otro nombre (será el nombre de la pestaña dentro de tu Sheets)
-   - `EMAIL_NOTIFICACION`: tu email donde quieres recibir notificación de cada lead
-7. Guarda con **Ctrl + S** y dale nombre al proyecto: `Captura Joako`
+6. **Guardar** (Ctrl/Cmd + S). Ponle nombre al proyecto: `Captura Joako Estratega`.
 
-### Paso 3. Desplegar como Web App
+### Paso 3. Implementar como Web App
 
-1. Click arriba a la derecha en **"Implementar" → "Nueva implementación"**
-2. Click en el ícono de engranaje ⚙️ y selecciona **"Aplicación web"**
-3. Configura:
-   - **Descripción:** "Captura de leads landings"
-   - **Ejecutar como:** Yo (tu correo)
-   - **Quién tiene acceso:** **Cualquier persona** (esto es necesario para que la landing pueda enviar datos)
-4. Click en **"Implementar"**
-5. La primera vez te pedirá autorización. Click en **"Autorizar acceso"**
-6. Selecciona tu cuenta Google
-7. Si te aparece "Esta app no está verificada", click en **"Avanzado"** → **"Ir a Captura Joako (no seguro)"**. Es seguro porque tú lo creaste.
-8. Click en **"Permitir"**
-9. Te aparece una URL al final. **Copia la URL de la Web app**. Va a verse así:
-   ```
-   https://script.google.com/macros/s/AQUI_VA_LARGA_CADENA/exec
-   ```
-10. Guárdala, la necesitas en el siguiente paso.
+1. Click en **Implementar → Nueva implementación** (arriba a la derecha).
+2. Click en el ícono ⚙ de tipo → **Aplicación web**.
+3. Configuración:
+   - **Descripción:** `Captura leads v2 multi-producto`.
+   - **Ejecutar como:** `Yo (tu correo)`.
+   - **Tener acceso:** `Cualquier persona`.
+4. Click **Implementar**.
+5. La primera vez te pide autorizar permisos: acepta y continúa con tu cuenta.
+6. Te aparece un URL que termina en `/exec`. **Cópialo, lo usas en el paso 4.**
 
-### Paso 4. Pegar la URL en tu HTML
+> **IMPORTANTE.** Si después editas el código, debes hacer **Implementar → Administrar implementaciones → ⚙ → Nueva versión** para que los cambios apliquen. Si haces "Nueva implementación" en lugar de "Nueva versión", se genera un URL nuevo y los formularios dejan de funcionar hasta que actualices el URL en las landings.
 
-1. Abre `bootcamp-claude/index.html` con un editor (VSCode, Bloc de notas)
-2. Busca la línea:
-   ```javascript
-   const APPS_SCRIPT_URL = 'PEGA_AQUI_LA_URL_DEL_APPS_SCRIPT';
-   ```
-3. Reemplaza `PEGA_AQUI_LA_URL_DEL_APPS_SCRIPT` con la URL real que copiaste
-4. Busca también:
-   ```javascript
-   const LINK_PAGO_WOMPI = '{{LINK_WOMPI}}';
-   ```
-5. Reemplaza `{{LINK_WOMPI}}` con tu link real de Wompi cuando lo crees
-6. Guarda el archivo y súbelo a GitHub
+### Paso 4. Pegar el URL en las landings
 
-### Paso 5. Probar el flujo
+En 6 archivos hay que reemplazar `PEGA_AQUI_EL_URL_DE_TU_APPS_SCRIPT` por el URL `/exec` que copiaste:
 
-1. Entra a `https://joakoestratega.com/bootcamp-claude/`
-2. Click en cualquier botón "Aplicar para mi cupo"
-3. Llena el formulario con datos de prueba
-4. Click en **Quiero mi cupo**
-5. Verifica que:
-   - Aparece pantalla de éxito
-   - Te llega email de notificación
-   - Aparece una nueva fila en tu Google Sheets
-   - Te redirige al link de Wompi
+- `index.html`
+- `plano-mpv/index.html`
+- `plano-mpv/gracias/index.html`
+- `comunidad/index.html`
+- `comunidad/gracias/index.html`
+- `metodo-mpv/index.html`
 
-Si todo funciona, **estás listo para vender.**
+Es siempre el mismo bloque:
 
----
-
-## Cómo trabajas con los datos
-
-### Tu Google Sheets es tu CRM
-
-Cada vez que alguien aplica, aparece una fila nueva con:
-
-| Fecha | Nombre | WhatsApp | Email | Negocio | Reqs | Producto | Estado |
-|-------|--------|----------|-------|---------|------|----------|--------|
-
-**Estados que tú vas actualizando:**
-- `Aplicó` (lo pone el sistema automáticamente)
-- `Pagado` (lo pones tú cuando ves el pago en Wompi)
-- `No respondió` (tras 72h sin respuesta)
-- `Rechazado` (no cumple requisitos importantes)
-
-### Cruzar con Wompi
-
-1. Cada día revisas tu dashboard de Wompi
-2. Cada pago aprobado, lo marcas como "Pagado" en tu Sheets
-3. Los que aplicaron pero NO pagaron en 24h → les escribes por WhatsApp manualmente
-4. Esos son tus leads más calientes para cierre personal
-
----
-
-## Si algo falla
-
-### "No me llegó email pero sí veo la fila en Sheets"
-Solución: ve al editor de Apps Script, click en **"Ejecuciones"** (menú izquierdo). Verás errores si los hay. Posiblemente toca dar permiso a Gmail.
-
-### "El formulario dice 'Hubo un problema'"
-Solución 1: verifica que `APPS_SCRIPT_URL` en el HTML está correctamente pegada (sin espacios, sin comillas extra).
-Solución 2: re-implementa el Apps Script (Implementar → Implementaciones de prueba → Nueva implementación).
-
-### "Quiero cambiar algo del email"
-Edita el cuerpo del email dentro del Apps Script (en la variable `cuerpo`). Cambia lo que quieras y guarda. **Importante:** después de cambiar el código, debes hacer **"Implementar → Administrar implementaciones → Editar (lápiz) → Versión nueva"**. Sin esto, los cambios no se aplican.
-
----
-
-## Reutilizar para otras landings (estándar Joako)
-
-Esta misma solución sirve para cualquier landing futura:
-- Bootcamp Meta Ads
-- Implementación personalizada
-- Mentoría
-- Eventos
-- Lead magnets
-
-Solo cambias estos 3 valores en el Apps Script:
-```javascript
-const NOMBRE_HOJA = 'Leads [Producto]';
-const EMAIL_NOTIFICACION = 'joakoestratega@gmail.com';
+```html
+<script>
+  window.JOAKO = {
+    APPS_SCRIPT_URL: 'PEGA_AQUI_EL_URL_DE_TU_APPS_SCRIPT', // ← cambia esto
+    ...
+  };
+</script>
 ```
 
-Y opcionalmente, todas las landings pueden apuntar al **mismo SHEET_ID**, con cada una guardando en su propia hoja (pestaña). Así tienes un solo Google Sheets con varias pestañas:
-- Hoja 1: Leads Bootcamp Claude
-- Hoja 2: Leads Bootcamp Meta
-- Hoja 3: Leads Implementación
-- ...
+### Paso 5. Probar
+
+1. Abre tu sitio en GitHub Pages (o sirve la carpeta local con `python -m http.server`).
+2. Llena el formulario de Comunidad (es el más simple) con tus propios datos.
+3. Verifica que:
+   - Te llega email a `joakoestratega@gmail.com`.
+   - Aparece la fila en la hoja `Leads Comunidad` de tu Sheets.
+   - Te redirige a `/comunidad/gracias/`.
+
+Si algo falla, abre la consola del navegador (F12) y mira el error. Lo más común:
+- URL mal pegado (debe terminar en `/exec`).
+- Olvidaste implementar como Web App (paso 3).
+- Permisos no aceptados.
 
 ---
 
-## Para el agente creador de landings (futuro)
+## Cómo agregar un producto nuevo después
 
-Este flujo queda como **estándar oficial** para cualquier landing que se genere con el agente creador de landings:
+Si más adelante creas un nuevo formulario (ej: para vender el Constructor MPV con su propia landing), solo tienes que:
 
-1. Cada landing nueva incluye automáticamente este sistema de captura
-2. El agente debe pedir el SHEET_ID al usuario al crear la landing
-3. El agente debe pedir el nombre del producto para `NOMBRE_HOJA`
-4. El agente integra el código JS al HTML automáticamente
+1. En tu landing nueva, ponle al `<form>` el atributo `data-form="Nombre del Producto"`.
+2. En `apps-script.gs`, agrega una entrada al objeto `HOJAS_POR_PRODUCTO`:
+   ```javascript
+   const HOJAS_POR_PRODUCTO = {
+     'Plano MPV': 'Leads Plano MPV',
+     'Comunidad WhatsApp': 'Leads Comunidad',
+     'Newsletter Método MPV': 'Leads Método MPV',
+     'Contacto Home': 'Contactos Home',
+     'Constructor MPV': 'Leads Constructor',  // ← nuevo
+     'default': 'Leads Generales'
+   };
+   ```
+3. **Implementar → Administrar implementaciones → Nueva versión.**
 
-Esto se documentará formalmente cuando creemos el agente.
+La hoja se crea sola la primera vez que llega un lead.
 
 ---
 
-*Sistema estable, gratis, sin dependencias externas. Tu sistema, tus datos, tu control.*
+## Notas técnicas
+
+- **Por qué `mode: 'no-cors'` en el fetch.** Apps Script en modo Web App no soporta CORS preflight. La respuesta no se puede leer desde el navegador, pero el envío sí pasa. Por eso usamos las páginas de `gracias/` para confirmar al usuario que llegó.
+- **Por qué leads parciales.** Si alguien empieza a llenar y se va, perdemos el lead a menos que lo capturemos al instante. El sistema dispara el envío parcial cuando hay nombre + WhatsApp/email aunque la persona no haya hecho click en enviar.
+- **Por qué hojas separadas.** Más fácil filtrar y segmentar después por producto. Si quieres ver todos los leads juntos, usa una vista o `=QUERY()` en una hoja resumen.
+- **Backup.** Cada noche Google hace backup automático de tu Sheets. También puedes Archivo → Crear copia para tener una manual.
+
+---
+
+*Sistema definido: 2026-05-11. Compatible con todas las landings v1 mayo 2026.*

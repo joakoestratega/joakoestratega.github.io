@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+Disallow: /plano-mpv/gracias/
+Disallow: /comunidad/gracias/
+Disallow: /_archivo-modelo-viejo-2026-04/
+
+Sitemap: https://joakoestratega.com/sitemap.xml
