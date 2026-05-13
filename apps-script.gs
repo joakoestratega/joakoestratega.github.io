@@ -17,8 +17,11 @@ const CALENDAR_ID = 'joakoestratega@gmail.com';
 const TELEGRAM_BOT_TOKEN = '8989852821:AAHs56lmK79xyS5_8e1L1nym5maEXwZlask';
 const TELEGRAM_CHAT_ID = '815920612';
 const WOMPI_PUBLIC_KEY = 'pub_test_M1mFEVzC2NXa2r5E69WdNm6ddHjq76Xx';
+const WOMPI_INTEGRITY_KEY = 'test_integrity_5IDf7ZMVxDJw8KfnHjLU1Nlquc6Y38P8';
 const WOMPI_API = 'https://sandbox.wompi.co/v1';  // cambiar a https://production.wompi.co/v1 cuando vaya live
 const TZ = 'America/Bogota';
+const ASESORIA_AMOUNT_CENTS = 20000000;  // $200.000 COP fijo
+const ASESORIA_CURRENCY = 'COP';
 
 // Horario de la Asesoría
 const ASESORIA_HORAS = ['15:00', '17:00', '18:30'];  // 3pm, 5pm, 6:30pm
@@ -56,9 +59,30 @@ function doGet(e) {
     return jsonResponse(verificarPago(e.parameter.ref));
   }
 
+  if (action === 'signature') {
+    return jsonResponse(generarFirmaWompi(e.parameter.ref));
+  }
+
   return ContentService
     .createTextOutput('Apps Script Joako Estratega · v3 · activo')
     .setMimeType(ContentService.MimeType.TEXT);
+}
+
+function generarFirmaWompi(referencia) {
+  if (!referencia) return { success: false, error: 'Sin referencia' };
+  // Wompi requiere: SHA256(referencia + amountInCents + currency + integrityKey)
+  const concat = referencia + ASESORIA_AMOUNT_CENTS + ASESORIA_CURRENCY + WOMPI_INTEGRITY_KEY;
+  const bytes = Utilities.computeDigest(Utilities.DigestAlgorithm.SHA_256, concat);
+  const hex = bytes.map(function (b) {
+    const v = (b < 0) ? b + 256 : b;
+    return ('0' + v.toString(16)).slice(-2);
+  }).join('');
+  return {
+    success: true,
+    signature: hex,
+    amountInCents: ASESORIA_AMOUNT_CENTS,
+    currency: ASESORIA_CURRENCY
+  };
 }
 
 function doPost(e) {

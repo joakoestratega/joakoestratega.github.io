@@ -163,37 +163,62 @@
   datos.referencia = referencia;
   sessionStorage.setItem('asesoriaMpvDatos', JSON.stringify(datos));
 
-  // 4. Botón Wompi
-  document.getElementById('btn-pagar').addEventListener('click', function() {
+  // 4. Botón Wompi (pedir firma al Apps Script antes de abrir el widget)
+  const btnPagar = document.getElementById('btn-pagar');
+  const txtOriginal = btnPagar.textContent;
+
+  btnPagar.addEventListener('click', function() {
     if (typeof WidgetCheckout === 'undefined') {
       alert('No se pudo cargar el procesador de pago. Verifica tu conexión y recarga la página.');
       return;
     }
 
-    const checkout = new WidgetCheckout({
-      currency: 'COP',
-      amountInCents: 20000000,  // $200.000 COP en centavos
-      reference: referencia,
-      publicKey: window.JOAKO.WOMPI_PUBLIC_KEY,
-      redirectUrl: window.location.origin + '/asesoria-mpv/agendar/',
-      customerData: {
-        email: datos.email,
-        fullName: datos.nombre,
-        phoneNumber: (datos.whatsapp || '').replace(/[^0-9]/g, ''),
-        phoneNumberPrefix: '+57'
-      }
-    });
+    btnPagar.disabled = true;
+    btnPagar.textContent = 'Preparando pago seguro...';
 
-    checkout.open(function(result) {
-      // Esta callback se ejecuta cuando se cierra el widget
-      const trans = result && result.transaction;
-      if (trans && trans.status === 'APPROVED') {
-        window.location.href = '/asesoria-mpv/agendar/?id=' + trans.id + '&ref=' + referencia;
-      } else if (trans) {
-        // Estado intermedio (PENDING) o redirección (PSE)
-        window.location.href = '/asesoria-mpv/agendar/?id=' + trans.id + '&ref=' + referencia;
-      }
-    });
+    // Pedir firma de integridad al Apps Script (el secret NUNCA viaja al navegador)
+    fetch(window.JOAKO.APPS_SCRIPT_URL + '?action=signature&ref=' + encodeURIComponent(referencia))
+      .then(r => r.json())
+      .then(res => {
+        if (!res.success || !res.signature) {
+          btnPagar.disabled = false;
+          btnPagar.textContent = txtOriginal;
+          alert('No pudimos preparar el pago. Intenta de nuevo o escríbeme por WhatsApp.');
+          return;
+        }
+
+        const checkout = new WidgetCheckout({
+          currency: res.currency,
+          amountInCents: res.amountInCents,
+          reference: referencia,
+          publicKey: window.JOAKO.WOMPI_PUBLIC_KEY,
+          signature: { integrity: res.signature },
+          redirectUrl: window.location.origin + '/asesoria-mpv/agendar/',
+          customerData: {
+            email: datos.email,
+            fullName: datos.nombre,
+            phoneNumber: (datos.whatsapp || '').replace(/[^0-9]/g, ''),
+            phoneNumberPrefix: '+57'
+          }
+        });
+
+        checkout.open(function(result) {
+          const trans = result && result.transaction;
+          if (trans) {
+            window.location.href = '/asesoria-mpv/agendar/?id=' + trans.id + '&ref=' + referencia;
+          } else {
+            // Usuario cerró el widget sin pagar
+            btnPagar.disabled = false;
+            btnPagar.textContent = txtOriginal;
+          }
+        });
+      })
+      .catch(err => {
+        btnPagar.disabled = false;
+        btnPagar.textContent = txtOriginal;
+        alert('Error de conexión preparando el pago. Intenta de nuevo.');
+        console.error('Error firma:', err);
+      });
   });
 })();
 </script>
