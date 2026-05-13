@@ -20,7 +20,7 @@
 // =====================================================
 
 // CONFIGURACIÓN — Cambia estos valores antes de implementar
-const SHEET_ID = 'PEGA_AQUI_EL_ID_DE_TU_GOOGLE_SHEETS';
+const SHEET_ID = '1pntzHPFutw6ZM7E9iUECW767mXRoxRUZHJgmX5rwWB8';
 const EMAIL_NOTIFICACION = 'joakoestratega@gmail.com';
 
 // Mapa producto → nombre de hoja en Google Sheets
