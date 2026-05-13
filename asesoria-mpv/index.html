@@ -285,9 +285,9 @@
       </div>
 
       <div>
-        <form class="form-bloque" data-form="Asesoría MPV" data-success="gracias/index.html">
-          <h3>Aplica al Asesoría MPV</h3>
-          <p class="form-sub">Recibes WhatsApp en menos de 24h para coordinar la sesión 1 y el link de pago.</p>
+        <form class="form-bloque" id="form-asesoria">
+          <h3>Empieza tu Asesoría MPV</h3>
+          <p class="form-sub">Paso 1 de 3 · Cuéntame de ti, luego pagas, luego eliges horario.</p>
 
           <label for="nombre">Nombre completo</label>
           <input id="nombre" name="nombre" type="text" required autocomplete="name">
@@ -317,10 +317,26 @@
           <label for="mensaje">¿Qué te gustaría resolver con la Asesoría MPV?</label>
           <textarea id="mensaje" name="mensaje" rows="4" placeholder="Cuéntame en 2-3 frases lo que más te urge resolver."></textarea>
 
-          <button type="submit" class="btn btn-primary btn-block btn-lg btn-lift" data-cta="form_aplicar_asesoria">Aplicar a la Asesoría MPV</button>
+          <button type="submit" class="btn btn-primary btn-block btn-lg btn-lift" data-cta="form_aplicar_asesoria">Continuar al pago →</button>
 
-          <small class="legal">Al enviar aceptas el contacto por WhatsApp y email para coordinar las sesiones. Tus datos no se comparten con terceros.</small>
+          <small class="legal">Después del pago eliges fecha y hora. Si en 7 días no tienes claridad estratégica real, se te devuelven los $200.000.</small>
         </form>
+        <script>
+          document.getElementById('form-asesoria').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const fd = new FormData(this);
+            const datos = { producto: 'Asesoría MPV' };
+            fd.forEach((v, k) => { datos[k] = (typeof v === 'string') ? v.trim() : v; });
+            // Guardar en sessionStorage para /pago/ y /agendar/
+            sessionStorage.setItem('asesoriaMpvDatos', JSON.stringify(datos));
+            // Disparar tracking
+            if (window.JOAKO && typeof window.JOAKO.track === 'function') {
+              window.JOAKO.track('form_complete', { producto: 'Asesoría MPV', meta_event_name: 'InitiateCheckout' });
+            }
+            // Redirigir a página de pago
+            window.location.href = 'pago/';
+          });
+        </script>
       </div>
 
     </div>

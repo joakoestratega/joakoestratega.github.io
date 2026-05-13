@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pagar Asesoría MPV · Joako Estratega</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&family=Bebas+Neue&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/styles.css">
+<script>
+  window.JOAKO = {
+    APPS_SCRIPT_URL: 'https://script.google.com/macros/s/AKfycbxc4Gjiidf8EM6OZBXWmQPJqQkKMoWToTtS0y0brxLHPubeaX-pyqoyW4962kSErmzy/exec',
+    WOMPI_PUBLIC_KEY: 'pub_test_M1mFEVzC2NXa2r5E69WdNm6ddHjq76Xx',
+    GA4_ID: '', META_PIXEL_ID: '', CLARITY_ID: ''
+  };
+</script>
+<style>
+  .checkout { max-width: 560px; margin: 0 auto; padding: 0 20px; }
+  .resumen-pago {
+    background: rgba(0,0,0,0.6); border: 1px solid var(--dorado-medio);
+    border-radius: var(--radius-lg); padding: 28px; margin: 24px 0;
+  }
+  .resumen-pago h3 { color: var(--blanco); margin-bottom: 16px; }
+  .resumen-pago dl { display: grid; grid-template-columns: auto 1fr; gap: 8px 16px; font-size: 14px; }
+  .resumen-pago dt { color: var(--gris-3); }
+  .resumen-pago dd { color: var(--blanco); }
+  .resumen-pago .total {
+    margin-top: 18px; padding-top: 18px; border-top: 1px solid var(--linea);
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .resumen-pago .total span { color: var(--gris-2); font-size: 14px; }
+  .resumen-pago .total strong { color: var(--dorado); font-size: 28px; font-weight: 900; }
+  .editar-link { display: inline-block; color: var(--gris-3); font-size: 13px; margin-top: 12px; text-decoration: underline; }
+  .editar-link:hover { color: var(--dorado); }
+  .pago-info { font-size: 13px; color: var(--gris-2); line-height: 1.6; margin: 18px 0; text-align: center; }
+  .pago-info strong { color: var(--blanco); }
+  .botones-pago { display: flex; flex-direction: column; gap: 10px; margin-top: 16px; }
+  .badge-seguro {
+    display: inline-flex; align-items: center; gap: 6px; padding: 6px 12px;
+    background: rgba(46,125,50,0.15); border: 1px solid rgba(46,125,50,0.4);
+    border-radius: 20px; font-size: 12px; color: #8ed09b; margin: 14px 0;
+  }
+  .form-falta { background: rgba(198,40,40,0.15); border: 1px solid var(--rojo, #c84a4a); padding: 18px; border-radius: 10px; color: #fdb; text-align: center; }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-inner">
+    <a href="../../index.html" class="logo">
+      <img src="../../imagenes/logos/joako-estratega-logo.png" alt="Joako Estratega">
+    </a>
+    <nav class="nav">
+      <a href="../index.html">← Volver</a>
+    </nav>
+  </div>
+</header>
+
+<section style="padding: 50px 0 70px;">
+  <div class="checkout">
+    <div class="text-center">
+      <span class="section-tag">Paso 2 de 3 · Confirmar y pagar</span>
+      <h1 class="section-title" style="font-size: 32px;">Confirma tu Asesoría MPV</h1>
+      <p style="color: var(--gris-2); font-size: 15px;">Apenas el pago se aprueba, eliges horario en pantalla.</p>
+    </div>
+
+    <div id="datos-faltan" class="form-falta hidden">
+      Tus datos no llegaron. <a href="../index.html#aplicar" style="color: var(--dorado);">Vuelve y llena el formulario</a> para continuar.
+    </div>
+
+    <div id="resumen" class="resumen-pago hidden">
+      <h3>Resumen</h3>
+      <dl>
+        <dt>Producto:</dt><dd>Asesoría MPV</dd>
+        <dt>Sesiones:</dt><dd>2 (90 min + 60 min)</dd>
+        <dt>A nombre de:</dt><dd id="r-nombre">—</dd>
+        <dt>WhatsApp:</dt><dd id="r-whatsapp">—</dd>
+        <dt>Email:</dt><dd id="r-email">—</dd>
+        <dt>Instagram:</dt><dd id="r-instagram">—</dd>
+        <dt>Profesión:</dt><dd id="r-profesion">—</dd>
+      </dl>
+      <div class="total">
+        <span>Total a pagar</span>
+        <strong>$200.000 COP</strong>
+      </div>
+      <a href="../index.html#aplicar" class="editar-link">✎ Editar datos</a>
+    </div>
+
+    <div class="text-center">
+      <div class="badge-seguro">🛡 Pago seguro con Wompi (Bancolombia)</div>
+    </div>
+
+    <p class="pago-info">
+      <strong>Garantía:</strong> si terminas la sesión 2 y no obtienes claridad estratégica real, se te devuelven los $200.000 sin preguntas.
+    </p>
+
+    <div class="botones-pago">
+      <button id="btn-pagar" class="btn btn-primary btn-lg btn-block btn-lift" data-cta="pago_wompi">
+        Pagar $200.000 COP con tarjeta, PSE, Nequi o Bancolombia
+      </button>
+      <p style="text-align: center; font-size: 12px; color: var(--gris-3); margin: 8px 0;">
+        También se acepta Bre-B y transferencia. Pago procesado por Wompi.
+      </p>
+    </div>
+
+    <div style="margin-top: 30px; padding: 20px; background: rgba(0,0,0,0.4); border-radius: var(--radius); font-size: 13px; color: var(--gris-2); line-height: 1.6;">
+      <strong style="color: var(--blanco);">Cómo funciona:</strong>
+      <ol style="margin: 10px 0 0 20px; padding: 0;">
+        <li>Pagas con el medio que prefieras (es seguro)</li>
+        <li>Apenas se aprueba, escoges fecha y hora</li>
+        <li>Te llega correo con el link de Google Meet</li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div>
+      <div class="logo-footer"><img src="../../imagenes/logos/joako-estratega-logo.png" alt="Joako Estratega"></div>
+      <p>Estratega oficial de la Feria EFFIX. Construyo sistemas de ventas por internet con el Método MPV.</p>
+    </div>
+    <div>
+      <h5>Contacto</h5>
+      <ul>
+        <li><a href="https://wa.me/573028662556?text=Hola%20Joako%2C%20tengo%20una%20duda%20con%20el%20pago%20de%20la%20Asesor%C3%ADa">WhatsApp directo</a></li>
+        <li><a href="mailto:joakoestratega@gmail.com">joakoestratega@gmail.com</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 Joaquín Rojas Peña · Joako Estratega</span>
+  </div>
+</footer>
+
+<!-- WIDGET WOMPI -->
+<script src="https://checkout.wompi.co/widget.js"></script>
+
+<script>
+(function() {
+  // 1. Recuperar datos del formulario (guardados en sessionStorage)
+  const datos = JSON.parse(sessionStorage.getItem('asesoriaMpvDatos') || 'null');
+
+  if (!datos || !datos.nombre || !datos.email) {
+    document.getElementById('datos-faltan').classList.remove('hidden');
+    document.getElementById('btn-pagar').disabled = true;
+    document.getElementById('btn-pagar').textContent = 'Faltan datos · Vuelve al formulario';
+    return;
+  }
+
+  // 2. Pintar resumen
+  document.getElementById('resumen').classList.remove('hidden');
+  document.getElementById('r-nombre').textContent = datos.nombre;
+  document.getElementById('r-whatsapp').textContent = datos.whatsapp || '—';
+  document.getElementById('r-email').textContent = datos.email;
+  document.getElementById('r-instagram').textContent = datos.instagram || '—';
+  document.getElementById('r-profesion').textContent = datos.profesion || '—';
+
+  // 3. Generar referencia única
+  const referencia = 'MPV-' + Date.now() + '-' + Math.random().toString(36).slice(2, 8).toUpperCase();
+  datos.referencia = referencia;
+  sessionStorage.setItem('asesoriaMpvDatos', JSON.stringify(datos));
+
+  // 4. Botón Wompi
+  document.getElementById('btn-pagar').addEventListener('click', function() {
+    if (typeof WidgetCheckout === 'undefined') {
+      alert('No se pudo cargar el procesador de pago. Verifica tu conexión y recarga la página.');
+      return;
+    }
+
+    const checkout = new WidgetCheckout({
+      currency: 'COP',
+      amountInCents: 20000000,  // $200.000 COP en centavos
+      reference: referencia,
+      publicKey: window.JOAKO.WOMPI_PUBLIC_KEY,
+      redirectUrl: window.location.origin + '/asesoria-mpv/agendar/',
+      customerData: {
+        email: datos.email,
+        fullName: datos.nombre,
+        phoneNumber: (datos.whatsapp || '').replace(/[^0-9]/g, ''),
+        phoneNumberPrefix: '+57'
+      }
+    });
+
+    checkout.open(function(result) {
+      // Esta callback se ejecuta cuando se cierra el widget
+      const trans = result && result.transaction;
+      if (trans && trans.status === 'APPROVED') {
+        window.location.href = '/asesoria-mpv/agendar/?id=' + trans.id + '&ref=' + referencia;
+      } else if (trans) {
+        // Estado intermedio (PENDING) o redirección (PSE)
+        window.location.href = '/asesoria-mpv/agendar/?id=' + trans.id + '&ref=' + referencia;
+      }
+    });
+  });
+})();
+</script>
+
+<script src="../../assets/main.js" defer></script>
+</body>
+</html>

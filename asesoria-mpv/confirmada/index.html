@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>¡Confirmada! · Asesoría MPV</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&family=Bebas+Neue&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/styles.css">
+<script>
+  window.JOAKO = {
+    APPS_SCRIPT_URL: 'https://script.google.com/macros/s/AKfycbxc4Gjiidf8EM6OZBXWmQPJqQkKMoWToTtS0y0brxLHPubeaX-pyqoyW4962kSErmzy/exec',
+    GA4_ID: '', META_PIXEL_ID: '', CLARITY_ID: ''
+  };
+</script>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-inner">
+    <a href="../../index.html" class="logo">
+      <img src="../../imagenes/logos/joako-estratega-logo.png" alt="Joako Estratega">
+    </a>
+  </div>
+</header>
+
+<section class="gracias-page">
+  <div>
+    <div class="icono-grande">🎉</div>
+    <h1>Tu Asesoría está <span class="text-dorado">confirmada</span></h1>
+    <p id="resumen-cita" style="color: var(--gris-1); font-size: 17px;">
+      Te llegó un correo con todos los detalles y el link de Google Meet.
+    </p>
+
+    <div class="siguiente-paso" style="margin: 30px auto;">
+      <h3>QUÉ SIGUE AHORA</h3>
+      <ol style="margin-top: 10px; padding-left: 20px; color: var(--gris-1); line-height: 1.7;">
+        <li><strong style="color: var(--blanco);">Acepta la invitación</strong> de Google Calendar que te llegó al correo (así te aparece en tu agenda).</li>
+        <li><strong style="color: var(--blanco);">Antes de la sesión</strong>, prepara una hoja con las 3 dudas más urgentes de tu negocio.</li>
+        <li><strong style="color: var(--blanco);">El día de la cita</strong>, abre el link de Meet 5 minutos antes.</li>
+      </ol>
+    </div>
+
+    <div style="margin: 30px auto; padding-top: 30px; border-top: 1px solid var(--linea); max-width: 600px;">
+      <p style="font-size: 14px; color: var(--gris-2); margin-bottom: 14px;">
+        Mientras tanto, únete al grupo de WhatsApp donde hago un live estratégico cada viernes. Es gratis y ahí pruebo en público lo que les vendo a mis clientas.
+      </p>
+      <a href="https://chat.whatsapp.com/Cxh4sRUI5pVGTD1h8efEyp" class="btn btn-azul btn-lift" data-cta="confirmada_comunidad">Entrar a la comunidad</a>
+    </div>
+
+    <div style="margin-top: 30px; padding-top: 30px; border-top: 1px solid var(--linea); max-width: 600px;">
+      <p style="font-size: 13px; color: var(--gris-3);">¿No te llegó el correo de Google Calendar? Revisa la carpeta de spam o escríbeme directo:</p>
+      <a href="https://wa.me/573028662556?text=Hola%20Joako%2C%20agend%C3%A9%20la%20Asesor%C3%ADa%20pero%20no%20me%20lleg%C3%B3%20el%20correo" class="btn btn-secondary btn-lift mt-2" data-cta="confirmada_wa">Escribirme directo</a>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div>
+      <div class="logo-footer"><img src="../../imagenes/logos/joako-estratega-logo.png" alt="Joako Estratega"></div>
+      <p>Estratega oficial de la Feria EFFIX. Construyo sistemas de ventas por internet con el Método MPV.</p>
+    </div>
+    <div>
+      <h5>Contacto</h5>
+      <ul>
+        <li><a href="https://wa.me/573028662556?text=Hola%20Joako">WhatsApp directo</a></li>
+        <li><a href="mailto:joakoestratega@gmail.com">joakoestratega@gmail.com</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 Joaquín Rojas Peña · Joako Estratega</span>
+  </div>
+</footer>
+
+<script src="../../assets/main.js" defer></script>
+<script>
+  // Mostrar el resumen de la cita si está guardado
+  const reserva = JSON.parse(sessionStorage.getItem('asesoriaMpvReserva') || 'null');
+  if (reserva && reserva.fecha) {
+    document.getElementById('resumen-cita').innerHTML =
+      'Nos vemos el <strong style="color: var(--dorado);">' + reserva.fecha + ' a las ' + reserva.hora + '</strong> (hora Colombia).<br>Te llegó un correo a <strong>' + reserva.email + '</strong> con el link de Google Meet.';
+  }
+  // Tracking
+  if (window.JOAKO && typeof window.JOAKO.track === 'function') {
+    window.addEventListener('load', () => {
+      window.JOAKO.track('asesoria_confirmada', { producto: 'Asesoría MPV', valor: 200000, meta_event_name: 'Purchase' });
+    });
+  }
+</script>
+</body>
+</html>
