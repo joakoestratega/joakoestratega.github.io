@@ -56,7 +56,8 @@ function doGet(e) {
   }
 
   if (action === 'verifyPayment') {
-    return jsonResponse(verificarPago(e.parameter.ref));
+    // Acepta tanto ref (nuestra referencia) como id (transaction id de Wompi)
+    return jsonResponse(verificarPago(e.parameter.ref, e.parameter.id));
   }
 
   if (action === 'signature') {
@@ -64,7 +65,7 @@ function doGet(e) {
   }
 
   return ContentService
-    .createTextOutput('Apps Script Joako Estratega · v3 · activo')
+    .createTextOutput('Apps Script Joako Estratega · v3.2 · activo')
     .setMimeType(ContentService.MimeType.TEXT);
 }
 
@@ -324,17 +325,23 @@ function formatearHora(hora24) {
 // AGENDAMIENTO — VERIFICACIÓN DE PAGO WOMPI
 // =====================================================
 
-function verificarPago(referencia) {
-  if (!referencia) return { success: false, error: 'Sin referencia' };
-
+function verificarPago(referencia, transactionId) {
+  if (!referencia && !transactionId) return { success: false, error: 'Sin referencia ni id' };
   try {
-    const url = WOMPI_API + '/transactions?reference=' + encodeURIComponent(referencia);
-    const resp = UrlFetchApp.fetch(url, { muteHttpExceptions: true });
-    const status = resp.getResponseCode();
-    if (status !== 200) return { success: false, error: 'Wompi respondió ' + status };
+    let trans = null;
 
-    const body = JSON.parse(resp.getContentText());
-    const trans = (body.data || [])[0];
+    // Si llegó id de Wompi, lo usamos directo (caso después del redirect del widget)
+    if (transactionId) {
+      const resp = UrlFetchApp.fetch(WOMPI_API + '/transactions/' + encodeURIComponent(transactionId), { muteHttpExceptions: true });
+      if (resp.getResponseCode() === 200) trans = JSON.parse(resp.getContentText()).data;
+    }
+
+    // Si no se encontró por id, buscamos por referencia
+    if (!trans && referencia) {
+      const resp = UrlFetchApp.fetch(WOMPI_API + '/transactions?reference=' + encodeURIComponent(referencia), { muteHttpExceptions: true });
+      if (resp.getResponseCode() === 200) trans = (JSON.parse(resp.getContentText()).data || [])[0];
+    }
+
     if (!trans) return { success: false, error: 'Transacción no encontrada' };
 
     return {
@@ -359,8 +366,8 @@ function crearReserva(data) {
   // data: { referencia, isoStart, isoEnd, nombre, whatsapp, email, instagram, profesion, mensaje }
   if (!data.referencia || !data.isoStart) return { success: false, error: 'Datos incompletos' };
 
-  // Verificar que el pago esté aprobado
-  const pago = verificarPago(data.referencia);
+  // Verificar que el pago esté aprobado (acepta referencia o id de Wompi)
+  const pago = verificarPago(data.referencia, data.transactionId);
   if (!pago.success || !pago.aprobada) {
     return { success: false, error: 'Pago no aprobado: ' + (pago.status || pago.error) };
   }
