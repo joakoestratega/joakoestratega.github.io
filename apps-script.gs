@@ -288,6 +288,32 @@ function pseudoRandomSeleccion(semilla, total, cuantos) {
   return indices.slice(0, cuantos).sort((a, b) => a - b);
 }
 
+function buscarLeadPorReferencia(referencia) {
+  // Busca el último lead pre-pago guardado con esa referencia.
+  // Sirve para recuperar nombre/email/IG si el sessionStorage del cliente se perdió.
+  try {
+    const sheet = SpreadsheetApp.openById(SHEET_ID).getSheetByName('Leads Asesoría MPV');
+    if (!sheet) return null;
+    const data = sheet.getDataRange().getValues();
+    if (data.length < 2) return null;
+    const headers = data[0].map(h => String(h));
+    const refCol = headers.indexOf('referencia');
+    if (refCol === -1) return null;
+    // Iterar de abajo hacia arriba para tomar el registro más reciente
+    for (let i = data.length - 1; i >= 1; i--) {
+      if (String(data[i][refCol]) === String(referencia)) {
+        const result = {};
+        headers.forEach((h, j) => { result[h] = data[i][j]; });
+        return result;
+      }
+    }
+    return null;
+  } catch (e) {
+    Logger.log('buscarLeadPorReferencia error: ' + e);
+    return null;
+  }
+}
+
 function reservaExiste(inicio) {
   try {
     const ss = SpreadsheetApp.openById(SHEET_ID);
@@ -363,14 +389,35 @@ function verificarPago(referencia, transactionId) {
 // =====================================================
 
 function crearReserva(data) {
-  // data: { referencia, isoStart, isoEnd, nombre, whatsapp, email, instagram, profesion, mensaje }
-  if (!data.referencia || !data.isoStart) return { success: false, error: 'Datos incompletos' };
+  // data: { referencia, transactionId, isoStart, isoEnd, nombre, whatsapp, email, instagram, profesion, mensaje }
+  if ((!data.referencia && !data.transactionId) || !data.isoStart) return { success: false, error: 'Datos incompletos' };
 
   // Verificar que el pago esté aprobado (acepta referencia o id de Wompi)
   const pago = verificarPago(data.referencia, data.transactionId);
   if (!pago.success || !pago.aprobada) {
     return { success: false, error: 'Pago no aprobado: ' + (pago.status || pago.error) };
   }
+
+  // Si la referencia no llegó, usar la que devuelve Wompi
+  if (!data.referencia && pago.referencia) data.referencia = pago.referencia;
+
+  // RESCATE DE DATOS: si el sessionStorage se perdió en el redirect a Wompi y los datos
+  // de la clienta no llegan, los buscamos en la hoja Leads Asesoría MPV por referencia.
+  if (!data.nombre && data.referencia) {
+    const lead = buscarLeadPorReferencia(data.referencia);
+    if (lead) {
+      data.nombre = data.nombre || lead.nombre;
+      data.email = data.email || lead.email;
+      data.whatsapp = data.whatsapp || lead.whatsapp;
+      data.instagram = data.instagram || lead.instagram;
+      data.profesion = data.profesion || lead.profesion;
+      data.situacion = data.situacion || lead.situacion;
+      data.mensaje = data.mensaje || lead.mensaje;
+    }
+  }
+
+  // Si tampoco hay email pero Wompi sí tiene, lo usamos
+  if (!data.email && pago.email) data.email = pago.email;
 
   const inicio = new Date(data.isoStart);
   const fin = new Date(data.isoEnd);

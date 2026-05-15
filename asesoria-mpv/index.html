@@ -322,17 +322,43 @@
           <small class="legal">Después del pago eliges fecha y hora. Si en 7 días no tienes claridad estratégica real, se te devuelven los $200.000.</small>
         </form>
         <script>
-          document.getElementById('form-asesoria').addEventListener('submit', function(e) {
+          document.getElementById('form-asesoria').addEventListener('submit', async function(e) {
             e.preventDefault();
+            const btn = this.querySelector('button[type="submit"]');
+            const txtOriginal = btn.textContent;
+            btn.disabled = true;
+            btn.textContent = 'Procesando...';
+
             const fd = new FormData(this);
             const datos = { producto: 'Asesoría MPV' };
             fd.forEach((v, k) => { datos[k] = (typeof v === 'string') ? v.trim() : v; });
+
+            // Generar referencia única que viaja por todo el flujo (form → pago → agendar)
+            datos.referencia = 'MPV-' + Date.now() + '-' + Math.random().toString(36).slice(2, 8).toUpperCase();
+            datos.estado = 'Pendiente pago';
+            datos.origen = window.location.href;
+
             // Guardar en sessionStorage para /pago/ y /agendar/
             sessionStorage.setItem('asesoriaMpvDatos', JSON.stringify(datos));
-            // Disparar tracking
+
+            // GUARDAR EN BACKEND (antes del pago) — si sessionStorage se pierde por redirect a Wompi,
+            // los datos quedan a salvo en Sheets y se recuperan por referencia al confirmar la reserva.
+            try {
+              await fetch(window.JOAKO.APPS_SCRIPT_URL, {
+                method: 'POST',
+                mode: 'no-cors',
+                headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+                body: JSON.stringify(datos)
+              });
+            } catch (err) {
+              console.error('No se pudo guardar lead pre-pago:', err);
+            }
+
+            // Tracking
             if (window.JOAKO && typeof window.JOAKO.track === 'function') {
               window.JOAKO.track('form_complete', { producto: 'Asesoría MPV', meta_event_name: 'InitiateCheckout' });
             }
+
             // Redirigir a página de pago
             window.location.href = 'pago/';
           });

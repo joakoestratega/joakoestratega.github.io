@@ -158,8 +158,9 @@
   document.getElementById('r-instagram').textContent = datos.instagram || '—';
   document.getElementById('r-profesion').textContent = datos.profesion || '—';
 
-  // 3. Generar referencia única
-  const referencia = 'MPV-' + Date.now() + '-' + Math.random().toString(36).slice(2, 8).toUpperCase();
+  // 3. Usar la referencia que ya viene del formulario (form la generó y la guardó en backend)
+  // Si por algún motivo no hay, generamos una de emergencia.
+  const referencia = datos.referencia || ('MPV-' + Date.now() + '-' + Math.random().toString(36).slice(2, 8).toUpperCase());
   datos.referencia = referencia;
   sessionStorage.setItem('asesoriaMpvDatos', JSON.stringify(datos));
 
