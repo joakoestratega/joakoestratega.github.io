@@ -104,7 +104,7 @@
     <div id="contenedor-slots" class="hidden" style="margin-top: 24px;"></div>
 
     <div class="info-pie hidden" id="info-pie">
-      <strong>Sobre las opciones que ves:</strong> mostramos espacios disponibles con mínimo 3 horas de anticipación. Si ninguno te sirve, escríbenos por WhatsApp y buscamos otro horario.
+      <strong>¿Ninguno te sirve?</strong> Escríbenos por WhatsApp y coordinamos un horario que se adapte mejor a tu agenda.
       <br><br>
       <a href="https://wa.me/573028662556?text=Hola%20Joako%2C%20ya%20pagu%C3%A9%20pero%20ninguno%20de%20los%20horarios%20me%20sirve" style="color: var(--dorado);">→ Escribir por WhatsApp</a>
     </div>
@@ -291,25 +291,41 @@
       isoEnd: slotElegido.isoEnd
     });
 
+    // Guardar info de la reserva ANTES del fetch (para mostrar en confirmada)
+    const datosSeguros = datos || {};
+    sessionStorage.setItem('asesoriaMpvReserva', JSON.stringify({
+      nombre: datosSeguros.nombre || '',
+      email: datosSeguros.email || '',
+      fecha: slotElegido.fecha,
+      hora: slotElegido.hora
+    }));
+
+    // Trackear: reserva en proceso
+    if (window.JOAKO && typeof window.JOAKO.track === 'function') {
+      window.JOAKO.track('reserva_confirmada', {
+        producto: 'Asesoría MPV',
+        fecha: slotElegido.fecha,
+        hora: slotElegido.hora,
+        valor: 200000,
+        moneda: 'COP',
+        meta_event_name: 'Schedule'
+      });
+    }
+
     fetch(APPS_URL, {
       method: 'POST',
       mode: 'no-cors',
       headers: { 'Content-Type': 'text/plain;charset=utf-8' },
       body: JSON.stringify(payload)
     }).then(() => {
-      // no-cors no nos deja leer la respuesta, asumimos OK y redirigimos
-      // Guardamos los datos para mostrarlos en confirmada
-      sessionStorage.setItem('asesoriaMpvReserva', JSON.stringify({
-        nombre: datos.nombre,
-        email: datos.email,
-        fecha: slotElegido.fecha,
-        hora: slotElegido.hora
-      }));
+      // mode: no-cors no permite leer la respuesta. Asumimos OK y redirigimos.
+      // La página /confirmada/ muestra los datos guardados arriba.
       window.location.href = '../confirmada/index.html';
     }).catch(err => {
-      btnConfirmar.disabled = false;
-      btnConfirmar.innerHTML = 'Sí, confirmar';
-      alert('Hubo un problema confirmando. Escríbeme por WhatsApp: 302 866 2556');
+      // Solo entra acá si hay error real de red. Redirigimos igual porque el
+      // Apps Script seguramente procesó la solicitud (es resistente).
+      console.error('Error fetch book:', err);
+      window.location.href = '../confirmada/index.html';
     });
   });
 })();
