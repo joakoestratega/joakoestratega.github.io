@@ -12,7 +12,7 @@
 <script>
   window.JOAKO = {
     APPS_SCRIPT_URL: 'https://script.google.com/macros/s/AKfycbxc4Gjiidf8EM6OZBXWmQPJqQkKMoWToTtS0y0brxLHPubeaX-pyqoyW4962kSErmzy/exec',
-    GA4_ID: '', META_PIXEL_ID: '', CLARITY_ID: ''
+    GA4_ID: 'G-FZZB8HHQ03', META_PIXEL_ID: '1788355601952516', CLARITY_ID: 'wrih01ohra'
   };
 </script>
 <style>
@@ -187,11 +187,25 @@
       // Pago aprobado, cargar slots
       estado.className = 'estado-box estado-ok';
       estado.innerHTML = '✅ Pago aprobado por $' + (res.monto || 200000).toLocaleString('es-CO') + ' COP';
+
+      // Trackear: pago confirmado (Purchase de Meta)
+      if (window.JOAKO && typeof window.JOAKO.track === 'function') {
+        window.JOAKO.track('pago_completado', {
+          producto: 'Asesoría MPV',
+          valor: res.monto || 200000,
+          moneda: 'COP',
+          meta_event_name: 'Purchase'
+        });
+      }
+
       cargarSlots();
     })
     .catch(err => {
       estado.className = 'estado-box estado-error';
       estado.innerHTML = '⚠️ Error verificando el pago. <a href="https://wa.me/573028662556" style="color: var(--dorado);">Escríbeme por WhatsApp</a>.';
+      if (window.JOAKO && typeof window.JOAKO.track === 'function') {
+        window.JOAKO.track('pago_verificacion_fallo', { error: String(err).slice(0, 100) });
+      }
     });
 
   function cargarSlots() {
@@ -216,6 +230,15 @@
         });
         contenedor.innerHTML = html;
         infoPie.classList.remove('hidden');
+
+        // Trackear: vio los slots disponibles
+        if (window.JOAKO && typeof window.JOAKO.track === 'function') {
+          window.JOAKO.track('slots_vistos', {
+            producto: 'Asesoría MPV',
+            dias_disponibles: res.dias.length,
+            meta_event_name: 'ViewContent'
+          });
+        }
 
         // Bind clicks
         contenedor.querySelectorAll('.slot-btn').forEach(btn => {
@@ -243,6 +266,14 @@
     };
     modalDetalle.innerHTML = '<strong>' + slotElegido.fecha + '</strong><br>a las <strong>' + slotElegido.hora + '</strong> (hora Colombia)<br><br>La sesión dura 90 minutos por Google Meet.';
     modal.classList.add('open');
+    // Trackear: seleccionó un slot (todavía no confirmó)
+    if (window.JOAKO && typeof window.JOAKO.track === 'function') {
+      window.JOAKO.track('slot_seleccionado', {
+        producto: 'Asesoría MPV',
+        fecha: slotElegido.fecha,
+        hora: slotElegido.hora
+      });
+    }
   }
 
   btnCancelar.addEventListener('click', () => modal.classList.remove('open'));

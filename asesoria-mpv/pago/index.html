@@ -13,7 +13,7 @@
   window.JOAKO = {
     APPS_SCRIPT_URL: 'https://script.google.com/macros/s/AKfycbxc4Gjiidf8EM6OZBXWmQPJqQkKMoWToTtS0y0brxLHPubeaX-pyqoyW4962kSErmzy/exec',
     WOMPI_PUBLIC_KEY: 'pub_test_M1mFEVzC2NXa2r5E69WdNm6ddHjq76Xx',
-    GA4_ID: '', META_PIXEL_ID: '', CLARITY_ID: ''
+    GA4_ID: 'G-FZZB8HHQ03', META_PIXEL_ID: '1788355601952516', CLARITY_ID: 'wrih01ohra'
   };
 </script>
 <style>
@@ -163,6 +163,18 @@
   datos.referencia = referencia;
   sessionStorage.setItem('asesoriaMpvDatos', JSON.stringify(datos));
 
+  // Trackear: llegó a checkout (paso 2 del embudo)
+  if (window.JOAKO && typeof window.JOAKO.track === 'function') {
+    window.addEventListener('load', () => {
+      window.JOAKO.track('checkout_view', {
+        producto: 'Asesoría MPV',
+        valor: 200000,
+        moneda: 'COP',
+        meta_event_name: 'InitiateCheckout'
+      });
+    });
+  }
+
   // 4. Botón Wompi (pedir firma al Apps Script antes de abrir el widget)
   const btnPagar = document.getElementById('btn-pagar');
   const txtOriginal = btnPagar.textContent;
@@ -171,6 +183,11 @@
     if (typeof WidgetCheckout === 'undefined') {
       alert('No se pudo cargar el procesador de pago. Verifica tu conexión y recarga la página.');
       return;
+    }
+
+    // Trackear: click en pagar
+    if (window.JOAKO && typeof window.JOAKO.track === 'function') {
+      window.JOAKO.track('pago_iniciado', { producto: 'Asesoría MPV', valor: 200000 });
     }
 
     btnPagar.disabled = true;
