@@ -56,7 +56,6 @@ function doGet(e) {
   }
 
   if (action === 'verifyPayment') {
-    // Acepta tanto ref (nuestra referencia) como id (transaction id de Wompi)
     return jsonResponse(verificarPago(e.parameter.ref, e.parameter.id));
   }
 
@@ -64,8 +63,12 @@ function doGet(e) {
     return jsonResponse(generarFirmaWompi(e.parameter.ref));
   }
 
+  if (action === 'verifyCortesia') {
+    return jsonResponse(verificarCodigoCortesia(e.parameter.codigo));
+  }
+
   return ContentService
-    .createTextOutput('Apps Script Joako Estratega · v3.2 · activo')
+    .createTextOutput('Apps Script Joako Estratega · v3.4 · cortesia + slots fix')
     .setMimeType(ContentService.MimeType.TEXT);
 }
 
@@ -93,17 +96,18 @@ function doPost(e) {
 
     const action = data.action || '';
 
-    // Reservar slot (después del pago)
     if (action === 'book') {
       return jsonResponse(crearReserva(data));
     }
 
-    // Webhook de Wompi
+    if (action === 'bookCortesia') {
+      return jsonResponse(crearReservaCortesia(data));
+    }
+
     if (data.event === 'transaction.updated') {
       return jsonResponse(procesarWebhookWompi(data));
     }
 
-    // Default: captura de leads (compatibilidad con formularios)
     return guardarLead(data);
 
   } catch (error) {
@@ -246,13 +250,11 @@ function generarSlotsDelDia(fecha, desde, cal) {
 
     if (inicio < desde) return;  // antes de la ventana de 3h
 
-    // Chequear conflicto con Calendar
+    // Calendar es la ÚNICA fuente de verdad. Si Joako borra el evento, el slot
+    // vuelve a quedar libre. La hoja "Reservas Asesoría" queda solo como historial.
     const eventos = cal.getEvents(inicio, fin);
     const ocupado = eventos.some(ev => !ev.isAllDayEvent() && ev.getMyStatus() !== CalendarApp.GuestStatus.NO);
     if (ocupado) return;
-
-    // Chequear si ya hay reserva nuestra (anti doble-booking)
-    if (reservaExiste(inicio)) return;
 
     slots.push({
       hora: hora,
@@ -286,6 +288,107 @@ function pseudoRandomSeleccion(semilla, total, cuantos) {
     [indices[i], indices[j]] = [indices[j], indices[i]];
   }
   return indices.slice(0, cuantos).sort((a, b) => a - b);
+}
+
+// =====================================================
+// FLUJO CORTESÍA (pago manual fuera de Wompi)
+// =====================================================
+// Joako genera un código manualmente en la hoja "Códigos Cortesía" con los
+// datos de la clienta y el código único. Le envía el link por WhatsApp:
+// https://joakoestratega.com/agendar-cortesia/?codigo=XXX
+// La clienta entra, el sistema valida el código y le permite agendar.
+
+const HOJA_CORTESIA = 'Códigos Cortesía';
+
+function verificarCodigoCortesia(codigo) {
+  if (!codigo) return { success: false, error: 'Sin código' };
+  try {
+    const sheet = SpreadsheetApp.openById(SHEET_ID).getSheetByName(HOJA_CORTESIA);
+    if (!sheet) return { success: false, error: 'Hoja de cortesía no existe' };
+    const data = sheet.getDataRange().getValues();
+    if (data.length < 2) return { success: false, error: 'Código no encontrado' };
+    const headers = data[0].map(h => String(h).toLowerCase().trim());
+    const colCodigo = headers.indexOf('código');
+    const colUsado = headers.indexOf('usado');
+    if (colCodigo === -1) return { success: false, error: 'Hoja mal configurada (falta columna "Código")' };
+    for (let i = 1; i < data.length; i++) {
+      if (String(data[i][colCodigo]).trim() === String(codigo).trim()) {
+        const usadoVal = colUsado >= 0 ? String(data[i][colUsado]).toLowerCase().trim() : '';
+        if (usadoVal === 'sí' || usadoVal === 'si' || usadoVal === 'true' || usadoVal === '✓') {
+          return { success: false, error: 'Este código ya fue usado', yaUsado: true };
+        }
+        const result = { success: true, fila: i + 1 };
+        headers.forEach((h, j) => { result[h] = data[i][j]; });
+        return result;
+      }
+    }
+    return { success: false, error: 'Código no válido' };
+  } catch (e) {
+    Logger.log('verificarCodigoCortesia error: ' + e);
+    return { success: false, error: e.toString() };
+  }
+}
+
+function crearReservaCortesia(data) {
+  if (!data.codigo || !data.isoStart) return { success: false, error: 'Datos incompletos' };
+
+  const cortesia = verificarCodigoCortesia(data.codigo);
+  if (!cortesia.success) return { success: false, error: cortesia.error };
+
+  // Fusionar datos del código con los del request (request tiene prioridad)
+  data.nombre = data.nombre || cortesia['nombre'] || '';
+  data.email = data.email || cortesia['email'] || '';
+  data.whatsapp = data.whatsapp || cortesia['whatsapp'] || '';
+  data.instagram = data.instagram || cortesia['instagram'] || '';
+  data.profesion = data.profesion || cortesia['profesión'] || cortesia['profesion'] || '';
+  data.mensaje = data.mensaje || cortesia['mensaje'] || '';
+  data.referencia = 'CORTESIA-' + data.codigo;
+
+  const inicio = new Date(data.isoStart);
+  const fin = new Date(data.isoEnd);
+
+  // Doble check Calendar
+  const cal = CalendarApp.getCalendarById(CALENDAR_ID);
+  const eventos = cal.getEvents(inicio, fin);
+  const ocupadoAhora = eventos.some(ev => !ev.isAllDayEvent() && ev.getMyStatus() !== CalendarApp.GuestStatus.NO);
+  if (ocupadoAhora) return { success: false, error: 'Este horario fue tomado por otra clienta. Elige otro.' };
+
+  // Crear evento + Meet
+  const evento = crearEventoCalendar(inicio, fin, data);
+
+  // Registrar reserva
+  registrarReserva(data, inicio, fin, evento);
+
+  // Marcar código como usado
+  marcarCodigoComoUsado(cortesia.fila);
+
+  // Enviar emails + Telegram
+  enviarEmailClienta(data, inicio, evento);
+  const pagoFake = { monto: ASESORIA_AMOUNT_CENTS / 100, referencia: data.referencia };
+  notificarJoakoNuevaReserva(data, inicio, evento, pagoFake);
+
+  return {
+    success: true,
+    fecha: formatearFecha(inicio),
+    hora: formatearHora(Utilities.formatDate(inicio, TZ, 'HH:mm')),
+    meetLink: evento.meetLink,
+    eventoId: evento.id
+  };
+}
+
+function marcarCodigoComoUsado(filaIdx) {
+  try {
+    const sheet = SpreadsheetApp.openById(SHEET_ID).getSheetByName(HOJA_CORTESIA);
+    if (!sheet) return;
+    const headers = sheet.getRange(1, 1, 1, sheet.getLastColumn()).getValues()[0].map(h => String(h).toLowerCase().trim());
+    const colUsado = headers.indexOf('usado');
+    const colFecha = headers.indexOf('fecha uso');
+    if (colUsado >= 0) sheet.getRange(filaIdx, colUsado + 1).setValue('Sí');
+    if (colFecha >= 0) sheet.getRange(filaIdx, colFecha + 1).setValue(new Date());
+    sheet.getRange(filaIdx, 1, 1, sheet.getLastColumn()).setBackground('#C8E6C9');
+  } catch (e) {
+    Logger.log('marcarCodigoComoUsado error: ' + e);
+  }
 }
 
 function buscarLeadPorReferencia(referencia) {
@@ -422,8 +525,11 @@ function crearReserva(data) {
   const inicio = new Date(data.isoStart);
   const fin = new Date(data.isoEnd);
 
-  // Doble check: el slot sigue libre
-  if (reservaExiste(inicio)) {
+  // Doble check con Calendar (única fuente de verdad)
+  const calCheck = CalendarApp.getCalendarById(CALENDAR_ID);
+  const eventosEnFranja = calCheck.getEvents(inicio, fin);
+  const ocupadoAhora = eventosEnFranja.some(ev => !ev.isAllDayEvent() && ev.getMyStatus() !== CalendarApp.GuestStatus.NO);
+  if (ocupadoAhora) {
     return { success: false, error: 'Este horario fue tomado por otra clienta. Elige otro.' };
   }
 
