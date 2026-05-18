@@ -376,6 +376,115 @@ function crearReservaCortesia(data) {
   };
 }
 
+// Ejecutar UNA SOLA VEZ desde el editor del Apps Script para crear la hoja
+// "Códigos Cortesía" lista para usar: con códigos pre-generados, fórmula del URL
+// y fórmula del mensaje de WhatsApp listo para copiar y pegar.
+function inicializarHojaCortesia() {
+  const ss = SpreadsheetApp.openById(SHEET_ID);
+  let sheet = ss.getSheetByName(HOJA_CORTESIA);
+  if (sheet) {
+    // Si ya existe, no la sobreescribimos
+    return 'La hoja "' + HOJA_CORTESIA + '" ya existe. No se hizo nada. Si quieres recrearla, bórrala primero a mano.';
+  }
+
+  sheet = ss.insertSheet(HOJA_CORTESIA);
+
+  // Headers
+  const headers = [
+    'Código',          // A · auto-generado
+    'Nombre',          // B · tú lo llenas
+    'Email',           // C · tú lo llenas
+    'WhatsApp',        // D · tú lo llenas
+    'Instagram',       // E · tú lo llenas
+    'Profesión',       // F · tú lo llenas
+    'Mensaje',         // G · opcional (lo que ella quiere resolver)
+    'Generado',        // H · auto-fecha
+    'Usado',           // I · sistema marca Sí
+    'Fecha uso',       // J · sistema marca fecha
+    '🔗 Link para enviar',     // K · fórmula
+    '💬 Mensaje WhatsApp listo' // L · fórmula
+  ];
+  sheet.appendRow(headers);
+  sheet.getRange(1, 1, 1, headers.length)
+    .setBackground('#21209C')
+    .setFontColor('#FFFFFF')
+    .setFontWeight('bold');
+  sheet.setFrozenRows(1);
+
+  // Generar 50 códigos pre-llenos
+  const filas = [];
+  const ahora = new Date();
+  for (let i = 1; i <= 50; i++) {
+    const codigo = 'CORT-MPV-' + Utilities.getUuid().replace(/-/g, '').substring(0, 6).toUpperCase();
+    filas.push([
+      codigo,           // Código
+      '',               // Nombre (vacío, lo llenas tú)
+      '',               // Email
+      '',               // WhatsApp
+      '',               // Instagram
+      '',               // Profesión
+      '',               // Mensaje
+      ahora,            // Generado
+      '',               // Usado (vacío)
+      '',               // Fecha uso (vacío)
+      '',               // Link (lo llena la fórmula)
+      ''                // Mensaje WhatsApp (lo llena la fórmula)
+    ]);
+  }
+  sheet.getRange(2, 1, filas.length, filas[0].length).setValues(filas);
+
+  // Fórmulas en columna K (Link) y L (Mensaje WhatsApp) para cada fila
+  const formulasLink = [];
+  const formulasMsg = [];
+  for (let i = 2; i <= 51; i++) {
+    // Solo genera el link si hay nombre llenado, para no confundirse con códigos sin asignar
+    formulasLink.push(['=SI(B' + i + '<>""; "https://joakoestratega.com/agendar-cortesia/?codigo="&A' + i + '; "")']);
+    formulasMsg.push([
+      '=SI(B' + i + '<>"";' +
+      '"Hola "&B' + i + '&", recibí tu pago de $200.000 COP por la Asesoría MPV. ¡Bienvenida!"' +
+      '&CHAR(10)&CHAR(10)&' +
+      '"Para agendar tu sesión, entra a este link (es de un solo uso, no lo compartas):"' +
+      '&CHAR(10)&CHAR(10)&' +
+      '"https://joakoestratega.com/agendar-cortesia/?codigo="&A' + i +
+      '&CHAR(10)&CHAR(10)&' +
+      '"Ahí eliges fecha y hora. Te llega el link de Google Meet automáticamente."' +
+      '&CHAR(10)&CHAR(10)&' +
+      '"— Joako"; "")'
+    ]);
+  }
+  sheet.getRange(2, 11, 50, 1).setFormulas(formulasLink);
+  sheet.getRange(2, 12, 50, 1).setFormulas(formulasMsg);
+
+  // Anchos de columna
+  sheet.setColumnWidth(1, 180);  // Código
+  sheet.setColumnWidth(2, 160);  // Nombre
+  sheet.setColumnWidth(3, 220);  // Email
+  sheet.setColumnWidth(4, 130);  // WhatsApp
+  sheet.setColumnWidth(5, 140);  // Instagram
+  sheet.setColumnWidth(6, 130);  // Profesión
+  sheet.setColumnWidth(7, 200);  // Mensaje
+  sheet.setColumnWidth(8, 110);  // Generado
+  sheet.setColumnWidth(9, 80);   // Usado
+  sheet.setColumnWidth(10, 110); // Fecha uso
+  sheet.setColumnWidth(11, 380); // Link
+  sheet.setColumnWidth(12, 500); // Mensaje WhatsApp
+
+  // Wrap en el mensaje de WhatsApp para que se vea bien
+  sheet.getRange(2, 12, 50, 1).setWrap(true);
+
+  // Pintar la columna del código de morado claro (read-only conceptual)
+  sheet.getRange(2, 1, 50, 1).setBackground('#F3E5F5');
+
+  // Pintar la columna del Link y Mensaje WA de amarillo claro (autogenerados)
+  sheet.getRange(1, 11, 51, 2).setBackground('#FFF9C4');
+  sheet.getRange(1, 11, 1, 2)
+    .setBackground('#21209C')
+    .setFontColor('#FFFFFF')
+    .setFontWeight('bold');
+
+  return 'OK. Hoja "' + HOJA_CORTESIA + '" creada con 50 códigos listos. Ve a la hoja y empieza a llenar.';
+}
+
 function marcarCodigoComoUsado(filaIdx) {
   try {
     const sheet = SpreadsheetApp.openById(SHEET_ID).getSheetByName(HOJA_CORTESIA);
