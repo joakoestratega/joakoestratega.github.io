@@ -16,9 +16,9 @@ const EMAIL_NOTIFICACION = 'joakoestratega@gmail.com';
 const CALENDAR_ID = 'joakoestratega@gmail.com';
 const TELEGRAM_BOT_TOKEN = '8989852821:AAHs56lmK79xyS5_8e1L1nym5maEXwZlask';
 const TELEGRAM_CHAT_ID = '815920612';
-const WOMPI_PUBLIC_KEY = 'pub_test_M1mFEVzC2NXa2r5E69WdNm6ddHjq76Xx';
-const WOMPI_INTEGRITY_KEY = 'test_integrity_5IDf7ZMVxDJw8KfnHjLU1Nlquc6Y38P8';
-const WOMPI_API = 'https://sandbox.wompi.co/v1';  // cambiar a https://production.wompi.co/v1 cuando vaya live
+const WOMPI_PUBLIC_KEY = 'pub_prod_1ADLuSGClwSbXw5frdu4FByZSghJklx8';
+const WOMPI_INTEGRITY_KEY = 'prod_integrity_dbIV4zYG65VRRHBz5GRurzccyRZbpTd7';
+const WOMPI_API = 'https://production.wompi.co/v1';
 const TZ = 'America/Bogota';
 const ASESORIA_AMOUNT_CENTS = 20000000;  // $200.000 COP fijo
 const ASESORIA_CURRENCY = 'COP';
@@ -68,7 +68,7 @@ function doGet(e) {
   }
 
   return ContentService
-    .createTextOutput('Apps Script Joako Estratega · v3.4 · cortesia + slots fix')
+    .createTextOutput('Apps Script Joako Estratega · v3.5 · PRODUCCIÓN')
     .setMimeType(ContentService.MimeType.TEXT);
 }
 
