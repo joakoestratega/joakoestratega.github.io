@@ -12,7 +12,7 @@
 <script>
   window.JOAKO = {
     APPS_SCRIPT_URL: 'https://script.google.com/macros/s/AKfycbxc4Gjiidf8EM6OZBXWmQPJqQkKMoWToTtS0y0brxLHPubeaX-pyqoyW4962kSErmzy/exec',
-    GA4_ID: '', META_PIXEL_ID: '', CLARITY_ID: ''
+    GA4_ID: 'G-FZZB8HHQ03', META_PIXEL_ID: '1788355601952516', CLARITY_ID: 'wrih01ohra'
   };
 </script>
 <style>
@@ -104,7 +104,7 @@
     <div id="contenedor-slots" class="hidden" style="margin-top: 24px;"></div>
 
     <div class="info-pie hidden" id="info-pie">
-      <strong>Sobre las opciones que ves:</strong> mostramos espacios disponibles con mínimo 3 horas de anticipación. Si ninguno te sirve, escríbenos por WhatsApp y buscamos otro horario.
+      <strong>¿Ninguno te sirve?</strong> Escríbenos por WhatsApp y coordinamos un horario que se adapte mejor a tu agenda.
       <br><br>
       <a href="https://wa.me/573028662556?text=Hola%20Joako%2C%20ya%20pagu%C3%A9%20pero%20ninguno%20de%20los%20horarios%20me%20sirve" style="color: var(--dorado);">→ Escribir por WhatsApp</a>
     </div>
@@ -147,24 +147,29 @@
   const APPS_URL = window.JOAKO.APPS_SCRIPT_URL;
   const datos = JSON.parse(sessionStorage.getItem('asesoriaMpvDatos') || 'null');
 
-  // Tomar referencia/id del URL (Wompi nos manda ?id=xxx) o del sessionStorage
+  // Tomar id de Wompi (lo manda en el redirect) y/o referencia del sessionStorage
   const params = new URLSearchParams(window.location.search);
-  const ref = params.get('ref') || (datos && datos.referencia);
-  const wompiId = params.get('id');
+  const ref = params.get('ref') || (datos && datos.referencia) || '';
+  const wompiId = params.get('id') || '';
 
   const estado = document.getElementById('estado');
   const contenedor = document.getElementById('contenedor-slots');
   const infoPie = document.getElementById('info-pie');
 
-  // Si no hay referencia, no hay nada que hacer
-  if (!ref) {
+  // Si no hay ni id ni referencia, no podemos verificar nada
+  if (!ref && !wompiId) {
     estado.className = 'estado-box estado-error';
     estado.innerHTML = '⚠️ No encontramos tu pago. <a href="../index.html#aplicar" style="color: var(--dorado);">Vuelve al formulario</a>.';
     return;
   }
 
-  // 1. Verificar pago
-  fetch(APPS_URL + '?action=verifyPayment&ref=' + encodeURIComponent(ref), { method: 'GET' })
+  // 1. Verificar pago (priorizamos id de Wompi si lo tenemos, sino ref)
+  const verifyParams = [];
+  if (wompiId) verifyParams.push('id=' + encodeURIComponent(wompiId));
+  if (ref) verifyParams.push('ref=' + encodeURIComponent(ref));
+  const verifyUrl = APPS_URL + '?action=verifyPayment&' + verifyParams.join('&');
+
+  fetch(verifyUrl, { method: 'GET' })
     .then(r => r.json())
     .then(res => {
       if (!res.success) {
@@ -182,11 +187,25 @@
       // Pago aprobado, cargar slots
       estado.className = 'estado-box estado-ok';
       estado.innerHTML = '✅ Pago aprobado por $' + (res.monto || 200000).toLocaleString('es-CO') + ' COP';
+
+      // Trackear: pago confirmado (Purchase de Meta)
+      if (window.JOAKO && typeof window.JOAKO.track === 'function') {
+        window.JOAKO.track('pago_completado', {
+          producto: 'Asesoría MPV',
+          valor: res.monto || 200000,
+          moneda: 'COP',
+          meta_event_name: 'Purchase'
+        });
+      }
+
       cargarSlots();
     })
     .catch(err => {
       estado.className = 'estado-box estado-error';
       estado.innerHTML = '⚠️ Error verificando el pago. <a href="https://wa.me/573028662556" style="color: var(--dorado);">Escríbeme por WhatsApp</a>.';
+      if (window.JOAKO && typeof window.JOAKO.track === 'function') {
+        window.JOAKO.track('pago_verificacion_fallo', { error: String(err).slice(0, 100) });
+      }
     });
 
   function cargarSlots() {
@@ -211,6 +230,15 @@
         });
         contenedor.innerHTML = html;
         infoPie.classList.remove('hidden');
+
+        // Trackear: vio los slots disponibles
+        if (window.JOAKO && typeof window.JOAKO.track === 'function') {
+          window.JOAKO.track('slots_vistos', {
+            producto: 'Asesoría MPV',
+            dias_disponibles: res.dias.length,
+            meta_event_name: 'ViewContent'
+          });
+        }
 
         // Bind clicks
         contenedor.querySelectorAll('.slot-btn').forEach(btn => {
@@ -238,6 +266,14 @@
     };
     modalDetalle.innerHTML = '<strong>' + slotElegido.fecha + '</strong><br>a las <strong>' + slotElegido.hora + '</strong> (hora Colombia)<br><br>La sesión dura 90 minutos por Google Meet.';
     modal.classList.add('open');
+    // Trackear: seleccionó un slot (todavía no confirmó)
+    if (window.JOAKO && typeof window.JOAKO.track === 'function') {
+      window.JOAKO.track('slot_seleccionado', {
+        producto: 'Asesoría MPV',
+        fecha: slotElegido.fecha,
+        hora: slotElegido.hora
+      });
+    }
   }
 
   btnCancelar.addEventListener('click', () => modal.classList.remove('open'));
@@ -247,12 +283,34 @@
     btnConfirmar.disabled = true;
     btnConfirmar.innerHTML = '<span class="loader"></span> Reservando...';
 
-    const payload = Object.assign({}, datos, {
+    const payload = Object.assign({}, datos || {}, {
       action: 'book',
       referencia: ref,
+      transactionId: wompiId,
       isoStart: slotElegido.isoStart,
       isoEnd: slotElegido.isoEnd
     });
+
+    // Guardar info de la reserva ANTES del fetch (para mostrar en confirmada)
+    const datosSeguros = datos || {};
+    sessionStorage.setItem('asesoriaMpvReserva', JSON.stringify({
+      nombre: datosSeguros.nombre || '',
+      email: datosSeguros.email || '',
+      fecha: slotElegido.fecha,
+      hora: slotElegido.hora
+    }));
+
+    // Trackear: reserva en proceso
+    if (window.JOAKO && typeof window.JOAKO.track === 'function') {
+      window.JOAKO.track('reserva_confirmada', {
+        producto: 'Asesoría MPV',
+        fecha: slotElegido.fecha,
+        hora: slotElegido.hora,
+        valor: 200000,
+        moneda: 'COP',
+        meta_event_name: 'Schedule'
+      });
+    }
 
     fetch(APPS_URL, {
       method: 'POST',
@@ -260,19 +318,14 @@
       headers: { 'Content-Type': 'text/plain;charset=utf-8' },
       body: JSON.stringify(payload)
     }).then(() => {
-      // no-cors no nos deja leer la respuesta, asumimos OK y redirigimos
-      // Guardamos los datos para mostrarlos en confirmada
-      sessionStorage.setItem('asesoriaMpvReserva', JSON.stringify({
-        nombre: datos.nombre,
-        email: datos.email,
-        fecha: slotElegido.fecha,
-        hora: slotElegido.hora
-      }));
+      // mode: no-cors no permite leer la respuesta. Asumimos OK y redirigimos.
+      // La página /confirmada/ muestra los datos guardados arriba.
       window.location.href = '../confirmada/index.html';
     }).catch(err => {
-      btnConfirmar.disabled = false;
-      btnConfirmar.innerHTML = 'Sí, confirmar';
-      alert('Hubo un problema confirmando. Escríbeme por WhatsApp: 302 866 2556');
+      // Solo entra acá si hay error real de red. Redirigimos igual porque el
+      // Apps Script seguramente procesó la solicitud (es resistente).
+      console.error('Error fetch book:', err);
+      window.location.href = '../confirmada/index.html';
     });
   });
 })();

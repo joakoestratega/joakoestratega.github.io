@@ -16,9 +16,12 @@ const EMAIL_NOTIFICACION = 'joakoestratega@gmail.com';
 const CALENDAR_ID = 'joakoestratega@gmail.com';
 const TELEGRAM_BOT_TOKEN = '8989852821:AAHs56lmK79xyS5_8e1L1nym5maEXwZlask';
 const TELEGRAM_CHAT_ID = '815920612';
-const WOMPI_PUBLIC_KEY = 'pub_test_M1mFEVzC2NXa2r5E69WdNm6ddHjq76Xx';
-const WOMPI_API = 'https://sandbox.wompi.co/v1';  // cambiar a https://production.wompi.co/v1 cuando vaya live
+const WOMPI_PUBLIC_KEY = 'pub_prod_1ADLuSGClwSbXw5frdu4FByZSghJklx8';
+const WOMPI_INTEGRITY_KEY = 'prod_integrity_dbIV4zYG65VRRHBz5GRurzccyRZbpTd7';
+const WOMPI_API = 'https://production.wompi.co/v1';
 const TZ = 'America/Bogota';
+const ASESORIA_AMOUNT_CENTS = 20000000;  // $200.000 COP fijo
+const ASESORIA_CURRENCY = 'COP';
 
 // Horario de la Asesoría
 const ASESORIA_HORAS = ['15:00', '17:00', '18:30'];  // 3pm, 5pm, 6:30pm
@@ -53,12 +56,37 @@ function doGet(e) {
   }
 
   if (action === 'verifyPayment') {
-    return jsonResponse(verificarPago(e.parameter.ref));
+    return jsonResponse(verificarPago(e.parameter.ref, e.parameter.id));
+  }
+
+  if (action === 'signature') {
+    return jsonResponse(generarFirmaWompi(e.parameter.ref));
+  }
+
+  if (action === 'verifyCortesia') {
+    return jsonResponse(verificarCodigoCortesia(e.parameter.codigo));
   }
 
   return ContentService
-    .createTextOutput('Apps Script Joako Estratega · v3 · activo')
+    .createTextOutput('Apps Script Joako Estratega · v3.5 · PRODUCCIÓN')
     .setMimeType(ContentService.MimeType.TEXT);
+}
+
+function generarFirmaWompi(referencia) {
+  if (!referencia) return { success: false, error: 'Sin referencia' };
+  // Wompi requiere: SHA256(referencia + amountInCents + currency + integrityKey)
+  const concat = referencia + ASESORIA_AMOUNT_CENTS + ASESORIA_CURRENCY + WOMPI_INTEGRITY_KEY;
+  const bytes = Utilities.computeDigest(Utilities.DigestAlgorithm.SHA_256, concat);
+  const hex = bytes.map(function (b) {
+    const v = (b < 0) ? b + 256 : b;
+    return ('0' + v.toString(16)).slice(-2);
+  }).join('');
+  return {
+    success: true,
+    signature: hex,
+    amountInCents: ASESORIA_AMOUNT_CENTS,
+    currency: ASESORIA_CURRENCY
+  };
 }
 
 function doPost(e) {
@@ -68,17 +96,18 @@ function doPost(e) {
 
     const action = data.action || '';
 
-    // Reservar slot (después del pago)
     if (action === 'book') {
       return jsonResponse(crearReserva(data));
     }
 
-    // Webhook de Wompi
+    if (action === 'bookCortesia') {
+      return jsonResponse(crearReservaCortesia(data));
+    }
+
     if (data.event === 'transaction.updated') {
       return jsonResponse(procesarWebhookWompi(data));
     }
 
-    // Default: captura de leads (compatibilidad con formularios)
     return guardarLead(data);
 
   } catch (error) {
@@ -221,13 +250,11 @@ function generarSlotsDelDia(fecha, desde, cal) {
 
     if (inicio < desde) return;  // antes de la ventana de 3h
 
-    // Chequear conflicto con Calendar
+    // Calendar es la ÚNICA fuente de verdad. Si Joako borra el evento, el slot
+    // vuelve a quedar libre. La hoja "Reservas Asesoría" queda solo como historial.
     const eventos = cal.getEvents(inicio, fin);
     const ocupado = eventos.some(ev => !ev.isAllDayEvent() && ev.getMyStatus() !== CalendarApp.GuestStatus.NO);
     if (ocupado) return;
-
-    // Chequear si ya hay reserva nuestra (anti doble-booking)
-    if (reservaExiste(inicio)) return;
 
     slots.push({
       hora: hora,
@@ -261,6 +288,242 @@ function pseudoRandomSeleccion(semilla, total, cuantos) {
     [indices[i], indices[j]] = [indices[j], indices[i]];
   }
   return indices.slice(0, cuantos).sort((a, b) => a - b);
+}
+
+// =====================================================
+// FLUJO CORTESÍA (pago manual fuera de Wompi)
+// =====================================================
+// Joako genera un código manualmente en la hoja "Códigos Cortesía" con los
+// datos de la clienta y el código único. Le envía el link por WhatsApp:
+// https://joakoestratega.com/agendar-cortesia/?codigo=XXX
+// La clienta entra, el sistema valida el código y le permite agendar.
+
+const HOJA_CORTESIA = 'Códigos Cortesía';
+
+function verificarCodigoCortesia(codigo) {
+  if (!codigo) return { success: false, error: 'Sin código' };
+  try {
+    const sheet = SpreadsheetApp.openById(SHEET_ID).getSheetByName(HOJA_CORTESIA);
+    if (!sheet) return { success: false, error: 'Hoja de cortesía no existe' };
+    const data = sheet.getDataRange().getValues();
+    if (data.length < 2) return { success: false, error: 'Código no encontrado' };
+    const headers = data[0].map(h => String(h).toLowerCase().trim());
+    const colCodigo = headers.indexOf('código');
+    const colUsado = headers.indexOf('usado');
+    if (colCodigo === -1) return { success: false, error: 'Hoja mal configurada (falta columna "Código")' };
+    for (let i = 1; i < data.length; i++) {
+      if (String(data[i][colCodigo]).trim() === String(codigo).trim()) {
+        const usadoVal = colUsado >= 0 ? String(data[i][colUsado]).toLowerCase().trim() : '';
+        if (usadoVal === 'sí' || usadoVal === 'si' || usadoVal === 'true' || usadoVal === '✓') {
+          return { success: false, error: 'Este código ya fue usado', yaUsado: true };
+        }
+        const result = { success: true, fila: i + 1 };
+        headers.forEach((h, j) => { result[h] = data[i][j]; });
+        return result;
+      }
+    }
+    return { success: false, error: 'Código no válido' };
+  } catch (e) {
+    Logger.log('verificarCodigoCortesia error: ' + e);
+    return { success: false, error: e.toString() };
+  }
+}
+
+function crearReservaCortesia(data) {
+  if (!data.codigo || !data.isoStart) return { success: false, error: 'Datos incompletos' };
+
+  const cortesia = verificarCodigoCortesia(data.codigo);
+  if (!cortesia.success) return { success: false, error: cortesia.error };
+
+  // Fusionar datos del código con los del request (request tiene prioridad)
+  data.nombre = data.nombre || cortesia['nombre'] || '';
+  data.email = data.email || cortesia['email'] || '';
+  data.whatsapp = data.whatsapp || cortesia['whatsapp'] || '';
+  data.instagram = data.instagram || cortesia['instagram'] || '';
+  data.profesion = data.profesion || cortesia['profesión'] || cortesia['profesion'] || '';
+  data.mensaje = data.mensaje || cortesia['mensaje'] || '';
+  data.referencia = 'CORTESIA-' + data.codigo;
+
+  const inicio = new Date(data.isoStart);
+  const fin = new Date(data.isoEnd);
+
+  // Doble check Calendar
+  const cal = CalendarApp.getCalendarById(CALENDAR_ID);
+  const eventos = cal.getEvents(inicio, fin);
+  const ocupadoAhora = eventos.some(ev => !ev.isAllDayEvent() && ev.getMyStatus() !== CalendarApp.GuestStatus.NO);
+  if (ocupadoAhora) return { success: false, error: 'Este horario fue tomado por otra clienta. Elige otro.' };
+
+  // Crear evento + Meet
+  const evento = crearEventoCalendar(inicio, fin, data);
+
+  // Registrar reserva
+  registrarReserva(data, inicio, fin, evento);
+
+  // Marcar código como usado
+  marcarCodigoComoUsado(cortesia.fila);
+
+  // Enviar emails + Telegram
+  enviarEmailClienta(data, inicio, evento);
+  const pagoFake = { monto: ASESORIA_AMOUNT_CENTS / 100, referencia: data.referencia };
+  notificarJoakoNuevaReserva(data, inicio, evento, pagoFake);
+
+  return {
+    success: true,
+    fecha: formatearFecha(inicio),
+    hora: formatearHora(Utilities.formatDate(inicio, TZ, 'HH:mm')),
+    meetLink: evento.meetLink,
+    eventoId: evento.id
+  };
+}
+
+// Ejecutar UNA SOLA VEZ desde el editor del Apps Script para crear la hoja
+// "Códigos Cortesía" lista para usar: con códigos pre-generados, fórmula del URL
+// y fórmula del mensaje de WhatsApp listo para copiar y pegar.
+function inicializarHojaCortesia() {
+  const ss = SpreadsheetApp.openById(SHEET_ID);
+  let sheet = ss.getSheetByName(HOJA_CORTESIA);
+  if (sheet) {
+    // Si ya existe, no la sobreescribimos
+    return 'La hoja "' + HOJA_CORTESIA + '" ya existe. No se hizo nada. Si quieres recrearla, bórrala primero a mano.';
+  }
+
+  sheet = ss.insertSheet(HOJA_CORTESIA);
+
+  // Headers
+  const headers = [
+    'Código',          // A · auto-generado
+    'Nombre',          // B · tú lo llenas
+    'Email',           // C · tú lo llenas
+    'WhatsApp',        // D · tú lo llenas
+    'Instagram',       // E · tú lo llenas
+    'Profesión',       // F · tú lo llenas
+    'Mensaje',         // G · opcional (lo que ella quiere resolver)
+    'Generado',        // H · auto-fecha
+    'Usado',           // I · sistema marca Sí
+    'Fecha uso',       // J · sistema marca fecha
+    '🔗 Link para enviar',     // K · fórmula
+    '💬 Mensaje WhatsApp listo' // L · fórmula
+  ];
+  sheet.appendRow(headers);
+  sheet.getRange(1, 1, 1, headers.length)
+    .setBackground('#21209C')
+    .setFontColor('#FFFFFF')
+    .setFontWeight('bold');
+  sheet.setFrozenRows(1);
+
+  // Generar 50 códigos pre-llenos
+  const filas = [];
+  const ahora = new Date();
+  for (let i = 1; i <= 50; i++) {
+    const codigo = 'CORT-MPV-' + Utilities.getUuid().replace(/-/g, '').substring(0, 6).toUpperCase();
+    filas.push([
+      codigo,           // Código
+      '',               // Nombre (vacío, lo llenas tú)
+      '',               // Email
+      '',               // WhatsApp
+      '',               // Instagram
+      '',               // Profesión
+      '',               // Mensaje
+      ahora,            // Generado
+      '',               // Usado (vacío)
+      '',               // Fecha uso (vacío)
+      '',               // Link (lo llena la fórmula)
+      ''                // Mensaje WhatsApp (lo llena la fórmula)
+    ]);
+  }
+  sheet.getRange(2, 1, filas.length, filas[0].length).setValues(filas);
+
+  // Fórmulas en columna K (Link) y L (Mensaje WhatsApp) para cada fila
+  const formulasLink = [];
+  const formulasMsg = [];
+  for (let i = 2; i <= 51; i++) {
+    // Solo genera el link si hay nombre llenado, para no confundirse con códigos sin asignar
+    formulasLink.push(['=SI(B' + i + '<>""; "https://joakoestratega.com/agendar-cortesia/?codigo="&A' + i + '; "")']);
+    formulasMsg.push([
+      '=SI(B' + i + '<>"";' +
+      '"Hola "&B' + i + '&", recibí tu pago de $200.000 COP por la Asesoría MPV. ¡Bienvenida!"' +
+      '&CHAR(10)&CHAR(10)&' +
+      '"Para agendar tu sesión, entra a este link (es de un solo uso, no lo compartas):"' +
+      '&CHAR(10)&CHAR(10)&' +
+      '"https://joakoestratega.com/agendar-cortesia/?codigo="&A' + i +
+      '&CHAR(10)&CHAR(10)&' +
+      '"Ahí eliges fecha y hora. Te llega el link de Google Meet automáticamente."' +
+      '&CHAR(10)&CHAR(10)&' +
+      '"— Joako"; "")'
+    ]);
+  }
+  sheet.getRange(2, 11, 50, 1).setFormulas(formulasLink);
+  sheet.getRange(2, 12, 50, 1).setFormulas(formulasMsg);
+
+  // Anchos de columna
+  sheet.setColumnWidth(1, 180);  // Código
+  sheet.setColumnWidth(2, 160);  // Nombre
+  sheet.setColumnWidth(3, 220);  // Email
+  sheet.setColumnWidth(4, 130);  // WhatsApp
+  sheet.setColumnWidth(5, 140);  // Instagram
+  sheet.setColumnWidth(6, 130);  // Profesión
+  sheet.setColumnWidth(7, 200);  // Mensaje
+  sheet.setColumnWidth(8, 110);  // Generado
+  sheet.setColumnWidth(9, 80);   // Usado
+  sheet.setColumnWidth(10, 110); // Fecha uso
+  sheet.setColumnWidth(11, 380); // Link
+  sheet.setColumnWidth(12, 500); // Mensaje WhatsApp
+
+  // Wrap en el mensaje de WhatsApp para que se vea bien
+  sheet.getRange(2, 12, 50, 1).setWrap(true);
+
+  // Pintar la columna del código de morado claro (read-only conceptual)
+  sheet.getRange(2, 1, 50, 1).setBackground('#F3E5F5');
+
+  // Pintar la columna del Link y Mensaje WA de amarillo claro (autogenerados)
+  sheet.getRange(1, 11, 51, 2).setBackground('#FFF9C4');
+  sheet.getRange(1, 11, 1, 2)
+    .setBackground('#21209C')
+    .setFontColor('#FFFFFF')
+    .setFontWeight('bold');
+
+  return 'OK. Hoja "' + HOJA_CORTESIA + '" creada con 50 códigos listos. Ve a la hoja y empieza a llenar.';
+}
+
+function marcarCodigoComoUsado(filaIdx) {
+  try {
+    const sheet = SpreadsheetApp.openById(SHEET_ID).getSheetByName(HOJA_CORTESIA);
+    if (!sheet) return;
+    const headers = sheet.getRange(1, 1, 1, sheet.getLastColumn()).getValues()[0].map(h => String(h).toLowerCase().trim());
+    const colUsado = headers.indexOf('usado');
+    const colFecha = headers.indexOf('fecha uso');
+    if (colUsado >= 0) sheet.getRange(filaIdx, colUsado + 1).setValue('Sí');
+    if (colFecha >= 0) sheet.getRange(filaIdx, colFecha + 1).setValue(new Date());
+    sheet.getRange(filaIdx, 1, 1, sheet.getLastColumn()).setBackground('#C8E6C9');
+  } catch (e) {
+    Logger.log('marcarCodigoComoUsado error: ' + e);
+  }
+}
+
+function buscarLeadPorReferencia(referencia) {
+  // Busca el último lead pre-pago guardado con esa referencia.
+  // Sirve para recuperar nombre/email/IG si el sessionStorage del cliente se perdió.
+  try {
+    const sheet = SpreadsheetApp.openById(SHEET_ID).getSheetByName('Leads Asesoría MPV');
+    if (!sheet) return null;
+    const data = sheet.getDataRange().getValues();
+    if (data.length < 2) return null;
+    const headers = data[0].map(h => String(h));
+    const refCol = headers.indexOf('referencia');
+    if (refCol === -1) return null;
+    // Iterar de abajo hacia arriba para tomar el registro más reciente
+    for (let i = data.length - 1; i >= 1; i--) {
+      if (String(data[i][refCol]) === String(referencia)) {
+        const result = {};
+        headers.forEach((h, j) => { result[h] = data[i][j]; });
+        return result;
+      }
+    }
+    return null;
+  } catch (e) {
+    Logger.log('buscarLeadPorReferencia error: ' + e);
+    return null;
+  }
 }
 
 function reservaExiste(inicio) {
@@ -300,17 +563,23 @@ function formatearHora(hora24) {
 // AGENDAMIENTO — VERIFICACIÓN DE PAGO WOMPI
 // =====================================================
 
-function verificarPago(referencia) {
-  if (!referencia) return { success: false, error: 'Sin referencia' };
-
+function verificarPago(referencia, transactionId) {
+  if (!referencia && !transactionId) return { success: false, error: 'Sin referencia ni id' };
   try {
-    const url = WOMPI_API + '/transactions?reference=' + encodeURIComponent(referencia);
-    const resp = UrlFetchApp.fetch(url, { muteHttpExceptions: true });
-    const status = resp.getResponseCode();
-    if (status !== 200) return { success: false, error: 'Wompi respondió ' + status };
+    let trans = null;
 
-    const body = JSON.parse(resp.getContentText());
-    const trans = (body.data || [])[0];
+    // Si llegó id de Wompi, lo usamos directo (caso después del redirect del widget)
+    if (transactionId) {
+      const resp = UrlFetchApp.fetch(WOMPI_API + '/transactions/' + encodeURIComponent(transactionId), { muteHttpExceptions: true });
+      if (resp.getResponseCode() === 200) trans = JSON.parse(resp.getContentText()).data;
+    }
+
+    // Si no se encontró por id, buscamos por referencia
+    if (!trans && referencia) {
+      const resp = UrlFetchApp.fetch(WOMPI_API + '/transactions?reference=' + encodeURIComponent(referencia), { muteHttpExceptions: true });
+      if (resp.getResponseCode() === 200) trans = (JSON.parse(resp.getContentText()).data || [])[0];
+    }
+
     if (!trans) return { success: false, error: 'Transacción no encontrada' };
 
     return {
@@ -332,20 +601,44 @@ function verificarPago(referencia) {
 // =====================================================
 
 function crearReserva(data) {
-  // data: { referencia, isoStart, isoEnd, nombre, whatsapp, email, instagram, profesion, mensaje }
-  if (!data.referencia || !data.isoStart) return { success: false, error: 'Datos incompletos' };
+  // data: { referencia, transactionId, isoStart, isoEnd, nombre, whatsapp, email, instagram, profesion, mensaje }
+  if ((!data.referencia && !data.transactionId) || !data.isoStart) return { success: false, error: 'Datos incompletos' };
 
-  // Verificar que el pago esté aprobado
-  const pago = verificarPago(data.referencia);
+  // Verificar que el pago esté aprobado (acepta referencia o id de Wompi)
+  const pago = verificarPago(data.referencia, data.transactionId);
   if (!pago.success || !pago.aprobada) {
     return { success: false, error: 'Pago no aprobado: ' + (pago.status || pago.error) };
   }
 
+  // Si la referencia no llegó, usar la que devuelve Wompi
+  if (!data.referencia && pago.referencia) data.referencia = pago.referencia;
+
+  // RESCATE DE DATOS: si el sessionStorage se perdió en el redirect a Wompi y los datos
+  // de la clienta no llegan, los buscamos en la hoja Leads Asesoría MPV por referencia.
+  if (!data.nombre && data.referencia) {
+    const lead = buscarLeadPorReferencia(data.referencia);
+    if (lead) {
+      data.nombre = data.nombre || lead.nombre;
+      data.email = data.email || lead.email;
+      data.whatsapp = data.whatsapp || lead.whatsapp;
+      data.instagram = data.instagram || lead.instagram;
+      data.profesion = data.profesion || lead.profesion;
+      data.situacion = data.situacion || lead.situacion;
+      data.mensaje = data.mensaje || lead.mensaje;
+    }
+  }
+
+  // Si tampoco hay email pero Wompi sí tiene, lo usamos
+  if (!data.email && pago.email) data.email = pago.email;
+
   const inicio = new Date(data.isoStart);
   const fin = new Date(data.isoEnd);
 
-  // Doble check: el slot sigue libre
-  if (reservaExiste(inicio)) {
+  // Doble check con Calendar (única fuente de verdad)
+  const calCheck = CalendarApp.getCalendarById(CALENDAR_ID);
+  const eventosEnFranja = calCheck.getEvents(inicio, fin);
+  const ocupadoAhora = eventosEnFranja.some(ev => !ev.isAllDayEvent() && ev.getMyStatus() !== CalendarApp.GuestStatus.NO);
+  if (ocupadoAhora) {
     return { success: false, error: 'Este horario fue tomado por otra clienta. Elige otro.' };
   }
 
