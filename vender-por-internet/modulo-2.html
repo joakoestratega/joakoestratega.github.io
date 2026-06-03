@@ -1,0 +1,1301 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark" data-mode="teorico">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Módulo 2 · Anuncios con IA · Vender por internet · Joako Estratega</title>
+<meta name="description" content="Convierte tu mensaje en anuncios. Prompts listos para generar imagen, reel y carrusel con cualquier IA.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --negro: #0F0F14;
+    --negro-2: #1A1A22;
+    --negro-3: #25252F;
+    --amarillo: #F8B400;
+    --amarillo-soft: #FFC940;
+    --blanco: #FFFFFF;
+    --blanco-60: rgba(255, 255, 255, 0.6);
+    --blanco-40: rgba(255, 255, 255, 0.4);
+    --blanco-10: rgba(255, 255, 255, 0.1);
+    --azul: #21209C;
+    --verde: #2EE07A;
+    --naranja: #FF9F2E;
+    --radius: 14px;
+    --radius-sm: 8px;
+    --transition: 220ms cubic-bezier(.2, .8, .2, 1);
+  }
+
+  [data-theme="light"] {
+    --negro: #F7F6F0;
+    --negro-2: #FFFFFF;
+    --negro-3: #EDEBE2;
+    --blanco: #0F0F14;
+    --blanco-60: rgba(15, 15, 20, 0.62);
+    --blanco-40: rgba(15, 15, 20, 0.42);
+    --blanco-10: rgba(15, 15, 20, 0.12);
+  }
+
+  /* Overrides de legibilidad en light mode: texto amarillo pasa a dorado oscuro */
+  [data-theme="light"] .brand-name strong,
+  [data-theme="light"] .hero h1 .accent,
+  [data-theme="light"] .preview-label,
+  [data-theme="light"] .pv-item-title,
+  [data-theme="light"] .llm-links a { color: #9C6A00; }
+
+  [data-theme="light"] .preview-label::before { background: #9C6A00; }
+  [data-theme="light"] .pv-edit:hover { color: #9C6A00; }
+  [data-theme="light"] .copy-feedback { color: #1B7D3D; }
+  [data-theme="light"] .pill-eyebrow,
+  [data-theme="light"] .quote-mark,
+  [data-theme="light"] .pat-num,
+  [data-theme="light"] .pat-card-title,
+  [data-theme="light"] .cond-num-big,
+  [data-theme="light"] .cond-card-title { color: #9C6A00; }
+
+  /* MODE TOGGLE & THEORY */
+  .mode-toggle { display: flex; background: var(--negro-2); padding: 4px; border-radius: 10px; border: 1px solid var(--amarillo); gap: 2px; }
+  .mode-tab { padding: 8px 14px; font-family: 'Montserrat', sans-serif; font-size: 11px; font-weight: 800; color: var(--blanco-60); background: transparent; border: none; border-radius: 6px; cursor: pointer; letter-spacing: 1px; text-transform: uppercase; transition: var(--transition); }
+  .mode-tab.active { background: var(--amarillo); color: #0F0F14; }
+  .mode-tab:hover:not(.active) { color: var(--blanco); }
+
+  [data-mode="teorico"] .practical-only { display: none !important; }
+  [data-mode="practico"] .theory-only { display: none !important; }
+
+  .mode-banner { margin: 28px 0 0; padding: 14px 18px; background: var(--negro-2); border-left: 4px solid var(--amarillo); border-radius: var(--radius-sm); display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+  .mode-banner-text { flex: 1; min-width: 220px; font-size: 14px; color: var(--blanco-60); line-height: 1.45; }
+  .mode-banner-text strong { color: var(--blanco); }
+
+  .theory { max-width: 1120px; margin: 0 auto; padding: 24px 28px 80px; position: relative; z-index: 1; }
+  .theory-section { margin-bottom: 56px; }
+  .theory-section-title { font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: clamp(24px, 3vw, 32px); line-height: 1.15; margin-bottom: 12px; letter-spacing: -0.5px; }
+  .pill-eyebrow { display: inline-block; font-family: 'Montserrat', sans-serif; font-size: 11px; font-weight: 800; color: var(--amarillo); letter-spacing: 2.5px; text-transform: uppercase; margin-bottom: 12px; }
+  .theory-lede { font-size: 17px; color: var(--blanco-60); line-height: 1.6; max-width: 760px; margin-bottom: 24px; }
+  .big-quote { background: linear-gradient(135deg, var(--negro-2) 0%, var(--negro-3) 100%); border-radius: var(--radius); padding: 36px 40px; margin: 24px 0; position: relative; border-left: 4px solid var(--amarillo); }
+  .quote-mark { font-family: 'Montserrat', sans-serif; font-size: 80px; font-weight: 900; color: var(--amarillo); line-height: 1; position: absolute; top: -10px; left: 18px; }
+  .quote-text { font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: clamp(20px, 2.4vw, 28px); line-height: 1.3; margin-left: 28px; }
+  .quote-author { margin-top: 14px; margin-left: 28px; color: var(--blanco-60); font-size: 14px; }
+
+  .pat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; margin: 24px 0; }
+  .pat-card { background: var(--negro-2); border: 1px solid var(--blanco-10); border-radius: var(--radius); padding: 24px; transition: var(--transition); }
+  .pat-card:hover { border-color: var(--amarillo); transform: translateY(-3px); }
+  .pat-num { font-family: 'Montserrat', sans-serif; font-weight: 900; font-size: 38px; color: var(--amarillo); line-height: 1; margin-bottom: 10px; }
+  .pat-card-title { font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 19px; line-height: 1.2; margin-bottom: 8px; color: var(--blanco); }
+  .pat-card-desc { color: var(--blanco-60); font-size: 13.5px; line-height: 1.55; margin-bottom: 12px; }
+  .pat-card-ex { background: var(--negro); border-radius: var(--radius-sm); padding: 12px 14px; font-size: 12.5px; color: var(--blanco-60); line-height: 1.5; border-left: 3px solid var(--amarillo); }
+  .pat-card-ex strong { color: var(--amarillo); display: block; margin-bottom: 4px; font-size: 10.5px; font-weight: 800; letter-spacing: 1.5px; text-transform: uppercase; }
+
+  /* CONDITIONS GRID (4 principios universales) */
+  .cond-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; margin: 24px 0; }
+  .cond-card-big { background: var(--negro-2); border: 1px solid var(--blanco-10); border-radius: var(--radius); padding: 24px; transition: var(--transition); }
+  .cond-card-big:hover { border-color: var(--amarillo); transform: translateY(-3px); }
+  .cond-num-big { font-family: 'Montserrat', sans-serif; font-weight: 900; font-size: 42px; color: var(--amarillo); line-height: 1; margin-bottom: 12px; }
+  .cond-card-title { font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 19px; line-height: 1.25; margin-bottom: 8px; color: var(--blanco); }
+  .cond-card-desc { color: var(--blanco-60); font-size: 13.5px; line-height: 1.55; margin-bottom: 12px; }
+  .cond-card-ex { background: var(--negro); border-radius: var(--radius-sm); padding: 12px 14px; font-size: 12.5px; color: var(--blanco-60); line-height: 1.5; border-left: 3px solid var(--amarillo); }
+  .cond-card-ex strong { color: var(--amarillo); display: block; margin-bottom: 4px; font-size: 10.5px; font-weight: 800; letter-spacing: 1.5px; text-transform: uppercase; }
+
+  /* FORMULA BOX */
+  .formula-box { background: var(--negro-2); border: 2px solid var(--amarillo); border-radius: var(--radius); padding: 28px; margin: 20px 0; text-align: center; }
+  .formula-text { font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: clamp(16px, 1.8vw, 22px); line-height: 1.4; color: var(--blanco); }
+  .formula-text .plus { color: var(--amarillo); margin: 0 8px; }
+
+  .anatomia-list { background: var(--negro-2); border: 1px solid var(--blanco-10); border-radius: var(--radius); padding: 24px; margin: 20px 0; }
+  .anat-row { display: flex; gap: 16px; padding: 14px 0; border-top: 1px solid var(--blanco-10); align-items: flex-start; }
+  .anat-row:first-child { border-top: none; padding-top: 0; }
+  .anat-num { background: var(--amarillo); color: #0F0F14; width: 32px; height: 32px; border-radius: 8px; display: grid; place-items: center; font-family: 'Montserrat', sans-serif; font-weight: 900; font-size: 14px; flex-shrink: 0; }
+  .anat-content { flex: 1; }
+  .anat-title { font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 16px; margin-bottom: 4px; }
+  .anat-desc { color: var(--blanco-60); font-size: 13.5px; line-height: 1.55; }
+
+  .theory-cta { margin-top: 36px; padding: 28px; background: var(--amarillo); color: #0F0F14; border-radius: var(--radius); text-align: center; }
+  .theory-cta h3 { font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: clamp(20px, 2.5vw, 26px); margin-bottom: 8px; color: #0F0F14; }
+  .theory-cta p { color: rgba(15, 15, 20, 0.75); margin-bottom: 16px; }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--negro);
+    color: var(--blanco);
+    font-family: 'Inter', system-ui, sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    min-height: 100vh;
+    overflow-x: hidden;
+    transition: background-color 280ms ease, color 280ms ease;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background:
+      radial-gradient(circle at 12% 10%, rgba(248, 180, 0, 0.08) 0%, transparent 35%),
+      radial-gradient(circle at 88% 90%, rgba(33, 32, 156, 0.12) 0%, transparent 40%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  [data-theme="light"] body::before {
+    background:
+      radial-gradient(circle at 12% 10%, rgba(248, 180, 0, 0.15) 0%, transparent 40%),
+      radial-gradient(circle at 88% 90%, rgba(33, 32, 156, 0.08) 0%, transparent 40%);
+  }
+
+  /* HEADER */
+  header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(15, 15, 20, 0.85);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--blanco-10);
+    transition: background-color 280ms ease;
+  }
+
+  [data-theme="light"] header { background: rgba(247, 246, 240, 0.85); }
+
+  .header-right { display: flex; align-items: center; gap: 12px; }
+
+  .theme-toggle {
+    width: 40px; height: 40px;
+    background: var(--negro-2);
+    border: 1px solid var(--blanco-10);
+    border-radius: 10px;
+    cursor: pointer;
+    display: grid;
+    place-items: center;
+    transition: var(--transition);
+    color: var(--blanco);
+    flex-shrink: 0;
+  }
+
+  .theme-toggle:hover {
+    background: var(--negro-3);
+    color: var(--amarillo);
+  }
+
+  .theme-toggle svg { width: 18px; height: 18px; }
+  .theme-toggle .icon-sun { display: none; }
+  .theme-toggle .icon-moon { display: block; }
+  [data-theme="light"] .theme-toggle .icon-sun { display: block; }
+  [data-theme="light"] .theme-toggle .icon-moon { display: none; }
+
+  .header-inner {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 18px 28px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+  }
+
+  .brand { display: flex; align-items: center; gap: 12px; }
+
+  .brand-mark {
+    width: 36px; height: 36px;
+    background: var(--amarillo); color: #0F0F14;
+    border-radius: 8px;
+    display: grid; place-items: center;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 900; font-size: 18px;
+  }
+
+  .brand-name {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 800; font-size: 18px;
+    letter-spacing: 0.5px;
+  }
+
+  .brand-name strong { color: var(--amarillo); }
+  .brand-name span {
+    display: block;
+    font-size: 11px; font-weight: 500;
+    color: var(--blanco-60);
+    letter-spacing: 1px; text-transform: uppercase;
+    margin-top: 2px;
+  }
+
+  .modules {
+    display: flex; gap: 4px;
+    background: var(--negro-2);
+    padding: 4px; border-radius: 10px;
+  }
+
+  .module-tab {
+    padding: 8px 14px;
+    font-size: 13px; font-weight: 600;
+    color: var(--blanco-60);
+    background: transparent; border: none;
+    border-radius: 6px; cursor: pointer;
+    transition: var(--transition);
+    position: relative;
+    font-family: inherit;
+    text-decoration: none;
+    display: inline-block;
+    line-height: 1.2;
+  }
+
+  a.module-tab:hover { color: var(--blanco); background: var(--negro-3); }
+  .module-tab.active { background: var(--amarillo); color: #0F0F14; }
+  .module-tab.disabled { cursor: not-allowed; opacity: 0.5; }
+
+  .module-tab .soon {
+    position: absolute;
+    top: -6px; right: -6px;
+    background: var(--azul); color: #FFFFFF;
+    font-size: 9px; padding: 2px 5px;
+    border-radius: 4px;
+    font-weight: 700; letter-spacing: 0.5px;
+  }
+
+  /* HERO */
+  .hero {
+    max-width: 1280px; margin: 0 auto;
+    padding: 56px 28px 32px;
+    position: relative; z-index: 1;
+  }
+
+  .hero-eyebrow {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--azul); color: #FFFFFF;
+    padding: 6px 14px; border-radius: 999px;
+    font-size: 12px; font-weight: 700;
+    letter-spacing: 1px; text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+
+  .hero-eyebrow::before {
+    content: ''; width: 8px; height: 8px;
+    background: var(--amarillo); border-radius: 50%;
+  }
+
+  .hero h1 {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 800;
+    font-size: clamp(32px, 5vw, 56px);
+    line-height: 1.05; letter-spacing: -1px;
+    margin-bottom: 16px;
+    max-width: 880px;
+  }
+
+  .hero h1 .accent { color: var(--amarillo); }
+
+  .hero p.lede {
+    font-size: clamp(16px, 1.5vw, 19px);
+    color: var(--blanco-60);
+    max-width: 760px; line-height: 1.55;
+  }
+
+  /* MISSING DATA STATE */
+  .missing {
+    max-width: 720px;
+    margin: 40px auto 80px;
+    padding: 0 28px;
+    text-align: center;
+    position: relative; z-index: 1;
+  }
+
+  .missing-icon {
+    width: 72px; height: 72px;
+    margin: 0 auto 24px;
+    background: rgba(255, 159, 46, 0.15);
+    color: var(--naranja);
+    border-radius: 50%;
+    display: grid; place-items: center;
+    font-size: 36px;
+  }
+
+  .missing h2 {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 28px;
+    margin-bottom: 12px;
+  }
+
+  .missing p {
+    color: var(--blanco-60);
+    margin-bottom: 28px;
+    line-height: 1.6;
+  }
+
+  /* WORKSPACE */
+  .workspace {
+    max-width: 1280px; margin: 0 auto;
+    padding: 0 28px 80px;
+    display: grid;
+    grid-template-columns: 1fr 340px;
+    gap: 28px;
+    position: relative; z-index: 1;
+  }
+
+  @media (max-width: 980px) {
+    .workspace { grid-template-columns: 1fr; }
+    .preview-panel { position: static !important; }
+  }
+
+  .generators { display: flex; flex-direction: column; gap: 24px; }
+
+  /* GENERATOR CARD */
+  .gen-card {
+    background: var(--negro-2);
+    border: 1px solid var(--blanco-10);
+    border-radius: var(--radius);
+    padding: 28px;
+  }
+
+  .gen-head {
+    display: flex; align-items: flex-start; gap: 14px;
+    margin-bottom: 8px;
+  }
+
+  .gen-num {
+    width: 40px; height: 40px;
+    background: var(--amarillo); color: #0F0F14;
+    border-radius: 10px;
+    display: grid; place-items: center;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 900; font-size: 18px;
+    flex-shrink: 0;
+  }
+
+  .gen-title {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 22px;
+    line-height: 1.2;
+    margin-bottom: 4px;
+  }
+
+  .gen-sub {
+    color: var(--blanco-60);
+    font-size: 14px;
+    line-height: 1.5;
+  }
+
+  .gen-body { margin-top: 18px; }
+
+  .llm-links {
+    background: rgba(33, 32, 156, 0.1);
+    border: 1px solid rgba(33, 32, 156, 0.3);
+    border-radius: var(--radius-sm);
+    padding: 12px 14px;
+    margin-bottom: 14px;
+    font-size: 13px;
+    color: var(--blanco-60);
+    line-height: 1.5;
+    display: flex; flex-wrap: wrap; gap: 4px 14px; align-items: center;
+  }
+
+  .llm-links strong { color: var(--blanco); margin-right: 6px; }
+
+  .llm-links a {
+    color: var(--amarillo);
+    text-decoration: none;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+
+  .llm-links a:hover { text-decoration: underline; }
+
+  .prompt-box {
+    background: var(--negro);
+    border: 1px solid var(--blanco-10);
+    border-radius: var(--radius-sm);
+    padding: 18px;
+    font-family: 'JetBrains Mono', Consolas, monospace;
+    font-size: 12.5px;
+    line-height: 1.7;
+    color: var(--blanco-60);
+    max-height: 320px;
+    overflow-y: auto;
+    white-space: pre-wrap;
+    word-break: break-word;
+    margin-bottom: 12px;
+  }
+
+  .prompt-box::-webkit-scrollbar { width: 8px; }
+  .prompt-box::-webkit-scrollbar-track { background: var(--negro-2); }
+  .prompt-box::-webkit-scrollbar-thumb { background: var(--blanco-10); border-radius: 4px; }
+
+  .copy-row {
+    display: flex; gap: 10px; flex-wrap: wrap;
+    align-items: center;
+  }
+
+  .copy-feedback {
+    color: var(--verde);
+    font-size: 13px;
+    font-weight: 600;
+    opacity: 0;
+    transition: var(--transition);
+  }
+
+  .copy-feedback.show { opacity: 1; }
+
+  /* BUTTONS */
+  .btn {
+    padding: 12px 22px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 13px;
+    letter-spacing: 0.5px;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    transition: var(--transition);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+    font-family: inherit;
+  }
+
+  .btn-primary {
+    background: var(--amarillo); color: #0F0F14;
+  }
+
+  .btn-primary:hover {
+    background: var(--amarillo-soft);
+    transform: translateY(-1px);
+  }
+
+  .btn-ghost {
+    background: transparent;
+    color: var(--blanco-60);
+    border: 1px solid var(--blanco-10);
+  }
+
+  .btn-ghost:hover { color: var(--blanco); border-color: var(--blanco-40); }
+
+  .btn-large { padding: 14px 28px; font-size: 14px; }
+
+  .download-all {
+    margin-top: 8px;
+    text-align: center;
+  }
+
+  /* PREVIEW PANEL (resumen módulo 1) */
+  .preview-panel {
+    position: sticky; top: 90px;
+    align-self: start;
+  }
+
+  .preview-card {
+    background: linear-gradient(180deg, var(--negro-2) 0%, var(--negro-3) 100%);
+    border: 1px solid var(--amarillo);
+    border-radius: var(--radius);
+    padding: 22px;
+    box-shadow: 0 0 0 4px rgba(248, 180, 0, 0.06);
+  }
+
+  .preview-label {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 11px; font-weight: 700;
+    color: var(--amarillo);
+    letter-spacing: 2px; text-transform: uppercase;
+    margin-bottom: 14px;
+    display: flex; align-items: center; gap: 8px;
+  }
+
+  .preview-label::before {
+    content: ''; width: 6px; height: 6px;
+    background: var(--amarillo); border-radius: 50%;
+  }
+
+  .pv-item {
+    padding: 10px 0;
+    border-top: 1px solid var(--blanco-10);
+    font-size: 12.5px;
+  }
+
+  .pv-item:first-of-type { border-top: none; padding-top: 0; }
+
+  .pv-item-title {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700; font-size: 11px;
+    color: var(--amarillo);
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+
+  .pv-item-body {
+    color: var(--blanco-60);
+    line-height: 1.5;
+  }
+
+  .pv-item-body.empty {
+    color: var(--blanco-40);
+    font-style: italic;
+  }
+
+  .pv-edit {
+    margin-top: 18px;
+    padding-top: 16px;
+    border-top: 1px solid var(--blanco-10);
+    display: block;
+    text-align: center;
+    color: var(--blanco-60);
+    text-decoration: none;
+    font-size: 13px;
+    transition: var(--transition);
+  }
+
+  .pv-edit:hover { color: var(--amarillo); }
+
+  /* FOOTER */
+  footer {
+    border-top: 1px solid var(--blanco-10);
+    padding: 32px 28px;
+    text-align: center;
+    color: var(--blanco-40);
+    font-size: 13px;
+    position: relative; z-index: 1;
+  }
+
+  footer a { color: var(--amarillo); text-decoration: none; }
+
+  /* MOBILE */
+  @media (max-width: 640px) {
+    .header-inner { flex-direction: column; align-items: flex-start; gap: 14px; padding: 14px 18px; }
+    .modules { width: 100%; overflow-x: auto; }
+    .module-tab { white-space: nowrap; font-size: 12px; padding: 8px 12px; }
+    .hero { padding: 32px 18px 24px; }
+    .workspace { padding: 0 18px 60px; gap: 20px; }
+    .gen-card { padding: 22px; }
+    .gen-title { font-size: 19px; }
+    .btn { width: 100%; justify-content: center; }
+    .copy-row { flex-direction: column; align-items: stretch; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="brand">
+      <div class="brand-mark">J</div>
+      <div class="brand-name">
+        <strong>JOAKO ESTRATEGA</strong>
+        <span>Vender por internet</span>
+      </div>
+    </div>
+
+    <div class="header-right">
+      <nav class="modules" aria-label="Módulos del taller">
+        <a class="module-tab" href="index.html">1 · Mensaje</a>
+        <button class="module-tab active" type="button">2 · Anuncios</button>
+        <a class="module-tab" href="modulo-3.html">3 · Embudo</a>
+        <a class="module-tab" href="modulo-4.html">4 · Métricas</a>
+      </nav>
+
+      <div class="mode-toggle" role="tablist" aria-label="Modo de visualización">
+        <button class="mode-tab active" type="button" data-mode="teorico">Teoría</button>
+        <button class="mode-tab" type="button" data-mode="practico">Práctica</button>
+      </div>
+
+      <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Cambiar tema claro/oscuro" title="Cambiar tema">
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+        </svg>
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="4"/>
+          <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="hero-eyebrow">Módulo 2 de 4</div>
+  <h1>Convierte tu mensaje en <span class="accent">anuncios que sí convierten</span>.</h1>
+  <p class="lede">El anuncio es la primera y única oportunidad de parar el scroll. Si la imagen es bonita pero no se entiende qué vendes, perdiste.</p>
+</section>
+
+<!-- ============ MODO TEÓRICO ============ -->
+<div class="theory theory-only">
+
+  <section class="theory-section">
+    <div class="pill-eyebrow">Definición</div>
+    <h2 class="theory-section-title">¿Qué hace ganador a un creativo de pauta?</h2>
+    <p class="theory-lede">Un creativo no es una imagen bonita ni un video producido. Un creativo es la pieza que para el scroll, conecta con una persona específica y la lleva a hacer algo concreto. Eso significa que su éxito depende menos del formato (imagen, video o carrusel) y mucho más de 4 principios universales que se cumplen siempre. Cuando uno falla, el creativo no convierte aunque la producción esté impecable.</p>
+  </section>
+
+  <section class="theory-section">
+    <div class="pill-eyebrow">Los 4 principios</div>
+    <h2 class="theory-section-title">Lo que todo creativo necesita (sin importar el formato)</h2>
+    <p class="theory-lede">Estos 4 principios aplican igual para una imagen estática, un reel de 20 segundos o un carrusel de 6 slides. Si los respetas, tu creativo tiene posibilidad real de convertir. Si los ignoras, ni el mejor diseño te salva.</p>
+
+    <div class="cond-grid">
+
+      <div class="cond-card-big">
+        <div class="cond-num-big">01</div>
+        <div class="cond-card-title">Le hablas a UNA persona, no a todo el mundo</div>
+        <p class="cond-card-desc">El error más común es escribir el creativo "para todos los que vendan inglés". Cuando hablas a todos, no le hablas a nadie. Tu creativo debe estar dirigido a UNA persona concreta: edad, situación, frustración. Si pudieras nombrar a esa persona, mejor. El resto del público que también encaja con esa descripción se sentirá interpelado automáticamente.</p>
+        <div class="cond-card-ex">
+          <strong>Test del filtro</strong>
+          ¿Podrías describir en una frase a la persona exacta que verá este creativo? Si dudas, todavía está demasiado abierto.
+        </div>
+      </div>
+
+      <div class="cond-card-big">
+        <div class="cond-num-big">02</div>
+        <div class="cond-card-title">Tocas UN dolor específico</div>
+        <p class="cond-card-desc">Cada creativo ataca un solo dolor concreto, no el problema general del nicho. Si tu cliente vive 5 dolores distintos, necesitas 5 creativos diferentes, cada uno enfocado en uno. Un dolor genérico ("quieres mejorar tu inglés") no engancha. Un dolor específico ("llevas años pagando cursos y no logras una conversación") sí.</p>
+        <div class="cond-card-ex">
+          <strong>Test del filtro</strong>
+          ¿La persona objetivo diría "esto me pasa exactamente" al ver el creativo? Si no se identifica con ese dolor puntual, el creativo no convierte.
+        </div>
+      </div>
+
+      <div class="cond-card-big">
+        <div class="cond-num-big">03</div>
+        <div class="cond-card-title">Muestras UNA solución concreta</div>
+        <p class="cond-card-desc">El creativo debe presentar una salida específica al dolor, no un universo de servicios. Si tu negocio ofrece 10 cosas, el creativo se enfoca en una. La solución se nombra de forma que el cliente entienda exactamente qué va a recibir y en cuánto tiempo. Ahí entran las 4 condiciones del Mensaje Principal de Venta (Módulo 1).</p>
+        <div class="cond-card-ex">
+          <strong>Test del filtro</strong>
+          Después de ver el creativo, ¿la persona puede explicar en una frase qué le estás ofreciendo? Si no, la solución está demasiado abstracta.
+        </div>
+      </div>
+
+      <div class="cond-card-big">
+        <div class="cond-num-big">04</div>
+        <div class="cond-card-title">Pides UNA sola acción</div>
+        <p class="cond-card-desc">Un creativo con tres llamadas a la acción ("dale like, guarda el post y escríbenos") no logra ninguna. Pide una sola acción concreta: enviar un mensaje al WhatsApp, dar clic al link, escribir una palabra clave. Cuanto más simple sea la acción, más personas la ejecutan. Cuanto más se explica la acción, más cuesta hacerla.</p>
+        <div class="cond-card-ex">
+          <strong>Test del filtro</strong>
+          ¿Qué hace la persona en los próximos 30 segundos después de ver el creativo? Si la respuesta no es clara o tiene más de una opción, el llamado a la acción está roto.
+        </div>
+      </div>
+
+    </div>
+
+    <div class="formula-box">
+      <div class="formula-text">
+        Una persona <span class="plus">+</span> Un dolor <span class="plus">+</span> Una solución <span class="plus">+</span> Una acción <span class="plus">=</span> Creativo que convierte
+      </div>
+    </div>
+  </section>
+
+  <section class="theory-section">
+    <div class="pill-eyebrow">Formatos</div>
+    <h2 class="theory-section-title">Los 3 formatos y cuándo usar cada uno</h2>
+    <p class="theory-lede">Cada formato cumple una función distinta dentro del embudo. No es que uno sea mejor que otro: cada uno se elige según el momento del cliente y el objetivo de la campaña. Lo importante es que los 4 principios anteriores se respetan igual, sin importar cuál escojas.</p>
+
+    <div class="pat-grid">
+
+      <div class="pat-card">
+        <div class="pat-num">A</div>
+        <div class="pat-card-title">Imagen estática</div>
+        <p class="pat-card-desc">Una pieza cuadrada o vertical con un titular grande y un soporte visual. Funciona rápido porque entrega el mensaje completo en menos de 2 segundos.</p>
+        <div class="pat-card-ex">
+          <strong>Cuándo usarla</strong>
+          Para tráfico frío que ve tu marca por primera vez, para retargeting con un recordatorio claro y para campañas con un único mensaje fuerte.
+        </div>
+      </div>
+
+      <div class="pat-card">
+        <div class="pat-num">B</div>
+        <div class="pat-card-title">Video corto (Reel / TikTok)</div>
+        <p class="pat-card-desc">Una pieza de 15 a 30 segundos que combina rostro, voz, texto en pantalla y movimiento. Genera más conexión emocional que la imagen porque el cerebro lee el lenguaje no verbal.</p>
+        <div class="pat-card-ex">
+          <strong>Cuándo usarlo</strong>
+          Para construir confianza, mostrar una transformación, romper objeciones complejas o contar un caso real. Funciona especialmente bien con audiencias que ya te vieron varias veces.
+        </div>
+      </div>
+
+      <div class="pat-card">
+        <div class="pat-num">C</div>
+        <div class="pat-card-title">Carrusel</div>
+        <p class="pat-card-desc">Una pieza de varias diapositivas que el usuario navega deslizando. Cada diapositiva avanza una idea hasta llegar al cierre. Permite educar y vender en la misma pieza.</p>
+        <div class="pat-card-ex">
+          <strong>Cuándo usarlo</strong>
+          Para educar al cliente sobre un problema que aún no reconoce, mostrar pasos de un proceso, contar varios casos o desarmar mitos del nicho. Funciona mejor en orgánico que en pauta paga.
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="theory-section">
+    <div class="pill-eyebrow">Patrones por formato</div>
+    <h2 class="theory-section-title">Estructuras que sirven de molde</h2>
+    <p class="theory-lede">Cada formato tiene patrones de composición que ya han demostrado funcionar. No son recetas mágicas, pero son puntos de partida que evitan que el creativo se sienta improvisado. Estos son los más usados para cada uno:</p>
+
+    <div class="pat-grid">
+
+      <div class="pat-card">
+        <div class="pat-card-title">Imagen · Gancho con rostro</div>
+        <p class="pat-card-desc">Una persona del nicho mira a la cámara con expresión expresiva. Al lado, un titular tipográfico grande con la frase que toca el dolor. El conjunto se lee en 1 segundo desde el thumbnail.</p>
+      </div>
+
+      <div class="pat-card">
+        <div class="pat-card-title">Imagen · Antes vs Después</div>
+        <p class="pat-card-desc">La imagen se divide en dos mitades. Una muestra el dolor en colores apagados y la otra muestra el resultado en colores saturados. Funciona bien cuando la transformación es visual y demostrable.</p>
+      </div>
+
+      <div class="pat-card">
+        <div class="pat-card-title">Imagen · Captura de chat</div>
+        <p class="pat-card-desc">Se simula una conversación de WhatsApp con burbujas. Un mensaje del cliente nombra el dolor y otro responde con la solución. Sirve como prueba social porque el cerebro lo lee como contenido orgánico.</p>
+      </div>
+
+      <div class="pat-card">
+        <div class="pat-card-title">Video · Hook + Cuerpo + CTA</div>
+        <p class="pat-card-desc">Los primeros 3 segundos abren con una frase o gesto que pare el scroll. Después vienen entre 15 y 22 segundos donde se desarrolla la idea. Al final, una sola llamada a la acción de máximo 5 segundos.</p>
+      </div>
+
+      <div class="pat-card">
+        <div class="pat-card-title">Video · Antes vs Ahora hablado</div>
+        <p class="pat-card-desc">La misma estructura del split visual pero contada en voz: el creador empieza describiendo el dolor con tono pesado y termina mostrando el resultado con energía positiva. Funciona bien para servicios y transformaciones personales.</p>
+      </div>
+
+      <div class="pat-card">
+        <div class="pat-card-title">Carrusel · 6 slides en escalera</div>
+        <p class="pat-card-desc">Estructura de seis diapositivas: hook, dolor, causa oculta, solución, cómo funciona y CTA. Cada slide avanza una idea. La última pide una sola acción concreta.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="theory-section">
+    <div class="pill-eyebrow">El test de los 2 segundos</div>
+    <h2 class="theory-section-title">Cómo validar un creativo antes de pautarlo</h2>
+    <p class="theory-lede">Antes de invertir un solo peso en pauta, pasa cada creativo por este test. Muéstraselo durante 2 segundos a alguien que no conozca tu negocio. Después pídele que responda 3 preguntas:</p>
+
+    <div class="pat-grid">
+      <div class="pat-card">
+        <div class="pat-card-title">1. ¿A quién le habla?</div>
+        <p class="pat-card-desc">Si la persona no puede describir en una frase a quién va dirigido el creativo, falta el anclaje del público y de su dolor. El mensaje está demasiado abierto.</p>
+      </div>
+      <div class="pat-card">
+        <div class="pat-card-title">2. ¿Qué se vende y por qué importaría?</div>
+        <p class="pat-card-desc">Si la persona no identifica la categoría del producto ni el beneficio principal, el titular y los elementos visuales no están haciendo el trabajo. Hay que reescribirlos.</p>
+      </div>
+      <div class="pat-card">
+        <div class="pat-card-title">3. ¿Qué tiene que hacer?</div>
+        <p class="pat-card-desc">Si la persona no ve una llamada a la acción clara (botón, flecha o palabra), el creativo informa pero no convierte. Agrega una sola acción visible y concreta.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="theory-section">
+    <div class="pill-eyebrow">Herramientas</div>
+    <h2 class="theory-section-title">Qué herramienta usar según el formato</h2>
+    <p class="theory-lede">Cada formato requiere herramientas distintas. La mayoría de IAs de imagen (Midjourney, DALL-E, Flux) no saben escribir texto legible dentro de la pieza, así que conviene saber cuál usar para qué. Esta es la guía corta:</p>
+
+    <div class="pat-grid">
+      <div class="pat-card">
+        <div class="pat-card-title">Imagen con texto legible</div>
+        <p class="pat-card-desc">Para creativos donde el titular debe quedar dentro de la imagen, usa Google Imagen 3 (en Gemini), GPT-4o (en ChatGPT) o Ideogram. Estas tres escriben palabras claras sin convertirlas en garabatos.</p>
+      </div>
+      <div class="pat-card">
+        <div class="pat-card-title">Imagen base + edición en Canva</div>
+        <p class="pat-card-desc">Si la foto base la genera Midjourney o Flux, el texto se agrega después en Canva. La tipografía controlada en Canva da mejor terminación que la que sale directo de la IA.</p>
+      </div>
+      <div class="pat-card">
+        <div class="pat-card-title">Video corto</div>
+        <p class="pat-card-desc">Para grabar el video se usa CapCut, InShot o Adobe Premiere. Los subtítulos automáticos los genera CapCut con bastante precisión y se editan en minutos.</p>
+      </div>
+      <div class="pat-card">
+        <div class="pat-card-title">Carrusel de Instagram</div>
+        <p class="pat-card-desc">El carrusel se diseña en Canva o Figma con plantillas de 6 a 10 slides. La idea por slide se planifica antes, no se improvisa. La última diapositiva siempre repite el llamado a la acción.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="theory-cta">
+    <h3>Genera tus 3 piezas</h3>
+    <button class="btn btn-ghost" type="button" data-go-mode="practico" style="background: rgba(15,15,20,0.15); color: #0F0F14; border-color: rgba(15,15,20,0.3); margin-top: 6px;">→ Modo Práctica</button>
+  </div>
+
+</div>
+
+<!-- ESTADO: FALTA MÓDULO 1 -->
+<section class="missing practical-only" id="state-missing" hidden>
+  <div class="missing-icon">!</div>
+  <h2>Primero el Módulo 1</h2>
+  <p>Este módulo necesita tus respuestas del Módulo 1 (Constructor del Mensaje) para generar los prompts. Sin esa base no hay material para construir anuncios. Tarda 8 minutos.</p>
+  <a href="index.html" class="btn btn-primary btn-large">Ir al Módulo 1 →</a>
+</section>
+
+<!-- ESTADO: MATERIAL LISTO -->
+<div class="workspace practical-only" id="state-ready" hidden>
+
+  <section class="generators">
+
+<!-- GENERADOR A — CREATIVO DE PAUTA -->
+    <article class="gen-card">
+      <div class="gen-head">
+        <div class="gen-num">A</div>
+        <div>
+          <h2 class="gen-title">Creativo de pauta para Meta</h2>
+          <p class="gen-sub">3 creativos completos con patrones validados (gancho con rostro · antes vs ahora · captura de chat). Copy que va dentro de la imagen + paleta + composición + instrucciones por herramienta (Imagen 3, GPT-4o, Ideogram o Canva).</p>
+        </div>
+      </div>
+      <div class="gen-body">
+        <div class="llm-links">
+          <strong>Dónde pegarlo (las que SÍ escriben texto legible):</strong>
+          <a href="https://gemini.google.com" target="_blank" rel="noopener">Gemini · Imagen 3 ↗</a>
+          <a href="https://chatgpt.com" target="_blank" rel="noopener">ChatGPT · GPT-4o ↗</a>
+          <a href="https://ideogram.ai" target="_blank" rel="noopener">Ideogram ↗</a>
+          <a href="https://canva.com" target="_blank" rel="noopener">Canva (montar con foto base) ↗</a>
+        </div>
+        <div class="prompt-box" id="prompt-imagen"></div>
+        <div class="copy-row">
+          <button class="btn btn-primary" type="button" id="btn-copy-imagen">📋 Copiar prompt</button>
+          <span class="copy-feedback" id="fb-imagen">✓ Copiado</span>
+        </div>
+      </div>
+    </article>
+
+    <!-- GENERADOR B — REEL -->
+    <article class="gen-card">
+      <div class="gen-head">
+        <div class="gen-num">B</div>
+        <div>
+          <h2 class="gen-title">Guion de Reel / Video corto</h2>
+          <p class="gen-sub">3 guiones de 20-30 segundos con estructura hook + cuerpo + CTA, tabla de B-roll y subtítulos en pantalla.</p>
+        </div>
+      </div>
+      <div class="gen-body">
+        <div class="llm-links">
+          <strong>Dónde pegarlo:</strong>
+          <a href="https://chatgpt.com" target="_blank" rel="noopener">ChatGPT ↗</a>
+          <a href="https://claude.ai" target="_blank" rel="noopener">Claude ↗</a>
+          <a href="https://gemini.google.com" target="_blank" rel="noopener">Gemini ↗</a>
+        </div>
+        <div class="prompt-box" id="prompt-reel"></div>
+        <div class="copy-row">
+          <button class="btn btn-primary" type="button" id="btn-copy-reel">📋 Copiar prompt</button>
+          <span class="copy-feedback" id="fb-reel">✓ Copiado</span>
+        </div>
+      </div>
+    </article>
+
+    <!-- GENERADOR C — CARRUSEL -->
+    <article class="gen-card">
+      <div class="gen-head">
+        <div class="gen-num">C</div>
+        <div>
+          <h2 class="gen-title">Carrusel de Instagram (6 slides)</h2>
+          <p class="gen-sub">Estructura slide por slide con función definida, texto principal, texto secundario, idea visual y caption del post.</p>
+        </div>
+      </div>
+      <div class="gen-body">
+        <div class="llm-links">
+          <strong>Dónde pegarlo:</strong>
+          <a href="https://chatgpt.com" target="_blank" rel="noopener">ChatGPT ↗</a>
+          <a href="https://claude.ai" target="_blank" rel="noopener">Claude ↗</a>
+          <a href="https://gemini.google.com" target="_blank" rel="noopener">Gemini ↗</a>
+        </div>
+        <div class="prompt-box" id="prompt-carrusel"></div>
+        <div class="copy-row">
+          <button class="btn btn-primary" type="button" id="btn-copy-carrusel">📋 Copiar prompt</button>
+          <span class="copy-feedback" id="fb-carrusel">✓ Copiado</span>
+        </div>
+      </div>
+    </article>
+
+    <div class="download-all">
+      <button class="btn btn-ghost btn-large" type="button" id="btn-download-all">⬇ Descargar los 3 prompts en un TXT</button>
+    </div>
+
+  </section>
+
+  <aside class="preview-panel">
+    <div class="preview-card">
+      <div class="preview-label">Material del Módulo 1</div>
+
+      <div class="pv-item">
+        <div class="pv-item-title">Producto</div>
+        <div class="pv-item-body" id="pv-producto">Sin completar</div>
+      </div>
+
+      <div class="pv-item">
+        <div class="pv-item-title">Cliente</div>
+        <div class="pv-item-body" id="pv-cliente">Sin completar</div>
+      </div>
+
+      <div class="pv-item">
+        <div class="pv-item-title">01 · Dolor</div>
+        <div class="pv-item-body" id="pv-dolor">Sin completar</div>
+      </div>
+
+      <div class="pv-item">
+        <div class="pv-item-title">02 · Fácil</div>
+        <div class="pv-item-body" id="pv-facil">Sin completar</div>
+      </div>
+
+      <div class="pv-item">
+        <div class="pv-item-title">03 · Rápido</div>
+        <div class="pv-item-body" id="pv-rapido">Sin completar</div>
+      </div>
+
+      <div class="pv-item">
+        <div class="pv-item-title">04 · Garantía</div>
+        <div class="pv-item-body" id="pv-garantia">Sin completar</div>
+      </div>
+
+      <a href="index.html" class="pv-edit">← Editar respuestas del Módulo 1</a>
+    </div>
+  </aside>
+
+</div>
+
+<footer>
+  Construido para el taller <strong style="color: var(--blanco);">Vender por internet: el mensaje, el anuncio y el embudo que sí funcionan</strong><br>
+  por <a href="https://joakoestratega.com" target="_blank" rel="noopener">Joako Estratega</a> · Método MPV · 2026
+</footer>
+
+<script>
+(function () {
+  'use strict';
+
+  // ============ THEME TOGGLE ============
+  const THEME_KEY = 'joako-taller-theme';
+  const savedTheme = localStorage.getItem(THEME_KEY) || 'dark';
+  document.documentElement.setAttribute('data-theme', savedTheme);
+
+  document.getElementById('theme-toggle').addEventListener('click', function () {
+    const current = document.documentElement.getAttribute('data-theme');
+    const next = current === 'dark' ? 'light' : 'dark';
+    document.documentElement.setAttribute('data-theme', next);
+    localStorage.setItem(THEME_KEY, next);
+  });
+
+  // ============ MODE TOGGLE (Teoría/Práctica) ============
+  const MODE_KEY = 'joako-taller-mode';
+  function setMode(mode) {
+    document.documentElement.setAttribute('data-mode', mode);
+    localStorage.setItem(MODE_KEY, mode);
+    document.querySelectorAll('.mode-tab').forEach(t => t.classList.toggle('active', t.dataset.mode === mode));
+  }
+  setMode(localStorage.getItem(MODE_KEY) || 'teorico');
+
+  document.querySelectorAll('.mode-tab').forEach(tab => {
+    tab.addEventListener('click', () => setMode(tab.dataset.mode));
+  });
+
+  document.querySelectorAll('[data-go-mode]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      setMode(btn.dataset.goMode);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  });
+
+  const STORAGE_KEY = 'joako-taller-mpv-v2';
+
+  // Cargar datos del módulo 1
+  let data = null;
+  try {
+    const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
+    const keys = ['q-producto', 'q-cliente', 'q-precio', 'q-dolor-que', 'q-dolor-frase', 'q-facil', 'q-rapido', 'q-garantia'];
+    let filled = 0;
+    keys.forEach(k => { if ((saved[k] || '').trim()) filled++; });
+    if (filled >= 4) {
+      data = {
+        producto: (saved['q-producto'] || '').trim() || '(no especificado)',
+        cliente: (saved['q-cliente'] || '').trim() || '(no especificado)',
+        precio: (saved['q-precio'] || '').trim() || '(no especificado)',
+        dolorQue: (saved['q-dolor-que'] || '').trim() || '(no especificado)',
+        dolorFrase: (saved['q-dolor-frase'] || '').trim() || '(no especificado)',
+        facil: (saved['q-facil'] || '').trim() || '(no especificado)',
+        rapido: (saved['q-rapido'] || '').trim() || '(no especificado)',
+        garantia: (saved['q-garantia'] || '').trim() || '(no especificado)'
+      };
+    }
+  } catch (e) {}
+
+  if (!data) {
+    document.getElementById('state-missing').hidden = false;
+    return;
+  }
+
+  document.getElementById('state-ready').hidden = false;
+
+  // Llenar preview panel
+  function truncate(s, max) {
+    const txt = String(s || '').trim();
+    if (txt.length <= max) return txt;
+    return txt.substring(0, max - 3) + '...';
+  }
+
+  function setPv(id, val) {
+    const el = document.getElementById(id);
+    if (!el) return;
+    if (val && val !== '(no especificado)') {
+      el.textContent = truncate(val, 90);
+      el.classList.remove('empty');
+    } else {
+      el.textContent = 'Sin completar';
+      el.classList.add('empty');
+    }
+  }
+
+  setPv('pv-producto', data.producto);
+  setPv('pv-cliente', data.cliente);
+  setPv('pv-dolor', data.dolorQue + (data.dolorFrase !== '(no especificado)' ? ' · "' + data.dolorFrase + '"' : ''));
+  setPv('pv-facil', data.facil);
+  setPv('pv-rapido', data.rapido);
+  setPv('pv-garantia', data.garantia);
+
+  // ============ PROMPT A — CREATIVO DE PAUTA ============
+  const promptImagen =
+'# ROL\n' +
+'Eres director creativo experto en pauta paga de Instagram, Facebook y TikTok. Tu trabajo NO es diseñar fotografía editorial. Es diseñar CREATIVOS PUBLICITARIOS que paran el scroll y empujan al click.\n\n' +
+'# DIFERENCIA CRÍTICA QUE DEBES ENTENDER\n\n' +
+'Una foto bonita NO es un creativo de pauta. La regla del 20% de texto que Meta penalizaba se eliminó oficialmente el 7 de septiembre de 2020 (fuente: anuncio de Meta confirmado por Matt Navarra). Hoy los creativos ganadores incluyen texto prominente, titular grande, paleta saturada de alto contraste, persona con expresión expresiva y elementos gráficos como flechas, círculos, tachones, badges y números grandes. Los patrones validados incluyen testimonio, antes/después y captura de chat. Referentes públicos del marketing digital hispano: Vilma Núñez, Juan Ads, Carlos Muñoz.\n\n' +
+'- Foto editorial: persona en escena bonita, sin texto, estilo Apple/Nike. Funciona en orgánico de marca pero no en pauta paga directa.\n' +
+'- Creativo de pauta: titular GIGANTE legible desde el thumbnail del feed, anclaje del nicho visible, llamada a la acción única y badge de garantía como elemento gráfico independiente.\n\n' +
+'# TEST DE LOS 2 SEGUNDOS (REGLA INNEGOCIABLE)\n\n' +
+'Antes de aprobar mentalmente un creativo, hazte este test: si una persona desconocida ve la imagen 2 segundos en su feed sin leer la letra pequeña, ¿puede responder estas 3 preguntas?\n\n' +
+'1. ¿QUÉ se vende? (categoría del producto/servicio).\n' +
+'2. ¿POR QUÉ me importa? (dolor o resultado visible).\n' +
+'3. ¿QUÉ tengo que hacer? (CTA o pista visual).\n\n' +
+'Si alguna respuesta NO es clara en 2 segundos, el creativo está roto. Rediseña antes de entregar.\n\n' +
+'Aplicado a este negocio: si vendes inglés, en la imagen DEBE aparecer la palabra "inglés" o "English" o una bandera de EE.UU. o un símbolo inequívoco del idioma. Si vendes mocasines, debe verse el zapato o la palabra "calzado". Si vendes asesoría legal, debe verse el nicho ("arrendadores", "divorcios", "deudas") en el titular. **Nunca dejes que la categoría dependa solo de la letra pequeña.**\n\n' +
+'# ANCLAJE OBLIGATORIO DEL NICHO\n\n' +
+'En cada creativo, el nicho/categoría del producto debe estar anclado de DOS formas mínimo (no una sola):\n\n' +
+'(a) En el TITULAR gigante: nombra el producto o categoría explícitamente. Mal: "¿Tantos años estudiando y no hablas?". Bien: "5 años estudiando INGLÉS y NO HABLAS". O: "Hablas INGLÉS o no?".\n\n' +
+'(b) En un ELEMENTO VISUAL prominente del creativo: bandera del país asociado, ícono universal del nicho, palabra en idioma extranjero visible, objeto inequívoco (un zapato, un contrato, un libro), captura de pantalla del producto. Que aunque alguien ignore todo el texto, la imagen sola identifique el nicho.\n\n' +
+'# CONTEXTO DEL NEGOCIO\n\n' +
+'- Producto/servicio: ' + data.producto + '\n' +
+'- Cliente objetivo: ' + data.cliente + '\n' +
+'- Dolor del cliente: ' + data.dolorQue + '\n' +
+'- Frase emocional del cliente: "' + data.dolorFrase + '"\n' +
+'- Por qué es fácil: ' + data.facil + '\n' +
+'- Tiempo al primer resultado: ' + data.rapido + '\n' +
+'- Garantía: ' + data.garantia + '\n\n' +
+'# TAREA\n\n' +
+'Diseña 3 CREATIVOS PUBLICITARIOS distintos para anuncio cuadrado (1080x1080), cada uno usando un patrón visual validado de pauta paga.\n\n' +
+'# LOS 3 PATRONES OBLIGATORIOS\n\n' +
+'**PATRÓN 1 — GANCHO CON ROSTRO + TITULAR GIGANTE**\n' +
+'Persona del nicho mirando a cámara con expresión expresiva (sorpresa, indignación, alegría auténtica). Titular tipográfico GRANDE ocupando 40-50% de la imagen. Frase corta de refuerzo abajo. Una palabra clave en color de acento (amarillo o rojo). Estilo creativo típico de cuentas de marketing digital ganadoras.\n\n' +
+'**PATRÓN 2 — ANTES VS AHORA (split visual)**\n' +
+'Imagen dividida en 2 mitades verticales. Mitad izquierda: escena del DOLOR (color apagado, gris azulado, fondo desordenado). Mitad derecha: escena de la SOLUCIÓN/RESULTADO (color saturado, ordenado, expresión positiva). Texto "ANTES" sobre izquierda y "DESPUÉS" sobre derecha. Una frase corta debajo de cada lado.\n\n' +
+'**PATRÓN 3 — CAPTURA DE CHAT / TESTIMONIO VISUAL**\n' +
+'Simula screenshot de conversación de WhatsApp o testimonio en formato burbuja. Una frase del cliente destacada en color contrastante. Hora del mensaje visible. Pie con nombre + ciudad (puede ser ficticio para el ejemplo). Prueba social inmediata. Funciona porque parece contenido orgánico no publicitario.\n\n' +
+'# PARA CADA PATRÓN ENTREGA EXACTAMENTE\n\n' +
+'1. **NOMBRE del creativo** y por qué este patrón funciona contra el dolor específico (1 párrafo).\n\n' +
+'2. **COPY EXACTO QUE VA DENTRO DE LA IMAGEN** (en español, listo para pegar):\n' +
+'   - Titular gigante: una frase de máximo 8 palabras.\n' +
+'   - Refuerzo: una frase de 6-12 palabras.\n' +
+'   - CTA si aplica: máximo 3 palabras (ej. "Escríbeme HOY", "Link en bio").\n\n' +
+'3. **PALETA DE COLORES** específica (3 colores con código hex). Debe ser de alto contraste. Bases que funcionan: amarillo #F8B400 + negro #0F0F14 + blanco; rojo #E63946 + crema + negro; azul #0066FF + amarillo #FFD60A + blanco. Evita pasteles, evita marrones, evita beige.\n\n' +
+'4. **ANCLAJE VISUAL DEL NICHO**: 1-2 elementos gráficos concretos que identifican la categoría del producto sin necesidad de leer (bandera, ícono, objeto del nicho, palabra en idioma extranjero visible, captura de pantalla del producto, sello). Detalla cuáles y dónde van en la composición.\n\n' +
+'5. **BADGE DE GARANTÍA**: cómo va a verse la garantía como elemento gráfico independiente del refuerzo (sello circular, cinta, banda lateral, sticker amarillo). Texto exacto del badge.\n\n' +
+'6. **COMPOSICIÓN** (descripción detallada): dónde va el titular, dónde va la persona/objeto, dónde va el refuerzo, dónde va el CTA, dónde va el badge de garantía, dónde van los anclajes del nicho, qué elementos decorativos (flechas, círculos, líneas).\n\n' +
+'7. **INSTRUCCIONES TÉCNICAS POR HERRAMIENTA** (entrega las 3 opciones):\n\n' +
+'   **OPCIÓN A — IAs que escriben texto legible (Google Imagen 3 / GPT-4o / Ideogram):**\n' +
+'   Prompt en inglés listo para pegar, que pida explícitamente el texto exacto a renderizar entre comillas. Ej: "Square 1080x1080 ad creative with large bold Montserrat headline reading \'EXACT HEADLINE TEXT HERE\'..."\n\n' +
+'   **OPCIÓN B — Canva (recomendado por mejor calidad tipográfica):**\n' +
+'   Instrucciones paso a paso: qué buscar en la plantilla ("Instagram Post Ad" + estilo), qué textos reemplazar, qué colores aplicar con sus códigos hex, qué iconos/elementos arrastrar.\n\n' +
+'   **OPCIÓN C — Midjourney/Flux (solo para la foto base, después se monta en Canva):**\n' +
+'   Prompt en inglés para generar SOLO la imagen base de la persona o escena, sin texto. Después el usuario abre Canva y pega el copy encima.\n\n' +
+'# REGLAS DURAS\n\n' +
+'- NUNCA generes "foto editorial realista sin texto". Eso no convierte en pauta.\n' +
+'- El titular dentro de la imagen debe ser legible desde el thumbnail del feed móvil. Tipografía mínima equivalente a 60pt.\n' +
+'- TODO creativo debe pasar el TEST DE LOS 2 SEGUNDOS antes de entregarlo. Si no se entiende qué se vende sin leer la letra pequeña, está roto.\n' +
+'- TODO creativo debe tener el ANCLAJE VISUAL del nicho en 2 capas (titular + elemento gráfico).\n' +
+'- TODO creativo debe tener el BADGE DE GARANTÍA como elemento gráfico independiente, no solo mencionada en texto pequeño.\n' +
+'- Si dudas de paleta, amarillo + negro + blanco siempre funciona como baseline (combinación de mayor contraste visual en pantalla).\n' +
+'- Cero clichés visuales: persona en escritorio frustrada con la cabeza entre las manos, profesional sonriendo en café con laptop, montaña con bandera al amanecer.\n' +
+'- Si citas al cliente, limpia su voz primero (no copies frases rotas ni groserías).\n' +
+'- Toda decisión debe estar al servicio del scroll-stopper, no de la estética.\n\n' +
+'# AUTOCHECK ANTES DE ENTREGAR\n\n' +
+'Por cada uno de los 3 creativos, antes de entregarlos pregúntate:\n' +
+'1. ¿Aparece la categoría del nicho en el titular Y en un elemento visual?\n' +
+'2. ¿Hay un badge/sello de garantía visible (no solo mención en refuerzo)?\n' +
+'3. ¿Una persona sin contexto previo entendería en 2 segundos qué se vende?\n' +
+'Si alguna respuesta es NO, rediseña el creativo antes de entregarlo.\n\n' +
+'# CIERRE\n\n' +
+'Recomendación de orden de pruebas:\n' +
+'1. Cuál creativo arrancar primero según audiencia (frío vs ya conoce la marca).\n' +
+'2. Cuál es el patrón más fácil de producir hoy con las herramientas disponibles.\n' +
+'3. Qué métrica observar las primeras 48 horas (CTR > 1.5% suele ser buena señal en pauta fría).';
+
+  document.getElementById('prompt-imagen').textContent = promptImagen;
+
+  // ============ PROMPT B — REEL ============
+  const promptReel =
+'# ROL\n' +
+'Eres un guionista de reels y TikTok experto en marketing directo. Trabajas con el Método MPV de Joako Estratega: dolor + fácil + rápido + garantía.\n\n' +
+'# CONTEXTO DEL NEGOCIO\n\n' +
+'- Producto: ' + data.producto + '\n' +
+'- Cliente: ' + data.cliente + '\n' +
+'- Dolor del cliente: ' + data.dolorQue + '\n' +
+'- Frase emocional del cliente: "' + data.dolorFrase + '"\n' +
+'- Por qué la solución es fácil: ' + data.facil + '\n' +
+'- Tiempo al primer resultado: ' + data.rapido + '\n' +
+'- Garantía: ' + data.garantia + '\n\n' +
+'# IMPORTANTE — MATERIAL CRUDO\n\n' +
+'El material puede estar vago o gramaticalmente roto. Procesa antes de escribir: si la frase del cliente está rota o tiene groserías, límpiala manteniendo la emoción. NUNCA copies literal una frase impublicable.\n\n' +
+'# REGLAS OBLIGATORIAS DE CADA GUION\n\n' +
+'- Duración objetivo: 20-30 segundos.\n' +
+'- Estructura fija: HOOK (0-3s) + CUERPO (3-25s) + CTA (25-30s).\n' +
+'- Hook hablado: máximo 8 palabras, dichas en 3 segundos.\n' +
+'- Cuerpo: nombra el dolor → revela el problema real (causa que el cliente no ve) → presenta la solución → menciona la garantía.\n' +
+'- CTA: 1 sola acción concreta. Ej: "Te dejo el link en mi bio", "Escríbeme la palabra CURSO por DM y te paso info".\n' +
+'- Hablado en primera persona del negocio, mirando a cámara (excepto donde se indique B-roll).\n' +
+'- Español neutro latinoamericano, "tú" no "vos".\n' +
+'- Cero clichés ("transforma tu vida", "atrévete a más", "el secreto que nadie te cuenta").\n' +
+'- Frases cortas, hablables. Una idea por frase.\n\n' +
+'# QUÉ NECESITO DE TI\n\n' +
+'Genera 3 GUIONES DISTINTOS según el nivel de consciencia del cliente:\n\n' +
+'**GUION 1 — DIRECTO (cliente que YA sabe que tiene el problema)**\n' +
+'Empieza nombrando el dolor sin rodeos. Para audiencia caliente que ya identifica su problema.\n\n' +
+'**GUION 2 — HISTORIA / MINI-CASO (cliente que NO se reconoce todavía)**\n' +
+'Empieza con un caso ("una clienta mía...", "el otro día un seguidor me escribió..."). Para audiencia fría que aún no se identifica con el problema.\n\n' +
+'**GUION 3 — REVELACIÓN / MITO ROTO (cliente que ya intentó otras soluciones)**\n' +
+'Empieza derribando una creencia falsa del mercado. Ej: "El verdadero problema no es X, es Y". Para audiencia escéptica que ya probó otras soluciones y desconfía.\n\n' +
+'# FORMATO DE TU RESPUESTA PARA CADA GUION\n\n' +
+'Entrega una tabla con 4 columnas:\n\n' +
+'| Tiempo | Texto hablado (lo que digo a cámara) | B-roll / Imagen en pantalla | Subtítulo en pantalla |\n' +
+'|--------|--------------------------------------|------------------------------|------------------------|\n' +
+'| 0-3s   | Hook (máx 8 palabras)                | Plano cerrado del rostro     | Hook destacado grande  |\n' +
+'| 3-10s  | Nombrar dolor                        | (qué B-roll mostrar)         | Frase clave            |\n' +
+'| 10-20s | Revelar problema real + solución     | Cambios de plano             | Datos en pantalla      |\n' +
+'| 20-25s | Mencionar garantía                   | Detalle del producto         | Garantía visible       |\n' +
+'| 25-30s | CTA (1 sola acción)                  | Flecha animada a perfil      | CTA grande con flecha  |\n\n' +
+'## Cierre — Por dónde empezar\n' +
+'Recomienda con cuál guion arrancar a publicar según el momento del negocio (recién empezando → guion 2; ya tiene audiencia → guion 1; mercado escéptico → guion 3).';
+
+  document.getElementById('prompt-reel').textContent = promptReel;
+
+  // ============ PROMPT C — CARRUSEL ============
+  const promptCarrusel =
+'# ROL\n' +
+'Eres diseñador de contenido de Instagram experto en carruseles que convierten. Trabajas con el Método MPV de Joako Estratega.\n\n' +
+'# CONTEXTO DEL NEGOCIO\n\n' +
+'- Producto: ' + data.producto + '\n' +
+'- Cliente: ' + data.cliente + '\n' +
+'- Dolor del cliente: ' + data.dolorQue + '\n' +
+'- Frase emocional del cliente: "' + data.dolorFrase + '"\n' +
+'- Por qué es fácil: ' + data.facil + '\n' +
+'- Tiempo al primer resultado: ' + data.rapido + '\n' +
+'- Garantía: ' + data.garantia + '\n\n' +
+'# REGLAS OBLIGATORIAS DEL CARRUSEL\n\n' +
+'- 6 slides exactos. No más, no menos.\n' +
+'- 1 idea por slide. Si hay dos ideas, abre otro slide.\n' +
+'- Slide 1: HOOK visual que pare el scroll.\n' +
+'- Slides 2-5: desarrollo en escalera (dolor → causa oculta → solución → cómo funciona).\n' +
+'- Slide 6: CTA único. Pide UNA sola acción (no pidas 3). Prohibido "dale like, comenta y guarda".\n' +
+'- Texto principal de cada slide: máximo 15 palabras visibles (lo demás va en caption del post).\n' +
+'- Texto secundario opcional: máximo 10 palabras de refuerzo.\n' +
+'- Las 4 condiciones MPV se cumplen en el CONJUNTO del carrusel, no en cada slide individual.\n' +
+'- Lenguaje sencillo, sin jerga marketera ("framework", "leverage", "stack", "optimizar").\n' +
+'- Si citas al cliente, limpia la voz (mantén la emoción, sin frases rotas ni groserías).\n\n' +
+'# QUÉ NECESITO DE TI\n\n' +
+'Genera el carrusel completo con la siguiente estructura fija de funciones por slide:\n\n' +
+'- SLIDE 1 — HOOK (parar el scroll · curiosidad o dolor reconocible)\n' +
+'- SLIDE 2 — NOMBRAR EL DOLOR (que el cliente diga "esto me pasa exactamente")\n' +
+'- SLIDE 3 — REVELAR LA CAUSA OCULTA (lo que el cliente NO ve y le impide avanzar)\n' +
+'- SLIDE 4 — PRESENTAR LA SOLUCIÓN (qué hace tu producto/servicio)\n' +
+'- SLIDE 5 — CÓMO FUNCIONA (3 pasos máximo, mostrar que es fácil + rápido + garantizado)\n' +
+'- SLIDE 6 — CTA (1 sola acción concreta)\n\n' +
+'# FORMATO DE TU RESPUESTA POR CADA SLIDE\n\n' +
+'**SLIDE [N] — [FUNCIÓN]**\n\n' +
+'Texto PRINCIPAL (lo que se ve grande, máx 15 palabras):\n' +
+'> [escribir el texto]\n\n' +
+'Texto SECUNDARIO opcional (refuerzo abajo, máx 10 palabras):\n' +
+'> [escribir el texto o "(sin secundario)"]\n\n' +
+'Idea visual:\n' +
+'- Fondo: [color o imagen sugerida]\n' +
+'- Composición: [layout: texto centrado, texto izquierda + foto derecha, etc.]\n' +
+'- Foto/ilustración sugerida: [descripción concreta]\n\n' +
+'---\n\n' +
+'# AL FINAL ENTREGA EL CAPTION DEL POST\n\n' +
+'Caption de 180-250 palabras que:\n' +
+'- Amplía lo que dice el carrusel (no lo repite).\n' +
+'- Tono real, no folleto.\n' +
+'- Cierra con el mismo CTA del slide 6 (consistencia).\n' +
+'- Termina con 5-8 hashtags relevantes específicos del nicho (no genéricos tipo #marketing #emprendimiento).\n\n' +
+'# CIERRE — Por dónde publicarlo\n' +
+'Recomienda hora y día óptimos según el nicho del cliente (tip rápido, no análisis largo).';
+
+  document.getElementById('prompt-carrusel').textContent = promptCarrusel;
+
+  // ============ COPY ============
+  function copyTo(text, fbId) {
+    navigator.clipboard.writeText(text).then(() => showFb(fbId)).catch(() => {
+      const ta = document.createElement('textarea');
+      ta.value = text; ta.style.position = 'fixed'; ta.style.left = '-9999px';
+      document.body.appendChild(ta); ta.select();
+      try { document.execCommand('copy'); } catch (e) {}
+      document.body.removeChild(ta);
+      showFb(fbId);
+    });
+  }
+
+  function showFb(id) {
+    const fb = document.getElementById(id);
+    if (!fb) return;
+    fb.classList.add('show');
+    setTimeout(() => fb.classList.remove('show'), 2200);
+  }
+
+  document.getElementById('btn-copy-imagen').addEventListener('click', () => {
+    copyTo(promptImagen, 'fb-imagen');
+  });
+  document.getElementById('btn-copy-reel').addEventListener('click', () => {
+    copyTo(promptReel, 'fb-reel');
+  });
+  document.getElementById('btn-copy-carrusel').addEventListener('click', () => {
+    copyTo(promptCarrusel, 'fb-carrusel');
+  });
+
+  // ============ DOWNLOAD ALL ============
+  document.getElementById('btn-download-all').addEventListener('click', () => {
+    const content =
+'═══════════════════════════════════════════════════\n' +
+'MIS 3 PROMPTS DE ANUNCIOS — TALLER JOAKO ESTRATEGA\n' +
+'═══════════════════════════════════════════════════\n\n' +
+'BASE: MATERIAL DEL MÓDULO 1\n' +
+'───────────────────────────────────────────────────\n\n' +
+'Producto: ' + data.producto + '\n' +
+'Cliente: ' + data.cliente + '\n' +
+'Dolor: ' + data.dolorQue + '\n' +
+'Frase del cliente: "' + data.dolorFrase + '"\n' +
+'Por qué es fácil: ' + data.facil + '\n' +
+'Tiempo al primer resultado: ' + data.rapido + '\n' +
+'Garantía: ' + data.garantia + '\n\n\n' +
+'═══════════════════════════════════════════════════\n' +
+'PROMPT A — IMAGEN PARA ANUNCIO ESTÁTICO\n' +
+'(Pégalo en ChatGPT, Gemini, Midjourney o Flux)\n' +
+'═══════════════════════════════════════════════════\n\n' +
+promptImagen + '\n\n\n' +
+'═══════════════════════════════════════════════════\n' +
+'PROMPT B — GUION DE REEL / VIDEO CORTO\n' +
+'(Pégalo en ChatGPT, Claude o Gemini)\n' +
+'═══════════════════════════════════════════════════\n\n' +
+promptReel + '\n\n\n' +
+'═══════════════════════════════════════════════════\n' +
+'PROMPT C — ESTRUCTURA DE CARRUSEL DE INSTAGRAM\n' +
+'(Pégalo en ChatGPT, Claude o Gemini)\n' +
+'═══════════════════════════════════════════════════\n\n' +
+promptCarrusel + '\n\n\n' +
+'Generado en el taller "Vender por internet" de Joako Estratega\n' +
+'joakoestratega.com\n';
+
+    const blob = new Blob([content], { type: 'text/plain;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'mis-3-prompts-anuncios.txt';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  });
+
+})();
+</script>
+
+</body>
+</html>

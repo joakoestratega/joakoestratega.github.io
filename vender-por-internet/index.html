@@ -1,0 +1,1768 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark" data-mode="teorico">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Módulo 1 · Mensaje · Vender por internet · Joako Estratega</title>
+<meta name="description" content="Herramienta interactiva del taller universitario. Construye tu mensaje, genera anuncios con IA, mide y mejora tu embudo.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --negro: #0F0F14;
+    --negro-2: #1A1A22;
+    --negro-3: #25252F;
+    --amarillo: #F8B400;
+    --amarillo-soft: #FFC940;
+    --blanco: #FFFFFF;
+    --blanco-60: rgba(255, 255, 255, 0.6);
+    --blanco-40: rgba(255, 255, 255, 0.4);
+    --blanco-10: rgba(255, 255, 255, 0.1);
+    --azul: #21209C;
+    --azul-soft: #3D3CBD;
+    --verde: #2EE07A;
+    --rojo: #FF5252;
+    --naranja: #FF9F2E;
+    --radius: 14px;
+    --radius-sm: 8px;
+    --shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+    --transition: 220ms cubic-bezier(.2, .8, .2, 1);
+  }
+
+  [data-theme="light"] {
+    --negro: #F7F6F0;
+    --negro-2: #FFFFFF;
+    --negro-3: #EDEBE2;
+    --blanco: #0F0F14;
+    --blanco-60: rgba(15, 15, 20, 0.62);
+    --blanco-40: rgba(15, 15, 20, 0.42);
+    --blanco-10: rgba(15, 15, 20, 0.12);
+  }
+
+  /* Overrides de legibilidad en light mode: texto amarillo pasa a dorado oscuro */
+  [data-theme="light"] .brand-name strong,
+  [data-theme="light"] .hero h1 .accent,
+  [data-theme="light"] .step-counter,
+  [data-theme="light"] .examples-title,
+  [data-theme="light"] .preview-label,
+  [data-theme="light"] .cond-num,
+  [data-theme="light"] .preview-meta strong,
+  [data-theme="light"] .summary-card-title,
+  [data-theme="light"] .preview-text .var,
+  [data-theme="light"] .examples li::before { color: #9C6A00; }
+
+  [data-theme="light"] .preview-text .var { background: rgba(156, 106, 0, 0.12); }
+  [data-theme="light"] .preview-label::before { background: #9C6A00; }
+  [data-theme="light"] .copy-feedback { color: #1B7D3D; }
+  [data-theme="light"] .pill-eyebrow,
+  [data-theme="light"] .quote-mark,
+  [data-theme="light"] .cond-num-big,
+  [data-theme="light"] .cond-card-title { color: #9C6A00; }
+
+  /* MODE TOGGLE & THEORY */
+  .mode-toggle {
+    display: flex;
+    background: var(--negro-2);
+    padding: 4px;
+    border-radius: 10px;
+    border: 1px solid var(--amarillo);
+    gap: 2px;
+  }
+
+  .mode-tab {
+    padding: 8px 14px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 11px;
+    font-weight: 800;
+    color: var(--blanco-60);
+    background: transparent;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    transition: var(--transition);
+  }
+
+  .mode-tab.active { background: var(--amarillo); color: #0F0F14; }
+  .mode-tab:hover:not(.active) { color: var(--blanco); }
+
+  [data-mode="teorico"] .practical-only { display: none !important; }
+  [data-mode="practico"] .theory-only { display: none !important; }
+
+  .mode-banner {
+    margin: 28px 0 0;
+    padding: 14px 18px;
+    background: var(--negro-2);
+    border-left: 4px solid var(--amarillo);
+    border-radius: var(--radius-sm);
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  .mode-banner-text {
+    flex: 1; min-width: 220px;
+    font-size: 14px;
+    color: var(--blanco-60);
+    line-height: 1.45;
+  }
+
+  .mode-banner-text strong { color: var(--blanco); }
+
+  .theory { max-width: 1120px; margin: 0 auto; padding: 24px 28px 80px; position: relative; z-index: 1; }
+  .theory-section { margin-bottom: 56px; }
+  .theory-section-title { font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: clamp(24px, 3vw, 32px); line-height: 1.15; margin-bottom: 12px; letter-spacing: -0.5px; }
+  .pill-eyebrow { display: inline-block; font-family: 'Montserrat', sans-serif; font-size: 11px; font-weight: 800; color: var(--amarillo); letter-spacing: 2.5px; text-transform: uppercase; margin-bottom: 12px; }
+  .theory-lede { font-size: 17px; color: var(--blanco-60); line-height: 1.6; max-width: 760px; margin-bottom: 24px; }
+  .big-quote { background: linear-gradient(135deg, var(--negro-2) 0%, var(--negro-3) 100%); border-radius: var(--radius); padding: 36px 40px; margin: 24px 0; position: relative; border-left: 4px solid var(--amarillo); }
+  .quote-mark { font-family: 'Montserrat', sans-serif; font-size: 80px; font-weight: 900; color: var(--amarillo); line-height: 1; position: absolute; top: -10px; left: 18px; }
+  .quote-text { font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: clamp(20px, 2.4vw, 28px); line-height: 1.3; margin-left: 28px; }
+  .quote-author { margin-top: 14px; margin-left: 28px; color: var(--blanco-60); font-size: 14px; }
+
+  .cond-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; margin: 24px 0; }
+  .cond-card-big { background: var(--negro-2); border: 1px solid var(--blanco-10); border-radius: var(--radius); padding: 24px; transition: var(--transition); }
+  .cond-card-big:hover { border-color: var(--amarillo); transform: translateY(-3px); }
+  .cond-num-big { font-family: 'Montserrat', sans-serif; font-weight: 900; font-size: 42px; color: var(--amarillo); line-height: 1; margin-bottom: 12px; }
+  .cond-card-title { font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 19px; line-height: 1.2; margin-bottom: 8px; color: var(--blanco); }
+  .cond-card-desc { color: var(--blanco-60); font-size: 13.5px; line-height: 1.55; margin-bottom: 12px; }
+  .cond-card-ex { background: var(--negro); border-radius: var(--radius-sm); padding: 12px 14px; font-size: 12.5px; color: var(--blanco-60); line-height: 1.5; border-left: 3px solid var(--amarillo); }
+  .cond-card-ex strong { color: var(--amarillo); display: block; margin-bottom: 4px; font-size: 10.5px; font-weight: 800; letter-spacing: 1.5px; text-transform: uppercase; }
+
+  .formula-box { background: var(--negro-2); border: 2px solid var(--amarillo); border-radius: var(--radius); padding: 28px; margin: 20px 0; text-align: center; }
+  .formula-text { font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: clamp(18px, 2vw, 24px); line-height: 1.4; }
+  .formula-text .plus { color: var(--amarillo); margin: 0 8px; }
+
+  .theory-cta { margin-top: 36px; padding: 28px; background: var(--amarillo); color: #0F0F14; border-radius: var(--radius); text-align: center; }
+  .theory-cta h3 { font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: clamp(20px, 2.5vw, 26px); margin-bottom: 8px; color: #0F0F14; }
+  .theory-cta p { color: rgba(15, 15, 20, 0.75); margin-bottom: 16px; }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--negro);
+    color: var(--blanco);
+    font-family: 'Inter', system-ui, sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    min-height: 100vh;
+    overflow-x: hidden;
+    transition: background-color 280ms ease, color 280ms ease;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background:
+      radial-gradient(circle at 12% 10%, rgba(248, 180, 0, 0.08) 0%, transparent 35%),
+      radial-gradient(circle at 88% 90%, rgba(33, 32, 156, 0.12) 0%, transparent 40%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  [data-theme="light"] body::before {
+    background:
+      radial-gradient(circle at 12% 10%, rgba(248, 180, 0, 0.15) 0%, transparent 40%),
+      radial-gradient(circle at 88% 90%, rgba(33, 32, 156, 0.08) 0%, transparent 40%);
+  }
+
+  /* ============ HEADER ============ */
+  header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(15, 15, 20, 0.85);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--blanco-10);
+    transition: background-color 280ms ease;
+  }
+
+  [data-theme="light"] header { background: rgba(247, 246, 240, 0.85); }
+
+  .header-right { display: flex; align-items: center; gap: 12px; }
+
+  .theme-toggle {
+    width: 40px; height: 40px;
+    background: var(--negro-2);
+    border: 1px solid var(--blanco-10);
+    border-radius: 10px;
+    cursor: pointer;
+    display: grid;
+    place-items: center;
+    transition: var(--transition);
+    color: var(--blanco);
+    flex-shrink: 0;
+  }
+
+  .theme-toggle:hover {
+    background: var(--negro-3);
+    color: var(--amarillo);
+  }
+
+  .theme-toggle svg { width: 18px; height: 18px; }
+  .theme-toggle .icon-sun { display: none; }
+  .theme-toggle .icon-moon { display: block; }
+  [data-theme="light"] .theme-toggle .icon-sun { display: block; }
+  [data-theme="light"] .theme-toggle .icon-moon { display: none; }
+
+  .header-inner {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 18px 28px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+  }
+
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 800;
+    font-size: 18px;
+    letter-spacing: 0.5px;
+  }
+
+  .brand-mark {
+    width: 36px;
+    height: 36px;
+    background: var(--amarillo);
+    color: #0F0F14;
+    border-radius: 8px;
+    display: grid;
+    place-items: center;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 900;
+    font-size: 18px;
+  }
+
+  .brand-name strong { color: var(--amarillo); }
+  .brand-name span {
+    display: block;
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--blanco-60);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-top: 2px;
+  }
+
+  .modules {
+    display: flex;
+    gap: 4px;
+    background: var(--negro-2);
+    padding: 4px;
+    border-radius: 10px;
+  }
+
+  .module-tab {
+    padding: 8px 14px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--blanco-60);
+    background: transparent;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: var(--transition);
+    position: relative;
+    font-family: inherit;
+    text-decoration: none;
+    display: inline-block;
+    line-height: 1.2;
+  }
+
+  a.module-tab:hover { color: var(--blanco); background: var(--negro-3); }
+
+  .module-tab.active {
+    background: var(--amarillo);
+    color: #0F0F14;
+  }
+
+  .module-tab.disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
+
+  .module-tab .soon {
+    position: absolute;
+    top: -6px;
+    right: -6px;
+    background: var(--azul);
+    color: #FFFFFF;
+    font-size: 9px;
+    padding: 2px 5px;
+    border-radius: 4px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+  }
+
+  /* ============ HERO ============ */
+  .hero {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 56px 28px 32px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .hero-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--azul);
+    color: #FFFFFF;
+    padding: 6px 14px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+
+  .hero-eyebrow::before {
+    content: '';
+    width: 8px;
+    height: 8px;
+    background: var(--amarillo);
+    border-radius: 50%;
+  }
+
+  .hero h1 {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 800;
+    font-size: clamp(32px, 5vw, 56px);
+    line-height: 1.05;
+    letter-spacing: -1px;
+    margin-bottom: 16px;
+    max-width: 880px;
+  }
+
+  .hero h1 .accent { color: var(--amarillo); }
+
+  .hero p.lede {
+    font-size: clamp(16px, 1.5vw, 19px);
+    color: var(--blanco-60);
+    max-width: 720px;
+    line-height: 1.55;
+  }
+
+  /* ============ LAYOUT ============ */
+  .workspace {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 28px 80px;
+    display: grid;
+    grid-template-columns: 1fr 380px;
+    gap: 32px;
+    position: relative;
+    z-index: 1;
+  }
+
+  @media (max-width: 980px) {
+    .workspace { grid-template-columns: 1fr; }
+    .preview-panel { position: static !important; }
+  }
+
+  /* ============ WIZARD ============ */
+  .wizard {
+    background: var(--negro-2);
+    border: 1px solid var(--blanco-10);
+    border-radius: var(--radius);
+    padding: 32px;
+    min-height: 580px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .progress {
+    display: flex;
+    gap: 6px;
+    margin-bottom: 32px;
+  }
+
+  .progress-step {
+    flex: 1;
+    height: 4px;
+    background: var(--negro-3);
+    border-radius: 2px;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .progress-step.done { background: var(--amarillo); }
+  .progress-step.current { background: var(--negro-3); }
+
+  .progress-step.current::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--amarillo);
+    animation: pulse 1.6s ease-in-out infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 0.4; }
+    50% { opacity: 1; }
+  }
+
+  .step-counter {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--amarillo);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+
+  .step-title {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: clamp(22px, 2.5vw, 30px);
+    line-height: 1.15;
+    margin-bottom: 8px;
+  }
+
+  .step-help {
+    color: var(--blanco-60);
+    font-size: 15px;
+    margin-bottom: 28px;
+    max-width: 640px;
+  }
+
+  .field { margin-bottom: 22px; }
+
+  .field label {
+    display: block;
+    font-weight: 600;
+    font-size: 14px;
+    margin-bottom: 8px;
+    color: var(--blanco);
+  }
+
+  .field .hint {
+    font-size: 13px;
+    color: var(--blanco-60);
+    margin-bottom: 10px;
+    line-height: 1.5;
+  }
+
+  .field input,
+  .field textarea,
+  .field select {
+    width: 100%;
+    background: var(--negro);
+    color: var(--blanco);
+    border: 1px solid var(--blanco-10);
+    border-radius: var(--radius-sm);
+    padding: 14px 16px;
+    font-family: 'Inter', sans-serif;
+    font-size: 15px;
+    transition: var(--transition);
+    resize: vertical;
+  }
+
+  .field textarea { min-height: 90px; line-height: 1.55; }
+
+  .field input:focus,
+  .field textarea:focus,
+  .field select:focus {
+    outline: none;
+    border-color: var(--amarillo);
+    box-shadow: 0 0 0 3px rgba(248, 180, 0, 0.15);
+  }
+
+  .field input::placeholder,
+  .field textarea::placeholder {
+    color: var(--blanco-40);
+  }
+
+  .field-warn {
+    display: none;
+    margin-top: 8px;
+    padding: 10px 12px;
+    background: rgba(255, 159, 46, 0.1);
+    border-left: 3px solid var(--naranja);
+    border-radius: 6px;
+    font-size: 13px;
+    color: var(--naranja);
+    line-height: 1.4;
+  }
+
+  .field-warn.show { display: block; }
+
+  .examples {
+    background: var(--negro);
+    border: 1px dashed var(--blanco-10);
+    border-radius: var(--radius-sm);
+    padding: 14px 16px;
+    margin-bottom: 16px;
+  }
+
+  .examples-title {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--amarillo);
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  .examples ul {
+    list-style: none;
+    font-size: 13px;
+    color: var(--blanco-60);
+    line-height: 1.7;
+  }
+
+  .examples li::before {
+    content: '→ ';
+    color: var(--amarillo);
+    font-weight: 700;
+  }
+
+  .actions {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    margin-top: auto;
+    padding-top: 28px;
+    border-top: 1px solid var(--blanco-10);
+  }
+
+  .btn {
+    padding: 14px 28px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: 0.5px;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    transition: var(--transition);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+    font-family: inherit;
+  }
+
+  .btn-primary {
+    background: var(--amarillo);
+    color: #0F0F14;
+  }
+
+  .btn-primary:hover {
+    background: var(--amarillo-soft);
+    transform: translateY(-1px);
+  }
+
+  .btn-primary:disabled {
+    background: var(--negro-3);
+    color: var(--blanco-40);
+    cursor: not-allowed;
+    transform: none;
+  }
+
+  .btn-ghost {
+    background: transparent;
+    color: var(--blanco-60);
+    border: 1px solid var(--blanco-10);
+  }
+
+  .btn-ghost:hover {
+    color: var(--blanco);
+    border-color: var(--blanco-40);
+  }
+
+  .step { display: none; flex-direction: column; flex: 1; }
+  .step.active { display: flex; animation: slideIn 320ms cubic-bezier(.2, .8, .2, 1); }
+
+  @keyframes slideIn {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ============ PREVIEW PANEL ============ */
+  .preview-panel {
+    position: sticky;
+    top: 90px;
+    align-self: start;
+  }
+
+  .preview-card {
+    background: linear-gradient(180deg, var(--negro-2) 0%, var(--negro-3) 100%);
+    border: 1px solid var(--amarillo);
+    border-radius: var(--radius);
+    padding: 24px;
+    box-shadow: 0 0 0 4px rgba(248, 180, 0, 0.06);
+  }
+
+  .preview-label {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--amarillo);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .preview-label::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    background: var(--amarillo);
+    border-radius: 50%;
+    animation: pulse 1.6s ease-in-out infinite;
+  }
+
+  .preview-sublabel {
+    font-size: 12px;
+    color: var(--blanco-60);
+    margin-bottom: 18px;
+    line-height: 1.4;
+  }
+
+  .cond-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .cond-item {
+    background: rgba(0, 0, 0, 0.25);
+    border: 1px solid var(--blanco-10);
+    border-radius: var(--radius-sm);
+    padding: 12px 14px;
+    transition: var(--transition);
+  }
+
+  .cond-item.filled {
+    border-color: var(--amarillo);
+    background: rgba(248, 180, 0, 0.06);
+  }
+
+  .cond-head {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 6px;
+  }
+
+  .check {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    border: 1.5px solid var(--blanco-40);
+    flex-shrink: 0;
+    display: grid;
+    place-items: center;
+    transition: var(--transition);
+  }
+
+  .cond-item.filled .check {
+    background: var(--amarillo);
+    border-color: var(--amarillo);
+  }
+
+  .check svg {
+    width: 10px;
+    height: 10px;
+    color: var(--negro);
+    opacity: 0;
+    transition: var(--transition);
+  }
+
+  .cond-item.filled .check svg { opacity: 1; }
+
+  .cond-title {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 13px;
+    color: var(--blanco);
+    letter-spacing: 0.2px;
+  }
+
+  .cond-num {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 800;
+    font-size: 11px;
+    color: var(--amarillo);
+    margin-right: 4px;
+  }
+
+  .cond-body {
+    font-size: 12.5px;
+    color: var(--blanco-60);
+    line-height: 1.5;
+    padding-left: 28px;
+  }
+
+  .cond-body.empty {
+    font-style: italic;
+    color: var(--blanco-40);
+  }
+
+  .preview-meta {
+    margin-top: 18px;
+    padding-top: 14px;
+    border-top: 1px solid var(--blanco-10);
+    font-size: 12px;
+    color: var(--blanco-60);
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .preview-meta strong {
+    color: var(--amarillo);
+    font-family: 'Montserrat', sans-serif;
+    font-size: 14px;
+    font-weight: 800;
+  }
+
+  /* ============ RESULT STEP ============ */
+  .result-hero {
+    padding: 12px 0 24px;
+  }
+
+  .result-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--verde);
+    color: #0F0F14;
+    padding: 6px 14px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-bottom: 16px;
+  }
+
+  .summary-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin: 8px 0 28px;
+  }
+
+  @media (max-width: 640px) {
+    .summary-grid { grid-template-columns: 1fr; }
+  }
+
+  .summary-card {
+    background: var(--negro);
+    border: 1px solid var(--blanco-10);
+    border-left: 3px solid var(--amarillo);
+    border-radius: var(--radius-sm);
+    padding: 14px 16px;
+  }
+
+  .summary-card-title {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 11px;
+    font-weight: 800;
+    color: var(--amarillo);
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  .summary-card-body {
+    font-size: 13.5px;
+    color: var(--blanco);
+    line-height: 1.5;
+  }
+
+  .summary-card-body.empty {
+    color: var(--blanco-40);
+    font-style: italic;
+  }
+
+  .summary-card-body .secondary {
+    display: block;
+    margin-top: 6px;
+    color: var(--blanco-60);
+    font-size: 12.5px;
+    border-top: 1px dashed var(--blanco-10);
+    padding-top: 6px;
+  }
+
+  .result-section-title {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 18px;
+    margin: 28px 0 8px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .result-section-title .num {
+    width: 28px;
+    height: 28px;
+    background: var(--amarillo);
+    color: #0F0F14;
+    border-radius: 6px;
+    display: grid;
+    place-items: center;
+    font-size: 14px;
+    font-weight: 800;
+  }
+
+  .result-section-help {
+    color: var(--blanco-60);
+    font-size: 14px;
+    margin-bottom: 14px;
+    line-height: 1.55;
+  }
+
+  .prompt-box {
+    background: var(--negro);
+    border: 1px solid var(--blanco-10);
+    border-radius: var(--radius-sm);
+    padding: 20px;
+    font-family: 'JetBrains Mono', Consolas, monospace;
+    font-size: 12.5px;
+    line-height: 1.7;
+    color: var(--blanco-60);
+    max-height: 340px;
+    overflow-y: auto;
+    white-space: pre-wrap;
+    word-break: break-word;
+    margin-bottom: 12px;
+  }
+
+  .prompt-box::-webkit-scrollbar { width: 8px; }
+  .prompt-box::-webkit-scrollbar-track { background: var(--negro-2); }
+  .prompt-box::-webkit-scrollbar-thumb { background: var(--blanco-10); border-radius: 4px; }
+
+  .copy-row {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 24px;
+    align-items: center;
+  }
+
+  .copy-feedback {
+    color: var(--verde);
+    font-size: 13px;
+    font-weight: 600;
+    opacity: 0;
+    transition: var(--transition);
+  }
+
+  .copy-feedback.show { opacity: 1; }
+
+  .llm-links {
+    background: rgba(33, 32, 156, 0.1);
+    border: 1px solid rgba(33, 32, 156, 0.3);
+    border-radius: var(--radius-sm);
+    padding: 14px 16px;
+    margin-bottom: 24px;
+    font-size: 13px;
+    color: var(--blanco-60);
+    line-height: 1.6;
+  }
+
+  .llm-links strong { color: var(--blanco); }
+
+  .llm-links a {
+    color: var(--amarillo);
+    text-decoration: none;
+    font-weight: 600;
+    margin-right: 12px;
+    white-space: nowrap;
+  }
+
+  .llm-links a:hover { text-decoration: underline; }
+
+  /* ============ FOOTER ============ */
+  footer {
+    border-top: 1px solid var(--blanco-10);
+    padding: 32px 28px;
+    text-align: center;
+    color: var(--blanco-40);
+    font-size: 13px;
+    position: relative;
+    z-index: 1;
+  }
+
+  footer a { color: var(--amarillo); text-decoration: none; }
+
+  /* ============ MOBILE ============ */
+  @media (max-width: 640px) {
+    .header-inner { flex-direction: column; align-items: flex-start; gap: 14px; padding: 14px 18px; }
+    .modules { width: 100%; overflow-x: auto; }
+    .module-tab { white-space: nowrap; font-size: 12px; padding: 8px 12px; }
+    .hero { padding: 32px 18px 24px; }
+    .workspace { padding: 0 18px 60px; gap: 20px; }
+    .wizard { padding: 22px; min-height: 0; }
+    .actions { flex-wrap: wrap; }
+    .btn { width: 100%; justify-content: center; }
+    .preview-card { padding: 18px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="brand">
+      <div class="brand-mark">J</div>
+      <div class="brand-name">
+        <strong>JOAKO ESTRATEGA</strong>
+        <span>Vender por internet</span>
+      </div>
+    </div>
+
+    <div class="header-right">
+      <nav class="modules" aria-label="Módulos del taller">
+        <button class="module-tab active" type="button">1 · Mensaje</button>
+        <a class="module-tab" href="modulo-2.html">2 · Anuncios</a>
+        <a class="module-tab" href="modulo-3.html">3 · Embudo</a>
+        <a class="module-tab" href="modulo-4.html">4 · Métricas</a>
+      </nav>
+
+      <div class="mode-toggle" role="tablist" aria-label="Modo de visualización">
+        <button class="mode-tab active" type="button" data-mode="teorico">Teoría</button>
+        <button class="mode-tab" type="button" data-mode="practico">Práctica</button>
+      </div>
+
+      <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Cambiar tema claro/oscuro" title="Cambiar tema">
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+        </svg>
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="4"/>
+          <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="hero-eyebrow">Módulo 1 de 4</div>
+  <h1>Construye el <span class="accent">mensaje que sí vende</span>.</h1>
+  <p class="lede">El Mensaje Principal de Venta es el 80% de cualquier venta. Sin un buen mensaje, ningún anuncio, embudo o métrica te salva.</p>
+</section>
+
+<!-- ============ MODO TEÓRICO ============ -->
+<div class="theory theory-only">
+
+  <section class="theory-section">
+    <div class="pill-eyebrow">Definición</div>
+    <h2 class="theory-section-title">¿Qué es el Mensaje Principal de Venta?</h2>
+    <p class="theory-lede">Es la frase central que atraviesa toda tu comunicación: el anuncio que para el scroll, la landing que convence, la conversación que cierra. No es un slogan. No es una promesa creativa. Es la respuesta exacta a "por qué deberían comprarme a mí". Si el mensaje está roto, todo lo demás (creativos, pauta, embudo) trabaja en contra.</p>
+
+    <div class="big-quote">
+      <div class="quote-mark">"</div>
+      <div class="quote-text">El 80% de cualquier venta es el mensaje. El otro 20% es el sistema. La mayoría de negocios obsesionan con el 20% y ni siquiera tienen el 80%.</div>
+      <div class="quote-author">— Método MPV</div>
+    </div>
+  </section>
+
+  <section class="theory-section">
+    <div class="pill-eyebrow">El método</div>
+    <h2 class="theory-section-title">Las 4 condiciones del Mensaje Principal de Venta</h2>
+    <p class="theory-lede">Un buen mensaje cumple 4 condiciones simultáneas. Si falta una, el cliente duda y pospone. Las 4 desbloquean la decisión de compra en el cerebro.</p>
+
+    <div class="cond-grid">
+
+      <div class="cond-card-big">
+        <div class="cond-num-big">01</div>
+        <div class="cond-card-title">Dolor claro</div>
+        <p class="cond-card-desc">El cliente debe reconocer su propio problema dentro de tu mensaje. No vagamente, sino con tanta precisión que sienta "esto me pasa a mí". Para lograrlo, usa las palabras de tu cliente y no las tuyas. Si tu cliente dice "estoy harto de pagar cursos que no funcionan", ahí mismo empieza tu mensaje.</p>
+        <div class="cond-card-ex">
+          <strong>Test del filtro</strong>
+          ¿El cliente diría "esto me pasa exactamente" al leerlo? Si la respuesta es no, el dolor está demasiado vago.
+        </div>
+      </div>
+
+      <div class="cond-card-big">
+        <div class="cond-num-big">02</div>
+        <div class="cond-card-title">Fácil de usar</div>
+        <p class="cond-card-desc">El cliente debe sentir que el esfuerzo de su parte es mínimo. Tú haces el trabajo pesado y él solo conecta o llega. Las frases que sí funcionan tienen forma de "yo me encargo de X, tú solo haces Y". Las frases que no funcionan exigen al cliente, como "si tú quieres aprender" o "debes practicar todos los días".</p>
+        <div class="cond-card-ex">
+          <strong>Test del filtro</strong>
+          ¿La carga del esfuerzo recae en ti o en el cliente? Si recae en el cliente, el mensaje está mal planteado.
+        </div>
+      </div>
+
+      <div class="cond-card-big">
+        <div class="cond-num-big">03</div>
+        <div class="cond-card-title">Resultados rápidos</div>
+        <p class="cond-card-desc">Tu mensaje promete un primer resultado visible en poco tiempo. No el resultado final, sino el primer hito que ya se siente. Esto le baja al cliente la ansiedad de comprar. Una promesa como "Hablas inglés fluido en 3 meses" le gana a "domina el inglés", y también le gana a "en 1 año serás bilingüe".</p>
+        <div class="cond-card-ex">
+          <strong>Test del filtro</strong>
+          ¿Hay un número concreto de tiempo? Si solo dice "rápido" o "pronto" sin un número, la promesa queda floja.
+        </div>
+      </div>
+
+      <div class="cond-card-big">
+        <div class="cond-num-big">04</div>
+        <div class="cond-card-title">Garantía real</div>
+        <p class="cond-card-desc">El cliente debe sentir que no pierde nada si las cosas no salen como prometiste. La estructura ideal de una garantía es "si en X tiempo no pasa Y, entonces Z": devolución del dinero, repetición del servicio o una sesión adicional sin costo. Sin una garantía concreta, el cliente siente que tú no arriesgas nada mientras él lo arriesga todo.</p>
+        <div class="cond-card-ex">
+          <strong>Test del filtro</strong>
+          ¿Es una promesa específica y verificable? Frases como "trabajamos con responsabilidad" no cuentan como garantía.
+        </div>
+      </div>
+
+    </div>
+
+    <div class="formula-box">
+      <div class="formula-text">
+        Dolor claro <span class="plus">+</span> Fácil de usar <span class="plus">+</span> Rápido <span class="plus">+</span> Garantía real <span class="plus">=</span> Venta
+      </div>
+    </div>
+  </section>
+
+  <section class="theory-section">
+    <div class="pill-eyebrow">El error más común</div>
+    <h2 class="theory-section-title">Por qué fallan los mensajes de la mayoría de negocios</h2>
+    <p class="theory-lede">El error no es vender un mal producto. Es describir el producto en lugar de atacar el dolor. La mayoría de mensajes hablan de FEATURES (qué tiene el producto). Los mensajes ganadores hablan del DOLOR del cliente y de la TRANSFORMACIÓN que sigue.</p>
+
+    <div class="cond-grid">
+      <div class="cond-card-big">
+        <div class="cond-card-title" style="color: var(--rojo);">❌ Mensaje débil</div>
+        <p class="cond-card-desc">"Curso de inglés intensivo con metodología propia y profesores certificados. Modalidad online y presencial."</p>
+        <div class="cond-card-ex">
+          <strong>Por qué no funciona</strong>
+          Describe el producto en lugar de tocar el dolor del cliente. No promete un tiempo concreto. No ofrece garantía. Suena igual que cualquier otro instituto.
+        </div>
+      </div>
+
+      <div class="cond-card-big">
+        <div class="cond-card-title" style="color: var(--verde);">✓ Mensaje fuerte</div>
+        <p class="cond-card-desc">"Llevas años pagando cursos de inglés y todavía no eres capaz de mantener una conversación. Con nuestras sesiones inmersivas vas a hablar con fluidez en 3 meses. Si en ese tiempo no lo logras, te devolvemos el 100% de tu dinero."</p>
+        <div class="cond-card-ex">
+          <strong>Por qué sí funciona</strong>
+          Toca el dolor exacto con las palabras del cliente. Promete un tiempo concreto (3 meses). Explica cómo lo logra (sesiones inmersivas). Cierra con una garantía verificable (devolución total del dinero).
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="theory-cta">
+    <h3>Construye tu mensaje</h3>
+    <button class="btn btn-ghost" type="button" data-go-mode="practico" style="background: rgba(15,15,20,0.15); color: #0F0F14; border-color: rgba(15,15,20,0.3); margin-top: 6px;">→ Modo Práctica</button>
+  </div>
+
+</div>
+
+<div class="workspace practical-only">
+
+  <!-- ============ WIZARD ============ -->
+  <section class="wizard" aria-label="Constructor del Mensaje">
+
+    <div class="progress" aria-hidden="true">
+      <div class="progress-step current" data-progress="1"></div>
+      <div class="progress-step" data-progress="2"></div>
+      <div class="progress-step" data-progress="3"></div>
+      <div class="progress-step" data-progress="4"></div>
+    </div>
+
+    <!-- PASO 1 -->
+    <div class="step active" data-step="1">
+      <div class="step-counter">Paso 1 de 4 · Tu negocio</div>
+      <h2 class="step-title">¿Qué vendes y a quién?</h2>
+      <p class="step-help">Sé concreto. Si tu respuesta sirve para 10 negocios distintos, está demasiado vaga. Mejor "asesoría legal para arrendadores" que "servicios jurídicos".</p>
+
+      <div class="field">
+        <label for="q-producto">Qué vendes (producto o servicio)</label>
+        <input type="text" id="q-producto" placeholder="Ej: Asesoría legal para arrendadores particulares en Medellín">
+      </div>
+
+      <div class="field">
+        <label for="q-cliente">A quién se lo vendes</label>
+        <input type="text" id="q-cliente" placeholder="Ej: Personas mayores de 50 que arriendan 1 o 2 inmuebles y nunca han necesitado abogado">
+        <div class="field-warn" id="warn-cliente">⚠ Tu cliente está demasiado amplio. "Todo el mundo" no compra. Reduce a un grupo concreto: edad, oficio, ciudad o situación específica. Si dudas, el prompt final te ayuda a elegir uno.</div>
+      </div>
+
+      <div class="field">
+        <label for="q-precio">Cuánto cobras</label>
+        <input type="text" id="q-precio" placeholder="Ej: $400.000 COP el paquete básico, $1.200.000 el premium">
+      </div>
+
+      <div class="actions">
+        <button class="btn btn-ghost" type="button" disabled>← Atrás</button>
+        <button class="btn btn-primary" type="button" data-next="2">Siguiente →</button>
+      </div>
+    </div>
+
+    <!-- PASO 2 -->
+    <div class="step" data-step="2">
+      <div class="step-counter">Paso 2 de 4 · El dolor</div>
+      <h2 class="step-title">¿Qué le quita el sueño a tu cliente?</h2>
+      <p class="step-help">Esta es la pregunta más importante del taller. El 80% de tu venta depende de que aciertes aquí. Escríbelo en bruto si quieres, después la IA lo limpia. Pero el material debe salir de aquí.</p>
+
+      <div class="field">
+        <label for="q-dolor-que">El problema que vive hoy tu cliente</label>
+        <div class="hint">¿Qué está perdiendo, sufriendo o gastando que no quiere seguir gastando? Escríbelo como lo entiendas tú.</div>
+        <textarea id="q-dolor-que" placeholder="Ej: Lleva 8 meses sin poder sacar a un inquilino que dejó de pagar y los procesos legales le quitan tiempo de su trabajo principal"></textarea>
+        <div class="field-warn" id="warn-dolor-que">⚠ Falta detalle. Cuéntame qué pierde tu cliente concretamente (tiempo, dinero, tranquilidad, oportunidades). Frases de 3 palabras no dan material suficiente.</div>
+      </div>
+
+      <div class="field">
+        <label for="q-dolor-frase">La frase EXACTA que tu cliente diría</label>
+        <div class="hint">Si pudieras grabarlo quejándose en un café con un amigo, ¿qué frase saldría? Esta frase es oro. Va casi literal en tus anuncios.</div>
+        <textarea id="q-dolor-frase" placeholder="Ej: 'No quiero meterme en juzgados porque cada vez que voy me roban medio día y siento que me ven la cara'"></textarea>
+        <div class="field-warn" id="warn-dolor-frase">⚠ Suena más a folleto que a queja real. Imagínate a tu cliente desahogándose con un amigo. Esa es la frase que pega en pauta.</div>
+      </div>
+
+      <div class="examples">
+        <div class="examples-title">Cómo SÍ se ve un dolor real (ejemplos)</div>
+        <ul>
+          <li>"Cada vez que abro Instagram veo a otras vendiendo lo que yo sé hacer mejor"</li>
+          <li>"Trabajo de domingo a domingo y al final del mes mi cuenta sigue en cero"</li>
+          <li>"Pagué un curso de $2 millones y todavía no facturo lo que prometieron"</li>
+        </ul>
+      </div>
+
+      <div class="actions">
+        <button class="btn btn-ghost" type="button" data-prev="1">← Atrás</button>
+        <button class="btn btn-primary" type="button" data-next="3">Siguiente →</button>
+      </div>
+    </div>
+
+    <!-- PASO 3 -->
+    <div class="step" data-step="3">
+      <div class="step-counter">Paso 3 de 4 · Facilidad y rapidez</div>
+      <h2 class="step-title">¿Por qué tu solución es fácil y rápida?</h2>
+      <p class="step-help">El cerebro del cliente quiere lo más fácil posible y lo más rápido posible. Si tu solución suena complicada o lenta, pierde. No se trata de mentir, sino de mostrar lo que ya tienes en palabras claras.</p>
+
+      <div class="field">
+        <label for="q-facil">¿Qué hace TU NEGOCIO para que sea fácil?</label>
+        <div class="hint">Describe lo que TÚ asumes (no lo que el cliente debe hacer). Mejor "yo me encargo de X, tú solo Y" que "si quieres aprender...".</div>
+        <textarea id="q-facil" placeholder="Ej: Yo me encargo de todo el trámite. Tú solo firmas un poder por internet y me reenvías los WhatsApp del inquilino. Nunca pisas un juzgado."></textarea>
+        <div class="field-warn" id="warn-facil">⚠ Estás describiendo lo que TU CLIENTE debe hacer. Cámbialo: cuenta lo que TÚ haces por él. La facilidad la pones tú, no él.</div>
+      </div>
+
+      <div class="field">
+        <label for="q-rapido">¿En cuánto tiempo ve el PRIMER resultado?</label>
+        <div class="hint">No prometas el resultado final. Promete el primer hito visible con número concreto: días, semanas, meses.</div>
+        <input type="text" id="q-rapido" placeholder="Ej: En 5 días hábiles ya tienes la notificación legal entregada al inquilino">
+        <div class="field-warn" id="warn-rapido">⚠ Te falta el número. "Rápido", "pronto" o "ya verás" no funcionan. Dale al cliente un número concreto: "en 7 días", "en 3 semanas", "en 1 mes".</div>
+      </div>
+
+      <div class="actions">
+        <button class="btn btn-ghost" type="button" data-prev="2">← Atrás</button>
+        <button class="btn btn-primary" type="button" data-next="4">Siguiente →</button>
+      </div>
+    </div>
+
+    <!-- PASO 4 -->
+    <div class="step" data-step="4">
+      <div class="step-counter">Paso 4 de 4 · Garantía</div>
+      <h2 class="step-title">¿Qué le aseguras al cliente si las cosas no salen?</h2>
+      <p class="step-help">Sin garantía concreta, el cliente piensa que tú no pierdes nada y él lo pierde todo. Una garantía real desbloquea la venta. "Trabajamos con responsabilidad" no es garantía. Sé específico.</p>
+
+      <div class="field">
+        <label for="q-garantia">Tu garantía concreta</label>
+        <div class="hint">Devolución del dinero · trabajo gratis hasta cumplir · sesión adicional sin costo · prueba gratuita · cláusula por escrito. Lo que sea, que sea verificable. Estructura ideal: "Si en X tiempo no pasa Y, entonces Z."</div>
+        <textarea id="q-garantia" placeholder="Ej: Si en 15 días no te he entregado la notificación legal al inquilino, te devuelvo el 100% del valor sin preguntas"></textarea>
+        <div class="field-warn" id="warn-garantia">⚠ Suena a promesa de marketing, no a garantía. Necesitas estructura "Si en X tiempo no Y, entonces Z" para que el cliente sepa qué reclamarte si fallas.</div>
+      </div>
+
+      <div class="examples">
+        <div class="examples-title">Garantías que sí funcionan (ejemplos)</div>
+        <ul>
+          <li>"Si en 7 días no facturas más de lo que invertiste conmigo, te devuelvo el dinero"</li>
+          <li>"Si tu hijo no pasa el examen, le doy 4 sesiones más gratis hasta que lo pase"</li>
+          <li>"Si la pieza no te gusta, la rediseñamos sin costo hasta que la apruebes"</li>
+        </ul>
+      </div>
+
+      <div class="actions">
+        <button class="btn btn-ghost" type="button" data-prev="3">← Atrás</button>
+        <button class="btn btn-primary" type="button" id="btn-finalizar">Ver mi material →</button>
+      </div>
+    </div>
+
+    <!-- RESULTADO -->
+    <div class="step" data-step="5">
+      <div class="result-hero">
+        <div class="result-badge">✓ Material listo para la IA</div>
+        <h2 class="step-title">Tu material está organizado</h2>
+        <p class="step-help">Aquí no vamos a armar el mensaje final. Tu mensaje lo va a construir mejor ChatGPT, Claude o Gemini. Lo que hicimos fue ORDENAR tu material crudo en las 4 condiciones del Método MPV. Eso es el 80% del trabajo. Ahora copia el prompt de abajo y pégalo en cualquier IA: te entregará 5 versiones limpias y bien escritas de tu Mensaje Principal de Venta.</p>
+      </div>
+
+      <div class="summary-grid" id="summary-grid"></div>
+
+      <h3 class="result-section-title"><span class="num">1</span> Prompt principal · 5 versiones de tu mensaje</h3>
+      <p class="result-section-help">Copia el bloque completo. Pégalo en ChatGPT, Claude o Gemini. Recibirás (a) cómo procesó tu material, (b) 5 versiones distintas de tu mensaje, (c) cuál es la más fuerte y por qué.</p>
+      <div class="llm-links">
+        <strong>¿Dónde lo pego?</strong> Cualquiera funciona:
+        <a href="https://chatgpt.com" target="_blank" rel="noopener">ChatGPT ↗</a>
+        <a href="https://claude.ai" target="_blank" rel="noopener">Claude ↗</a>
+        <a href="https://gemini.google.com" target="_blank" rel="noopener">Gemini ↗</a>
+      </div>
+      <div class="prompt-box" id="prompt-mensaje"></div>
+      <div class="copy-row">
+        <button class="btn btn-primary" type="button" id="btn-copy-prompt-mensaje">📋 Copiar prompt principal</button>
+        <span class="copy-feedback" id="copy-feedback-prompt">✓ Prompt copiado</span>
+      </div>
+
+      <h3 class="result-section-title"><span class="num">2</span> Prompt extra · 10 hooks para redes en 30 segundos</h3>
+      <p class="result-section-help">Mismo proceso. Este prompt te entrega 10 frases-gancho de máximo 8 palabras para abrir tus reels, anuncios y carruseles, basadas en el dolor real de tu cliente.</p>
+      <div class="prompt-box" id="prompt-hooks"></div>
+      <div class="copy-row">
+        <button class="btn btn-primary" type="button" id="btn-copy-prompt-hooks">📋 Copiar prompt de hooks</button>
+        <button class="btn btn-ghost" type="button" id="btn-download-txt">⬇ Descargar todo en TXT</button>
+        <span class="copy-feedback" id="copy-feedback-hooks">✓ Listo</span>
+      </div>
+
+      <div class="actions">
+        <button class="btn btn-ghost" type="button" data-prev="4">← Editar respuestas</button>
+        <button class="btn btn-primary" type="button" id="btn-reset">↻ Empezar de cero</button>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ============ PREVIEW PANEL ============ -->
+  <aside class="preview-panel" aria-label="Vista previa">
+    <div class="preview-card">
+      <div class="preview-label">Tu material por condición</div>
+      <div class="preview-sublabel">Las 4 condiciones del Método MPV se van marcando a medida que llenas el formulario.</div>
+
+      <div class="cond-list">
+        <div class="cond-item" data-cond="dolor">
+          <div class="cond-head">
+            <div class="check"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><polyline points="2,6 5,9 10,3"/></svg></div>
+            <span class="cond-title"><span class="cond-num">01</span>Dolor claro</span>
+          </div>
+          <div class="cond-body empty" data-cond-body="dolor">Sin completar</div>
+        </div>
+
+        <div class="cond-item" data-cond="facil">
+          <div class="cond-head">
+            <div class="check"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><polyline points="2,6 5,9 10,3"/></svg></div>
+            <span class="cond-title"><span class="cond-num">02</span>Fácil de usar</span>
+          </div>
+          <div class="cond-body empty" data-cond-body="facil">Sin completar</div>
+        </div>
+
+        <div class="cond-item" data-cond="rapido">
+          <div class="cond-head">
+            <div class="check"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><polyline points="2,6 5,9 10,3"/></svg></div>
+            <span class="cond-title"><span class="cond-num">03</span>Resultados rápidos</span>
+          </div>
+          <div class="cond-body empty" data-cond-body="rapido">Sin completar</div>
+        </div>
+
+        <div class="cond-item" data-cond="garantia">
+          <div class="cond-head">
+            <div class="check"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><polyline points="2,6 5,9 10,3"/></svg></div>
+            <span class="cond-title"><span class="cond-num">04</span>Garantía real</span>
+          </div>
+          <div class="cond-body empty" data-cond-body="garantia">Sin completar</div>
+        </div>
+      </div>
+
+      <div class="preview-meta">
+        <span>Progreso del método</span>
+        <strong id="preview-progress">0 / 4</strong>
+      </div>
+    </div>
+  </aside>
+
+</div>
+
+<footer>
+  Construido para el taller <strong style="color: var(--blanco);">Vender por internet: el mensaje, el anuncio y el embudo que sí funcionan</strong><br>
+  por <a href="https://joakoestratega.com" target="_blank" rel="noopener">Joako Estratega</a> · Método MPV · 2026
+</footer>
+
+<script>
+(function () {
+  'use strict';
+
+  // ============ THEME TOGGLE ============
+  const THEME_KEY = 'joako-taller-theme';
+  const savedTheme = localStorage.getItem(THEME_KEY) || 'dark';
+  document.documentElement.setAttribute('data-theme', savedTheme);
+
+  document.getElementById('theme-toggle').addEventListener('click', function () {
+    const current = document.documentElement.getAttribute('data-theme');
+    const next = current === 'dark' ? 'light' : 'dark';
+    document.documentElement.setAttribute('data-theme', next);
+    localStorage.setItem(THEME_KEY, next);
+  });
+
+  // ============ MODE TOGGLE (Teoría/Práctica) ============
+  const MODE_KEY = 'joako-taller-mode';
+  function setMode(mode) {
+    document.documentElement.setAttribute('data-mode', mode);
+    localStorage.setItem(MODE_KEY, mode);
+    document.querySelectorAll('.mode-tab').forEach(t => t.classList.toggle('active', t.dataset.mode === mode));
+  }
+  setMode(localStorage.getItem(MODE_KEY) || 'teorico');
+
+  document.querySelectorAll('.mode-tab').forEach(tab => {
+    tab.addEventListener('click', () => setMode(tab.dataset.mode));
+  });
+
+  document.querySelectorAll('[data-go-mode]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      setMode(btn.dataset.goMode);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  });
+
+  const STORAGE_KEY = 'joako-taller-mpv-v2';
+  const ids = ['q-producto', 'q-cliente', 'q-precio', 'q-dolor-que', 'q-dolor-frase', 'q-facil', 'q-rapido', 'q-garantia'];
+  const state = {};
+
+  // ============ STORAGE ============
+  try {
+    const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
+    ids.forEach(id => {
+      if (saved[id]) {
+        const el = document.getElementById(id);
+        if (el) { el.value = saved[id]; state[id] = saved[id]; }
+      }
+    });
+  } catch (e) {}
+
+  function persist() {
+    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); } catch (e) {}
+  }
+
+  function val(id) { return (state[id] || '').trim(); }
+
+  function escapeHtml(s) {
+    return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+  }
+
+  function truncate(s, max) {
+    const txt = String(s || '').trim();
+    if (txt.length <= max) return txt;
+    return txt.substring(0, max - 3) + '...';
+  }
+
+  // ============ VALIDACIONES SUAVES ============
+  const VAGUE_CLIENT_PATTERNS = [
+    /\btodo el mundo\b/i,
+    /\btoda la gente\b/i,
+    /\btodas las personas\b/i,
+    /\bla gente\b/i,
+    /\bpersonas\s*$/i,
+    /\bcualquiera\b/i,
+    /\bcualquier persona\b/i,
+    /^todos\b/i,
+    /^todas\b/i
+  ];
+
+  const SELF_REF_FACIL_PATTERNS = [
+    /\bsi quieres\b/i,
+    /\bsi tú quieres\b/i,
+    /\btienes que\b/i,
+    /\bdebes\b/i,
+    /\baprende[rs]?\b/i
+  ];
+
+  const VAGUE_TIME_PATTERNS = [
+    /^rápid[oa]?\.?$/i,
+    /^pronto\.?$/i,
+    /^en poco tiempo\.?$/i,
+    /^ya\b/i,
+    /\b(empiezas a ver|empezarás a ver)\b/i
+  ];
+
+  const WEAK_GUARANTEE_PATTERNS = [
+    /\b(con|trabajo con|trabajamos con) (responsabilidad|seriedad|profesionalismo)\b/i,
+    /\bgarantizo (un|el) buen (servicio|trabajo|trato)\b/i,
+    /^calidad/i,
+    /\bestoy comprometido\b/i
+  ];
+
+  function checkPatterns(text, patterns) {
+    return patterns.some(re => re.test(text));
+  }
+
+  function runValidations() {
+    // Cliente vago
+    const cliente = val('q-cliente');
+    toggleWarn('warn-cliente', cliente.length > 0 && cliente.length < 60 && checkPatterns(cliente, VAGUE_CLIENT_PATTERNS));
+
+    // Dolor muy corto
+    const dolorQue = val('q-dolor-que');
+    toggleWarn('warn-dolor-que', dolorQue.length > 0 && dolorQue.length < 40);
+
+    // Frase del dolor que suena a folleto (no usa primera persona ni queja típica)
+    const dolorFrase = val('q-dolor-frase');
+    const fraseSounds = dolorFrase.length > 0 && dolorFrase.length < 30;
+    toggleWarn('warn-dolor-frase', fraseSounds);
+
+    // Facilidad auto-referenciada al cliente
+    const facil = val('q-facil');
+    toggleWarn('warn-facil', facil.length > 0 && checkPatterns(facil, SELF_REF_FACIL_PATTERNS));
+
+    // Tiempo vago (sin número)
+    const rapido = val('q-rapido');
+    const hasNumber = /\d/.test(rapido);
+    toggleWarn('warn-rapido', rapido.length > 0 && (!hasNumber || checkPatterns(rapido, VAGUE_TIME_PATTERNS)));
+
+    // Garantía débil
+    const garantia = val('q-garantia');
+    toggleWarn('warn-garantia', garantia.length > 0 && checkPatterns(garantia, WEAK_GUARANTEE_PATTERNS));
+  }
+
+  function toggleWarn(id, on) {
+    const el = document.getElementById(id);
+    if (!el) return;
+    el.classList.toggle('show', on);
+  }
+
+  // ============ PREVIEW ============
+  function updatePreview() {
+    const dolorQue = val('q-dolor-que');
+    const dolorFrase = val('q-dolor-frase');
+    const facil = val('q-facil');
+    const rapido = val('q-rapido');
+    const garantia = val('q-garantia');
+
+    setCondition('dolor', dolorQue || dolorFrase, function () {
+      let txt = '';
+      if (dolorQue) txt += truncate(dolorQue, 110);
+      if (dolorFrase) {
+        if (txt) txt += ' · ';
+        txt += '"' + truncate(dolorFrase, 80) + '"';
+      }
+      return txt;
+    });
+
+    setCondition('facil', facil, function () { return truncate(facil, 130); });
+    setCondition('rapido', rapido, function () { return truncate(rapido, 130); });
+    setCondition('garantia', garantia, function () { return truncate(garantia, 130); });
+
+    // Progreso
+    const filled = [dolorQue || dolorFrase, facil, rapido, garantia].filter(Boolean).length;
+    const progressEl = document.getElementById('preview-progress');
+    if (progressEl) progressEl.textContent = filled + ' / 4';
+
+    runValidations();
+  }
+
+  function setCondition(name, hasContent, contentFn) {
+    const item = document.querySelector('[data-cond="' + name + '"]');
+    const body = document.querySelector('[data-cond-body="' + name + '"]');
+    if (!item || !body) return;
+
+    if (hasContent) {
+      item.classList.add('filled');
+      body.classList.remove('empty');
+      body.textContent = contentFn();
+    } else {
+      item.classList.remove('filled');
+      body.classList.add('empty');
+      body.textContent = 'Sin completar';
+    }
+  }
+
+  // ============ NAVIGATION ============
+  function goToStep(n) {
+    document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+    const target = document.querySelector('[data-step="' + n + '"]');
+    if (target) target.classList.add('active');
+
+    document.querySelectorAll('.progress-step').forEach((p, idx) => {
+      p.classList.remove('done', 'current');
+      const stepNum = idx + 1;
+      if (n > stepNum) p.classList.add('done');
+      else if (n === stepNum) p.classList.add('current');
+      if (n === 5) p.classList.add('done');
+    });
+
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  document.querySelectorAll('[data-next]').forEach(btn => {
+    btn.addEventListener('click', () => goToStep(parseInt(btn.dataset.next, 10)));
+  });
+
+  document.querySelectorAll('[data-prev]').forEach(btn => {
+    btn.addEventListener('click', () => goToStep(parseInt(btn.dataset.prev, 10)));
+  });
+
+  // ============ INPUT LISTENERS ============
+  ids.forEach(id => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    el.addEventListener('input', function () {
+      state[id] = el.value;
+      persist();
+      updatePreview();
+    });
+  });
+
+  // ============ RESULT BUILDER ============
+  document.getElementById('btn-finalizar').addEventListener('click', function () {
+    buildResult();
+    goToStep(5);
+  });
+
+  function buildResult() {
+    const data = {
+      producto: val('q-producto') || '(no especificado)',
+      cliente: val('q-cliente') || '(no especificado)',
+      precio: val('q-precio') || '(no especificado)',
+      dolorQue: val('q-dolor-que') || '(no especificado)',
+      dolorFrase: val('q-dolor-frase') || '(no especificado)',
+      facil: val('q-facil') || '(no especificado)',
+      rapido: val('q-rapido') || '(no especificado)',
+      garantia: val('q-garantia') || '(no especificado)'
+    };
+
+    // Construir summary grid
+    const grid = document.getElementById('summary-grid');
+    grid.innerHTML = '';
+
+    const cards = [
+      {
+        title: '01 · Dolor claro',
+        primary: data.dolorQue,
+        secondary: data.dolorFrase !== '(no especificado)' ? 'Frase exacta del cliente: "' + data.dolorFrase + '"' : null
+      },
+      {
+        title: '02 · Fácil de usar',
+        primary: data.facil,
+        secondary: null
+      },
+      {
+        title: '03 · Resultados rápidos',
+        primary: data.rapido,
+        secondary: null
+      },
+      {
+        title: '04 · Garantía real',
+        primary: data.garantia,
+        secondary: null
+      }
+    ];
+
+    cards.forEach(c => {
+      const isEmpty = c.primary === '(no especificado)';
+      const card = document.createElement('div');
+      card.className = 'summary-card';
+      card.innerHTML =
+        '<div class="summary-card-title">' + escapeHtml(c.title) + '</div>' +
+        '<div class="summary-card-body' + (isEmpty ? ' empty' : '') + '">' +
+          escapeHtml(c.primary) +
+          (c.secondary ? '<span class="secondary">' + escapeHtml(c.secondary) + '</span>' : '') +
+        '</div>';
+      grid.appendChild(card);
+    });
+
+    // ============ PROMPT 1 — 5 VERSIONES POR USO ============
+    const promptMensaje =
+'# ROL\n' +
+'Eres un copywriter senior experto en construir Mensajes Principales de Venta para marketing digital. Trabajas con el Método MPV de Joako Estratega: todo mensaje debe cumplir 4 condiciones simultáneas — (1) dolor claro que el cliente quiere acabar, (2) fácil de usar, (3) resultados rápidos, (4) garantía real que elimine el miedo.\n\n' +
+'# IMPORTANTE — TIPO DE MATERIAL QUE RECIBES\n' +
+'El siguiente material es CRUDO. Viene de una persona aprendiendo a estructurar su oferta. Puede estar vago, mal redactado, redundante, en flujo de conciencia, gramaticalmente roto, con groserías o palabras explícitas, o con frases auto-referenciadas. Tu trabajo NO es copiarlo literal. Es procesarlo, limpiarlo y convertirlo en mensajes que vendan.\n\n' +
+'# MATERIAL CRUDO DEL NEGOCIO\n\n' +
+'- Qué vende: ' + data.producto + '\n' +
+'- A quién (en sus palabras): ' + data.cliente + '\n' +
+'- Precio: ' + data.precio + '\n' +
+'- Dolor del cliente (descripción del negocio): ' + data.dolorQue + '\n' +
+'- Frase exacta que el cliente diría sobre su dolor: "' + data.dolorFrase + '"\n' +
+'- Por qué la solución es fácil (según el negocio): ' + data.facil + '\n' +
+'- Tiempo al primer resultado visible: ' + data.rapido + '\n' +
+'- Garantía concreta que ofrece el negocio: ' + data.garantia + '\n\n' +
+'# PROCESAMIENTO OBLIGATORIO ANTES DE ESCRIBIR\n\n' +
+'PASO A — CLIENTE: si "a quién" es vago (ej. "todo el mundo", "personas", "la gente", "cualquiera"), propón 3 segmentos concretos que ese negocio podría elegir (basados en producto y dolor descrito). Elige el más rentable y úsalo para escribir los 5 mensajes.\n\n' +
+'PASO B — DOLOR: si la descripción del dolor es vaga o contradictoria, dedúcela del contexto y reescríbela en 1 frase concreta.\n\n' +
+'PASO C — FACILIDAD: si "por qué la solución es fácil" está auto-referenciado al cliente (ej. "si quieres aprender...", "debes...", "tienes que..."), reescríbelo en primera persona del negocio (ej. "yo me encargo de X, tú solo Y"). La facilidad la pone el negocio, no el cliente.\n\n' +
+'PASO D — RAPIDEZ: si el tiempo del primer resultado no tiene número concreto, propón uno verosímil basado en el producto y úsalo.\n\n' +
+'PASO E — GARANTÍA: si la garantía es débil ("trabajamos con responsabilidad", "calidad asegurada"), reescríbela en estructura "Si en X tiempo no pasa Y, entonces Z" y úsala.\n\n' +
+'PASO F — VOZ PUBLICABLE (CRÍTICO): NUNCA copies literal una frase del cliente si está rota, en flujo de conciencia, repetitiva, con groserías o palabras censuradas (asteriscos, ****), o con errores gramaticales. Las comillas en marketing sirven para dar AUTENTICIDAD, no para reproducir texto roto. Mantén la idea emocional pero reescribe como la persona la diría si pudiera pensar la frase antes de hablar. Ejemplos de cómo limpiar:\n' +
+'  • "ha gastado mi hija plata en cursos a.**** que al final no, no hay re..." → "Mi hija lleva años pagando cursos que no le dan resultados"\n' +
+'  • "Que ch*** sería poder hablar inglés bien fluido" → "Cómo me cambiaría la vida hablar inglés con fluidez"\n' +
+'  • "no, pues mira, es que yo creo que ya está bien pero no sé" → "Siento que ya hice lo suficiente y aún no funciona"\n' +
+'Toda frase que vayas a citar entre comillas en el output final debe poder leerse en un anuncio sin avergonzar al negocio. Si la frase original es impublicable, reescríbela.\n\n' +
+'PASO G — CONTRADICCIONES DE OFERTA: si lo que el cliente DICE QUERER (ej. "en 1 mes") contradice lo que el negocio REALMENTE entrega (ej. "3 meses"), no inventes ni mientas. Usa el tiempo real del negocio y enmárcalo como contraste honesto contra el dolor (ej. "3 meses, frente a los años perdidos del cliente").\n\n' +
+'# REGLAS GLOBALES DE TODAS LAS VERSIONES\n\n' +
+'- Cada versión cumple las 4 condiciones del Método MPV. LAS 4, no algunas (excepto el Hook Corto, que solo tiene que tocar el dolor).\n' +
+'- Español neutro latinoamericano, gramaticalmente impecable, sin voseo ("tú" no "vos").\n' +
+'- Cero clichés: prohibido "transforma tu vida", "tu mejor versión", "atrévete a más", "método 100% efectivo", "la fórmula secreta", "alcanza tus sueños", "el secreto que nadie te cuenta", "deja atrás", "llegó la hora de", "no más excusas".\n' +
+'- B2C → tono cercano y conversacional. B2B → tono profesional sin perder humanidad.\n' +
+'- Si citas al cliente entre comillas, aplica el PASO F siempre.\n' +
+'- **VOZ CONSISTENTE:** elige UNA voz al inicio — primera persona singular ("yo te ayudo", "me encargo de") o plural ("nosotros eliminamos", "te acompañamos como equipo"). MANTÉN LA MISMA voz en las 5 versiones. Si dudas, elige según el material: si suena a profesional individual usa "yo", si suena a equipo/empresa usa "nosotros". Declara la decisión en el Paso 1.\n\n' +
+'# LAS 5 VERSIONES SON PARA 5 USOS DISTINTOS (NO 5 VARIACIONES COSMÉTICAS)\n\n' +
+'**VERSIÓN 1 — HOOK CORTO (reel/scroll)**\n' +
+'Máximo 12 palabras. 1 sola frase. Para parar el scroll en Instagram/TikTok. Toca el dolor real.\n' +
+'PROHIBIDO empezar con "¿Cansado de...?", "¿Estás harto de...?", "¿Te suena familiar...?" — son aperturas genéricas que ya no detienen el scroll porque la audiencia las ha visto en demasiados anuncios. Usa en cambio: contraste duro (Antes X. Hoy Y.) · cifra impactante real · confesión del cliente · error común nombrado · contradicción de creencia.\n\n' +
+'**VERSIÓN 2 — ANUNCIO META ADS (feed)**\n' +
+'25 a 35 palabras. Cumple las 4 condiciones MPV (dolor + fácil + rápido + garantía).\n' +
+'PRIMER RENGLÓN obligatorio: debe parar el scroll en menos de 2 segundos. PROHIBIDO arrancar con "Deja...", "Olvida...", "No más...", "Es hora de...", "Si llevas tiempo...". Usa: cifra concreta verificable, error específico, pregunta con dato adentro, o contraste duro. El primer renglón es lo que decide si el resto del anuncio se lee o no.\n\n' +
+'**VERSIÓN 3 — HERO DE LANDING PAGE**\n' +
+'35 a 50 palabras divididas en titular (1 línea fuerte) + subtítulo (1-2 líneas). Más profesional pero conserva emoción. **La garantía es la ÚLTIMA frase del subtítulo, no metas nada después de ella** (rompería el cierre). Cumple las 4 condiciones.\n\n' +
+'**VERSIÓN 4 — DISCURSO DE WHATSAPP / DM**\n' +
+'50 a 80 palabras. Tono de MENSAJE MÓVIL REAL, no de email comercial.\n' +
+'Reglas duras: frases de 8 a 15 palabras máximo, sin párrafos de 3 líneas, sin saltos dobles formales. Líneas separadas con un solo enter. Como si lo escribieras con el pulgar respondiendo a un prospecto. Puede usar 1 emoji funcional (no decoración). Cumple las 4 condiciones MPV pero distribuidas en mini-frases, no en bloques.\n\n' +
+'**VERSIÓN 5 — PITCH ELEVATOR (30 segundos en vivo)**\n' +
+'40 a 60 palabras. Lo que dirías si te encuentras con un prospecto en un evento y tienes medio minuto. Memorizable, hablado en voz alta sin trabarse, sin tecnicismos. **Mantén la voz elegida** (yo/nosotros) sin mezclar.\n\n' +
+'# FORMATO DE TU RESPUESTA\n\n' +
+'## Paso 1 — Cómo procesé tu material\n' +
+'(Cuenta brevemente qué entendiste, qué limpiaste, qué decisiones tomaste en los pasos A-G. Sé honesto si algo estaba mal estructurado o si tuviste que reescribir frases del cliente.)\n\n' +
+'## Paso 2 — Las 5 versiones (una por uso)\n' +
+'(Cada una con su uso al inicio. Indica cuántas palabras tiene entre paréntesis.)\n\n' +
+'## Paso 3 — Por dónde empezar\n' +
+'(Recomienda con cuál arrancar a probar. Típicamente: Hook + Anuncio Meta primero, para validar dolor con poca inversión antes de armar la landing larga.)';
+
+    document.getElementById('prompt-mensaje').textContent = promptMensaje;
+
+    // ============ PROMPT 2 — HOOKS ============
+    const promptHooks =
+'# ROL\n' +
+'Eres copywriter de redes sociales especializado en frases-gancho (hooks) que paran el scroll en Instagram, TikTok y anuncios de Meta. Trabajas con el Método MPV de Joako Estratega.\n\n' +
+'# IMPORTANTE — MATERIAL CRUDO\n' +
+'El material viene de una persona aprendiendo a estructurar su oferta. Puede estar vago. Procesa antes de escribir.\n\n' +
+'# DATOS DEL NEGOCIO\n\n' +
+'- Producto/servicio: ' + data.producto + '\n' +
+'- Cliente ideal: ' + data.cliente + '\n' +
+'- Dolor del cliente (descripción): ' + data.dolorQue + '\n' +
+'- Frase exacta que diría el cliente sobre su dolor: "' + data.dolorFrase + '"\n' +
+'- Garantía: ' + data.garantia + '\n\n' +
+'# REGLAS OBLIGATORIAS\n\n' +
+'- Máximo 8 palabras por hook.\n' +
+'- 1 sola frase, sin signos de puntuación interna excepto signo de pregunta al final si aplica.\n' +
+'- Lectura de 2 segundos.\n' +
+'- Toca un dolor universal del cliente, NO una causa específica. Si el hook implica que el cliente hizo algo concreto (ej. "si compraste un curso de..."), pierde a las personas con el mismo dolor por otra causa.\n' +
+'- Cero clichés: prohibido "transforma tu vida", "tu mejor versión", "atrévete a más", "secreto que nadie te cuenta".\n' +
+'- Español neutro latinoamericano, "tú" no "vos".\n\n' +
+'# ESTRUCTURAS VÁLIDAS (USA AL MENOS 5 DISTINTAS)\n\n' +
+'1. Pregunta directa: "¿Cuánto pierdes por no tener X?"\n' +
+'2. Contraste antes/ahora: "Antes vivía con X. Hoy no."\n' +
+'3. Error común: "El error que repites cada lunes"\n' +
+'4. Revelación inesperada: "X no es lo que crees"\n' +
+'5. Cifra impactante (verificable, sin inventar): "3 de cada 5 X pierden Y"\n' +
+'6. Confesión: "Lo que nadie te cuenta sobre X"\n' +
+'7. Contradicción directa: "X no funciona por esto"\n' +
+'8. Dolor en primera persona del cliente: "Estoy harta de Y"\n\n' +
+'# FORMATO DE TU RESPUESTA\n\n' +
+'## Paso 1 — Procesamiento\n' +
+'(Si el cliente o el dolor estaban vagos, di qué cliente y qué dolor concretos usaste para los hooks.)\n\n' +
+'## Paso 2 — Los 10 hooks numerados\n' +
+'(Cada uno con marca [estructura] al lado, ej: "Hook 5 — [Contraste]: Antes pagaba renta. Hoy cobro renta.")\n\n' +
+'## Paso 3 — Los 3 más fuertes\n' +
+'(Marca con ★ los 3 mejores y explica por qué pegarían más en pauta o en feed orgánico.)';
+
+    document.getElementById('prompt-hooks').textContent = promptHooks;
+  }
+
+  // ============ COPY ============
+  function copyTo(text, feedbackId) {
+    navigator.clipboard.writeText(text).then(() => {
+      showFeedback(feedbackId);
+    }).catch(() => {
+      const ta = document.createElement('textarea');
+      ta.value = text;
+      ta.style.position = 'fixed';
+      ta.style.left = '-9999px';
+      document.body.appendChild(ta);
+      ta.select();
+      try { document.execCommand('copy'); } catch (e) {}
+      document.body.removeChild(ta);
+      showFeedback(feedbackId);
+    });
+  }
+
+  function showFeedback(id) {
+    const fb = document.getElementById(id);
+    if (!fb) return;
+    fb.classList.add('show');
+    setTimeout(() => fb.classList.remove('show'), 2200);
+  }
+
+  document.getElementById('btn-copy-prompt-mensaje').addEventListener('click', function () {
+    copyTo(document.getElementById('prompt-mensaje').textContent, 'copy-feedback-prompt');
+  });
+
+  document.getElementById('btn-copy-prompt-hooks').addEventListener('click', function () {
+    copyTo(document.getElementById('prompt-hooks').textContent, 'copy-feedback-hooks');
+  });
+
+  // ============ DOWNLOAD ============
+  document.getElementById('btn-download-txt').addEventListener('click', function () {
+    const prompt1 = document.getElementById('prompt-mensaje').textContent;
+    const prompt2 = document.getElementById('prompt-hooks').textContent;
+
+    const content =
+'═══════════════════════════════════════════════════\n' +
+'MI MATERIAL MPV — TALLER JOAKO ESTRATEGA\n' +
+'═══════════════════════════════════════════════════\n\n' +
+'MIS RESPUESTAS\n' +
+'───────────────────────────────────────────────────\n\n' +
+'Qué vendo: ' + (val('q-producto') || '(sin responder)') + '\n\n' +
+'A quién: ' + (val('q-cliente') || '(sin responder)') + '\n\n' +
+'Precio: ' + (val('q-precio') || '(sin responder)') + '\n\n' +
+'Dolor del cliente: ' + (val('q-dolor-que') || '(sin responder)') + '\n\n' +
+'Frase exacta del cliente: "' + (val('q-dolor-frase') || '(sin responder)') + '"\n\n' +
+'Por qué es fácil: ' + (val('q-facil') || '(sin responder)') + '\n\n' +
+'Tiempo al primer resultado: ' + (val('q-rapido') || '(sin responder)') + '\n\n' +
+'Garantía: ' + (val('q-garantia') || '(sin responder)') + '\n\n\n' +
+'═══════════════════════════════════════════════════\n' +
+'PROMPT 1 — 5 VERSIONES DEL MENSAJE\n' +
+'(Pégalo en ChatGPT, Claude o Gemini)\n' +
+'═══════════════════════════════════════════════════\n\n' +
+prompt1 + '\n\n\n' +
+'═══════════════════════════════════════════════════\n' +
+'PROMPT 2 — 10 HOOKS PARA REDES\n' +
+'(Pégalo en ChatGPT, Claude o Gemini)\n' +
+'═══════════════════════════════════════════════════\n\n' +
+prompt2 + '\n\n\n' +
+'Generado en el taller "Vender por internet" de Joako Estratega\n' +
+'joakoestratega.com\n';
+
+    const blob = new Blob([content], { type: 'text/plain;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'mi-material-mpv.txt';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+    showFeedback('copy-feedback-hooks');
+  });
+
+  // ============ RESET ============
+  document.getElementById('btn-reset').addEventListener('click', function () {
+    if (!confirm('¿Seguro que quieres borrar todas tus respuestas y empezar de cero?')) return;
+    ids.forEach(id => {
+      const el = document.getElementById(id);
+      if (el) el.value = '';
+      delete state[id];
+    });
+    persist();
+    updatePreview();
+    goToStep(1);
+  });
+
+  // ============ INIT ============
+  updatePreview();
+})();
+</script>
+
+</body>
+</html>

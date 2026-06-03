@@ -1,0 +1,1382 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark" data-mode="teorico">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Módulo 4 · Métricas · Vender por internet · Joako Estratega</title>
+<meta name="description" content="Las métricas que de verdad importan, qué significan y cómo interpretarlas con IA.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --negro: #0F0F14;
+    --negro-2: #1A1A22;
+    --negro-3: #25252F;
+    --blanco: #FFFFFF;
+    --blanco-60: rgba(255, 255, 255, 0.6);
+    --blanco-40: rgba(255, 255, 255, 0.4);
+    --blanco-10: rgba(255, 255, 255, 0.1);
+    --amarillo: #F8B400;
+    --amarillo-soft: #FFC940;
+    --azul: #21209C;
+    --verde: #2EE07A;
+    --naranja: #FF9F2E;
+    --rojo: #E63946;
+    --radius: 14px;
+    --radius-sm: 8px;
+    --transition: 220ms cubic-bezier(.2, .8, .2, 1);
+  }
+
+  [data-theme="light"] {
+    --negro: #F7F6F0;
+    --negro-2: #FFFFFF;
+    --negro-3: #EDEBE2;
+    --blanco: #0F0F14;
+    --blanco-60: rgba(15, 15, 20, 0.62);
+    --blanco-40: rgba(15, 15, 20, 0.42);
+    --blanco-10: rgba(15, 15, 20, 0.12);
+  }
+
+  [data-theme="light"] .brand-name strong,
+  [data-theme="light"] .hero h1 .accent,
+  [data-theme="light"] .form-eyebrow,
+  [data-theme="light"] .examples-title,
+  [data-theme="light"] .llm-links a,
+  [data-theme="light"] .pill-eyebrow,
+  [data-theme="light"] .quote-mark,
+  [data-theme="light"] .metric-eyebrow,
+  [data-theme="light"] .metric-formula,
+  [data-theme="light"] .acord-num { color: #9C6A00; }
+
+  [data-theme="light"] .copy-feedback { color: #1B7D3D; }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--negro);
+    color: var(--blanco);
+    font-family: 'Inter', system-ui, sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    min-height: 100vh;
+    overflow-x: hidden;
+    transition: background-color 280ms ease, color 280ms ease;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background:
+      radial-gradient(circle at 12% 10%, rgba(248, 180, 0, 0.08) 0%, transparent 35%),
+      radial-gradient(circle at 88% 90%, rgba(33, 32, 156, 0.12) 0%, transparent 40%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  [data-theme="light"] body::before {
+    background:
+      radial-gradient(circle at 12% 10%, rgba(248, 180, 0, 0.15) 0%, transparent 40%),
+      radial-gradient(circle at 88% 90%, rgba(33, 32, 156, 0.08) 0%, transparent 40%);
+  }
+
+  /* HEADER */
+  header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(15, 15, 20, 0.85);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--blanco-10);
+    transition: background-color 280ms ease;
+  }
+
+  [data-theme="light"] header { background: rgba(247, 246, 240, 0.85); }
+
+  .header-inner {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 18px 28px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+  }
+
+  .brand { display: flex; align-items: center; gap: 12px; }
+
+  .brand-mark {
+    width: 36px; height: 36px;
+    background: var(--amarillo); color: #0F0F14;
+    border-radius: 8px;
+    display: grid; place-items: center;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 900; font-size: 18px;
+  }
+
+  .brand-name {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 800; font-size: 18px;
+    letter-spacing: 0.5px;
+  }
+
+  .brand-name strong { color: var(--amarillo); }
+  .brand-name span {
+    display: block;
+    font-size: 11px; font-weight: 500;
+    color: var(--blanco-60);
+    letter-spacing: 1px; text-transform: uppercase;
+    margin-top: 2px;
+  }
+
+  .header-right { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; justify-content: flex-end; }
+
+  .modules {
+    display: flex; gap: 4px;
+    background: var(--negro-2);
+    padding: 4px; border-radius: 10px;
+  }
+
+  .module-tab {
+    padding: 8px 14px;
+    font-size: 13px; font-weight: 600;
+    color: var(--blanco-60);
+    background: transparent; border: none;
+    border-radius: 6px; cursor: pointer;
+    transition: var(--transition);
+    position: relative;
+    font-family: inherit;
+    text-decoration: none;
+    display: inline-block;
+    line-height: 1.2;
+  }
+
+  a.module-tab:hover { color: var(--blanco); background: var(--negro-3); }
+  .module-tab.active { background: var(--amarillo); color: #0F0F14; }
+
+  /* MODE TOGGLE */
+  .mode-toggle {
+    display: flex;
+    background: var(--negro-2);
+    padding: 4px;
+    border-radius: 10px;
+    border: 1px solid var(--amarillo);
+    gap: 2px;
+  }
+
+  .mode-tab {
+    padding: 8px 14px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 11px;
+    font-weight: 800;
+    color: var(--blanco-60);
+    background: transparent;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    transition: var(--transition);
+  }
+
+  .mode-tab.active { background: var(--amarillo); color: #0F0F14; }
+  .mode-tab:hover:not(.active) { color: var(--blanco); }
+
+  /* THEME TOGGLE */
+  .theme-toggle {
+    width: 40px; height: 40px;
+    background: var(--negro-2);
+    border: 1px solid var(--blanco-10);
+    border-radius: 10px;
+    cursor: pointer;
+    display: grid;
+    place-items: center;
+    transition: var(--transition);
+    color: var(--blanco);
+    flex-shrink: 0;
+  }
+
+  .theme-toggle:hover { background: var(--negro-3); color: var(--amarillo); }
+  .theme-toggle svg { width: 18px; height: 18px; }
+  .theme-toggle .icon-sun { display: none; }
+  .theme-toggle .icon-moon { display: block; }
+  [data-theme="light"] .theme-toggle .icon-sun { display: block; }
+  [data-theme="light"] .theme-toggle .icon-moon { display: none; }
+
+  /* HERO */
+  .hero {
+    max-width: 1280px; margin: 0 auto;
+    padding: 56px 28px 24px;
+    position: relative; z-index: 1;
+  }
+
+  .hero-eyebrow {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--azul); color: #FFFFFF;
+    padding: 6px 14px; border-radius: 999px;
+    font-size: 12px; font-weight: 700;
+    letter-spacing: 1px; text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+
+  .hero-eyebrow::before {
+    content: ''; width: 8px; height: 8px;
+    background: var(--amarillo); border-radius: 50%;
+  }
+
+  .hero h1 {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 800;
+    font-size: clamp(32px, 5vw, 56px);
+    line-height: 1.05; letter-spacing: -1px;
+    margin-bottom: 16px;
+    max-width: 920px;
+  }
+
+  .hero h1 .accent { color: var(--amarillo); }
+
+  .hero p.lede {
+    font-size: clamp(16px, 1.5vw, 19px);
+    color: var(--blanco-60);
+    max-width: 760px; line-height: 1.55;
+  }
+
+  .mode-banner {
+    margin: 28px 0 0;
+    padding: 14px 18px;
+    background: var(--negro-2);
+    border-left: 4px solid var(--amarillo);
+    border-radius: var(--radius-sm);
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  .mode-banner-text {
+    flex: 1; min-width: 220px;
+    font-size: 14px;
+    color: var(--blanco-60);
+    line-height: 1.45;
+  }
+
+  .mode-banner-text strong { color: var(--blanco); }
+
+  /* MODE VISIBILITY */
+  [data-mode="teorico"] .practical-only { display: none !important; }
+  [data-mode="practico"] .theory-only { display: none !important; }
+
+  /* ============ TEORÍA ============ */
+  .theory {
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 24px 28px 80px;
+    position: relative; z-index: 1;
+  }
+
+  .theory-section { margin-bottom: 56px; }
+
+  .theory-section-title {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 800;
+    font-size: clamp(24px, 3vw, 32px);
+    line-height: 1.15;
+    margin-bottom: 12px;
+    letter-spacing: -0.5px;
+  }
+
+  .pill-eyebrow {
+    display: inline-block;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 11px;
+    font-weight: 800;
+    color: var(--amarillo);
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+
+  .theory-lede {
+    font-size: 17px;
+    color: var(--blanco-60);
+    line-height: 1.6;
+    max-width: 760px;
+    margin-bottom: 24px;
+  }
+
+  .big-quote {
+    background: linear-gradient(135deg, var(--negro-2) 0%, var(--negro-3) 100%);
+    border-radius: var(--radius);
+    padding: 36px 40px;
+    margin: 24px 0;
+    position: relative;
+    border-left: 4px solid var(--amarillo);
+  }
+
+  .quote-mark {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 80px;
+    font-weight: 900;
+    color: var(--amarillo);
+    line-height: 1;
+    position: absolute;
+    top: -10px;
+    left: 18px;
+  }
+
+  .quote-text {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: clamp(20px, 2.4vw, 28px);
+    line-height: 1.3;
+    margin-left: 28px;
+  }
+
+  .quote-author {
+    margin-top: 14px;
+    margin-left: 28px;
+    color: var(--blanco-60);
+    font-size: 14px;
+  }
+
+  /* MÉTRICAS GRID */
+  .metrics-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 14px;
+    margin: 24px 0;
+  }
+
+  .metric-card {
+    background: var(--negro-2);
+    border: 1px solid var(--blanco-10);
+    border-radius: var(--radius);
+    padding: 22px;
+    transition: var(--transition);
+  }
+
+  .metric-card:hover { border-color: var(--amarillo); transform: translateY(-2px); }
+
+  .metric-eyebrow {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 10.5px;
+    font-weight: 800;
+    color: var(--amarillo);
+    letter-spacing: 1.8px;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+
+  .metric-name {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 800;
+    font-size: 22px;
+    line-height: 1.15;
+    margin-bottom: 8px;
+  }
+
+  .metric-formula {
+    font-family: 'JetBrains Mono', Consolas, monospace;
+    background: var(--negro);
+    border: 1px dashed var(--amarillo);
+    border-radius: var(--radius-sm);
+    padding: 8px 12px;
+    font-size: 12.5px;
+    color: var(--amarillo);
+    margin-bottom: 12px;
+    text-align: center;
+  }
+
+  .metric-meaning {
+    color: var(--blanco-60);
+    font-size: 13.5px;
+    line-height: 1.55;
+    margin-bottom: 12px;
+  }
+
+  .metric-bench {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 12px;
+    padding-top: 12px;
+    border-top: 1px solid var(--blanco-10);
+  }
+
+  .bench {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 11px;
+    padding: 4px 10px;
+    border-radius: 6px;
+    letter-spacing: 0.5px;
+  }
+
+  .bench.good { color: var(--verde); background: rgba(46, 224, 122, 0.12); }
+  .bench.mid { color: var(--naranja); background: rgba(255, 159, 46, 0.12); }
+  .bench.bad { color: var(--rojo); background: rgba(230, 57, 70, 0.12); }
+
+  .metric-source {
+    margin-top: 12px;
+    padding-top: 10px;
+    border-top: 1px dashed var(--blanco-10);
+    font-size: 11.5px;
+    color: var(--blanco-40);
+    line-height: 1.45;
+    font-style: italic;
+  }
+
+  /* SEMÁFORO */
+  .traffic-light {
+    background: var(--negro-2);
+    border: 1px solid var(--blanco-10);
+    border-radius: var(--radius);
+    padding: 28px;
+    margin: 24px 0;
+  }
+
+  .traffic-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 14px;
+    margin-top: 16px;
+  }
+
+  @media (max-width: 720px) { .traffic-row { grid-template-columns: 1fr; } }
+
+  .traffic-col {
+    border-radius: var(--radius-sm);
+    padding: 16px 18px;
+  }
+
+  .traffic-col.green {
+    background: rgba(46, 224, 122, 0.08);
+    border: 1px solid rgba(46, 224, 122, 0.3);
+  }
+
+  .traffic-col.yellow {
+    background: rgba(255, 159, 46, 0.08);
+    border: 1px solid rgba(255, 159, 46, 0.3);
+  }
+
+  .traffic-col.red {
+    background: rgba(230, 57, 70, 0.08);
+    border: 1px solid rgba(230, 57, 70, 0.3);
+  }
+
+  .traffic-col-title {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 800;
+    font-size: 13px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+
+  .traffic-col.green .traffic-col-title { color: var(--verde); }
+  .traffic-col.yellow .traffic-col-title { color: var(--naranja); }
+  .traffic-col.red .traffic-col-title { color: var(--rojo); }
+
+  .traffic-col ul {
+    list-style: none;
+    padding: 0;
+    font-size: 13px;
+    color: var(--blanco-60);
+    line-height: 1.6;
+  }
+
+  .traffic-col li { padding: 4px 0; }
+  .traffic-col li::before { content: '· '; color: var(--amarillo); font-weight: 700; }
+
+  /* THEORY CTA */
+  .theory-cta {
+    margin-top: 36px;
+    padding: 28px;
+    background: var(--amarillo);
+    color: #0F0F14;
+    border-radius: var(--radius);
+    text-align: center;
+  }
+
+  .theory-cta h3 {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 800;
+    font-size: clamp(20px, 2.5vw, 26px);
+    margin-bottom: 8px;
+    color: #0F0F14;
+  }
+
+  .theory-cta p { color: rgba(15, 15, 20, 0.75); margin-bottom: 16px; }
+
+  /* ============ PRÁCTICA ============ */
+  .missing {
+    max-width: 720px;
+    margin: 40px auto 80px;
+    padding: 0 28px;
+    text-align: center;
+    position: relative; z-index: 1;
+  }
+
+  .missing-icon {
+    width: 72px; height: 72px;
+    margin: 0 auto 24px;
+    background: rgba(255, 159, 46, 0.15);
+    color: var(--naranja);
+    border-radius: 50%;
+    display: grid; place-items: center;
+    font-size: 36px; font-weight: 800;
+  }
+
+  .missing h2 {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 28px;
+    margin-bottom: 12px;
+  }
+
+  .missing p { color: var(--blanco-60); margin-bottom: 28px; line-height: 1.6; }
+
+  .practice {
+    max-width: 980px; margin: 0 auto;
+    padding: 24px 28px 80px;
+    position: relative; z-index: 1;
+  }
+
+  .practice-card {
+    background: var(--negro-2);
+    border: 1px solid var(--blanco-10);
+    border-radius: var(--radius);
+    padding: 28px;
+    margin-bottom: 24px;
+  }
+
+  .form-eyebrow {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 11px;
+    font-weight: 800;
+    color: var(--amarillo);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  .practice-card h3 {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 22px;
+    line-height: 1.2;
+    margin-bottom: 8px;
+  }
+
+  .practice-card p.help {
+    color: var(--blanco-60);
+    font-size: 14.5px;
+    line-height: 1.55;
+    margin-bottom: 20px;
+  }
+
+  .field { margin-bottom: 18px; }
+  .field label {
+    display: block;
+    font-weight: 600;
+    font-size: 13.5px;
+    margin-bottom: 6px;
+    color: var(--blanco);
+  }
+
+  .field .hint {
+    font-size: 12.5px;
+    color: var(--blanco-60);
+    margin-bottom: 8px;
+    line-height: 1.45;
+  }
+
+  .field textarea, .field input {
+    width: 100%;
+    background: var(--negro);
+    color: var(--blanco);
+    border: 1px solid var(--blanco-10);
+    border-radius: var(--radius-sm);
+    padding: 12px 14px;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    transition: var(--transition);
+    resize: vertical;
+  }
+
+  .field textarea { min-height: 160px; line-height: 1.5; font-family: 'JetBrains Mono', Consolas, monospace; font-size: 13px; }
+  .field input:focus, .field textarea:focus {
+    outline: none;
+    border-color: var(--amarillo);
+    box-shadow: 0 0 0 3px rgba(248, 180, 0, 0.15);
+  }
+
+  .field textarea::placeholder, .field input::placeholder { color: var(--blanco-40); }
+
+  .examples {
+    background: var(--negro);
+    border: 1px dashed var(--blanco-10);
+    border-radius: var(--radius-sm);
+    padding: 14px 16px;
+    margin: 6px 0 12px;
+  }
+
+  .examples-title {
+    font-size: 10.5px;
+    font-weight: 700;
+    color: var(--amarillo);
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  .examples pre {
+    font-family: 'JetBrains Mono', Consolas, monospace;
+    font-size: 11.5px;
+    color: var(--blanco-60);
+    line-height: 1.6;
+    white-space: pre-wrap;
+  }
+
+  .btn {
+    padding: 12px 22px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 13px;
+    letter-spacing: 0.5px;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    transition: var(--transition);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+    font-family: inherit;
+  }
+
+  .btn-primary { background: var(--amarillo); color: #0F0F14; }
+  .btn-primary:hover { background: var(--amarillo-soft); transform: translateY(-1px); }
+  .btn-primary:disabled { background: var(--negro-3); color: var(--blanco-40); cursor: not-allowed; transform: none; }
+  .btn-ghost { background: transparent; color: var(--blanco-60); border: 1px solid var(--blanco-10); }
+  .btn-ghost:hover { color: var(--blanco); border-color: var(--blanco-40); }
+  .btn-large { padding: 14px 28px; font-size: 14px; }
+
+  .result-section-title {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 20px;
+    margin: 24px 0 8px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .result-section-title .num {
+    width: 28px;
+    height: 28px;
+    background: var(--amarillo);
+    color: #0F0F14;
+    border-radius: 6px;
+    display: grid;
+    place-items: center;
+    font-size: 14px;
+    font-weight: 800;
+  }
+
+  .llm-links {
+    background: rgba(33, 32, 156, 0.1);
+    border: 1px solid rgba(33, 32, 156, 0.3);
+    border-radius: var(--radius-sm);
+    padding: 12px 14px;
+    margin-bottom: 14px;
+    font-size: 13px;
+    color: var(--blanco-60);
+    line-height: 1.5;
+    display: flex; flex-wrap: wrap; gap: 4px 14px; align-items: center;
+  }
+
+  .llm-links strong { color: var(--blanco); margin-right: 6px; }
+  .llm-links a { color: var(--amarillo); text-decoration: none; font-weight: 600; }
+  .llm-links a:hover { text-decoration: underline; }
+
+  .prompt-box {
+    background: var(--negro);
+    border: 1px solid var(--blanco-10);
+    border-radius: var(--radius-sm);
+    padding: 20px;
+    font-family: 'JetBrains Mono', Consolas, monospace;
+    font-size: 12.5px;
+    line-height: 1.7;
+    color: var(--blanco-60);
+    max-height: 360px;
+    overflow-y: auto;
+    white-space: pre-wrap;
+    word-break: break-word;
+    margin-bottom: 12px;
+  }
+
+  .copy-row { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 20px; align-items: center; }
+
+  .copy-feedback {
+    color: var(--verde);
+    font-size: 13px;
+    font-weight: 600;
+    opacity: 0;
+    transition: var(--transition);
+  }
+
+  .copy-feedback.show { opacity: 1; }
+
+  footer {
+    border-top: 1px solid var(--blanco-10);
+    padding: 32px 28px;
+    text-align: center;
+    color: var(--blanco-40);
+    font-size: 13px;
+    position: relative; z-index: 1;
+  }
+
+  footer a { color: var(--amarillo); text-decoration: none; }
+
+  /* MOBILE */
+  @media (max-width: 760px) {
+    .header-inner { flex-direction: column; align-items: stretch; gap: 14px; padding: 14px 18px; }
+    .header-right { width: 100%; justify-content: flex-start; }
+    .modules { overflow-x: auto; flex: 1; }
+    .module-tab { white-space: nowrap; font-size: 12px; padding: 8px 12px; }
+    .hero { padding: 32px 18px 20px; }
+    .theory { padding: 16px 18px 60px; }
+    .practice { padding: 16px 18px 60px; }
+    .practice-card { padding: 22px; }
+    .btn { width: 100%; justify-content: center; }
+    .big-quote { padding: 28px 24px; }
+    .quote-text { margin-left: 16px; font-size: 18px; }
+    .quote-author { margin-left: 16px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="brand">
+      <div class="brand-mark">J</div>
+      <div class="brand-name">
+        <strong>JOAKO ESTRATEGA</strong>
+        <span>Vender por internet</span>
+      </div>
+    </div>
+
+    <div class="header-right">
+      <nav class="modules" aria-label="Módulos del taller">
+        <a class="module-tab" href="index.html">1 · Mensaje</a>
+        <a class="module-tab" href="modulo-2.html">2 · Anuncios</a>
+        <a class="module-tab" href="modulo-3.html">3 · Embudo</a>
+        <button class="module-tab active" type="button">4 · Métricas</button>
+      </nav>
+
+      <div class="mode-toggle" role="tablist" aria-label="Modo de visualización">
+        <button class="mode-tab active" type="button" data-mode="teorico">Teoría</button>
+        <button class="mode-tab" type="button" data-mode="practico">Práctica</button>
+      </div>
+
+      <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Cambiar tema" title="Cambiar tema">
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+        </svg>
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="4"/>
+          <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="hero-eyebrow">Módulo 4 de 4</div>
+  <h1>Las métricas: <span class="accent">el termómetro de tu embudo</span></h1>
+  <p class="lede">Si no mides, no mejoras. Pero medir 50 indicadores tampoco sirve. Aquí están las 9 métricas que de verdad mueven el negocio.</p>
+</section>
+
+<!-- ============ MODO TEÓRICO ============ -->
+<div class="theory theory-only">
+
+  <section class="theory-section">
+    <div class="pill-eyebrow">Definición</div>
+    <h2 class="theory-section-title">¿Qué son las métricas y por qué importan?</h2>
+    <p class="theory-lede">Una métrica es un número que te dice cómo está funcionando una parte específica de tu embudo. Sin métricas, decides "a sentimiento": pausas anuncios porque te parecen feos, no porque los datos digan que no convierten. Con métricas, mides → decides → ajustas. Eso es la diferencia entre invertir y apostar.</p>
+
+    <div class="big-quote">
+      <div class="quote-mark">"</div>
+      <div class="quote-text">Lo que no se mide no se mejora. Lo que se mide a medias se mejora a medias. Lo que se mide bien se mejora rápido.</div>
+      <div class="quote-author">— Método MPV · principio lean aplicado al marketing</div>
+    </div>
+  </section>
+
+  <section class="theory-section">
+    <div class="pill-eyebrow">Las 9 métricas</div>
+    <h2 class="theory-section-title">Las únicas 9 métricas que de verdad importan en pauta digital</h2>
+    <p class="theory-lede">Meta Ads tiene más de 100 columnas. 91 de ellas son ruido. Estas 9 son las que mueven el negocio. Aprende a leerlas y vas a tomar decisiones 10x más rápido que el 90% de quienes pautan.</p>
+
+    <div class="metrics-grid">
+
+      <div class="metric-card">
+        <div class="metric-eyebrow">01 · Alcance</div>
+        <div class="metric-name">CPM</div>
+        <div class="metric-formula">(gasto ÷ impresiones) × 1.000</div>
+        <p class="metric-meaning">Costo por cada 1.000 veces que se mostró tu anuncio. Mide qué tan caro o barato es comprar atención de tu público.</p>
+        <div class="metric-bench">
+          <span class="bench good">Bueno: &lt; USD 13.48</span>
+          <span class="bench mid">Mediano global: USD 13.48</span>
+          <span class="bench bad">Caro: &gt; USD 20</span>
+        </div>
+        <div class="metric-source">Fuente: Wordstream · Facebook Ads Benchmarks 2025 (mediana de todas las industrias).</div>
+      </div>
+
+      <div class="metric-card">
+        <div class="metric-eyebrow">02 · Atracción</div>
+        <div class="metric-name">CTR</div>
+        <div class="metric-formula">(clics ÷ impresiones) × 100</div>
+        <p class="metric-meaning">Porcentaje de personas que vieron el anuncio y dieron clic. La métrica reina del creativo: te dice si el anuncio engancha.</p>
+        <div class="metric-bench">
+          <span class="bench good">Bueno: &gt; 2.5%</span>
+          <span class="bench mid">Mediano: 1.71% (Tráfico) · 2.59% (Leads)</span>
+          <span class="bench bad">Bajo: &lt; 1%</span>
+        </div>
+        <div class="metric-source">Fuente: Wordstream · Facebook Ads Benchmarks 2025 (medianas por tipo de campaña).</div>
+      </div>
+
+      <div class="metric-card">
+        <div class="metric-eyebrow">03 · Costo del clic</div>
+        <div class="metric-name">CPC</div>
+        <div class="metric-formula">gasto ÷ clics</div>
+        <p class="metric-meaning">Cuánto te cuesta llevar UNA persona a tu landing o WhatsApp. Si está alto, el creativo es flojo o el público no está bien segmentado.</p>
+        <div class="metric-bench">
+          <span class="bench good">Bueno: &lt; USD 1.28 (Reels)</span>
+          <span class="bench mid">Promedio Feed: USD 1.72</span>
+          <span class="bench bad">Caro: &gt; USD 3</span>
+        </div>
+        <div class="metric-source">Fuente: Wordstream · Facebook Ads Benchmarks 2025 (promedios globales).</div>
+      </div>
+
+      <div class="metric-card">
+        <div class="metric-eyebrow">04 · Captura</div>
+        <div class="metric-name">CPL</div>
+        <div class="metric-formula">gasto ÷ leads</div>
+        <p class="metric-meaning">Costo por cada lead capturado (WhatsApp, email, formulario). Define si tu sistema de captura es eficiente.</p>
+        <div class="metric-bench">
+          <span class="bench good">Regla operativa: CPL ≤ 10% del ticket</span>
+          <span class="bench bad">Revisar si CPL &gt; 25% del ticket</span>
+        </div>
+        <div class="metric-source">No hay benchmark oficial por la variabilidad entre nichos. La regla del 10% es referencia operativa común en la industria.</div>
+      </div>
+
+      <div class="metric-card">
+        <div class="metric-eyebrow">05 · Conversión</div>
+        <div class="metric-name">CR · Tasa de Conversión</div>
+        <div class="metric-formula">(conversiones ÷ visitas) × 100</div>
+        <p class="metric-meaning">Porcentaje de quienes llegaron a la landing y completaron la acción objetivo (compra, lead, agendar).</p>
+        <div class="metric-bench">
+          <span class="bench good">Bueno: &gt; 2.5%</span>
+          <span class="bench mid">Mediano Meta Ads: 1.57%</span>
+          <span class="bench bad">Bajo: &lt; 1%</span>
+        </div>
+        <div class="metric-source">Fuente: Wordstream · Facebook Ads Benchmarks 2025 (CVR mediano todas las industrias).</div>
+      </div>
+
+      <div class="metric-card">
+        <div class="metric-eyebrow">06 · Adquisición</div>
+        <div class="metric-name">CPA</div>
+        <div class="metric-formula">gasto ÷ compras</div>
+        <p class="metric-meaning">Costo de conseguir UN cliente que paga. La métrica más importante para evaluar la rentabilidad de un canal.</p>
+        <div class="metric-bench">
+          <span class="bench good">Bueno: CPA &lt; 30% del ticket</span>
+          <span class="bench mid">Mediano global: USD 38.17</span>
+          <span class="bench bad">Revisar si CPA &gt; 60% del ticket</span>
+        </div>
+        <div class="metric-source">CPA absoluto: Wordstream · Facebook Ads Benchmarks 2025. Regla del % del ticket: referencia operativa de la industria.</div>
+      </div>
+
+      <div class="metric-card">
+        <div class="metric-eyebrow">07 · Retorno</div>
+        <div class="metric-name">ROAS</div>
+        <div class="metric-formula">ingresos ÷ gasto publicitario</div>
+        <p class="metric-meaning">Cuántos pesos generas por cada peso invertido en pauta. ROAS = 3 significa "por cada $1 que pago, gano $3".</p>
+        <div class="metric-bench">
+          <span class="bench good">Bueno: &gt; 3</span>
+          <span class="bench mid">Mediano global: 1.93</span>
+          <span class="bench bad">Quebrado: &lt; 1</span>
+        </div>
+        <div class="metric-source">Fuente: Wordstream · Facebook Ads Benchmarks 2025 (ROAS mediano todas las industrias).</div>
+      </div>
+
+      <div class="metric-card">
+        <div class="metric-eyebrow">08 · Valor del cliente</div>
+        <div class="metric-name">LTV : CAC</div>
+        <div class="metric-formula">LTV ÷ CAC (CPA)</div>
+        <p class="metric-meaning">Lifetime Value sobre Costo de Adquisición. Mide si tu negocio gana lo suficiente por cada cliente para sostenerse y crecer.</p>
+        <div class="metric-bench">
+          <span class="bench good">Saludable: ≥ 3 : 1</span>
+          <span class="bench mid">Fuerte: 5 : 1</span>
+          <span class="bench bad">No sostenible: &lt; 2 : 1</span>
+        </div>
+        <div class="metric-source">Fuente: Optifai Pipeline Study 2026 (N=939 empresas B2B SaaS). Mediana global 3.2 : 1.</div>
+      </div>
+
+      <div class="metric-card">
+        <div class="metric-eyebrow">09 · Saturación</div>
+        <div class="metric-name">Frecuencia</div>
+        <div class="metric-formula">impresiones ÷ alcance único</div>
+        <p class="metric-meaning">Cuántas veces ve el mismo anuncio cada persona. Si sube demasiado, el público se cansa y el CTR baja.</p>
+        <div class="metric-bench">
+          <span class="bench good">Bueno: 1.5–3</span>
+          <span class="bench mid">Atención: 3–5</span>
+          <span class="bench bad">Saturado: &gt; 5</span>
+        </div>
+        <div class="metric-source">No hay benchmark oficial de Meta. Los rangos provienen de práctica de la industria y se reportan en blogs de operación de pauta como Revealbot y Madgicx.</div>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="theory-section">
+    <div class="pill-eyebrow">Cómo se leen</div>
+    <h2 class="theory-section-title">Semáforo de métricas: cuándo intervenir</h2>
+    <p class="theory-lede">La métrica sola no dice nada. La métrica con un rango de referencia te dice qué hacer. Este semáforo aplica a la mayoría de nichos B2C en Latinoamérica. Para B2B y tickets altos, los valores se ajustan.</p>
+
+    <div class="traffic-light">
+      <div class="traffic-row">
+        <div class="traffic-col green">
+          <div class="traffic-col-title">🟢 Verde · sigue invirtiendo</div>
+          <ul>
+            <li>CTR &gt; 2.5%</li>
+            <li>CPC &lt; USD 1.30</li>
+            <li>CPM &lt; USD 13.50</li>
+            <li>CR &gt; 2.5%</li>
+            <li>CPA &lt; 30% del ticket</li>
+            <li>ROAS &gt; 3</li>
+            <li>Frecuencia entre 1.5 y 3</li>
+          </ul>
+        </div>
+        <div class="traffic-col yellow">
+          <div class="traffic-col-title">🟡 Amarillo · revisa creativo o público</div>
+          <ul>
+            <li>CTR entre 1% y 2.5%</li>
+            <li>CPC entre USD 1.30 y 2.50</li>
+            <li>CPM entre USD 13.50 y 20</li>
+            <li>CR entre 1% y 2.5%</li>
+            <li>CPA entre 30% y 60% del ticket</li>
+            <li>ROAS entre 1.5 y 3</li>
+            <li>Frecuencia entre 3 y 5</li>
+          </ul>
+        </div>
+        <div class="traffic-col red">
+          <div class="traffic-col-title">🔴 Rojo · pausa o reescribe</div>
+          <ul>
+            <li>CTR &lt; 1%</li>
+            <li>CPC &gt; USD 2.50</li>
+            <li>CPM &gt; USD 20</li>
+            <li>CR &lt; 1%</li>
+            <li>CPA &gt; 60% del ticket</li>
+            <li>ROAS &lt; 1.5</li>
+            <li>Frecuencia &gt; 5</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <p style="margin-top: 18px; font-size: 13px; color: var(--blanco-60); line-height: 1.55;">Los rangos se basan en las medianas globales del reporte Wordstream · Facebook Ads Benchmarks 2025. Tu nicho puede tener variaciones: ecommerce de bajo ticket suele tener métricas más eficientes que finanzas o seguros, que pagan CPM mucho más altos.</p>
+  </section>
+
+  <section class="theory-section">
+    <div class="pill-eyebrow">El error más común</div>
+    <h2 class="theory-section-title">La regla del 3: no mires 50 métricas, mira 3</h2>
+    <p class="theory-lede">La mayoría se pierde mirando 30 columnas en Meta Ads. Tienes que enfocarte en 3 a la vez. Cuáles dependen del momento del embudo:</p>
+
+    <div class="metrics-grid" style="margin-top: 18px;">
+      <div class="metric-card">
+        <div class="metric-eyebrow">Etapa: validar creativo</div>
+        <div class="metric-name">CTR · CPC · Frecuencia</div>
+        <p class="metric-meaning">Si CTR es alto y CPC bajo, el creativo funciona. Si la frecuencia sube y CTR baja, hay que renovar piezas.</p>
+      </div>
+      <div class="metric-card">
+        <div class="metric-eyebrow">Etapa: validar landing</div>
+        <div class="metric-name">CR · CPL · CPA</div>
+        <p class="metric-meaning">Si el CTR está bien pero el CR es bajo, la fuga está en la landing, no en el anuncio. Optimiza ahí.</p>
+      </div>
+      <div class="metric-card">
+        <div class="metric-eyebrow">Etapa: escalar</div>
+        <div class="metric-name">ROAS · LTV · CPA</div>
+        <p class="metric-meaning">Cuando ya validaste creativo y landing, el foco es economía: cada peso debe generar suficiente para escalar sin perder margen.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="theory-section">
+    <div class="pill-eyebrow">Frecuencia</div>
+    <h2 class="theory-section-title">¿Cada cuánto se miran las métricas?</h2>
+    <p class="theory-lede">Mirarlas todos los días te vuelve loco. Mirarlas una vez al mes te lleva a perder dinero. La frecuencia correcta:</p>
+
+    <div class="traffic-light">
+      <div class="traffic-row">
+        <div class="traffic-col green">
+          <div class="traffic-col-title">Diario (5 min)</div>
+          <ul>
+            <li>Gasto del día vs presupuesto</li>
+            <li>Si alguna campaña explotó o quedó parada</li>
+          </ul>
+        </div>
+        <div class="traffic-col yellow">
+          <div class="traffic-col-title">Cada 3 días (20 min)</div>
+          <ul>
+            <li>CTR por adset y por creativo</li>
+            <li>CPC y CPM</li>
+            <li>Pausar lo rojo, escalar lo verde</li>
+          </ul>
+        </div>
+        <div class="traffic-col red">
+          <div class="traffic-col-title">Semanal (1 hora)</div>
+          <ul>
+            <li>CPA, ROAS y CR</li>
+            <li>Renovación de creativos saturados</li>
+            <li>Reasignación de presupuesto</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="theory-cta">
+    <h3>Analiza tus métricas</h3>
+    <button class="btn btn-ghost" type="button" data-go-mode="practico" style="background: rgba(15,15,20,0.15); color: #0F0F14; border-color: rgba(15,15,20,0.3); margin-top: 6px;">→ Modo Práctica</button>
+  </div>
+
+</div>
+
+<!-- ============ MODO PRÁCTICO ============ -->
+<section class="missing practical-only" id="state-missing" hidden>
+  <div class="missing-icon">!</div>
+  <h2>Primero el Módulo 1</h2>
+  <p>El análisis necesita tus respuestas del Módulo 1 para cruzar tus métricas con tu mensaje y embudo. Sin esa base, el diagnóstico sale genérico.</p>
+  <a href="index.html" class="btn btn-primary btn-large">Ir al Módulo 1 →</a>
+</section>
+
+<div class="practice practical-only" id="state-ready" hidden>
+
+  <div class="practice-card">
+    <div class="form-eyebrow">Paso 1 · Tus datos</div>
+    <h3>Pega tus métricas crudas</h3>
+    <p class="help">Copia las filas del administrador de Meta Ads, Google Analytics o tu hoja de cálculo. Si no tienes acceso, escribe los números que conozcas en cualquier formato. La IA acomoda lo que llegue.</p>
+
+    <div class="field">
+      <label for="f-metricas">Métricas (pega el bloque completo)</label>
+      <div class="hint">Puede ser tabla copiada de Meta Ads, captura traducida a texto, o lista hecha a mano. Idealmente incluye gasto, impresiones, clics, leads y compras. Mientras más datos pegues, mejor el diagnóstico.</div>
+      <textarea id="f-metricas" placeholder="Pega aquí. Ejemplo:&#10;&#10;Campaña Asesoría MPV - 7 días&#10;Gasto: $210.000 COP&#10;Impresiones: 38.420&#10;Clics: 412&#10;CTR: 1.07%&#10;CPC: $510 COP&#10;Leads (WhatsApp): 18&#10;Ventas: 2&#10;Ticket promedio: $200.000 COP"></textarea>
+    </div>
+
+    <div class="examples">
+      <div class="examples-title">Ejemplo de bloque completo (puedes pegar algo así)</div>
+      <pre>Periodo: últimos 14 días
+Producto: Asesoría MPV ($200.000)
+Plataforma: Meta Ads (Instagram + Facebook)
+
+Gasto: USD 145
+Impresiones: 87.500
+Alcance único: 38.200
+Clics totales: 1.140
+CTR: 1.30%
+CPC: USD 0.13
+CPM: USD 1.66
+Frecuencia: 2.29
+
+Visitas a landing: 980
+Conversion rate: 1.4%
+Leads generados (WhatsApp): 14
+Ventas confirmadas: 2
+Ticket promedio: USD 50
+ROAS calculado: 0.69</pre>
+    </div>
+
+    <div class="field">
+      <label for="f-contexto">Contexto adicional (opcional)</label>
+      <div class="hint">¿Algo importante que la IA deba saber? Ej: "es el primer mes pautando", "cambié el creativo a mitad de período", "el público es nuevo y nunca había escuchado de la marca".</div>
+      <textarea id="f-contexto" style="min-height: 70px; font-family: inherit;" placeholder="Ej: Es el primer mes pautando. El producto es nuevo. El público es frío, no me conoce. Cambié la landing en el día 8."></textarea>
+    </div>
+
+    <div style="margin-top: 22px;">
+      <button class="btn btn-primary btn-large" id="btn-generar" type="button" disabled>Generar prompt de análisis →</button>
+    </div>
+  </div>
+
+  <div id="result-section" hidden>
+    <h3 class="result-section-title"><span class="num">2</span> Prompt de análisis para la IA</h3>
+    <p style="color: var(--blanco-60); font-size: 14px; margin-bottom: 14px;">Copia el bloque completo. Pégalo en cualquier IA junto con tus datos. La IA te entregará: diagnóstico de cada métrica, semáforo verde/amarillo/rojo, la fuga más grande, plan de acción de 4 semanas.</p>
+    <div class="llm-links">
+      <strong>Dónde pegarlo:</strong>
+      <a href="https://chatgpt.com" target="_blank" rel="noopener">ChatGPT ↗</a>
+      <a href="https://claude.ai" target="_blank" rel="noopener">Claude ↗</a>
+      <a href="https://gemini.google.com" target="_blank" rel="noopener">Gemini ↗</a>
+    </div>
+    <div class="prompt-box" id="prompt-analisis"></div>
+    <div class="copy-row">
+      <button class="btn btn-primary" type="button" id="btn-copy-prompt">📋 Copiar prompt</button>
+      <button class="btn btn-ghost" type="button" id="btn-download-txt">⬇ Descargar TXT</button>
+      <span class="copy-feedback" id="fb-copy">✓ Listo</span>
+    </div>
+
+    <div style="margin-top: 24px; display: flex; gap: 10px; flex-wrap: wrap;">
+      <button class="btn btn-ghost" type="button" id="btn-edit">← Editar métricas</button>
+      <button class="btn btn-ghost" type="button" id="btn-reset">↻ Empezar de cero</button>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  Construido para el taller <strong style="color: var(--blanco);">Vender por internet: el mensaje, el anuncio y el embudo que sí funcionan</strong><br>
+  por <a href="https://joakoestratega.com" target="_blank" rel="noopener">Joako Estratega</a> · Método MPV · 2026
+</footer>
+
+<script>
+(function () {
+  'use strict';
+
+  // ============ THEME ============
+  const THEME_KEY = 'joako-taller-theme';
+  document.documentElement.setAttribute('data-theme', localStorage.getItem(THEME_KEY) || 'dark');
+  document.getElementById('theme-toggle').addEventListener('click', function () {
+    const current = document.documentElement.getAttribute('data-theme');
+    const next = current === 'dark' ? 'light' : 'dark';
+    document.documentElement.setAttribute('data-theme', next);
+    localStorage.setItem(THEME_KEY, next);
+  });
+
+  // ============ MODE ============
+  const MODE_KEY = 'joako-taller-mode';
+  function setMode(mode) {
+    document.documentElement.setAttribute('data-mode', mode);
+    localStorage.setItem(MODE_KEY, mode);
+    document.querySelectorAll('.mode-tab').forEach(t => t.classList.toggle('active', t.dataset.mode === mode));
+  }
+  setMode(localStorage.getItem(MODE_KEY) || 'teorico');
+
+  document.querySelectorAll('.mode-tab').forEach(tab => {
+    tab.addEventListener('click', () => setMode(tab.dataset.mode));
+  });
+
+  document.querySelectorAll('[data-go-mode]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      setMode(btn.dataset.goMode);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  });
+
+  // ============ STATE ============
+  const STORAGE_KEY = 'joako-taller-metricas-v1';
+  const MOD1_KEY = 'joako-taller-mpv-v2';
+  let state = { metricas: '', contexto: '' };
+  try { state = Object.assign(state, JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}')); } catch (e) {}
+
+  function persist() { try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); } catch (e) {} }
+
+  // ============ MODULE 1 DATA ============
+  let m1 = null;
+  try {
+    const saved = JSON.parse(localStorage.getItem(MOD1_KEY) || '{}');
+    const keys = ['q-producto', 'q-cliente', 'q-precio', 'q-dolor-que', 'q-dolor-frase', 'q-facil', 'q-rapido', 'q-garantia'];
+    let filled = 0;
+    keys.forEach(k => { if ((saved[k] || '').trim()) filled++; });
+    if (filled >= 4) {
+      m1 = {
+        producto: (saved['q-producto'] || '').trim() || '(no especificado)',
+        cliente: (saved['q-cliente'] || '').trim() || '(no especificado)',
+        precio: (saved['q-precio'] || '').trim() || '(no especificado)',
+        dolorQue: (saved['q-dolor-que'] || '').trim() || '(no especificado)',
+        dolorFrase: (saved['q-dolor-frase'] || '').trim() || '(no especificado)',
+        facil: (saved['q-facil'] || '').trim() || '(no especificado)',
+        rapido: (saved['q-rapido'] || '').trim() || '(no especificado)',
+        garantia: (saved['q-garantia'] || '').trim() || '(no especificado)'
+      };
+    }
+  } catch (e) {}
+
+  if (!m1) {
+    document.getElementById('state-missing').hidden = false;
+  } else {
+    document.getElementById('state-ready').hidden = false;
+    initPractice();
+  }
+
+  function initPractice() {
+    const tMet = document.getElementById('f-metricas');
+    const tCtx = document.getElementById('f-contexto');
+    const btnGen = document.getElementById('btn-generar');
+
+    tMet.value = state.metricas || '';
+    tCtx.value = state.contexto || '';
+
+    function updateBtn() {
+      btnGen.disabled = tMet.value.trim().length < 20;
+    }
+    updateBtn();
+
+    tMet.addEventListener('input', () => {
+      state.metricas = tMet.value;
+      persist();
+      updateBtn();
+    });
+
+    tCtx.addEventListener('input', () => {
+      state.contexto = tCtx.value;
+      persist();
+    });
+
+    btnGen.addEventListener('click', generarPrompt);
+
+    document.getElementById('btn-edit').addEventListener('click', () => {
+      document.getElementById('result-section').hidden = true;
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    document.getElementById('btn-reset').addEventListener('click', () => {
+      if (!confirm('¿Borrar todas las métricas y empezar de cero?')) return;
+      state = { metricas: '', contexto: '' };
+      persist();
+      tMet.value = '';
+      tCtx.value = '';
+      updateBtn();
+      document.getElementById('result-section').hidden = true;
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    document.getElementById('btn-copy-prompt').addEventListener('click', () => {
+      copyTo(document.getElementById('prompt-analisis').textContent, 'fb-copy');
+    });
+
+    document.getElementById('btn-download-txt').addEventListener('click', downloadTxt);
+  }
+
+  function generarPrompt() {
+    const metricas = state.metricas.trim();
+    const contexto = state.contexto.trim();
+
+    let p = '# ROL\n';
+    p += 'Eres consultor senior en pauta digital y analítica de marketing con criterio del Método MPV de Joako Estratega. Tu trabajo es leer las métricas crudas de un negocio y entregar un diagnóstico estructurado con plan de acción de 4 semanas.\n\n';
+
+    p += '# CONTEXTO DEL NEGOCIO\n\n';
+    p += '- Producto/servicio: ' + m1.producto + '\n';
+    p += '- Cliente ideal: ' + m1.cliente + '\n';
+    p += '- Precio: ' + m1.precio + '\n';
+    p += '- Dolor del cliente: ' + m1.dolorQue + '\n';
+    p += '- Por qué la solución es fácil: ' + m1.facil + '\n';
+    p += '- Tiempo al primer resultado: ' + m1.rapido + '\n';
+    p += '- Garantía: ' + m1.garantia + '\n\n';
+
+    if (contexto) {
+      p += '# CONTEXTO ADICIONAL DEL DUEÑO\n\n' + contexto + '\n\n';
+    }
+
+    p += '# MÉTRICAS CRUDAS A ANALIZAR\n\n';
+    p += '```\n' + metricas + '\n```\n\n';
+
+    p += '# IMPORTANTE — TIPO DE DATOS QUE RECIBES\n\n';
+    p += 'El bloque de métricas puede estar mal formateado, incompleto, con números en formato diferente (USD, COP, MXN), con columnas de Meta Ads, capturas traducidas a texto, o anotaciones a mano. NO rechaces el análisis por formato. Identifica lo que está, calcula lo que se pueda derivar, y nombra lo que falta.\n\n';
+
+    p += '# BENCHMARKS DE REFERENCIA (fuentes citadas)\n\n';
+    p += 'Wordstream · Facebook Ads Benchmarks 2025 (medianas globales):\n';
+    p += '- CTR mediano: 1.71% (Tráfico) · 2.59% (Leads).\n';
+    p += '- CPC promedio: USD 1.72 (Feed) · USD 1.28 (Instagram Reels).\n';
+    p += '- CPM mediano: USD 13.48.\n';
+    p += '- CVR mediano: 1.57%.\n';
+    p += '- CPA mediano: USD 38.17.\n';
+    p += '- ROAS mediano: 1.93.\n\n';
+    p += 'Otras fuentes:\n';
+    p += '- Baymard Institute (2025): tasa de abandono de carrito promedio 70.19%, lo que implica una tasa de checkout completado cercana al 30%.\n';
+    p += '- Optifai Pipeline Study 2026 (N=939 empresas B2B SaaS): LTV:CAC saludable ≥ 3:1, fuerte ≥ 5:1.\n';
+    p += '- Frecuencia 1.5–3 bueno / 3–5 atención / >5 saturado: rangos operativos comúnmente citados por agencias de pauta (no benchmark oficial de Meta).\n';
+    p += '- Regla CPA < 30% del ticket: referencia operativa estándar de la industria.\n\n';
+
+    p += '# REGLAS DEL DIAGNÓSTICO\n\n';
+    p += '- No inventes números. Solo trabajas con lo aportado.\n' +
+         '- Si falta un dato clave, dilo expreso y propón cómo conseguirlo en 5 minutos.\n' +
+         '- Cruza las métricas con el mensaje y el dolor del cliente (sección Contexto del Negocio).\n' +
+         '- Identifica la fuga MÁS GRANDE primero. La que tiene mayor impacto en el negocio, no la más fácil de tocar.\n' +
+         '- Lenguaje sencillo, sin jerga marketera. Quien lee no necesariamente es marketer.\n' +
+         '- Cero clichés ("optimiza tu funnel", "escala tu negocio").\n\n';
+
+    p += '# FORMATO DE TU RESPUESTA\n\n';
+    p += '## 1 — Semáforo de cada métrica\n';
+    p += 'Lista cada métrica detectada y márcala con 🟢 / 🟡 / 🔴 según el benchmark. Incluye una línea explicando QUÉ significa para este negocio (no la definición general).\n\n';
+    p += '## 2 — La fuga más grande\n';
+    p += 'Una sola. Cuál es y por qué. Cuánto le cuesta al negocio NO arreglarla (estimación gruesa basada en los números).\n\n';
+    p += '## 3 — Plan de 4 semanas\n';
+    p += 'Semana 1: 1–2 acciones concretas para atacar la fuga principal.\n';
+    p += 'Semana 2: 1–2 acciones.\n';
+    p += 'Semana 3: 1–2 acciones.\n';
+    p += 'Semana 4: 1–2 acciones + checkpoint.\n';
+    p += '(Cada acción ejecutable en <4 horas.)\n\n';
+    p += '## 4 — Qué medir cada 3 días\n';
+    p += 'Lista de 3 métricas (no más) a observar mientras se ejecuta el plan. Por cada una, el valor objetivo esperado al final de las 4 semanas.\n\n';
+    p += '## 5 — Lo que NO debes hacer todavía\n';
+    p += '2–3 cosas que el dueño podría sentirse tentado a hacer (subir presupuesto, lanzar producto nuevo, contratar agencia) pero que NO corresponden por el momento de las métricas.';
+
+    document.getElementById('prompt-analisis').textContent = p;
+    document.getElementById('result-section').hidden = false;
+    document.getElementById('result-section').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  function copyTo(text, fbId) {
+    navigator.clipboard.writeText(text).then(() => showFb(fbId)).catch(() => {
+      const ta = document.createElement('textarea');
+      ta.value = text; ta.style.position = 'fixed'; ta.style.left = '-9999px';
+      document.body.appendChild(ta); ta.select();
+      try { document.execCommand('copy'); } catch (e) {}
+      document.body.removeChild(ta);
+      showFb(fbId);
+    });
+  }
+
+  function showFb(id) {
+    const fb = document.getElementById(id);
+    if (!fb) return;
+    fb.classList.add('show');
+    setTimeout(() => fb.classList.remove('show'), 2200);
+  }
+
+  function downloadTxt() {
+    let txt = '═══════════════════════════════════════════════════\n';
+    txt += 'MIS MÉTRICAS Y ANÁLISIS — TALLER JOAKO ESTRATEGA\n';
+    txt += '═══════════════════════════════════════════════════\n\n';
+    txt += 'BASE: MATERIAL DEL MÓDULO 1\n';
+    txt += '───────────────────────────────────────────────────\n\n';
+    txt += 'Producto: ' + m1.producto + '\nCliente: ' + m1.cliente + '\nPrecio: ' + m1.precio + '\n';
+    txt += 'Dolor: ' + m1.dolorQue + '\nGarantía: ' + m1.garantia + '\n\n';
+    txt += '═══════════════════════════════════════════════════\nMIS MÉTRICAS\n═══════════════════════════════════════════════════\n\n';
+    txt += state.metricas + '\n\n';
+    if (state.contexto) txt += 'Contexto adicional:\n' + state.contexto + '\n\n';
+    txt += '═══════════════════════════════════════════════════\nPROMPT DE ANÁLISIS\n═══════════════════════════════════════════════════\n\n';
+    txt += document.getElementById('prompt-analisis').textContent + '\n\n';
+    txt += 'Generado en el taller "Vender por internet" de Joako Estratega\njoakoestratega.com\n';
+
+    const blob = new Blob([txt], { type: 'text/plain;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'mis-metricas-analisis.txt';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+    showFb('fb-copy');
+  }
+
+})();
+</script>
+
+</body>
+</html>

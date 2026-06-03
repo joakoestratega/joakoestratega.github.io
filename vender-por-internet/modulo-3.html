@@ -1,0 +1,1951 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark" data-mode="teorico">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Módulo 3 · Embudo de venta · Vender por internet · Joako Estratega</title>
+<meta name="description" content="Teoría y práctica del embudo de venta de 7 etapas con doble ruta web y WhatsApp.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --negro: #0F0F14;
+    --negro-2: #1A1A22;
+    --negro-3: #25252F;
+    --blanco: #FFFFFF;
+    --blanco-60: rgba(255, 255, 255, 0.6);
+    --blanco-40: rgba(255, 255, 255, 0.4);
+    --blanco-10: rgba(255, 255, 255, 0.1);
+    --amarillo: #F8B400;
+    --amarillo-soft: #FFC940;
+    --azul: #21209C;
+    --verde: #2EE07A;
+    --naranja: #FF9F2E;
+    --rojo: #E63946;
+    --radius: 14px;
+    --radius-sm: 8px;
+    --transition: 220ms cubic-bezier(.2, .8, .2, 1);
+  }
+
+  [data-theme="light"] {
+    --negro: #F7F6F0;
+    --negro-2: #FFFFFF;
+    --negro-3: #EDEBE2;
+    --blanco: #0F0F14;
+    --blanco-60: rgba(15, 15, 20, 0.62);
+    --blanco-40: rgba(15, 15, 20, 0.42);
+    --blanco-10: rgba(15, 15, 20, 0.12);
+  }
+
+  [data-theme="light"] .brand-name strong,
+  [data-theme="light"] .hero h1 .accent,
+  [data-theme="light"] .stage-name,
+  [data-theme="light"] .form-eyebrow,
+  [data-theme="light"] .summary-card-eyebrow,
+  [data-theme="light"] .examples-title,
+  [data-theme="light"] .llm-links a,
+  [data-theme="light"] .pill-eyebrow,
+  [data-theme="light"] .quote-mark,
+  [data-theme="light"] .theory-num,
+  [data-theme="light"] .route-card-title,
+  [data-theme="light"] .acord-num,
+  [data-theme="light"] .examples li::before { color: #9C6A00; }
+
+  [data-theme="light"] .copy-feedback { color: #1B7D3D; }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--negro);
+    color: var(--blanco);
+    font-family: 'Inter', system-ui, sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    min-height: 100vh;
+    overflow-x: hidden;
+    transition: background-color 280ms ease, color 280ms ease;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background:
+      radial-gradient(circle at 12% 10%, rgba(248, 180, 0, 0.08) 0%, transparent 35%),
+      radial-gradient(circle at 88% 90%, rgba(33, 32, 156, 0.12) 0%, transparent 40%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  [data-theme="light"] body::before {
+    background:
+      radial-gradient(circle at 12% 10%, rgba(248, 180, 0, 0.15) 0%, transparent 40%),
+      radial-gradient(circle at 88% 90%, rgba(33, 32, 156, 0.08) 0%, transparent 40%);
+  }
+
+  /* HEADER */
+  header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(15, 15, 20, 0.85);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--blanco-10);
+    transition: background-color 280ms ease;
+  }
+
+  [data-theme="light"] header { background: rgba(247, 246, 240, 0.85); }
+
+  .header-inner {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 18px 28px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+  }
+
+  .brand { display: flex; align-items: center; gap: 12px; }
+
+  .brand-mark {
+    width: 36px; height: 36px;
+    background: var(--amarillo); color: #0F0F14;
+    border-radius: 8px;
+    display: grid; place-items: center;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 900; font-size: 18px;
+  }
+
+  .brand-name {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 800; font-size: 18px;
+    letter-spacing: 0.5px;
+  }
+
+  .brand-name strong { color: var(--amarillo); }
+  .brand-name span {
+    display: block;
+    font-size: 11px; font-weight: 500;
+    color: var(--blanco-60);
+    letter-spacing: 1px; text-transform: uppercase;
+    margin-top: 2px;
+  }
+
+  .header-right { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; justify-content: flex-end; }
+
+  .modules {
+    display: flex; gap: 4px;
+    background: var(--negro-2);
+    padding: 4px; border-radius: 10px;
+  }
+
+  .module-tab {
+    padding: 8px 14px;
+    font-size: 13px; font-weight: 600;
+    color: var(--blanco-60);
+    background: transparent; border: none;
+    border-radius: 6px; cursor: pointer;
+    transition: var(--transition);
+    position: relative;
+    font-family: inherit;
+    text-decoration: none;
+    display: inline-block;
+    line-height: 1.2;
+  }
+
+  a.module-tab:hover { color: var(--blanco); background: var(--negro-3); }
+  .module-tab.active { background: var(--amarillo); color: #0F0F14; }
+  .module-tab.disabled { cursor: not-allowed; opacity: 0.5; }
+
+  .module-tab .soon {
+    position: absolute;
+    top: -6px; right: -6px;
+    background: var(--azul); color: #FFFFFF;
+    font-size: 9px; padding: 2px 5px;
+    border-radius: 4px;
+    font-weight: 700; letter-spacing: 0.5px;
+  }
+
+  /* MODE TOGGLE */
+  .mode-toggle {
+    display: flex;
+    background: var(--negro-2);
+    padding: 4px;
+    border-radius: 10px;
+    border: 1px solid var(--amarillo);
+    gap: 2px;
+  }
+
+  .mode-tab {
+    padding: 8px 14px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 11px;
+    font-weight: 800;
+    color: var(--blanco-60);
+    background: transparent;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    transition: var(--transition);
+  }
+
+  .mode-tab.active { background: var(--amarillo); color: #0F0F14; }
+  .mode-tab:hover:not(.active) { color: var(--blanco); }
+
+  /* THEME TOGGLE */
+  .theme-toggle {
+    width: 40px; height: 40px;
+    background: var(--negro-2);
+    border: 1px solid var(--blanco-10);
+    border-radius: 10px;
+    cursor: pointer;
+    display: grid;
+    place-items: center;
+    transition: var(--transition);
+    color: var(--blanco);
+    flex-shrink: 0;
+  }
+
+  .theme-toggle:hover {
+    background: var(--negro-3);
+    color: var(--amarillo);
+  }
+
+  .theme-toggle svg { width: 18px; height: 18px; }
+  .theme-toggle .icon-sun { display: none; }
+  .theme-toggle .icon-moon { display: block; }
+  [data-theme="light"] .theme-toggle .icon-sun { display: block; }
+  [data-theme="light"] .theme-toggle .icon-moon { display: none; }
+
+  /* HERO */
+  .hero {
+    max-width: 1280px; margin: 0 auto;
+    padding: 56px 28px 24px;
+    position: relative; z-index: 1;
+  }
+
+  .hero-eyebrow {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--azul); color: #FFFFFF;
+    padding: 6px 14px; border-radius: 999px;
+    font-size: 12px; font-weight: 700;
+    letter-spacing: 1px; text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+
+  .hero-eyebrow::before {
+    content: ''; width: 8px; height: 8px;
+    background: var(--amarillo); border-radius: 50%;
+  }
+
+  .hero h1 {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 800;
+    font-size: clamp(32px, 5vw, 56px);
+    line-height: 1.05; letter-spacing: -1px;
+    margin-bottom: 16px;
+    max-width: 920px;
+  }
+
+  .hero h1 .accent { color: var(--amarillo); }
+
+  .hero p.lede {
+    font-size: clamp(16px, 1.5vw, 19px);
+    color: var(--blanco-60);
+    max-width: 760px; line-height: 1.55;
+  }
+
+  .mode-banner {
+    margin: 28px 0 0;
+    padding: 14px 18px;
+    background: var(--negro-2);
+    border-left: 4px solid var(--amarillo);
+    border-radius: var(--radius-sm);
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  .mode-banner-text {
+    flex: 1;
+    min-width: 220px;
+    font-size: 14px;
+    color: var(--blanco-60);
+    line-height: 1.45;
+  }
+
+  .mode-banner-text strong { color: var(--blanco); }
+
+  /* MODE-DEPENDENT VISIBILITY */
+  [data-mode="teorico"] .practical-only { display: none !important; }
+  [data-mode="practico"] .theory-only { display: none !important; }
+
+  /* ============ MODO TEÓRICO ============ */
+  .theory {
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 24px 28px 80px;
+    position: relative; z-index: 1;
+  }
+
+  .theory-section {
+    margin-bottom: 56px;
+  }
+
+  .theory-section-title {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 800;
+    font-size: clamp(24px, 3vw, 32px);
+    line-height: 1.15;
+    margin-bottom: 12px;
+    letter-spacing: -0.5px;
+  }
+
+  .pill-eyebrow {
+    display: inline-block;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 11px;
+    font-weight: 800;
+    color: var(--amarillo);
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+
+  .theory-lede {
+    font-size: 17px;
+    color: var(--blanco-60);
+    line-height: 1.6;
+    max-width: 760px;
+    margin-bottom: 24px;
+  }
+
+  .big-quote {
+    background: linear-gradient(135deg, var(--negro-2) 0%, var(--negro-3) 100%);
+    border-radius: var(--radius);
+    padding: 36px 40px;
+    margin: 24px 0;
+    position: relative;
+    border-left: 4px solid var(--amarillo);
+  }
+
+  .quote-mark {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 80px;
+    font-weight: 900;
+    color: var(--amarillo);
+    line-height: 1;
+    position: absolute;
+    top: -10px;
+    left: 18px;
+  }
+
+  .quote-text {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: clamp(20px, 2.4vw, 28px);
+    line-height: 1.3;
+    margin-left: 28px;
+  }
+
+  .quote-author {
+    margin-top: 14px;
+    margin-left: 28px;
+    color: var(--blanco-60);
+    font-size: 14px;
+  }
+
+  /* FUNNEL VISUAL */
+  .funnel-visual {
+    background: var(--negro-2);
+    border: 1px solid var(--blanco-10);
+    border-radius: var(--radius);
+    padding: 32px;
+    margin: 24px 0;
+  }
+
+  .funnel-row {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--blanco-10);
+  }
+
+  .funnel-row:last-child { border-bottom: none; padding-bottom: 0; }
+  .funnel-row:first-child { padding-top: 0; }
+
+  .funnel-bar {
+    background: var(--amarillo);
+    color: #0F0F14;
+    border-radius: 8px;
+    padding: 12px 18px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 800;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    transition: width 600ms cubic-bezier(.2,.8,.2,1);
+  }
+
+  .funnel-bar-num {
+    background: rgba(0,0,0,0.15);
+    color: #0F0F14;
+    width: 26px; height: 26px;
+    border-radius: 6px;
+    display: grid; place-items: center;
+    font-weight: 900;
+    flex-shrink: 0;
+  }
+
+  .funnel-row-meta {
+    flex-shrink: 0;
+    text-align: right;
+    color: var(--blanco-60);
+    font-size: 12.5px;
+  }
+
+  .funnel-row-meta strong {
+    display: block;
+    color: var(--blanco);
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 800;
+    font-size: 16px;
+  }
+
+  /* ACORDEÓN DE ETAPAS */
+  .stages-acord {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .acord-item {
+    background: var(--negro-2);
+    border: 1px solid var(--blanco-10);
+    border-radius: var(--radius);
+    overflow: hidden;
+    transition: var(--transition);
+  }
+
+  .acord-item.open { border-color: var(--amarillo); }
+
+  .acord-head {
+    padding: 18px 22px;
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    cursor: pointer;
+    transition: var(--transition);
+  }
+
+  .acord-head:hover { background: var(--negro-3); }
+
+  .acord-num {
+    width: 40px; height: 40px;
+    background: var(--negro-3);
+    color: var(--amarillo);
+    border-radius: 10px;
+    display: grid; place-items: center;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 900;
+    font-size: 18px;
+    flex-shrink: 0;
+    transition: var(--transition);
+  }
+
+  .acord-item.open .acord-num { background: var(--amarillo); color: #0F0F14; }
+
+  .acord-title-wrap { flex: 1; min-width: 0; }
+
+  .acord-title {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 18px;
+    margin-bottom: 2px;
+  }
+
+  .acord-summary {
+    color: var(--blanco-60);
+    font-size: 13.5px;
+    line-height: 1.45;
+  }
+
+  .acord-chev {
+    width: 28px; height: 28px;
+    color: var(--blanco-60);
+    transition: transform var(--transition);
+    flex-shrink: 0;
+  }
+
+  .acord-item.open .acord-chev { transform: rotate(180deg); color: var(--amarillo); }
+
+  .acord-body {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 380ms cubic-bezier(.2,.8,.2,1);
+  }
+
+  .acord-item.open .acord-body { max-height: 800px; }
+
+  .acord-content {
+    padding: 4px 22px 22px;
+    border-top: 1px solid var(--blanco-10);
+    padding-top: 18px;
+    margin-top: 4px;
+  }
+
+  .acord-row {
+    display: grid;
+    grid-template-columns: 130px 1fr;
+    gap: 12px;
+    padding: 8px 0;
+    align-items: start;
+    border-bottom: 1px dashed var(--blanco-10);
+    font-size: 14px;
+  }
+
+  .acord-row:last-child { border-bottom: none; }
+
+  .acord-row dt {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 11px;
+    color: var(--amarillo);
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding-top: 2px;
+  }
+
+  .acord-row dd {
+    color: var(--blanco-60);
+    line-height: 1.55;
+  }
+
+  .acord-row dd strong { color: var(--blanco); font-weight: 600; }
+
+  /* ROUTES */
+  .routes-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+    margin: 24px 0;
+  }
+
+  @media (max-width: 720px) { .routes-grid { grid-template-columns: 1fr; } }
+
+  .route-card {
+    background: var(--negro-2);
+    border: 1px solid var(--blanco-10);
+    border-radius: var(--radius);
+    padding: 24px;
+  }
+
+  .route-card-eyebrow {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 11px;
+    font-weight: 800;
+    color: var(--blanco-60);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  .route-card-title {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 22px;
+    margin-bottom: 14px;
+    color: var(--amarillo);
+  }
+
+  .route-card ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  .route-card li {
+    color: var(--blanco-60);
+    font-size: 13.5px;
+    line-height: 1.55;
+    padding: 8px 0;
+    border-top: 1px solid var(--blanco-10);
+    display: flex;
+    gap: 10px;
+  }
+
+  .route-card li:first-child { border-top: none; padding-top: 0; }
+
+  .route-card li::before {
+    content: counter(li);
+    counter-increment: li;
+    background: var(--amarillo);
+    color: #0F0F14;
+    width: 22px; height: 22px;
+    border-radius: 5px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 800;
+    font-size: 11px;
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .route-card ul { counter-reset: li; }
+
+  /* PERCENT EXAMPLE */
+  .percent-example {
+    background: var(--negro-2);
+    border: 1px solid var(--blanco-10);
+    border-radius: var(--radius);
+    padding: 24px;
+    margin: 18px 0;
+  }
+
+  .percent-row {
+    display: grid;
+    grid-template-columns: 1fr auto auto;
+    gap: 16px;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--blanco-10);
+  }
+
+  .percent-row:last-child { border-bottom: none; }
+
+  .percent-step { font-size: 14px; color: var(--blanco-60); }
+  .percent-step strong { color: var(--blanco); font-family: 'Montserrat', sans-serif; }
+
+  .percent-num {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 800;
+    font-size: 22px;
+    color: var(--amarillo);
+    min-width: 100px;
+    text-align: right;
+  }
+
+  .percent-rate {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    color: var(--verde);
+    background: rgba(46, 224, 122, 0.1);
+    padding: 4px 10px;
+    border-radius: 6px;
+    min-width: 60px;
+    text-align: center;
+  }
+
+  .percent-rate.low { color: var(--rojo); background: rgba(230, 57, 70, 0.1); }
+  .percent-rate.mid { color: var(--naranja); background: rgba(255, 159, 46, 0.1); }
+
+  .theory-cta {
+    margin-top: 36px;
+    padding: 28px;
+    background: var(--amarillo);
+    color: #0F0F14;
+    border-radius: var(--radius);
+    text-align: center;
+  }
+
+  .theory-cta h3 {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 800;
+    font-size: clamp(20px, 2.5vw, 26px);
+    margin-bottom: 8px;
+    color: #0F0F14;
+  }
+
+  .theory-cta p { color: rgba(15, 15, 20, 0.75); margin-bottom: 16px; }
+
+  /* ============ MODO PRÁCTICO ============ */
+  .missing {
+    max-width: 720px;
+    margin: 40px auto 80px;
+    padding: 0 28px;
+    text-align: center;
+    position: relative; z-index: 1;
+  }
+
+  .missing-icon {
+    width: 72px; height: 72px;
+    margin: 0 auto 24px;
+    background: rgba(255, 159, 46, 0.15);
+    color: var(--naranja);
+    border-radius: 50%;
+    display: grid; place-items: center;
+    font-size: 36px; font-weight: 800;
+  }
+
+  .missing h2 {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 28px;
+    margin-bottom: 12px;
+  }
+
+  .missing p {
+    color: var(--blanco-60);
+    margin-bottom: 28px;
+    line-height: 1.6;
+  }
+
+  .practice {
+    max-width: 1280px; margin: 0 auto;
+    padding: 24px 28px 80px;
+    position: relative; z-index: 1;
+  }
+
+  .route-selector {
+    background: var(--negro-2);
+    border: 1px solid var(--amarillo);
+    border-radius: var(--radius);
+    padding: 18px 22px;
+    margin-bottom: 22px;
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    flex-wrap: wrap;
+  }
+
+  .route-selector-label {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--amarillo);
+  }
+
+  .route-options { display: flex; gap: 6px; flex-wrap: wrap; }
+
+  .route-option {
+    padding: 8px 16px;
+    background: var(--negro);
+    color: var(--blanco-60);
+    border: 1px solid var(--blanco-10);
+    border-radius: 8px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 12px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: var(--transition);
+  }
+
+  .route-option.active { background: var(--amarillo); color: #0F0F14; border-color: var(--amarillo); }
+  .route-option:hover:not(.active) { border-color: var(--amarillo); color: var(--blanco); }
+
+  .workspace-grid {
+    display: grid;
+    grid-template-columns: 1fr 480px;
+    gap: 22px;
+  }
+
+  @media (max-width: 1100px) {
+    .workspace-grid { grid-template-columns: 1fr; }
+    .stage-form-panel { position: static !important; }
+  }
+
+  .funnel-stages { display: flex; flex-direction: column; gap: 10px; }
+
+  .stage {
+    background: var(--negro-2);
+    border: 1px solid var(--blanco-10);
+    border-radius: var(--radius);
+    padding: 16px 20px;
+    cursor: pointer;
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .stage:hover { border-color: var(--blanco-40); transform: translateX(3px); }
+  .stage.active { border-color: var(--amarillo); background: linear-gradient(180deg, var(--negro-2) 0%, var(--negro-3) 100%); box-shadow: 0 0 0 4px rgba(248, 180, 0, 0.08); }
+  .stage.filled .stage-num { background: var(--amarillo); color: #0F0F14; }
+  .stage.filled .stage-status { color: var(--verde); }
+
+  .stage-num {
+    width: 42px; height: 42px;
+    background: var(--negro-3);
+    color: var(--blanco-60);
+    border-radius: 10px;
+    display: grid; place-items: center;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 900;
+    font-size: 18px;
+    flex-shrink: 0;
+    transition: var(--transition);
+  }
+
+  .stage.active .stage-num { background: var(--amarillo); color: #0F0F14; }
+
+  .stage-content { flex: 1; min-width: 0; }
+
+  .stage-title {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 16px;
+    margin-bottom: 2px;
+  }
+
+  .stage-name {
+    font-size: 10.5px;
+    font-weight: 800;
+    color: var(--amarillo);
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin-right: 8px;
+  }
+
+  .stage-desc {
+    color: var(--blanco-60);
+    font-size: 12.5px;
+    line-height: 1.4;
+  }
+
+  .stage-status {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 10.5px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--blanco-40);
+    white-space: nowrap;
+  }
+
+  .stage-form-panel { position: sticky; top: 90px; align-self: start; }
+
+  .form-card {
+    background: var(--negro-2);
+    border: 1px solid var(--blanco-10);
+    border-radius: var(--radius);
+    padding: 26px;
+  }
+
+  .form-eyebrow {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 11px;
+    font-weight: 800;
+    color: var(--amarillo);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  .route-context {
+    background: rgba(33, 32, 156, 0.12);
+    border: 1px solid rgba(33, 32, 156, 0.35);
+    border-radius: var(--radius-sm);
+    padding: 10px 14px;
+    margin-bottom: 16px;
+    font-size: 12.5px;
+    color: var(--blanco-60);
+    line-height: 1.45;
+  }
+
+  .route-context strong { color: var(--blanco); }
+
+  [data-theme="light"] .route-context { background: rgba(33, 32, 156, 0.08); }
+
+  .form-title {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 22px;
+    line-height: 1.2;
+    margin-bottom: 6px;
+  }
+
+  .form-question {
+    color: var(--blanco-60);
+    font-size: 14px;
+    margin-bottom: 22px;
+    line-height: 1.5;
+  }
+
+  .field { margin-bottom: 18px; }
+  .field label {
+    display: block;
+    font-weight: 600;
+    font-size: 13.5px;
+    margin-bottom: 6px;
+    color: var(--blanco);
+  }
+
+  .field .hint {
+    font-size: 12.5px;
+    color: var(--blanco-60);
+    margin-bottom: 8px;
+    line-height: 1.45;
+  }
+
+  .field input, .field textarea {
+    width: 100%;
+    background: var(--negro);
+    color: var(--blanco);
+    border: 1px solid var(--blanco-10);
+    border-radius: var(--radius-sm);
+    padding: 11px 14px;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    transition: var(--transition);
+    resize: vertical;
+  }
+
+  .field textarea { min-height: 64px; line-height: 1.5; }
+  .field input:focus, .field textarea:focus {
+    outline: none;
+    border-color: var(--amarillo);
+    box-shadow: 0 0 0 3px rgba(248, 180, 0, 0.15);
+  }
+
+  .field input::placeholder, .field textarea::placeholder { color: var(--blanco-40); }
+
+  .examples {
+    background: var(--negro);
+    border: 1px dashed var(--blanco-10);
+    border-radius: var(--radius-sm);
+    padding: 12px 14px;
+    margin-bottom: 8px;
+  }
+
+  .examples-title {
+    font-size: 10.5px;
+    font-weight: 700;
+    color: var(--amarillo);
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+
+  .examples ul { list-style: none; font-size: 12.5px; color: var(--blanco-60); line-height: 1.6; }
+  .examples li::before { content: '→ '; color: var(--amarillo); font-weight: 700; }
+
+  .form-actions {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    margin-top: 22px;
+    padding-top: 18px;
+    border-top: 1px solid var(--blanco-10);
+  }
+
+  .btn {
+    padding: 11px 22px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 13px;
+    letter-spacing: 0.5px;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    transition: var(--transition);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+    font-family: inherit;
+  }
+
+  .btn-primary { background: var(--amarillo); color: #0F0F14; }
+  .btn-primary:hover { background: var(--amarillo-soft); transform: translateY(-1px); }
+  .btn-primary:disabled { background: var(--negro-3); color: var(--blanco-40); cursor: not-allowed; transform: none; }
+  .btn-ghost { background: transparent; color: var(--blanco-60); border: 1px solid var(--blanco-10); }
+  .btn-ghost:hover { color: var(--blanco); border-color: var(--blanco-40); }
+  .btn-large { padding: 14px 28px; font-size: 14px; }
+
+  /* RESULT STATE */
+  .result {
+    max-width: 980px; margin: 0 auto;
+    padding: 24px 28px 80px;
+    position: relative; z-index: 1;
+  }
+
+  .result-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--verde);
+    color: #0F0F14;
+    padding: 6px 14px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-bottom: 16px;
+  }
+
+  .result h2 {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: clamp(26px, 3.5vw, 38px);
+    line-height: 1.1;
+    margin-bottom: 12px;
+  }
+
+  .result-help {
+    color: var(--blanco-60);
+    font-size: 16px;
+    margin-bottom: 28px;
+    line-height: 1.6;
+  }
+
+  .stages-summary {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 12px;
+    margin-bottom: 36px;
+  }
+
+  .summary-card {
+    background: var(--negro-2);
+    border: 1px solid var(--blanco-10);
+    border-left: 3px solid var(--amarillo);
+    border-radius: var(--radius-sm);
+    padding: 14px 16px;
+  }
+
+  .summary-card-eyebrow {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 10.5px;
+    font-weight: 800;
+    color: var(--amarillo);
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+
+  .summary-card-title {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 15px;
+    margin-bottom: 8px;
+  }
+
+  .summary-card-field {
+    font-size: 12.5px;
+    color: var(--blanco-60);
+    line-height: 1.5;
+    margin-bottom: 4px;
+  }
+
+  .summary-card-field strong { color: var(--blanco); font-weight: 600; }
+
+  .result-section-title {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 20px;
+    margin: 24px 0 8px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .result-section-title .num {
+    width: 28px;
+    height: 28px;
+    background: var(--amarillo);
+    color: #0F0F14;
+    border-radius: 6px;
+    display: grid;
+    place-items: center;
+    font-size: 14px;
+    font-weight: 800;
+  }
+
+  .llm-links {
+    background: rgba(33, 32, 156, 0.1);
+    border: 1px solid rgba(33, 32, 156, 0.3);
+    border-radius: var(--radius-sm);
+    padding: 12px 14px;
+    margin-bottom: 14px;
+    font-size: 13px;
+    color: var(--blanco-60);
+    line-height: 1.5;
+    display: flex; flex-wrap: wrap; gap: 4px 14px; align-items: center;
+  }
+
+  .llm-links strong { color: var(--blanco); margin-right: 6px; }
+  .llm-links a { color: var(--amarillo); text-decoration: none; font-weight: 600; }
+  .llm-links a:hover { text-decoration: underline; }
+
+  .prompt-box {
+    background: var(--negro);
+    border: 1px solid var(--blanco-10);
+    border-radius: var(--radius-sm);
+    padding: 20px;
+    font-family: 'JetBrains Mono', Consolas, monospace;
+    font-size: 12.5px;
+    line-height: 1.7;
+    color: var(--blanco-60);
+    max-height: 360px;
+    overflow-y: auto;
+    white-space: pre-wrap;
+    word-break: break-word;
+    margin-bottom: 12px;
+  }
+
+  .copy-row { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 20px; align-items: center; }
+
+  .copy-feedback {
+    color: var(--verde);
+    font-size: 13px;
+    font-weight: 600;
+    opacity: 0;
+    transition: var(--transition);
+  }
+
+  .copy-feedback.show { opacity: 1; }
+
+  footer {
+    border-top: 1px solid var(--blanco-10);
+    padding: 32px 28px;
+    text-align: center;
+    color: var(--blanco-40);
+    font-size: 13px;
+    position: relative; z-index: 1;
+  }
+
+  footer a { color: var(--amarillo); text-decoration: none; }
+
+  /* MOBILE */
+  @media (max-width: 760px) {
+    .header-inner { flex-direction: column; align-items: stretch; gap: 14px; padding: 14px 18px; }
+    .header-right { width: 100%; justify-content: flex-start; }
+    .modules { overflow-x: auto; flex: 1; }
+    .module-tab { white-space: nowrap; font-size: 12px; padding: 8px 12px; }
+    .hero { padding: 32px 18px 20px; }
+    .theory { padding: 16px 18px 60px; }
+    .practice { padding: 16px 18px 60px; }
+    .workspace-grid { padding: 0; gap: 14px; }
+    .stage { padding: 12px 14px; gap: 10px; }
+    .stage-num { width: 38px; height: 38px; font-size: 16px; }
+    .stage-title { font-size: 15px; }
+    .form-card { padding: 22px; }
+    .btn { width: 100%; justify-content: center; }
+    .form-actions { flex-direction: column-reverse; }
+    .funnel-bar { font-size: 12px; padding: 10px 14px; }
+    .acord-row { grid-template-columns: 1fr; gap: 4px; }
+    .acord-row dt { font-size: 10px; }
+    .big-quote { padding: 28px 24px; }
+    .quote-text { margin-left: 16px; font-size: 18px; }
+    .quote-author { margin-left: 16px; }
+    .result { padding: 16px 18px 60px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="brand">
+      <div class="brand-mark">J</div>
+      <div class="brand-name">
+        <strong>JOAKO ESTRATEGA</strong>
+        <span>Vender por internet</span>
+      </div>
+    </div>
+
+    <div class="header-right">
+      <nav class="modules" aria-label="Módulos del taller">
+        <a class="module-tab" href="index.html">1 · Mensaje</a>
+        <a class="module-tab" href="modulo-2.html">2 · Anuncios</a>
+        <button class="module-tab active" type="button">3 · Embudo</button>
+        <a class="module-tab" href="modulo-4.html">4 · Métricas</a>
+      </nav>
+
+      <div class="mode-toggle" role="tablist" aria-label="Modo de visualización">
+        <button class="mode-tab active" type="button" data-mode="teorico">Teoría</button>
+        <button class="mode-tab" type="button" data-mode="practico">Práctica</button>
+      </div>
+
+      <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Cambiar tema" title="Cambiar tema">
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+        </svg>
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="4"/>
+          <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="hero-eyebrow">Módulo 3 de 4</div>
+  <h1>El embudo de venta: <span class="accent">7 etapas, 2 rutas, una decisión de inversión</span></h1>
+  <p class="lede">Tu embudo es el camino que recorre el cliente desde que ve tu anuncio hasta que te recompra. Si una etapa convierte mal, todo el dinero que invertiste antes se pierde.</p>
+</section>
+
+<!-- ============ MODO TEÓRICO ============ -->
+<div class="theory theory-only">
+
+  <section class="theory-section">
+    <div class="pill-eyebrow">Definición</div>
+    <h2 class="theory-section-title">¿Qué es un embudo de venta?</h2>
+    <p class="theory-lede">Un embudo es el camino que recorre tu cliente desde que te conoce hasta que te recompra. Se llama "embudo" porque cada etapa pierde gente: 1.000 personas ven tu anuncio, 100 dan clic, 10 escriben, 1 compra. La diferencia entre un negocio rentable y uno quebrado está en qué porcentaje pasa de una etapa a la siguiente.</p>
+
+    <div class="big-quote">
+      <div class="quote-mark">"</div>
+      <div class="quote-text">Si una etapa de tu embudo convierte 0%, todo lo que invertiste antes se vuelve cero. Por eso el dolor de cabeza no es el tráfico: es la fuga.</div>
+      <div class="quote-author">— Método MPV</div>
+    </div>
+  </section>
+
+  <section class="theory-section">
+    <div class="pill-eyebrow">El modelo</div>
+    <h2 class="theory-section-title">Las 7 etapas del embudo</h2>
+    <p class="theory-lede">No son 5 ni 10. Son 7 etapas reales, donde cada una tiene una decisión que toma el cliente. Si conoces las 7, sabes dónde se cae el negocio. Aquí están en el orden en que ocurren.</p>
+
+    <div class="funnel-visual">
+      <div class="funnel-row"><div class="funnel-bar" style="width: 100%;"><span class="funnel-bar-num">1</span>ATRAER</div><div class="funnel-row-meta"><strong>10.000</strong>impresiones</div></div>
+      <div class="funnel-row"><div class="funnel-bar" style="width: 75%;"><span class="funnel-bar-num">2</span>CLICK AL CTA</div><div class="funnel-row-meta"><strong>150</strong>clics · 1.5%</div></div>
+      <div class="funnel-row"><div class="funnel-bar" style="width: 60%;"><span class="funnel-bar-num">3</span>LLEGADA WEB/WS</div><div class="funnel-row-meta"><strong>120</strong>llegadas · 80%</div></div>
+      <div class="funnel-row"><div class="funnel-bar" style="width: 45%;"><span class="funnel-bar-num">4</span>CIERRE · OBJECIONES</div><div class="funnel-row-meta"><strong>30</strong>engaged · 25%</div></div>
+      <div class="funnel-row"><div class="funnel-bar" style="width: 32%;"><span class="funnel-bar-num">5</span>INTENCIÓN DE COMPRA</div><div class="funnel-row-meta"><strong>9</strong>intentos · 30%</div></div>
+      <div class="funnel-row"><div class="funnel-bar" style="width: 22%;"><span class="funnel-bar-num">6</span>DATOS + COMPRA</div><div class="funnel-row-meta"><strong>3</strong>compras · 33%</div></div>
+      <div class="funnel-row"><div class="funnel-bar" style="width: 15%;"><span class="funnel-bar-num">7</span>ENTREGA + FIDELIZACIÓN</div><div class="funnel-row-meta"><strong>1</strong>recompra · 33%</div></div>
+    </div>
+
+    <div class="stages-acord" id="acord-stages">
+      <!-- Acordeones por etapa, llenados con JS -->
+    </div>
+  </section>
+
+  <section class="theory-section">
+    <div class="pill-eyebrow">Las 2 rutas</div>
+    <h2 class="theory-section-title">El mismo embudo, dos caminos para recorrerlo</h2>
+    <p class="theory-lede">Una vez el cliente da clic al anuncio (etapa 2), elige una de dos rutas. Cada una se mide distinto pero el embudo es el mismo. Decide cuál usas según tu producto, tu margen y tu equipo.</p>
+
+    <div class="routes-grid">
+      <div class="route-card">
+        <div class="route-card-eyebrow">Ruta 1</div>
+        <h3 class="route-card-title">Página Web</h3>
+        <ul>
+          <li>Anuncio → click → landing page</li>
+          <li>Landing con info, video, testimonios, botón de compra</li>
+          <li>Carrito + checkout + datos de pago</li>
+          <li>Pago automatizado (Stripe, MercadoPago, PayU)</li>
+          <li>Métricas: CTR · tasa de conversión de landing · % de checkout</li>
+        </ul>
+      </div>
+
+      <div class="route-card">
+        <div class="route-card-eyebrow">Ruta 2</div>
+        <h3 class="route-card-title">WhatsApp directo</h3>
+        <ul>
+          <li>Anuncio → click-to-WhatsApp → conversación</li>
+          <li>Vendedor (humano o bot) resuelve objeciones</li>
+          <li>Se solicitan datos por chat: nombre, ubicación, info de pago</li>
+          <li>Pago por transferencia, link de pago o contra entrega</li>
+          <li>Métricas: tasa de respuesta · % de chats que llegan a precio · % de cierre</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="theory-section">
+    <div class="pill-eyebrow">La métrica clave</div>
+    <h2 class="theory-section-title">Por qué medimos porcentajes, no números absolutos</h2>
+    <p class="theory-lede">Cuando un negocio dice "vendí 5 esta semana", no sabes si es bueno o malo. Pero si dice "convertí el 2% del tráfico", ahí sabes exactamente dónde estás. El porcentaje compara, el número absoluto solo describe.</p>
+
+    <div class="percent-example">
+      <div class="percent-row">
+        <div class="percent-step"><strong>Impresiones (vio el anuncio)</strong></div>
+        <div class="percent-num">10.000</div>
+        <div class="percent-rate">100%</div>
+      </div>
+      <div class="percent-row">
+        <div class="percent-step"><strong>Clics al CTA</strong> · CTR</div>
+        <div class="percent-num">150</div>
+        <div class="percent-rate">1.5%</div>
+      </div>
+      <div class="percent-row">
+        <div class="percent-step"><strong>Llegaron a landing/WhatsApp</strong></div>
+        <div class="percent-num">120</div>
+        <div class="percent-rate mid">80%</div>
+      </div>
+      <div class="percent-row">
+        <div class="percent-step"><strong>Interactuaron · vieron info clave</strong></div>
+        <div class="percent-num">30</div>
+        <div class="percent-rate low">25%</div>
+      </div>
+      <div class="percent-row">
+        <div class="percent-step"><strong>Iniciaron checkout o pidieron pago</strong></div>
+        <div class="percent-num">9</div>
+        <div class="percent-rate mid">30%</div>
+      </div>
+      <div class="percent-row">
+        <div class="percent-step"><strong>Pagaron</strong></div>
+        <div class="percent-num">3</div>
+        <div class="percent-rate mid">33%</div>
+      </div>
+      <div class="percent-row">
+        <div class="percent-step"><strong>Recompraron o refirieron</strong></div>
+        <div class="percent-num">1</div>
+        <div class="percent-rate mid">33%</div>
+      </div>
+    </div>
+
+    <p class="theory-lede" style="margin-top: 18px;">En este ejemplo, la fuga está clarísima: <strong style="color: var(--blanco);">cuando llegan a la landing y solo 25% interactúan</strong>. Esa es la etapa que vale la pena optimizar primero: si la subes a 50%, duplicas las ventas con la misma inversión publicitaria. Optimizar el CTR del 1.5% al 2% es esfuerzo desperdiciado mientras la fuga de la etapa 4 esté abierta.</p>
+  </section>
+
+  <section class="theory-section">
+    <div class="pill-eyebrow">La regla</div>
+    <h2 class="theory-section-title">Optimiza la fuga más grande, no la más fácil</h2>
+    <p class="theory-lede">El instinto es resolver lo que duele menos: cambiar el botón del anuncio, probar otra foto. Pero la plata se queda donde más fuga hay. Identifica la etapa con peor porcentaje y arregla ESA primero, aunque sea la más incómoda de tocar.</p>
+  </section>
+
+  <div class="theory-cta">
+    <h3>Construye tu embudo</h3>
+    <button class="btn btn-ghost" type="button" data-go-mode="practico" style="background: rgba(15,15,20,0.15); color: #0F0F14; border-color: rgba(15,15,20,0.3); margin-top: 6px;">→ Modo Práctica</button>
+  </div>
+</div>
+
+<!-- ============ MODO PRÁCTICO ============ -->
+<section class="missing practical-only" id="state-missing" hidden>
+  <div class="missing-icon">!</div>
+  <h2>Primero el Módulo 1</h2>
+  <p>El modo Práctica necesita tus respuestas del Módulo 1 (Constructor del Mensaje). El diagnóstico del embudo se hace cruzando tu mensaje con tu sistema de captación. Sin esa base, el diagnóstico sale genérico.</p>
+  <a href="index.html" class="btn btn-primary btn-large">Ir al Módulo 1 →</a>
+</section>
+
+<div class="practice practical-only" id="state-ready" hidden>
+
+  <div class="route-selector">
+    <div class="route-selector-label">¿Cuál ruta usas hoy?</div>
+    <div class="route-options" id="route-options">
+      <button class="route-option active" type="button" data-route="web">Web</button>
+      <button class="route-option" type="button" data-route="whatsapp">WhatsApp</button>
+      <button class="route-option" type="button" data-route="ambas">Ambas</button>
+    </div>
+  </div>
+
+  <div class="workspace-grid">
+
+    <section class="funnel-stages" id="funnel-stages-practica">
+      <!-- 7 etapas, llenadas con JS -->
+      <div style="margin-top: 8px;">
+        <button class="btn btn-primary btn-large" type="button" id="btn-finalizar" disabled style="width: 100%;">Ver diagnóstico del embudo →</button>
+      </div>
+    </section>
+
+    <aside class="stage-form-panel">
+      <div class="form-card" id="form-card"></div>
+    </aside>
+
+  </div>
+
+</div>
+
+<!-- ============ RESULTADO ============ -->
+<div class="result practical-only" id="state-result" hidden>
+  <div class="result-badge">✓ Embudo completo</div>
+  <h2>Tu embudo de venta · 7 etapas</h2>
+  <p class="result-help">Este es tu embudo tal como funciona hoy. Abajo está el prompt magistral para que ChatGPT, Claude o Gemini te entreguen el diagnóstico estructurado: las 3 fugas principales, la etapa crítica para optimizar primero, plan de 4 semanas, métricas que debes empezar a medir hoy y qué NO hacer aún.</p>
+
+  <div class="stages-summary" id="stages-summary"></div>
+
+  <h3 class="result-section-title"><span class="num">1</span> Prompt de diagnóstico para la IA</h3>
+  <div class="llm-links">
+    <strong>Dónde pegarlo:</strong>
+    <a href="https://chatgpt.com" target="_blank" rel="noopener">ChatGPT ↗</a>
+    <a href="https://claude.ai" target="_blank" rel="noopener">Claude ↗</a>
+    <a href="https://gemini.google.com" target="_blank" rel="noopener">Gemini ↗</a>
+  </div>
+  <div class="prompt-box" id="prompt-diagnostico"></div>
+  <div class="copy-row">
+    <button class="btn btn-primary" type="button" id="btn-copy-prompt">📋 Copiar prompt</button>
+    <button class="btn btn-ghost" type="button" id="btn-download-txt">⬇ Descargar TXT</button>
+    <span class="copy-feedback" id="fb-copy">✓ Listo</span>
+  </div>
+
+  <div style="margin-top: 28px; display: flex; gap: 10px; flex-wrap: wrap;">
+    <button class="btn btn-ghost" type="button" id="btn-back">← Editar el embudo</button>
+    <button class="btn btn-ghost" type="button" id="btn-reset">↻ Empezar de cero</button>
+  </div>
+</div>
+
+<footer>
+  Construido para el taller <strong style="color: var(--blanco);">Vender por internet: el mensaje, el anuncio y el embudo que sí funcionan</strong><br>
+  por <a href="https://joakoestratega.com" target="_blank" rel="noopener">Joako Estratega</a> · Método MPV · 2026
+</footer>
+
+<script>
+(function () {
+  'use strict';
+
+  // ============ THEME TOGGLE ============
+  const THEME_KEY = 'joako-taller-theme';
+  document.documentElement.setAttribute('data-theme', localStorage.getItem(THEME_KEY) || 'dark');
+  document.getElementById('theme-toggle').addEventListener('click', function () {
+    const current = document.documentElement.getAttribute('data-theme');
+    const next = current === 'dark' ? 'light' : 'dark';
+    document.documentElement.setAttribute('data-theme', next);
+    localStorage.setItem(THEME_KEY, next);
+  });
+
+  // ============ MODE TOGGLE (Teoría/Práctica) ============
+  const MODE_KEY = 'joako-taller-mode';
+  function setMode(mode) {
+    document.documentElement.setAttribute('data-mode', mode);
+    localStorage.setItem(MODE_KEY, mode);
+    document.querySelectorAll('.mode-tab').forEach(t => t.classList.toggle('active', t.dataset.mode === mode));
+  }
+  setMode(localStorage.getItem(MODE_KEY) || 'teorico');
+
+  document.querySelectorAll('.mode-tab').forEach(tab => {
+    tab.addEventListener('click', () => setMode(tab.dataset.mode));
+  });
+
+  document.querySelectorAll('[data-go-mode]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      setMode(btn.dataset.goMode);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  });
+
+  // ============ ETAPAS (definición compartida teórico/práctico) ============
+  const STAGES = [
+    {
+      n: 1, key: 'atraer', name: 'Atraer · Pauta paga',
+      practiceQ: '¿Cómo atraes la atención al inicio del embudo?',
+      summary: 'Pauta paga · llegar a la mayor cantidad de gente del público objetivo.',
+      theory: {
+        que: 'Esta etapa consiste en lograr que el mayor número posible de personas de tu público objetivo vea tu marca por primera vez. La medida básica son las impresiones del anuncio.',
+        canal: 'Los canales más usados son Meta Ads, Google Ads, TikTok Ads y YouTube Ads. Se complementan con contenido orgánico viral, alianzas con otras marcas y notas de prensa.',
+        metrica: 'Las métricas clave son el alcance, las impresiones, la frecuencia con que el anuncio se ve y el CPM (costo por cada mil impresiones).',
+        benchmark: 'Según el reporte de Wordstream (Facebook Ads Benchmarks 2025), el CPM mediano en Meta Ads se ubicó en USD 13.48 a través de todas las industrias. Los nichos B2C de bajo ticket suelen estar por debajo del mediano; los nichos competitivos como finanzas o seguros lo superan.',
+        ejemplo: 'Joako paga anuncios en Meta a razón de $30.000 COP por día y los reparte en 5 adsets distintos para que distintas mujeres profesionales vean su VSL.'
+      },
+      fields: [
+        { id: 'canal', label: 'Canal/herramienta principal', placeholder: 'Ej: Meta Ads + orgánico Reels Instagram' },
+        { id: 'conversion', label: '% objetivo (o actual) de esta etapa', placeholder: 'Ej: 100% es la base (todos los impactos)', hint: 'Esta es la base de medición (100%), de aquí parten las conversiones siguientes.' },
+        { id: 'metrica', label: 'Métrica que mides', placeholder: 'Ej: impresiones/día, CPM, alcance único' }
+      ]
+    },
+    {
+      n: 2, key: 'click', name: 'Click al CTA',
+      practiceQ: '¿Qué porcentaje de los que ven tu anuncio le da clic?',
+      summary: 'Quien vio el anuncio toca el botón hacia tu web o WhatsApp.',
+      theory: {
+        que: 'Quien vio el anuncio decide actuar y toca el botón. Es la primera decisión real del cliente.',
+        canal: 'Botón de "Comprar ahora", "Más info", "Enviar mensaje" del anuncio. Click-to-WhatsApp o link a landing.',
+        metrica: 'CTR (Click-Through Rate) = (clics ÷ impresiones) × 100.',
+        benchmark: 'Según Wordstream (Facebook Ads Benchmarks 2025), el CTR mediano en campañas de Tráfico fue 1.71% y en campañas de Leads 2.59%. Por debajo de 1% el creativo necesita revisión; por encima de 2.5% el creativo está funcionando bien.',
+        ejemplo: 'De 10.000 impresiones, 150 personas dieron clic, lo que equivale a un CTR del 1.5%. El resultado está bien encaminado, aunque todavía no es excepcional.'
+      },
+      fields: [
+        { id: 'canal', label: 'Tipo de CTA y destino', placeholder: 'Ej: botón "Enviar mensaje" → WhatsApp / botón "Saber más" → landing' },
+        { id: 'conversion', label: 'CTR actual (%)', placeholder: 'Ej: 1.5%', hint: 'Lo encuentras en el administrador de anuncios de Meta como CTR.' },
+        { id: 'metrica', label: 'Métrica que mides', placeholder: 'Ej: CTR único, CPC (costo por clic)' }
+      ]
+    },
+    {
+      n: 3, key: 'llegada', name: 'Llegada · Web o WhatsApp',
+      practiceQ: '¿Cuántos de los que dieron clic realmente llegan al destino?',
+      summary: 'El cliente aterriza en la landing o inicia la conversación de WhatsApp. Dos rutas paralelas con métricas distintas.',
+      theory: {
+        que: 'El cliente que dio clic completa la carga de la página o envía el primer mensaje al WhatsApp. Hay fuga porque algunos cierran antes de ver nada.',
+        canal: 'Landing page con buen LCP (rapidez de carga) o WhatsApp Business API con mensaje automático de bienvenida.',
+        metrica: 'Web: % de visitas vs clics (idealmente cerca del 100% si la landing es rápida). WhatsApp: % de chats abiertos vs clics.',
+        benchmark: 'No hay un benchmark público estándar para esta etapa porque depende mucho del setup técnico. Como referencia operativa: si en web la cantidad de visitas registradas en Google Analytics es muy inferior a los clics reportados por Meta Ads, la landing está cargando lento (más de 3 segundos según Google Web Vitals). En WhatsApp, si los chats iniciados son muy inferiores a los clics del anuncio, hay fricción en el botón del anuncio o en el mensaje de bienvenida.',
+        ejemplo: 'De 150 clics, 120 llegaron a la landing = 80%. 30 personas se cayeron por velocidad o cambiaron de opinión.'
+      },
+      fields: [
+        { id: 'canal', label: 'Destino del clic (web o WhatsApp)', placeholder: 'Ej: landing /asesoria-mpv con video VSL · o WhatsApp directo del cierre' },
+        { id: 'conversion', label: '% de llegada vs clics', placeholder: 'Ej: 80%', hint: 'Mides en Google Analytics (visitas) o WhatsApp Business (chats nuevos por anuncio).' },
+        { id: 'metrica', label: 'Métrica que mides', placeholder: 'Ej: visitas únicas, tiempo en página, % de chats abiertos' }
+      ]
+    },
+    {
+      n: 4, key: 'cierre', name: 'Cierre · Info + objeciones',
+      practiceQ: '¿Cuántos de los que llegaron consumen la info o conversan en serio?',
+      summary: 'En la landing o en la conversación entregas información clave, resuelves objeciones, atacas dolores.',
+      theory: {
+        que: 'El cliente lee la landing, ve el video, lee el FAQ, o conversa con el vendedor. En esta etapa decide si vale la pena seguir adelante. Aquí pesa el mensaje de venta (Módulo 1) y la calidad del creativo (Módulo 2).',
+        canal: 'Landing con secciones de dolor, solución, prueba social, FAQ. O conversación con vendedor humano/bot guiado.',
+        metrica: 'Web: scroll depth, % que llega al CTA final, tiempo en página, vistas del video. WhatsApp: % de chats que pasan de 5 mensajes, % que pregunta el precio.',
+        benchmark: 'No hay un benchmark público estándar porque depende del producto y el nicho. Como referencia operativa: si menos del 25% del tráfico llega al final de la landing (medible con Google Analytics scroll depth) o si menos del 30% de los chats de WhatsApp pasa del mensaje de bienvenida sin preguntar el precio, la fuga está en la página o en el guion del vendedor.',
+        ejemplo: 'De 120 llegadas, 30 personas interactuaron en serio (vieron el video, llegaron al CTA o preguntaron el precio), lo que equivale al 25%. Aquí se asoma una fuga importante porque la página o el mensaje no logran enganchar al visitante.'
+      },
+      fields: [
+        { id: 'canal', label: 'Cómo entregas info y resuelves objeciones', placeholder: 'Ej: landing con VSL + FAQ + 6 testimonios + sección de garantía · o vendedor humano con guion de 4 objeciones típicas' },
+        { id: 'conversion', label: '% de engagement vs llegadas', placeholder: 'Ej: 25%', hint: 'Web: scroll depth o vistas del video. WhatsApp: chats que llegan a preguntar precio.' },
+        { id: 'metrica', label: 'Métrica que mides', placeholder: 'Ej: scroll al 75%, vistas video 50%, % de chats que llegan al precio' }
+      ]
+    },
+    {
+      n: 5, key: 'intencion', name: 'Intención de compra',
+      practiceQ: '¿Cuántos de los que interactuaron muestran intención de compra concreta?',
+      summary: 'El cliente agrega al carrito en la web o pide datos de pago en WhatsApp. Acción concreta hacia la compra.',
+      theory: {
+        que: 'El cliente ya decidió comprar pero todavía no ha pagado. Toca un botón "Comprar" en la landing y entra al checkout, o pide en WhatsApp "¿cómo te pago?". Es el momento más crítico: pequeñas fricciones pueden tumbar la venta.',
+        canal: 'Botón de compra en landing que abre checkout (Stripe, MercadoPago, PayU, Bold). O mensaje de WhatsApp que pide datos para enviar link de pago.',
+        metrica: 'Web: % añadido al carrito o iniciado el checkout vs vista del producto. WhatsApp: % de chats que piden datos de pago vs los que preguntaron el precio.',
+        benchmark: 'Según Wordstream (Facebook Ads Benchmarks 2025), la tasa de conversión mediana (CVR) en Meta Ads fue 1.57% del tráfico total. En ecommerce las tasas add-to-cart típicas reportadas por plataformas como Shopify se mueven entre 2% y 8% del tráfico. En WhatsApp no hay dato público estándar; como referencia operativa, si menos del 50% de quienes preguntan el precio termina pidiendo cómo pagar, hay una objeción sin resolver.',
+        ejemplo: 'De 30 personas con engagement, 9 iniciaron el checkout, lo que equivale al 30%. El problema más típico en esta etapa es que la página de compra le exige al cliente demasiados datos antes de pagar.'
+      },
+      fields: [
+        { id: 'canal', label: 'Cómo capturas la intención', placeholder: 'Ej: botón "Pagar con tarjeta o Nequi" en landing · o "Pídeme link de pago" en chat' },
+        { id: 'conversion', label: '% que muestran intención vs engagement', placeholder: 'Ej: 30%' },
+        { id: 'metrica', label: 'Métrica que mides', placeholder: 'Ej: add to cart, iniciaciones de checkout, solicitudes de pago' }
+      ]
+    },
+    {
+      n: 6, key: 'compra', name: 'Datos + Compra',
+      practiceQ: '¿Cuántos de los que mostraron intención terminan pagando?',
+      summary: 'Se completan los datos (nombre, dirección, tarjeta) y se ejecuta el pago.',
+      theory: {
+        que: 'El cliente completa el formulario de checkout y procesa el pago. O en WhatsApp envía el comprobante de transferencia. Aquí se mide la conversión REAL del negocio.',
+        canal: 'Pasarela de pago (Stripe, MercadoPago, PayU). Transferencia bancaria, Nequi, Bre-B, link de pago en WhatsApp.',
+        metrica: 'Web: tasa de checkout completado (pagos efectivos vs checkouts iniciados). WhatsApp: % de chats que terminan en pago confirmado.',
+        benchmark: 'La tasa de abandono de carrito promedio en ecommerce es del 70.19% según el Baymard Institute (estudio agregado de 49 fuentes, 2025). Eso quiere decir que la tasa de checkout completado promedio es alrededor del 30%. Si tu tasa está por debajo del 25%, suele haber fricción técnica (tarjetas rechazadas, errores en la pasarela) o desconfianza visual (sin sellos, sin precio claro, sin información del vendedor).',
+        ejemplo: 'De 9 iniciaciones, 3 pagaron = 33%. Si la tasa cae mucho, suele ser problema de la pasarela o de no aceptar el medio de pago preferido.'
+      },
+      fields: [
+        { id: 'canal', label: 'Método de pago habilitado', placeholder: 'Ej: Tarjeta + Nequi + transferencia + Bre-B · o link de pago Wompi por WhatsApp' },
+        { id: 'conversion', label: '% de pagos vs intenciones', placeholder: 'Ej: 33%' },
+        { id: 'metrica', label: 'Métrica que mides', placeholder: 'Ej: tasa de conversión final, ticket promedio, % de pagos rechazados' }
+      ]
+    },
+    {
+      n: 7, key: 'fidelizar', name: 'Entrega + Fidelización',
+      practiceQ: '¿Cuántos clientes recompran o te recomiendan?',
+      summary: 'Si es producto físico, garantizar la entrega. Postventa, recompra y referidos.',
+      theory: {
+        que: 'La compra no termina en el pago. Producto físico: hay que entregar y validar que el cliente lo recibió bien. Producto digital o servicio: postventa, seguimiento, upsell al siguiente peldaño de la escalera.',
+        canal: 'Logística (mensajería, courier), seguimiento por WhatsApp, encuesta NPS, programa de referidos, upsell al siguiente producto.',
+        metrica: 'Tasa de entrega exitosa (físico), NPS (Net Promoter Score), tasa de recompra, LTV (Lifetime Value), número de referidos por cliente.',
+        benchmark: 'La relación LTV:CAC saludable estándar es 3:1 según el reporte Optifai 2026 (estudio sobre 939 empresas B2B SaaS). Eso significa que cada peso invertido en adquirir un cliente debe generar al menos 3 pesos en su ciclo de vida con tu marca. Por encima de 5:1 indica eficiencia fuerte, aunque también puede significar que estás subinvirtiendo en crecimiento. El NPS y la tasa de recompra varían demasiado por industria para dar un benchmark único.',
+        ejemplo: 'De 3 compras, 1 recompra o refiere = 33%. Joako apunta a que cada cliente del primer peldaño suba al segundo (Implementación MPV) y al tercero (Acompañamiento MPV) en 90 días.'
+      },
+      fields: [
+        { id: 'canal', label: 'Acción concreta de fidelización', placeholder: 'Ej: Seguimiento 30 días + upsell al siguiente peldaño + programa de referidos con 20% comisión' },
+        { id: 'conversion', label: '% que recompra o refiere', placeholder: 'Ej: 30%' },
+        { id: 'metrica', label: 'Métrica que mides', placeholder: 'Ej: tasa de recompra, NPS, # referidos/cliente, LTV' }
+      ]
+    }
+  ];
+
+  // ============ MODO TEÓRICO — RENDER ACORDEONES ============
+  const acordContainer = document.getElementById('acord-stages');
+  STAGES.forEach(stage => {
+    const item = document.createElement('div');
+    item.className = 'acord-item';
+    item.innerHTML =
+      '<div class="acord-head">' +
+        '<div class="acord-num">' + stage.n + '</div>' +
+        '<div class="acord-title-wrap">' +
+          '<div class="acord-title">' + escapeHtml(stage.name) + '</div>' +
+          '<div class="acord-summary">' + escapeHtml(stage.summary) + '</div>' +
+        '</div>' +
+        '<svg class="acord-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>' +
+      '</div>' +
+      '<div class="acord-body">' +
+        '<dl class="acord-content">' +
+          '<div class="acord-row"><dt>Qué pasa</dt><dd>' + escapeHtml(stage.theory.que) + '</dd></div>' +
+          '<div class="acord-row"><dt>Canal/Activo</dt><dd>' + escapeHtml(stage.theory.canal) + '</dd></div>' +
+          '<div class="acord-row"><dt>Métrica</dt><dd>' + escapeHtml(stage.theory.metrica) + '</dd></div>' +
+          '<div class="acord-row"><dt>Benchmark</dt><dd>' + escapeHtml(stage.theory.benchmark) + '</dd></div>' +
+          '<div class="acord-row"><dt>Ejemplo</dt><dd>' + escapeHtml(stage.theory.ejemplo) + '</dd></div>' +
+        '</dl>' +
+      '</div>';
+    item.querySelector('.acord-head').addEventListener('click', () => item.classList.toggle('open'));
+    acordContainer.appendChild(item);
+  });
+
+  // ============ MODO PRÁCTICO — STATE & DECLARACIONES (deben ir antes de initPractice) ============
+  const STORAGE_KEY = 'joako-taller-embudo-v2';
+  const ROUTE_KEY = 'joako-taller-embudo-route';
+  const MOD1_KEY = 'joako-taller-mpv-v2';
+  let state = {};
+  let currentRoute = localStorage.getItem(ROUTE_KEY) || 'web';
+  let currentStage = 1;
+  try { state = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}'); } catch (e) {}
+
+  function persist() { try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); } catch (e) {} }
+
+  // ============ MODO PRÁCTICO — DATA DEL MÓDULO 1 ============
+  let m1 = null;
+  try {
+    const saved = JSON.parse(localStorage.getItem(MOD1_KEY) || '{}');
+    const keys = ['q-producto', 'q-cliente', 'q-precio', 'q-dolor-que', 'q-dolor-frase', 'q-facil', 'q-rapido', 'q-garantia'];
+    let filled = 0;
+    keys.forEach(k => { if ((saved[k] || '').trim()) filled++; });
+    if (filled >= 4) {
+      m1 = {
+        producto: (saved['q-producto'] || '').trim() || '(no especificado)',
+        cliente: (saved['q-cliente'] || '').trim() || '(no especificado)',
+        precio: (saved['q-precio'] || '').trim() || '(no especificado)',
+        dolorQue: (saved['q-dolor-que'] || '').trim() || '(no especificado)',
+        dolorFrase: (saved['q-dolor-frase'] || '').trim() || '(no especificado)',
+        facil: (saved['q-facil'] || '').trim() || '(no especificado)',
+        rapido: (saved['q-rapido'] || '').trim() || '(no especificado)',
+        garantia: (saved['q-garantia'] || '').trim() || '(no especificado)'
+      };
+    }
+  } catch (e) {}
+
+  if (!m1) {
+    document.getElementById('state-missing').hidden = false;
+  } else {
+    document.getElementById('state-ready').hidden = false;
+    initPractice();
+  }
+
+  function initPractice() {
+    // Render stages
+    const container = document.getElementById('funnel-stages-practica');
+    const btnFinalizar = document.getElementById('btn-finalizar');
+    STAGES.forEach((stage, idx) => {
+      const card = document.createElement('article');
+      card.className = 'stage' + (idx === 0 ? ' active' : '');
+      card.setAttribute('data-stage', stage.n);
+      card.innerHTML =
+        '<div class="stage-num">' + stage.n + '</div>' +
+        '<div class="stage-content">' +
+          '<div class="stage-title"><span class="stage-name">Etapa ' + stage.n + '</span>' + escapeHtml(stage.name.split(' · ')[0]) + '</div>' +
+          '<div class="stage-desc">' + escapeHtml(stage.summary) + '</div>' +
+        '</div>' +
+        '<div class="stage-status" data-status="' + stage.n + '">Pendiente</div>';
+      card.addEventListener('click', () => setActiveStage(stage.n));
+      container.insertBefore(card, btnFinalizar.parentElement);
+    });
+
+    // Route selector
+    document.querySelectorAll('.route-option').forEach(b => {
+      if (b.dataset.route === currentRoute) b.classList.add('active');
+      else b.classList.remove('active');
+      b.addEventListener('click', () => {
+        currentRoute = b.dataset.route;
+        localStorage.setItem(ROUTE_KEY, currentRoute);
+        document.querySelectorAll('.route-option').forEach(x => x.classList.toggle('active', x.dataset.route === currentRoute));
+        renderForm(currentStage);
+      });
+    });
+
+    STAGES.forEach(s => updateStageStatus(s.n));
+    updateFinishButton();
+    renderForm(1);
+
+    document.getElementById('btn-finalizar').addEventListener('click', goToResult);
+  }
+
+  // Reemplazos contextuales por ruta. Si la etapa o ruta no tiene reemplazo, usa el original.
+  const ROUTE_HINTS = {
+    web: {
+      banner: '🌐 Estás diseñando el embudo para <strong>Página Web</strong>. Los ejemplos y métricas se adaptan a landing + checkout.',
+      placeholders: {
+        '3-canal': 'Ej: landing /asesoria-mpv con video VSL + secciones de prueba social',
+        '3-metrica': 'Ej: visitas únicas, bounce rate, tiempo en página',
+        '4-canal': 'Ej: landing con video VSL + FAQ + 6 testimonios + sección de garantía',
+        '4-metrica': 'Ej: scroll depth al 75%, vistas video 50%, clics al CTA',
+        '5-canal': 'Ej: botón "Pagar con tarjeta o Nequi" → checkout de la pasarela',
+        '5-metrica': 'Ej: add to cart, inicios de checkout, abandono de carrito',
+        '6-canal': 'Ej: pasarela Wompi/MercadoPago con tarjeta + Nequi + Bre-B + PSE',
+        '6-metrica': 'Ej: tasa de checkout completado, ticket promedio, % pagos rechazados'
+      }
+    },
+    whatsapp: {
+      banner: '💬 Estás diseñando el embudo para <strong>WhatsApp directo</strong>. Los ejemplos y métricas se adaptan a click-to-WhatsApp + cierre por chat.',
+      placeholders: {
+        '3-canal': 'Ej: anuncio click-to-WhatsApp con mensaje de bienvenida automático',
+        '3-metrica': 'Ej: chats nuevos por anuncio, % de mensajes de bienvenida respondidos',
+        '4-canal': 'Ej: vendedor humano con guion de 4 objeciones típicas + audios de testimonios',
+        '4-metrica': 'Ej: % chats que pasan de 5 mensajes, % que pregunta el precio',
+        '5-canal': 'Ej: mensaje "Pídeme el link de pago" o "Te paso datos bancarios"',
+        '5-metrica': 'Ej: % de chats que solicitan datos de pago vs los que preguntaron precio',
+        '6-canal': 'Ej: link de pago Wompi por WhatsApp · transferencia + comprobante',
+        '6-metrica': 'Ej: % de chats que terminan en pago confirmado, ticket promedio'
+      }
+    },
+    ambas: {
+      banner: '🔀 Estás diseñando el embudo para <strong>Web + WhatsApp en paralelo</strong>. Mide ambas rutas por separado y compara cuál convierte mejor.',
+      placeholders: {}
+    }
+  };
+
+  function renderForm(n) {
+    currentStage = n;
+    const stage = STAGES[n - 1];
+    if (!stage) return;
+
+    const card = document.getElementById('form-card');
+    const data = state[stage.key] || {};
+    const routeConfig = ROUTE_HINTS[currentRoute] || ROUTE_HINTS.web;
+
+    let html = '<div class="route-context">' + routeConfig.banner + '</div>';
+    html += '<div class="form-eyebrow">Etapa ' + n + ' de 7 · ' + escapeHtml(stage.name) + '</div>';
+    html += '<h3 class="form-title">' + escapeHtml(stage.practiceQ) + '</h3>';
+    html += '<p class="form-question">Llena los 3 campos con tus datos reales (no los ideales). Si no tienes el dato, escribe "no lo mido todavía" — eso ya es un diagnóstico.</p>';
+
+    stage.fields.forEach(f => {
+      html += '<div class="field">';
+      html += '<label for="f-' + f.id + '">' + escapeHtml(f.label) + '</label>';
+      if (f.hint) html += '<div class="hint">' + escapeHtml(f.hint) + '</div>';
+      const value = data[f.id] || '';
+      const isShort = f.id === 'conversion';
+      const routeKey = n + '-' + f.id;
+      const routePlaceholder = routeConfig.placeholders[routeKey];
+      const placeholder = routePlaceholder || f.placeholder;
+      if (isShort) {
+        html += '<input type="text" id="f-' + f.id + '" data-field="' + f.id + '" placeholder="' + escapeHtml(placeholder) + '" value="' + escapeHtml(value) + '">';
+      } else {
+        html += '<textarea id="f-' + f.id + '" data-field="' + f.id + '" placeholder="' + escapeHtml(placeholder) + '">' + escapeHtml(value) + '</textarea>';
+      }
+      html += '</div>';
+    });
+
+    html += '<div class="form-actions">';
+    if (n > 1) html += '<button class="btn btn-ghost" type="button" data-go-prev>← Etapa ' + (n - 1) + '</button>';
+    else html += '<span></span>';
+    if (n < 7) html += '<button class="btn btn-primary" type="button" data-go-next>Etapa ' + (n + 1) + ' →</button>';
+    else html += '<button class="btn btn-primary" type="button" data-go-finish>Ver diagnóstico →</button>';
+    html += '</div>';
+
+    card.innerHTML = html;
+
+    card.querySelectorAll('[data-field]').forEach(el => {
+      el.addEventListener('input', () => {
+        if (!state[stage.key]) state[stage.key] = {};
+        state[stage.key][el.dataset.field] = el.value;
+        persist();
+        updateStageStatus(n);
+        updateFinishButton();
+      });
+    });
+
+    const pb = card.querySelector('[data-go-prev]');
+    if (pb) pb.addEventListener('click', () => setActiveStage(n - 1));
+    const nb = card.querySelector('[data-go-next]');
+    if (nb) nb.addEventListener('click', () => setActiveStage(n + 1));
+    const fb = card.querySelector('[data-go-finish]');
+    if (fb) fb.addEventListener('click', goToResult);
+  }
+
+  function setActiveStage(n) {
+    if (n < 1 || n > 7) return;
+    document.querySelectorAll('.stage').forEach(s => s.classList.remove('active'));
+    const target = document.querySelector('[data-stage="' + n + '"]');
+    if (target) target.classList.add('active');
+    renderForm(n);
+    if (window.innerWidth <= 1100) {
+      document.querySelector('.stage-form-panel').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }
+
+  function isStageFilled(n) {
+    const stage = STAGES[n - 1];
+    const data = state[stage.key] || {};
+    return stage.fields.every(f => (data[f.id] || '').trim().length > 0);
+  }
+
+  function updateStageStatus(n) {
+    const card = document.querySelector('[data-stage="' + n + '"]');
+    const status = document.querySelector('[data-status="' + n + '"]');
+    if (!card || !status) return;
+    if (isStageFilled(n)) {
+      card.classList.add('filled');
+      status.textContent = '✓ Lleno';
+    } else {
+      card.classList.remove('filled');
+      status.textContent = 'Pendiente';
+    }
+  }
+
+  function updateFinishButton() {
+    const btn = document.getElementById('btn-finalizar');
+    if (!btn) return;
+    const filledCount = [1, 2, 3, 4, 5, 6, 7].filter(isStageFilled).length;
+    const allFilled = filledCount === 7;
+    btn.disabled = !allFilled;
+    btn.textContent = allFilled ? 'Ver diagnóstico del embudo →' : 'Faltan etapas (' + filledCount + ' / 7)';
+  }
+
+  function escapeHtml(s) {
+    return String(s || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+  }
+
+  function goToResult() {
+    buildResult();
+    document.getElementById('state-ready').hidden = true;
+    document.getElementById('state-result').hidden = false;
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function buildResult() {
+    const summary = document.getElementById('stages-summary');
+    summary.innerHTML = '';
+    STAGES.forEach(stage => {
+      const data = state[stage.key] || {};
+      const card = document.createElement('div');
+      card.className = 'summary-card';
+      let inner = '<div class="summary-card-eyebrow">Etapa ' + stage.n + '</div>';
+      inner += '<div class="summary-card-title">' + escapeHtml(stage.name) + '</div>';
+      stage.fields.forEach(f => {
+        const v = (data[f.id] || '').trim() || '(sin completar)';
+        inner += '<div class="summary-card-field"><strong>' + escapeHtml(f.label) + ':</strong> ' + escapeHtml(v) + '</div>';
+      });
+      card.innerHTML = inner;
+      summary.appendChild(card);
+    });
+
+    const routeLabel = currentRoute === 'web' ? 'Página Web' : currentRoute === 'whatsapp' ? 'WhatsApp directo' : 'Ambas rutas (Web + WhatsApp)';
+
+    let p = '# ROL\n';
+    p += 'Eres consultor senior en embudos de venta digital con criterio del Método MPV de Joako Estratega: dolor + fácil + rápido + garantía. Tu trabajo es diagnosticar el embudo de 7 etapas descrito y entregar un plan de 4 semanas para arreglar la fuga más grande.\n\n';
+
+    p += '# CONTEXTO DEL NEGOCIO\n\n';
+    p += '- Producto/servicio: ' + m1.producto + '\n';
+    p += '- Cliente ideal: ' + m1.cliente + '\n';
+    p += '- Precio: ' + m1.precio + '\n';
+    p += '- Dolor del cliente: ' + m1.dolorQue + '\n';
+    p += '- Frase emocional del cliente: "' + m1.dolorFrase + '"\n';
+    p += '- Por qué la solución es fácil: ' + m1.facil + '\n';
+    p += '- Tiempo al primer resultado: ' + m1.rapido + '\n';
+    p += '- Garantía: ' + m1.garantia + '\n';
+    p += '- Ruta principal del embudo: ' + routeLabel + '\n\n';
+
+    p += '# EMBUDO ACTUAL DESCRITO POR EL DUEÑO (7 ETAPAS)\n\n';
+    STAGES.forEach(stage => {
+      const data = state[stage.key] || {};
+      p += '## ETAPA ' + stage.n + ' — ' + stage.name.toUpperCase() + '\n';
+      stage.fields.forEach(f => {
+        const v = (data[f.id] || '').trim() || '(no especificado)';
+        p += '- ' + f.label + ': ' + v + '\n';
+      });
+      p += '\n';
+    });
+
+    p += '# REGLAS DEL DIAGNÓSTICO\n\n';
+    p += '- Analiza los % de conversión entre etapas. Identifica dónde la caída es MÁS pronunciada relativo a los benchmarks de la industria.\n';
+    p += '- Benchmarks de referencia (fuente: Wordstream · Facebook Ads Benchmarks 2025, medianas globales):\n';
+    p += '  · CTR mediano: 1.71% en campañas de Tráfico, 2.59% en Leads.\n';
+    p += '  · CPC promedio: USD 1.72 en Facebook Feed, USD 1.28 en Instagram Reels.\n';
+    p += '  · CPM mediano global: USD 13.48.\n';
+    p += '  · CVR mediano (tasa de conversión): 1.57%.\n';
+    p += '  · CPA mediano: USD 38.17.\n';
+    p += '  · ROAS mediano: 1.93.\n';
+    p += '  · Tasa de checkout completado en ecommerce: alrededor del 30% (Baymard Institute, tasa de abandono de carrito promedio 70.19%).\n';
+    p += '  · LTV:CAC saludable: ≥ 3:1 (Optifai Pipeline Study 2026, N=939 empresas B2B SaaS).\n';
+    p += '- Prioriza la fuga con MAYOR impacto en ROI, no la más fácil de tocar.\n';
+    p += '- Si el dueño dice "no lo mido todavía", el primer diagnóstico es eso: lo que no se mide no se puede mejorar.\n';
+    p += '- Cruza el embudo con el mensaje del Módulo 1: si el mensaje promete X y el embudo entrega Y, esa es la fuga real.\n';
+    p += '- Lenguaje sencillo, sin jerga marketera. Quien lee no es marketero.\n\n';
+
+    p += '# FORMATO DE TU RESPUESTA\n\n';
+    p += '## 1 — Las 3 fugas principales\n';
+    p += '(Nombra las 3 etapas donde se pierde más gente. Por cada una di: dónde está la fuga, % actual vs % esperado por benchmark, qué le cuesta al negocio.)\n\n';
+    p += '## 2 — La etapa crítica para optimizar PRIMERO\n';
+    p += '(Una sola. Justifica por qué esta. Estima el impacto en ventas si se sube al benchmark.)\n\n';
+    p += '## 3 — Plan de 4 semanas\n';
+    p += 'Semana 1: 1-2 acciones concretas (qué hacer, qué medir, cómo).\n';
+    p += 'Semana 2: 1-2 acciones concretas.\n';
+    p += 'Semana 3: 1-2 acciones concretas.\n';
+    p += 'Semana 4: 1-2 acciones + revisión.\n';
+    p += '(Cada acción ejecutable en menos de 4 horas.)\n\n';
+    p += '## 4 — Métricas que debes empezar a medir HOY\n';
+    p += '(Lista de 4-6 métricas concretas con valor objetivo por etapa. Solo las indispensables.)\n\n';
+    p += '## 5 — Lo que NO debes hacer todavía\n';
+    p += '(2-3 cosas que el dueño podría sentirse tentado a hacer pero no corresponden por la madurez actual del embudo.)';
+
+    document.getElementById('prompt-diagnostico').textContent = p;
+  }
+
+  // ============ COPY ============
+  function copyTo(text, fbId) {
+    navigator.clipboard.writeText(text).then(() => showFb(fbId)).catch(() => {
+      const ta = document.createElement('textarea');
+      ta.value = text; ta.style.position = 'fixed'; ta.style.left = '-9999px';
+      document.body.appendChild(ta); ta.select();
+      try { document.execCommand('copy'); } catch (e) {}
+      document.body.removeChild(ta);
+      showFb(fbId);
+    });
+  }
+
+  function showFb(id) {
+    const fb = document.getElementById(id);
+    if (!fb) return;
+    fb.classList.add('show');
+    setTimeout(() => fb.classList.remove('show'), 2200);
+  }
+
+  document.getElementById('btn-copy-prompt').addEventListener('click', () => {
+    copyTo(document.getElementById('prompt-diagnostico').textContent, 'fb-copy');
+  });
+
+  document.getElementById('btn-download-txt').addEventListener('click', () => {
+    let txt = '═══════════════════════════════════════════════════\n';
+    txt += 'MI EMBUDO DE 7 ETAPAS — TALLER JOAKO ESTRATEGA\n';
+    txt += '═══════════════════════════════════════════════════\n\n';
+    txt += 'Ruta principal: ' + (currentRoute === 'web' ? 'Página Web' : currentRoute === 'whatsapp' ? 'WhatsApp directo' : 'Ambas') + '\n\n';
+    txt += 'BASE: MATERIAL DEL MÓDULO 1\n';
+    txt += '───────────────────────────────────────────────────\n\n';
+    txt += 'Producto: ' + m1.producto + '\nCliente: ' + m1.cliente + '\nPrecio: ' + m1.precio + '\n';
+    txt += 'Dolor: ' + m1.dolorQue + '\nFrase del cliente: "' + m1.dolorFrase + '"\n';
+    txt += 'Por qué es fácil: ' + m1.facil + '\nTiempo al primer resultado: ' + m1.rapido + '\nGarantía: ' + m1.garantia + '\n\n';
+    txt += '═══════════════════════════════════════════════════\nMI EMBUDO\n═══════════════════════════════════════════════════\n\n';
+    STAGES.forEach(stage => {
+      const data = state[stage.key] || {};
+      txt += '── ETAPA ' + stage.n + ' · ' + stage.name + ' ──\n';
+      stage.fields.forEach(f => {
+        const v = (data[f.id] || '').trim() || '(sin completar)';
+        txt += f.label + ': ' + v + '\n';
+      });
+      txt += '\n';
+    });
+    txt += '═══════════════════════════════════════════════════\nPROMPT DE DIAGNÓSTICO PARA LA IA\n═══════════════════════════════════════════════════\n\n';
+    txt += document.getElementById('prompt-diagnostico').textContent + '\n\n';
+    txt += 'Generado en el taller "Vender por internet" de Joako Estratega\njoakoestratega.com\n';
+
+    const blob = new Blob([txt], { type: 'text/plain;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'mi-embudo-7-etapas.txt';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+    showFb('fb-copy');
+  });
+
+  document.getElementById('btn-back').addEventListener('click', () => {
+    document.getElementById('state-result').hidden = true;
+    document.getElementById('state-ready').hidden = false;
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+
+  document.getElementById('btn-reset').addEventListener('click', () => {
+    if (!confirm('¿Borrar todo el embudo y empezar de cero?')) return;
+    state = {};
+    persist();
+    STAGES.forEach(s => updateStageStatus(s.n));
+    updateFinishButton();
+    renderForm(1);
+    setActiveStage(1);
+    document.getElementById('state-result').hidden = true;
+    document.getElementById('state-ready').hidden = false;
+  });
+
+})();
+</script>
+
+</body>
+</html>
