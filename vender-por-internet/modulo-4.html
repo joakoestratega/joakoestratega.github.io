@@ -787,6 +787,25 @@
 
   footer a { color: var(--amarillo); text-decoration: none; }
 
+  /* INSTAGRAM LINK & QR DOCK */
+  .ig-link { display: inline-flex; align-items: center; gap: 6px; padding: 8px 12px; background: var(--negro-2); color: var(--blanco); border: 1px solid var(--blanco-10); border-radius: 10px; text-decoration: none; font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 12px; letter-spacing: 0.3px; transition: var(--transition); white-space: nowrap; }
+  .ig-link:hover { background: var(--amarillo); color: #0F0F14; border-color: var(--amarillo); }
+  .ig-link svg { width: 14px; height: 14px; }
+  .qr-dock { position: fixed; bottom: 20px; right: 20px; display: flex; gap: 12px; z-index: 90; transition: transform 280ms cubic-bezier(.2,.8,.2,1), opacity 280ms; }
+  .qr-dock.collapsed { transform: translateY(calc(100% + 20px)); opacity: 0; pointer-events: none; }
+  .qr-card { background: #FFFFFF; border-radius: 12px; padding: 12px 12px 8px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35); text-align: center; border: 2px solid var(--amarillo); transition: var(--transition); }
+  .qr-card:hover { transform: translateY(-3px); box-shadow: 0 14px 36px rgba(0, 0, 0, 0.45); }
+  .qr-image { width: 116px; height: 116px; margin: 0 auto 6px; display: grid; place-items: center; }
+  .qr-image img, .qr-image canvas { width: 100% !important; height: 100% !important; display: block; }
+  .qr-label { font-family: 'Montserrat', sans-serif; font-size: 10px; font-weight: 800; color: #0F0F14; text-transform: uppercase; letter-spacing: 1px; white-space: nowrap; }
+  .qr-toggle { position: fixed; bottom: 20px; right: 20px; z-index: 91; width: 44px; height: 44px; border-radius: 50%; background: var(--amarillo); color: #0F0F14; border: none; cursor: pointer; display: none; place-items: center; box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3); font-size: 14px; font-weight: 800; font-family: 'Montserrat', sans-serif; transition: var(--transition); }
+  .qr-toggle.show { display: grid; }
+  .qr-toggle:hover { transform: scale(1.05); }
+
+  @media (max-width: 900px) {
+    .qr-dock, .qr-toggle { display: none !important; }
+  }
+
   /* MOBILE */
   @media (max-width: 760px) {
     .header-inner { flex-direction: column; align-items: stretch; gap: 14px; padding: 14px 18px; }
@@ -828,6 +847,11 @@
         <button class="mode-tab active" type="button" data-mode="teorico">Teoría</button>
         <button class="mode-tab" type="button" data-mode="practico">Práctica</button>
       </div>
+
+      <a class="ig-link" href="https://instagram.com/joakoestratega" target="_blank" rel="noopener" aria-label="Sígueme en Instagram">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+        @joakoestratega
+      </a>
 
       <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Cambiar tema" title="Cambiar tema">
         <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -1186,6 +1210,55 @@ ROAS calculado: 0.69</pre>
   Construido para el taller <strong style="color: var(--blanco);">Vender por internet: el mensaje, el anuncio y el embudo que sí funcionan</strong><br>
   por <a href="https://joakoestratega.com" target="_blank" rel="noopener">Joako Estratega</a> · Método MPV · 2026
 </footer>
+
+<aside class="qr-dock" id="qr-dock" aria-label="Códigos QR del taller">
+  <div class="qr-card" title="Escanea para abrir el taller en tu teléfono">
+    <div class="qr-image" id="qr-taller"></div>
+    <div class="qr-label">Abrir el taller</div>
+  </div>
+  <div class="qr-card" title="Escanea para seguir a Joako en Instagram">
+    <div class="qr-image" id="qr-ig"></div>
+    <div class="qr-label">@joakoestratega</div>
+  </div>
+  <button class="qr-close" id="qr-close" type="button" aria-label="Cerrar códigos QR" style="position:absolute;top:-10px;right:-10px;width:28px;height:28px;border-radius:50%;background:#0F0F14;color:#fff;border:2px solid #F8B400;cursor:pointer;font-size:14px;font-weight:700;display:grid;place-items:center;">×</button>
+</aside>
+
+<button class="qr-toggle" id="qr-toggle" type="button" aria-label="Mostrar códigos QR" title="Mostrar QR">QR</button>
+
+<script src="https://cdn.jsdelivr.net/gh/davidshimjs/qrcodejs/qrcode.min.js"></script>
+<script>
+(function () {
+  if (typeof QRCode === 'undefined') return;
+  try {
+    new QRCode(document.getElementById('qr-taller'), {
+      text: 'https://joakoestratega.com/vender-por-internet/',
+      width: 116, height: 116,
+      colorDark: '#0F0F14', colorLight: '#FFFFFF',
+      correctLevel: QRCode.CorrectLevel.M
+    });
+    new QRCode(document.getElementById('qr-ig'), {
+      text: 'https://instagram.com/joakoestratega',
+      width: 116, height: 116,
+      colorDark: '#0F0F14', colorLight: '#FFFFFF',
+      correctLevel: QRCode.CorrectLevel.M
+    });
+  } catch (e) {}
+
+  const dock = document.getElementById('qr-dock');
+  const toggle = document.getElementById('qr-toggle');
+  const closeBtn = document.getElementById('qr-close');
+  if (closeBtn && dock && toggle) {
+    closeBtn.addEventListener('click', () => {
+      dock.classList.add('collapsed');
+      toggle.classList.add('show');
+    });
+    toggle.addEventListener('click', () => {
+      dock.classList.remove('collapsed');
+      toggle.classList.remove('show');
+    });
+  }
+})();
+</script>
 
 <script>
 (function () {
