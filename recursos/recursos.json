@@ -1,0 +1,140 @@
+{
+  "_nota": "Fuente unica de verdad de los recursos gratis de joakoestratega.com/recursos/. NO editar el index.html del hub a mano: se regenera desde aqui con SCRIPTS/generar_hub_recursos.py. Al crear un recurso con generar_recurso.py este archivo se actualiza solo. El orden del array es el orden de aparicion en el hub.",
+  "recursos": [
+    {
+      "slug": "copy-desde-resultado",
+      "tag": "Mensaje · Copy",
+      "titulo": "Reescribe tu copy desde el resultado, no desde el proceso",
+      "desc": "Tu cliente no compra 'una valoración integral'. Compra dejar de sentirse mal. Ejercicio para reescribir tu copy desde el dolor real, con ejemplos por profesión.",
+      "cta": "Hacer el ejercicio →",
+      "lastmod": "2026-05-18",
+      "priority": "0.7"
+    },
+    {
+      "slug": "como-hacer-hooks-vender-servicios",
+      "tag": "Copy · Hooks",
+      "titulo": "Cómo hacer hooks que venden tu servicio",
+      "desc": "Guía paso a paso para escribir el primer renglón que frena el scroll. 5 estructuras con ejemplos por profesión: abogada, psicóloga, nutricionista, coach.",
+      "cta": "Leer guía →",
+      "lastmod": "2026-06-01",
+      "priority": "0.7"
+    },
+    {
+      "slug": "5-niveles-conciencia-cliente",
+      "tag": "Mensaje · Embudo",
+      "titulo": "Los 5 niveles de conciencia de tu cliente",
+      "desc": "Tu cliente no compra hasta pasar por 5 niveles. La mayoría publica solo para el último. Mapa de qué pieza publicar para cada nivel, con ejemplos por profesión.",
+      "cta": "Ver el mapa →",
+      "lastmod": "2026-05-18",
+      "priority": "0.7"
+    },
+    {
+      "slug": "chequeo-creativos-meta-ads",
+      "tag": "Pauta · Meta Ads",
+      "titulo": "Chequeo de 5 minutos para validar tus creativos",
+      "desc": "6 preguntas antes de pautar. Si tu creativo no las cumple, ahí está la razón por la que la pauta no convierte.",
+      "cta": "Leer guía →",
+      "lastmod": "2026-05-12",
+      "priority": "0.7"
+    },
+    {
+      "slug": "5-razones-pauta-meta-no-vende",
+      "tag": "Pauta · Meta Ads",
+      "titulo": "5 razones por las que tu pauta no vende",
+      "desc": "Las causas más frecuentes y cómo revisar cada una en tu Business Manager sin pagar agencia ni meter más presupuesto.",
+      "cta": "Leer guía →",
+      "lastmod": "2026-05-12",
+      "priority": "0.7"
+    },
+    {
+      "slug": "escalar-pieza-organica",
+      "tag": "Pauta · Escalar",
+      "titulo": "¿Qué pieza tuya escalar con pauta?",
+      "desc": "Tu pieza orgánica que sí conecta puede pasar de 400 a 4000 vistas con poco presupuesto. Pero solo si pasa estos 5 filtros antes de pautar.",
+      "cta": "Hacer el chequeo →",
+      "lastmod": "2026-05-18",
+      "priority": "0.7"
+    },
+    {
+      "slug": "3-errores-destruyen-confianza",
+      "tag": "Confianza · Contenido",
+      "titulo": "3 errores que destruyen la confianza profesional en redes",
+      "desc": "Tu cliente distingue entre criterio y frases de coach, entre caso real y testimonio inflado. Los 3 errores más comunes, con su versión correcta.",
+      "cta": "Leer guía →",
+      "lastmod": "2026-05-18",
+      "priority": "0.7"
+    },
+    {
+      "slug": "chequeo-confianza-profesional",
+      "tag": "Confianza · Contenido",
+      "titulo": "¿Tu contenido construye o destruye confianza?",
+      "desc": "8 puntos concretos para revisar si tu contenido suma o resta confianza con el cliente que paga bien por tu servicio.",
+      "cta": "Hacer el chequeo →",
+      "lastmod": "2026-05-18",
+      "priority": "0.7"
+    },
+    {
+      "slug": "cta-instagram-generar-interaccion",
+      "tag": "Copy · Instagram",
+      "titulo": "Banco de CTAs que sí generan interacción",
+      "desc": "16 llamados a la acción categorizados por intención + las 3 reglas para elegir el correcto en cada pieza.",
+      "cta": "Leer guía →",
+      "lastmod": "2026-05-12",
+      "priority": "0.7"
+    },
+    {
+      "slug": "objeciones-comunes-clientes-servicios",
+      "tag": "Ventas · Servicios",
+      "titulo": "10 objeciones comunes en servicios + cómo responder",
+      "desc": "\"Está caro\", \"lo voy a pensar\", \"no tengo tiempo\". La respuesta concreta a cada una sin sonar a guion de vendedor.",
+      "cta": "Leer guía →",
+      "lastmod": "2026-05-12",
+      "priority": "0.7"
+    },
+    {
+      "slug": "sistema-cierre-servicios",
+      "tag": "Cierre · Sistema",
+      "titulo": "El sistema de cierre para servicios en 4 pasos",
+      "desc": "Sin sistema de cierre, tu contenido educa pero no vende. 4 pasos para llevar a tu cliente de pieza educativa a consulta pagada, con ejemplos.",
+      "cta": "Ver el sistema →",
+      "lastmod": "2026-05-18",
+      "priority": "0.7"
+    },
+    {
+      "slug": "servicio-vs-producto",
+      "tag": "Estrategia · Servicios",
+      "titulo": "Vender servicio no es vender producto",
+      "desc": "Las tácticas hechas para vender producto te queman plata cuando vendes servicio. Las 6 diferencias concretas, con ejemplos por profesión.",
+      "cta": "Leer guía →",
+      "lastmod": "2026-05-18",
+      "priority": "0.7"
+    },
+    {
+      "slug": "4-metricas-sistema-venta",
+      "tag": "Métricas · Sistema",
+      "titulo": "Las 4 métricas de tu sistema de venta",
+      "desc": "Sin medirlas, ajustas a ciegas. Cada una te dice en qué paso se cae el flujo. Plantilla semanal lista para llevar tú misma.",
+      "cta": "Ver las métricas →",
+      "lastmod": "2026-05-18",
+      "priority": "0.7"
+    },
+    {
+      "slug": "respuestas-automaticas-instagram-meta-business",
+      "tag": "Automatización · Instagram",
+      "titulo": "Tutorial: respuestas automáticas con Meta Business Suite",
+      "desc": "Configura el primer mensaje automático en 20 minutos. Sin pagar ManyChat. Con las opciones oficiales que Meta ya trae.",
+      "cta": "Ver tutorial →",
+      "lastmod": "2026-05-12",
+      "priority": "0.7"
+    },
+    {
+      "slug": "3-preguntas-filtrar-agencia-marketing",
+      "tag": "Decisión · Agencia",
+      "titulo": "3 preguntas para filtrar una agencia antes de contratarla",
+      "desc": "Te toman 10 minutos en la primera reunión y te pueden ahorrar 6 meses con miles de dólares perdidos.",
+      "cta": "Leer guía →",
+      "lastmod": "2026-05-12",
+      "priority": "0.7"
+    }
+  ]
+}

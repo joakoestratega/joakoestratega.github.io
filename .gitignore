@@ -1,0 +1,23 @@
+# ─── BACKEND / CÓDIGO INTERNO (no va al repo público) ───
+# El código de Google Apps Script vive en script.google.com.
+# Aquí se conserva solo como copia local, nunca se sube.
+apps-script.gs
+*.gs
+
+# ─── SECRETOS Y CREDENCIALES (jamás se suben) ───
+.env
+.env.*
+*.key
+*.pem
+*credentials*
+*secret*
+*-secrets.*
+service-account*.json
+client_secret*.json
+
+# ─── BASURA DEL SISTEMA ───
+.DS_Store
+Thumbs.db
+desktop.ini
+*.log
+node_modules/
