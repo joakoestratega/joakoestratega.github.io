@@ -27,7 +27,7 @@ LANDINGS/                              ← esto es lo que subes a GitHub Pages
 │   └── testimonios/                   ← (vacía, por llenar con capturas)
 │
 ├── asesoria-mpv/
-│   ├── index.html                     ← landing del producto $200.000 COP (la crítica)
+│   ├── index.html                     ← landing del producto $1.000.000 COP (la crítica)
 │   └── gracias/index.html
 │
 ├── comunidad/
@@ -47,7 +47,7 @@ LANDINGS/                              ← esto es lo que subes a GitHub Pages
 | URL | Función |
 |---|---|
 | `https://joakoestratega.com/` | Home institucional. Presenta a Joako, escalera de productos, Método MPV resumido, validación. CTA principal: Asesoría MPV |
-| `https://joakoestratega.com/asesoria-mpv/` | Landing de venta del producto $200.000 COP. La página que más debe convertir |
+| `https://joakoestratega.com/asesoria-mpv/` | Landing de venta del producto $1.000.000 COP. La página que más debe convertir |
 | `https://joakoestratega.com/comunidad/` | Lead magnet del grupo de WhatsApp gratis |
 | `https://joakoestratega.com/metodo-mpv/` | Pilar de autoridad: explica las 4 condiciones del Método MPV. Captura email para newsletter mensual |
 

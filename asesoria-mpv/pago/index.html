@@ -83,7 +83,7 @@
       </dl>
       <div class="total">
         <span>Total a pagar</span>
-        <strong>$200.000 COP</strong>
+        <strong>$1.000.000 COP</strong>
       </div>
       <a href="../index.html#aplicar" class="editar-link">✎ Editar datos</a>
     </div>
@@ -93,12 +93,12 @@
     </div>
 
     <p class="pago-info">
-      <strong>Garantía:</strong> si terminas la sesión 2 y no obtienes claridad estratégica real, se te devuelven los $200.000 sin preguntas.
+      <strong>Garantía:</strong> si terminas la sesión 2 y no obtienes claridad estratégica real, se te devuelven los $1.000.000 sin preguntas.
     </p>
 
     <div class="botones-pago">
       <button id="btn-pagar" class="btn btn-primary btn-lg btn-block btn-lift" data-cta="pago_wompi">
-        Pagar $200.000 COP con tarjeta, PSE, Nequi o Bancolombia
+        Pagar $1.000.000 COP con tarjeta, PSE, Nequi o Bancolombia
       </button>
       <p style="text-align: center; font-size: 12px; color: var(--gris-3); margin: 8px 0;">
         También se acepta Bre-B y transferencia. Pago procesado por Wompi.
@@ -169,7 +169,7 @@
     window.addEventListener('load', () => {
       window.JOAKO.track('checkout_view', {
         producto: 'Asesoría MPV',
-        valor: 200000,
+        valor: 1000000,
         moneda: 'COP',
         meta_event_name: 'InitiateCheckout'
       });
@@ -188,7 +188,7 @@
 
     // Trackear: click en pagar
     if (window.JOAKO && typeof window.JOAKO.track === 'function') {
-      window.JOAKO.track('pago_iniciado', { producto: 'Asesoría MPV', valor: 200000 });
+      window.JOAKO.track('pago_iniciado', { producto: 'Asesoría MPV', valor: 1000000 });
     }
 
     btnPagar.disabled = true;

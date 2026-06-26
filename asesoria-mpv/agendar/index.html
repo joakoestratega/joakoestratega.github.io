@@ -186,13 +186,13 @@
 
       // Pago aprobado, cargar slots
       estado.className = 'estado-box estado-ok';
-      estado.innerHTML = '✅ Pago aprobado por $' + (res.monto || 200000).toLocaleString('es-CO') + ' COP';
+      estado.innerHTML = '✅ Pago aprobado por $' + (res.monto || 1000000).toLocaleString('es-CO') + ' COP';
 
       // Trackear: pago confirmado (Purchase de Meta)
       if (window.JOAKO && typeof window.JOAKO.track === 'function') {
         window.JOAKO.track('pago_completado', {
           producto: 'Asesoría MPV',
-          valor: res.monto || 200000,
+          valor: res.monto || 1000000,
           moneda: 'COP',
           meta_event_name: 'Purchase'
         });
@@ -306,7 +306,7 @@
         producto: 'Asesoría MPV',
         fecha: slotElegido.fecha,
         hora: slotElegido.hora,
-        valor: 200000,
+        valor: 1000000,
         moneda: 'COP',
         meta_event_name: 'Schedule'
       });
