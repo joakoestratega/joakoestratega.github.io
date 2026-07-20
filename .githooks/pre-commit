@@ -1,0 +1,79 @@
+#!/bin/sh
+# ─────────────────────────────────────────────────────────────
+# Freno de mano contra secretos · Joako Estratega
+# Bloquea el commit si detecta una llave, token o contraseña
+# en lo que estás a punto de subir. Este repo es PÚBLICO.
+#
+# Instalado el 2026-07-18 tras encontrar la llave de integridad
+# de Wompi y el token de Telegram vivos en el historial.
+#
+# Para saltarlo a propósito (solo si sabes qué haces):
+#   git commit --no-verify
+# ─────────────────────────────────────────────────────────────
+
+archivos=$(git diff --cached --name-only --diff-filter=ACM)
+[ -z "$archivos" ] && exit 0
+
+hallazgos=0
+
+revisar() {
+  patron="$1"
+  descripcion="$2"
+  encontrado=$(git diff --cached -U0 -- $archivos | grep -nE "^\+.*$patron" 2>/dev/null)
+  if [ -n "$encontrado" ]; then
+    echo ""
+    echo "  ✖ $descripcion"
+    echo "$encontrado" | head -3 | sed 's/^/      /' | cut -c1-110
+    hallazgos=$((hallazgos + 1))
+  fi
+}
+
+# Llaves de pasarela de pago
+revisar "prv_(prod|test)_[A-Za-z0-9]{10}"      "Llave PRIVADA de Wompi"
+revisar "(prod|test)_integrity_[A-Za-z0-9]{10}" "Llave de INTEGRIDAD de Wompi"
+revisar "(prod|test)_events_[A-Za-z0-9]{10}"    "Llave de EVENTOS de Wompi"
+# Nota: pub_prod_ / pub_test_ son PÚBLICAS por diseño y no se bloquean.
+
+# Bots y servicios
+revisar "[0-9]{8,10}:AA[A-Za-z0-9_-]{30}"       "Token de bot de Telegram"
+revisar "sk-[A-Za-z0-9]{20}"                    "Llave de OpenAI"
+revisar "sk_live_[A-Za-z0-9]{20}"               "Llave viva de Stripe"
+revisar "AIza[A-Za-z0-9_-]{30}"                 "Llave de API de Google"
+revisar "AKIA[A-Z0-9]{16}"                      "Llave de acceso de AWS"
+revisar "gh[pousr]_[A-Za-z0-9]{30}"             "Token de GitHub"
+revisar "xox[baprs]-[A-Za-z0-9-]{10}"           "Token de Slack"
+revisar "BEGIN (RSA |EC |OPENSSH )?PRIVATE KEY" "Llave privada"
+
+# Archivos que nunca deben entrar a un repo público
+for f in $archivos; do
+  case "$f" in
+    *.gs|.env|.env.*|*.pem|*.key|service-account*.json|client_secret*.json)
+      echo ""
+      echo "  ✖ Archivo que no va en un repo público: $f"
+      hallazgos=$((hallazgos + 1))
+      ;;
+  esac
+done
+
+if [ "$hallazgos" -gt 0 ]; then
+  echo ""
+  echo "═══════════════════════════════════════════════════════════"
+  echo "  COMMIT BLOQUEADO · se detectaron $hallazgos posibles secretos"
+  echo "═══════════════════════════════════════════════════════════"
+  echo ""
+  echo "  Este repositorio es PÚBLICO. Lo que subas aquí lo puede"
+  echo "  leer cualquiera, y borrarlo después NO lo elimina: queda"
+  echo "  en el historial para siempre."
+  echo ""
+  echo "  Qué hacer:"
+  echo "   1. Saca el secreto del archivo."
+  echo "   2. Guárdalo donde va: Propiedades del script en Apps"
+  echo "      Script, o el archivo .env, que no se sube."
+  echo "   3. Deja en el código solo el NOMBRE de la variable."
+  echo ""
+  echo "  Si de verdad es un falso positivo:  git commit --no-verify"
+  echo ""
+  exit 1
+fi
+
+exit 0

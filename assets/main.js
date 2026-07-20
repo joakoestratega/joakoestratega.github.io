@@ -120,6 +120,13 @@
         }
       });
 
+      // CAPTURA DE "LEAD PARCIAL" DESACTIVADA (2026-07-18).
+      // Antes, este bloque enviaba nombre + WhatsApp al backend en cuanto la persona
+      // salía del campo, ANTES de que diera clic en enviar. El aviso legal del
+      // formulario solo cubre "al enviar", así que era recolección de datos sin el
+      // consentimiento declarado (Habeas Data). No se reactiva sin cambiar antes el
+      // aviso del formulario y la política de privacidad.
+      // Se conserva el evento de analítica, que no guarda datos personales.
       form.addEventListener('focusout', () => {
         if (partial.sent) return;
         const fd = new FormData(form);
@@ -128,7 +135,7 @@
         const email = (fd.get('email') || '').toString().trim();
         if (nombre && (whatsapp || email)) {
           partial.sent = true;
-          enviarApps(buildPayload(form, producto, 'Lead parcial'));
+          track('form_abandon_datos_completos', { producto });
         }
       });
 
