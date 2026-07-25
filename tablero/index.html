@@ -1,0 +1,558 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Joako Estratega Platform · Tablero</title>
+<meta name="robots" content="noindex" />
+<meta name="description" content="Tablero de seguimiento — Joako Estratega Platform." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#050507; --card:#0c0c12; --card2:#13131a; --card3:#1a1a22;
+  --line:#22222e; --line2:#2d2d3a;
+  --amarillo:#F8B400; --amarillo2:#FFC939;
+  --azul:#21209C; --azul2:#4D4CD9; --azul3:#6366f1;
+  --verde:#10b981; --verde2:#059669;
+  --txt:#fafafa; --muted:#b8b8c2; --bajo:#6b6b78; --fantasma:#45454f;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
+body{
+  font-family:'Montserrat',Arial,sans-serif;
+  background:
+    radial-gradient(ellipse 90% 60% at 50% -10%, rgba(99,102,241,0.28), transparent 55%),
+    radial-gradient(ellipse 70% 50% at 95% 95%, rgba(248,180,0,0.14), transparent 65%),
+    radial-gradient(ellipse 50% 40% at 5% 80%, rgba(77,76,217,0.16), transparent 70%),
+    var(--bg);
+  background-attachment:fixed;
+  color:var(--txt);
+  letter-spacing:-0.01em;
+  -webkit-font-smoothing:antialiased;
+  min-height:100%;
+}
+.tabular{font-variant-numeric:tabular-nums}
+.eyebrow{font-size:11px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:var(--bajo)}
+a{color:inherit;text-decoration:none}
+button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}
+
+/* NAV */
+header.nav{position:sticky;top:0;z-index:40;width:100%;border-bottom:1px solid var(--line);background:rgba(5,5,7,0.72);backdrop-filter:blur(20px)}
+.nav-in{max-width:1400px;margin:0 auto;height:64px;display:flex;align-items:center;gap:18px;padding:0 22px}
+.logo{display:flex;align-items:center;gap:10px;flex-shrink:0}
+.logo .j{width:36px;height:36px;border-radius:12px;background:var(--amarillo);color:#0F0F14;font-weight:900;font-size:19px;display:flex;align-items:center;justify-content:center;box-shadow:0 10px 24px -10px rgba(248,180,0,0.6)}
+.logo .wm{font-weight:900;font-size:15px;letter-spacing:-0.02em}
+.logo .wm span{color:var(--amarillo)}
+nav.tabs{display:flex;flex:1;align-items:center;gap:2px;overflow-x:auto}
+nav.tabs button{position:relative;white-space:nowrap;padding:8px 14px;font-size:14px;font-weight:600;color:var(--bajo);transition:color .15s;border-radius:8px}
+nav.tabs button:hover{color:var(--muted)}
+nav.tabs button.on{color:var(--txt)}
+nav.tabs button.on::after{content:"";position:absolute;left:12px;right:12px;bottom:-1px;height:2px;background:linear-gradient(90deg,transparent,var(--azul3),transparent)}
+.clock{font-size:12px;color:var(--muted);white-space:nowrap}
+.clock .d{color:var(--bajo);text-transform:capitalize}
+.envivo{display:flex;align-items:center;gap:8px}
+.dot{width:8px;height:8px;border-radius:50%;background:var(--verde);animation:pulso 2s ease-in-out infinite}
+@keyframes pulso{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(1.3)}}
+.envivo span{font-size:10px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:#34d399}
+.avatar{width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,var(--azul2),var(--azul));display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:#fff;box-shadow:0 8px 20px -8px rgba(33,32,156,0.6);flex-shrink:0;position:relative;border:2px solid var(--card2)}
+.avatar::after{content:"";position:absolute;bottom:-2px;right:-2px;width:12px;height:12px;border-radius:50%;background:var(--verde);border:2px solid var(--bg)}
+.hide-sm{display:none}
+@media(min-width:900px){.hide-sm{display:block}.hide-sm.flex{display:flex}}
+
+main{max-width:1400px;margin:0 auto;padding:36px 22px 48px}
+.tabpane{display:none}
+.tabpane.on{display:block;animation:fadeup .4s ease both}
+@keyframes fadeup{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+
+/* Resumen header */
+.rhead{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:20px;margin-bottom:30px}
+.rhead h1{font-size:44px;font-weight:900;letter-spacing:-0.05em;line-height:.9}
+.weeks{display:flex;flex-wrap:wrap;gap:8px}
+.weeks button{border-radius:16px;padding:10px 16px;text-align:left;border:1px solid var(--line2);background:var(--card3);color:var(--muted);transition:all .15s}
+.weeks button:hover{border-color:#3a3a48}
+.weeks button b{display:block;font-size:14px;font-weight:900;line-height:1}
+.weeks button small{font-size:10px;color:var(--bajo)}
+.weeks button.on{color:#fff;border-color:var(--azul2);background:var(--azul2)}
+.weeks button.on.mes{color:#0F0F14;border-color:var(--amarillo);background:var(--amarillo)}
+.weeks button.on small{opacity:.7;color:inherit}
+
+/* KPIs */
+.kpis{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-bottom:32px}
+@media(min-width:900px){.kpis{grid-template-columns:repeat(4,1fr)}}
+.kpi{border-radius:20px;border:1px solid var(--line2);background:rgba(19,19,26,0.6);padding:16px;display:flex;flex-direction:column;justify-content:space-between;min-height:104px}
+.kpi .lab{display:flex;align-items:center;gap:6px;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--bajo)}
+.kpi .val{font-size:28px;font-weight:900;line-height:1;margin-top:12px}
+.kpi.verde .val{color:#34d399}
+.kpi.roas{border-color:rgba(248,180,0,.4);background:linear-gradient(160deg,rgba(248,180,0,.15),transparent)}
+.kpi.roas .lab{color:var(--muted)}
+.kpi.roas .val{font-size:46px;color:var(--amarillo)}
+.kpi.roas small{font-size:11px;color:var(--bajo);margin-top:6px;display:block}
+
+/* Panel */
+.panel{border-radius:26px;border:1px solid var(--line2);background:rgba(8,8,12,0.6);padding:32px 26px;margin-bottom:32px}
+.panel .ph{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px;margin-bottom:26px}
+.panel h2{font-size:20px;font-weight:900;letter-spacing:-0.02em}
+.panel .note{font-size:12px;color:var(--bajo);max-width:290px;text-align:right}
+.grid-bg{background-image:linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);background-size:64px 64px}
+
+/* Cadena */
+.cadena{display:flex;flex-wrap:wrap;align-items:stretch;justify-content:center;row-gap:24px}
+.esl-wrap{display:flex;align-items:center}
+.esl{position:relative;width:150px;border-radius:22px;padding:1.5px}
+.esl .in{border-radius:21px;height:100%;padding:20px 16px;display:flex;flex-direction:column;align-items:center;text-align:center;background:#0c0c12}
+.esl .badge{width:44px;height:44px;border-radius:16px;display:flex;align-items:center;justify-content:center;margin-bottom:12px}
+.esl .badge svg{width:20px;height:20px;stroke:#fff;fill:none;stroke-width:2.2}
+.esl .num{font-size:30px;font-weight:900;letter-spacing:-0.02em;color:#fff;line-height:1}
+.esl .nm{margin-top:8px;font-size:11px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:rgba(255,255,255,.55);line-height:1.15}
+.con{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:0 6px;flex-shrink:0}
+.con .t{font-size:14px;font-weight:900;color:#fff;line-height:1}
+.con .s{font-size:9px;letter-spacing:.05em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:4px}
+.con .bar{position:relative;height:3px;width:32px;border-radius:2px;background:rgba(255,255,255,.12);overflow:hidden}
+.con .bar::after{content:"";position:absolute;top:0;bottom:0;width:50%;border-radius:2px;background:linear-gradient(90deg,transparent,var(--amarillo),transparent);animation:flow 1.6s linear infinite}
+@keyframes flow{from{transform:translateX(-100%)}to{transform:translateX(280%)}}
+.con .arw{color:rgba(255,255,255,.25);margin-top:4px;font-size:14px}
+
+/* Comparativo */
+.cmp{display:grid;grid-template-columns:1fr;gap:16px}
+@media(min-width:640px){.cmp{grid-template-columns:repeat(2,1fr)}}
+@media(min-width:1024px){.cmp{grid-template-columns:repeat(3,1fr)}}
+.mini{border-radius:16px;border:1px solid var(--line);background:rgba(26,26,34,.4);padding:16px}
+.mini .mh{display:flex;align-items:flex-start;justify-content:space-between;gap:8px;margin-bottom:12px}
+.mini .mt{font-size:12px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--muted);line-height:1.15}
+.mini .tr{display:flex;align-items:center;gap:2px;font-size:12px;font-weight:900}
+.tr.bien{color:#34d399}.tr.mal{color:#f87171}.tr.neutro{color:var(--bajo)}
+.bars{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;align-items:end;height:110px}
+.bcol{display:flex;flex-direction:column;align-items:center;justify-content:flex-end;gap:6px;height:100%}
+.bcol .bv{font-size:11px;font-weight:900;line-height:1;color:var(--muted)}
+.bcol.on .bv{color:var(--amarillo)}
+.bcol .bk{width:100%;border-radius:8px 8px 0 0;background:linear-gradient(to top,var(--azul),var(--azul2));transition:height .5s cubic-bezier(.16,1,.3,1)}
+.bcol.on .bk{background:linear-gradient(to top,var(--amarillo),var(--amarillo2))}
+.bcol .bl{font-size:10px;font-weight:700;color:var(--bajo);line-height:1}
+
+/* PageHeader grande */
+.phead{padding-bottom:28px}
+.phead .big{font-size:52px;font-weight:900;letter-spacing:-0.05em;line-height:.92}
+.phead .big i{font-style:italic;font-weight:400;font-family:Georgia,serif;color:var(--amarillo)}
+.phead p{color:var(--muted);font-size:17px;max-width:620px;margin-top:12px;line-height:1.5}
+
+/* Estrategias */
+.egrid{display:grid;grid-template-columns:1fr;gap:16px}
+@media(min-width:640px){.egrid{grid-template-columns:repeat(2,1fr)}}
+.ecard{border-radius:24px;border:1px solid var(--line2);background:rgba(8,8,12,.6);padding:24px}
+.ecard .top{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:16px}
+.ecard .ic{width:44px;height:44px;border-radius:16px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.ecard .ic svg{width:20px;height:20px;fill:none;stroke-width:2.2}
+.ecard .tt{font-weight:900;font-size:18px;letter-spacing:-0.02em;line-height:1.15}
+.chip{flex-shrink:0;border-radius:999px;padding:4px 12px;font-size:11px;font-weight:700}
+.ecard p{font-size:14px;color:var(--muted);margin-bottom:20px}
+.prog{display:flex;align-items:center;gap:12px}
+.prog .track{height:8px;flex:1;border-radius:999px;background:var(--card3);overflow:hidden}
+.prog .fill{height:100%;border-radius:999px}
+.prog .pct{font-size:12px;font-weight:900;color:var(--muted);width:40px;text-align:right}
+.cob{display:grid;grid-template-columns:1fr;gap:12px;margin-top:8px}
+@media(min-width:640px){.cob{grid-template-columns:repeat(2,1fr)}}
+@media(min-width:1024px){.cob{grid-template-columns:repeat(4,1fr)}}
+.cobi{display:flex;align-items:center;gap:12px;border-radius:16px;border:1px solid;padding:14px 16px}
+.cobi.ok{border-color:rgba(16,185,129,.25);background:rgba(16,185,129,.08)}
+.cobi.no{border-color:rgba(245,158,11,.25);background:rgba(245,158,11,.08)}
+.cobi b{font-size:14px;display:block;line-height:1.15}
+.cobi small{font-size:11px}
+.cobi.ok small{color:#34d399}.cobi.no small{color:#fbbf24}
+
+/* Tabla */
+.tbl-wrap{border-radius:24px;border:1px solid var(--line2);background:rgba(8,8,12,.6);overflow:hidden}
+table{width:100%;border-collapse:collapse;font-size:14px}
+th{text-align:right;padding:12px 16px;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--bajo);border-bottom:1px solid var(--line2)}
+th:first-child,td:first-child{text-align:left}
+th.l{text-align:left}
+td{padding:10px 16px;text-align:right;border-bottom:1px solid rgba(34,34,46,.5)}
+tbody tr:hover{background:rgba(26,26,34,.4)}
+.semtag{display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:6px;font-size:11px;font-weight:900;color:#fff}
+tfoot td{font-weight:900;background:rgba(26,26,34,.6);border-bottom:none}
+.g{color:#34d399}.y{color:var(--amarillo)}.mut{color:var(--muted)}
+
+/* Integraciones */
+.intro-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+@media(min-width:560px){.intro-grid{grid-template-columns:repeat(3,1fr)}}
+@media(min-width:900px){.intro-grid{grid-template-columns:repeat(4,1fr)}}
+.grp{margin-bottom:30px}
+.grp .gt{font-size:13px;font-weight:800;color:var(--txt);margin-bottom:4px}
+.grp .gd{font-size:12px;color:var(--bajo);margin-bottom:14px}
+.tile{border-radius:16px;padding:16px;display:flex;align-items:center;gap:12px;border:1px solid var(--line);min-height:64px}
+.tile .tg{width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:16px;flex-shrink:0}
+.tile .tn{font-size:13px;font-weight:700;line-height:1.15}
+.closer{position:relative;overflow:hidden;border-radius:26px;border:1px solid var(--line2);background:linear-gradient(135deg,rgba(33,32,156,.14),transparent 60%,rgba(248,180,0,.1));padding:56px 32px;text-align:center;margin-top:8px}
+.closer .big{font-size:32px;font-weight:900;letter-spacing:-0.04em;line-height:1.1}
+.closer p{color:var(--muted);margin-top:14px;font-size:16px;max-width:560px;margin-left:auto;margin-right:auto}
+
+/* Bitacora */
+.tl{position:relative}
+.tl::before{content:"";position:absolute;left:19px;top:8px;bottom:8px;width:1px;background:var(--line2)}
+.tli{position:relative;display:flex;gap:16px;margin-bottom:16px}
+.tli .node{position:relative;z-index:1;flex-shrink:0;width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;border:1px solid var(--line2);background:#0c0c12;box-shadow:0 0 0 4px var(--bg)}
+.tli .node svg{width:16px;height:16px;fill:none;stroke-width:2.2}
+.tli .body{flex:1;border-radius:16px;border:1px solid var(--line2);background:rgba(8,8,12,.6);padding:16px}
+.tli .meta{display:flex;align-items:center;gap:12px;margin-bottom:6px}
+.tli .tp{font-size:12px;font-weight:900;letter-spacing:.04em;text-transform:uppercase}
+.tli .dt{font-size:12px;color:var(--bajo)}
+.tli p{font-size:14px;color:var(--muted);line-height:1.55}
+
+footer.ft{border-top:1px solid var(--line);margin-top:56px}
+.ft-in{max-width:1400px;margin:0 auto;padding:22px;display:flex;align-items:center;justify-content:space-between;font-size:12px;color:var(--bajo)}
+.ft-in i{font-family:Georgia,serif;font-style:italic;color:var(--muted);font-size:14px}
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="nav-in">
+    <a class="logo" href="#" onclick="go('resumen');return false">
+      <div class="j">J</div>
+      <div class="wm hide-sm">Joako Estratega <span>Platform</span></div>
+    </a>
+    <nav class="tabs" id="tabs">
+      <button data-tab="resumen" class="on">Resumen</button>
+      <button data-tab="estrategias">Estrategias</button>
+      <button data-tab="dia-a-dia">Día a día</button>
+      <button data-tab="integraciones">Integraciones</button>
+      <button data-tab="bitacora">Bitácora</button>
+    </nav>
+    <div class="clock hide-sm" id="clock"></div>
+    <div class="envivo hide-sm flex"><span class="dot"></span><span>En vivo</span></div>
+    <div class="avatar">JR</div>
+  </div>
+</header>
+
+<main>
+  <!-- RESUMEN -->
+  <section id="resumen" class="tabpane on">
+    <div class="rhead">
+      <div>
+        <div class="eyebrow" style="margin-bottom:8px">Campaña · Julio 2026</div>
+        <h1>Resumen del mes</h1>
+      </div>
+      <div class="weeks" id="weeks"></div>
+    </div>
+    <div class="kpis" id="kpis"></div>
+    <div class="panel grid-bg">
+      <div class="ph">
+        <div>
+          <div class="eyebrow" style="margin-bottom:4px">La cadena</div>
+          <h2>Cada eslabón, medido y con nombre propio</h2>
+        </div>
+        <div class="note">Cuando algo se cae, se ve exactamente en qué eslabón. Ahí se optimiza.</div>
+      </div>
+      <div class="cadena" id="cadena"></div>
+    </div>
+    <div class="panel">
+      <div class="ph">
+        <div>
+          <div class="eyebrow" style="margin-bottom:4px">Comparativo</div>
+          <h2>Semana a semana, métrica por métrica</h2>
+        </div>
+        <div class="note">Ver la evolución de cada número es lo que permite decidir qué mejorar.</div>
+      </div>
+      <div class="cmp" id="cmp"></div>
+    </div>
+  </section>
+
+  <!-- ESTRATEGIAS -->
+  <section id="estrategias" class="tabpane">
+    <div class="phead">
+      <div class="eyebrow" style="margin-bottom:12px">Estrategias</div>
+      <div class="big">El plan, <i>vivo</i>.</div>
+      <p>Cada estrategia con su estado, su avance y qué se está ajustando ahora mismo.</p>
+    </div>
+    <div class="egrid" id="egrid" style="margin-bottom:48px"></div>
+    <div class="panel">
+      <div class="eyebrow" style="margin-bottom:4px">Método MPV</div>
+      <h2 style="margin-bottom:24px">Cobertura del mensaje</h2>
+      <div class="cob" id="cob"></div>
+    </div>
+  </section>
+
+  <!-- DIA A DIA -->
+  <section id="dia-a-dia" class="tabpane">
+    <div class="phead">
+      <div class="eyebrow" style="margin-bottom:12px">Día a día · Meta</div>
+      <div class="big">Cada día, <i>medido</i>.</div>
+      <p>Lo que Meta gastó y lo que la closer cerró, día por día. Aquí nace todo lo que ves en el resumen.</p>
+    </div>
+    <div class="tbl-wrap" style="overflow-x:auto"><table id="tabla"></table></div>
+  </section>
+
+  <!-- INTEGRACIONES -->
+  <section id="integraciones" class="tabpane">
+    <div class="phead">
+      <div class="eyebrow" style="margin-bottom:12px">Integraciones · +28 herramientas</div>
+      <div class="big">Todo conectado. <i>Todo medido</i>.</div>
+      <p>Conecta tus anuncios, tus chats, tus ventas y tus datos en un solo lugar. Y por fin mides lo que de verdad te hace ganar dinero.</p>
+    </div>
+    <div id="mural" style="margin-bottom:8px"></div>
+    <div class="closer">
+      <div class="eyebrow" style="color:var(--amarillo);margin-bottom:14px">Una sola plataforma</div>
+      <div class="big">Deja de saltar entre 20 pestañas.</div>
+      <p>Tus campañas, tus conversaciones y tus ventas hablan entre sí. Tú solo miras el tablero y decides con datos, no con corazonadas.</p>
+    </div>
+  </section>
+
+  <!-- BITACORA -->
+  <section id="bitacora" class="tabpane">
+    <div class="phead">
+      <div class="eyebrow" style="margin-bottom:12px">Bitácora</div>
+      <div class="big">La historia, <i>día por día</i>.</div>
+      <p>Cada decisión, cada hallazgo y cada alerta queda registrada. Nada se pierde, nada se repite.</p>
+    </div>
+    <div class="tl" id="tl"></div>
+  </section>
+</main>
+
+<footer class="ft">
+  <div class="ft-in">
+    <span><i>Joako Estratega</i> · Platform</span>
+    <span class="tabular">Julio 2026</span>
+  </div>
+</footer>
+
+<script>
+/* ====== DATOS (USD) — misma fuente que la plataforma, julio 2026 ====== */
+var SEMANAS=[
+ {id:'s1',label:'Semana 1',rango:'1 – 7 jul',inversion:743,entrantes:38,contestaron:24,seguimiento:8,agenda:7,cierres:2,ingreso:2150},
+ {id:'s2',label:'Semana 2',rango:'8 – 14 jul',inversion:1488,entrantes:99,contestaron:60,seguimiento:25,agenda:11,cierres:6,ingreso:7455},
+ {id:'s3',label:'Semana 3',rango:'15 – 21 jul',inversion:1085,entrantes:72,contestaron:52,seguimiento:28,agenda:9,cierres:5,ingreso:5625}
+];
+function acum(){var a={id:'julio',label:'Julio',rango:'acumulado del mes',inversion:0,entrantes:0,contestaron:0,seguimiento:0,agenda:0,cierres:0,ingreso:0};
+ SEMANAS.forEach(function(s){['inversion','entrantes','contestaron','seguimiento','agenda','cierres','ingreso'].forEach(function(k){a[k]+=s[k]})});return a;}
+var JULIO=acum();
+var VISTAS=SEMANAS.concat([JULIO]);
+var sel='julio';
+
+var usd0=new Intl.NumberFormat('en-US',{style:'currency',currency:'USD',maximumFractionDigits:0});
+var usd1c=new Intl.NumberFormat('en-US',{style:'currency',currency:'USD',maximumFractionDigits:1,notation:'compact'});
+var nf=new Intl.NumberFormat('en-US');
+function roas(s){return s.inversion>0?s.ingreso/s.inversion:0}
+
+/* ====== ICONOS ====== */
+var IC={
+ megafono:'<path d="M3 11l14-6v14L3 13zM3 11v2M17 8a3 3 0 010 6"/>',
+ mensaje:'<path d="M21 11.5a8.4 8.4 0 01-9 8 9 9 0 01-4-1L3 20l1.5-4a8.5 8.5 0 01-1-4 8.4 8.4 0 019-8 8.5 8.5 0 018 7.5z"/>',
+ chats:'<path d="M14 9a3 3 0 01-3 3H7l-4 3V5a2 2 0 012-2h7a3 3 0 013 3zM17 8h1a3 3 0 013 3v9l-4-3h-4a3 3 0 01-3-3"/>',
+ clip:'<path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2M9 14l2 2 4-4"/>',
+ calendario:'<path d="M8 2v4M16 2v4M3 10h18M5 4h14a2 2 0 012 2v14a2 2 0 01-2 2H5a2 2 0 01-2-2V6a2 2 0 012-2M9 16l2 2 4-4"/>',
+ trofeo:'<path d="M6 4h12v4a6 6 0 01-12 0zM6 6H4a2 2 0 002 4M18 6h2a2 2 0 01-2 4M9 18h6M10 14v4M14 14v4"/>',
+ diana:'<circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.5"/>',
+ chat:'<path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/>',
+ linea:'<path d="M3 3v18h18M7 14l3-4 3 3 5-7"/>',
+ bandera:'<path d="M4 21V4M4 4h13l-2 4 2 4H4"/>',
+ idea:'<path d="M9 18h6M10 21h4M12 3a6 6 0 00-4 10.5c.8.8 1 1.5 1 2.5h6c0-1 .2-1.7 1-2.5A6 6 0 0012 3z"/>',
+ alerta:'<path d="M12 3l9 16H3zM12 9v5M12 17v.5"/>',
+ sube:'<path d="M7 17L17 7M17 7H8M17 7v9"/>'
+};
+function svg(p,color){return '<svg viewBox="0 0 24 24" style="stroke:'+(color||'#fff')+'">'+p+'</svg>'}
+
+/* ====== CADENA ====== */
+var ESL=[
+ {k:'inversion',nm:'Inversión en pauta',dinero:true,ic:IC.megafono,c:'#0F0F14',cc:'#2d2d3a',get:function(s){return s.inversion}},
+ {k:'entrantes',nm:'Mensajes entrantes',ic:IC.mensaje,c:'#21209C',cc:'#4D4CD9',get:function(s){return s.entrantes}},
+ {k:'contestaron',nm:'Contestaron',ic:IC.chats,c:'#4D4CD9',cc:'#6366f1',get:function(s){return s.contestaron}},
+ {k:'seguimiento',nm:'En seguimiento',ic:IC.clip,c:'#6366f1',cc:'#818cf8',get:function(s){return s.seguimiento}},
+ {k:'agenda',nm:'Agendaron',ic:IC.calendario,c:'#F8B400',cc:'#FFC939',get:function(s){return s.agenda}},
+ {k:'cierres',nm:'Compraron',ic:IC.trofeo,c:'#059669',cc:'#10b981',get:function(s){return s.cierres}}
+];
+function renderCadena(s){
+ var h='';
+ for(var i=0;i<ESL.length;i++){
+   var e=ESL[i],v=e.get(s);
+   var val=e.dinero?usd0.format(v):nf.format(v);
+   h+='<div class="esl-wrap"><div class="esl" style="background:linear-gradient(160deg,'+e.cc+','+e.c+');box-shadow:0 18px 45px -22px '+e.cc+'">'
+     +'<div class="in"><div class="badge" style="background:linear-gradient(160deg,'+e.cc+','+e.c+')">'+svg(e.ic)+'</div>'
+     +'<div class="num">'+val+'</div><div class="nm">'+e.nm+'</div></div></div>';
+   if(i<ESL.length-1){
+     var b=ESL[i+1],t,sub;
+     if(e.k==='inversion'){var cpm=b.get(s)>0?s.inversion/b.get(s):0;t=usd0.format(cpm);sub='por mensaje';}
+     else{var pct=v>0?(b.get(s)/v)*100:0;t=Math.round(pct)+'%';sub='pasa';}
+     h+='<div class="con"><div class="t">'+t+'</div><div class="s">'+sub+'</div><div class="bar"></div><div class="arw">›</div></div>';
+   }
+   h+='</div>';
+ }
+ document.getElementById('cadena').innerHTML=h;
+}
+
+/* ====== KPIs ====== */
+function renderKpis(s){
+ var r=roas(s),gan=s.ingreso-s.inversion;
+ var h='';
+ h+=kpi('Inversión en pauta',usd0.format(s.inversion),'');
+ h+=kpi('Ventas facturadas',usd0.format(s.ingreso),'verde');
+ h+=kpi('Ganancia sobre la pauta',usd0.format(gan),'verde');
+ h+='<div class="kpi roas"><div class="lab">ROAS</div><div class="val">'+r.toFixed(2)+'x</div>'
+   +'<small>Por cada $1 invertido, entran $'+r.toFixed(2)+'</small></div>';
+ document.getElementById('kpis').innerHTML=h;
+}
+function kpi(l,v,t){return '<div class="kpi '+t+'"><div class="lab">'+l+'</div><div class="val">'+v+'</div></div>'}
+
+/* ====== SEMANAS (selector) ====== */
+function renderWeeks(){
+ var h='';
+ VISTAS.forEach(function(v){
+   var on=v.id===sel,mes=v.id==='julio';
+   h+='<button class="'+(on?'on':'')+(mes?' mes':'')+'" onclick="pick(\''+v.id+'\')"><b>'+v.label+'</b><small>'+v.rango+'</small></button>';
+ });
+ document.getElementById('weeks').innerHTML=h;
+}
+function pick(id){sel=id;var s=byId(id);renderWeeks();renderKpis(s);renderCadena(s);renderCmp();}
+function byId(id){for(var i=0;i<VISTAS.length;i++)if(VISTAS[i].id===id)return VISTAS[i];return JULIO;}
+
+/* ====== COMPARATIVO ====== */
+var MET=[
+ {label:'ROAS',tipo:'roas',dir:'up',get:function(s){return roas(s)}},
+ {label:'Ventas facturadas',tipo:'money',dir:'up',get:function(s){return s.ingreso}},
+ {label:'Compraron',tipo:'int',dir:'up',get:function(s){return s.cierres}},
+ {label:'Mensajes entrantes',tipo:'int',dir:'up',get:function(s){return s.entrantes}},
+ {label:'Costo por mensaje',tipo:'money',dir:'down',get:function(s){return s.entrantes>0?s.inversion/s.entrantes:0}},
+ {label:'Inversión en pauta',tipo:'money',dir:'neutral',get:function(s){return s.inversion}}
+];
+function fmtM(v,t){if(t==='roas')return v.toFixed(2)+'x';if(t==='money')return usd1c.format(v);return nf.format(v);}
+function renderCmp(){
+ var h='';
+ MET.forEach(function(m){
+   var vals=SEMANAS.map(m.get),max=Math.max.apply(null,vals.concat([1]));
+   var first=vals[0],last=vals[vals.length-1],ch=first>0?((last-first)/first)*100:0;
+   var buena='neutro';
+   if(m.dir==='up')buena=ch>=0?'bien':'mal';
+   if(m.dir==='down')buena=ch<=0?'bien':'mal';
+   var arw=ch>0?'▲':(ch<0?'▼':'—');
+   h+='<div class="mini"><div class="mh"><div class="mt">'+m.label+'</div>'
+     +'<div class="tr '+buena+'">'+arw+' '+Math.abs(Math.round(ch))+'%</div></div><div class="bars">';
+   SEMANAS.forEach(function(s,i){
+     var v=vals[i],alto=22+(v/max)*78,on=s.id===sel;
+     h+='<div class="bcol'+(on?' on':'')+'"><span class="bv">'+fmtM(v,m.tipo)+'</span>'
+       +'<div class="bk" style="height:'+alto+'px"></div><span class="bl">S'+(i+1)+'</span></div>';
+   });
+   h+='</div></div>';
+ });
+ document.getElementById('cmp').innerHTML=h;
+}
+
+/* ====== ESTRATEGIAS ====== */
+var EST=[
+ {ic:IC.diana,nm:'Mensaje Principal de Venta',estado:'Activo',c:'#10b981',av:100,l:'Dolor claro · resultados rápidos · garantía real. Aprobado y en operación.'},
+ {ic:IC.megafono,nm:'Pauta de captación (Meta)',estado:'Optimizando',c:'#F8B400',av:74,l:'5 conjuntos activos. Se ajusta público y creativos semana a semana.'},
+ {ic:IC.chat,nm:'Guion de cierre por WhatsApp',estado:'Activo',c:'#10b981',av:100,l:'La closer sigue el mismo paso a paso en cada conversación.'},
+ {ic:IC.linea,nm:'Recorrido del cliente',estado:'En prueba',c:'#4D4CD9',av:48,l:'Se está midiendo dónde se cae la gente antes de agendar.'}
+];
+var COB=[['Dolor claro',1],['Fácil de usar',1],['Resultados rápidos',1],['Garantía real',0]];
+function renderEst(){
+ var h='';
+ EST.forEach(function(e){
+   h+='<div class="ecard"><div class="top"><div style="display:flex;align-items:center;gap:12px">'
+    +'<div class="ic" style="background:'+e.c+'22">'+svg(e.ic,e.c)+'</div><div class="tt">'+e.nm+'</div></div>'
+    +'<span class="chip" style="background:'+e.c+'1e;color:'+e.c+'">'+e.estado+'</span></div>'
+    +'<p>'+e.l+'</p><div class="prog"><div class="track"><div class="fill" style="width:'+e.av+'%;background:'+e.c+'"></div></div>'
+    +'<span class="pct">'+e.av+'%</span></div></div>';
+ });
+ document.getElementById('egrid').innerHTML=h;
+ var c='';
+ COB.forEach(function(x){c+='<div class="cobi '+(x[1]?'ok':'no')+'">'+svg(x[1]?IC.clip:IC.alerta,x[1]?'#34d399':'#fbbf24')
+   +'<div><b>'+x[0]+'</b><small>'+(x[1]?'Cubierta':'En construcción')+'</small></div></div>';});
+ document.getElementById('cob').innerHTML=c;
+}
+
+/* ====== DIA A DIA ====== */
+var DIAS=[
+ ['1 jul',1,100,5,3,1,0,0],['2 jul',1,105,6,4,1,1,1075],['3 jul',1,108,5,3,1,0,0],['4 jul',1,110,6,4,1,0,0],
+ ['5 jul',1,105,6,4,1,1,1075],['6 jul',1,102,5,3,1,0,0],['7 jul',1,113,5,3,1,0,0],
+ ['8 jul',2,205,13,8,1,1,1242],['9 jul',2,212,14,9,2,1,1242],['10 jul',2,218,15,9,2,1,1242],['11 jul',2,225,15,9,2,1,1242],
+ ['12 jul',2,215,14,8,2,1,1242],['13 jul',2,208,14,8,1,1,1245],['14 jul',2,205,14,9,1,0,0],
+ ['15 jul',3,158,11,8,2,1,1125],['16 jul',3,155,10,7,1,1,1125],['17 jul',3,160,11,8,2,1,1125],['18 jul',3,151,10,7,1,1,1125],
+ ['19 jul',3,153,10,7,1,1,1125],['20 jul',3,150,10,7,1,0,0],['21 jul',3,158,10,8,1,0,0]
+];
+var SC={1:'#6366f1',2:'#4D4CD9',3:'#F8B400'};
+function renderTabla(){
+ var h='<thead><tr><th class="l">Fecha</th><th class="l">Sem</th><th>Inversión</th><th>Mensajes</th><th>Contestó</th><th>Agenda</th><th>Cierres</th><th>Ventas</th><th>ROAS</th></tr></thead><tbody>';
+ var ti=0,tm=0,tc=0,tg=0;
+ DIAS.forEach(function(d){
+   ti+=d[2];tm+=d[3];tc+=d[6];tg+=d[7];
+   var r=d[7]>0?d[7]/d[2]:0;
+   h+='<tr><td style="font-weight:600">'+d[0]+'</td><td><span class="semtag" style="background:'+SC[d[1]]+'">'+d[1]+'</span></td>'
+    +'<td class="mut">'+usd0.format(d[2])+'</td><td style="font-weight:600">'+d[3]+'</td><td class="mut">'+d[4]+'</td><td class="mut">'+d[5]+'</td>'
+    +'<td style="font-weight:800">'+(d[6]||'—')+'</td><td class="g" style="font-weight:600">'+(d[7]>0?usd0.format(d[7]):'—')+'</td>'
+    +'<td class="y" style="font-weight:900">'+(r>0?r.toFixed(1)+'x':'—')+'</td></tr>';
+ });
+ h+='</tbody><tfoot><tr><td colspan="2">Julio</td><td>'+usd0.format(ti)+'</td><td>'+tm+'</td><td colspan="2"></td><td>'+tc+'</td>'
+  +'<td class="g">'+usd0.format(tg)+'</td><td class="y">'+(tg/ti).toFixed(2)+'x</td></tr></tfoot>';
+ document.getElementById('tabla').innerHTML=h;
+}
+
+/* ====== INTEGRACIONES ====== */
+var GRUPOS=[
+ {t:'Pauta y anuncios',d:'De dónde salen los clics y el gasto.',items:[
+   ['Meta Ads','#0866FF'],['Google Ads','#4285F4'],['TikTok Ads','#111111'],['YouTube Ads','#FF0000'],['LinkedIn Ads','#0A66C2']]},
+ {t:'Medición',d:'Lo que de verdad pasa en tu web y tus datos.',items:[
+   ['Google Analytics','#E37400'],['Search Console','#458CF5'],['Clarity','#3A6DF0'],['Meta Pixel','#0866FF']]},
+ {t:'Conversación y CRM',d:'Cada chat, en un solo lugar.',items:[
+   ['WhatsApp','#25D366'],['ManyChat','#00A6DE'],['Pancake','#2D8CFF'],['Instagram','#E4405F'],['Messenger','#0084FF'],['Telegram','#26A5E4']]},
+ {t:'Ventas, pagos y boletería',d:'Donde entra el dinero.',items:[
+   ['Stripe','#635BFF'],['Wompi','#4C2FBF'],['La Tiquetera','#F8B400'],['Bold','#111111']]},
+ {t:'Datos y automatización',d:'Todo cruzado, sin copiar y pegar.',items:[
+   ['Google Sheets','#0F9D58'],['Airtable','#18BFFF'],['Make','#6D00CC'],['Zapier','#FF4A00'],['Notion','#111111'],['PostgreSQL','#4169E1']]},
+ {t:'Videollamadas y reuniones',d:'Las citas también se miden.',items:[
+   ['Google Meet','#00897B'],['Zoom','#2D8CFF'],['Teams','#6264A7'],['Llamadas','#10b981']]}
+];
+function contrast(hex){var r=parseInt(hex.substr(1,2),16),g=parseInt(hex.substr(3,2),16),b=parseInt(hex.substr(5,2),16);return (r*299+g*587+b*114)/1000>150?'#0F0F14':'#fff';}
+function renderMural(){
+ var h='';
+ GRUPOS.forEach(function(g){
+   h+='<div class="grp"><div class="gt">'+g.t+'</div><div class="gd">'+g.d+'</div><div class="intro-grid">';
+   g.items.forEach(function(it){
+     var fg=contrast(it[1]);
+     h+='<div class="tile" style="background:'+it[1]+'14;border-color:'+it[1]+'44"><div class="tg" style="background:'+it[1]+';color:'+fg+'">'+it[0][0]+'</div><div class="tn">'+it[0]+'</div></div>';
+   });
+   h+='</div></div>';
+ });
+ document.getElementById('mural').innerHTML=h;
+}
+
+/* ====== BITACORA ====== */
+var BIT=[
+ ['21 jul','Decisión',IC.bandera,'#4D4CD9','Se sube el presupuesto del conjunto que trae mensajes más baratos. El público frío se pausa hasta tener más señal.'],
+ ['18 jul','Hallazgo',IC.idea,'#F8B400','La gente que agenda en las primeras 2 horas cierra el doble. Se ajusta el guion para responder más rápido.'],
+ ['14 jul','Resultado',IC.sube,'#10b981','Semana 2 cerró con ROAS 5,01x. El mejor creativo fue el de la historia real del cliente.'],
+ ['11 jul','Alerta',IC.alerta,'#f97316','Un conjunto empezó a subir el costo por mensaje. Se revisa el creativo antes de que se coma el presupuesto.'],
+ ['8 jul','Decisión',IC.bandera,'#4D4CD9','Se separa la campaña por tipo de público para medir cuál trae mejores conversaciones, no solo más baratas.'],
+ ['3 jul','Hallazgo',IC.idea,'#F8B400','El mensaje que abre con el dolor del cliente trae 3 veces más respuestas que el que abre con la oferta.']
+];
+function renderBit(){
+ var h='';
+ BIT.forEach(function(b){
+   h+='<div class="tli"><div class="node">'+svg(b[2],b[3])+'</div><div class="body"><div class="meta">'
+    +'<span class="tp" style="color:'+b[3]+'">'+b[1]+'</span><span class="dt">'+b[0]+'</span></div><p>'+b[4]+'</p></div></div>';
+ });
+ document.getElementById('tl').innerHTML=h;
+}
+
+/* ====== TABS ====== */
+function go(id){
+ document.querySelectorAll('.tabpane').forEach(function(p){p.classList.toggle('on',p.id===id)});
+ document.querySelectorAll('#tabs button').forEach(function(b){b.classList.toggle('on',b.getAttribute('data-tab')===id)});
+ window.scrollTo(0,0);
+}
+document.querySelectorAll('#tabs button').forEach(function(b){b.addEventListener('click',function(){go(b.getAttribute('data-tab'))})});
+
+/* ====== RELOJ ====== */
+function tick(){
+ var n=new Date();
+ var d=n.toLocaleDateString('es-CO',{weekday:'short',day:'numeric',month:'short'});
+ var t=n.toLocaleTimeString('es-CO',{hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:false});
+ document.getElementById('clock').innerHTML='<span class="d">'+d+'</span> · '+t;
+}
+
+/* ====== INIT ====== */
+renderWeeks();renderKpis(byId(sel));renderCadena(byId(sel));renderCmp();
+renderEst();renderTabla();renderMural();renderBit();
+tick();setInterval(tick,1000);
+</script>
+</body>
+</html>
