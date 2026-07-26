@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mide tu venta por internet · Clase gratis · Joako Estratega</title>
+<meta name="description" content="Clase gratis de 10 minutos: aprende a medir tu venta por internet paso a paso y descubre en qué parte se te están yendo los clientes.">
+<meta property="og:title" content="Mide tu venta por internet · Clase gratis">
+<meta property="og:description" content="Diez minutos para dejar de adivinar. Aprende a medir tu venta y ve dónde se te caen los clientes.">
+<meta property="og:type" content="video.other">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --negro:#0F0F14; --negro-suave:#1a1a22; --amarillo:#F8B400;
+  --amarillo-tenue:rgba(248,180,0,.14); --blanco:#FFFFFF;
+  --azul:#21209C; --gris-1:#d6d6de; --gris-2:#9a9aa8; --gris-3:#6e6e7c;
+  --linea:rgba(255,255,255,.10); --radio:14px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Montserrat',system-ui,sans-serif;background:var(--negro);color:var(--gris-1);line-height:1.65;-webkit-font-smoothing:antialiased}
+.wrap{max-width:900px;margin:0 auto;padding:0 20px}
+h1,h2,h3{color:var(--blanco);font-weight:900;line-height:1.15;letter-spacing:-.5px}
+.am{color:var(--amarillo)}
+section{padding:56px 0}
+
+/* ── Encabezado ── */
+.tope{border-bottom:1px solid var(--linea);padding:18px 0;text-align:center}
+.tope span{font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--amarillo);font-weight:800}
+
+/* ── Zona del video ── */
+.hero{padding:44px 0 0;text-align:center}
+.hero h1{font-size:clamp(26px,4.6vw,42px);margin-bottom:14px}
+.hero p.bajada{color:var(--gris-2);font-size:17px;max-width:640px;margin:0 auto 28px}
+
+.reproductor{position:relative;background:#000;border-radius:var(--radio);overflow:hidden;border:2px solid var(--amarillo-tenue);box-shadow:0 20px 60px rgba(0,0,0,.5);aspect-ratio:16/9}
+.reproductor video{display:block;width:100%;height:100%;object-fit:contain;cursor:pointer;background:#000}
+/* Capa de sonido. El video corre en silencio detrás: se ve, no se oye. */
+.capa-sonido{position:absolute;inset:0;display:grid;place-items:center;cursor:pointer;background:rgba(0,0,0,.30);backdrop-filter:blur(1px)}
+.capa-sonido[hidden]{display:none}
+.capa-caja{background:#8ED12B;border-radius:12px;padding:clamp(14px,3vw,26px) clamp(18px,5vw,42px);display:flex;flex-direction:column;align-items:center;gap:clamp(6px,1.6vw,13px);box-shadow:0 14px 44px rgba(0,0,0,.4);transition:transform .15s;max-width:min(90%,460px);max-height:86%;overflow:hidden}
+.capa-sonido:hover .capa-caja{transform:scale(1.03)}
+.capa-caja strong,.capa-caja span{color:#0F0F14;font-weight:800;text-align:center;line-height:1.25}
+.capa-caja strong{font-size:clamp(15px,2.4vw,22px)}
+.capa-caja span{font-size:clamp(13px,2vw,18px)}
+
+.controles{display:flex;align-items:center;gap:14px;padding:12px 4px 0}
+.btn-pausa{background:transparent;border:1px solid var(--linea);color:var(--amarillo);width:38px;height:38px;border-radius:9px;cursor:pointer;font-size:13px;line-height:1;flex-shrink:0}
+.btn-pausa:hover{border-color:var(--amarillo)}
+/* La barra es solo indicador: no se puede arrastrar ni hacer clic para saltar. */
+.barra{flex:1;height:7px;background:rgba(255,255,255,.12);border-radius:99px;overflow:hidden;pointer-events:none}
+.relleno{height:100%;width:0;background:var(--amarillo);border-radius:99px;transition:width .25s linear}
+
+.aviso{margin-top:18px;text-align:center;font-size:14px;color:var(--gris-3)}
+
+/* ── Oferta ── */
+.oferta{background:linear-gradient(150deg,#1c1c26,#121218);border:2px solid var(--amarillo);border-radius:var(--radio);padding:38px 30px;margin-top:34px;text-align:center}
+.oferta.aparece{animation:surge .5s ease}
+@keyframes surge{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.oferta h2{font-size:clamp(23px,3.6vw,32px);margin-bottom:12px}
+.oferta .precio{font-size:52px;font-weight:900;color:var(--amarillo);line-height:1;margin:20px 0 4px}
+.oferta .precio small{font-size:17px;color:var(--gris-2);font-weight:700}
+.oferta .unico{color:var(--gris-2);font-size:14px;margin-bottom:24px}
+.lista{list-style:none;text-align:left;max-width:440px;margin:0 auto 26px}
+.lista li{padding:9px 0 9px 30px;position:relative;color:var(--gris-1);font-size:15.5px;border-bottom:1px solid var(--linea)}
+.lista li:last-child{border-bottom:0}
+.lista li::before{content:"✓";position:absolute;left:0;color:var(--amarillo);font-weight:900}
+
+.btn{display:inline-block;background:var(--amarillo);color:var(--negro);font-weight:900;font-size:18px;padding:18px 40px;border-radius:10px;text-decoration:none;transition:transform .15s,box-shadow .15s;border:0;cursor:pointer}
+.btn:hover{transform:translateY(-2px);box-shadow:0 12px 30px rgba(248,180,0,.28)}
+.btn-grande{font-size:20px;padding:20px 46px}
+
+.garantia{margin-top:26px;padding:20px;background:rgba(255,255,255,.04);border-radius:10px;border-left:4px solid var(--amarillo);text-align:left}
+
+/* demostracion de lo que recibe */
+
+/* Hasta que el video presenta la oferta, la pagina es solo la clase: el video
+   y nada mas. Cuando llega ese segundo, se abre la pagina de venta completa. */
+body.solo-clase .tras-oferta{display:none}
+.tras-oferta{animation:surge .5s ease}
+.demo{margin:26px 0 8px;text-align:left}
+.demo-t{font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--gris-2);text-align:center;margin-bottom:14px}
+.demo-pantalla{background:#0f0f14;border:1px solid rgba(255,255,255,.10);border-radius:14px;padding:20px;display:grid;gap:18px}
+.demo-fuga{text-align:center;padding-bottom:16px;border-bottom:1px solid rgba(255,255,255,.08)}
+.demo-fuga-et{font-size:11px;text-transform:uppercase;letter-spacing:.1em;color:var(--amarillo);font-weight:800}
+.demo-fuga-tit{font-size:clamp(17px,2.6vw,22px);font-weight:900;margin:6px 0 12px}
+.demo-fuga-plata{font-size:clamp(30px,6vw,44px);font-weight:900;color:var(--amarillo);line-height:1}
+.demo-fuga-sub{font-size:13px;color:var(--gris-2);margin-top:4px}
+.demo-cadena{display:grid;gap:0}
+.demo-paso{display:flex;justify-content:space-between;align-items:center;background:rgba(255,255,255,.04);border-radius:8px;padding:9px 13px;font-size:14px}
+.demo-paso b{font-weight:800;font-variant-numeric:tabular-nums}
+.demo-paso.ultimo{border:1px solid rgba(248,180,0,.35)}
+.demo-salto{padding:3px 13px;font-size:12px;color:var(--gris-2);display:flex;gap:8px;align-items:center}
+.demo-salto.es-fuga{color:#E5484D;font-weight:700}
+.demo-salto.es-fuga em{font-style:normal;background:rgba(229,72,77,.14);padding:1px 7px;border-radius:99px;font-size:11px}
+.demo-reco{border-top:1px solid rgba(255,255,255,.08);padding-top:14px}
+.demo-reco-t{font-size:12px;text-transform:uppercase;letter-spacing:.08em;color:var(--gris-2);font-weight:800;margin-bottom:8px}
+.demo-reco-i{font-size:13.5px;color:var(--gris-1);border-left:3px solid var(--amarillo);padding-left:11px;margin-bottom:9px;line-height:1.5}
+.demo-reco-i b{color:var(--blanco)}
+.demo-pie{text-align:center;font-size:13px;color:var(--gris-2);margin-top:10px}
+/* objeciones */
+.faq{margin-top:26px;text-align:left;display:grid;gap:2px}
+.faq-i{border-top:1px solid rgba(255,255,255,.08);padding:14px 2px}
+.faq-p{font-weight:800;font-size:14.5px;margin-bottom:5px}
+.faq-r{font-size:14px;color:var(--gris-1);line-height:1.55}
+.garantia strong{color:var(--blanco);display:block;margin-bottom:6px;font-size:15px}
+.garantia p{font-size:14.5px;color:var(--gris-1);margin-bottom:8px}
+.garantia small{font-size:13px;color:var(--gris-3)}
+
+/* ── Contenido educativo ── */
+.cadena{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:26px 0}
+.paso{background:var(--negro-suave);border:1px solid var(--linea);border-radius:9px;padding:12px 16px;font-size:14px;color:var(--gris-1);font-weight:600}
+.paso b{color:var(--amarillo);display:block;font-size:11px;letter-spacing:1px;margin-bottom:2px}
+.flecha{align-self:center;color:var(--gris-3)}
+
+table{width:100%;border-collapse:collapse;margin:22px 0;font-size:14.5px;background:var(--negro-suave);border-radius:10px;overflow:hidden}
+th{background:var(--azul);color:var(--blanco);text-align:left;padding:13px 14px;font-size:12.5px;text-transform:uppercase;letter-spacing:.6px}
+td{padding:12px 14px;border-top:1px solid var(--linea);color:var(--gris-1);vertical-align:top}
+
+.nota{background:var(--amarillo-tenue);border-left:4px solid var(--amarillo);padding:18px 22px;border-radius:0 10px 10px 0;margin:24px 0}
+.nota p{color:var(--gris-1);font-size:15.5px}
+.nota strong{color:var(--blanco)}
+
+.tabla-envoltura{overflow-x:auto}
+
+footer{border-top:1px solid var(--linea);padding:34px 0;text-align:center;color:var(--gris-3);font-size:13.5px}
+footer a{color:var(--amarillo);text-decoration:none}
+
+@media(max-width:640px){
+  section{padding:40px 0}
+  .oferta{padding:28px 20px}
+  .flecha{display:none}
+  .cadena{flex-direction:column}
+}
+</style>
+</head>
+<body class="solo-clase">
+
+<div class="tope"><span>Clase gratis · 10 minutos</span></div>
+
+<!-- ── VIDEO ── -->
+<section class="hero">
+  <div class="wrap">
+    <h1>Mide tu venta por internet y descubre <span class="am">dónde se te están yendo los clientes.</span></h1>
+    <p class="bajada">Si vendes un servicio y no sabes por qué unos meses vendes bien y otros mal, esta clase es para ti. No te voy a prometer que vas a vender más. Te voy a enseñar a ver.</p>
+
+    <div class="reproductor">
+      <video id="vsl" playsinline muted preload="auto" disablepictureinpicture controlslist="nodownload noplaybackrate"></video>
+
+      <!-- Capa de sonido: el video ya está corriendo en silencio detrás -->
+      <div class="capa-sonido" id="capa-sonido" role="button" tabindex="0" aria-label="Activar el sonido y empezar la clase">
+        <div class="capa-caja">
+          <strong>Tu video ya ha comenzado</strong>
+          <svg width="clamp(34,6vw,58)" height="46" style="width:clamp(34px,6vw,58px);height:auto" viewBox="0 0 24 24" fill="none" stroke="#0F0F14" stroke-width="1.7" stroke-linecap="round">
+            <path d="M11 5L6 9H2v6h4l5 4V5z" fill="#0F0F14"/>
+            <path d="M23 9l-6 6M17 9l6 6"/>
+          </svg>
+          <span>Haz clic para escuchar</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="controles">
+      <button class="btn-pausa" id="btn-pausa" aria-label="Pausar o seguir">❚❚</button>
+      <div class="barra"><div class="relleno" id="relleno-progreso"></div></div>
+    </div>
+
+    <p class="aviso" id="aviso-oferta">Mira la clase completa. Al final te muestro la herramienta con la que hago esto en automático.</p>
+
+    <!-- ── OFERTA (aparece en el segundo del pitch) ── -->
+    <div class="oferta" id="bloque-oferta" hidden>
+      <h2>Ya sabes medir. <span class="am">Ahora hazlo en automático.</span></h2>
+      <p style="color:var(--gris-1);max-width:560px;margin:0 auto">Haz tú mismo las pruebas con tu negocio. Y si quieres que esto te quede mucho más fácil, puedes usar mi Tablero: es la herramienta que construí para no tener que hacer las cuentas a mano.</p>
+
+      <!-- ── ASÍ SE VE LO QUE RECIBES ── -->
+      <div class="demo">
+        <div class="demo-t">Esto es lo que ves después de meter tus números</div>
+
+        <div class="demo-pantalla">
+          <div class="demo-fuga">
+            <div class="demo-fuga-et">Tu mayor oportunidad</div>
+            <div class="demo-fuga-tit">Llegan a la cita, pero no te contratan.</div>
+            <div class="demo-fuga-plata">$11.600.000</div>
+            <div class="demo-fuga-sub">al mes que ya estaban en tu cadena y no llegaron a caja</div>
+          </div>
+
+          <div class="demo-cadena">
+            <div class="demo-paso"><span>Te ven</span><b>4.000</b></div>
+            <div class="demo-salto"><span>29% pasa</span></div>
+            <div class="demo-paso"><span>Te escriben</span><b>1.160</b></div>
+            <div class="demo-salto"><span>67% pasa</span></div>
+            <div class="demo-paso"><span>Hablan contigo</span><b>777</b></div>
+            <div class="demo-salto"><span>25% pasa</span></div>
+            <div class="demo-paso"><span>Agendan</span><b>194</b></div>
+            <div class="demo-salto"><span>56% pasa</span></div>
+            <div class="demo-paso"><span>Llegan a la cita</span><b>109</b></div>
+            <div class="demo-salto es-fuga"><span>14% pasa</span><em>aquí se te caen</em></div>
+            <div class="demo-paso ultimo"><span>Te contratan</span><b>15</b></div>
+          </div>
+
+          <div class="demo-reco">
+            <div class="demo-reco-t">Qué revisar, en orden</div>
+            <div class="demo-reco-i"><b>Tuviste 109 citas y cerraste 15.</b> Con ese volumen, el problema rara vez es tu forma de vender: es a quién estás sentando al frente.</div>
+            <div class="demo-reco-i"><b>La pauta se está comiendo 31% de lo que facturas.</b> Cada punto que subas en tu paso más flojo baja ese costo sin gastar un peso más.</div>
+          </div>
+        </div>
+
+        <p class="demo-pie">Con tus números va a decir otra cosa. Ese es el punto.</p>
+      </div>
+
+      <ul class="lista">
+        <li>Calcula solo las tasas de los seis pasos de tu venta</li>
+        <li>Te dice cuál es tu fuga más grande y cuánto te cuesta en plata, al mes y al año</li>
+        <li>Te dice qué revisar en ese paso, según tus números, no según una lista genérica</li>
+        <li>Guarda tu histórico y te muestra si lo que cambiaste sirvió</li>
+        <li>Entras con tu correo y tu clave desde cualquier computador</li>
+      </ul>
+
+      <div class="precio"><span id="precio-usd">$19</span> <small>USD</small></div>
+      <p class="unico" style="margin-bottom:4px" id="precio-cop">Se cobra en pesos, al cambio del día.</p>
+      <p class="unico">Un solo pago. No es mensualidad.</p>
+
+      <a href="https://plataforma.joakoestratega.com/comprar" class="btn btn-grande" data-compra="oferta_video">Quiero el Tablero</a>
+
+      <div class="garantia">
+        <strong>🛡️ Garantía</strong>
+        <p>Si el Tablero no te muestra en qué paso se te caen los clientes, te devolvemos el 100% del dinero, sin preguntas.</p>
+        <small>Tienes 7 días desde la compra. Sin condiciones y sin trámites.</small>
+      </div>
+
+      <!-- ── OBJECIONES ── -->
+      <div class="faq">
+        <div class="faq-i">
+          <div class="faq-p">¿Y si no tengo los números exactos?</div>
+          <div class="faq-r">Sirve con tu mejor cálculo. Un número aproximado te muestra la fuga igual; ninguno, no te muestra nada.</div>
+        </div>
+        <div class="faq-i">
+          <div class="faq-p">¿Esto sirve si vendo por WhatsApp y no tengo página?</div>
+          <div class="faq-r">Sí. Los seis pasos son los mismos: te ven, te escriben, hablan contigo, agendan, llegan y te contratan. No importa por dónde pasen.</div>
+        </div>
+        <div class="faq-i">
+          <div class="faq-p">¿Necesito conectar algo o instalar algo?</div>
+          <div class="faq-r">No. Entras, escribes seis números y listo. No pide acceso a tus cuentas ni a tu pauta.</div>
+        </div>
+        <div class="faq-i">
+          <div class="faq-p">¿Y si me toca cambiar de computador?</div>
+          <div class="faq-r">Tus mediciones quedan en tu cuenta, no en el navegador. Entras con tu correo y tu clave desde donde sea y ahí están.</div>
+        </div>
+        <div class="faq-i">
+          <div class="faq-p">Estoy fuera de Colombia, ¿puedo pagar?</div>
+          <div class="faq-r">Sí, con tu tarjeta. El cobro se hace en pesos colombianos al cambio del día y tu banco lo convierte a tu moneda.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CONTENIDO QUE COMPLEMENTA ── -->
+<section style="background:rgba(0,0,0,.35)">
+  <div class="tras-oferta wrap">
+    <h2 style="font-size:clamp(22px,3.4vw,30px);margin-bottom:10px">La cadena de <span class="am">seis pasos</span></h2>
+    <p style="color:var(--gris-2);margin-bottom:6px">Tu venta no es una sola cosa. Es una cadena. Antes de pagarte, un cliente pasa por estos seis pasos.</p>
+
+    <div class="cadena">
+      <div class="paso"><b>Paso 1</b>Te ven</div><span class="flecha">→</span>
+      <div class="paso"><b>Paso 2</b>Te escriben</div><span class="flecha">→</span>
+      <div class="paso"><b>Paso 3</b>Hablan contigo</div><span class="flecha">→</span>
+      <div class="paso"><b>Paso 4</b>Agendan</div><span class="flecha">→</span>
+      <div class="paso"><b>Paso 5</b>Llegan a la cita</div><span class="flecha">→</span>
+      <div class="paso"><b>Paso 6</b>Te contratan</div>
+    </div>
+
+    <div class="nota">
+      <p><strong>Agendar y llegar no son lo mismo.</strong> Mucha gente agenda y no aparece. Si mides esos dos como un solo número, nunca vas a ver ese hueco.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="tras-oferta wrap">
+    <h2 style="font-size:clamp(22px,3.4vw,30px);margin-bottom:10px">De dónde sacas <span class="am">cada número</span></h2>
+    <p style="color:var(--gris-2)">No necesitas herramientas caras ni ser experto en datos. Los seis números ya los tienes. Solo que nunca los pusiste en fila.</p>
+
+    <div class="tabla-envoltura">
+      <table>
+        <tr><th>Paso</th><th>Qué número</th><th>De dónde lo sacas</th></tr>
+        <tr><td>1. Te ven</td><td>Cuánta gente te vio este mes</td><td>Instagram → Estadísticas → cuentas alcanzadas. Si pautas, el alcance del anuncio</td></tr>
+        <tr><td>2. Te escriben</td><td>Cuántas personas nuevas te escribieron</td><td>Tu bandeja de entrada o tu WhatsApp</td></tr>
+        <tr><td>3. Hablan contigo</td><td>Con cuántas hablaste en serio de tu servicio</td><td>Tu chat, o quien atiende por ti</td></tr>
+        <tr><td>4. Agendan</td><td>Cuántas agendaron cita</td><td>Tu calendario</td></tr>
+        <tr><td>5. Llegan</td><td>Cuántas llegaron de verdad</td><td>Tu calendario, o quien atiende la cita</td></tr>
+        <tr><td>6. Te contratan</td><td>Cuántas pagaron</td><td>Tus ventas</td></tr>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section style="background:rgba(0,0,0,.35)">
+  <div class="tras-oferta wrap">
+    <h2 style="font-size:clamp(22px,3.4vw,30px);margin-bottom:16px">Dos reglas que te <span class="am">ahorran plata</span></h2>
+
+    <div class="nota">
+      <p><strong>Separa lo que llegó solo de lo que pagaste.</strong> Lo que llega gratis por tu contenido va en una columna. Lo que llega porque pusiste plata en anuncios va en otra. Si los mezclas, un video que impulsaste te hace creer que tu contenido gratis está volando, y no. Es como pesarte con los zapatos puestos y creer que subiste de músculo.</p>
+    </div>
+
+    <div class="nota">
+      <p><strong>Hay ventas que el anuncio hizo y el reporte no muestra.</strong> Alguien vio tu anuncio, no te escribió, y a las dos semanas se acordó de ti y te buscó. Esa venta el reporte no la cuenta. Por eso, cuando midas, no mires solo lo que dice la plataforma: mira también si las ventas de todo tu negocio subieron.</p>
+    </div>
+
+    <div class="nota">
+      <p><strong>Compárate contigo, no con promedios de internet.</strong> Mide este mes, guarda el número y vuelve a medir el otro. Si subió, lo que hiciste sirvió. Si no, ya sabes dónde meterle.</p>
+    </div>
+  </div>
+</section>
+
+<section style="text-align:center">
+  <div class="tras-oferta wrap">
+    <h2 style="font-size:clamp(22px,3.4vw,30px);margin-bottom:12px">Para mejorar algo, <span class="am">primero hay que medirlo.</span></h2>
+    <p style="color:var(--gris-2);max-width:600px;margin:0 auto 26px">Es la regla del ingeniero, aplicada a la venta por internet. Si no sabes en qué parte se te caen los clientes, no estás ahorrando: estás perdiendo ventas sin verlo.</p>
+    <a href="https://plataforma.joakoestratega.com/comprar" class="btn" data-compra="cierre_pagina">Quiero el Tablero · $19 USD</a>
+  </div>
+</section>
+
+<footer class="tras-oferta">
+  <div class="wrap">
+    <p>Joako Estratega · Medellín, Colombia</p>
+    <p style="margin-top:8px"><a href="https://wa.me/573028662556?text=Hola%20Joako.%20Vi%20tu%20clase%20de%20medici%C3%B3n%20y%20tengo%20una%20pregunta." target="_blank" rel="noopener">¿Tienes una pregunta? Escríbeme por WhatsApp</a></p>
+  </div>
+</footer>
+
+<script>
+  window.TABLERO = {
+    // ── Fuente del video. Intercambiable: hoy un archivo, mañana R2 o el servidor.
+    // El video vive en el servidor de Joako, no en el repositorio: pesa 65 MB
+    // y GitHub tiene tope. Se sirve desde /medios, que soporta adelantar.
+    // Si la pagina se esta probando en el ambiente de pruebas, toma el de
+    // pruebas; en cualquier otro caso, el de produccion.
+    // El video pesa 65 MB: vive en el servidor de Joako, no en este
+    // repositorio. Quien mira la pagina no lo nota, solo ve joakoestratega.com.
+    VIDEO_SRC: 'https://plataforma.joakoestratega.com/medios/vsl/vsl-tablero-web.mp4',
+    VIDEO_ID:  'vsl-tablero-v1',
+
+    // ── Segundo en que aparece el botón de compra.
+    // 4:43 del video, cuando dice "O si quieres el camino más fácil, yo te
+    // puedo compartir este tablero". Ahí entra la oferta en escena, y ahí se
+    // abre la página de venta. Quien ya se convenció no espera al final: le
+    // quedan 83 segundos de video que ya no lo frenan.
+    SEGUNDO_OFERTA: 283,
+
+    // ── A dónde viajan los eventos de medición.
+    // Vacío = solo consola. Se llena cuando exista el endpoint en el servidor.
+    ENDPOINT: '',
+
+    // ── Forma de la barra de progreso.
+    // 1    = barra honesta, avanza igual que el video.
+    // 0.5  = avanza rápido al principio y lento al final (como VTurb).
+    // 0.35 = más exagerada todavía.
+    CURVA_BARRA: 0.5,
+
+    INTERVALO_AVANCE: 5,
+    DEBUG: false   // poner en true SOLO al probar en local. En producción va en false.
+  };
+
+  // Carga la fuente del video si está configurada.
+  // Mientras no haya video, no se muestra texto de desarrollador al usuario.
+  (function () {
+    var v = document.getElementById('vsl');
+    if (window.TABLERO.VIDEO_SRC) {
+      v.src = window.TABLERO.VIDEO_SRC;
+    } else if (window.TABLERO.DEBUG) {
+      var c = document.querySelector('.capa-caja span');
+      if (c) c.textContent = 'Falta configurar VIDEO_SRC';
+    }
+  })();
+</script>
+
+<script>
+// Para revisar la parte de venta sin tener que ver el video completo:
+// agregando ?oferta=1 a la direccion, el bloque aparece de una.
+(function(){
+  try{
+    if(location.search.indexOf('oferta=1') === -1) return;
+    var b = document.getElementById('bloque-oferta');
+    var a = document.getElementById('aviso-oferta');
+    if(b){ b.hidden = false; b.classList.add('aparece'); }
+    if(a){ a.style.display = 'none'; }
+    document.body.classList.remove('solo-clase');
+  }catch(e){}
+})();
+
+// El precio en pesos sale de la plataforma, que lo calcula con el cambio
+// oficial del dia. Si no responde, la pagina se queda con el texto de siempre
+// y no muestra un numero equivocado.
+(function(){
+  try{
+    fetch('https://plataforma.joakoestratega.com/api/precio')
+      .then(function(r){ return r.json(); })
+      .then(function(d){
+        if(!d || !d.pesosTexto) return;
+        var cop = document.getElementById('precio-cop');
+        if(cop) cop.textContent = 'Hoy son ' + d.pesosTexto + ' COP, al cambio del dia.';
+      })
+      .catch(function(){});
+  }catch(e){}
+})();
+</script>
+<script src="medir.js"></script>
+</body>
+</html>
