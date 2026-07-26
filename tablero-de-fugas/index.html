@@ -79,6 +79,15 @@ section{padding:56px 0}
    y nada mas. Cuando llega ese segundo, se abre la pagina de venta completa. */
 body.solo-clase .tras-oferta{display:none}
 .tras-oferta{animation:surge .5s ease}
+/* El precio y los botones no salen hasta que el video dice el precio. Antes de
+   ese segundo la persona ve que es y para que sirve, pero todavia no hay
+   nada que comprar: la oferta la abre la voz, no la pagina. */
+body.sin-precio .solo-precio{display:none}
+.solo-precio{animation:surge .5s ease}
+/* Boton pegado al video, para el que ya decidio y no quiere bajar. */
+.cta-video{margin:18px 0 4px;text-align:center}
+.cta-video .btn{width:100%;max-width:420px}
+.cta-video-precio{color:var(--gris-2);font-size:13.5px;margin-top:8px}
 .demo{margin:26px 0 8px;text-align:left}
 .demo-t{font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--gris-2);text-align:center;margin-bottom:14px}
 .demo-pantalla{background:#0f0f14;border:1px solid rgba(255,255,255,.10);border-radius:14px;padding:20px;display:grid;gap:18px}
@@ -135,7 +144,7 @@ footer a{color:var(--amarillo);text-decoration:none}
 }
 </style>
 </head>
-<body class="solo-clase">
+<body class="solo-clase sin-precio">
 
 <div class="tope"><span>Clase gratis · 10 minutos</span></div>
 
@@ -164,6 +173,11 @@ footer a{color:var(--amarillo);text-decoration:none}
     <div class="controles">
       <button class="btn-pausa" id="btn-pausa" aria-label="Pausar o seguir">❚❚</button>
       <div class="barra"><div class="relleno" id="relleno-progreso"></div></div>
+    </div>
+
+    <div class="cta-video solo-precio">
+      <a href="https://plataforma.joakoestratega.com/comprar" class="btn btn-grande" data-compra="bajo_el_video">Quiero el Tablero · <span id="precio-boton">$19 USD</span></a>
+      <p class="cta-video-precio">Pago único. Garantía de 7 días.</p>
     </div>
 
     <p class="aviso" id="aviso-oferta">Quédate hasta el final: adentro está el sistema exacto con el que se venden servicios por internet todos los meses.</p>
@@ -217,13 +231,16 @@ footer a{color:var(--amarillo);text-decoration:none}
         <li>Entras con tu correo y tu clave desde cualquier computador</li>
       </ul>
 
+      <div class="solo-precio">
       <div class="precio"><span id="precio-usd">$19</span> <small>USD</small></div>
       <p class="unico" style="margin-bottom:4px" id="precio-cop">Se cobra en pesos, al cambio del día.</p>
       <p class="unico">Un solo pago. No es mensualidad.</p>
 
       <a href="https://plataforma.joakoestratega.com/comprar" class="btn btn-grande" data-compra="oferta_video">Quiero el Tablero</a>
 
-      <div class="garantia">
+      </div>
+
+      <div class="garantia solo-precio">
         <strong>🛡️ Garantía</strong>
         <p>Si el Tablero no te muestra en qué paso se te caen los clientes, te devolvemos el 100% del dinero, sin preguntas.</p>
         <small>Tienes 7 días desde la compra. Sin condiciones y sin trámites.</small>
@@ -318,7 +335,7 @@ footer a{color:var(--amarillo);text-decoration:none}
   <div class="tras-oferta wrap">
     <h2 style="font-size:clamp(22px,3.4vw,30px);margin-bottom:12px">El mes que viene vas a facturar lo mismo. <span class="am">A menos que sepas dónde estás perdiendo.</span></h2>
     <p style="color:var(--gris-2);max-width:600px;margin:0 auto 26px">Los clientes que se te cayeron este mes ya los pagaste: en pauta, en contenido y en tiempo. Verlos es lo único que los convierte en ventas.</p>
-    <a href="https://plataforma.joakoestratega.com/comprar" class="btn" data-compra="cierre_pagina">Quiero el Tablero · $19 USD</a>
+    <a href="https://plataforma.joakoestratega.com/comprar" class="btn solo-precio" data-compra="cierre_pagina">Quiero el Tablero · $19 USD</a>
   </div>
 </section>
 
@@ -347,6 +364,12 @@ footer a{color:var(--amarillo);text-decoration:none}
     // abre la página de venta. Quien ya se convenció no espera al final: le
     // quedan 83 segundos de video que ya no lo frenan.
     SEGUNDO_OFERTA: 283,
+
+    // ── Segundo en que aparece el PRECIO y los botones de compra.
+    // 5:42, cuando el video dice "una módica suma de 19 dólares". Antes de eso
+    // la persona ya vio qué es el Tablero y qué hace, pero no hay nada que
+    // comprar todavía: la oferta la abre la voz, no la página.
+    SEGUNDO_PRECIO: 342,
 
     // ── A dónde viajan los eventos de medición.
     // Vacío = solo consola. Se llena cuando exista el endpoint en el servidor.
@@ -386,6 +409,7 @@ footer a{color:var(--amarillo);text-decoration:none}
     if(b){ b.hidden = false; b.classList.add('aparece'); }
     if(a){ a.style.display = 'none'; }
     document.body.classList.remove('solo-clase');
+    document.body.classList.remove('sin-precio');
   }catch(e){}
 })();
 
@@ -399,7 +423,9 @@ footer a{color:var(--amarillo);text-decoration:none}
       .then(function(d){
         if(!d || !d.pesosTexto) return;
         var cop = document.getElementById('precio-cop');
-        if(cop) cop.textContent = 'Hoy son ' + d.pesosTexto + ' COP, al cambio del dia.';
+        if(cop) cop.textContent = 'Hoy son ' + d.pesosTexto + ' COP, al cambio del día.';
+        var bot = document.getElementById('precio-boton');
+        if(bot) bot.textContent = d.pesosTexto;
       })
       .catch(function(){});
   }catch(e){}

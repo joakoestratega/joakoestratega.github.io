@@ -59,6 +59,7 @@
   var ultimoReporte = 0;
   var conSonido = false;
   var ofertaMostrada = false;
+  var precioMostrado = false;
   var yaArranco = false;
 
   // ── Envío de eventos ───────────────────────────────────────────
@@ -155,6 +156,7 @@
   video.addEventListener('ended', function () {
     reportar('fin');
     mostrarOferta('fin_del_video');
+    mostrarPrecio('fin_del_video');
   });
 
   // ── Candado: no se salta ni para adelante ni para atrás ────────
@@ -194,6 +196,11 @@
       mostrarOferta('segundo_' + CFG.SEGUNDO_OFERTA);
     }
 
+    // El precio y los botones salen cuando el video dice el precio, no antes.
+    if (CFG.SEGUNDO_PRECIO != null && conSonido && maxVisto >= CFG.SEGUNDO_PRECIO) {
+      mostrarPrecio('segundo_' + CFG.SEGUNDO_PRECIO);
+    }
+
     pintarBarra();
   });
 
@@ -205,6 +212,17 @@
     if (!video.duration || !relleno) return;
     var real = Math.min(1, video.currentTime / video.duration);
     relleno.style.width = (Math.pow(real, CFG.CURVA_BARRA) * 100) + '%';
+  }
+
+  // ── Precio y botones ───────────────────────────────────────────
+  // Segundo momento: la persona ya vio que es el Tablero y que hace. Aqui el
+  // video dice cuanto vale, y recien ahi aparecen el precio y los dos botones:
+  // uno pegado al video, para el que ya decidio, y el de la oferta mas abajo.
+  function mostrarPrecio(motivo) {
+    if (precioMostrado) return;
+    precioMostrado = true;
+    document.body.classList.remove('sin-precio');
+    reportar('precio_visible', { motivo: motivo });
   }
 
   // ── Oferta ─────────────────────────────────────────────────────
