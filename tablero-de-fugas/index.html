@@ -348,14 +348,20 @@ footer a{color:var(--amarillo);text-decoration:none}
 
 <script>
   window.TABLERO = {
-    // ── Fuente del video. Intercambiable: hoy un archivo, mañana R2 o el servidor.
-    // El video vive en el servidor de Joako, no en el repositorio: pesa 65 MB
-    // y GitHub tiene tope. Se sirve desde /medios, que soporta adelantar.
-    // Si la pagina se esta probando en el ambiente de pruebas, toma el de
-    // pruebas; en cualquier otro caso, el de produccion.
-    // El video pesa 65 MB: vive en el servidor de Joako, no en este
-    // repositorio. Quien mira la pagina no lo nota, solo ve joakoestratega.com.
-    VIDEO_SRC: 'https://plataforma.joakoestratega.com/medios/vsl/vsl-tablero-web.mp4',
+    // ── Fuente del video. Intercambiable: un archivo suelto, R2 o el servidor.
+    //
+    // CAMBIADO EL 2026-07-31. Antes salia del servidor de la casa
+    // (plataforma.joakoestratega.com/medios/...) y por eso el VSL se caia cada
+    // vez que se caia el servidor, que ya van dos veces en cuatro dias. El
+    // video pesa 66 MB, asi que no puede ir dentro del repositorio, pero SI
+    // puede ir como archivo adjunto de una version publicada (release): eso no
+    // engorda el historial de Git, es gratis, y se sirve desde la red de
+    // GitHub, que no depende de la luz de la casa.
+    //
+    // El archivo adjunto acepta que el visitante adelante el video, que es lo
+    // unico que de verdad se necesitaba del servidor.
+    // Si algun dia se pasa a Cloudflare R2, se cambia esta sola linea.
+    VIDEO_SRC: 'https://github.com/joakoestratega/joakoestratega.github.io/releases/download/vsl-v1/vsl-tablero-web.mp4',
     VIDEO_ID:  'vsl-tablero-v1',
 
     // ── Segundo en que aparece el botón de compra.
