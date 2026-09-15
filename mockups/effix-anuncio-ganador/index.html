@@ -58,12 +58,31 @@
   .caja{max-width:600px;margin:0 auto;padding:0 22px;position:relative;z-index:1}
 
   /* ───────────────────────── titular tipo sticker */
+  /* Titular sticker. Las proporciones estan medidas sobre los dossiers que
+     ya se enviaron al cliente (HERRAMIENTAS/dossier-effix/dossier.py):
+     el halo blanco es 0,24 del cuerpo de letra y el filete negro 0,095.
+     El blanco va bastante mas grueso que el negro; al reves el efecto se
+     pierde y las letras se ven ahogadas.
+     Se arma en dos capas porque el trazo de CSS se dibuja centrado:
+     el fondo lleva el halo blanco y encima va el filete negro. */
   .sticker{
+    --filete:.095em;
+    --halo:.24em;
+    position:relative;display:block;width:fit-content;max-width:100%;
+    margin-left:auto;margin-right:auto;padding:.06em .42em;text-align:center;
     font-weight:900;color:var(--blanco);text-transform:uppercase;
-    -webkit-text-stroke:4px var(--negro);paint-order:stroke fill;
-    filter:drop-shadow(2px 0 0 #fff) drop-shadow(-2px 0 0 #fff)
-           drop-shadow(0 2px 0 #fff) drop-shadow(0 -2px 0 #fff);
-    letter-spacing:.3px;line-height:1.08;text-wrap:balance;
+    -webkit-text-stroke:calc((var(--filete) + var(--halo)) * 2) var(--blanco);
+    paint-order:stroke fill;
+    letter-spacing:.3px;line-height:1.24;text-wrap:balance;
+    max-width:100%;
+  }
+  .sticker::after{
+    content:attr(data-t);
+    position:absolute;inset:0;padding:inherit;text-align:inherit;
+    color:var(--blanco);
+    -webkit-text-stroke:calc(var(--filete) * 2) var(--negro);
+    paint-order:stroke fill;
+    letter-spacing:inherit;line-height:inherit;text-transform:inherit;
   }
 
   /* ───────────────────────── hero */
@@ -83,7 +102,7 @@
   .hero .dentro{position:relative;z-index:2}
 
   .marca{display:flex;justify-content:center}
-  .marca img{height:38px;filter:drop-shadow(0 4px 14px rgba(0,0,0,.7))}
+  .marca img{height:38px;width:auto;filter:drop-shadow(0 4px 14px rgba(0,0,0,.7))}
 
   .fila-centro{display:flex;justify-content:center}
   .etiqueta{
@@ -176,7 +195,7 @@
 
   /* ───────────────────────── lo que trae */
   .seccion{padding:52px 0 0}
-  .titulo-sec{font-size:clamp(23px,5.8vw,31px);text-align:center}
+  .titulo-sec{font-size:clamp(19px,5vw,27px);text-align:center;max-width:100%}
   .lista{margin-top:24px;display:grid;gap:2px}
   .linea{
     display:flex;gap:13px;align-items:center;padding:15px 4px;
@@ -290,7 +309,7 @@ window.EFFIX = {
 </div>
 
 <section class="caja seccion">
-  <h2 class="sticker titulo-sec">Lo que tienen los VIP</h2>
+  <h2 class="sticker titulo-sec" data-t="Lo que tienen los VIP">Lo que tienen los VIP</h2>
 
   <div class="lista">
     <div class="linea">
