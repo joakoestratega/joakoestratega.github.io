@@ -8,286 +8,226 @@
 <meta name="description" content="Entrada VIP de la Feria EFFIX 2026 con 30% menos. Del 15 al 19 de octubre en Plaza Mayor, Medellín.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800;900&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900&display=swap" rel="stylesheet">
 
 <!--
   Feria EFFIX 2026 - pagina del "anuncio ganador"
   ------------------------------------------------------------------
+  MARCA: sale del BRANDBOOK FERIA EFFIX 2026 (pag. 9, 11, 14 y 15), no de
+  lo que se vea bonito.
+    - Tipografia: MONTSERRAT en todo. Black para titulares en MAYUSCULAS,
+      Regular para cuerpos de texto. No entra ninguna otra familia.
+    - Paleta, y son solo tres: negro #000000, blanco #FFFFFF y
+      lavanda grisaceo #726E8D. Nada de dorado ni de crema.
+    - Texturas: cromo, cristal y degradados de la paleta con un toque de
+      ruido, preferentemente como fondo.
+    - Titulares tipo sticker: relleno blanco, contorno negro y halo blanco.
+
   CONFIG: lo unico que se toca esta en el bloque <script id="config">.
-  No hay ninguna llave de pasarela aqui: el boton manda al checkout que
-  se configure en DESTINO.
+  No hay ninguna llave de pasarela aqui.
 
-  Los beneficios estan copiados de la tabla de feriaeffix.com/quiero-mi-entrada/
+  Los beneficios salen de la tabla de feriaeffix.com/quiero-mi-entrada/
   verificada el 2026-09-15. No agregar ninguno que no este alli.
-
-  La pagina va en tres bloques: oscuro (la oferta), claro (la informacion)
-  y oscuro (el cierre). La alternancia es a proposito: todo oscuro cansa.
 -->
 
 <style>
   :root{
-    --crema:#F3F4EF;
-    --morado:#CFCBEF;
-    --morado-hondo:#35375F;
-    --tinta:#0A0B11;
-    --oro:#FFC94A;
-    --oro-hondo:#9A6B00;
-    --borde:rgba(207,203,239,.16);
-    --suave:#B9B7C9;
-    --gris:#5A5866;
+    --negro:#000000;
+    --blanco:#FFFFFF;
+    --lavanda:#726E8D;
+    --fondo:#08080E;
+    --lavanda-claro:#B6B2C9;
   }
   *{box-sizing:border-box;margin:0;padding:0}
   html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
   body{
     overflow-x:hidden;
-    font-family:'Poppins',system-ui,sans-serif;
-    color:var(--crema);
-    background:var(--tinta);
-    line-height:1.6;
+    font-family:'Montserrat',system-ui,sans-serif;
+    color:var(--blanco);
+    background:var(--fondo);
+    line-height:1.55;
     -webkit-font-smoothing:antialiased;
   }
-  .caja{max-width:640px;margin:0 auto;padding:0 22px}
+  /* la textura de ruido del brandbook, sobre todo el fondo */
+  body::before{
+    content:'';position:fixed;inset:0;pointer-events:none;z-index:0;opacity:.5;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='.35'/%3E%3C/svg%3E");
+    mix-blend-mode:overlay;
+  }
+  .caja{max-width:600px;margin:0 auto;padding:0 22px;position:relative;z-index:1}
 
-  /* ═════════════════════════ BLOQUE 1: la oferta, sobre la tarima */
-  .hero{position:relative;padding:32px 0 42px;overflow:hidden}
+  /* ───────────────────────── titular tipo sticker */
+  .sticker{
+    font-weight:900;color:var(--blanco);text-transform:uppercase;
+    -webkit-text-stroke:4px var(--negro);paint-order:stroke fill;
+    filter:drop-shadow(2px 0 0 #fff) drop-shadow(-2px 0 0 #fff)
+           drop-shadow(0 2px 0 #fff) drop-shadow(0 -2px 0 #fff);
+    letter-spacing:.3px;line-height:1.08;text-wrap:balance;
+  }
+
+  /* ───────────────────────── hero */
+  .hero{position:relative;padding:28px 0 36px;overflow:hidden}
   .hero .foto{
     position:absolute;inset:0;
     background:url("fondo-tarima.jpg") center 42% / cover no-repeat;
-    transform:scale(1.05);
+    transform:scale(1.04);
     animation:respira 26s ease-in-out infinite alternate;
   }
-  @keyframes respira{from{transform:scale(1.05)}to{transform:scale(1.13)}}
+  @keyframes respira{from{transform:scale(1.04)}to{transform:scale(1.12)}}
   .hero .tinte{
     position:absolute;inset:0;
-    background:
-      linear-gradient(180deg, rgba(10,11,17,.86) 0%, rgba(10,11,17,.62) 34%, rgba(10,11,17,.80) 74%, var(--tinta) 100%);
+    background:linear-gradient(180deg, rgba(8,8,14,.84) 0%, rgba(8,8,14,.55) 32%,
+      rgba(8,8,14,.82) 72%, var(--fondo) 100%);
   }
   .hero .dentro{position:relative;z-index:2}
 
   .marca{display:flex;justify-content:center}
-  .marca img{height:40px;filter:drop-shadow(0 4px 16px rgba(0,0,0,.65))}
+  .marca img{height:38px;filter:drop-shadow(0 4px 14px rgba(0,0,0,.7))}
 
   .fila-centro{display:flex;justify-content:center}
   .etiqueta{
-    display:inline-flex;align-items:center;gap:9px;
-    margin:22px 0 18px;padding:8px 17px;
-    border:1px solid rgba(255,201,74,.45);border-radius:60px;
-    background:rgba(255,201,74,.12);backdrop-filter:blur(6px);
-    font-family:'Montserrat',sans-serif;font-weight:700;
-    font-size:11px;letter-spacing:2.4px;color:var(--oro);
+    display:inline-flex;align-items:center;gap:8px;
+    margin:20px 0 16px;padding:7px 16px;
+    border:2px solid var(--blanco);border-radius:40px;
+    background:rgba(255,255,255,.10);backdrop-filter:blur(6px);
+    font-weight:800;font-size:10.5px;letter-spacing:2.4px;color:var(--blanco);
   }
-  .etiqueta i{width:7px;height:7px;border-radius:50%;background:var(--oro);
-    box-shadow:0 0 0 0 rgba(255,201,74,.7);animation:pulso 2.2s infinite}
+  .etiqueta i{width:6px;height:6px;border-radius:50%;background:var(--blanco);
+    box-shadow:0 0 0 0 rgba(255,255,255,.65);animation:pulso 2.2s infinite}
   @keyframes pulso{
-    0%{box-shadow:0 0 0 0 rgba(255,201,74,.6)}
-    70%{box-shadow:0 0 0 12px rgba(255,201,74,0)}
-    100%{box-shadow:0 0 0 0 rgba(255,201,74,0)}
+    0%{box-shadow:0 0 0 0 rgba(255,255,255,.55)}
+    70%{box-shadow:0 0 0 11px rgba(255,255,255,0)}
+    100%{box-shadow:0 0 0 0 rgba(255,255,255,0)}
   }
 
-  h1{
-    font-family:'Montserrat',sans-serif;font-weight:900;
-    font-size:clamp(31px,7.8vw,48px);line-height:1.05;
-    letter-spacing:-.8px;text-align:center;text-wrap:balance;
-    text-shadow:0 5px 28px rgba(0,0,0,.65);
-  }
-  .subhero{
-    text-align:center;color:#DBD8E8;margin-top:15px;
-    font-size:clamp(15px,3.9vw,18px);font-weight:300;text-wrap:balance;
-  }
+  h1{font-size:clamp(30px,7.6vw,46px);text-align:center;font-weight:900;
+    letter-spacing:-.6px;line-height:1.04;text-wrap:balance;
+    text-shadow:0 4px 22px rgba(0,0,0,.7)}
+  .subhero{text-align:center;color:var(--lavanda-claro);margin-top:13px;
+    font-size:clamp(14.5px,3.8vw,17px);font-weight:400;text-wrap:balance}
 
-  .zona-precio{background:var(--tinta);padding-bottom:12px}
-
+  /* ───────────────────────── la oferta */
   .tarjeta{
-    position:relative;margin:34px 0 0;padding:56px 24px 28px;
-    background:linear-gradient(165deg, rgba(64,62,98,.62), rgba(20,21,33,.92));
-    border:1px solid rgba(207,203,239,.24);border-radius:28px;
-    box-shadow:0 26px 70px rgba(0,0,0,.55), inset 0 1px 0 rgba(255,255,255,.10);
+    position:relative;margin:30px 0 0;padding:52px 22px 26px;
+    background:var(--blanco);color:var(--negro);
+    border-radius:30px;box-shadow:0 22px 60px rgba(0,0,0,.6);
     text-align:center;
   }
   .sello{
-    position:absolute;top:-38px;right:14px;
-    width:94px;height:94px;border-radius:50%;
-    background:radial-gradient(120% 120% at 32% 26%, #FFDE8C 0%, var(--oro) 52%, #E0A426 100%);
-    color:#1A1405;
+    position:absolute;top:-34px;right:16px;
+    width:88px;height:88px;border-radius:50%;
+    background:var(--negro);color:var(--blanco);
+    border:4px solid var(--blanco);
     display:flex;flex-direction:column;align-items:center;justify-content:center;
-    font-family:'Montserrat',sans-serif;font-weight:900;
-    transform:rotate(-9deg);
-    box-shadow:0 14px 34px rgba(0,0,0,.5), inset 0 -3px 9px rgba(0,0,0,.18);
+    font-weight:900;transform:rotate(-8deg);
+    box-shadow:0 12px 28px rgba(0,0,0,.5);
   }
-  .sello b{font-size:27px;line-height:1}
-  .sello span{font-size:9px;letter-spacing:1.4px;margin-top:2px}
+  .sello b{font-size:25px;line-height:1}
+  .sello span{font-size:8.5px;letter-spacing:1.3px;margin-top:2px;font-weight:700}
 
-  .kicker{font-family:'Montserrat',sans-serif;font-weight:700;
-    letter-spacing:4.4px;font-size:11px;color:var(--morado)}
-  .antes{
-    margin-top:14px;font-family:'Montserrat',sans-serif;font-weight:600;
-    font-size:clamp(19px,4.8vw,24px);color:#CFCDDC;
-    text-decoration:line-through;text-decoration-color:var(--oro);
-    text-decoration-thickness:3px;
-  }
-  .ahora{
-    font-family:'Montserrat',sans-serif;font-weight:900;
-    font-size:clamp(46px,12.4vw,70px);line-height:1.02;margin-top:2px;
-    letter-spacing:-2px;color:#FFFFFF;
-  }
-  .ahorro{color:var(--oro);font-size:clamp(13.5px,3.5vw,15.5px);margin-top:7px;font-weight:500}
+  .kicker{font-weight:800;letter-spacing:4px;font-size:10.5px;color:var(--lavanda)}
+  .antes{margin-top:12px;font-weight:600;font-size:clamp(18px,4.6vw,22px);
+    color:var(--lavanda);text-decoration:line-through;text-decoration-thickness:3px}
+  .ahora{font-weight:900;font-size:clamp(46px,12.6vw,68px);line-height:1;
+    margin-top:2px;letter-spacing:-2.5px;color:var(--negro)}
+  .ahorro{color:var(--lavanda);font-size:14px;margin-top:6px;font-weight:600}
 
-  .reloj{margin-top:26px;padding-top:24px;border-top:1px solid var(--borde)}
-  .reloj p{font-size:11.5px;letter-spacing:2.5px;color:var(--morado);text-transform:uppercase;font-weight:600}
-  .digitos{
-    font-family:'Montserrat',sans-serif;font-weight:900;
-    font-size:clamp(42px,12vw,56px);letter-spacing:2px;margin-top:7px;
-    font-variant-numeric:tabular-nums;
-  }
-  .digitos.poco{color:var(--oro)}
-  .barra{height:5px;border-radius:5px;background:rgba(255,255,255,.09);overflow:hidden;margin-top:14px}
+  .reloj{margin-top:22px;padding-top:20px;border-top:2px solid rgba(114,110,141,.22)}
+  .reloj p{font-size:10.5px;letter-spacing:2.4px;color:var(--lavanda);
+    text-transform:uppercase;font-weight:800}
+  .digitos{font-weight:900;font-size:clamp(40px,11.5vw,54px);letter-spacing:1px;
+    margin-top:4px;font-variant-numeric:tabular-nums;color:var(--negro)}
+  .barra{height:5px;border-radius:5px;background:rgba(114,110,141,.2);
+    overflow:hidden;margin-top:12px}
   .barra i{display:block;height:100%;width:100%;border-radius:5px;
-    background:linear-gradient(90deg,#FFDE8C,var(--oro));transition:width 1s linear}
+    background:var(--negro);transition:width 1s linear}
 
   .boton{
-    display:block;margin-top:26px;padding:21px 18px;
-    background:linear-gradient(180deg,#FFFFFF,#EAE8DF);color:#0A0B11;
-    font-family:'Montserrat',sans-serif;font-weight:800;
-    font-size:clamp(15.5px,4.1vw,18.5px);letter-spacing:.2px;
-    text-align:center;text-decoration:none;border-radius:60px;
-    box-shadow:0 16px 36px rgba(0,0,0,.45);
-    transition:transform .16s ease, box-shadow .16s ease;
+    display:block;margin-top:22px;padding:20px 18px;
+    background:var(--negro);color:var(--blanco);
+    font-weight:900;font-size:clamp(15px,4vw,17.5px);letter-spacing:.4px;
+    text-align:center;text-decoration:none;border-radius:50px;
+    text-transform:uppercase;
+    transition:transform .16s ease, opacity .16s ease;
   }
-  .boton:hover{transform:translateY(-2px);box-shadow:0 20px 44px rgba(0,0,0,.55)}
+  .boton:hover{transform:translateY(-2px);opacity:.92}
   .boton:active{transform:translateY(0)}
-  .bajo-boton{color:var(--suave);font-size:13px;margin-top:12px}
+  .bajo-boton{color:var(--lavanda);font-size:12.5px;margin-top:11px;font-weight:500}
 
-  /* ═════════════════════════ BLOQUE 2: la informacion, en claro */
-  .claro{
-    background:var(--crema);color:#111114;
-    padding:58px 0 62px;margin-top:34px;
-    border-radius:34px 34px 0 0;
+  .aviso{display:none}
+  body.vencido .aviso{
+    display:block;margin-top:16px;padding:14px 16px;border-radius:14px;
+    background:rgba(114,110,141,.12);border:2px solid rgba(114,110,141,.3);
+    color:var(--negro);font-size:13.5px;font-weight:500;
   }
-  .claro .rotulo{
-    font-family:'Montserrat',sans-serif;font-weight:700;
-    letter-spacing:3.2px;font-size:11px;color:var(--oro-hondo);text-align:center;
-  }
-  .claro .titulo{
-    font-family:'Montserrat',sans-serif;font-weight:900;color:#111114;
-    font-size:clamp(24px,5.9vw,32px);margin-top:11px;text-align:center;
-    letter-spacing:-.5px;text-wrap:balance;line-height:1.14;
-  }
-  .claro .entradilla{text-align:center;color:var(--gris);margin-top:12px;font-weight:400;text-wrap:balance}
 
-  .items{display:grid;gap:11px;margin-top:28px}
-  @media (min-width:660px){.items{grid-template-columns:1fr 1fr}}
-  .item{
-    display:flex;gap:13px;align-items:flex-start;
-    padding:18px;border:1px solid rgba(17,17,20,.09);border-radius:16px;
-    background:#FFFFFF;box-shadow:0 2px 10px rgba(17,17,20,.04);
-    opacity:0;transform:translateY(18px);
-    transition:opacity .55s ease, transform .55s ease;
-  }
-  .item.ver{opacity:1;transform:none}
-  .item .ico{
-    flex:none;width:36px;height:36px;border-radius:10px;
-    background:#FBF0D6;border:1px solid rgba(154,107,0,.22);
-    display:flex;align-items:center;justify-content:center;
-  }
-  .item b{font-family:'Montserrat',sans-serif;font-weight:700;font-size:15px;display:block;line-height:1.3;color:#111114}
-  .item span{font-size:13.5px;color:var(--gris);display:block;margin-top:3px;font-weight:400;line-height:1.5}
+  /* ───────────────────────── fotos */
+  .tira{padding:28px 0 4px}
+  .tira .rejilla{display:grid;grid-template-columns:repeat(3,1fr);gap:7px}
+  .tira figure{position:relative;margin:0;aspect-ratio:3/4;overflow:hidden;
+    border-radius:12px;border:2px solid rgba(255,255,255,.14)}
+  .tira img{width:100%;height:100%;object-fit:cover;display:block;
+    filter:saturate(1.02) contrast(1.05)}
 
-  .tabla{
-    margin-top:26px;border:1px solid rgba(17,17,20,.10);border-radius:18px;overflow:hidden;
-    background:#FFFFFF;box-shadow:0 2px 10px rgba(17,17,20,.04);
-  }
-  .tabla .fila{display:grid;grid-template-columns:1fr 74px 74px;align-items:center;
-    padding:14px 17px;border-top:1px solid rgba(17,17,20,.08);font-size:13.8px;color:#111114}
-  .tabla .fila:first-child{border-top:0;background:#F1EFE8}
-  .tabla .fila span+span{text-align:center;font-size:13px}
-  .tabla .cab{font-family:'Montserrat',sans-serif;font-weight:800;font-size:11px;letter-spacing:1.5px}
-  .tabla .cab span+span{color:var(--gris)}
-  .tabla .cab span:last-child{color:var(--oro-hondo)}
-  .si{color:var(--oro-hondo);font-weight:700}
-  .no{color:#A8A6B0}
+  .ancha{margin:34px 0 0;aspect-ratio:16/10;overflow:hidden;border-radius:18px;
+    border:2px solid rgba(255,255,255,.14)}
+  .ancha img{width:100%;height:100%;object-fit:cover;object-position:center 46%;display:block}
 
+  /* ───────────────────────── lo que trae */
+  .seccion{padding:52px 0 0}
+  .titulo-sec{font-size:clamp(23px,5.8vw,31px);text-align:center}
+  .lista{margin-top:24px;display:grid;gap:2px}
+  .linea{
+    display:flex;gap:13px;align-items:center;padding:15px 4px;
+    border-bottom:1px solid rgba(255,255,255,.10);
+    font-size:clamp(15px,3.9vw,17px);font-weight:600;
+    opacity:0;transform:translateX(-12px);
+    transition:opacity .5s ease, transform .5s ease;
+  }
+  .linea.ver{opacity:1;transform:none}
+  .linea:last-child{border-bottom:0}
+  .linea svg{flex:none}
+
+  /* ───────────────────────── datos */
   .datos{
-    margin-top:26px;padding:26px 22px;text-align:center;
-    border:1px solid rgba(17,17,20,.10);border-radius:20px;background:#FFFFFF;
-    box-shadow:0 2px 10px rgba(17,17,20,.04);
+    margin-top:34px;padding:26px 20px;text-align:center;
+    background:var(--lavanda);border-radius:24px;color:var(--blanco);
   }
-  .datos .cuando{font-family:'Montserrat',sans-serif;font-weight:900;color:#111114;
-    font-size:clamp(23px,5.8vw,30px);letter-spacing:-.5px}
-  .datos .donde{color:var(--morado-hondo);margin-top:5px;letter-spacing:2px;font-size:13px;font-weight:500}
-  .datos .cifras{margin-top:18px;padding-top:18px;border-top:1px solid rgba(17,17,20,.08);
-    display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
-  .datos .cifras b{display:block;font-family:'Montserrat',sans-serif;font-weight:900;font-size:18px;color:#111114}
-  .datos .cifras span{display:block;font-size:10.5px;color:var(--gris);letter-spacing:.8px;margin-top:2px}
+  .datos .cuando{font-weight:900;font-size:clamp(23px,5.8vw,30px);letter-spacing:-.5px}
+  .datos .donde{margin-top:4px;letter-spacing:2px;font-size:12.5px;font-weight:700;
+    color:rgba(255,255,255,.88)}
+  .datos .cifras{margin-top:16px;padding-top:16px;border-top:2px solid rgba(255,255,255,.25);
+    display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+  .datos .cifras b{display:block;font-weight:900;font-size:18px}
+  .datos .cifras span{display:block;font-size:10px;letter-spacing:.8px;margin-top:1px;
+    color:rgba(255,255,255,.85);font-weight:600}
 
-  /* ═════════════════════════ BLOQUE 3: el cierre, con la gente */
-  .final{position:relative;padding:66px 0 40px;overflow:hidden;background:var(--tinta)}
-  .final .foto{position:absolute;inset:0;
-    background:url("fondo-gente.jpg") center 46% / cover no-repeat}
-  .final .tinte{position:absolute;inset:0;
-    background:linear-gradient(180deg, rgba(10,11,17,.92), rgba(10,11,17,.74) 42%, rgba(10,11,17,.96))}
-  .final .dentro{position:relative;z-index:2;text-align:center}
-  .final .frase{
-    font-family:'Montserrat',sans-serif;font-weight:900;
-    font-size:clamp(22px,5.5vw,30px);line-height:1.16;text-wrap:balance;
-    text-shadow:0 5px 26px rgba(0,0,0,.7);
-  }
-  .final .apoyo{margin-top:13px;color:var(--morado);font-size:14px;font-weight:300}
-  .final .boton{max-width:520px;margin-left:auto;margin-right:auto;margin-top:28px}
-  .final .remate{margin-top:22px;color:#D6D3E2;font-size:14.5px;font-weight:300;text-wrap:balance}
+  .cierre{text-align:center;margin-top:44px}
+  .cierre .frase{font-size:clamp(20px,5vw,26px)}
+  .cierre .boton{background:var(--blanco);color:var(--negro);max-width:520px;
+    margin-left:auto;margin-right:auto}
+  .remate{margin-top:18px;color:var(--lavanda-claro);font-size:13.5px;font-weight:500;text-wrap:balance}
 
-  .pie{margin-top:34px;padding-bottom:104px;text-align:center;color:#6B6978;font-size:11.5px;line-height:1.8;
-    position:relative;z-index:2}
+  .pie{margin-top:40px;padding-bottom:100px;text-align:center;
+    color:rgba(255,255,255,.34);font-size:11px;line-height:1.8;font-weight:500}
 
-  /* ═════════════════════════ estado vencido */
   body.vencido .sello,
   body.vencido .antes,
   body.vencido .ahorro{display:none}
-  body.vencido .etiqueta{border-color:rgba(207,203,239,.30);
-    background:rgba(255,255,255,.07);color:var(--morado)}
-  body.vencido .etiqueta i{background:#6B6979;animation:none;box-shadow:none}
-  body.vencido .ahora{color:#C9C6D6}
-  body.vencido .barra i{background:#4A4857}
-  .aviso{display:none}
-  body.vencido .aviso{
-    display:block;margin-top:18px;padding:16px 18px;border-radius:15px;
-    background:rgba(255,201,74,.09);border:1px solid rgba(255,201,74,.3);
-    color:#EFE4CB;font-size:14px;
-  }
-
-
-  /* ═════════════════════════ fotos de la feria */
-  .tira{padding:34px 0 6px}
-  .tira .rot{
-    font-family:'Montserrat',sans-serif;font-weight:700;
-    letter-spacing:3px;font-size:10.5px;color:var(--morado);
-    text-align:center;margin-bottom:14px;
-  }
-  .tira .rejilla{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
-  .tira figure{
-    position:relative;margin:0;aspect-ratio:3/4;overflow:hidden;border-radius:14px;
-    border:1px solid rgba(207,203,239,.14);
-  }
-  .tira img{width:100%;height:100%;object-fit:cover;display:block;
-    filter:saturate(1.06) contrast(1.04)}
-  .tira figure::after{
-    content:'';position:absolute;inset:0;
-    background:linear-gradient(180deg, rgba(10,11,17,0) 55%, rgba(10,11,17,.55) 100%);
-  }
-
-
-  .retrato{
-    float:none;width:100%;aspect-ratio:16/10;overflow:hidden;border-radius:18px;
-    margin:26px 0 4px;border:1px solid rgba(17,17,20,.10);
-  }
-  .retrato img{width:100%;height:100%;object-fit:cover;object-position:center 58%;display:block}
+  body.vencido .ahora{color:var(--lavanda)}
+  body.vencido .barra i{background:var(--lavanda)}
+  body.vencido .etiqueta{border-color:rgba(255,255,255,.4);color:rgba(255,255,255,.7)}
+  body.vencido .etiqueta i{animation:none;background:rgba(255,255,255,.5)}
 
   .fija{
-    position:fixed;left:0;right:0;bottom:0;padding:12px 16px calc(12px + env(safe-area-inset-bottom));
-    background:linear-gradient(180deg, rgba(10,11,17,0), rgba(10,11,17,.95) 36%);
-    transform:translateY(130%);transition:transform .32s ease;z-index:9;
+    position:fixed;left:0;right:0;bottom:0;z-index:9;
+    padding:12px 16px calc(12px + env(safe-area-inset-bottom));
+    background:linear-gradient(180deg, rgba(8,8,14,0), rgba(8,8,14,.96) 36%);
+    transform:translateY(130%);transition:transform .32s ease;
   }
   .fija.ver{transform:translateY(0)}
-  .fija .boton{margin:0 auto;max-width:560px;margin-top:0}
+  .fija .boton{margin:0 auto;max-width:540px;margin-top:0;
+    background:var(--blanco);color:var(--negro)}
 </style>
 </head>
 <body>
@@ -319,130 +259,86 @@ window.EFFIX = {
   </div>
 </header>
 
-<div class="zona-precio">
-  <div class="caja">
-    <div class="tarjeta">
-      <div class="sello"><b id="selloPct">-30%</b><span>SOLO AQUÍ</span></div>
-      <div class="kicker" id="kicker">ENTRADA VIP</div>
-      <div class="antes" id="precioAntes">$1.155.000</div>
-      <div class="ahora" id="precioAhora">$808.500</div>
-      <div class="ahorro" id="ahorro">Te ahorras $346.500</div>
+<div class="caja">
+  <div class="tarjeta">
+    <div class="sello"><b id="selloPct">-30%</b><span>SOLO AQUÍ</span></div>
+    <div class="kicker" id="kicker">ENTRADA VIP</div>
+    <div class="antes" id="precioAntes">$1.155.000</div>
+    <div class="ahora" id="precioAhora">$808.500</div>
+    <div class="ahorro" id="ahorro">Te ahorras $346.500</div>
 
-      <div class="reloj">
-        <p id="rotuloReloj">Este precio se va en</p>
-        <div class="digitos" id="digitos">25:00</div>
-        <div class="barra"><i id="barra"></i></div>
-      </div>
-
-      <div class="aviso" id="aviso">
-        La feria sigue en pie: del 15 al 19 de octubre en Plaza Mayor, Medellín.
-      </div>
-
-      <a class="boton" id="cta" href="#">QUIERO MI ENTRADA VIP</a>
-      <p class="bajo-boton" id="bajoBoton">Eliges, pagas y te llega la entrada al correo.</p>
+    <div class="reloj">
+      <p id="rotuloReloj">Este precio se va en</p>
+      <div class="digitos" id="digitos">25:00</div>
+      <div class="barra"><i id="barra"></i></div>
     </div>
+
+    <div class="aviso" id="aviso">La feria sigue: del 15 al 19 de octubre en Plaza Mayor.</div>
+
+    <a class="boton" id="cta" href="#">Quiero mi entrada VIP</a>
+    <p class="bajo-boton" id="bajoBoton">Eliges, pagas y te llega la entrada al correo.</p>
   </div>
 </div>
 
-  <div class="caja tira">
-    <div class="rot">ASÍ ESTUVO LA ÚLTIMA</div>
-    <div class="rejilla">
-      <figure><img src="p-gente.jpg" alt="El público de la Feria EFFIX" loading="lazy"></figure>
-      <figure><img src="p-atento.jpg" alt="Asistentes en una charla" loading="lazy"></figure>
-      <figure><img src="p-celebra.jpg" alt="Una asistente celebrando" loading="lazy"></figure>
-    </div>
-  </div>
-
-<div class="claro">
-  <div class="caja">
-    <div class="rotulo">LO QUE TIENEN LOS VIP</div>
-    <h2 class="titulo">Con la VIP entras sin fila y te quedas los cinco días.</h2>
-    <p class="entradilla">La entrada general cubre tres días. La VIP, los cinco.</p>
-
-    <div class="items">
-      <div class="item">
-        <div class="ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#9A6B00" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
-        <div><b>Entras sin filas</b><span>Pasas directo los tres días generales, sin quedarte en la fila de la entrada.</span></div>
-      </div>
-      <div class="item">
-        <div class="ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#9A6B00" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg></div>
-        <div><b>Los cinco días completos</b><span>Del 15 al 19 de octubre. La entrada general cubre tres, del 16 al 18.</span></div>
-      </div>
-      <div class="item">
-        <div class="ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#9A6B00" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2h8l-1 6H9L8 2zM12 8v8M8 22h8"/></svg></div>
-        <div><b>Zona VIP con hidratación</b><span>Un lugar propio para sentarte, tomar algo y seguir hablando entre charla y charla.</span></div>
-      </div>
-      <div class="item">
-        <div class="ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#9A6B00" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21V8l9-5 9 5v13M9 21v-6h6v6"/></svg></div>
-        <div><b>Tu área en los auditorios</b><span>Áreas reservadas, así llegues sobre la hora a la charla que todo el mundo quiere ver.</span></div>
-      </div>
-      <div class="item">
-        <div class="ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#9A6B00" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l2.4 6.9H22l-6 4.4 2.3 7-6.3-4.6L5.7 20l2.3-7-6-4.4h7.6z"/></svg></div>
-        <div><b>La inauguración privada</b><span>El jueves 15, antes de que abran las puertas al público general.</span></div>
-      </div>
-      <div class="item">
-        <div class="ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#9A6B00" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
-        <div><b>La clausura exclusiva</b><span>El lunes 19, cuando queda la gente que vino a cerrar negocios.</span></div>
-      </div>
-      <div class="item">
-        <div class="ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#9A6B00" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg></div>
-        <div><b>Entras y sales cuando quieras</b><span>La escarapela VIP no tiene límite de entradas y salidas durante los cinco días.</span></div>
-      </div>
-      <div class="item">
-        <div class="ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#9A6B00" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M23 7l-7 5 7 5V7z"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg></div>
-        <div><b>Zonas para grabar</b><span>Espacios montados para crear contenido, más la foto y el video profesional del evento.</span></div>
-      </div>
-    </div>
-
-
-    <div class="retrato"><img src="p-auditorio.jpg" alt="El auditorio principal de la feria" loading="lazy"></div>
-
-    <div class="rotulo" style="margin-top:46px">LADO A LADO</div>
-    <h2 class="titulo">Esto es lo que cambia si llevas VIP.</h2>
-
-    <div class="tabla">
-      <div class="fila cab"><span>&nbsp;</span><span>GENERAL</span><span>VIP</span></div>
-      <div class="fila"><span>Días de acceso</span><span>3</span><span class="si">5</span></div>
-      <div class="fila"><span>Entrar sin filas</span><span class="no">No</span><span class="si">Sí</span></div>
-      <div class="fila"><span>Zona con hidratación</span><span class="no">No</span><span class="si">Sí</span></div>
-      <div class="fila"><span>Área reservada en auditorios</span><span class="no">No</span><span class="si">Sí</span></div>
-      <div class="fila"><span>Inauguración y clausura privadas</span><span class="no">No</span><span class="si">Sí</span></div>
-      <div class="fila"><span>Entrada y salida ilimitada</span><span class="no">No</span><span class="si">Sí</span></div>
-    </div>
-
-
-    <div class="retrato" style="margin-top:22px"><img src="p-depie.jpg" alt="Asistentes de pie en una charla de la feria" loading="lazy"></div>
-
-    <div class="datos">
-      <div class="cuando">15 al 19 de octubre</div>
-      <div class="donde">PLAZA MAYOR &middot; MEDELLÍN</div>
-      <div class="cifras">
-        <div><b>+200</b><span>PONENTES</span></div>
-        <div><b>350+</b><span>EMPRESAS</span></div>
-        <div><b>6ª</b><span>EDICIÓN</span></div>
-      </div>
-    </div>
+<div class="caja tira">
+  <div class="rejilla">
+    <figure><img src="p-gente.jpg" alt="El público de la Feria EFFIX" loading="lazy"></figure>
+    <figure><img src="p-atento.jpg" alt="Asistentes en una charla" loading="lazy"></figure>
+    <figure><img src="p-celebra.jpg" alt="Una asistente celebrando" loading="lazy"></figure>
   </div>
 </div>
 
+<section class="caja seccion">
+  <h2 class="sticker titulo-sec">Lo que tienen los VIP</h2>
 
-<div class="final">
-  <div class="foto"></div>
-  <div class="tinte"></div>
-  <div class="dentro caja">
-    <p class="frase">Lo que llevas meses buscando en internet, aquí lo encuentras en tres días.</p>
-    <p class="apoyo">+200 ponentes, más de 350 empresas y +200 conferencias y talleres.</p>
-    <a class="boton" id="cta2" href="#">QUIERO MI ENTRADA VIP</a>
+  <div class="lista">
+    <div class="linea">
+      <svg width="17" height="17" viewBox="0 0 24 24" fill="#726E8D"><path d="M12 2l2.6 6.9L22 12l-7.4 3.1L12 22l-2.6-6.9L2 12l7.4-3.1z"/></svg>
+      Entras sin filas los tres días generales.
+    </div>
+    <div class="linea">
+      <svg width="17" height="17" viewBox="0 0 24 24" fill="#726E8D"><path d="M12 2l2.6 6.9L22 12l-7.4 3.1L12 22l-2.6-6.9L2 12l7.4-3.1z"/></svg>
+      Te quedas los cinco días, del 15 al 19.
+    </div>
+    <div class="linea">
+      <svg width="17" height="17" viewBox="0 0 24 24" fill="#726E8D"><path d="M12 2l2.6 6.9L22 12l-7.4 3.1L12 22l-2.6-6.9L2 12l7.4-3.1z"/></svg>
+      Tienes zona VIP con hidratación.
+    </div>
+    <div class="linea">
+      <svg width="17" height="17" viewBox="0 0 24 24" fill="#726E8D"><path d="M12 2l2.6 6.9L22 12l-7.4 3.1L12 22l-2.6-6.9L2 12l7.4-3.1z"/></svg>
+      Tienes tu área reservada en los auditorios.
+    </div>
+    <div class="linea">
+      <svg width="17" height="17" viewBox="0 0 24 24" fill="#726E8D"><path d="M12 2l2.6 6.9L22 12l-7.4 3.1L12 22l-2.6-6.9L2 12l7.4-3.1z"/></svg>
+      Entras a la inauguración privada y a la clausura.
+    </div>
+  </div>
+
+  <div class="ancha"><img src="p-depie.jpg" alt="Asistentes de pie en una charla" loading="lazy"></div>
+
+  <div class="datos">
+    <div class="cuando">15 al 19 de octubre</div>
+    <div class="donde">PLAZA MAYOR &middot; MEDELLÍN</div>
+    <div class="cifras">
+      <div><b>+200</b><span>PONENTES</span></div>
+      <div><b>350+</b><span>EMPRESAS</span></div>
+      <div><b>6ª</b><span>EDICIÓN</span></div>
+    </div>
+  </div>
+
+  <div class="cierre">
+    <a class="boton" id="cta2" href="#">Quiero mi entrada VIP</a>
     <p class="remate" id="remate">Cuando cierres esta página, la VIP vuelve a valer <span id="cierrePrecio">$1.155.000</span>.</p>
   </div>
+
   <div class="pie">
     Feria EFFIX 2026 &middot; Plaza Mayor, Medellín<br>
     Precios en pesos colombianos con IVA incluido.
   </div>
-</div>
+</section>
 
 <div class="fija" id="fija">
-  <a class="boton" id="ctaFija" href="#">QUIERO MI ENTRADA VIP</a>
+  <a class="boton" id="ctaFija" href="#">Quiero mi entrada VIP</a>
 </div>
 
 <script>
@@ -454,13 +350,12 @@ window.EFFIX = {
 
   var full = C.PRECIO_FULL;
   var ok = Math.round(full * (100 - C.DESCUENTO) / 100);
-  var ahorro = full - ok;
 
   document.getElementById('kicker').textContent = C.ENTRADA;
   document.getElementById('selloPct').textContent = '-' + C.DESCUENTO + '%';
   document.getElementById('precioAntes').textContent = pesos(full);
   document.getElementById('precioAhora').textContent = pesos(ok);
-  document.getElementById('ahorro').textContent = 'Te ahorras ' + pesos(ahorro);
+  document.getElementById('ahorro').textContent = 'Te ahorras ' + pesos(full - ok);
   document.getElementById('cierrePrecio').textContent = pesos(full);
   document.getElementById('digitos').textContent = C.MINUTOS + ':00';
 
@@ -499,11 +394,10 @@ window.EFFIX = {
   function vencer() {
     document.body.classList.add('vencido');
     elDig.textContent = '00:00';
-    elDig.classList.add('poco');
     elBarra.style.width = '0%';
     elRotulo.textContent = 'Este precio ya cerró';
     document.getElementById('precioAhora').textContent = pesos(full);
-    botones.forEach(function (b) { b.textContent = 'VER LAS ENTRADAS'; });
+    botones.forEach(function (b) { b.textContent = 'Ver las entradas'; });
     elBajo.textContent = 'Eliges tu entrada en la página oficial de la feria.';
     document.getElementById('etiquetaTxt').textContent = 'PRECIO CERRADO';
     document.getElementById('titular').textContent = 'Se acabó el tiempo.';
@@ -519,7 +413,6 @@ window.EFFIX = {
     var m = Math.floor(seg / 60), s = seg % 60;
     elDig.textContent = (m < 10 ? '0' : '') + m + ':' + (s < 10 ? '0' : '') + s;
     elBarra.style.width = (resta / (C.MINUTOS * 60 * 1000) * 100) + '%';
-    if (resta < 5 * 60 * 1000) elDig.classList.add('poco');
   }
 
   var reloj = setInterval(latir, 1000);
@@ -538,10 +431,10 @@ window.EFFIX = {
           vigia.unobserve(e.target);
         }
       });
-    }, { threshold: .16 });
-    document.querySelectorAll('.item').forEach(function (n) { vigia.observe(n); });
+    }, { threshold: .2 });
+    document.querySelectorAll('.linea').forEach(function (n) { vigia.observe(n); });
   } else {
-    document.querySelectorAll('.item').forEach(function (n) { n.classList.add('ver'); });
+    document.querySelectorAll('.linea').forEach(function (n) { n.classList.add('ver'); });
   }
 })();
 </script>
