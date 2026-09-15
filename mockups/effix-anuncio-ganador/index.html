@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="es-CO">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Tu entrada VIP con 30% | Feria EFFIX 2026</title>
+<meta name="robots" content="noindex, nofollow">
+<meta name="description" content="Entrada VIP de la Feria EFFIX 2026 con 30% menos. Del 15 al 19 de octubre en Plaza Mayor, Medellín.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800;900&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+
+<!--
+  Feria EFFIX 2026 · pagina del "anuncio ganador"
+  ------------------------------------------------------------------
+  CONFIG: lo unico que se toca esta en el bloque <script id="config">.
+  No hay ninguna llave de pasarela en esta pagina: el boton manda al
+  checkout que se configure en DESTINO. El cobro y la emision de la
+  boleta ocurren alla, no aqui.
+-->
+
+<style>
+  :root{
+    --crema:#F3F4EF;
+    --morado:#CFCBEF;
+    --tinta:#111114;
+    --oro:#FFC94A;
+    --borde:rgba(207,203,239,.18);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{-webkit-text-size-adjust:100%}
+  body{
+    overflow-x:hidden;
+    font-family:'Poppins',system-ui,sans-serif;
+    color:var(--crema);
+    background:
+      radial-gradient(130% 55% at 50% -8%, #35375f 0%, #2a2c4b 18%, #1e2035 38%, #141421 62%, #0a0b11 84%, #05060a 100%),
+      #05060a;
+    background-attachment:fixed;
+    min-height:100vh;
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+  .envoltura{max-width:620px;margin:0 auto;padding:40px 22px 90px}
+
+  .marca{display:flex;justify-content:center;margin-bottom:34px}
+  .marca img{height:46px;opacity:.95}
+
+  h1{
+    font-family:'Montserrat',sans-serif;font-weight:900;
+    font-size:clamp(30px,7.6vw,46px);line-height:1.04;
+    letter-spacing:-.4px;text-align:center;text-wrap:balance;
+  }
+  .subhero{
+    text-align:center;color:var(--morado);margin-top:16px;
+    font-size:clamp(15px,3.8vw,18px);text-wrap:balance;
+  }
+
+  /* ---------------------------------------------------- tarjeta del precio */
+  .tarjeta{
+    position:relative;margin:52px 0 0;padding:58px 24px 30px;
+    background:linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.025));
+    border:1px solid var(--borde);border-radius:26px;
+    box-shadow:0 22px 60px rgba(0,0,0,.45);
+    text-align:center;
+  }
+  .sello{
+    position:absolute;top:-46px;right:12px;
+    width:96px;height:96px;border-radius:50%;
+    background:var(--oro);color:var(--tinta);
+    display:flex;flex-direction:column;align-items:center;justify-content:center;
+    font-family:'Montserrat',sans-serif;font-weight:900;
+    transform:rotate(-9deg);
+    box-shadow:0 12px 30px rgba(0,0,0,.42);
+  }
+  .sello b{font-size:28px;line-height:1}
+  .sello span{font-size:10px;letter-spacing:1.6px;margin-top:3px}
+
+  .kicker{
+    font-family:'Montserrat',sans-serif;font-weight:700;
+    letter-spacing:4px;font-size:12px;color:var(--morado);
+  }
+  .antes{
+    margin-top:14px;font-family:'Montserrat',sans-serif;font-weight:600;
+    font-size:clamp(20px,5vw,26px);color:#DEDCE8;
+    text-decoration:line-through;text-decoration-color:var(--oro);
+    text-decoration-thickness:3px;
+  }
+  .ahora{
+    font-family:'Montserrat',sans-serif;font-weight:900;
+    font-size:clamp(46px,12.5vw,70px);line-height:1.04;margin-top:4px;
+    letter-spacing:-1.5px;
+  }
+  .ahorro{color:var(--morado);font-size:clamp(14px,3.6vw,16px);margin-top:6px}
+
+  /* ---------------------------------------------------- reloj */
+  .reloj{margin-top:26px;padding-top:24px;border-top:1px solid var(--borde)}
+  .reloj p{font-size:13px;letter-spacing:2.4px;color:var(--morado);text-transform:uppercase;font-weight:600}
+  .digitos{
+    font-family:'Montserrat',sans-serif;font-weight:900;
+    font-size:clamp(42px,12vw,58px);letter-spacing:1px;margin-top:6px;
+    font-variant-numeric:tabular-nums;
+  }
+  .digitos.poco{color:var(--oro)}
+  .barra{height:5px;border-radius:5px;background:rgba(255,255,255,.1);overflow:hidden;margin-top:14px}
+  .barra i{display:block;height:100%;width:100%;background:var(--oro);border-radius:5px;transition:width 1s linear}
+
+  /* ---------------------------------------------------- boton */
+  .boton{
+    display:block;margin-top:26px;padding:21px 18px;
+    background:var(--crema);color:var(--tinta);
+    font-family:'Montserrat',sans-serif;font-weight:800;
+    font-size:clamp(16px,4.2vw,19px);letter-spacing:.2px;
+    text-align:center;text-decoration:none;border-radius:60px;
+    box-shadow:0 14px 34px rgba(0,0,0,.4);
+    transition:transform .16s ease, box-shadow .16s ease;
+  }
+  .boton:hover{transform:translateY(-2px);box-shadow:0 18px 40px rgba(0,0,0,.5)}
+  .boton:active{transform:translateY(0)}
+  .bajo-boton{text-align:center;color:var(--morado);font-size:13.5px;margin-top:13px}
+
+  /* ---------------------------------------------------- que trae */
+  .seccion-titulo{
+    font-family:'Montserrat',sans-serif;font-weight:800;
+    font-size:clamp(21px,5.2vw,26px);margin:52px 0 18px;text-align:center;
+  }
+  .items{display:grid;gap:11px}
+  .item{
+    display:flex;gap:13px;align-items:flex-start;
+    padding:16px 18px;border:1px solid var(--borde);border-radius:16px;
+    background:rgba(255,255,255,.035);
+  }
+  .item svg{flex:none;margin-top:3px}
+  .item b{font-family:'Montserrat',sans-serif;font-weight:700;font-size:15.5px;display:block}
+  .item span{font-size:14px;color:#C9C7D6;display:block;margin-top:2px}
+
+  .datos{
+    margin-top:34px;padding:24px;text-align:center;
+    border:1px solid var(--borde);border-radius:20px;background:rgba(255,255,255,.03);
+  }
+  .datos .cuando{font-family:'Montserrat',sans-serif;font-weight:900;font-size:clamp(22px,5.6vw,28px)}
+  .datos .donde{color:var(--morado);margin-top:5px;letter-spacing:1.4px;font-size:14px}
+  .datos .cifras{margin-top:16px;padding-top:16px;border-top:1px solid var(--borde);
+    color:#C9C7D6;font-size:13.5px;letter-spacing:.6px}
+
+  .cierre{text-align:center;margin-top:42px}
+  .cierre p{font-family:'Montserrat',sans-serif;font-weight:800;font-size:clamp(19px,4.8vw,23px);text-wrap:balance}
+
+  .pie{margin-top:52px;text-align:center;color:#7C7A8C;font-size:12px;line-height:1.7}
+
+  /* ---------------------------------------------------- estado vencido */
+  body.vencido .reloj p{color:#C9C7D6}
+  body.vencido .sello{display:none}
+  body.vencido .antes{display:none}
+  body.vencido .ahorro{display:none}
+  .vencido-aviso{display:none}
+  body.vencido .vencido-aviso{
+    display:block;margin-top:18px;padding:16px 18px;border-radius:16px;
+    background:rgba(255,201,74,.09);border:1px solid rgba(255,201,74,.3);
+    color:#F0E6CF;font-size:14.5px;text-align:center;
+  }
+
+  /* barra fija en movil */
+  .fija{
+    position:fixed;left:0;right:0;bottom:0;padding:12px 16px calc(12px + env(safe-area-inset-bottom));
+    background:linear-gradient(180deg, rgba(5,6,10,0), rgba(5,6,10,.93) 34%);
+    transform:translateY(120%);transition:transform .3s ease;z-index:9;
+  }
+  .fija.ver{transform:translateY(0)}
+  .fija .boton{margin:0 auto;max-width:560px}
+  @media (min-width:760px){.fija{display:none}}
+</style>
+</head>
+<body>
+
+<script id="config">
+/* ------------------------------------------------------------------
+   LO UNICO QUE SE TOCA
+   ------------------------------------------------------------------ */
+window.EFFIX = {
+  // A donde manda el boton. Se reemplaza por el enlace de checkout
+  // con el precio ya rebajado (localidad oculta de La Tiquetera o
+  // pasarela propia). Mientras tanto apunta a la pagina oficial.
+  DESTINO: 'https://feriaeffix.com/quiero-mi-entrada/',
+
+  // A donde manda el boton cuando ya se vencio el tiempo (precio pleno).
+  DESTINO_VENCIDO: 'https://feriaeffix.com/quiero-mi-entrada/',
+
+  ENTRADA: 'ENTRADA VIP',
+  PRECIO_FULL: 1155000,
+  DESCUENTO: 30,
+  MINUTOS: 25
+};
+</script>
+
+<div class="envoltura">
+
+  <div class="marca">
+    <img src="logo-effix.png" alt="Feria EFFIX 2026">
+  </div>
+
+  <h1 id="titular">Este anuncio no le sale a todo el mundo.</h1>
+  <p class="subhero" id="subtitular">Te salió a ti, y trae un precio que no está en la página.</p>
+
+  <div class="tarjeta">
+    <div class="sello"><b id="selloPct">-30%</b><span>SOLO AQUÍ</span></div>
+    <div class="kicker" id="kicker">ENTRADA VIP</div>
+    <div class="antes" id="precioAntes">$1.155.000</div>
+    <div class="ahora" id="precioAhora">$808.500</div>
+    <div class="ahorro" id="ahorro">Te ahorras $346.500</div>
+
+    <div class="reloj">
+      <p id="rotuloReloj">Este precio se va en</p>
+      <div class="digitos" id="digitos">25:00</div>
+      <div class="barra"><i id="barra"></i></div>
+    </div>
+
+    <div class="vencido-aviso" id="avisoVencido">
+      La feria sigue en pie: del 15 al 19 de octubre en Plaza Mayor, Medellín.
+    </div>
+
+    <a class="boton" id="cta" href="#">QUIERO MI ENTRADA VIP</a>
+    <p class="bajo-boton" id="bajoBoton">Eliges, pagas y te llega la entrada al correo.</p>
+  </div>
+
+  <h2 class="seccion-titulo">Lo que tienen los VIP</h2>
+  <div class="items">
+    <div class="item">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#FFC94A" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      <div><b>Entras sin filas</b><span>Ingreso preferencial los tres días generales, con escarapela de entrada y salida ilimitada.</span></div>
+    </div>
+    <div class="item">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#FFC94A" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+      <div><b>Tienes zona con hidratación</b><span>La zona VIP, con hidratación incluida, y las zonas para crear contenido.</span></div>
+    </div>
+    <div class="item">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#FFC94A" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+      <div><b>Tienes tu área en el auditorio</b><span>Áreas reservadas en los auditorios, más la inauguración privada del jueves 15 y la clausura del lunes 19.</span></div>
+    </div>
+  </div>
+
+  <div class="datos">
+    <div class="cuando">15 al 19 de octubre</div>
+    <div class="donde">PLAZA MAYOR · MEDELLÍN</div>
+    <div class="cifras">+200 ponentes · 350+ empresas · +200 conferencias y talleres · Sexta edición</div>
+  </div>
+
+  <div class="cierre">
+    <p id="remate">Cuando cierres esta página, la VIP vuelve a valer <span id="cierrePrecio">$1.155.000</span>.</p>
+  </div>
+
+  <div class="pie">
+    Feria EFFIX 2026 · Plaza Mayor, Medellín<br>
+    Precios en pesos colombianos con IVA incluido.
+  </div>
+</div>
+
+<div class="fija" id="fija">
+  <a class="boton" id="ctaFija" href="#">QUIERO MI ENTRADA VIP</a>
+</div>
+
+<script>
+(function () {
+  var C = window.EFFIX;
+  var LLAVE = 'effix_ganador_' + C.ENTRADA.replace(/\s+/g, '') + '_' + C.DESCUENTO;
+
+  function pesos(n) {
+    return '$' + n.toLocaleString('es-CO').replace(/,/g, '.');
+  }
+
+  var full = C.PRECIO_FULL;
+  var ok = Math.round(full * (100 - C.DESCUENTO) / 100);
+  var ahorro = full - ok;
+
+  document.getElementById('kicker').textContent = C.ENTRADA;
+  document.getElementById('selloPct').textContent = '-' + C.DESCUENTO + '%';
+  document.getElementById('precioAntes').textContent = pesos(full);
+  document.getElementById('precioAhora').textContent = pesos(ok);
+  document.getElementById('ahorro').textContent = 'Te ahorras ' + pesos(ahorro);
+  document.getElementById('cierrePrecio').textContent = pesos(full);
+  document.getElementById('digitos').textContent = C.MINUTOS + ':00';
+
+  // el enlace conserva la marca de la campana (sRef, utm_*) para poder medir la venta
+  function conParametros(url) {
+    var entra = new URLSearchParams(location.search);
+    if (!entra.toString()) return url;
+    var u = new URL(url, location.href);
+    entra.forEach(function (v, k) {
+      if (/^(utm_|sRef|fbclid|ttclid|gclid)/i.test(k)) u.searchParams.set(k, v);
+    });
+    return u.toString();
+  }
+
+  // arranca en la primera visita y sobrevive a recargas
+  var inicio = parseInt(localStorage.getItem(LLAVE) || '0', 10);
+  if (!inicio || isNaN(inicio)) {
+    inicio = Date.now();
+    try { localStorage.setItem(LLAVE, String(inicio)); } catch (e) {}
+  }
+  var fin = inicio + C.MINUTOS * 60 * 1000;
+
+  var elDig = document.getElementById('digitos');
+  var elBarra = document.getElementById('barra');
+  var elCta = document.getElementById('cta');
+  var elCtaFija = document.getElementById('ctaFija');
+  var elRotulo = document.getElementById('rotuloReloj');
+  var elBajo = document.getElementById('bajoBoton');
+  var elFija = document.getElementById('fija');
+
+  function pintarDestino() {
+    var vencido = document.body.classList.contains('vencido');
+    var url = conParametros(vencido ? C.DESTINO_VENCIDO : C.DESTINO);
+    elCta.href = url;
+    elCtaFija.href = url;
+  }
+
+  function vencer() {
+    document.body.classList.add('vencido');
+    elDig.textContent = '00:00';
+    elDig.classList.add('poco');
+    elBarra.style.width = '0%';
+    elRotulo.textContent = 'Este precio ya cerró';
+    document.getElementById('precioAhora').textContent = pesos(full);
+    elCta.textContent = 'VER LAS ENTRADAS';
+    elCtaFija.textContent = 'VER LAS ENTRADAS';
+    elBajo.textContent = 'Eliges tu entrada en la página oficial de la feria.';
+    document.getElementById('titular').textContent = 'Se acabó el tiempo.';
+    document.getElementById('subtitular').textContent = 'La entrada VIP volvió a su valor normal.';
+    document.getElementById('remate').textContent = 'Nos vemos del 15 al 19 de octubre.';
+    pintarDestino();
+  }
+
+  function latir() {
+    var resta = fin - Date.now();
+    if (resta <= 0) { vencer(); clearInterval(reloj); return; }
+    var seg = Math.floor(resta / 1000);
+    var m = Math.floor(seg / 60), s = seg % 60;
+    elDig.textContent = (m < 10 ? '0' : '') + m + ':' + (s < 10 ? '0' : '') + s;
+    elBarra.style.width = (resta / (C.MINUTOS * 60 * 1000) * 100) + '%';
+    if (resta < 5 * 60 * 1000) elDig.classList.add('poco');
+  }
+
+  var reloj = setInterval(latir, 1000);
+  latir();
+  pintarDestino();
+
+  // la barra fija aparece cuando el boton de arriba sale de pantalla
+  if ('IntersectionObserver' in window) {
+    new IntersectionObserver(function (e) {
+      elFija.classList.toggle('ver', !e[0].isIntersecting);
+    }, { threshold: 0 }).observe(elCta);
+  }
+})();
+</script>
+</body>
+</html>
