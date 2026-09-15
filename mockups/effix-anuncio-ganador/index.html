@@ -129,6 +129,7 @@
   .reloj{margin-top:20px;padding-top:18px;border-top:2px solid rgba(0,0,0,.10)}
   .reloj p{font-size:10px;letter-spacing:2.4px;color:#8C8A96;text-transform:uppercase;font-weight:800}
   .digitos{font-weight:900;font-size:clamp(38px,11vw,52px);letter-spacing:1px;
+    white-space:nowrap;
     margin-top:3px;font-variant-numeric:tabular-nums;color:var(--negro)}
   .barra{height:5px;border-radius:5px;background:rgba(0,0,0,.09);overflow:hidden;margin-top:11px}
   .barra i{display:block;height:100%;width:100%;border-radius:5px;
@@ -208,11 +209,45 @@
   body.vencido .sello,
   body.vencido .antes,
   body.vencido .ahorro{display:none}
-  body.vencido .ahora{color:#8C8A96}
+  body.vencido .ahora{color:var(--negro)}
+  body.vencido .digitos{font-size:clamp(28px,8vw,38px);color:var(--oro-hondo)}
   body.vencido .barra i{background:#C9C7D0}
   body.vencido .etiqueta{border-color:rgba(255,255,255,.35);color:rgba(255,255,255,.72);
     background:rgba(255,255,255,.06)}
   body.vencido .etiqueta i{animation:none;background:rgba(255,255,255,.5)}
+
+
+  /* ───────────────────────── pop de pasarela (solo en el mockup) */
+  .telon{
+    position:fixed;inset:0;z-index:40;display:none;
+    background:rgba(0,0,0,.78);backdrop-filter:blur(4px);
+    align-items:center;justify-content:center;padding:22px;
+  }
+  .telon.ver{display:flex}
+  .pop{
+    width:100%;max-width:400px;background:var(--blanco);color:var(--negro);
+    border:2px solid var(--oro);border-radius:24px;padding:28px 22px 22px;
+    text-align:center;box-shadow:0 26px 70px rgba(0,0,0,.7);
+    animation:sube .22s ease-out;
+  }
+  @keyframes sube{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+  .pop .icono{
+    width:62px;height:62px;border-radius:50%;margin:0 auto 14px;
+    background:linear-gradient(160deg,var(--oro-luz),var(--oro) 45%,var(--oro-hondo));
+    border:2px solid var(--negro);display:flex;align-items:center;justify-content:center;
+  }
+  .pop h3{font-size:21px;font-weight:900;letter-spacing:-.3px}
+  .pop .monto{margin-top:12px;padding:14px;border-radius:14px;background:#F4F2EC;
+    border:1.5px solid rgba(0,0,0,.08)}
+  .pop .monto small{display:block;font-size:10.5px;letter-spacing:2px;color:#8C8A96;font-weight:800}
+  .pop .monto b{display:block;font-size:28px;font-weight:900;margin-top:2px}
+  .pop .nota{margin-top:14px;font-size:13px;color:#5A5866;font-weight:500;line-height:1.5}
+  .pop .cerrar{
+    margin-top:18px;width:100%;padding:15px;border:2px solid var(--negro);
+    background:var(--negro);color:var(--blanco);border-radius:50px;
+    font-family:inherit;font-weight:900;font-size:14px;text-transform:uppercase;
+    cursor:pointer;letter-spacing:.3px;
+  }
 
   .fija{
     position:fixed;left:0;right:0;bottom:0;z-index:9;
@@ -266,7 +301,7 @@ window.EFFIX = {
       <div class="barra"><i id="barra"></i></div>
     </div>
 
-    <div class="aviso" id="aviso">La feria sigue: del 15 al 19 de octubre en Plaza Mayor.</div>
+    <div class="aviso" id="aviso">Este precio era solo de este anuncio. La entrada VIP sigue abierta al valor de la página.</div>
 
     <a class="boton" id="cta" href="#">
       <span class="corona"><svg width="14" height="14" viewBox="0 0 24 24" fill="#D9A93C"><path d="M3 7l4.5 3.5L12 4l4.5 6.5L21 7l-1.8 11H4.8z"/></svg></span>
@@ -347,6 +382,24 @@ window.EFFIX = {
   </div>
 </section>
 
+
+<div class="telon" id="telon">
+  <div class="pop" role="dialog" aria-modal="true" aria-labelledby="popTit">
+    <div class="icono">
+      <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2.2" stroke-linecap="round">
+        <rect x="2" y="5" width="20" height="14" rx="2.5"/><path d="M2 10h20"/>
+      </svg>
+    </div>
+    <h3 id="popTit">Pasarela de pago</h3>
+    <div class="monto">
+      <small>TOTAL A PAGAR</small>
+      <b id="popMonto">$808.500</b>
+    </div>
+    <p class="nota" id="popNota">Aquí se abre el pago de la entrada VIP. En producción queda conectado el checkout real.</p>
+    <button class="cerrar" id="popCerrar">Volver</button>
+  </div>
+</div>
+
 <div class="fija" id="fija">
   <a class="boton" id="ctaFija" href="#">
     <span class="corona"><svg width="14" height="14" viewBox="0 0 24 24" fill="#D9A93C"><path d="M3 7l4.5 3.5L12 4l4.5 6.5L21 7l-1.8 11H4.8z"/></svg></span>
@@ -382,6 +435,11 @@ window.EFFIX = {
     return u.toString();
   }
 
+  // para revisar: ?vencido=1 muestra como queda cuando se acaba el tiempo,
+  // y ?reset=1 vuelve a poner el reloj en cero
+  var q = new URLSearchParams(location.search);
+  if (q.has('reset')) { try { localStorage.removeItem(LLAVE); } catch (e) {} }
+
   var inicio = parseInt(localStorage.getItem(LLAVE) || '0', 10);
   if (!inicio || isNaN(inicio)) {
     inicio = Date.now();
@@ -398,27 +456,59 @@ window.EFFIX = {
                  document.getElementById('cta2'),
                  document.getElementById('ctaFija')];
 
+  var telon = document.getElementById('telon');
+
   function pintarDestino() {
     var vencido = document.body.classList.contains('vencido');
     var url = conParametros(vencido ? C.DESTINO_VENCIDO : C.DESTINO);
     botones.forEach(function (b) { b.href = url; });
   }
 
+  // En el mockup el boton no navega: abre el pop de la pasarela, para que se
+  // vea que ahi va el pago. En produccion se quita este bloque y el enlace
+  // de DESTINO hace su trabajo.
+  function abrirPasarela(e) {
+    e.preventDefault();
+    var vencido = document.body.classList.contains('vencido');
+    document.getElementById('popMonto').textContent = pesos(vencido ? full : ok);
+    document.getElementById('popNota').textContent = vencido
+      ? 'Aquí se abre el pago de la entrada VIP a su precio normal. En producción queda conectado el checkout real.'
+      : 'Aquí se abre el pago de la entrada VIP con el 30% ya aplicado. En producción queda conectado el checkout real.';
+    telon.classList.add('ver');
+  }
+  botones.forEach(function (b) { b.addEventListener('click', abrirPasarela); });
+  document.getElementById('popCerrar').addEventListener('click', function () {
+    telon.classList.remove('ver');
+  });
+  telon.addEventListener('click', function (e) {
+    if (e.target === telon) telon.classList.remove('ver');
+  });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') telon.classList.remove('ver');
+  });
+
+  function diasParaLaFeria() {
+    var feria = new Date(2026, 9, 15);           // 15 de octubre de 2026
+    var hoy = new Date();
+    return Math.max(0, Math.ceil((feria - hoy) / 86400000));
+  }
+
   function vencer() {
     document.body.classList.add('vencido');
-    elDig.textContent = '00:00';
     elBarra.style.width = '0%';
-    elRotulo.textContent = 'Este precio ya cerró';
+    // el reloj no se queda en 00:00, que no sirve de nada: pasa a contar lo
+    // que de verdad corre, que son los dias que faltan para la feria
+    var d = diasParaLaFeria();
+    elRotulo.textContent = 'Faltan para la feria';
+    elDig.textContent = d + (d === 1 ? ' día' : ' días');
     document.getElementById('precioAhora').textContent = pesos(full);
-    botones.forEach(function (b) {
-      var t = b.querySelector('span:last-child');
-      if (t) t.textContent = 'Ver la entrada VIP';
-    });
-    elBajo.textContent = 'La compras en la página oficial de la feria.';
-    document.getElementById('etiquetaTxt').textContent = 'PRECIO CERRADO';
-    document.getElementById('titular').textContent = 'Se acabó el tiempo.';
-    document.getElementById('subtitular').textContent = 'La entrada VIP volvió a su valor normal.';
-    document.getElementById('remate').textContent = 'Nos vemos del 15 al 19 de octubre.';
+    elBajo.textContent = 'Eliges, pagas y te llega la entrada al correo.';
+    document.getElementById('etiquetaTxt').textContent = 'DESCUENTO AGOTADO';
+    document.getElementById('titular').textContent = 'El descuento se agotó.';
+    document.getElementById('subtitular').textContent =
+      'La entrada VIP volvió a su precio normal, y sigue disponible.';
+    document.getElementById('remate').textContent =
+      'Te esperamos del 15 al 19 de octubre en Plaza Mayor.';
     pintarDestino();
   }
 
@@ -431,8 +521,13 @@ window.EFFIX = {
     elBarra.style.width = (resta / (C.MINUTOS * 60 * 1000) * 100) + '%';
   }
 
-  var reloj = setInterval(latir, 1000);
-  latir();
+  var reloj;
+  if (q.has('vencido')) {
+    vencer();
+  } else {
+    reloj = setInterval(latir, 1000);
+    latir();
+  }
   pintarDestino();
 
   if ('IntersectionObserver' in window) {
