@@ -15,21 +15,26 @@
   ------------------------------------------------------------------
   CONFIG: lo unico que se toca esta en el bloque <script id="config">.
   No hay ninguna llave de pasarela aqui: el boton manda al checkout que
-  se configure en DESTINO. El cobro y la emision de la boleta ocurren
-  alla, no en esta pagina.
+  se configure en DESTINO.
 
   Los beneficios estan copiados de la tabla de feriaeffix.com/quiero-mi-entrada/
   verificada el 2026-09-15. No agregar ninguno que no este alli.
+
+  La pagina va en tres bloques: oscuro (la oferta), claro (la informacion)
+  y oscuro (el cierre). La alternancia es a proposito: todo oscuro cansa.
 -->
 
 <style>
   :root{
     --crema:#F3F4EF;
     --morado:#CFCBEF;
+    --morado-hondo:#35375F;
     --tinta:#0A0B11;
     --oro:#FFC94A;
+    --oro-hondo:#9A6B00;
     --borde:rgba(207,203,239,.16);
     --suave:#B9B7C9;
+    --gris:#5A5866;
   }
   *{box-sizing:border-box;margin:0;padding:0}
   html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
@@ -43,228 +48,214 @@
   }
   .caja{max-width:640px;margin:0 auto;padding:0 22px}
 
-  /* ---------------------------------------------- hero con la tarima */
-  .hero{
-    position:relative;min-height:86vh;
-    display:flex;flex-direction:column;justify-content:flex-end;
-    padding:46px 0 0;overflow:hidden;
-  }
+  /* ═════════════════════════ BLOQUE 1: la oferta, sobre la tarima */
+  .hero{position:relative;padding:32px 0 42px;overflow:hidden}
   .hero .foto{
     position:absolute;inset:0;
-    background:url("fondo-tarima.jpg") center 38% / cover no-repeat;
-    transform:scale(1.06);
-    animation:respira 22s ease-in-out infinite alternate;
+    background:url("fondo-tarima.jpg") center 42% / cover no-repeat;
+    transform:scale(1.05);
+    animation:respira 26s ease-in-out infinite alternate;
   }
-  @keyframes respira{from{transform:scale(1.06)}to{transform:scale(1.14)}}
+  @keyframes respira{from{transform:scale(1.05)}to{transform:scale(1.13)}}
   .hero .tinte{
     position:absolute;inset:0;
     background:
-      radial-gradient(120% 70% at 50% 18%, rgba(53,55,95,.30) 0%, rgba(10,11,17,.55) 48%, rgba(10,11,17,.88) 78%, var(--tinta) 100%),
-      linear-gradient(180deg, rgba(10,11,17,.72) 0%, rgba(10,11,17,.26) 26%, rgba(10,11,17,.80) 68%, var(--tinta) 100%);
+      linear-gradient(180deg, rgba(10,11,17,.86) 0%, rgba(10,11,17,.62) 34%, rgba(10,11,17,.80) 74%, var(--tinta) 100%);
   }
-  .hero .grano{
-    position:absolute;inset:0;opacity:.20;mix-blend-mode:overlay;pointer-events:none;
-    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='.5'/%3E%3C/svg%3E");
-  }
-  .hero .dentro{position:relative;z-index:2;padding-bottom:26px}
+  .hero .dentro{position:relative;z-index:2}
 
-  .marca{display:flex;justify-content:center;margin-bottom:auto}
-  .marca img{height:44px;filter:drop-shadow(0 4px 18px rgba(0,0,0,.6))}
+  .marca{display:flex;justify-content:center}
+  .marca img{height:40px;filter:drop-shadow(0 4px 16px rgba(0,0,0,.65))}
 
   .fila-centro{display:flex;justify-content:center}
   .etiqueta{
     display:inline-flex;align-items:center;gap:9px;
-    margin:0 0 20px;padding:9px 18px;
-    border:1px solid rgba(255,201,74,.42);border-radius:60px;
-    background:rgba(255,201,74,.10);backdrop-filter:blur(6px);
+    margin:22px 0 18px;padding:8px 17px;
+    border:1px solid rgba(255,201,74,.45);border-radius:60px;
+    background:rgba(255,201,74,.12);backdrop-filter:blur(6px);
     font-family:'Montserrat',sans-serif;font-weight:700;
-    font-size:11.5px;letter-spacing:2.6px;color:var(--oro);
+    font-size:11px;letter-spacing:2.4px;color:var(--oro);
   }
   .etiqueta i{width:7px;height:7px;border-radius:50%;background:var(--oro);
     box-shadow:0 0 0 0 rgba(255,201,74,.7);animation:pulso 2.2s infinite}
   @keyframes pulso{
-    0%{box-shadow:0 0 0 0 rgba(255,201,74,.65)}
-    70%{box-shadow:0 0 0 13px rgba(255,201,74,0)}
+    0%{box-shadow:0 0 0 0 rgba(255,201,74,.6)}
+    70%{box-shadow:0 0 0 12px rgba(255,201,74,0)}
     100%{box-shadow:0 0 0 0 rgba(255,201,74,0)}
   }
 
   h1{
     font-family:'Montserrat',sans-serif;font-weight:900;
-    font-size:clamp(33px,8.4vw,54px);line-height:1.02;
-    letter-spacing:-1px;text-align:center;text-wrap:balance;
-    text-shadow:0 6px 34px rgba(0,0,0,.6);
+    font-size:clamp(31px,7.8vw,48px);line-height:1.05;
+    letter-spacing:-.8px;text-align:center;text-wrap:balance;
+    text-shadow:0 5px 28px rgba(0,0,0,.65);
   }
   .subhero{
-    text-align:center;color:var(--morado);margin-top:18px;
-    font-size:clamp(15.5px,4vw,19px);font-weight:300;text-wrap:balance;
+    text-align:center;color:#DBD8E8;margin-top:15px;
+    font-size:clamp(15px,3.9vw,18px);font-weight:300;text-wrap:balance;
   }
 
-  /* ---------------------------------------------- tarjeta del precio */
+  .zona-precio{background:var(--tinta);padding-bottom:12px}
+
   .tarjeta{
-    position:relative;margin:38px 0 0;padding:62px 26px 30px;
-    background:linear-gradient(165deg, rgba(60,58,92,.55), rgba(18,19,30,.82));
-    backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
-    border:1px solid rgba(207,203,239,.22);border-radius:30px;
-    box-shadow:0 30px 80px rgba(0,0,0,.6), inset 0 1px 0 rgba(255,255,255,.10);
+    position:relative;margin:34px 0 0;padding:56px 24px 28px;
+    background:linear-gradient(165deg, rgba(64,62,98,.62), rgba(20,21,33,.92));
+    border:1px solid rgba(207,203,239,.24);border-radius:28px;
+    box-shadow:0 26px 70px rgba(0,0,0,.55), inset 0 1px 0 rgba(255,255,255,.10);
     text-align:center;
   }
   .sello{
-    position:absolute;top:-40px;right:14px;
-    width:100px;height:100px;border-radius:50%;
+    position:absolute;top:-38px;right:14px;
+    width:94px;height:94px;border-radius:50%;
     background:radial-gradient(120% 120% at 32% 26%, #FFDE8C 0%, var(--oro) 52%, #E0A426 100%);
     color:#1A1405;
     display:flex;flex-direction:column;align-items:center;justify-content:center;
     font-family:'Montserrat',sans-serif;font-weight:900;
     transform:rotate(-9deg);
-    box-shadow:0 16px 38px rgba(0,0,0,.55), inset 0 -3px 10px rgba(0,0,0,.18);
+    box-shadow:0 14px 34px rgba(0,0,0,.5), inset 0 -3px 9px rgba(0,0,0,.18);
   }
-  .sello b{font-size:29px;line-height:1}
-  .sello span{font-size:9.5px;letter-spacing:1.5px;margin-top:2px}
+  .sello b{font-size:27px;line-height:1}
+  .sello span{font-size:9px;letter-spacing:1.4px;margin-top:2px}
 
-  .kicker{
-    font-family:'Montserrat',sans-serif;font-weight:700;
-    letter-spacing:4.5px;font-size:11.5px;color:var(--morado);
-  }
+  .kicker{font-family:'Montserrat',sans-serif;font-weight:700;
+    letter-spacing:4.4px;font-size:11px;color:var(--morado)}
   .antes{
-    margin-top:16px;font-family:'Montserrat',sans-serif;font-weight:600;
-    font-size:clamp(20px,5vw,25px);color:#CFCDDC;
+    margin-top:14px;font-family:'Montserrat',sans-serif;font-weight:600;
+    font-size:clamp(19px,4.8vw,24px);color:#CFCDDC;
     text-decoration:line-through;text-decoration-color:var(--oro);
     text-decoration-thickness:3px;
   }
   .ahora{
     font-family:'Montserrat',sans-serif;font-weight:900;
-    font-size:clamp(48px,13vw,74px);line-height:1.02;margin-top:2px;
-    letter-spacing:-2px;
-    background:linear-gradient(180deg,#FFFFFF 0%, #DCD9EA 100%);
-    -webkit-background-clip:text;background-clip:text;color:transparent;
+    font-size:clamp(46px,12.4vw,70px);line-height:1.02;margin-top:2px;
+    letter-spacing:-2px;color:#FFFFFF;
   }
-  .ahorro{color:var(--oro);font-size:clamp(14px,3.6vw,16px);margin-top:8px;font-weight:500}
+  .ahorro{color:var(--oro);font-size:clamp(13.5px,3.5vw,15.5px);margin-top:7px;font-weight:500}
 
-  .reloj{margin-top:28px;padding-top:26px;border-top:1px solid var(--borde)}
-  .reloj p{font-size:12px;letter-spacing:2.6px;color:var(--morado);text-transform:uppercase;font-weight:600}
+  .reloj{margin-top:26px;padding-top:24px;border-top:1px solid var(--borde)}
+  .reloj p{font-size:11.5px;letter-spacing:2.5px;color:var(--morado);text-transform:uppercase;font-weight:600}
   .digitos{
     font-family:'Montserrat',sans-serif;font-weight:900;
-    font-size:clamp(44px,12.5vw,60px);letter-spacing:2px;margin-top:8px;
-    font-variant-numeric:tabular-nums;text-shadow:0 0 34px rgba(255,201,74,.22);
+    font-size:clamp(42px,12vw,56px);letter-spacing:2px;margin-top:7px;
+    font-variant-numeric:tabular-nums;
   }
   .digitos.poco{color:var(--oro)}
-  .barra{height:5px;border-radius:5px;background:rgba(255,255,255,.09);overflow:hidden;margin-top:16px}
+  .barra{height:5px;border-radius:5px;background:rgba(255,255,255,.09);overflow:hidden;margin-top:14px}
   .barra i{display:block;height:100%;width:100%;border-radius:5px;
     background:linear-gradient(90deg,#FFDE8C,var(--oro));transition:width 1s linear}
 
   .boton{
-    display:block;margin-top:28px;padding:22px 18px;
-    background:linear-gradient(180deg,#FFFFFF,#E7E5DC);color:#0A0B11;
+    display:block;margin-top:26px;padding:21px 18px;
+    background:linear-gradient(180deg,#FFFFFF,#EAE8DF);color:#0A0B11;
     font-family:'Montserrat',sans-serif;font-weight:800;
-    font-size:clamp(16px,4.2vw,19px);letter-spacing:.2px;
+    font-size:clamp(15.5px,4.1vw,18.5px);letter-spacing:.2px;
     text-align:center;text-decoration:none;border-radius:60px;
-    box-shadow:0 18px 40px rgba(0,0,0,.5);
+    box-shadow:0 16px 36px rgba(0,0,0,.45);
     transition:transform .16s ease, box-shadow .16s ease;
   }
-  .boton:hover{transform:translateY(-2px);box-shadow:0 22px 48px rgba(0,0,0,.6)}
+  .boton:hover{transform:translateY(-2px);box-shadow:0 20px 44px rgba(0,0,0,.55)}
   .boton:active{transform:translateY(0)}
-  .bajo-boton{color:var(--suave);font-size:13.5px;margin-top:14px}
+  .bajo-boton{color:var(--suave);font-size:13px;margin-top:12px}
 
-  /* ---------------------------------------------- secciones */
-  section{padding:66px 0 0}
-  .rotulo{
+  /* ═════════════════════════ BLOQUE 2: la informacion, en claro */
+  .claro{
+    background:var(--crema);color:#111114;
+    padding:58px 0 62px;margin-top:34px;
+    border-radius:34px 34px 0 0;
+  }
+  .claro .rotulo{
     font-family:'Montserrat',sans-serif;font-weight:700;
-    letter-spacing:3.4px;font-size:11.5px;color:var(--oro);text-align:center;
+    letter-spacing:3.2px;font-size:11px;color:var(--oro-hondo);text-align:center;
   }
-  .titulo{
-    font-family:'Montserrat',sans-serif;font-weight:900;
-    font-size:clamp(25px,6.2vw,34px);margin-top:12px;text-align:center;
-    letter-spacing:-.5px;text-wrap:balance;line-height:1.1;
+  .claro .titulo{
+    font-family:'Montserrat',sans-serif;font-weight:900;color:#111114;
+    font-size:clamp(24px,5.9vw,32px);margin-top:11px;text-align:center;
+    letter-spacing:-.5px;text-wrap:balance;line-height:1.14;
   }
-  .entradilla{text-align:center;color:var(--suave);margin-top:14px;font-weight:300;text-wrap:balance}
+  .claro .entradilla{text-align:center;color:var(--gris);margin-top:12px;font-weight:400;text-wrap:balance}
 
-  .items{display:grid;gap:12px;margin-top:30px}
+  .items{display:grid;gap:11px;margin-top:28px}
   @media (min-width:660px){.items{grid-template-columns:1fr 1fr}}
   .item{
-    display:flex;gap:14px;align-items:flex-start;
-    padding:20px;border:1px solid var(--borde);border-radius:18px;
-    background:linear-gradient(160deg, rgba(255,255,255,.055), rgba(255,255,255,.018));
-    opacity:0;transform:translateY(22px);
-    transition:opacity .6s ease, transform .6s ease;
+    display:flex;gap:13px;align-items:flex-start;
+    padding:18px;border:1px solid rgba(17,17,20,.09);border-radius:16px;
+    background:#FFFFFF;box-shadow:0 2px 10px rgba(17,17,20,.04);
+    opacity:0;transform:translateY(18px);
+    transition:opacity .55s ease, transform .55s ease;
   }
   .item.ver{opacity:1;transform:none}
   .item .ico{
-    flex:none;width:38px;height:38px;border-radius:11px;
-    background:rgba(255,201,74,.12);border:1px solid rgba(255,201,74,.26);
+    flex:none;width:36px;height:36px;border-radius:10px;
+    background:#FBF0D6;border:1px solid rgba(154,107,0,.22);
     display:flex;align-items:center;justify-content:center;
   }
-  .item b{font-family:'Montserrat',sans-serif;font-weight:700;font-size:15.5px;display:block;line-height:1.3}
-  .item span{font-size:13.8px;color:var(--suave);display:block;margin-top:4px;font-weight:300;line-height:1.5}
-
-  .banda{
-    position:relative;margin-top:66px;padding:74px 0;overflow:hidden;
-    border-top:1px solid var(--borde);border-bottom:1px solid var(--borde);
-  }
-  .banda .foto{position:absolute;inset:0;
-    background:url("fondo-gente.jpg") center 46% / cover no-repeat}
-  .banda .tinte{position:absolute;inset:0;
-    background:linear-gradient(180deg, rgba(10,11,17,.90), rgba(10,11,17,.70) 45%, rgba(10,11,17,.94))}
-  .banda .dentro{position:relative;z-index:2;text-align:center}
-  .banda p{
-    font-family:'Montserrat',sans-serif;font-weight:900;
-    font-size:clamp(23px,5.8vw,32px);line-height:1.14;text-wrap:balance;
-    text-shadow:0 6px 30px rgba(0,0,0,.7);
-  }
-  .banda small{display:block;margin-top:14px;color:var(--morado);font-size:14.5px;font-weight:300}
+  .item b{font-family:'Montserrat',sans-serif;font-weight:700;font-size:15px;display:block;line-height:1.3;color:#111114}
+  .item span{font-size:13.5px;color:var(--gris);display:block;margin-top:3px;font-weight:400;line-height:1.5}
 
   .tabla{
-    margin-top:30px;border:1px solid var(--borde);border-radius:20px;overflow:hidden;
-    background:rgba(255,255,255,.028);
+    margin-top:26px;border:1px solid rgba(17,17,20,.10);border-radius:18px;overflow:hidden;
+    background:#FFFFFF;box-shadow:0 2px 10px rgba(17,17,20,.04);
   }
-  .tabla .fila{display:grid;grid-template-columns:1fr 78px 78px;align-items:center;
-    padding:15px 18px;border-top:1px solid var(--borde);font-size:14px}
-  .tabla .fila:first-child{border-top:0;background:rgba(255,255,255,.045)}
-  .tabla .fila span:first-child{color:var(--crema);font-weight:400}
+  .tabla .fila{display:grid;grid-template-columns:1fr 74px 74px;align-items:center;
+    padding:14px 17px;border-top:1px solid rgba(17,17,20,.08);font-size:13.8px;color:#111114}
+  .tabla .fila:first-child{border-top:0;background:#F1EFE8}
   .tabla .fila span+span{text-align:center;font-size:13px}
-  .tabla .cab{font-family:'Montserrat',sans-serif;font-weight:800;font-size:11.5px;letter-spacing:1.6px}
-  .tabla .cab span+span{color:var(--morado)}
-  .tabla .cab span:last-child{color:var(--oro)}
-  .si{color:var(--oro);font-weight:700}
-  .no{color:#6B6979}
+  .tabla .cab{font-family:'Montserrat',sans-serif;font-weight:800;font-size:11px;letter-spacing:1.5px}
+  .tabla .cab span+span{color:var(--gris)}
+  .tabla .cab span:last-child{color:var(--oro-hondo)}
+  .si{color:var(--oro-hondo);font-weight:700}
+  .no{color:#A8A6B0}
 
   .datos{
-    margin-top:34px;padding:30px 24px;text-align:center;
-    border:1px solid var(--borde);border-radius:22px;
-    background:linear-gradient(160deg, rgba(255,255,255,.05), rgba(255,255,255,.015));
+    margin-top:26px;padding:26px 22px;text-align:center;
+    border:1px solid rgba(17,17,20,.10);border-radius:20px;background:#FFFFFF;
+    box-shadow:0 2px 10px rgba(17,17,20,.04);
   }
-  .datos .cuando{font-family:'Montserrat',sans-serif;font-weight:900;font-size:clamp(24px,6vw,32px);letter-spacing:-.5px}
-  .datos .donde{color:var(--morado);margin-top:6px;letter-spacing:2px;font-size:13.5px}
-  .datos .cifras{margin-top:20px;padding-top:20px;border-top:1px solid var(--borde);
+  .datos .cuando{font-family:'Montserrat',sans-serif;font-weight:900;color:#111114;
+    font-size:clamp(23px,5.8vw,30px);letter-spacing:-.5px}
+  .datos .donde{color:var(--morado-hondo);margin-top:5px;letter-spacing:2px;font-size:13px;font-weight:500}
+  .datos .cifras{margin-top:18px;padding-top:18px;border-top:1px solid rgba(17,17,20,.08);
     display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
-  .datos .cifras b{display:block;font-family:'Montserrat',sans-serif;font-weight:900;font-size:19px}
-  .datos .cifras span{display:block;font-size:11px;color:var(--suave);letter-spacing:.8px;margin-top:2px}
+  .datos .cifras b{display:block;font-family:'Montserrat',sans-serif;font-weight:900;font-size:18px;color:#111114}
+  .datos .cifras span{display:block;font-size:10.5px;color:var(--gris);letter-spacing:.8px;margin-top:2px}
 
-  .cierre{text-align:center;margin-top:60px}
-  .cierre p{font-family:'Montserrat',sans-serif;font-weight:900;
-    font-size:clamp(21px,5.2vw,27px);text-wrap:balance;line-height:1.16}
-  .cierre .boton{max-width:520px;margin-left:auto;margin-right:auto}
+  /* ═════════════════════════ BLOQUE 3: el cierre, con la gente */
+  .final{position:relative;padding:66px 0 40px;overflow:hidden;background:var(--tinta)}
+  .final .foto{position:absolute;inset:0;
+    background:url("fondo-gente.jpg") center 46% / cover no-repeat}
+  .final .tinte{position:absolute;inset:0;
+    background:linear-gradient(180deg, rgba(10,11,17,.92), rgba(10,11,17,.74) 42%, rgba(10,11,17,.96))}
+  .final .dentro{position:relative;z-index:2;text-align:center}
+  .final .frase{
+    font-family:'Montserrat',sans-serif;font-weight:900;
+    font-size:clamp(22px,5.5vw,30px);line-height:1.16;text-wrap:balance;
+    text-shadow:0 5px 26px rgba(0,0,0,.7);
+  }
+  .final .apoyo{margin-top:13px;color:var(--morado);font-size:14px;font-weight:300}
+  .final .boton{max-width:520px;margin-left:auto;margin-right:auto;margin-top:28px}
+  .final .remate{margin-top:22px;color:#D6D3E2;font-size:14.5px;font-weight:300;text-wrap:balance}
 
-  .pie{margin-top:56px;padding-bottom:110px;text-align:center;color:#63616F;font-size:12px;line-height:1.8}
+  .pie{margin-top:34px;padding-bottom:104px;text-align:center;color:#6B6978;font-size:11.5px;line-height:1.8;
+    position:relative;z-index:2}
 
-  /* ---------------------------------------------- estado vencido */
+  /* ═════════════════════════ estado vencido */
   body.vencido .sello,
   body.vencido .antes,
   body.vencido .ahorro{display:none}
   body.vencido .etiqueta{border-color:rgba(207,203,239,.30);
-    background:rgba(255,255,255,.06);color:var(--morado)}
+    background:rgba(255,255,255,.07);color:var(--morado)}
   body.vencido .etiqueta i{background:#6B6979;animation:none;box-shadow:none}
-  body.vencido .ahora{background:linear-gradient(180deg,#D8D6E2 0%, #A9A7B8 100%);
-    -webkit-background-clip:text;background-clip:text}
+  body.vencido .ahora{color:#C9C6D6}
   body.vencido .barra i{background:#4A4857}
   .aviso{display:none}
   body.vencido .aviso{
-    display:block;margin-top:20px;padding:17px 18px;border-radius:16px;
-    background:rgba(255,201,74,.08);border:1px solid rgba(255,201,74,.28);
-    color:#EFE4CB;font-size:14.5px;
+    display:block;margin-top:18px;padding:16px 18px;border-radius:15px;
+    background:rgba(255,201,74,.09);border:1px solid rgba(255,201,74,.3);
+    color:#EFE4CB;font-size:14px;
   }
 
   .fija{
-    position:fixed;left:0;right:0;bottom:0;padding:13px 16px calc(13px + env(safe-area-inset-bottom));
+    position:fixed;left:0;right:0;bottom:0;padding:12px 16px calc(12px + env(safe-area-inset-bottom));
     background:linear-gradient(180deg, rgba(10,11,17,0), rgba(10,11,17,.95) 36%);
     transform:translateY(130%);transition:transform .32s ease;z-index:9;
   }
@@ -291,124 +282,121 @@ window.EFFIX = {
 <header class="hero">
   <div class="foto"></div>
   <div class="tinte"></div>
-  <div class="grano"></div>
   <div class="dentro caja">
     <div class="marca"><img src="logo-effix.png" alt="Feria EFFIX 2026"></div>
     <div class="fila-centro">
-      <div class="etiqueta" id="etiqueta"><i></i> <span id="etiquetaTxt">PRECIO RESERVADO</span></div>
+      <div class="etiqueta"><i></i> <span id="etiquetaTxt">PRECIO RESERVADO</span></div>
     </div>
     <h1 id="titular">Este anuncio no le sale a todo el mundo.</h1>
     <p class="subhero" id="subtitular">Te salió a ti, y trae un precio que no está en la página.</p>
   </div>
 </header>
 
-<div class="caja">
-  <div class="tarjeta">
-    <div class="sello"><b id="selloPct">-30%</b><span>SOLO AQUÍ</span></div>
-    <div class="kicker" id="kicker">ENTRADA VIP</div>
-    <div class="antes" id="precioAntes">$1.155.000</div>
-    <div class="ahora" id="precioAhora">$808.500</div>
-    <div class="ahorro" id="ahorro">Te ahorras $346.500</div>
+<div class="zona-precio">
+  <div class="caja">
+    <div class="tarjeta">
+      <div class="sello"><b id="selloPct">-30%</b><span>SOLO AQUÍ</span></div>
+      <div class="kicker" id="kicker">ENTRADA VIP</div>
+      <div class="antes" id="precioAntes">$1.155.000</div>
+      <div class="ahora" id="precioAhora">$808.500</div>
+      <div class="ahorro" id="ahorro">Te ahorras $346.500</div>
 
-    <div class="reloj">
-      <p id="rotuloReloj">Este precio se va en</p>
-      <div class="digitos" id="digitos">25:00</div>
-      <div class="barra"><i id="barra"></i></div>
+      <div class="reloj">
+        <p id="rotuloReloj">Este precio se va en</p>
+        <div class="digitos" id="digitos">25:00</div>
+        <div class="barra"><i id="barra"></i></div>
+      </div>
+
+      <div class="aviso" id="aviso">
+        La feria sigue en pie: del 15 al 19 de octubre en Plaza Mayor, Medellín.
+      </div>
+
+      <a class="boton" id="cta" href="#">QUIERO MI ENTRADA VIP</a>
+      <p class="bajo-boton" id="bajoBoton">Eliges, pagas y te llega la entrada al correo.</p>
     </div>
-
-    <div class="aviso" id="aviso">
-      La feria sigue en pie: del 15 al 19 de octubre en Plaza Mayor, Medellín.
-    </div>
-
-    <a class="boton" id="cta" href="#">QUIERO MI ENTRADA VIP</a>
-    <p class="bajo-boton" id="bajoBoton">Eliges, pagas y te llega la entrada al correo.</p>
   </div>
 </div>
 
-<section class="caja">
-  <div class="rotulo">LO QUE TIENEN LOS VIP</div>
-  <h2 class="titulo">Cinco días adentro, sin hacer una sola fila.</h2>
-  <p class="entradilla">La VIP no es la general con otro color. Es otra forma de vivir la feria.</p>
+<div class="claro">
+  <div class="caja">
+    <div class="rotulo">LO QUE TIENEN LOS VIP</div>
+    <h2 class="titulo">Con la VIP entras sin fila y te quedas los cinco días.</h2>
+    <p class="entradilla">La entrada general cubre tres días. La VIP, los cinco.</p>
 
-  <div class="items">
-    <div class="item">
-      <div class="ico"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#FFC94A" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
-      <div><b>Entras sin filas</b><span>Ingreso preferencial los tres días generales, mientras la entrada se revisa en la puerta.</span></div>
+    <div class="items">
+      <div class="item">
+        <div class="ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#9A6B00" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+        <div><b>Entras sin filas</b><span>Pasas directo los tres días generales, sin quedarte en la fila de la entrada.</span></div>
+      </div>
+      <div class="item">
+        <div class="ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#9A6B00" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg></div>
+        <div><b>Los cinco días completos</b><span>Del 15 al 19 de octubre. La entrada general cubre tres, del 16 al 18.</span></div>
+      </div>
+      <div class="item">
+        <div class="ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#9A6B00" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2h8l-1 6H9L8 2zM12 8v8M8 22h8"/></svg></div>
+        <div><b>Zona VIP con hidratación</b><span>Un lugar propio para sentarte, tomar algo y seguir hablando entre charla y charla.</span></div>
+      </div>
+      <div class="item">
+        <div class="ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#9A6B00" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21V8l9-5 9 5v13M9 21v-6h6v6"/></svg></div>
+        <div><b>Tu área en los auditorios</b><span>Áreas reservadas, así llegues sobre la hora a la charla que todo el mundo quiere ver.</span></div>
+      </div>
+      <div class="item">
+        <div class="ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#9A6B00" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l2.4 6.9H22l-6 4.4 2.3 7-6.3-4.6L5.7 20l2.3-7-6-4.4h7.6z"/></svg></div>
+        <div><b>La inauguración privada</b><span>El jueves 15, antes de que abran las puertas al público general.</span></div>
+      </div>
+      <div class="item">
+        <div class="ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#9A6B00" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+        <div><b>La clausura exclusiva</b><span>El lunes 19, cuando queda la gente que vino a cerrar negocios.</span></div>
+      </div>
+      <div class="item">
+        <div class="ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#9A6B00" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg></div>
+        <div><b>Entras y sales cuando quieras</b><span>La escarapela VIP no tiene límite de entradas y salidas durante los cinco días.</span></div>
+      </div>
+      <div class="item">
+        <div class="ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#9A6B00" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M23 7l-7 5 7 5V7z"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg></div>
+        <div><b>Zonas para grabar</b><span>Espacios montados para crear contenido, más la foto y el video profesional del evento.</span></div>
+      </div>
     </div>
-    <div class="item">
-      <div class="ico"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#FFC94A" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg></div>
-      <div><b>Los cinco días completos</b><span>Del 15 al 19 de octubre. La entrada general cubre tres, del 16 al 18.</span></div>
+
+    <div class="rotulo" style="margin-top:56px">LADO A LADO</div>
+    <h2 class="titulo">Esto es lo que cambia si llevas VIP.</h2>
+
+    <div class="tabla">
+      <div class="fila cab"><span>&nbsp;</span><span>GENERAL</span><span>VIP</span></div>
+      <div class="fila"><span>Días de acceso</span><span>3</span><span class="si">5</span></div>
+      <div class="fila"><span>Entrar sin filas</span><span class="no">No</span><span class="si">Sí</span></div>
+      <div class="fila"><span>Zona con hidratación</span><span class="no">No</span><span class="si">Sí</span></div>
+      <div class="fila"><span>Área reservada en auditorios</span><span class="no">No</span><span class="si">Sí</span></div>
+      <div class="fila"><span>Inauguración y clausura privadas</span><span class="no">No</span><span class="si">Sí</span></div>
+      <div class="fila"><span>Entrada y salida ilimitada</span><span class="no">No</span><span class="si">Sí</span></div>
     </div>
-    <div class="item">
-      <div class="ico"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#FFC94A" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2h8l-1 6H9L8 2zM12 8v8M8 22h8"/></svg></div>
-      <div><b>Zona VIP con hidratación</b><span>Un lugar propio para sentarte, tomar algo y seguir hablando entre charla y charla.</span></div>
-    </div>
-    <div class="item">
-      <div class="ico"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#FFC94A" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21V8l9-5 9 5v13M9 21v-6h6v6"/></svg></div>
-      <div><b>Tu área en los auditorios</b><span>Áreas reservadas, así llegues sobre la hora a la charla que todo el mundo quiere ver.</span></div>
-    </div>
-    <div class="item">
-      <div class="ico"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#FFC94A" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l2.4 6.9H22l-6 4.4 2.3 7-6.3-4.6L5.7 20l2.3-7-6-4.4h7.6z"/></svg></div>
-      <div><b>La inauguración privada</b><span>El jueves 15, antes de que abran las puertas al público general.</span></div>
-    </div>
-    <div class="item">
-      <div class="ico"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#FFC94A" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
-      <div><b>La clausura exclusiva</b><span>El lunes 19, cuando queda la gente que vino a cerrar negocios.</span></div>
-    </div>
-    <div class="item">
-      <div class="ico"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#FFC94A" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg></div>
-      <div><b>Entras y sales cuando quieras</b><span>La escarapela VIP no tiene límite de entradas y salidas durante los cinco días.</span></div>
-    </div>
-    <div class="item">
-      <div class="ico"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#FFC94A" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M23 7l-7 5 7 5V7z"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg></div>
-      <div><b>Zonas para grabar</b><span>Espacios montados para crear contenido, más la foto y el video profesional del evento.</span></div>
+
+    <div class="datos">
+      <div class="cuando">15 al 19 de octubre</div>
+      <div class="donde">PLAZA MAYOR &middot; MEDELLÍN</div>
+      <div class="cifras">
+        <div><b>+200</b><span>PONENTES</span></div>
+        <div><b>350+</b><span>EMPRESAS</span></div>
+        <div><b>6ª</b><span>EDICIÓN</span></div>
+      </div>
     </div>
   </div>
-</section>
+</div>
 
-<div class="banda">
+<div class="final">
   <div class="foto"></div>
   <div class="tinte"></div>
   <div class="dentro caja">
-    <p>Todo lo que te falta para vender más está en el mismo recinto.</p>
-    <small>+200 ponentes, más de 350 empresas y +200 conferencias y talleres.</small>
-  </div>
-</div>
-
-<section class="caja">
-  <div class="rotulo">LADO A LADO</div>
-  <h2 class="titulo">La diferencia entre ver la feria y estar adentro.</h2>
-
-  <div class="tabla">
-    <div class="fila cab"><span>&nbsp;</span><span>GENERAL</span><span>VIP</span></div>
-    <div class="fila"><span>Días de acceso</span><span>3</span><span class="si">5</span></div>
-    <div class="fila"><span>Entrar sin filas</span><span class="no">No</span><span class="si">Sí</span></div>
-    <div class="fila"><span>Zona con hidratación</span><span class="no">No</span><span class="si">Sí</span></div>
-    <div class="fila"><span>Área reservada en auditorios</span><span class="no">No</span><span class="si">Sí</span></div>
-    <div class="fila"><span>Inauguración y clausura privadas</span><span class="no">No</span><span class="si">Sí</span></div>
-    <div class="fila"><span>Entrada y salida ilimitada</span><span class="no">No</span><span class="si">Sí</span></div>
-  </div>
-
-  <div class="datos">
-    <div class="cuando">15 al 19 de octubre</div>
-    <div class="donde">PLAZA MAYOR &middot; MEDELLÍN</div>
-    <div class="cifras">
-      <div><b>+200</b><span>PONENTES</span></div>
-      <div><b>350+</b><span>EMPRESAS</span></div>
-      <div><b>6ª</b><span>EDICIÓN</span></div>
-    </div>
-  </div>
-
-  <div class="cierre">
-    <p id="remate">Cuando cierres esta página, la VIP vuelve a valer <span id="cierrePrecio">$1.155.000</span>.</p>
+    <p class="frase">Lo que llevas meses buscando en internet, aquí lo encuentras en tres días.</p>
+    <p class="apoyo">+200 ponentes, más de 350 empresas y +200 conferencias y talleres.</p>
     <a class="boton" id="cta2" href="#">QUIERO MI ENTRADA VIP</a>
+    <p class="remate" id="remate">Cuando cierres esta página, la VIP vuelve a valer <span id="cierrePrecio">$1.155.000</span>.</p>
   </div>
-
   <div class="pie">
     Feria EFFIX 2026 &middot; Plaza Mayor, Medellín<br>
     Precios en pesos colombianos con IVA incluido.
   </div>
-</section>
+</div>
 
 <div class="fija" id="fija">
   <a class="boton" id="ctaFija" href="#">QUIERO MI ENTRADA VIP</a>
@@ -503,7 +491,7 @@ window.EFFIX = {
     var vigia = new IntersectionObserver(function (es) {
       es.forEach(function (e, i) {
         if (e.isIntersecting) {
-          setTimeout(function () { e.target.classList.add('ver'); }, i * 70);
+          setTimeout(function () { e.target.classList.add('ver'); }, i * 60);
           vigia.unobserve(e.target);
         }
       });
