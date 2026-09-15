@@ -254,6 +254,33 @@
     color:#EFE4CB;font-size:14px;
   }
 
+
+  /* ═════════════════════════ fotos de la feria */
+  .tira{padding:34px 0 6px}
+  .tira .rot{
+    font-family:'Montserrat',sans-serif;font-weight:700;
+    letter-spacing:3px;font-size:10.5px;color:var(--morado);
+    text-align:center;margin-bottom:14px;
+  }
+  .tira .rejilla{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+  .tira figure{
+    position:relative;margin:0;aspect-ratio:3/4;overflow:hidden;border-radius:14px;
+    border:1px solid rgba(207,203,239,.14);
+  }
+  .tira img{width:100%;height:100%;object-fit:cover;display:block;
+    filter:saturate(1.06) contrast(1.04)}
+  .tira figure::after{
+    content:'';position:absolute;inset:0;
+    background:linear-gradient(180deg, rgba(10,11,17,0) 55%, rgba(10,11,17,.55) 100%);
+  }
+
+
+  .retrato{
+    float:none;width:100%;aspect-ratio:16/10;overflow:hidden;border-radius:18px;
+    margin:26px 0 4px;border:1px solid rgba(17,17,20,.10);
+  }
+  .retrato img{width:100%;height:100%;object-fit:cover;object-position:center 58%;display:block}
+
   .fija{
     position:fixed;left:0;right:0;bottom:0;padding:12px 16px calc(12px + env(safe-area-inset-bottom));
     background:linear-gradient(180deg, rgba(10,11,17,0), rgba(10,11,17,.95) 36%);
@@ -317,6 +344,15 @@ window.EFFIX = {
   </div>
 </div>
 
+  <div class="caja tira">
+    <div class="rot">ASÍ ESTUVO LA ÚLTIMA</div>
+    <div class="rejilla">
+      <figure><img src="p-gente.jpg" alt="El público de la Feria EFFIX" loading="lazy"></figure>
+      <figure><img src="p-atento.jpg" alt="Asistentes en una charla" loading="lazy"></figure>
+      <figure><img src="p-celebra.jpg" alt="Una asistente celebrando" loading="lazy"></figure>
+    </div>
+  </div>
+
 <div class="claro">
   <div class="caja">
     <div class="rotulo">LO QUE TIENEN LOS VIP</div>
@@ -358,7 +394,10 @@ window.EFFIX = {
       </div>
     </div>
 
-    <div class="rotulo" style="margin-top:56px">LADO A LADO</div>
+
+    <div class="retrato"><img src="p-auditorio.jpg" alt="El auditorio principal de la feria" loading="lazy"></div>
+
+    <div class="rotulo" style="margin-top:46px">LADO A LADO</div>
     <h2 class="titulo">Esto es lo que cambia si llevas VIP.</h2>
 
     <div class="tabla">
@@ -371,6 +410,9 @@ window.EFFIX = {
       <div class="fila"><span>Entrada y salida ilimitada</span><span class="no">No</span><span class="si">Sí</span></div>
     </div>
 
+
+    <div class="retrato" style="margin-top:22px"><img src="p-depie.jpg" alt="Asistentes de pie en una charla de la feria" loading="lazy"></div>
+
     <div class="datos">
       <div class="cuando">15 al 19 de octubre</div>
       <div class="donde">PLAZA MAYOR &middot; MEDELLÍN</div>
@@ -382,6 +424,7 @@ window.EFFIX = {
     </div>
   </div>
 </div>
+
 
 <div class="final">
   <div class="foto"></div>
