@@ -209,6 +209,7 @@
   body.vencido .sello,
   body.vencido .antes,
   body.vencido .ahorro{display:none}
+  body.vencido .reloj{display:none}
   body.vencido .ahora{color:var(--negro)}
   body.vencido .digitos{font-size:clamp(28px,8vw,38px);color:var(--oro-hondo)}
   body.vencido .barra i{background:#C9C7D0}
@@ -487,20 +488,10 @@ window.EFFIX = {
     if (e.key === 'Escape') telon.classList.remove('ver');
   });
 
-  function diasParaLaFeria() {
-    var feria = new Date(2026, 9, 15);           // 15 de octubre de 2026
-    var hoy = new Date();
-    return Math.max(0, Math.ceil((feria - hoy) / 86400000));
-  }
-
   function vencer() {
     document.body.classList.add('vencido');
     elBarra.style.width = '0%';
-    // el reloj no se queda en 00:00, que no sirve de nada: pasa a contar lo
-    // que de verdad corre, que son los dias que faltan para la feria
-    var d = diasParaLaFeria();
-    elRotulo.textContent = 'Faltan para la feria';
-    elDig.textContent = d + (d === 1 ? ' día' : ' días');
+    // el reloj se oculta entero: un contador en cero no aporta nada
     document.getElementById('precioAhora').textContent = pesos(full);
     elBajo.textContent = 'Eliges, pagas y te llega la entrada al correo.';
     document.getElementById('etiquetaTxt').textContent = 'DESCUENTO AGOTADO';
