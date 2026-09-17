@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Effix x Creators | Feria Effix</title>
+<meta name="description" content="Aprovecha Feria Effix para conectar con marcas, crear contenido y hacer parte de la estrategia de amplificación de Effix x Creators.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --negro:#000000;
+    --blanco:#ffffff;
+    --lavanda:#726E8D;
+    --lavanda-clara:#B6B2C9;
+    --texto-suave:#D9D6E6;
+  }
+
+  *{box-sizing:border-box;margin:0;padding:0;}
+
+  html{scroll-behavior:smooth;}
+
+  body{
+    font-family:'Montserrat',Arial,sans-serif;
+    background:#000000;
+    color:#ffffff;
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  img{max-width:100%;display:block;}
+  a{text-decoration:none;color:inherit;}
+
+  .contenedor{
+    max-width:1120px;
+    margin:0 auto;
+    padding:0 20px;
+    position:relative;
+    z-index:1;
+  }
+
+  /* ---------- Fondo negro con ruido + degradado lavanda (marca Effix, pág. 14-15 brandbook) ---------- */
+  section, header, footer{position:relative;overflow:hidden;background-color:#000000;}
+
+  .zona-a{
+    background-image:
+      radial-gradient(circle at 12% 15%, rgba(114,110,141,0.40) 0%, rgba(0,0,0,0) 42%),
+      radial-gradient(circle at 90% 85%, rgba(114,110,141,0.22) 0%, rgba(0,0,0,0) 48%),
+      linear-gradient(180deg, #060608 0%, #000000 100%);
+  }
+  .zona-b{
+    background-image:
+      radial-gradient(circle at 88% 20%, rgba(114,110,141,0.32) 0%, rgba(0,0,0,0) 45%),
+      radial-gradient(circle at 10% 88%, rgba(114,110,141,0.30) 0%, rgba(0,0,0,0) 46%),
+      linear-gradient(180deg, #030304 0%, #000000 100%);
+  }
+  .zona-c{
+    background-image:
+      radial-gradient(circle at 50% 0%, rgba(114,110,141,0.38) 0%, rgba(0,0,0,0) 55%),
+      radial-gradient(circle at 15% 95%, rgba(114,110,141,0.20) 0%, rgba(0,0,0,0) 40%),
+      linear-gradient(180deg, #08070a 0%, #000000 100%);
+  }
+  .zona-d{
+    background-image:
+      radial-gradient(circle at 78% 70%, rgba(114,110,141,0.30) 0%, rgba(0,0,0,0) 50%),
+      radial-gradient(circle at 20% 10%, rgba(114,110,141,0.24) 0%, rgba(0,0,0,0) 42%),
+      linear-gradient(180deg, #050506 0%, #000000 100%);
+  }
+
+  section::before, header::before, footer::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    pointer-events:none;
+    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='140' height='140'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix type='saturate' values='0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)' opacity='0.18'/></svg>");
+    mix-blend-mode:overlay;
+    z-index:0;
+  }
+  header::before, footer::before{opacity:0.35;}
+  section.ruido-suave::before{opacity:0.35;}
+  section.ruido-fuerte::before{opacity:0.6;}
+
+  /* =====================================================================
+     TITULAR STICKER — SVG inline (reemplaza el intento anterior con
+     text-shadow: los 48 puntos por anillo dejaban el borde serruchado a
+     zoom, y visto en revisión no pasaba). El SVG resuelve las dos fallas:
+       - stroke-linejoin:round da un borde REALMENTE redondo (curva
+         geométrica, no una aproximación por puntos).
+       - cada renglón es un <text> con su propia coordenada Y fija, así que
+         nunca puede "pisar" al renglón vecino como pasaba con el texto que
+         saltaba de línea dentro de un solo bloque.
+     3 capas (mismo orden que el ciclo anterior, ahora con <g> en vez de
+     text-shadow):
+       1) halo blanco: TODOS los renglones (chica y grandes), fill + stroke
+          blancos, stroke-linejoin/linecap:round.
+       2) filete negro: solo los renglones GRANDES, fill + stroke negros.
+       3) relleno limpio: sin stroke — blanco en grande, negro en chica.
+     Radios medidos por [AUV] sobre titulo-beneficios.webp: filete 0,17 del
+     tamaño de letra grande, halo total 0,42 (stroke-width = 2× el radio,
+     porque el trazo de SVG también se dibuja centrado). La línea chica
+     usa el halo a su propia escala (0,42 de SU tamaño), sin filete.
+     El viewBox se calculó con el ancho/alto REAL del texto (PIL con la
+     misma Montserrat Black, ver HERRAMIENTAS/dossier-effix/fuentes), más
+     el margen del halo — queda escrito fijo en el HTML, no depende de JS
+     ni de que la fuente esté cargada al medir.
+     Cada título trae DOS versiones (móvil / escritorio) con renglones
+     distintos, alternadas por media query — la que no aplica queda
+     display:none, nunca se recorta ni se aplasta porque el SVG escala
+     completo (width:100%, height:auto) dentro de su propio viewBox.
+     El texto accesible real vive en un span .sr-only (oculto visualmente,
+     visible para lectores de pantalla); los SVG llevan aria-hidden.
+     ===================================================================== */
+  .sr-only{
+    position:absolute;
+    width:1px;height:1px;
+    padding:0;margin:-1px;
+    overflow:hidden;
+    clip:rect(0,0,0,0);
+    white-space:nowrap;
+    border:0;
+  }
+
+  .titulo-svg{
+    display:block;
+    width:100%;
+    max-width:560px;
+    margin:0 0 20px;
+  }
+  .centro-svg{margin-left:auto;margin-right:auto;}
+  @media(min-width:768px){
+    /* Ancho casi completo del contenedor (1120px - 40px de padding = 1080px
+       disponibles): así el título manda en su sección y la línea grande
+       queda en ~48-60px de letra en vez de la tira angosta anterior. */
+    .titulo-svg{max-width:1080px;}
+    .titulo-svg.titulo-hero{max-width:1080px;}
+  }
+
+  .tit-svg{display:block;width:100%;}
+  .tit-svg svg{display:block;width:100%;height:auto;}
+  .tit-escritorio{display:none;}
+  @media(min-width:768px){
+    .tit-movil{display:none;}
+    .tit-escritorio{display:block;}
+  }
+
+  .titulo-svg + p,
+  .titulo-svg + .parrafo-grande{margin-top:2px;}
+
+
+  .etiqueta-seccion{
+    display:block;
+    font-size:12px;
+    font-weight:700;
+    letter-spacing:0.06em;
+    text-transform:uppercase;
+    color:var(--texto-suave);
+    margin-bottom:12px;
+  }
+
+  .parrafo-grande{
+    font-size:16px;
+    max-width:640px;
+    color:var(--texto-suave);
+  }
+  @media(min-width:768px){.parrafo-grande{font-size:17px;}}
+
+  /* ---------- Píldora: cápsula blanca / texto negro para remates ---------- */
+  .pildora{
+    display:inline-block;
+    background:#ffffff;
+    color:#0a0a0a;
+    font-weight:800;
+    font-size:16px;
+    line-height:1.3;
+    border-radius:100px;
+    padding:14px 24px;
+    max-width:100%;
+  }
+  .frase-destacada{margin:14px 0 18px;}
+  @media(min-width:768px){.frase-destacada{font-size:17px;margin-bottom:36px;}}
+  .remate{margin-top:28px;}
+
+  /* ---------- Botones (min 48px alto, texto >=16px) ---------- */
+  .boton{
+    display:inline-block;
+    font-family:'Montserrat',sans-serif;
+    font-weight:700;
+    font-size:16px;
+    padding:15px 30px;
+    border-radius:100px;
+    border:2px solid transparent;
+    cursor:pointer;
+    transition:box-shadow .15s ease, background-color .15s ease;
+    text-align:center;
+    min-height:48px;
+  }
+  .boton-blanco{background:#ffffff;color:#000000;}
+  .boton-blanco:hover{box-shadow:0 8px 22px rgba(255,255,255,0.22);}
+  .boton-negro{background:#000000;color:#ffffff;border-color:#ffffff;}
+  .boton-negro:hover{background:#161616;}
+  .boton-lavanda{background:var(--lavanda);color:#ffffff;}
+  .boton-lavanda:hover{box-shadow:0 8px 22px rgba(114,110,141,0.35);}
+  .boton-grande{font-size:18px;padding:20px 44px;}
+  .boton-ancho{display:block;width:100%;}
+
+  /* ---------- Header ---------- */
+  header{
+    position:sticky;
+    top:0;
+    z-index:50;
+    background-color:rgba(0,0,0,0.88);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid rgba(114,110,141,0.35);
+  }
+  header .contenedor{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding-top:10px;
+    padding-bottom:10px;
+  }
+  /* El archivo oficial es un trazo negro puro sobre fondo transparente (pensado para
+     fondo blanco). Sobre nuestro header negro se invierte a blanco puro: no es el logo
+     cromado (ese sí tenía tonos de color y el invert lo doraba); este es blanco/negro
+     sin matiz, invertir no le mete color. Sin width/height en el HTML: el ancho queda
+     en auto por CSS para que no se aplaste (LOG 2026-09-15). */
+  header img.logo{height:38px;width:auto;filter:invert(1);}
+  @media(min-width:768px){header img.logo{height:46px;}}
+  header .boton{padding:12px 20px;font-size:14.5px;min-height:48px;}
+  @media(max-width:767px){
+    header .boton{display:none;}
+  }
+
+  /* ---------- Secciones genéricas ---------- */
+  section{padding:44px 0;}
+  @media(min-width:768px){section{padding:60px 0;}}
+
+  /* ---------- Grillas de tarjetas ---------- */
+  .grilla{
+    display:grid;
+    gap:16px;
+    grid-template-columns:1fr;
+    margin-top:30px;
+  }
+  @media(min-width:640px){
+    .grilla.cols-2{grid-template-columns:repeat(2,1fr);}
+    .grilla.cols-3{grid-template-columns:repeat(3,1fr);}
+    .grilla.cols-4{grid-template-columns:repeat(2,1fr);}
+    .grilla.cols-5{grid-template-columns:repeat(2,1fr);}
+  }
+  @media(min-width:960px){
+    .grilla.cols-4{grid-template-columns:repeat(4,1fr);}
+    .grilla.cols-5{grid-template-columns:repeat(5,1fr);}
+  }
+
+  /* Carrusel horizontal en móvil para grupos de 3-5 tarjetas (secciones 2, 3, 4).
+     A partir de 768px vuelve a ser el grid normal de arriba.
+     scroll-padding-inline es lo que le dice al navegador que el padding
+     cuenta como parte del "inicio" válido para el scroll-snap; sin eso,
+     el navegador snapea ignorando el padding y la carga arranca con
+     scrollLeft = 20 (el padding) en vez de 0, dejando la primera tarjeta
+     pegada al borde izquierdo (o cortada). */
+  @media(max-width:767px){
+    .grilla.carrusel{
+      display:flex;
+      grid-template-columns:none;
+      overflow-x:auto;
+      scroll-snap-type:x mandatory;
+      scroll-padding-inline:20px;
+      gap:14px;
+      margin-left:-20px;
+      margin-right:-20px;
+      padding-block:20px 10px;
+      padding-inline:20px;
+      -webkit-overflow-scrolling:touch;
+      scrollbar-width:none;
+    }
+    .grilla.carrusel::-webkit-scrollbar{display:none;}
+    .grilla.carrusel .tarjeta{
+      scroll-snap-align:start;
+      flex:0 0 80%;
+      min-width:80%;
+    }
+    /* La sección 3 anida el carrusel dentro de .bloque-media; ahí
+       align-items:center (mobile) deja a .texto-media sin ancho definido
+       y el margen negativo del carrusel se disparaba a un ancho mayor que
+       la pantalla. Con width:100% el carrusel vuelve a quedar acotado al
+       viewport, igual que en las secciones 2 y 4. */
+    .bloque-media .texto-media{width:100%;}
+  }
+
+  .tarjeta{
+    background:#ffffff;
+    border-radius:26px;
+    padding:26px 22px;
+    transition:box-shadow .18s ease;
+  }
+  .tarjeta:hover{box-shadow:0 10px 26px rgba(114,110,141,0.22);}
+  .tarjeta h3{margin-bottom:9px;color:#0a0a0a;font-size:20px;}
+  .tarjeta p{font-size:16px;color:#4b4956;}
+  .tarjeta .flecha{color:var(--lavanda);font-weight:800;margin-right:6px;}
+
+  /* Tarjeta lavanda sólida, texto blanco */
+  .tarjeta.tinte{background:var(--lavanda);}
+  .tarjeta.tinte h3{color:#ffffff;}
+  .tarjeta.tinte p{color:#EDECF3;}
+  /* La flecha lavanda queda invisible sobre fondo lavanda: aquí va blanca */
+  .tarjeta.tinte .flecha{color:#ffffff;}
+
+  /* Tarjeta lavanda clara, texto negro (variante B de la marca) */
+  .tarjeta.tinte-clara{background:var(--lavanda-clara);}
+  .tarjeta.tinte-clara h3{color:#0a0a0a;}
+  .tarjeta.tinte-clara p{color:#33313d;}
+
+  /* Número DENTRO de la tarjeta, círculo a la izquierda del texto,
+     centrado verticalmente. Reemplaza el círculo absoluto que quedaba
+     medio afuera y se cortaba en el carrusel del celular. */
+  .tarjeta.numero{display:flex;align-items:center;gap:14px;}
+  .tarjeta.numero .num{
+    flex:0 0 auto;
+    width:42px;
+    height:42px;
+    border-radius:50%;
+    background:#0a0a0a;
+    color:#ffffff;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-weight:900;
+    font-size:17px;
+  }
+  .tarjeta.numero p{margin:0;color:#EDECF3;}
+
+  .cierre-italica{
+    font-style:italic;
+    color:var(--texto-suave);
+    margin-top:28px;
+    font-size:16px;
+  }
+
+  /* ---------- Banner de imagen: sin botón de play, foto como fondo ---------- */
+  .banner-foto{
+    position:relative;
+    width:100%;
+    border-radius:22px;
+    overflow:hidden;
+    background:#111;
+    margin-top:30px;
+  }
+  .banner-foto.formato-ancho{height:24vh;min-height:170px;}
+  @media(min-width:768px){
+    /* Alto fijo en vh (no aspect-ratio): así el título y el botón del hero
+       entran en la primera pantalla también en escritorios bajos (1440×900).
+       Ancho completo del contenedor (antes tenía max-width:900 centrado y
+       dejaba franjas negras a los lados con el título pegado a la izquierda:
+       la foto y el título ahora comparten el mismo borde). */
+    .banner-foto.formato-ancho{height:42vh;max-height:420px;width:100%;}
+  }
+  .banner-foto.formato-vertical{aspect-ratio:4/5;max-width:440px;margin-left:auto;margin-right:auto;}
+  /* Formato ancho para bloques de medios (sección 5): 16:10 en vez de
+     vertical, para que el texto no tenga que estirarse para llenar una
+     foto alta y quede aire de sobra arriba y abajo. */
+  .banner-foto.formato-media-ancha{aspect-ratio:16/10;max-width:520px;margin-left:auto;margin-right:auto;}
+  .banner-foto img{width:100%;height:100%;object-fit:cover;}
+  .banner-foto::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:linear-gradient(180deg, rgba(0,0,0,0.05) 0%, rgba(0,0,0,0.35) 100%);
+  }
+
+  /* Bloque de medios lado a lado: texto + foto (fallback 4:5, brandbook) */
+  .bloque-media{
+    display:flex;
+    flex-direction:column;
+    gap:26px;
+    align-items:center;
+    margin-top:30px;
+  }
+  @media(min-width:768px){
+    .bloque-media{flex-direction:row;align-items:stretch;gap:32px;}
+    .bloque-media .texto-media{flex:1;display:flex;flex-direction:column;justify-content:center;}
+    .bloque-media .banner-foto{margin-top:0;flex:0 0 380px;}
+    .bloque-media .grilla.carrusel{display:grid;grid-template-columns:1fr;margin:0;padding:0;}
+    /* Variante top-aligned (sección 5): el texto es corto y con stretch
+       flotaba centrado en medio de cientos de px vacíos. Aquí arranca
+       arriba, alineado con el borde superior de la foto. */
+    .bloque-media.arriba{align-items:flex-start;}
+    .bloque-media.arriba .texto-media{justify-content:flex-start;}
+    .bloque-media.arriba .banner-foto{flex:0 0 460px;}
+  }
+
+  /* ---------- Hero: pensado para llenar la primera pantalla del celular ---------- */
+  .hero{padding-top:18px;padding-bottom:30px;}
+  @media(min-width:768px){.hero{padding-top:44px;padding-bottom:60px;}}
+  /* Longhand a propósito: si fuera "margin:" corto pisaría los 4 lados que
+     ya fija .titulo (el truco de padding negativo del halo) y descuadraba
+     el título del resto del bloque. */
+  .hero h1{margin-top:calc(22px - 24px);}
+  @media(min-width:768px){.hero h1{margin-top:calc(32px - 24px);}}
+  .hero .parrafo-grande{font-size:16px;}
+  @media(min-width:768px){.hero .parrafo-grande{font-size:17px;}}
+  .hero .boton{margin-top:18px;padding-left:22px;padding-right:22px;font-size:15px;}
+  @media(min-width:768px){.hero .boton{font-size:16px;padding-left:30px;padding-right:30px;}}
+
+  /* ---------- Sección CTA ---------- */
+  .cta-central{text-align:center;}
+
+  /* ---------- Botón fijo abajo en móvil ---------- */
+  .cta-fija{
+    position:fixed;
+    left:0;right:0;bottom:0;
+    z-index:70;
+    padding:12px 20px calc(12px + env(safe-area-inset-bottom, 0px));
+    background:rgba(0,0,0,0.94);
+    backdrop-filter:blur(8px);
+    border-top:1px solid rgba(114,110,141,0.4);
+    transform:translateY(120%);
+    transition:transform .28s ease;
+  }
+  .cta-fija.visible{transform:translateY(0);}
+  @media(min-width:768px){.cta-fija{display:none;}}
+
+  /* ---------- Aparición suave al hacer scroll ----------
+     Visible por defecto (si el JS no corre, no se pierde contenido).
+     El JS agrega ".armado" solo cuando SÍ va a animar, y recién ahí se
+     esconde para el efecto de aparición; sin JS o con
+     prefers-reduced-motion nunca se esconde nada. */
+  .reveal.armado{opacity:0;transform:translateY(16px);transition:opacity .55s ease, transform .55s ease;}
+  .reveal.armado.visible{opacity:1;transform:none;}
+
+  /* ---------- Footer ---------- */
+  footer{padding:36px 0;text-align:center;}
+  /* Colchón de seguridad: aunque el JS del botón fijo falle o llegue tarde,
+     el pie nunca queda tapado por él en móvil. */
+  @media(max-width:767px){footer{padding-bottom:calc(36px + 64px + env(safe-area-inset-bottom, 0px));}}
+  /* Logo horizontal (blanco, igual técnica que el header) en vez del
+     cromado chico y borroso que quedaba casi ilegible en el pie. */
+  footer img{height:40px;width:auto;margin:0 auto 14px;filter:invert(1);}
+  footer p{font-size:13px;color:var(--texto-suave);}
+
+  .centro{text-align:center;}
+  .mt-grande{margin-top:44px;}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="contenedor">
+    <a href="#" aria-label="Feria Effix">
+      <img class="logo" src="imagenes/logo-effix-horizontal.webp" alt="Feria Effix 2026">
+    </a>
+    <a href="#quiero-hacer-parte" class="boton boton-blanco">Quiero hacer parte</a>
+  </div>
+</header>
+
+<!-- ============================================================ -->
+<!-- 1. HERO -->
+<!-- ============================================================ -->
+<section class="zona-a ruido-fuerte hero">
+  <div class="contenedor">
+
+    <div class="banner-foto formato-ancho">
+      <!-- VIDEO: pegar aquí -->
+      <img src="imagenes/hero-tarima.jpg" alt="Tarima principal de Feria Effix iluminada, vista del recinto">
+    </div>
+
+    <h1 class="titulo-svg titulo-hero">
+  <span class="sr-only">Haz que Feria Effix impulse también tu crecimiento como creador.</span>
+  <span class="tit-svg tit-movil" aria-hidden="true"><svg viewBox="0 0 1114.00 477.84" xmlns="http://www.w3.org/2000/svg" font-family="Montserrat, Arial, sans-serif" font-weight="900" letter-spacing="0"><g fill="#fff" stroke="#fff" stroke-linejoin="round" stroke-linecap="round"><g stroke-width="43.68"><text x="45.00" y="62.84" font-size="52.00" word-spacing="8.84">HAZ QUE FERIA EFFIX</text></g><g stroke-width="84.00"><text x="45.00" y="194.84" font-size="100.00" word-spacing="17.00">IMPULSE TAMBIÉN</text><text x="45.00" y="312.84" font-size="100.00" word-spacing="17.00">TU CRECIMIENTO</text><text x="45.00" y="430.84" font-size="100.00" word-spacing="17.00">COMO CREADOR</text></g></g><g fill="#000" stroke="#000" stroke-width="34.00" stroke-linejoin="round" stroke-linecap="round"><text x="45.00" y="194.84" font-size="100.00" word-spacing="17.00">IMPULSE TAMBIÉN</text><text x="45.00" y="312.84" font-size="100.00" word-spacing="17.00">TU CRECIMIENTO</text><text x="45.00" y="430.84" font-size="100.00" word-spacing="17.00">COMO CREADOR</text></g><g><text x="45.00" y="62.84" font-size="52.00" word-spacing="8.84" fill="#000">HAZ QUE FERIA EFFIX</text><text x="45.00" y="194.84" font-size="100.00" word-spacing="17.00" fill="#fff">IMPULSE TAMBIÉN</text><text x="45.00" y="312.84" font-size="100.00" word-spacing="17.00" fill="#fff">TU CRECIMIENTO</text><text x="45.00" y="430.84" font-size="100.00" word-spacing="17.00" fill="#fff">COMO CREADOR</text></g></svg></span>
+  <span class="tit-svg tit-escritorio" aria-hidden="true"><svg viewBox="0 0 1901.50 323.32" xmlns="http://www.w3.org/2000/svg" font-family="Montserrat, Arial, sans-serif" font-weight="900" letter-spacing="0"><g fill="#fff" stroke="#fff" stroke-linejoin="round" stroke-linecap="round"><g stroke-width="38.64"><text x="40.80" y="55.32" font-size="46.00" word-spacing="7.82">HAZ QUE FERIA EFFIX</text></g><g stroke-width="75.60"><text x="40.80" y="174.32" font-size="90.00" word-spacing="15.30">IMPULSE TAMBIÉN TU CRECIMIENTO</text><text x="40.80" y="280.52" font-size="90.00" word-spacing="15.30">COMO CREADOR</text></g></g><g fill="#000" stroke="#000" stroke-width="30.60" stroke-linejoin="round" stroke-linecap="round"><text x="40.80" y="174.32" font-size="90.00" word-spacing="15.30">IMPULSE TAMBIÉN TU CRECIMIENTO</text><text x="40.80" y="280.52" font-size="90.00" word-spacing="15.30">COMO CREADOR</text></g><g><text x="40.80" y="55.32" font-size="46.00" word-spacing="7.82" fill="#000">HAZ QUE FERIA EFFIX</text><text x="40.80" y="174.32" font-size="90.00" word-spacing="15.30" fill="#fff">IMPULSE TAMBIÉN TU CRECIMIENTO</text><text x="40.80" y="280.52" font-size="90.00" word-spacing="15.30" fill="#fff">COMO CREADOR</text></g></svg></span>
+</h1>
+
+    <p class="parrafo-grande">Vas a estar rodeado de marcas, ecommerce y negocios que necesitan contenido. Queremos ayudarte a aprovechar ese escenario para conectar, mostrar tu talento y abrir nuevas oportunidades.</p>
+
+    <a href="#quiero-hacer-parte" class="boton boton-blanco">Quiero aprovechar Effix al máximo</a>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- 2. TODO LO QUE PUEDES SACAR DE EFFIX -->
+<!-- ============================================================ -->
+<section class="zona-b ruido-suave">
+  <div class="contenedor">
+    <span class="etiqueta-seccion reveal">Todo lo que puedes sacar de Effix</span>
+    <h2 class="titulo-svg reveal">
+  <span class="sr-only">Aquí no solo vienes a crear. Vienes a conectar, mostrarte y crecer.</span>
+  <span class="tit-svg tit-movil" aria-hidden="true"><svg viewBox="0 0 1361.00 349.84" xmlns="http://www.w3.org/2000/svg" font-family="Montserrat, Arial, sans-serif" font-weight="900" letter-spacing="0"><g fill="#fff" stroke="#fff" stroke-linejoin="round" stroke-linecap="round"><g stroke-width="43.68"><text x="45.00" y="72.84" font-size="52.00" word-spacing="8.84">AQUÍ NO SOLO VIENES A CREAR</text></g><g stroke-width="84.00"><text x="45.00" y="184.84" font-size="100.00" word-spacing="17.00">VIENES A CONECTAR,</text><text x="45.00" y="302.84" font-size="100.00" word-spacing="17.00">MOSTRARTE Y CRECER</text></g></g><g fill="#000" stroke="#000" stroke-width="34.00" stroke-linejoin="round" stroke-linecap="round"><text x="45.00" y="184.84" font-size="100.00" word-spacing="17.00">VIENES A CONECTAR,</text><text x="45.00" y="302.84" font-size="100.00" word-spacing="17.00">MOSTRARTE Y CRECER</text></g><g><text x="45.00" y="72.84" font-size="52.00" word-spacing="8.84" fill="#000">AQUÍ NO SOLO VIENES A CREAR</text><text x="45.00" y="184.84" font-size="100.00" word-spacing="17.00" fill="#fff">VIENES A CONECTAR,</text><text x="45.00" y="302.84" font-size="100.00" word-spacing="17.00" fill="#fff">MOSTRARTE Y CRECER</text></g></svg></span>
+  <span class="tit-svg tit-escritorio" aria-hidden="true"><svg viewBox="0 0 1811.50 315.32" xmlns="http://www.w3.org/2000/svg" font-family="Montserrat, Arial, sans-serif" font-weight="900" letter-spacing="0"><g fill="#fff" stroke="#fff" stroke-linejoin="round" stroke-linecap="round"><g stroke-width="38.64"><text x="40.80" y="65.32" font-size="46.00" word-spacing="7.82">AQUÍ NO SOLO VIENES A CREAR</text></g><g stroke-width="75.60"><text x="40.80" y="166.32" font-size="90.00" word-spacing="15.30">VIENES A CONECTAR, MOSTRARTE</text><text x="40.80" y="272.52" font-size="90.00" word-spacing="15.30">Y CRECER</text></g></g><g fill="#000" stroke="#000" stroke-width="30.60" stroke-linejoin="round" stroke-linecap="round"><text x="40.80" y="166.32" font-size="90.00" word-spacing="15.30">VIENES A CONECTAR, MOSTRARTE</text><text x="40.80" y="272.52" font-size="90.00" word-spacing="15.30">Y CRECER</text></g><g><text x="40.80" y="65.32" font-size="46.00" word-spacing="7.82" fill="#000">AQUÍ NO SOLO VIENES A CREAR</text><text x="40.80" y="166.32" font-size="90.00" word-spacing="15.30" fill="#fff">VIENES A CONECTAR, MOSTRARTE</text><text x="40.80" y="272.52" font-size="90.00" word-spacing="15.30" fill="#fff">Y CRECER</text></g></svg></span>
+</h2>
+
+    <div class="grilla cols-3 carrusel reveal">
+      <div class="tarjeta">
+        <h3>Conecta</h3>
+        <p>Con marcas y negocios que pueden necesitar tus servicios.</p>
+      </div>
+      <div class="tarjeta tinte">
+        <h3>Crea</h3>
+        <p>Aprovecha productos, experiencias, aprendizajes y momentos de la feria para generar contenido para tu propia marca.</p>
+      </div>
+      <div class="tarjeta">
+        <h3>Crece</h3>
+        <p>Convierte esas conexiones y contenidos en nuevas oportunidades.</p>
+      </div>
+    </div>
+
+    <p class="cierre-italica reveal">Nosotros ponemos el escenario. Queremos ayudarte a sacarle todo el provecho.</p>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- 3. CÓMO APROVECHAR LA FERIA -->
+<!-- ============================================================ -->
+<section class="zona-c ruido-suave">
+  <div class="contenedor">
+    <span class="etiqueta-seccion reveal">Cómo aprovechar la feria</span>
+    <h2 class="titulo-svg reveal">
+  <span class="sr-only">Algunas ideas para que Effix trabaje también a favor de tu marca.</span>
+  <span class="tit-svg tit-movil" aria-hidden="true"><svg viewBox="0 0 1314.00 359.84" xmlns="http://www.w3.org/2000/svg" font-family="Montserrat, Arial, sans-serif" font-weight="900" letter-spacing="0"><g fill="#fff" stroke="#fff" stroke-linejoin="round" stroke-linecap="round"><g stroke-width="43.68"><text x="45.00" y="62.84" font-size="52.00" word-spacing="8.84">ALGUNAS IDEAS PARA QUE EFFIX</text></g><g stroke-width="84.00"><text x="45.00" y="194.84" font-size="100.00" word-spacing="17.00">TRABAJE TAMBIÉN A</text><text x="45.00" y="312.84" font-size="100.00" word-spacing="17.00">FAVOR DE TU MARCA</text></g></g><g fill="#000" stroke="#000" stroke-width="34.00" stroke-linejoin="round" stroke-linecap="round"><text x="45.00" y="194.84" font-size="100.00" word-spacing="17.00">TRABAJE TAMBIÉN A</text><text x="45.00" y="312.84" font-size="100.00" word-spacing="17.00">FAVOR DE TU MARCA</text></g><g><text x="45.00" y="62.84" font-size="52.00" word-spacing="8.84" fill="#000">ALGUNAS IDEAS PARA QUE EFFIX</text><text x="45.00" y="194.84" font-size="100.00" word-spacing="17.00" fill="#fff">TRABAJE TAMBIÉN A</text><text x="45.00" y="312.84" font-size="100.00" word-spacing="17.00" fill="#fff">FAVOR DE TU MARCA</text></g></svg></span>
+  <span class="tit-svg tit-escritorio" aria-hidden="true"><svg viewBox="0 0 1534.50 323.32" xmlns="http://www.w3.org/2000/svg" font-family="Montserrat, Arial, sans-serif" font-weight="900" letter-spacing="0"><g fill="#fff" stroke="#fff" stroke-linejoin="round" stroke-linecap="round"><g stroke-width="38.64"><text x="40.80" y="55.32" font-size="46.00" word-spacing="7.82">ALGUNAS IDEAS PARA QUE EFFIX</text></g><g stroke-width="75.60"><text x="40.80" y="174.32" font-size="90.00" word-spacing="15.30">TRABAJE TAMBIÉN A FAVOR</text><text x="40.80" y="280.52" font-size="90.00" word-spacing="15.30">DE TU MARCA</text></g></g><g fill="#000" stroke="#000" stroke-width="30.60" stroke-linejoin="round" stroke-linecap="round"><text x="40.80" y="174.32" font-size="90.00" word-spacing="15.30">TRABAJE TAMBIÉN A FAVOR</text><text x="40.80" y="280.52" font-size="90.00" word-spacing="15.30">DE TU MARCA</text></g><g><text x="40.80" y="55.32" font-size="46.00" word-spacing="7.82" fill="#000">ALGUNAS IDEAS PARA QUE EFFIX</text><text x="40.80" y="174.32" font-size="90.00" word-spacing="15.30" fill="#fff">TRABAJE TAMBIÉN A FAVOR</text><text x="40.80" y="280.52" font-size="90.00" word-spacing="15.30" fill="#fff">DE TU MARCA</text></g></svg></span>
+</h2>
+
+    <div class="bloque-media">
+      <div class="texto-media">
+        <div class="grilla carrusel reveal">
+          <div class="tarjeta tinte numero"><span class="num">1</span><p>Acércate a marcas que te llamen la atención.</p></div>
+          <div class="tarjeta tinte numero"><span class="num">2</span><p>Pregunta cómo están trabajando su contenido.</p></div>
+          <div class="tarjeta tinte numero"><span class="num">3</span><p>Muéstrales ideas, no solo tu portafolio.</p></div>
+          <div class="tarjeta tinte numero"><span class="num">4</span><p>Crea contenido con productos y experiencias que conecten contigo.</p></div>
+          <div class="tarjeta tinte numero"><span class="num">5</span><p>Haz networking y continúa las conversaciones después de la feria.</p></div>
+        </div>
+      </div>
+      <div class="banner-foto formato-vertical reveal">
+        <!-- VIDEO: pegar aquí -->
+        <img src="imagenes/recorriendo-la-feria.jpg" alt="Asistentes reunidos y caminando en la entrada del recinto de Feria Effix, con la fachada del evento de fondo">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- 4. LAS PERSONAS QUE PUEDEN NECESITARTE -->
+<!-- ============================================================ -->
+<section class="zona-d ruido-suave">
+  <div class="contenedor">
+    <span class="etiqueta-seccion reveal">Las personas que pueden necesitarte</span>
+    <h2 class="titulo-svg reveal">
+  <span class="sr-only">En Effix vas a estar rodeado de potenciales oportunidades.</span>
+  <span class="tit-svg tit-movil" aria-hidden="true"><svg viewBox="0 0 1083.20 330.84" xmlns="http://www.w3.org/2000/svg" font-family="Montserrat, Arial, sans-serif" font-weight="900" letter-spacing="0"><g fill="#fff" stroke="#fff" stroke-linejoin="round" stroke-linecap="round"><g stroke-width="43.68"><text x="45.00" y="62.84" font-size="52.00" word-spacing="8.84">EN EFFIX VAS A ESTAR RODEADO</text></g><g stroke-width="84.00"><text x="45.00" y="165.84" font-size="100.00" word-spacing="17.00">DE POTENCIALES</text><text x="45.00" y="283.84" font-size="100.00">OPORTUNIDADES</text></g></g><g fill="#000" stroke="#000" stroke-width="34.00" stroke-linejoin="round" stroke-linecap="round"><text x="45.00" y="165.84" font-size="100.00" word-spacing="17.00">DE POTENCIALES</text><text x="45.00" y="283.84" font-size="100.00">OPORTUNIDADES</text></g><g><text x="45.00" y="62.84" font-size="52.00" word-spacing="8.84" fill="#000">EN EFFIX VAS A ESTAR RODEADO</text><text x="45.00" y="165.84" font-size="100.00" word-spacing="17.00" fill="#fff">DE POTENCIALES</text><text x="45.00" y="283.84" font-size="100.00" fill="#fff">OPORTUNIDADES</text></g></svg></span>
+  <span class="tit-svg tit-escritorio" aria-hidden="true"><svg viewBox="0 0 1844.20 191.12" xmlns="http://www.w3.org/2000/svg" font-family="Montserrat, Arial, sans-serif" font-weight="900" letter-spacing="0"><g fill="#fff" stroke="#fff" stroke-linejoin="round" stroke-linecap="round"><g stroke-width="38.64"><text x="40.80" y="55.32" font-size="46.00" word-spacing="7.82">EN EFFIX VAS A ESTAR RODEADO</text></g><g stroke-width="75.60"><text x="40.80" y="148.32" font-size="90.00" word-spacing="15.30">DE POTENCIALES OPORTUNIDADES</text></g></g><g fill="#000" stroke="#000" stroke-width="30.60" stroke-linejoin="round" stroke-linecap="round"><text x="40.80" y="148.32" font-size="90.00" word-spacing="15.30">DE POTENCIALES OPORTUNIDADES</text></g><g><text x="40.80" y="55.32" font-size="46.00" word-spacing="7.82" fill="#000">EN EFFIX VAS A ESTAR RODEADO</text><text x="40.80" y="148.32" font-size="90.00" word-spacing="15.30" fill="#fff">DE POTENCIALES OPORTUNIDADES</text></g></svg></span>
+</h2>
+
+    <div class="grilla cols-4 carrusel reveal">
+      <div class="tarjeta">
+        <h3>Marcas y ecommerce</h3>
+        <p><span class="flecha">→</span>Necesitan nuevos creativos.</p>
+      </div>
+      <div class="tarjeta tinte">
+        <h3>Emprendedores</h3>
+        <p><span class="flecha">→</span>Necesitan comunicar y vender mejor.</p>
+      </div>
+      <div class="tarjeta">
+        <h3>Agencias</h3>
+        <p><span class="flecha">→</span>Necesitan creators para sus clientes.</p>
+      </div>
+      <div class="tarjeta tinte">
+        <h3>Equipos de marketing</h3>
+        <p><span class="flecha">→</span>Necesitan contenido constantemente.</p>
+      </div>
+    </div>
+
+    <p class="remate reveal"><span class="pildora">Tu próximo cliente podría estar caminando por la feria.</span></p>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- 5. EL GRAN PLUS, EFFIX X CREATORS -->
+<!-- ============================================================ -->
+<section class="zona-a ruido-fuerte">
+  <div class="contenedor">
+    <span class="etiqueta-seccion reveal">Effix x Creators</span>
+    <h2 class="titulo-svg reveal">
+  <span class="sr-only">Y nosotros también queremos ayudarte a ser más visible.</span>
+  <span class="tit-svg tit-movil" aria-hidden="true"><svg viewBox="0 0 1099.52 349.84" xmlns="http://www.w3.org/2000/svg" font-family="Montserrat, Arial, sans-serif" font-weight="900" letter-spacing="0"><g fill="#fff" stroke="#fff" stroke-linejoin="round" stroke-linecap="round"><g stroke-width="43.68"><text x="45.00" y="72.84" font-size="52.00" word-spacing="8.84">Y NOSOTROS TAMBIÉN QUEREMOS</text></g><g stroke-width="84.00"><text x="45.00" y="184.84" font-size="100.00" word-spacing="17.00">AYUDARTE A SER</text><text x="45.00" y="302.84" font-size="100.00" word-spacing="17.00">MÁS VISIBLE</text></g></g><g fill="#000" stroke="#000" stroke-width="34.00" stroke-linejoin="round" stroke-linecap="round"><text x="45.00" y="184.84" font-size="100.00" word-spacing="17.00">AYUDARTE A SER</text><text x="45.00" y="302.84" font-size="100.00" word-spacing="17.00">MÁS VISIBLE</text></g><g><text x="45.00" y="72.84" font-size="52.00" word-spacing="8.84" fill="#000">Y NOSOTROS TAMBIÉN QUEREMOS</text><text x="45.00" y="184.84" font-size="100.00" word-spacing="17.00" fill="#fff">AYUDARTE A SER</text><text x="45.00" y="302.84" font-size="100.00" word-spacing="17.00" fill="#fff">MÁS VISIBLE</text></g></svg></span>
+  <span class="tit-svg tit-escritorio" aria-hidden="true"><svg viewBox="0 0 1651.80 227.12" xmlns="http://www.w3.org/2000/svg" font-family="Montserrat, Arial, sans-serif" font-weight="900" letter-spacing="0"><g fill="#fff" stroke="#fff" stroke-linejoin="round" stroke-linecap="round"><g stroke-width="38.64"><text x="40.80" y="65.32" font-size="46.00" word-spacing="7.82">Y NOSOTROS TAMBIÉN QUEREMOS</text></g><g stroke-width="75.60"><text x="40.80" y="184.32" font-size="90.00" word-spacing="15.30">AYUDARTE A SER MÁS VISIBLE</text></g></g><g fill="#000" stroke="#000" stroke-width="30.60" stroke-linejoin="round" stroke-linecap="round"><text x="40.80" y="184.32" font-size="90.00" word-spacing="15.30">AYUDARTE A SER MÁS VISIBLE</text></g><g><text x="40.80" y="65.32" font-size="46.00" word-spacing="7.82" fill="#000">Y NOSOTROS TAMBIÉN QUEREMOS</text><text x="40.80" y="184.32" font-size="90.00" word-spacing="15.30" fill="#fff">AYUDARTE A SER MÁS VISIBLE</text></g></svg></span>
+</h2>
+
+    <div class="bloque-media arriba">
+      <div class="texto-media reveal">
+        <p class="parrafo-grande">Como parte de nuestra comunidad de creators, queremos ir un paso más allá. Por eso creamos una oportunidad para que quienes quieran puedan hacer parte de nuestra estrategia de amplificación.</p>
+        <p class="frase-destacada"><span class="pildora">Tú creas. Nosotros te ayudamos a llegar más lejos.</span></p>
+      </div>
+      <div class="banner-foto formato-media-ancha reveal">
+        <!-- VIDEO: pegar aquí -->
+        <img src="imagenes/escenario-publico-amplificacion.webp" alt="Público de Feria Effix con los brazos en alto frente al escenario principal y las pantallas del recinto">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- 6. CTA QUIERO HACER PARTE -->
+<!-- ============================================================ -->
+<section class="zona-b ruido-suave" id="quiero-hacer-parte">
+  <div class="contenedor cta-central">
+    <a href="#FORMULARIO-PENDIENTE" class="boton boton-negro boton-grande reveal">QUIERO HACER PARTE</a>
+
+    <div class="grilla cols-3 reveal" style="text-align:left;max-width:1080px;margin-left:auto;margin-right:auto;">
+      <div class="tarjeta">
+        <h3>¿Cómo funciona?</h3>
+        <p>Creas contenido recomendando la feria. Lo subes a tus redes. Feria Effix puede pautarlo.</p>
+      </div>
+      <div class="tarjeta tinte">
+        <h3>¿Qué buscamos?</h3>
+        <p>Un ejército de creadores de contenido hablando del evento de ecommerce más grande del mundo.</p>
+      </div>
+      <div class="tarjeta tinte-clara">
+        <h3>¿Qué recibes tú?</h3>
+        <p>Visibilidad, exposición de perfil, amplificación y presencia frente al ecosistema Effix.</p>
+      </div>
+      <!-- PENDIENTE texto real de Feria Effix: tarjeta "¿Qué necesitamos de ti?" — el wireframe solo traía "Entregables, fechas y condiciones." como relleno de maqueta, sin contenido real entregado. No se inventa.
+      <div class="tarjeta">
+        <h3>¿Qué necesitamos de ti?</h3>
+        <p>Entregables, fechas y condiciones.</p>
+      </div>
+      -->
+    </div>
+
+    <a href="#FORMULARIO-PENDIENTE" class="boton boton-lavanda mt-grande reveal">Sí, quiero participar</a>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- 7. CIERRE -->
+<!-- ============================================================ -->
+<section class="zona-c ruido-suave centro">
+  <div class="contenedor">
+    <h2 class="titulo-svg centro-svg reveal">
+  <span class="sr-only">Queremos que Feria Effix sea un aliado para tu crecimiento.</span>
+  <span class="tit-svg tit-movil" aria-hidden="true"><svg viewBox="0 0 1080.00 339.84" xmlns="http://www.w3.org/2000/svg" font-family="Montserrat, Arial, sans-serif" font-weight="900" letter-spacing="0"><g fill="#fff" stroke="#fff" stroke-linejoin="round" stroke-linecap="round"><g stroke-width="43.68"><text x="45.00" y="62.84" font-size="52.00" word-spacing="8.84">QUEREMOS QUE FERIA EFFIX SEA</text></g><g stroke-width="84.00"><text x="45.00" y="174.84" font-size="100.00" word-spacing="17.00">UN ALIADO PARA</text><text x="45.00" y="292.84" font-size="100.00" word-spacing="17.00">TU CRECIMIENTO</text></g></g><g fill="#000" stroke="#000" stroke-width="34.00" stroke-linejoin="round" stroke-linecap="round"><text x="45.00" y="174.84" font-size="100.00" word-spacing="17.00">UN ALIADO PARA</text><text x="45.00" y="292.84" font-size="100.00" word-spacing="17.00">TU CRECIMIENTO</text></g><g><text x="45.00" y="62.84" font-size="52.00" word-spacing="8.84" fill="#000">QUEREMOS QUE FERIA EFFIX SEA</text><text x="45.00" y="174.84" font-size="100.00" word-spacing="17.00" fill="#fff">UN ALIADO PARA</text><text x="45.00" y="292.84" font-size="100.00" word-spacing="17.00" fill="#fff">TU CRECIMIENTO</text></g></svg></span>
+  <span class="tit-svg tit-escritorio" aria-hidden="true"><svg viewBox="0 0 1865.80 199.12" xmlns="http://www.w3.org/2000/svg" font-family="Montserrat, Arial, sans-serif" font-weight="900" letter-spacing="0"><g fill="#fff" stroke="#fff" stroke-linejoin="round" stroke-linecap="round"><g stroke-width="38.64"><text x="40.80" y="55.32" font-size="46.00" word-spacing="7.82">QUEREMOS QUE FERIA EFFIX SEA</text></g><g stroke-width="75.60"><text x="40.80" y="156.32" font-size="90.00" word-spacing="15.30">UN ALIADO PARA TU CRECIMIENTO</text></g></g><g fill="#000" stroke="#000" stroke-width="30.60" stroke-linejoin="round" stroke-linecap="round"><text x="40.80" y="156.32" font-size="90.00" word-spacing="15.30">UN ALIADO PARA TU CRECIMIENTO</text></g><g><text x="40.80" y="55.32" font-size="46.00" word-spacing="7.82" fill="#000">QUEREMOS QUE FERIA EFFIX SEA</text><text x="40.80" y="156.32" font-size="90.00" word-spacing="15.30" fill="#fff">UN ALIADO PARA TU CRECIMIENTO</text></g></svg></span>
+</h2>
+
+    <p class="parrafo-grande reveal" style="margin-left:auto;margin-right:auto;">Aprovecha la feria para conocer marcas, crear contenido, mostrar lo que sabes hacer y generar nuevas oportunidades.</p>
+
+    <p class="parrafo-grande reveal" style="margin:20px auto 32px;">Nosotros ponemos el escenario, la comunidad y las herramientas. Tú decides hasta dónde quieres llevarlo.</p>
+
+    <a href="#quiero-hacer-parte" class="boton boton-negro boton-grande reveal">Voy a aprovechar Effix</a>
+  </div>
+</section>
+
+<footer class="zona-d">
+  <div class="contenedor">
+    <img src="imagenes/logo-effix-horizontal.webp" alt="Feria Effix">
+    <p>Feria Effix. El evento de ecommerce más grande del mundo.</p>
+  </div>
+</footer>
+
+<!-- Botón fijo abajo en móvil: aparece pasado el hero, se oculta en la sección 6 -->
+<div class="cta-fija" id="ctaFija">
+  <a href="#quiero-hacer-parte" class="boton boton-blanco boton-ancho">Quiero hacer parte</a>
+</div>
+
+<script>
+(function(){
+  // Botón fijo móvil: visible entre el final del hero y el inicio de la
+  // sección 6, y también se esconde al llegar al pie (si no, al pasar la
+  // sección 6 el observer de esa sección vuelve a dar "no visible" y el
+  // botón reaparecía tapando el logo del pie).
+  var hero = document.querySelector('.hero');
+  var seccionCta = document.getElementById('quiero-hacer-parte');
+  var pie = document.querySelector('footer');
+  var ctaFija = document.getElementById('ctaFija');
+  if (hero && seccionCta && pie && ctaFija && 'IntersectionObserver' in window) {
+    var heroVisible = true;
+    var ctaSeccionVisible = false;
+    var pieVisible = false;
+    function actualizar(){
+      ctaFija.classList.toggle('visible', !heroVisible && !ctaSeccionVisible && !pieVisible);
+    }
+    new IntersectionObserver(function(entries){
+      heroVisible = entries[0].isIntersecting;
+      actualizar();
+    }, {threshold:0}).observe(hero);
+    new IntersectionObserver(function(entries){
+      ctaSeccionVisible = entries[0].isIntersecting;
+      actualizar();
+    }, {threshold:0.12}).observe(seccionCta);
+    new IntersectionObserver(function(entries){
+      pieVisible = entries[0].isIntersecting;
+      actualizar();
+    }, {threshold:0, rootMargin:'0px 0px -10% 0px'}).observe(pie);
+  }
+
+  // Aparición suave al hacer scroll, respetando prefers-reduced-motion.
+  // Por defecto (sin JS) todo el contenido ya es visible por CSS; acá solo
+  // se "arma" la animación cuando de verdad va a correr, para no arriesgar
+  // contenido invisible si el script falla o tarda en cargar.
+  var prefiereMenosMovimiento = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var elementos = document.querySelectorAll('.reveal');
+  if (!prefiereMenosMovimiento && 'IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          io.unobserve(entry.target);
+        }
+      });
+    }, {threshold:0.15, rootMargin:'0px 0px -30px 0px'});
+    elementos.forEach(function(el){
+      el.classList.add('armado');
+      io.observe(el);
+    });
+  }
+})();
+</script>
+
+</body>
+</html>
