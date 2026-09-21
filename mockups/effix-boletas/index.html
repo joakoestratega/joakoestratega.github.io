@@ -2985,94 +2985,97 @@
  } </style><link rel="dns-prefetch" href="https://player.vimeo.com/" data-set-by="Speed Optimizer by SiteGround"><link rel="dns-prefetch" href="https://i.vimeocdn.com/" data-set-by="Speed Optimizer by SiteGround"><link rel="dns-prefetch" href="https://www.google-analytics.com/" data-set-by="Speed Optimizer by SiteGround"><link rel="dns-prefetch" href="https://www.youtube-nocookie.com/" data-set-by="Speed Optimizer by SiteGround"><script src="chrome-extension://liecbddmkiiihnedobmlmillhodjkdmb/js/recordConsoleEvents.js"></script><script type="text/javascript" async="" src="prod/f.txt"></script>
 <style>
 /* ===== PIRAMIDE DE PONENTES EN EL HERO =====
-   Las figuras van juntas y grandes. Cada rotulo se apoya ENCIMA de su
-   propio ponente, a la altura de las piernas, no flotando abajo en el
-   negro: asi la pagina no queda con huecos y se sabe de quien es cada
-   nombre. Los rotulos viven en su capa, por encima de las figuras.      */
-.feria-lp .piramide-wrap{margin:18px 0 0}
-.feria-lp .piramide{position:relative;width:100%;height:clamp(240px,33vw,372px);margin:0 auto}
-.feria-lp .piso{position:absolute;left:50%;bottom:2%;transform:translateX(-50%);width:70%;height:26%;z-index:0;
-  background:radial-gradient(ellipse at center,rgba(235,235,245,.22),transparent 70%)}
-.feria-lp .spk{position:absolute;transform:translateX(-50%);margin:0;display:flex;justify-content:center}
-.feria-lp .spk img{width:auto;max-width:none;display:block}
-.feria-lp .spk-fondo{bottom:20%;z-index:1}
-.feria-lp .spk-medio{bottom:10%;z-index:2}
-.feria-lp .spk-frente{bottom:0;z-index:3}
-/* los del fondo con mas luz: antes casi no se reconocian */
-.feria-lp .spk-fondo img{height:clamp(162px,23.5vw,262px);filter:brightness(.9) contrast(1.02)}
-.feria-lp .spk-medio img{height:clamp(180px,27vw,300px);filter:brightness(.97)}
-.feria-lp .spk-frente img{height:clamp(200px,31vw,340px);filter:drop-shadow(0 18px 34px rgba(0,0,0,.85))}
+   Foto de grupo: seis bustos pegados, cortados a la altura del torso, que
+   se funden con el negro abajo. El nombre va sin cuadro, sobre el pecho de
+   cada uno. Detras, las caras de otros ponentes top, sin nombre.          */
+.feria-lp .piramide-wrap{margin:14px 0 0}
+.feria-lp .piramide{position:relative;width:100%;max-width:1140px;margin:0 auto;
+  height:clamp(262px,37vw,470px);overflow:hidden}
+.feria-lp .luz{position:absolute;left:50%;top:6%;transform:translateX(-50%);width:80%;height:80%;z-index:0;
+  background:radial-gradient(ellipse at center,rgba(150,148,181,.30),rgba(115,112,142,.10) 45%,transparent 70%)}
 
-/* capa de rotulos: apoyados sobre cada ponente y siempre encima */
-.feria-lp .rot{position:absolute;transform:translateX(-50%);z-index:20;
-  width:clamp(98px,12.4vw,150px);border-radius:11px;text-align:center;
-  padding:clamp(5px,.6vw,9px);font-family:var(--texto);font-style:normal;
-  background:rgba(12,12,18,.93);border:1px solid rgba(255,255,255,.22);
-  box-shadow:0 8px 22px rgba(0,0,0,.78)}
-.feria-lp .rot b{display:block;font-size:clamp(8px,.76vw,10.5px);font-weight:800;text-transform:uppercase;
-  letter-spacing:.3px;line-height:1.18;color:var(--blanco)}
-.feria-lp .rot span{display:block;font-size:clamp(6.8px,.64vw,9px);font-weight:500;line-height:1.3;
-  margin-top:3px;color:var(--marca-claro)}
-.feria-lp .rot-fondo{bottom:24%}
-.feria-lp .rot-medio{bottom:13%}
-.feria-lp .rot-frente{bottom:3%;background:rgba(255,255,255,.97);border-color:#fff}
-.feria-lp .rot-frente b{color:var(--negro)}
-.feria-lp .rot-frente span{color:#4A4862;font-weight:600}
+/* fila de atras: solo caras, mas chicas y en penumbra */
+.feria-lp .atr{position:absolute;transform:translateX(-50%);height:37%;width:auto;max-width:none;
+  bottom:49%;z-index:1;filter:brightness(.46) saturate(.85);
+  -webkit-mask-image:linear-gradient(to bottom,#000 55%,transparent 100%);
+  mask-image:linear-gradient(to bottom,#000 55%,transparent 100%)}
+.feria-lp .atr-1{left:4%}
+.feria-lp .atr-2{left:18%}
+.feria-lp .atr-3{left:34%}
+.feria-lp .atr-4{left:66%}
+.feria-lp .atr-5{left:82%}
+.feria-lp .atr-6{left:96%}
 
-/* el grupo va cerrado: las figuras se tocan y no queda hueco en el medio */
-.feria-lp .spk-goycochea,.feria-lp .rot-goycochea{left:13%}
-.feria-lp .spk-bayter,.feria-lp .rot-bayter{left:28%}
-.feria-lp .spk-vilma,.feria-lp .rot-vilma{left:42%}
-.feria-lp .spk-bilbao,.feria-lp .rot-bilbao{left:58%}
-.feria-lp .spk-regina,.feria-lp .rot-regina{left:72%}
-.feria-lp .spk-petersen,.feria-lp .rot-petersen{left:87%}
+/* fila del frente: bustos pegados */
+.feria-lp .spk{position:absolute;bottom:0;transform:translateX(-50%);margin:0}
+.feria-lp .spk img{display:block;width:auto;max-width:none;height:100%}
+.feria-lp .spk-lado{height:74%;z-index:2}
+.feria-lp .spk-medio{height:83%;z-index:3}
+.feria-lp .spk-frente{height:93%;z-index:4}
+.feria-lp .spk-lado img{filter:brightness(.92)}
+.feria-lp .spk-goycochea{left:10%}
+.feria-lp .spk-bayter{left:26%}
+.feria-lp .spk-vilma{left:42%}
+.feria-lp .spk-bilbao{left:58%}
+.feria-lp .spk-regina{left:74%}
+.feria-lp .spk-petersen{left:90%}
+
+/* abajo se funde con el fondo, como en el afiche */
+.feria-lp .fundido{position:absolute;left:0;right:0;bottom:0;height:34%;z-index:5;pointer-events:none;
+  background:linear-gradient(to top,#000 8%,rgba(0,0,0,.72) 45%,rgba(0,0,0,0))}
+
+/* nombres SIN cuadro, sobre el pecho de cada ponente */
+.feria-lp .rot{position:absolute;transform:translateX(-50%);z-index:6;width:clamp(96px,14vw,168px);
+  text-align:center;font-family:var(--texto);font-style:normal;
+  text-shadow:0 2px 6px rgba(0,0,0,.95),0 0 14px rgba(0,0,0,.85)}
+.feria-lp .rot b{display:block;font-size:clamp(9.5px,1.28vw,16px);font-weight:900;text-transform:uppercase;
+  letter-spacing:.4px;line-height:1.08;color:#fff}
+.feria-lp .rot span{display:block;font-size:clamp(7.4px,.84vw,11px);font-weight:600;line-height:1.25;
+  margin-top:3px;color:#E4E2EE;text-transform:uppercase;letter-spacing:.3px}
+.feria-lp .rot-frente{bottom:6%}
+.feria-lp .rot-medio{bottom:17%}
+.feria-lp .rot-lado{bottom:25%}
+.feria-lp .rot-goycochea{left:10%}
+.feria-lp .rot-bayter{left:26%}
+.feria-lp .rot-vilma{left:42%}
+.feria-lp .rot-bilbao{left:58%}
+.feria-lp .rot-regina{left:74%}
+.feria-lp .rot-petersen{left:90%}
 .feria-lp .piramide-hint{display:none}
 
-@media(max-width:1040px){
-  .feria-lp .rot{width:clamp(96px,13.6vw,132px);padding:6px 5px}
-  .feria-lp .rot b{font-size:9px}
-  .feria-lp .rot span{font-size:7.4px}
-}
-
 @media(max-width:700px){
-  .feria-lp .piramide{height:262px}
-  .feria-lp .spk-medio{bottom:17%}
-  .feria-lp .spk-fondo{bottom:35%}
-  .feria-lp .rot-medio{bottom:20%}
-  .feria-lp .rot-fondo{bottom:38%}
-  .feria-lp .rot-frente{bottom:2%}
-  .feria-lp .spk-fondo img{height:160px}
-  .feria-lp .spk-medio img{height:178px}
-  .feria-lp .spk-frente img{height:200px}
-  .feria-lp .rot{width:88px;padding:5px 4px}
-  .feria-lp .rot b{font-size:8.2px}
-  .feria-lp .rot span{font-size:6.8px}
-  .feria-lp .spk-goycochea,.feria-lp .rot-goycochea{left:12%}
-  .feria-lp .spk-bayter,.feria-lp .rot-bayter{left:29%}
-  .feria-lp .spk-vilma,.feria-lp .rot-vilma{left:42%}
-  .feria-lp .spk-bilbao,.feria-lp .rot-bilbao{left:58%}
-  .feria-lp .spk-regina,.feria-lp .rot-regina{left:71%}
-  .feria-lp .spk-petersen,.feria-lp .rot-petersen{left:88%}
-}
-
-/* Pantalla muy angosta: los dos del centro se abren lo minimo para que su
-   rotulo siga CENTRADO bajo cada uno, sin dejar hueco entre los cuerpos. */
-@media(max-width:620px){
+  /* en celular una sola fila: caras separadas lo justo para que ninguna
+     tape a otra, y los nombres en dos alturas alternadas */
+  .feria-lp .piramide{height:clamp(232px,64vw,280px)}
+  .feria-lp .atr-1,.feria-lp .atr-3,.feria-lp .atr-4,.feria-lp .atr-6{display:none}
+  .feria-lp .atr{height:30%;bottom:58%}
+  .feria-lp .atr-2{left:16%}
+  .feria-lp .atr-5{left:84%}
+  .feria-lp .spk-lado{height:64%}
+  .feria-lp .spk-medio{height:71%}
+  .feria-lp .spk-frente{height:79%}
+  .feria-lp .fundido{height:42%}
+  .feria-lp .spk-goycochea,.feria-lp .rot-goycochea{left:8%}
+  .feria-lp .spk-bayter,.feria-lp .rot-bayter{left:23%}
   .feria-lp .spk-vilma,.feria-lp .rot-vilma{left:39%}
-  .feria-lp .spk-bilbao,.feria-lp .rot-bilbao{left:61%}
-  .feria-lp .rot{width:84px}
-  .feria-lp .rot b{font-size:7.8px}
-  .feria-lp .rot span{font-size:6.5px}
+  .feria-lp .spk-bilbao,.feria-lp .rot-bilbao{left:59%}
+  .feria-lp .spk-regina,.feria-lp .rot-regina{left:77.5%}
+  .feria-lp .spk-petersen,.feria-lp .rot-petersen{left:92.5%}
+  .feria-lp .rot{width:72px}
+  .feria-lp .rot-frente{width:70px}
+  .feria-lp .rot b{font-size:8.4px;letter-spacing:.1px}
+  .feria-lp .rot span{font-size:6px;letter-spacing:0;margin-top:2px}
+  .feria-lp .rot-frente,.feria-lp .rot-lado{bottom:3%}
+  .feria-lp .rot-medio{bottom:23%}
+  /* los de las orillas: el nombre arranca en el borde, bajo su foto */
+  .feria-lp .rot-goycochea{left:1.5%;transform:none;text-align:left}
+  .feria-lp .rot-petersen{left:auto;right:1.5%;transform:none;text-align:right}
 }
-
-/* Celulares angostos: el cuadro se angosta y el par del centro se abre lo
-   justo para que cada nombre siga centrado bajo su propia foto. */
-@media(max-width:440px){
-  .feria-lp .spk-vilma,.feria-lp .rot-vilma{left:36%}
-  .feria-lp .spk-bilbao,.feria-lp .rot-bilbao{left:64%}
-  .feria-lp .rot{width:76px;padding:4px 3px}
-  .feria-lp .rot b{font-size:7.2px}
-  .feria-lp .rot span{font-size:6px;margin-top:2px}
+@media(max-width:380px){
+  .feria-lp .spk-vilma,.feria-lp .rot-vilma{left:38%}
+  .feria-lp .spk-bilbao,.feria-lp .rot-bilbao{left:60%}
+  .feria-lp .rot-frente{width:64px}
+  .feria-lp .rot b{font-size:8px}
 }
 
 /* ===== CONTEO REGRESIVO ===== */
@@ -3172,7 +3175,7 @@
 </style>
 </head><body class="wp-singular page-template page-template-entradas-v-uno page-template-entradas-v-uno-php page page-id-14736 wp-custom-logo wp-embed-responsive wp-theme-hello-elementor wp-child-theme-hello-elementor-child manage-default hello-elementor-default elementor-default elementor-kit-8 elementor-page elementor-page-14736 e--ua-blink e--ua-chrome e--ua-webkit" data-elementor-device-mode="desktop" cz-shortcut-listen="true"> <!-- ============ STICKY BAR (fija arriba siempre, móvil y escritorio) ============ --> <!-- Barra fija con logo y botón de compra. --><div class="urgencia-bar"> <img src="prod/img-logo-feria-effix-2026-2.webp" alt="Feria EFFIX 2026" class="logo-mini"><span class="bar-conteo">Faltan <b id="barra-dias">—</b> días</span> <a href="https://feriaeffix.com/quiero-mi-entrada/#precios" class="btn-bar">Comprar mi entrada</a></div> <!-- Wrapper propio: aísla el CSS de la página del menú y footer de Elementor --><div class="feria-lp"> <!-- ============ HERO RÉPLICA FIEL ============ -->
 <!-- ===== 01 HERO CON PIRAMIDE Y CONTEO ===== -->
-<section class="hero"><div class="container"> <!-- HEADLINE EN TEXTO (gancho primario) --><h1 class="hero-headline">El evento de ecommerce<br>más grande <span class="amarillo">del mundo</span></h1><p class="hero-sub">En 5 días encuentras todo lo que tu negocio necesita para <strong>vender más por internet</strong>. Los proveedores, los expertos y los aliados, juntos en un mismo lugar.</p><p class="hero-sub-mini" style="margin-top:18px;">15 al 19 de octubre · Plaza Mayor, Medellín · +200 ponentes · +350 empresas</p><div class="piramide-wrap"><div class="piramide"><div class="piso"></div><figure class="spk spk-goycochea spk-fondo"><img src="assets/spk-goycochea.webp" alt="Sergio Goycochea, ponente confirmado Feria EFFIX 2026"></figure><figure class="spk spk-bayter spk-medio"><img src="assets/spk-bayter.webp" alt="Doctor Bayter, ponente confirmado Feria EFFIX 2026"></figure><figure class="spk spk-vilma spk-frente"><img src="assets/spk-vilma.webp" alt="Vilma Núñez, ponente confirmado Feria EFFIX 2026"></figure><figure class="spk spk-bilbao spk-frente"><img src="assets/spk-bilbao.webp" alt="Andrés Bilbao, ponente confirmado Feria EFFIX 2026"></figure><figure class="spk spk-regina spk-medio"><img src="assets/spk-regina.webp" alt="Regina Carrot, ponente confirmado Feria EFFIX 2026"></figure><figure class="spk spk-petersen spk-fondo"><img src="assets/spk-petersen.webp" alt="Leandro Petersen, ponente confirmado Feria EFFIX 2026"></figure><div class="rot rot-goycochea rot-fondo"><b>Sergio Goycochea</b><span>Arquero histórico de la Selección Argentina</span></div><div class="rot rot-bayter rot-medio"><b>Doctor Bayter</b><span>Médico y creador del método DKP</span></div><div class="rot rot-vilma rot-frente"><b>Vilma Núñez</b><span>Fundadora y CEO de Grupo Convierte Más</span></div><div class="rot rot-bilbao rot-frente"><b>Andrés Bilbao</b><span>Cofundador de Rappi</span></div><div class="rot rot-regina rot-medio"><b>Regina Carrot</b><span>Conferencista y creadora de contenido</span></div><div class="rot rot-petersen rot-fondo"><b>Leandro Petersen</b><span>Ex director de marketing de la AFA</span></div></div></div><div class="conteo-wrap"><p class="conteo-lbl">Faltan</p><div class="conteo"><div class="caja"><b id="c-dias">—</b><i>días</i></div><div class="caja"><b id="c-horas">—</b><i>horas</i></div><div class="caja"><b id="c-min">—</b><i>min</i></div><div class="caja"><b id="c-seg">—</b><i>seg</i></div></div></div> <!-- 3 botones tickets GIGANTES (estilo pill original) --><div class="hero-tickets-row"> <a href="https://latiquetera.com/site/effix/events/view/feria-comercio-electronico-effix2026?sRef=meta" class="hero-ticket-pill" target="_blank" rel="noopener"> <img src="prod/img-boton-pasaporte-3-dias-feria-effix-2.webp" alt="Pasaporte 3 días"> </a> <a href="https://latiquetera.com/site/effix/events/view/feria-comercio-electronico-effix2026?sRef=meta" class="hero-ticket-pill" target="_blank" rel="noopener"> <img src="prod/img-boton-entrada-vip-2-feria-effix-dorado.webp" alt="Entrada VIP"> </a> <a href="https://latiquetera.com/site/effix/events/view/feria-comercio-electronico-effix2026?sRef=meta" class="hero-ticket-pill" target="_blank" rel="noopener"> <img src="prod/img-boton-pasaporte-black-feria-effix.webp" alt="Entrada Black"> </a></div></div></section>
+<section class="hero"><div class="container"> <!-- HEADLINE EN TEXTO (gancho primario) --><h1 class="hero-headline">El evento de ecommerce<br>más grande <span class="amarillo">del mundo</span></h1><p class="hero-sub">En 5 días encuentras todo lo que tu negocio necesita para <strong>vender más por internet</strong>. Los proveedores, los expertos y los aliados, juntos en un mismo lugar.</p><p class="hero-sub-mini" style="margin-top:18px;">15 al 19 de octubre · Plaza Mayor, Medellín · +200 ponentes · +350 empresas</p><div class="piramide-wrap"><div class="piramide"><div class="luz"></div><img class="atr atr-1" src="assets/busto/heras.webp" alt="Víctor Heras, ponente confirmado Feria EFFIX 2026"><img class="atr atr-2" src="assets/busto/rincon.webp" alt="Alejandra Rincón, ponente confirmado Feria EFFIX 2026"><img class="atr atr-3" src="assets/busto/juanads.webp" alt="Juan Ads, ponente confirmado Feria EFFIX 2026"><img class="atr atr-4" src="assets/busto/suarez.webp" alt="Carlos Suárez, ponente confirmado Feria EFFIX 2026"><img class="atr atr-5" src="assets/busto/rocha.webp" alt="Enrique Rocha, ponente confirmado Feria EFFIX 2026"><img class="atr atr-6" src="assets/busto/rodriguez.webp" alt="David Rodríguez, ponente confirmado Feria EFFIX 2026"><figure class="spk spk-goycochea spk-lado"><img src="assets/busto/goycochea.webp" alt="Sergio Goycochea, ponente confirmado Feria EFFIX 2026"></figure><figure class="spk spk-bayter spk-medio"><img src="assets/busto/bayter.webp" alt="Doctor Bayter, ponente confirmado Feria EFFIX 2026"></figure><figure class="spk spk-vilma spk-frente"><img src="assets/busto/vilma.webp" alt="Vilma Núñez, ponente confirmado Feria EFFIX 2026"></figure><figure class="spk spk-bilbao spk-frente"><img src="assets/busto/bilbao.webp" alt="Andrés Bilbao, ponente confirmado Feria EFFIX 2026"></figure><figure class="spk spk-regina spk-medio"><img src="assets/busto/regina.webp" alt="Regina Carrot, ponente confirmado Feria EFFIX 2026"></figure><figure class="spk spk-petersen spk-lado"><img src="assets/busto/petersen.webp" alt="Leandro Petersen, ponente confirmado Feria EFFIX 2026"></figure><div class="fundido"></div><div class="rot rot-goycochea rot-lado"><b>Sergio Goycochea</b><span>Arquero histórico de la Selección Argentina</span></div><div class="rot rot-bayter rot-medio"><b>Doctor Bayter</b><span>Médico y creador del método DKP</span></div><div class="rot rot-vilma rot-frente"><b>Vilma Núñez</b><span>Fundadora y CEO de Grupo Convierte Más</span></div><div class="rot rot-bilbao rot-frente"><b>Andrés Bilbao</b><span>Cofundador de Rappi</span></div><div class="rot rot-regina rot-medio"><b>Regina Carrot</b><span>Conferencista y creadora de contenido</span></div><div class="rot rot-petersen rot-lado"><b>Leandro Petersen</b><span>Ex director de marketing de la AFA</span></div></div></div><div class="conteo-wrap"><p class="conteo-lbl">Faltan</p><div class="conteo"><div class="caja"><b id="c-dias">—</b><i>días</i></div><div class="caja"><b id="c-horas">—</b><i>horas</i></div><div class="caja"><b id="c-min">—</b><i>min</i></div><div class="caja"><b id="c-seg">—</b><i>seg</i></div></div></div> <!-- 3 botones tickets GIGANTES (estilo pill original) --><div class="hero-tickets-row"> <a href="https://latiquetera.com/site/effix/events/view/feria-comercio-electronico-effix2026?sRef=meta" class="hero-ticket-pill" target="_blank" rel="noopener"> <img src="prod/img-boton-pasaporte-3-dias-feria-effix-2.webp" alt="Pasaporte 3 días"> </a> <a href="https://latiquetera.com/site/effix/events/view/feria-comercio-electronico-effix2026?sRef=meta" class="hero-ticket-pill" target="_blank" rel="noopener"> <img src="prod/img-boton-entrada-vip-2-feria-effix-dorado.webp" alt="Entrada VIP"> </a> <a href="https://latiquetera.com/site/effix/events/view/feria-comercio-electronico-effix2026?sRef=meta" class="hero-ticket-pill" target="_blank" rel="noopener"> <img src="prod/img-boton-pasaporte-black-feria-effix.webp" alt="Entrada Black"> </a></div></div></section>
 <!-- ===== 02 EMPRESAS Y MARCAS ===== -->
 <section class="marcas-lp"><div class="container"><div class="titulo-seccion"><h2 class="display">Algunas de las marcas confirmadas</h2><p>Más de 350 empresas de marcas, dropshipping, software, logística y agencias de inteligencia artificial, en un mismo recinto.</p></div><div class="marcas-caja"><img src="assets/logos-marcas.webp" alt="Marcas participantes de Feria EFFIX" loading="lazy"></div></div></section>
 <!-- ===== 03 MAS PONENTES ===== -->
