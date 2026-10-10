@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<meta name="referrer" content="no-referrer">
+<title>Consulta tu pasaporte · Feria EFFIX 2026</title>
+<meta name="description" content="Escribe tu documento o tu correo y mira cuántas entradas tienes para la Feria EFFIX 2026.">
+<link rel="preload" href="montserrat.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+<header class="hero">
+  <div class="hero-fondo" aria-hidden="true"></div>
+  <div class="hero-contenido">
+    <img class="logo" src="logo.png" alt="Feria EFFIX 2026" width="360" height="263">
+    <span class="pildora pildora-blanca">Consulta tu entrada</span>
+    <h1>¿Qué pasaporte<br>tienes?</h1>
+    <p class="bajada">Escribe tu número de documento o tu correo. Te mostramos cuántas entradas tienes y de qué tipo.</p>
+  </div>
+</header>
+
+<main>
+  <section class="tarjeta formulario">
+    <form id="form" novalidate autocomplete="off">
+      <label for="doc">Documento o correo</label>
+      <input id="doc" name="doc" type="text" inputmode="text" maxlength="120" placeholder="Ejemplo: 1020304050" autocapitalize="off" spellcheck="false" required>
+      <button id="btn" type="submit">Consultar</button>
+      <p class="nota">¿Otra persona compró tu entrada? Escribe el documento o el correo de quien hizo la compra.</p>
+    </form>
+  </section>
+
+  <section id="resultado" class="tarjeta resultado" hidden aria-live="polite"></section>
+
+  <section class="aviso">
+    <span class="pildora pildora-negra">Importante</span>
+    <h2>¿Tus entradas están bien y no te llegó el correo?</h2>
+    <p class="aviso-grande">No te preocupes. Reclama tus pasaportes en la taquilla de La Tiquetera desde el <strong>miércoles 14 de octubre</strong>.</p>
+    <p class="aviso-chico">Lleva tu documento de identidad.</p>
+  </section>
+
+  <section class="bienvenida">
+    <p class="bienvenida-titulo"><span>Bienvenido a la</span>Feria EFFIX</p>
+    <p class="fecha">Del 15 al 19 de octubre · Plaza Mayor, Medellín</p>
+  </section>
+</main>
+
+<footer>
+  <p>@FERIAEFFIX · WWW.FERIAEFFIX.COM</p>
+  <p class="muestra">Muestra para aprobación, con datos de prueba. Prueba con 1111111111, 2222222222, 3333333333 o laura@ejemplo.com</p>
+</footer>
+<script src="app.js" defer></script>
+</body>
+</html>
