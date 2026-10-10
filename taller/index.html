@@ -12,6 +12,20 @@ label{display:block;margin:12px 0 4px;font-weight:700}
 input[type=text],input[type=tel],input[type=email]{width:100%;box-sizing:border-box;padding:12px;border-radius:10px;border:1px solid #333;background:#0b0b0f;color:#fff;font-size:1rem}
 .chk{display:flex;gap:10px;align-items:flex-start;font-weight:500;font-size:.88rem;opacity:.9}
 .oculto{position:absolute;left:-9999px} button{margin-top:16px;width:100%;border:0;cursor:pointer;font-size:1.05rem}
+
+.topbar{position:sticky;top:0;z-index:20;display:flex;justify-content:space-between;align-items:center;gap:10px;padding:10px 16px;background:#0F0F14;border-bottom:1px solid #2a2a35}
+.topbar b{color:#F8B400;font-weight:900}.topbar .redes{display:flex;gap:8px}
+.topbar a.r{display:inline-flex;align-items:center;gap:6px;text-decoration:none;font-weight:800;font-size:.85rem;padding:8px 14px;border-radius:30px}
+.topbar a.wa{background:#25D366;color:#0F0F14}.topbar a.ig{background:#fff;color:#0F0F14}
+.wa-flota{position:fixed;right:16px;bottom:16px;z-index:30;background:#25D366;color:#0F0F14;font-weight:900;text-decoration:none;padding:14px 20px;border-radius:40px;box-shadow:0 6px 24px rgba(0,0,0,.45)}
+.pie-serv{margin-top:50px;padding:30px 0 70px;border-top:1px solid #2a2a35;opacity:.92}
+.pie-serv h3{color:#F8B400;margin:0 0 12px}.serv{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px}
+.serv div{background:#1c1c24;border-radius:12px;padding:14px 16px;font-size:.92rem}.serv b{display:block;margin-bottom:4px}
+.pie-serv .quien{margin-top:18px;font-size:.88rem;opacity:.75}
+@media(max-width:560px){.wa-flota{padding:10px 14px;font-size:.82rem;bottom:12px;right:12px}.topbar b{font-size:.85rem}.topbar a.r{padding:7px 10px;font-size:.78rem}}
+
+#lb{position:fixed;inset:0;background:rgba(0,0,0,.9);display:none;align-items:center;justify-content:center;z-index:50;cursor:zoom-out}#lb.on{display:flex}#lb img,#lb video{max-width:94vw;max-height:92vh;border-radius:10px}
+img.zoom{cursor:zoom-in}
 #error{color:#ff6b6b;min-height:1.3em} .lista a{display:block;background:#1c1c24;border-radius:12px;padding:16px 18px;margin:10px 0;text-decoration:none;color:#fff}
 .lista b{color:#F8B400}
 .intro{font-size:1.1rem;opacity:.9}
@@ -42,23 +56,38 @@ input[type=text],input[type=tel],input[type=email]{width:100%;box-sizing:border-
 <p class="intro">Empieza por el paso a paso: ahí están <b>los prompts exactos</b> para que la IA busque, descargue y analice todo por ti.</p>
 <div class="tarjetas">
 <a class="t grande" href="guia.html"><img src="img/2667-04-ficha-estrellas.jpg" alt=""><div><span>EMPIEZA AQUÍ</span><b>El paso a paso con todos los prompts</b><p>Cópialos y pégalos en Claude Code. Desde la web también.</p></div></a>
-<a class="t" href="informe.html"><img src="img/top10.png" alt=""><div><span>INVESTIGACIÓN</span><b>El informe</b><p>468 anuncios de 153 marcas en 4 países.</p></div></a>
+<a class="t" href="informe.html"><img src="img/top10.jpg" alt=""><div><span>INVESTIGACIÓN</span><b>El informe</b><p>468 anuncios de 153 marcas en 4 países.</p></div></a>
 <a class="t" href="top-10.html"><img src="anuncios/4167054630177709.jpg" alt=""><div><span>LO QUE VENDE</span><b>Top 10 en video e imagen</b><p>Los que más tiempo llevan prendidos y por qué.</p></div></a>
 <a class="t" href="politicas.html"><img src="img/2667-06-antes-despues-ropa.jpg" alt=""><div><span>ANTES DE PAUTAR</span><b>¿Meta lo aprueba?</b><p>Las 3 reglas que más tumban anuncios de fajas.</p></div></a>
 <a class="t" href="comentarios-de-clientas.csv"><img src="img/2667-05-con-ropa-ni-se-nota.jpg" alt=""><div><span>VOZ DE LA CLIENTA</span><b>3.715 comentarios</b><p>Sin nombres, listos para tu análisis.</p></div></a>
-<a class="t" href="https://joakoestratega.com/editor/" target="_blank" rel="noopener"><img src="img/2667-08-frase-grande.jpg" alt=""><div><span>HERRAMIENTA GRATIS</span><b>Joako Editor</b><p>Edita tus videos sin pagar.</p></div></a>
+<a class="t" href="https://joakoestratega.com/editor/" target="_blank" rel="noopener"><img src="img/joako-editor.jpg" alt="Joako Editor" style="object-position:left center"><div><span>HERRAMIENTA GRATIS</span><b>Joako Editor</b><p>Edita tus videos gratis y rápido: subtítulos automáticos y corte de silencios.</p></div></a>
 </div>
-<h2>Las 10 imágenes que hicimos con base</h2><div class="g"><img src="img/2667-00-otras-vs-nosotros.jpg"><img src="img/2667-01-ficha-flechas.jpg"><img src="img/2667-02-resultado-inmediato.jpg"><img src="img/2667-03-producto-solo.jpg"><img src="img/2667-04-ficha-estrellas.jpg"><img src="img/2667-05-con-ropa-ni-se-nota.jpg"><img src="img/2667-06-antes-despues-ropa.jpg"><img src="img/2667-07-tu-mejor-version.jpg"><img src="img/2667-08-frase-grande.jpg"><img src="img/2667-09-sin-y-con.jpg"></div>
-<h2>Sin base vs. con base</h2><img src="img/sin-base-vs-10.jpg" style="width:100%;border-radius:12px">
+<h2>Las 10 imágenes que hicimos con base</h2><div class="g"><img class="zoom" loading="lazy" src="img/2667-00-otras-vs-nosotros.jpg"><img class="zoom" loading="lazy" src="img/2667-01-ficha-flechas.jpg"><img class="zoom" loading="lazy" src="img/2667-02-resultado-inmediato.jpg"><img class="zoom" loading="lazy" src="img/2667-03-producto-solo.jpg"><img class="zoom" loading="lazy" src="img/2667-04-ficha-estrellas.jpg"><img class="zoom" loading="lazy" src="img/2667-05-con-ropa-ni-se-nota.jpg"><img class="zoom" loading="lazy" src="img/2667-06-antes-despues-ropa.jpg"><img class="zoom" loading="lazy" src="img/2667-07-tu-mejor-version.jpg"><img class="zoom" loading="lazy" src="img/2667-08-frase-grande.jpg"><img class="zoom" loading="lazy" src="img/2667-09-sin-y-con.jpg"></div>
+<h2>Sin base vs. con base</h2><img class="zoom" loading="lazy" src="img/sin-base-vs-10.jpg" style="width:100%;border-radius:12px">
 </div>
-<div class="pie"><b class="y">Joako Estratega</b> · CEO de Joako Estratega (agencia) · CEO de PatoEditor · Director de la estrategia de marketing de Feria Effix<br>
-¿Quieres que te ayude con tu negocio? <a href="https://wa.me/573028662556?text=Hola%20Joako%2C%20estuve%20en%20el%20taller%20Marketing%20con%20estrategia">Escríbeme por WhatsApp: +57 302 866 2556</a> · <a href="https://instagram.com/joakoestratega">@joakoestratega</a> · <a href="https://joakoestratega.com">joakoestratega.com</a></div>
+<div class="pie-serv"><h3>Lo que hacemos en Joako Estratega</h3><div class="serv">
+<div><b>Te muestro dónde se te caen los clientes</b>Revisamos tu cadena de venta, de que te vean a que te contraten. <a href="https://wa.me/573028662556?text=Hola%20Joako%2C%20estuve%20en%20el%20taller%20Marketing%20con%20estrategia">Escríbeme</a></div>
+<div><b>Agencia: estrategia, mensaje y pauta</b>Investigación, creativos y campañas en Meta, como lo viste en el taller.</div>
+<div><b>Implementación a la medida</b>Herramientas con IA hechas para tu negocio.</div>
+<div><b>Tablero de Fugas</b>La app que te dice en qué paso pierdes clientes. <a href="https://joakoestratega.com/tablero-de-fugas/">Ver</a></div>
+<div><b>Gratis</b><a href="https://joakoestratega.com/editor/">Joako Editor</a> · <a href="https://joakoestratega.com/recursos/">Herramientas para tu mensaje y tus anuncios</a></div>
+</div><p class="quien">Joaquín Rojas Peña · CEO de Joako Estratega (agencia) · CEO de PatoEditor · Director de la estrategia de marketing de Feria Effix · <a href="https://wa.me/573028662556?text=Hola%20Joako%2C%20estuve%20en%20el%20taller%20Marketing%20con%20estrategia">+57 302 866 2556</a> · <a href="https://instagram.com/joakoestratega">@joakoestratega</a> · <a href="https://joakoestratega.com">joakoestratega.com</a> · <a href="https://joakoestratega.com/politica-taller/">Política de datos</a></p></div>
 </div>
+<a class="wa-flota" href="https://wa.me/573028662556?text=Hola%20Joako%2C%20estuve%20en%20el%20taller%20Marketing%20con%20estrategia" target="_blank" rel="noopener">💬 Escríbeme</a>
+<div id="lb"></div>
 <script>
 // Mismo registro que Joako Editor: solo escribe, nunca devuelve datos ([SEG] 2026-09-17).
 const API = 'https://editor-9qb.pages.dev/api/registro';
 const AVISO = 'taller-2026-10-v1', VERSION = 'taller-mkt-2026-10-16', LLAVE = 'taller-mkt-2026';
 const $ = (id) => document.getElementById(id);
+// imágenes y videos que se agrandan al tocarlos
+document.addEventListener('click', (e) => {
+  const z = e.target.closest('.zoom'); const lb = $('lb');
+  if (z) { lb.innerHTML = ''; const el = document.createElement(z.tagName === 'VIDEO' ? 'video' : 'img'); el.src = z.currentSrc || z.src;
+    if (el.tagName === 'VIDEO') { el.controls = true; el.autoplay = true; } lb.appendChild(el); lb.classList.add('on'); return; }
+  if (e.target === lb) { lb.classList.remove('on'); lb.innerHTML = ''; }
+});
+document.addEventListener('keydown', (e) => { if (e.key === 'Escape') { $('lb').classList.remove('on'); $('lb').innerHTML = ''; } });
 function abrir() { $('puerta').hidden = true; $('material').hidden = false; window.scrollTo(0, 0); }
 try { if (localStorage.getItem(LLAVE)) abrir(); } catch (e) {}
 $('f').addEventListener('submit', (ev) => {
