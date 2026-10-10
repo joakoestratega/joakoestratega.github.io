@@ -1,4 +1,5 @@
 User-agent: *
 Allow: /
+Disallow: /taller/comentarios-de-clientas.csv
 
 Sitemap: https://joakoestratega.com/sitemap.xml

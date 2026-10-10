@@ -1,0 +1,138 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex"><title>Paso a paso · Joako Estratega</title><link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700;800&display=swap" rel="stylesheet"><style>body{margin:0;background:#0F0F14;color:#fff;font-family:Montserrat,Segoe UI,Arial,sans-serif;line-height:1.55}
+.w{max-width:1100px;margin:auto;padding:28px 18px 70px}a{color:#F8B400}h1{color:#F8B400;font-size:2.1rem;line-height:1.15}
+h2{color:#F8B400;margin-top:42px}.caja{background:#1c1c24;border-radius:14px;padding:18px 20px;margin:14px 0}
+.g{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px}.g img{width:100%;border-radius:10px;display:block;background:#fff}
+pre{white-space:pre-wrap;background:#0b0b0f;border:1px solid #2a2a33;border-radius:10px;padding:14px;font-size:.92rem}
+.btn{display:inline-block;background:#F8B400;color:#0F0F14;font-weight:800;padding:12px 22px;border-radius:30px;text-decoration:none}
+.pie{margin-top:60px;padding-top:20px;border-top:1px solid #2a2a33;opacity:.85}</style></head>
+<body><div class="w"><p><a href="./">← Volver a todo el material</a></p><h1>Paso a paso: cómo hacerlo tú</h1>
+<p>Lo mismo que viste en el taller, para que lo hagas con tu producto. Cada paso trae <b>cómo se hace desde la web</b> y <b>cómo lo hago yo</b> con Claude Code.</p>
+
+<h2>Paso 1 · Mira lo que ya vende</h2>
+<div class="caja"><b>Desde la web, a mano (gratis):</b> entra a <a href="https://www.facebook.com/ads/library/">la Biblioteca de anuncios de Meta</a> → país → "Todos los anuncios" → escribe tu producto. Abre los que llevan más tiempo activos (dice "En circulación desde…") y toma pantallazos de 20 o 30.</div>
+<div class="caja"><b>Desde la web, con volumen:</b> <a href="https://apify.com">Apify</a> es de pago: el plan inicial trae 5 dólares de uso al mes y para más volumen se paga. Busca "Facebook Ads Library Scraper", pega el enlace de tu búsqueda y descarga el Excel. Con esos 5 dólares salen unos 800 anuncios (precio consultado el 9 de octubre de 2026).</div>
+<div class="caja"><b>Analízalos:</b> sube los pantallazos o el Excel a Claude o Gemini con este prompt:
+<pre>Estos son anuncios activos de mi competencia. Los que llevan más días activos son los que más venden.
+Sácame:
+1. Los ganchos que más se repiten (la primera frase o imagen).
+2. Qué dolor o deseo de la clienta toca cada uno.
+3. Qué ofrecen (precio, envío, garantía, pago al recibir) y qué botón usan.
+4. Qué NO está diciendo nadie y yo podría decir.
+Ordénalo de lo que más se repite a lo que menos.</pre></div>
+<div class="caja"><b>Así lo hago yo:</b> le pido a Claude Code: <i>"Busca en la Biblioteca de anuncios de Meta los anuncios activos de [producto] en [países]. Descarga las imágenes y los videos de los que llevan más días activos y hazme un informe con lo que funciona."</i></div>
+
+<h2>Paso 2 · Escucha lo que duele</h2>
+<div class="caja"><b>Desde la web:</b> copia comentarios de videos de YouTube sobre tu producto, de grupos de Facebook y, mejor todavía, de tus propios anuncios. Quítales los nombres. Pégalos en Claude o Gemini:
+<pre>Estos son comentarios reales de clientas. Sácame lo que les duele, lo que desean y lo que les frena la compra, con sus palabras exactas y cuántas veces se repite cada uno. Después dime qué de esto no está diciendo ningún anuncio de la competencia.</pre>
+Aquí tienes <a href="comentarios-de-clientas.csv">los 3.715 comentarios de fajas</a> que usamos, sin nombres.</div>
+<div class="caja"><b>Así lo hago yo:</b> Claude Code baja miles de comentarios de YouTube en minutos, los limpia (en fajas salieron 385 de cinta para amarrar carga) y les quita los nombres.</div>
+
+<h2>Paso 3 · Crea con base (imagen)</h2>
+<div class="caja"><b>El error:</b> pedirle a la IA "hazme una imagen para vender…" sin darle nada. Sale lo mismo que a todos.
+<div class="g" style="margin-top:12px"><img src="img/generica-1.jpg"><img src="img/generica-2.jpg"><img src="img/generica-3.jpg"></div></div>
+<div class="caja"><b>Lo que funciona:</b> en Gemini adjunta <b>(1)</b> un anuncio de tu competencia que lleve meses activo y <b>(2)</b> la foto real de tu producto. Después pega un prompt como este:
+<pre>Te adjunto dos imágenes:
+1. Un anuncio de fajas que lleva más de 200 días activo en Facebook. Úsalo SOLO como referencia de estructura: comparación en dos columnas, &quot;otras fajas&quot; a la izquierda con X rojas, y &quot;nuestra faja&quot; a la derecha con chulos verdes, producto grande en cada columna.
+2. La foto real de mi producto: faja body negra de tiro alto y alta compresión, referencia 2667.
+
+Crea un anuncio nuevo con esa misma estructura para mi producto:
+- Formato vertical 4:5 para Instagram y Facebook.
+- Colores: negro, beige y blanco. NO uses el rosado ni el logo de la referencia. No pongas ninguna marca.
+- Columna izquierda, título &quot;OTRAS FAJAS&quot;, con una faja genérica tipo cinturilla y estas 4 X:
+  · Se te sale el gordito de arriba
+  · Solo cubren la cintura
+  · Se enrollan en la espalda
+  · Se marcan con la ropa
+- Columna derecha, título &quot;FAJA 2667&quot;, con mi producto tal cual se ve en la foto (mismo diseño, mismos broches, mismos tirantes) y estos 4 chulos:
+  · Tiro alto: tapa el gordito debajo del brasier
+  · Abdomen completo con cinturilla
+  · Broches al frente
+  · Alta compresión
+- Abajo, una franja con el texto: &quot;Escríbenos por WhatsApp&quot;
+- Ortografía en español perfecta. Letra grande, que se lea en el celular.
+</pre>
+Si algo sale mal, se corrige en la misma conversación:
+<pre>Me gusta. Deja todo igual, solo corrige dos cosas:
+1. El texto de la columna derecha se sale del borde. Déjale margen a los lados.
+2. En la columna derecha, muestra la faja 2667 PUESTA en una mujer de cuerpo real, talla grande, con algo de abdomen, no operada. Encuadre desde el cuello hasta las rodillas, sin mostrar la cara. La faja debe verse igual a la de mi foto.
+</pre>
+<pre>Casi. Todavía hay dos errores:
+1. Las frases de la columna derecha siguen tocando el borde derecho de la imagen (&quot;gordito&quot; queda cortado). Haz la letra de esa columna un poco más pequeña y deja el mismo margen que tiene la columna izquierda.
+2. La mujer no es talla grande. Quiero un cuerpo talla XL, con abdomen y caderas anchas, como una mamá real de 40 años. El encuadre debe empezar en los hombros: que NO se vea la boca ni la barbilla.
+No cambies nada más.
+</pre>
+<b>Si después de 2 o 3 intentos no hace caso, cambia de herramienta.</b></div>
+<div class="g"><img src="img/pantallazo-sin-base.png"><img src="img/pantallazo-con-base.png"><img src="img/pantallazo-correcciones.png"></div>
+<div class="caja"><b>Así lo hago yo:</b> con Claude Code pongo la foto real del producto sobre la plantilla que hizo Gemini y escribo el texto con código, así queda perfecto.</div>
+<h3>Los 10 prompts que usamos</h3>
+<div class="caja"><b>01-ficha-flechas</b><pre>La primera imagen es un anuncio que lleva 250 días activo. Copia su estructura: título grande arriba, el producto en el centro y flechas que señalan cada parte con su beneficio.
+La segunda imagen es mi producto, la faja body 2667.
+Título: &quot;FAJA BODY 2667&quot;. Flechas con estos textos:
+· Tiro alto: tapa el gordito debajo del brasier
+· Broches al frente
+· Abdomen completo con cinturilla
+· Tirantes anchos
+· Alta compresión
+Abajo: &quot;Escríbenos por WhatsApp&quot;.
+
+Reglas: formato vertical 4:5 para Instagram y Facebook. Colores: negro, beige y blanco. NO copies el logo, la marca, los colores ni las personas de la referencia: solo la estructura. No pongas ninguna marca. La faja debe verse IGUAL a la de mi foto (body negro, tirantes anchos, busto abierto, broches al frente, hasta medio muslo). Ortografía en español perfecta, letra grande que se lea en el celular. No escribas precios ni descuentos.</pre></div><div class="caja"><b>02-resultado-inmediato</b><pre>La primera imagen es un anuncio que lleva 241 días activo. Copia su estructura: frase grande a un lado, mujer de cuerpo completo al otro lado y un recuadro pequeño con el producto.
+La segunda imagen es mi producto.
+Frase: &quot;Moldea tu figura desde que te la pones&quot;. Debajo, más pequeño: &quot;Faja body 2667 · tiro alto · alta compresión&quot;. La mujer es de cuerpo real, talla L, latina, con la faja puesta. Abajo: &quot;Escríbenos por WhatsApp&quot;.
+
+Reglas: formato vertical 4:5 para Instagram y Facebook. Colores: negro, beige y blanco. NO copies el logo, la marca, los colores ni las personas de la referencia: solo la estructura. No pongas ninguna marca. La faja debe verse IGUAL a la de mi foto (body negro, tirantes anchos, busto abierto, broches al frente, hasta medio muslo). Ortografía en español perfecta, letra grande que se lea en el celular. No escribas precios ni descuentos.</pre></div><div class="caja"><b>03-producto-solo</b><pre>La primera imagen es un anuncio de producto sobre fondo limpio. Copia ese estilo: el producto solo, grande, bien iluminado, sin persona, fondo beige claro liso.
+Las otras imágenes son mi producto, la faja body 2667. Muéstrala sola, como foto de catálogo, de frente, sin cuerpo. Un detalle redondo pequeño con los broches de cerca. Texto pequeño abajo: &quot;Faja body 2667 · tiro alto&quot;.
+
+Reglas: formato vertical 4:5 para Instagram y Facebook. Colores: negro, beige y blanco. NO copies el logo, la marca, los colores ni las personas de la referencia: solo la estructura. No pongas ninguna marca. La faja debe verse IGUAL a la de mi foto (body negro, tirantes anchos, busto abierto, broches al frente, hasta medio muslo). Ortografía en español perfecta, letra grande que se lea en el celular. No escribas precios ni descuentos.</pre></div><div class="caja"><b>04-ficha-estrellas</b><pre>La primera imagen es un anuncio que lleva 161 días activo. Copia su estructura: título grande arriba, producto a la izquierda y a la derecha una lista de beneficios en franjas con estrella.
+La segunda imagen es mi producto. Título: &quot;FAJA BODY 2667&quot;. Lista:
+★ Tapa el gordito debajo del brasier
+★ Abdomen completo
+★ Broches al frente
+★ Tirantes anchos
+★ Alta compresión
+IMPORTANTE: no escribas &quot;reduce medidas&quot; ni &quot;quema grasa&quot;.
+
+Reglas: formato vertical 4:5 para Instagram y Facebook. Colores: negro, beige y blanco. NO copies el logo, la marca, los colores ni las personas de la referencia: solo la estructura. No pongas ninguna marca. La faja debe verse IGUAL a la de mi foto (body negro, tirantes anchos, busto abierto, broches al frente, hasta medio muslo). Ortografía en español perfecta, letra grande que se lea en el celular. No escribas precios ni descuentos.</pre></div><div class="caja"><b>05-con-ropa-ni-se-nota</b><pre>La primera imagen es un anuncio que lleva 106 días activo: dos fotos tipo selfie en el espejo, una con ropa y otra mostrando la faja, con etiquetas rosadas pequeñas.
+Copia esa estructura con mi producto (segunda imagen). Una mujer latina de cuerpo real, talla L, se toma selfie con el celular frente al espejo en su cuarto. Foto de arriba: con una camiseta ajustada, etiqueta &quot;Con ropa, ni se nota&quot;. Foto de abajo: levanta la camiseta y se ve la faja 2667 puesta, etiqueta &quot;Debajo: la 2667&quot;. Que se vea casero, de celular, no de estudio. La cara tapada por el celular.
+
+Reglas: formato vertical 4:5 para Instagram y Facebook. Colores: negro, beige y blanco. NO copies el logo, la marca, los colores ni las personas de la referencia: solo la estructura. No pongas ninguna marca. La faja debe verse IGUAL a la de mi foto (body negro, tirantes anchos, busto abierto, broches al frente, hasta medio muslo). Ortografía en español perfecta, letra grande que se lea en el celular. No escribas precios ni descuentos.</pre></div><div class="caja"><b>06-antes-despues-ropa</b><pre>La primera imagen es un anuncio que lleva 94 días activo: la misma mujer con la misma ropa, una foto sin faja y otra con faja.
+Copia esa estructura con mi producto (segunda imagen). Mujer latina de cuerpo real, talla L, con un vestido negro ajustado, en su casa, foto de celular. Izquierda, etiqueta &quot;Sin faja&quot;: el vestido marca el gordito debajo del brasier. Derecha, etiqueta &quot;Con la 2667&quot;: misma mujer, mismo vestido, la línea se ve lisa. La cara tapada por el celular.
+
+Reglas: formato vertical 4:5 para Instagram y Facebook. Colores: negro, beige y blanco. NO copies el logo, la marca, los colores ni las personas de la referencia: solo la estructura. No pongas ninguna marca. La faja debe verse IGUAL a la de mi foto (body negro, tirantes anchos, busto abierto, broches al frente, hasta medio muslo). Ortografía en español perfecta, letra grande que se lea en el celular. No escribas precios ni descuentos.</pre></div><div class="caja"><b>07-tu-mejor-version</b><pre>La primera imagen es un anuncio que lleva 69 días activo: título elegante arriba, dos fotos de la mujer (de frente y de espalda) e íconos con beneficios a los lados.
+Copia esa estructura con mi producto (las otras imágenes): mujer latina de cuerpo real con la faja 2667 puesta, una foto de frente y otra de espalda.
+Título: &quot;Así se ve la 2667&quot;. Íconos: Tiro alto · Broches al frente · Abdomen completo · Tirantes anchos. Abajo: &quot;Escríbenos por WhatsApp&quot;.
+
+Reglas: formato vertical 4:5 para Instagram y Facebook. Colores: negro, beige y blanco. NO copies el logo, la marca, los colores ni las personas de la referencia: solo la estructura. No pongas ninguna marca. La faja debe verse IGUAL a la de mi foto (body negro, tirantes anchos, busto abierto, broches al frente, hasta medio muslo). Ortografía en español perfecta, letra grande que se lea en el celular. No escribas precios ni descuentos.</pre></div><div class="caja"><b>08-frase-grande</b><pre>La primera imagen es un anuncio de una marca de fajas: fondo oscuro, mujer con la faja en un lado y una frase grande en letra elegante al otro.
+Copia esa estructura con mi producto (segunda imagen). Mujer latina de cuerpo real, talla L, con la faja 2667 puesta, fondo gris oscuro de estudio.
+Frase grande: &quot;Se acabó el gordito de arriba&quot;. Debajo, pequeño: &quot;Faja body 2667 · tiro alto&quot;.
+
+Reglas: formato vertical 4:5 para Instagram y Facebook. Colores: negro, beige y blanco. NO copies el logo, la marca, los colores ni las personas de la referencia: solo la estructura. No pongas ninguna marca. La faja debe verse IGUAL a la de mi foto (body negro, tirantes anchos, busto abierto, broches al frente, hasta medio muslo). Ortografía en español perfecta, letra grande que se lea en el celular. No escribas precios ni descuentos.</pre></div><div class="caja"><b>09-sin-y-con</b><pre>La primera imagen es un anuncio con tres paneles: la mujer con un vestido sin faja, la misma mujer con el vestido usando la faja, y la faja sola. Título arriba en letra grande.
+Copia esa estructura con mi producto (segunda imagen). Mujer latina de cuerpo real, talla L, con vestido azul ajustado.
+Título: &quot;VESTIDO AJUSTADO, CERO GORDITOS&quot;. Etiquetas: &quot;Sin faja&quot;, &quot;Con la 2667&quot;, &quot;Faja body 2667&quot;.
+
+Reglas: formato vertical 4:5 para Instagram y Facebook. Colores: negro, beige y blanco. NO copies el logo, la marca, los colores ni las personas de la referencia: solo la estructura. No pongas ninguna marca. La faja debe verse IGUAL a la de mi foto (body negro, tirantes anchos, busto abierto, broches al frente, hasta medio muslo). Ortografía en español perfecta, letra grande que se lea en el celular. No escribas precios ni descuentos.</pre></div>
+
+<h2>Paso 3 · Crea con base (video)</h2>
+<div class="caja"><b>Herramientas</b> (precios de las páginas oficiales, 9 de octubre de 2026):<br>
+Google Flow: AI Pro $79.000 COP (1.000 créditos al mes), AI Ultra 5x $449.000 COP (10.000), AI Ultra 20x $790.000 COP (25.000).<br>
+Higgsfield: Starter USD 15 (sin Seedance 2.5), Plus USD 49 (~67 videos con Seedance 2.5), Ultra USD 129 (~200).<br>
+Revisa los precios antes de pagar: cambian.</div>
+<div class="caja"><b>Cómo se hace:</b> mira un video de tu competencia que lleve meses activo, copia <b>su estructura</b> (cómo arranca, qué muestra, qué dice) y escríbele a Flow una toma de 8 segundos a la vez. Sube la foto real de tu producto como referencia. <b>La persona hecha con IA presenta el producto, nunca dice que es clienta.</b></div>
+
+<h2>Paso 4 · ¿Meta lo aprueba?</h2>
+<div class="caja">Antes de pautar, revisa tu anuncio con este prompt (las reglas completas están en <a href="politicas.html">la revisión de políticas</a>):
+<pre>Adjunto mi anuncio. Revísalo contra las políticas de publicidad de Meta para productos de salud y apariencia (Health and Wellness). Dime en un semáforo (verde, amarillo, rojo):
+1. ¿Promete resultados solo por usar la prenda? (reduce medidas, quema grasa, bajas tallas)
+2. ¿Muestra un acercamiento pellizcando grasa?
+3. ¿Hace sentir inferior a alguien por su cuerpo?
+4. ¿Tiene un antes y después que se pueda leer como bajar de peso?
+Para cada punto en amarillo o rojo, dame la frase o la imagen exacta que lo causa y cómo cambiarla sin perder la fuerza del anuncio.</pre></div>
+
+<h2>Paso 5 · Deja que Meta escoja</h2>
+<div class="caja"><b>A:</b> 1 campaña → 1 conjunto → 3 creativos. Si pones más, muchos se quedan sin presupuesto y ese trabajo se pierde.<br>
+<b>B:</b> 1 campaña con contenido dinámico de 10 imágenes o 10 videos: Meta decide a quién le muestra cuál.<br>
+<b>Lo que decide todo es el creativo.</b></div>
+
+<h2>Las dos aplicaciones</h2>
+<div class="caja"><b>Claude Code</b>: la IA que hace el trabajo. <b>Recortes</b>: ¿error? ¿no entiendes algo? Recorte y a la IA.</div><div class="pie"><b class="y">Joako Estratega</b> · CEO de Joako Estratega (agencia) · CEO de PatoEditor · Director de la estrategia de marketing de Feria Effix<br>
+¿Quieres que te ayude con tu negocio? <a href="https://wa.me/573028662556?text=Hola%20Joako%2C%20estuve%20en%20el%20taller%20Marketing%20con%20estrategia">Escríbeme por WhatsApp: +57 302 866 2556</a> · <a href="https://instagram.com/joakoestratega">@joakoestratega</a> · <a href="https://joakoestratega.com">joakoestratega.com</a></div></div></body></html>
