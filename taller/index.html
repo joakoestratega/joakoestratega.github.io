@@ -48,7 +48,7 @@ input[type=text],input[type=tel],input[type=email]{width:100%;box-sizing:border-
 const API = 'https://editor-9qb.pages.dev/api/registro';
 const AVISO = 'taller-2026-10-v1', VERSION = 'taller-mkt-2026-10-16', LLAVE = 'taller-mkt-2026';
 const $ = (id) => document.getElementById(id);
-function abrir() { $('puerta').hidden = true; $('material').hidden = false; }
+function abrir() { $('puerta').hidden = true; $('material').hidden = false; window.scrollTo(0, 0); }
 try { if (localStorage.getItem(LLAVE)) abrir(); } catch (e) {}
 $('f').addEventListener('submit', (ev) => {
   ev.preventDefault();
