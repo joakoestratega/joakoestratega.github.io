@@ -1,37 +1,133 @@
 <!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="robots" content="noindex"><title>Paso a paso · Joako Estratega</title><link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700;800&display=swap" rel="stylesheet"><style>body{margin:0;background:#0F0F14;color:#fff;font-family:Montserrat,Segoe UI,Arial,sans-serif;line-height:1.55}
-.w{max-width:1100px;margin:auto;padding:28px 18px 70px}a{color:#F8B400}h1{color:#F8B400;font-size:2.1rem;line-height:1.15}
-h2{color:#F8B400;margin-top:42px}.caja{background:#1c1c24;border-radius:14px;padding:18px 20px;margin:14px 0}
-.g{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px}.g img{width:100%;border-radius:10px;display:block;background:#fff}
-pre{white-space:pre-wrap;background:#0b0b0f;border:1px solid #2a2a33;border-radius:10px;padding:14px;font-size:.92rem}
-.btn{display:inline-block;background:#F8B400;color:#0F0F14;font-weight:800;padding:12px 22px;border-radius:30px;text-decoration:none}
-.pie{margin-top:60px;padding-top:20px;border-top:1px solid #2a2a33;opacity:.85}</style></head>
-<body><div class="w"><p><a href="./">← Volver a todo el material</a></p><h1>Paso a paso: cómo hacerlo tú</h1>
-<p>Lo mismo que viste en el taller, para que lo hagas con tu producto. Cada paso trae <b>cómo se hace desde la web</b> y <b>cómo lo hago yo</b> con Claude Code.</p>
+<meta name="robots" content="noindex"><title>Paso a paso · Marketing con estrategia</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{--n:#0F0F14;--y:#F8B400;--c:#1a1a22;--l:#2a2a35}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;background:var(--n);color:#fff;font-family:Montserrat,system-ui,sans-serif;line-height:1.55}
+a{color:var(--y)}em{font-style:normal;color:var(--y)}
+.hero{padding:70px 20px 40px;text-align:center;background:radial-gradient(circle at 50% 0,#3a2c00 0,var(--n) 65%)}
+.hero h1{font-size:clamp(2.2rem,6vw,4rem);font-weight:900;line-height:1.05;margin:0 0 14px}
+.hero p{font-size:1.15rem;opacity:.8;max-width:640px;margin:0 auto}
+.barra{height:6px;background:var(--l);border-radius:4px;max-width:420px;margin:26px auto 6px;overflow:hidden}.barra i{display:block;height:100%;width:0;background:var(--y);transition:width .4s}
+#progreso{font-size:.85rem;opacity:.7}
+nav{position:sticky;top:0;z-index:10;background:rgba(15,15,20,.92);backdrop-filter:blur(8px);display:flex;gap:6px;justify-content:center;padding:10px;border-bottom:1px solid var(--l);overflow-x:auto}
+nav a{display:flex;align-items:center;gap:6px;text-decoration:none;color:#fff;padding:7px 12px;border-radius:30px;background:var(--c);font-weight:700;font-size:.9rem;white-space:nowrap;transition:.2s}
+nav a b{background:var(--y);color:var(--n);border-radius:50%;width:24px;height:24px;display:grid;place-items:center;font-size:.8rem}
+nav a.on,nav a:hover{background:var(--y);color:var(--n)}nav a.on b{background:var(--n);color:var(--y)}nav a.listo b{background:#3ccf72}
+main{max-width:1060px;margin:auto;padding:10px 18px 60px}
+.paso{scroll-margin-top:70px;padding:56px 0 30px;border-bottom:1px solid var(--l);opacity:0;transform:translateY(30px);transition:.7s}.paso.ve{opacity:1;transform:none}
+.cab{display:flex;gap:20px;align-items:center;margin-bottom:26px}.cab .n{font-size:5rem;font-weight:900;color:var(--y);line-height:.8}
+.cab h2{font-size:clamp(1.7rem,4vw,2.6rem);margin:0;font-weight:900}.frase{margin:6px 0 0;font-size:1.1rem;opacity:.8}
+.cifras{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-bottom:26px}
+.cifra{background:var(--c);border-radius:16px;padding:20px;text-align:center;border:1px solid var(--l)}.cifra b{display:block;font-size:2.4rem;font-weight:900;color:var(--y)}.cifra span{opacity:.75;font-size:.9rem}
+.modo{display:inline-flex;background:var(--c);border-radius:40px;padding:5px;margin:8px 0 18px;flex-wrap:wrap}
+.modo button{border:0;background:none;color:#fff;font:700 .95rem Montserrat,sans-serif;padding:11px 18px;border-radius:30px;cursor:pointer}.modo button.on{background:var(--y);color:var(--n)}
+.prompt{background:#0a0a0e;border:1px solid var(--l);border-left:4px solid var(--y);border-radius:14px;margin:14px 0;overflow:hidden}
+.ph{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:12px 16px;background:var(--c);font-weight:800}
+.copiar{border:0;background:var(--y);color:var(--n);font:800 .85rem Montserrat;padding:8px 16px;border-radius:20px;cursor:pointer;flex:none}.copiar.ok{background:#3ccf72;color:#fff}
+pre{margin:0;padding:16px;white-space:pre-wrap;font:500 .95rem/1.6 Montserrat,sans-serif;max-height:340px;overflow:auto}
+.nota{font-size:.88rem;opacity:.7;margin:8px 16px 12px}
+.tarjeta{background:var(--c);border-radius:14px;padding:18px 20px;margin:12px 0;border:1px solid var(--l)}
+.resultado{margin-top:26px}.resultado h3{color:var(--y)}
+.botones{display:flex;gap:10px;flex-wrap:wrap;margin:14px 0}
+.btn{display:inline-block;background:var(--y);color:var(--n);font-weight:800;padding:13px 22px;border-radius:30px;text-decoration:none;transition:.2s}.btn:hover{transform:translateY(-2px)}.btn.alt{background:none;color:var(--y);border:2px solid var(--y)}
+img.zoom{width:100%;border-radius:12px;cursor:zoom-in;display:block;background:#fff;transition:.2s}img.zoom:hover{transform:scale(1.02)}
+.citas{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin-bottom:20px}
+blockquote{margin:0;background:var(--c);border-radius:14px;padding:18px;font-style:italic;font-weight:700;font-size:1.05rem;border-top:4px solid var(--y)}
+.cruce{display:grid;grid-template-columns:1fr auto 1fr;gap:14px;align-items:center}.cruce>div{background:var(--c);border-radius:14px;padding:18px}.cruce .ok{border:2px solid var(--y)}
+.cruce small{display:block;opacity:.7}.cruce b{display:block;font-size:1.15rem;margin:6px 0}.cruce span{font-size:.85rem;opacity:.7}.vs{font-weight:900;color:var(--y);font-size:1.4rem}
+.antesdes{display:grid;grid-template-columns:1fr 2fr;gap:18px;margin-bottom:20px}.antesdes p{font-size:.9rem;opacity:.75}
+.g3{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:8px}.g5{display:grid;grid-template-columns:repeat(auto-fill,minmax(110px,1fr));gap:8px}
+.et{display:inline-block;font-weight:800;padding:4px 14px;border-radius:20px;margin-bottom:10px;background:var(--y);color:var(--n)}.et.rojo{background:#ff4d5a;color:#fff}.et.verde{background:#3ccf72;color:#fff}
+details.mas{margin-top:16px}details.mas summary{cursor:pointer;font-weight:800;color:var(--y);padding:12px 0}
+.precios,.estructuras{display:grid;grid-template-columns:1fr 1fr;gap:14px}.precios ul{margin:8px 0 0;padding-left:18px}
+.reglas{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:10px}.reglas div{background:var(--c);border-radius:14px;padding:18px;border-top:5px solid #ff4d5a;font-weight:600}.reglas b{display:block;font-size:2rem;color:#ff4d5a}
+.arbol{display:flex;flex-direction:column;align-items:flex-start;gap:6px;margin:8px 0}.arbol i{font-style:normal;background:var(--l);padding:8px 14px;border-radius:10px;font-weight:700}.arbol i+i{margin-left:24px;position:relative}.arbol .hoja{background:var(--y);color:var(--n)}
+.hecho{display:inline-flex;gap:10px;align-items:center;margin-top:20px;font-weight:700;cursor:pointer;background:var(--c);padding:10px 16px;border-radius:30px}.hecho input{width:20px;height:20px;accent-color:#3ccf72}
+.cta{text-align:center;padding:60px 20px;background:radial-gradient(circle at 50% 100%,#3a2c00 0,var(--n) 70%)}.cta h2{font-size:2rem;margin:0 0 10px}
+#lb{position:fixed;inset:0;background:rgba(0,0,0,.9);display:none;align-items:center;justify-content:center;z-index:50;cursor:zoom-out}#lb.on{display:flex}#lb img{max-width:94vw;max-height:92vh;border-radius:10px}
+@media(max-width:720px){.antesdes,.precios,.estructuras,.reglas,.cruce{grid-template-columns:1fr}.vs{text-align:center}.cab .n{font-size:3.6rem}}
+</style></head><body>
+<div class="hero"><p style="opacity:.9;font-weight:800;color:#F8B400;letter-spacing:3px">TALLER · MARKETING CON ESTRATEGIA</p>
+<h1>El paso a paso para<br><em>hacerlo con tu producto</em></h1>
+<p>Los prompts exactos que uso para que la IA busque, descargue y analice cientos de anuncios por mí. Cópialos y pégalos.</p>
+<div class="barra"><i id="bar"></i></div><div id="progreso">0 de 6 pasos hechos</div>
+<p style="margin-top:16px"><a href="./">← Volver a todo el material</a></p></div>
+<nav><a href="#p1"><b>1</b><span>Mira</span></a><a href="#p2"><b>2</b><span>Escucha</span></a><a href="#p3"><b>3</b><span>Imagen</span></a><a href="#p4"><b>4</b><span>Video</span></a><a href="#p5"><b>5</b><span>¿Meta?</span></a><a href="#p6"><b>6</b><span>Pauta</span></a></nav>
+<main><section class="paso" id="p1"><div class="cab"><div class="n">1</div><div><h2>Mira lo que <em>ya vende</em></h2><p class="frase">Un anuncio que lleva meses prendido es un anuncio que vende. Nadie paga meses por uno que no vende.</p></div></div>
+<div class="cifras"><div class="cifra"><b data-n="468">468</b><span>anuncios activos</span></div><div class="cifra"><b data-n="153">153</b><span>marcas</span></div><div class="cifra"><b data-n="110">110</b><span>videos bajados</span></div><div class="cifra"><b data-n="100">100</b><span>imágenes bajadas</span></div></div><div class="modo"><button class="on" data-m="yo">⚡ Así lo hago yo · Claude Code</button><button data-m="web">🌐 Desde la web</button></div>
+<div class="panel yo"><div class="prompt"><div class="ph"><span>1 · Para arrancar (pégalo primero)</span><button class="copiar">Copiar</button></div>
+<pre>Voy a investigar el mercado de mi producto para hacer mejores anuncios. Antes de empezar:
+1. Revisa qué tengo instalado y, si falta algo, instálalo tú: Python, Playwright con su navegador, yt-dlp y faster-whisper.
+2. Crea una carpeta llamada &quot;investigacion&quot; en mi Escritorio. Todo lo que hagamos queda ahí.
+3. Explícame en palabras sencillas qué hiciste. Si algo falla, dime qué pasó y cómo lo arreglas.</pre></div><div class="prompt"><div class="ph"><span>2 · Buscar y descargar cientos de anuncios</span><button class="copiar">Copiar</button></div>
+<pre>Busca y descarga los anuncios activos de mi competencia en la Biblioteca de anuncios de Meta.
 
-<h2>Paso 1 · Mira lo que ya vende</h2>
-<div class="caja"><b>Desde la web, a mano (gratis):</b> entra a <a href="https://www.facebook.com/ads/library/">la Biblioteca de anuncios de Meta</a> → país → "Todos los anuncios" → escribe tu producto. Abre los que llevan más tiempo activos (dice "En circulación desde…") y toma pantallazos de 20 o 30.</div>
-<div class="caja"><b>Desde la web, con volumen:</b> <a href="https://apify.com">Apify</a> es de pago: el plan inicial trae 5 dólares de uso al mes y para más volumen se paga. Busca "Facebook Ads Library Scraper", pega el enlace de tu búsqueda y descarga el Excel. Con esos 5 dólares salen unos 800 anuncios (precio consultado el 9 de octubre de 2026).</div>
-<div class="caja"><b>Analízalos:</b> sube los pantallazos o el Excel a Claude o Gemini con este prompt:
+Producto: [faja colombiana de alta compresión]
+Palabras de búsqueda: [faja colombiana, faja reductora, faja postparto]
+Países: [Colombia, México, Estados Unidos, Perú]
+
+Hazlo así:
+1. Con Playwright, abre facebook.com/ads/library con &quot;Anuncios activos&quot; y &quot;Todos los anuncios&quot;, una vez por cada país y cada palabra. Baja la página hasta que no carguen más resultados.
+2. De cada anuncio guarda en un Excel (anuncios.xlsx): marca, país, fecha desde la que está activo, días activo, formato (imagen o video), texto, título, botón y enlace de destino.
+3. Descarga la imagen o el video de cada anuncio a la carpeta &quot;anuncios&quot;, con el número del anuncio como nombre del archivo.
+4. Ordena de más días activo a menos. Los que llevan más tiempo prendidos son los que más venden.
+5. Quita lo que no sea de mi producto (otros productos, clínicas, ropa que no es faja) y dime cuántos quitaste y por qué.
+6. Si Facebook te frena, ve más despacio y vuelve a intentar. No inventes ningún dato.
+
+Al final dime: cuántos anuncios, cuántas marcas, cuántos videos y cuántas imágenes quedaron.</pre><p class="nota">Cambia lo que está entre [corchetes] por tu producto y tus países.</p></div><div class="prompt"><div class="ph"><span>3 · Hacer el informe</span><button class="copiar">Copiar</button></div>
+<pre>Con anuncios.xlsx, comentarios.xlsx y las transcripciones, hazme un informe en HTML fácil de leer, que se abra sin internet:
+
+1. Lo importante en 1 minuto: 5 cifras grandes.
+2. Qué ganchos y qué ofertas usan los anuncios que más días llevan activos.
+3. Qué les duele, qué desean y qué les frena la compra a las clientas, con sus palabras exactas y cuántas veces se repite cada cosa.
+4. El cruce: lo que dicen las clientas y NINGÚN anuncio está diciendo. Ahí está la oportunidad.
+5. Top 10 de videos y top 10 de imágenes, con la pieza, los días activo y una línea de por qué vende.
+
+Usa solo los datos de los archivos. Si algo no se puede saber, dilo; no lo inventes.</pre></div></div><div class="panel web" hidden><div class="tarjeta"><b>A mano (gratis):</b> entra a <a href="https://www.facebook.com/ads/library/" target="_blank" rel="noopener">la Biblioteca de anuncios de Meta</a>, escoge el país y "Todos los anuncios", escribe tu producto y toma pantallazos de los que dicen "En circulación desde" hace más tiempo. Saldrán unos 20 o 30.</div>
+<div class="tarjeta"><b>Con Apify (de pago):</b> el plan inicial trae 5 dólares de uso al mes, unos 800 anuncios. Busca "Facebook Ads Library Scraper" en <a href="https://apify.com" target="_blank" rel="noopener">apify.com</a>, pega el enlace de tu búsqueda y descarga el Excel (precio consultado el 9 de octubre de 2026).</div><div class="prompt"><div class="ph"><span>Para analizar los pantallazos o el Excel en Claude o Gemini</span><button class="copiar">Copiar</button></div>
 <pre>Estos son anuncios activos de mi competencia. Los que llevan más días activos son los que más venden.
-Sácame:
-1. Los ganchos que más se repiten (la primera frase o imagen).
-2. Qué dolor o deseo de la clienta toca cada uno.
-3. Qué ofrecen (precio, envío, garantía, pago al recibir) y qué botón usan.
-4. Qué NO está diciendo nadie y yo podría decir.
-Ordénalo de lo que más se repite a lo que menos.</pre></div>
-<div class="caja"><b>Así lo hago yo:</b> le pido a Claude Code: <i>"Busca en la Biblioteca de anuncios de Meta los anuncios activos de [producto] en [países]. Descarga las imágenes y los videos de los que llevan más días activos y hazme un informe con lo que funciona."</i></div>
+Sácame: 1) los ganchos que más se repiten, 2) qué dolor o deseo toca cada uno, 3) qué ofrecen y qué botón usan, 4) qué NO está diciendo nadie y yo podría decir.</pre></div></div><div class="resultado"><h3>Lo que salió</h3><div class="botones"><a class="btn" href="informe.html">Ver el informe</a><a class="btn alt" href="top-10.html">Ver el Top 10</a></div><img class="zoom" src="img/top10.png" alt="Top 10 de anuncios"></div><label class="hecho"><input type="checkbox" data-paso="p1"> Ya lo hice</label></section><section class="paso" id="p2"><div class="cab"><div class="n">2</div><div><h2>Escucha <em>lo que duele</em></h2><p class="frase">Los anuncios dicen qué hace la competencia. Los comentarios dicen qué siente la clienta.</p></div></div>
+<div class="cifras"><div class="cifra"><b data-n="4.408">4.408</b><span>comentarios bajados</span></div><div class="cifra"><b data-n="66">66</b><span>videos de YouTube</span></div><div class="cifra"><b data-n="3.715">3.715</b><span>después de limpiar</span></div><div class="cifra"><b data-n="385">385</b><span>eran basura</span></div></div><div class="citas"><blockquote>"Se te salen los gorditos de la parte de arriba"</blockquote><blockquote>"Pongan una modelo más llenita… toda operada ni se aprecia el cambio"</blockquote><blockquote>"Me ahogan, siento que me asfixio"</blockquote><blockquote>"El problema es saber cuál talla pedir"</blockquote></div><div class="modo"><button class="on" data-m="yo">⚡ Así lo hago yo · Claude Code</button><button data-m="web">🌐 Desde la web</button></div>
+<div class="panel yo"><div class="prompt"><div class="ph"><span>Bajar miles de comentarios y limpiarlos</span><button class="copiar">Copiar</button></div>
+<pre>Ahora quiero saber qué les duele a las clientas, con sus propias palabras.
 
-<h2>Paso 2 · Escucha lo que duele</h2>
-<div class="caja"><b>Desde la web:</b> copia comentarios de videos de YouTube sobre tu producto, de grupos de Facebook y, mejor todavía, de tus propios anuncios. Quítales los nombres. Pégalos en Claude o Gemini:
-<pre>Estos son comentarios reales de clientas. Sácame lo que les duele, lo que desean y lo que les frena la compra, con sus palabras exactas y cuántas veces se repite cada uno. Después dime qué de esto no está diciendo ningún anuncio de la competencia.</pre>
-Aquí tienes <a href="comentarios-de-clientas.csv">los 3.715 comentarios de fajas</a> que usamos, sin nombres.</div>
-<div class="caja"><b>Así lo hago yo:</b> Claude Code baja miles de comentarios de YouTube en minutos, los limpia (en fajas salieron 385 de cinta para amarrar carga) y les quita los nombres.</div>
+1. Busca en YouTube los 60 videos con más vistas sobre reseñas y experiencias con [faja colombiana]. Búsquedas: [faja colombiana reseña, faja postparto opinión, mi experiencia con faja colombiana, faja que no se enrolla].
+2. Con yt-dlp, descarga hasta 400 comentarios de cada video, SIN descargar el video. Guarda en comentarios.xlsx: el comentario, sus likes y el título del video.
+3. Quítales a los comentarios todo dato de personas: nombres, @usuarios, teléfonos, correos y enlaces.
+4. Quita los comentarios que no hablen de mi producto. Por ejemplo, en fajas salieron comentarios de cinta para amarrar carga.
+5. Dime cuántos comentarios bajaste, cuántos quitaste y cuántos quedaron.</pre></div><div class="prompt"><div class="ph"><span>Transcribir los videos y ver cómo arrancan</span><button class="copiar">Copiar</button></div>
+<pre>Transcribe en mi computador todos los videos de la carpeta &quot;anuncios&quot; con faster-whisper, en español, sin subir nada a internet.
 
-<h2>Paso 3 · Crea con base (imagen)</h2>
-<div class="caja"><b>El error:</b> pedirle a la IA "hazme una imagen para vender…" sin darle nada. Sale lo mismo que a todos.
-<div class="g" style="margin-top:12px"><img src="img/generica-1.jpg"><img src="img/generica-2.jpg"><img src="img/generica-3.jpg"></div></div>
-<div class="caja"><b>Lo que funciona:</b> en Gemini adjunta <b>(1)</b> un anuncio de tu competencia que lleve meses activo y <b>(2)</b> la foto real de tu producto. Después pega un prompt como este:
+Después clasifica cada video según cómo arranca en los primeros 3 segundos:
+· reseña de una creadora (&quot;me la puse y…&quot;)
+· abre con el dolor o una pregunta
+· antes y después en cámara
+· muestra el producto y lo explica
+· fábrica u origen
+· oferta o forma de pago
+· ayuda con la talla
+· lo que dicen otras clientas
+
+Dame una tabla con: tipo, cuántos videos hay de ese tipo y cuántos días activos llevan en promedio. Así veo qué se usa más y qué dura más.</pre></div></div><div class="panel web" hidden><div class="tarjeta">Copia comentarios de videos de YouTube sobre tu producto, de grupos de Facebook y, mejor todavía, de tus propios anuncios. Quítales los nombres y pégalos en Claude o Gemini.</div><div class="prompt"><div class="ph"><span>Para analizar los comentarios</span><button class="copiar">Copiar</button></div>
+<pre>Estos son comentarios reales de clientas. Sácame lo que les duele, lo que desean y lo que les frena la compra, con sus palabras exactas y cuántas veces se repite cada uno. Después dime qué de esto no está diciendo ningún anuncio de la competencia.</pre></div></div><div class="resultado"><h3>El cruce</h3><div class="cruce"><div><small>La competencia habla de…</small><b>Precio y descuento</b><span>35% de los anuncios</span></div><div class="vs">vs</div><div class="ok"><small>La clienta habla de…</small><b>El gordito de arriba · modelos operadas · la talla</b><span>Garantía de talla: solo 3,6%</span></div></div><div class="botones"><a class="btn alt" href="comentarios-de-clientas.csv">Descargar los 3.715 comentarios</a></div></div><label class="hecho"><input type="checkbox" data-paso="p2"> Ya lo hice</label></section><section class="paso" id="p3"><div class="cab"><div class="n">3</div><div><h2>Crea <em>con base</em></h2><p class="frase">Sin base, la IA hace lo mismo para todos. Con base, sale bien a la primera.</p></div></div>
+<div class="antesdes"><div><span class="et rojo">Sin base</span><div class="g3"><img class="zoom" src="img/generica-1.jpg"><img class="zoom" src="img/generica-2.jpg"><img class="zoom" src="img/generica-3.jpg"></div><p>Marcas inventadas, "Moldea tu curvas", horizontal.</p></div><div><span class="et verde">Con base</span><div class="g5"><img class="zoom" src="img/2667-00-otras-vs-nosotros.jpg"><img class="zoom" src="img/2667-01-ficha-flechas.jpg"><img class="zoom" src="img/2667-02-resultado-inmediato.jpg"><img class="zoom" src="img/2667-03-producto-solo.jpg"><img class="zoom" src="img/2667-04-ficha-estrellas.jpg"><img class="zoom" src="img/2667-05-con-ropa-ni-se-nota.jpg"><img class="zoom" src="img/2667-06-antes-despues-ropa.jpg"><img class="zoom" src="img/2667-07-tu-mejor-version.jpg"><img class="zoom" src="img/2667-08-frase-grande.jpg"><img class="zoom" src="img/2667-09-sin-y-con.jpg"></div><p>10 anuncios distintos, con la faja real y las frases de las clientas.</p></div></div><div class="modo"><button class="on" data-m="yo">⚡ Así lo hago yo · Claude Code</button><button data-m="web">🌐 Desde la web</button></div>
+<div class="panel yo"><div class="prompt"><div class="ph"><span>Los 10 prompts de una vez</span><button class="copiar">Copiar</button></div>
+<pre>Quiero crear 10 anuncios de imagen de mi producto, cada uno con la estructura de uno de los 10 que más venden.
+
+Te adjunto la foto real de mi producto. Para cada imagen del top 10:
+1. Escríbeme un prompt para Gemini que diga: &quot;copia SOLO la estructura de esta referencia, no su marca, sus colores ni sus personas&quot;.
+2. Que use mi producto tal cual se ve en la foto.
+3. Que use las frases de las clientas que salieron en el informe.
+4. Que NO diga &quot;reduce medidas&quot;, &quot;quema grasa&quot; ni nada que prometa bajar de peso.
+5. Formato vertical 4:5, ortografía perfecta y letra grande.
+
+Entrégame los 10 prompts numerados, cada uno con el nombre de la referencia que debo adjuntar en Gemini.</pre></div><div class="prompt"><div class="ph"><span>Que Claude Code las haga solo</span><button class="copiar">Copiar</button></div>
+<pre>Así lo hago yo: Claude Code abre Gemini en mi Chrome (con mi sesión), adjunta la referencia y la foto del producto, pega cada prompt, espera la imagen y la descarga. Las 10 salen solas, una por una.
+
+Si quieres lo mismo, pídele:
+&quot;Abre Gemini en mi Chrome, con mi sesión iniciada. Para cada uno de los 10 prompts, adjunta su referencia y la foto de mi producto, pega el prompt, espera la imagen y descárgala en la carpeta &#x27;mis-anuncios&#x27;. Si una sale con errores de texto, pídele a Gemini que la corrija en la misma conversación, máximo 2 veces.&quot; </pre></div></div><div class="panel web" hidden><div class="tarjeta">En Gemini adjunta <b>(1)</b> un anuncio que lleve meses activo y <b>(2)</b> la foto real de tu producto. Pega el prompt. Si algo sale mal, corrígelo en la misma conversación. <b>Si no hace caso en 2 o 3 intentos, cambia de herramienta.</b></div><div class="prompt"><div class="ph"><span>Prompt con base</span><button class="copiar">Copiar</button></div>
 <pre>Te adjunto dos imágenes:
 1. Un anuncio de fajas que lleva más de 200 días activo en Facebook. Úsalo SOLO como referencia de estructura: comparación en dos columnas, &quot;otras fajas&quot; a la izquierda con X rojas, y &quot;nuestra faja&quot; a la derecha con chulos verdes, producto grande en cada columna.
 2. La foto real de mi producto: faja body negra de tiro alto y alta compresión, referencia 2667.
@@ -51,22 +147,17 @@ Crea un anuncio nuevo con esa misma estructura para mi producto:
   · Alta compresión
 - Abajo, una franja con el texto: &quot;Escríbenos por WhatsApp&quot;
 - Ortografía en español perfecta. Letra grande, que se lea en el celular.
-</pre>
-Si algo sale mal, se corrige en la misma conversación:
+</pre></div><div class="prompt"><div class="ph"><span>Corrección 1</span><button class="copiar">Copiar</button></div>
 <pre>Me gusta. Deja todo igual, solo corrige dos cosas:
 1. El texto de la columna derecha se sale del borde. Déjale margen a los lados.
 2. En la columna derecha, muestra la faja 2667 PUESTA en una mujer de cuerpo real, talla grande, con algo de abdomen, no operada. Encuadre desde el cuello hasta las rodillas, sin mostrar la cara. La faja debe verse igual a la de mi foto.
-</pre>
+</pre></div><div class="prompt"><div class="ph"><span>Corrección 2</span><button class="copiar">Copiar</button></div>
 <pre>Casi. Todavía hay dos errores:
 1. Las frases de la columna derecha siguen tocando el borde derecho de la imagen (&quot;gordito&quot; queda cortado). Haz la letra de esa columna un poco más pequeña y deja el mismo margen que tiene la columna izquierda.
 2. La mujer no es talla grande. Quiero un cuerpo talla XL, con abdomen y caderas anchas, como una mamá real de 40 años. El encuadre debe empezar en los hombros: que NO se vea la boca ni la barbilla.
 No cambies nada más.
-</pre>
-<b>Si después de 2 o 3 intentos no hace caso, cambia de herramienta.</b></div>
-<div class="g"><img src="img/pantallazo-sin-base.png"><img src="img/pantallazo-con-base.png"><img src="img/pantallazo-correcciones.png"></div>
-<div class="caja"><b>Así lo hago yo:</b> con Claude Code pongo la foto real del producto sobre la plantilla que hizo Gemini y escribo el texto con código, así queda perfecto.</div>
-<h3>Los 10 prompts que usamos</h3>
-<div class="caja"><b>01-ficha-flechas</b><pre>La primera imagen es un anuncio que lleva 250 días activo. Copia su estructura: título grande arriba, el producto en el centro y flechas que señalan cada parte con su beneficio.
+</pre></div><div class="g3"><img class="zoom" src="img/pantallazo-sin-base.png"><img class="zoom" src="img/pantallazo-con-base.png"><img class="zoom" src="img/pantallazo-correcciones.png"></div></div><details class="mas"><summary>Ver los 10 prompts que usamos</summary><div class="prompt"><div class="ph"><span>01-ficha-flechas</span><button class="copiar">Copiar</button></div>
+<pre>La primera imagen es un anuncio que lleva 250 días activo. Copia su estructura: título grande arriba, el producto en el centro y flechas que señalan cada parte con su beneficio.
 La segunda imagen es mi producto, la faja body 2667.
 Título: &quot;FAJA BODY 2667&quot;. Flechas con estos textos:
 · Tiro alto: tapa el gordito debajo del brasier
@@ -76,14 +167,17 @@ Título: &quot;FAJA BODY 2667&quot;. Flechas con estos textos:
 · Alta compresión
 Abajo: &quot;Escríbenos por WhatsApp&quot;.
 
-Reglas: formato vertical 4:5 para Instagram y Facebook. Colores: negro, beige y blanco. NO copies el logo, la marca, los colores ni las personas de la referencia: solo la estructura. No pongas ninguna marca. La faja debe verse IGUAL a la de mi foto (body negro, tirantes anchos, busto abierto, broches al frente, hasta medio muslo). Ortografía en español perfecta, letra grande que se lea en el celular. No escribas precios ni descuentos.</pre></div><div class="caja"><b>02-resultado-inmediato</b><pre>La primera imagen es un anuncio que lleva 241 días activo. Copia su estructura: frase grande a un lado, mujer de cuerpo completo al otro lado y un recuadro pequeño con el producto.
+Reglas: formato vertical 4:5 para Instagram y Facebook. Colores: negro, beige y blanco. NO copies el logo, la marca, los colores ni las personas de la referencia: solo la estructura. No pongas ninguna marca. La faja debe verse IGUAL a la de mi foto (body negro, tirantes anchos, busto abierto, broches al frente, hasta medio muslo). Ortografía en español perfecta, letra grande que se lea en el celular. No escribas precios ni descuentos.</pre></div><div class="prompt"><div class="ph"><span>02-resultado-inmediato</span><button class="copiar">Copiar</button></div>
+<pre>La primera imagen es un anuncio que lleva 241 días activo. Copia su estructura: frase grande a un lado, mujer de cuerpo completo al otro lado y un recuadro pequeño con el producto.
 La segunda imagen es mi producto.
 Frase: &quot;Moldea tu figura desde que te la pones&quot;. Debajo, más pequeño: &quot;Faja body 2667 · tiro alto · alta compresión&quot;. La mujer es de cuerpo real, talla L, latina, con la faja puesta. Abajo: &quot;Escríbenos por WhatsApp&quot;.
 
-Reglas: formato vertical 4:5 para Instagram y Facebook. Colores: negro, beige y blanco. NO copies el logo, la marca, los colores ni las personas de la referencia: solo la estructura. No pongas ninguna marca. La faja debe verse IGUAL a la de mi foto (body negro, tirantes anchos, busto abierto, broches al frente, hasta medio muslo). Ortografía en español perfecta, letra grande que se lea en el celular. No escribas precios ni descuentos.</pre></div><div class="caja"><b>03-producto-solo</b><pre>La primera imagen es un anuncio de producto sobre fondo limpio. Copia ese estilo: el producto solo, grande, bien iluminado, sin persona, fondo beige claro liso.
+Reglas: formato vertical 4:5 para Instagram y Facebook. Colores: negro, beige y blanco. NO copies el logo, la marca, los colores ni las personas de la referencia: solo la estructura. No pongas ninguna marca. La faja debe verse IGUAL a la de mi foto (body negro, tirantes anchos, busto abierto, broches al frente, hasta medio muslo). Ortografía en español perfecta, letra grande que se lea en el celular. No escribas precios ni descuentos.</pre></div><div class="prompt"><div class="ph"><span>03-producto-solo</span><button class="copiar">Copiar</button></div>
+<pre>La primera imagen es un anuncio de producto sobre fondo limpio. Copia ese estilo: el producto solo, grande, bien iluminado, sin persona, fondo beige claro liso.
 Las otras imágenes son mi producto, la faja body 2667. Muéstrala sola, como foto de catálogo, de frente, sin cuerpo. Un detalle redondo pequeño con los broches de cerca. Texto pequeño abajo: &quot;Faja body 2667 · tiro alto&quot;.
 
-Reglas: formato vertical 4:5 para Instagram y Facebook. Colores: negro, beige y blanco. NO copies el logo, la marca, los colores ni las personas de la referencia: solo la estructura. No pongas ninguna marca. La faja debe verse IGUAL a la de mi foto (body negro, tirantes anchos, busto abierto, broches al frente, hasta medio muslo). Ortografía en español perfecta, letra grande que se lea en el celular. No escribas precios ni descuentos.</pre></div><div class="caja"><b>04-ficha-estrellas</b><pre>La primera imagen es un anuncio que lleva 161 días activo. Copia su estructura: título grande arriba, producto a la izquierda y a la derecha una lista de beneficios en franjas con estrella.
+Reglas: formato vertical 4:5 para Instagram y Facebook. Colores: negro, beige y blanco. NO copies el logo, la marca, los colores ni las personas de la referencia: solo la estructura. No pongas ninguna marca. La faja debe verse IGUAL a la de mi foto (body negro, tirantes anchos, busto abierto, broches al frente, hasta medio muslo). Ortografía en español perfecta, letra grande que se lea en el celular. No escribas precios ni descuentos.</pre></div><div class="prompt"><div class="ph"><span>04-ficha-estrellas</span><button class="copiar">Copiar</button></div>
+<pre>La primera imagen es un anuncio que lleva 161 días activo. Copia su estructura: título grande arriba, producto a la izquierda y a la derecha una lista de beneficios en franjas con estrella.
 La segunda imagen es mi producto. Título: &quot;FAJA BODY 2667&quot;. Lista:
 ★ Tapa el gordito debajo del brasier
 ★ Abdomen completo
@@ -92,47 +186,66 @@ La segunda imagen es mi producto. Título: &quot;FAJA BODY 2667&quot;. Lista:
 ★ Alta compresión
 IMPORTANTE: no escribas &quot;reduce medidas&quot; ni &quot;quema grasa&quot;.
 
-Reglas: formato vertical 4:5 para Instagram y Facebook. Colores: negro, beige y blanco. NO copies el logo, la marca, los colores ni las personas de la referencia: solo la estructura. No pongas ninguna marca. La faja debe verse IGUAL a la de mi foto (body negro, tirantes anchos, busto abierto, broches al frente, hasta medio muslo). Ortografía en español perfecta, letra grande que se lea en el celular. No escribas precios ni descuentos.</pre></div><div class="caja"><b>05-con-ropa-ni-se-nota</b><pre>La primera imagen es un anuncio que lleva 106 días activo: dos fotos tipo selfie en el espejo, una con ropa y otra mostrando la faja, con etiquetas rosadas pequeñas.
+Reglas: formato vertical 4:5 para Instagram y Facebook. Colores: negro, beige y blanco. NO copies el logo, la marca, los colores ni las personas de la referencia: solo la estructura. No pongas ninguna marca. La faja debe verse IGUAL a la de mi foto (body negro, tirantes anchos, busto abierto, broches al frente, hasta medio muslo). Ortografía en español perfecta, letra grande que se lea en el celular. No escribas precios ni descuentos.</pre></div><div class="prompt"><div class="ph"><span>05-con-ropa-ni-se-nota</span><button class="copiar">Copiar</button></div>
+<pre>La primera imagen es un anuncio que lleva 106 días activo: dos fotos tipo selfie en el espejo, una con ropa y otra mostrando la faja, con etiquetas rosadas pequeñas.
 Copia esa estructura con mi producto (segunda imagen). Una mujer latina de cuerpo real, talla L, se toma selfie con el celular frente al espejo en su cuarto. Foto de arriba: con una camiseta ajustada, etiqueta &quot;Con ropa, ni se nota&quot;. Foto de abajo: levanta la camiseta y se ve la faja 2667 puesta, etiqueta &quot;Debajo: la 2667&quot;. Que se vea casero, de celular, no de estudio. La cara tapada por el celular.
 
-Reglas: formato vertical 4:5 para Instagram y Facebook. Colores: negro, beige y blanco. NO copies el logo, la marca, los colores ni las personas de la referencia: solo la estructura. No pongas ninguna marca. La faja debe verse IGUAL a la de mi foto (body negro, tirantes anchos, busto abierto, broches al frente, hasta medio muslo). Ortografía en español perfecta, letra grande que se lea en el celular. No escribas precios ni descuentos.</pre></div><div class="caja"><b>06-antes-despues-ropa</b><pre>La primera imagen es un anuncio que lleva 94 días activo: la misma mujer con la misma ropa, una foto sin faja y otra con faja.
+Reglas: formato vertical 4:5 para Instagram y Facebook. Colores: negro, beige y blanco. NO copies el logo, la marca, los colores ni las personas de la referencia: solo la estructura. No pongas ninguna marca. La faja debe verse IGUAL a la de mi foto (body negro, tirantes anchos, busto abierto, broches al frente, hasta medio muslo). Ortografía en español perfecta, letra grande que se lea en el celular. No escribas precios ni descuentos.</pre></div><div class="prompt"><div class="ph"><span>06-antes-despues-ropa</span><button class="copiar">Copiar</button></div>
+<pre>La primera imagen es un anuncio que lleva 94 días activo: la misma mujer con la misma ropa, una foto sin faja y otra con faja.
 Copia esa estructura con mi producto (segunda imagen). Mujer latina de cuerpo real, talla L, con un vestido negro ajustado, en su casa, foto de celular. Izquierda, etiqueta &quot;Sin faja&quot;: el vestido marca el gordito debajo del brasier. Derecha, etiqueta &quot;Con la 2667&quot;: misma mujer, mismo vestido, la línea se ve lisa. La cara tapada por el celular.
 
-Reglas: formato vertical 4:5 para Instagram y Facebook. Colores: negro, beige y blanco. NO copies el logo, la marca, los colores ni las personas de la referencia: solo la estructura. No pongas ninguna marca. La faja debe verse IGUAL a la de mi foto (body negro, tirantes anchos, busto abierto, broches al frente, hasta medio muslo). Ortografía en español perfecta, letra grande que se lea en el celular. No escribas precios ni descuentos.</pre></div><div class="caja"><b>07-tu-mejor-version</b><pre>La primera imagen es un anuncio que lleva 69 días activo: título elegante arriba, dos fotos de la mujer (de frente y de espalda) e íconos con beneficios a los lados.
+Reglas: formato vertical 4:5 para Instagram y Facebook. Colores: negro, beige y blanco. NO copies el logo, la marca, los colores ni las personas de la referencia: solo la estructura. No pongas ninguna marca. La faja debe verse IGUAL a la de mi foto (body negro, tirantes anchos, busto abierto, broches al frente, hasta medio muslo). Ortografía en español perfecta, letra grande que se lea en el celular. No escribas precios ni descuentos.</pre></div><div class="prompt"><div class="ph"><span>07-tu-mejor-version</span><button class="copiar">Copiar</button></div>
+<pre>La primera imagen es un anuncio que lleva 69 días activo: título elegante arriba, dos fotos de la mujer (de frente y de espalda) e íconos con beneficios a los lados.
 Copia esa estructura con mi producto (las otras imágenes): mujer latina de cuerpo real con la faja 2667 puesta, una foto de frente y otra de espalda.
 Título: &quot;Así se ve la 2667&quot;. Íconos: Tiro alto · Broches al frente · Abdomen completo · Tirantes anchos. Abajo: &quot;Escríbenos por WhatsApp&quot;.
 
-Reglas: formato vertical 4:5 para Instagram y Facebook. Colores: negro, beige y blanco. NO copies el logo, la marca, los colores ni las personas de la referencia: solo la estructura. No pongas ninguna marca. La faja debe verse IGUAL a la de mi foto (body negro, tirantes anchos, busto abierto, broches al frente, hasta medio muslo). Ortografía en español perfecta, letra grande que se lea en el celular. No escribas precios ni descuentos.</pre></div><div class="caja"><b>08-frase-grande</b><pre>La primera imagen es un anuncio de una marca de fajas: fondo oscuro, mujer con la faja en un lado y una frase grande en letra elegante al otro.
+Reglas: formato vertical 4:5 para Instagram y Facebook. Colores: negro, beige y blanco. NO copies el logo, la marca, los colores ni las personas de la referencia: solo la estructura. No pongas ninguna marca. La faja debe verse IGUAL a la de mi foto (body negro, tirantes anchos, busto abierto, broches al frente, hasta medio muslo). Ortografía en español perfecta, letra grande que se lea en el celular. No escribas precios ni descuentos.</pre></div><div class="prompt"><div class="ph"><span>08-frase-grande</span><button class="copiar">Copiar</button></div>
+<pre>La primera imagen es un anuncio de una marca de fajas: fondo oscuro, mujer con la faja en un lado y una frase grande en letra elegante al otro.
 Copia esa estructura con mi producto (segunda imagen). Mujer latina de cuerpo real, talla L, con la faja 2667 puesta, fondo gris oscuro de estudio.
 Frase grande: &quot;Se acabó el gordito de arriba&quot;. Debajo, pequeño: &quot;Faja body 2667 · tiro alto&quot;.
 
-Reglas: formato vertical 4:5 para Instagram y Facebook. Colores: negro, beige y blanco. NO copies el logo, la marca, los colores ni las personas de la referencia: solo la estructura. No pongas ninguna marca. La faja debe verse IGUAL a la de mi foto (body negro, tirantes anchos, busto abierto, broches al frente, hasta medio muslo). Ortografía en español perfecta, letra grande que se lea en el celular. No escribas precios ni descuentos.</pre></div><div class="caja"><b>09-sin-y-con</b><pre>La primera imagen es un anuncio con tres paneles: la mujer con un vestido sin faja, la misma mujer con el vestido usando la faja, y la faja sola. Título arriba en letra grande.
+Reglas: formato vertical 4:5 para Instagram y Facebook. Colores: negro, beige y blanco. NO copies el logo, la marca, los colores ni las personas de la referencia: solo la estructura. No pongas ninguna marca. La faja debe verse IGUAL a la de mi foto (body negro, tirantes anchos, busto abierto, broches al frente, hasta medio muslo). Ortografía en español perfecta, letra grande que se lea en el celular. No escribas precios ni descuentos.</pre></div><div class="prompt"><div class="ph"><span>09-sin-y-con</span><button class="copiar">Copiar</button></div>
+<pre>La primera imagen es un anuncio con tres paneles: la mujer con un vestido sin faja, la misma mujer con el vestido usando la faja, y la faja sola. Título arriba en letra grande.
 Copia esa estructura con mi producto (segunda imagen). Mujer latina de cuerpo real, talla L, con vestido azul ajustado.
 Título: &quot;VESTIDO AJUSTADO, CERO GORDITOS&quot;. Etiquetas: &quot;Sin faja&quot;, &quot;Con la 2667&quot;, &quot;Faja body 2667&quot;.
 
-Reglas: formato vertical 4:5 para Instagram y Facebook. Colores: negro, beige y blanco. NO copies el logo, la marca, los colores ni las personas de la referencia: solo la estructura. No pongas ninguna marca. La faja debe verse IGUAL a la de mi foto (body negro, tirantes anchos, busto abierto, broches al frente, hasta medio muslo). Ortografía en español perfecta, letra grande que se lea en el celular. No escribas precios ni descuentos.</pre></div>
+Reglas: formato vertical 4:5 para Instagram y Facebook. Colores: negro, beige y blanco. NO copies el logo, la marca, los colores ni las personas de la referencia: solo la estructura. No pongas ninguna marca. La faja debe verse IGUAL a la de mi foto (body negro, tirantes anchos, busto abierto, broches al frente, hasta medio muslo). Ortografía en español perfecta, letra grande que se lea en el celular. No escribas precios ni descuentos.</pre></div></details><label class="hecho"><input type="checkbox" data-paso="p3"> Ya lo hice</label></section><section class="paso" id="p4"><div class="cab"><div class="n">4</div><div><h2>Crea con base <em>en video</em></h2><p class="frase">La misma idea: copia la estructura de un video que lleve meses vendiendo, una toma de 8 segundos a la vez.</p></div></div>
+<div class="precios"><div class="tarjeta"><b>Google Flow</b><ul><li>AI Pro · $79.000 COP · 1.000 créditos</li><li>AI Ultra 5x · $449.000 COP · 10.000</li><li>AI Ultra 20x · $790.000 COP · 25.000</li></ul></div>
+<div class="tarjeta"><b>Higgsfield (Seedance 2.5)</b><ul><li>Starter · USD 15 · sin Seedance 2.5</li><li>Plus · USD 49 · ~67 videos</li><li>Ultra · USD 129 · ~200 videos</li></ul></div></div>
+<p class="nota">Precios de las páginas oficiales, consultados el 9 de octubre de 2026. Revísalos antes de pagar.</p><div class="prompt"><div class="ph"><span>Para que Claude Code te escriba las tomas</span><button class="copiar">Copiar</button></div>
+<pre>Mira los 3 videos del top 10 que más días llevan activos (están en la carpeta &quot;anuncios&quot;), con su transcripción. Para cada uno escríbeme las tomas de 8 segundos para Google Flow que copien su ESTRUCTURA (cómo arranca, qué muestra, qué dice) con mi producto.
+Reglas: formato vertical 9:16; la persona es hecha con IA y presenta el producto, NUNCA dice que es clienta ni que lo compró; nada de pellizcar grasa, &quot;reduce medidas&quot; ni &quot;quema grasa&quot;. Prompts en inglés y lo que dice la persona en español.</pre></div><label class="hecho"><input type="checkbox" data-paso="p4"> Ya lo hice</label></section><section class="paso" id="p5"><div class="cab"><div class="n">5</div><div><h2>¿Meta <em>lo aprueba</em>?</h2><p class="frase">Antes de poner plata, revisa que Meta no te lo vaya a tumbar.</p></div></div>
+<div class="reglas"><div><b>1</b>Prometer resultados solo por usar la prenda: "reduce medidas", "quema grasa"</div><div><b>2</b>Pellizcar la grasa en primer plano</div><div><b>3</b>Hacer sentir inferior a alguien por su cuerpo</div></div><div class="modo"><button class="on" data-m="yo">⚡ Así lo hago yo · Claude Code</button><button data-m="web">🌐 Desde la web</button></div>
+<div class="panel yo"><div class="prompt"><div class="ph"><span>Revisar todos tus anuncios de una vez</span><button class="copiar">Copiar</button></div>
+<pre>Revisa todas las imágenes de la carpeta &quot;mis-anuncios&quot; contra las políticas de publicidad de Meta para salud y apariencia (Health and Wellness). Busca la política actual en internet y cítala.
 
-<h2>Paso 3 · Crea con base (video)</h2>
-<div class="caja"><b>Herramientas</b> (precios de las páginas oficiales, 9 de octubre de 2026):<br>
-Google Flow: AI Pro $79.000 COP (1.000 créditos al mes), AI Ultra 5x $449.000 COP (10.000), AI Ultra 20x $790.000 COP (25.000).<br>
-Higgsfield: Starter USD 15 (sin Seedance 2.5), Plus USD 49 (~67 videos con Seedance 2.5), Ultra USD 129 (~200).<br>
-Revisa los precios antes de pagar: cambian.</div>
-<div class="caja"><b>Cómo se hace:</b> mira un video de tu competencia que lleve meses activo, copia <b>su estructura</b> (cómo arranca, qué muestra, qué dice) y escríbele a Flow una toma de 8 segundos a la vez. Sube la foto real de tu producto como referencia. <b>La persona hecha con IA presenta el producto, nunca dice que es clienta.</b></div>
-
-<h2>Paso 4 · ¿Meta lo aprueba?</h2>
-<div class="caja">Antes de pautar, revisa tu anuncio con este prompt (las reglas completas están en <a href="politicas.html">la revisión de políticas</a>):
-<pre>Adjunto mi anuncio. Revísalo contra las políticas de publicidad de Meta para productos de salud y apariencia (Health and Wellness). Dime en un semáforo (verde, amarillo, rojo):
-1. ¿Promete resultados solo por usar la prenda? (reduce medidas, quema grasa, bajas tallas)
+Para cada imagen, dame un semáforo (verde, amarillo, rojo):
+1. ¿Promete resultados solo por usar la prenda? (&quot;reduce medidas&quot;, &quot;quema grasa&quot;, &quot;bajas tallas&quot;)
 2. ¿Muestra un acercamiento pellizcando grasa?
 3. ¿Hace sentir inferior a alguien por su cuerpo?
 4. ¿Tiene un antes y después que se pueda leer como bajar de peso?
-Para cada punto en amarillo o rojo, dame la frase o la imagen exacta que lo causa y cómo cambiarla sin perder la fuerza del anuncio.</pre></div>
 
-<h2>Paso 5 · Deja que Meta escoja</h2>
-<div class="caja"><b>A:</b> 1 campaña → 1 conjunto → 3 creativos. Si pones más, muchos se quedan sin presupuesto y ese trabajo se pierde.<br>
-<b>B:</b> 1 campaña con contenido dinámico de 10 imágenes o 10 videos: Meta decide a quién le muestra cuál.<br>
-<b>Lo que decide todo es el creativo.</b></div>
-
-<h2>Las dos aplicaciones</h2>
-<div class="caja"><b>Claude Code</b>: la IA que hace el trabajo. <b>Recortes</b>: ¿error? ¿no entiendes algo? Recorte y a la IA.</div><div class="pie"><b class="y">Joako Estratega</b> · CEO de Joako Estratega (agencia) · CEO de PatoEditor · Director de la estrategia de marketing de Feria Effix<br>
-¿Quieres que te ayude con tu negocio? <a href="https://wa.me/573028662556?text=Hola%20Joako%2C%20estuve%20en%20el%20taller%20Marketing%20con%20estrategia">Escríbeme por WhatsApp: +57 302 866 2556</a> · <a href="https://instagram.com/joakoestratega">@joakoestratega</a> · <a href="https://joakoestratega.com">joakoestratega.com</a></div></div></body></html>
+Para lo amarillo y lo rojo: la frase o la parte exacta que lo causa y cómo cambiarla sin perder la fuerza del anuncio.</pre></div></div><div class="panel web" hidden><div class="prompt"><div class="ph"><span>Revisar un anuncio en Claude o Gemini</span><button class="copiar">Copiar</button></div>
+<pre>Adjunto mi anuncio. Revísalo contra las políticas de Meta para salud y apariencia (Health and Wellness) y dame un semáforo: 1) ¿promete resultados solo por usar la prenda? 2) ¿pellizca grasa? 3) ¿hace sentir inferior a alguien? 4) ¿tiene un antes y después que parezca bajar de peso? Para lo amarillo y rojo, dime qué cambiar.</pre></div></div><div class="botones"><a class="btn alt" href="politicas.html">Ver el semáforo completo</a></div><label class="hecho"><input type="checkbox" data-paso="p5"> Ya lo hice</label></section><section class="paso" id="p6"><div class="cab"><div class="n">6</div><div><h2>Deja que <em>Meta escoja</em></h2><p class="frase">La pauta solo reparte lo que tú le das. Lo que decide todo es el creativo.</p></div></div>
+<div class="estructuras"><div class="tarjeta"><span class="et">A</span><div class="arbol"><i>1 campaña</i><i>1 conjunto</i><i class="hoja">3 creativos</i></div><p>Más de 3 y muchos se quedan sin presupuesto: ese trabajo se pierde.</p></div>
+<div class="tarjeta"><span class="et">B</span><div class="arbol"><i>1 campaña</i><i class="hoja">contenido dinámico: 10 imágenes o 10 videos</i></div><p>Meta decide a quién le muestra cuál.</p></div></div><label class="hecho"><input type="checkbox" data-paso="p6"> Ya lo hice</label></section></main>
+<div class="cta"><h2>¿Quieres que lo hagamos con <em>tu negocio</em>?</h2><p>Joako Estratega · CEO de Joako Estratega (agencia) · CEO de PatoEditor · Director de la estrategia de marketing de Feria Effix</p>
+<p><a class="btn" href="https://wa.me/573028662556?text=Hola%20Joako%2C%20estuve%20en%20el%20taller%20Marketing%20con%20estrategia">Escríbeme por WhatsApp</a></p><p><a href="https://instagram.com/joakoestratega">@joakoestratega</a> · <a href="https://joakoestratega.com">joakoestratega.com</a></p></div>
+<div id="lb"><img alt=""></div>
+<script>
+document.querySelectorAll('.copiar').forEach(b=>b.onclick=()=>{const t=b.closest('.prompt').querySelector('pre').textContent;
+  (navigator.clipboard?navigator.clipboard.writeText(t):Promise.reject()).then(()=>{b.textContent='¡Copiado!';b.classList.add('ok');setTimeout(()=>{b.textContent='Copiar';b.classList.remove('ok')},1600)}).catch(()=>{const r=document.createRange();r.selectNodeContents(b.closest('.prompt').querySelector('pre'));getSelection().removeAllRanges();getSelection().addRange(r);});});
+document.querySelectorAll('.modo').forEach(m=>m.querySelectorAll('button').forEach(b=>b.onclick=()=>{
+  m.querySelectorAll('button').forEach(x=>x.classList.toggle('on',x===b));
+  let p=m.nextElementSibling; while(p&&p.classList.contains('panel')){p.hidden=!p.classList.contains(b.dataset.m);p=p.nextElementSibling;}}));
+const lb=document.getElementById('lb');document.querySelectorAll('img.zoom').forEach(i=>i.onclick=()=>{lb.querySelector('img').src=i.src;lb.classList.add('on')});lb.onclick=()=>lb.classList.remove('on');
+addEventListener('keydown',e=>{if(e.key==='Escape')lb.classList.remove('on')});
+const io=new IntersectionObserver(es=>es.forEach(x=>{if(x.isIntersecting){x.target.classList.add('ve');
+  document.querySelectorAll('nav a').forEach(a=>a.classList.toggle('on',a.getAttribute('href')==='#'+x.target.id));
+  x.target.querySelectorAll('.cifra b').forEach(b=>{if(b.dataset.ok)return;b.dataset.ok=1;const fin=b.dataset.n,num=parseInt(fin.replace(/\D/g,''));let k=0;const t=setInterval(()=>{k+=Math.ceil(num/30);if(k>=num){b.textContent=fin;clearInterval(t)}else b.textContent=k.toLocaleString('es-CO')},30)});}}),{threshold:.25});
+document.querySelectorAll('.paso').forEach(s=>io.observe(s));
+const K='taller-hecho';let hecho={};try{hecho=JSON.parse(localStorage.getItem(K)||'{}')}catch(e){}
+function pintar(){const n=Object.values(hecho).filter(Boolean).length;document.getElementById('bar').style.width=(n/6*100)+'%';document.getElementById('progreso').textContent=n+' de 6 pasos hechos';
+  document.querySelectorAll('nav a').forEach(a=>a.classList.toggle('listo',!!hecho[a.getAttribute('href').slice(1)]));}
+document.querySelectorAll('.hecho input').forEach(c=>{c.checked=!!hecho[c.dataset.paso];c.onchange=()=>{hecho[c.dataset.paso]=c.checked;try{localStorage.setItem(K,JSON.stringify(hecho))}catch(e){}pintar();}});pintar();
+</script></body></html>

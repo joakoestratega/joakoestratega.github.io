@@ -13,7 +13,17 @@ input[type=text],input[type=tel],input[type=email]{width:100%;box-sizing:border-
 .chk{display:flex;gap:10px;align-items:flex-start;font-weight:500;font-size:.88rem;opacity:.9}
 .oculto{position:absolute;left:-9999px} button{margin-top:16px;width:100%;border:0;cursor:pointer;font-size:1.05rem}
 #error{color:#ff6b6b;min-height:1.3em} .lista a{display:block;background:#1c1c24;border-radius:12px;padding:16px 18px;margin:10px 0;text-decoration:none;color:#fff}
-.lista b{color:#F8B400}</style></head><body><div class="w">
+.lista b{color:#F8B400}
+.intro{font-size:1.1rem;opacity:.9}
+.tarjetas{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:16px;margin:20px 0 10px}
+.t{display:flex;flex-direction:column;background:#1c1c24;border-radius:18px;overflow:hidden;text-decoration:none;color:#fff;border:1px solid #2a2a35;transition:.25s}
+.t:hover{transform:translateY(-4px);border-color:#F8B400}
+.t img{width:100%;height:190px;object-fit:cover;object-position:top;background:#fff}
+.t div{padding:14px 16px 18px} .t span{color:#F8B400;font-size:.75rem;font-weight:800;letter-spacing:2px}
+.t b{display:block;font-size:1.15rem;margin:4px 0} .t p{margin:0;opacity:.75;font-size:.92rem}
+.t.grande{grid-column:1/-1;flex-direction:row;border:2px solid #F8B400} .t.grande img{width:42%;height:auto;min-height:240px}
+.t.grande div{display:flex;flex-direction:column;justify-content:center;padding:26px} .t.grande b{font-size:1.7rem}
+@media(max-width:640px){.t.grande{flex-direction:column} .t.grande img{width:100%;height:220px}}</style></head><body><div class="w">
 <h1>Marketing con estrategia<br>el material completo del taller</h1>
 <p>Todo lo que viste, más el paso a paso para hacerlo con tu producto.</p>
 
@@ -29,13 +39,14 @@ input[type=text],input[type=tel],input[type=email]{width:100%;box-sizing:border-
 </form></div>
 
 <div id="material" hidden>
-<div class="lista">
-<a href="guia.html"><b>1. El paso a paso con todos los prompts</b><br>Cómo hacerlo desde la web y cómo lo hago yo, paso por paso.</a>
-<a href="informe.html"><b>2. El informe de la investigación</b><br>468 anuncios de 153 marcas en 4 países, explicado fácil.</a>
-<a href="top-10.html"><b>3. Top 10 de anuncios en video e imagen</b><br>Los que más tiempo llevan vendiendo y por qué.</a>
-<a href="politicas.html"><b>4. ¿Meta lo aprueba?</b><br>Las 3 reglas que más tumban anuncios de fajas, con semáforo.</a>
-<a href="comentarios-de-clientas.csv"><b>5. Los 3.715 comentarios de clientas</b><br>Sin nombres, listos para tu análisis.</a>
-<a href="https://joakoestratega.com/editor/" target="_blank" rel="noopener"><b>6. Joako Editor</b><br>Edita tus videos gratis.</a>
+<p class="intro">Empieza por el paso a paso: ahí están <b>los prompts exactos</b> para que la IA busque, descargue y analice todo por ti.</p>
+<div class="tarjetas">
+<a class="t grande" href="guia.html"><img src="img/2667-04-ficha-estrellas.jpg" alt=""><div><span>EMPIEZA AQUÍ</span><b>El paso a paso con todos los prompts</b><p>Cópialos y pégalos en Claude Code. Desde la web también.</p></div></a>
+<a class="t" href="informe.html"><img src="img/top10.png" alt=""><div><span>INVESTIGACIÓN</span><b>El informe</b><p>468 anuncios de 153 marcas en 4 países.</p></div></a>
+<a class="t" href="top-10.html"><img src="anuncios/4167054630177709.jpg" alt=""><div><span>LO QUE VENDE</span><b>Top 10 en video e imagen</b><p>Los que más tiempo llevan prendidos y por qué.</p></div></a>
+<a class="t" href="politicas.html"><img src="img/2667-06-antes-despues-ropa.jpg" alt=""><div><span>ANTES DE PAUTAR</span><b>¿Meta lo aprueba?</b><p>Las 3 reglas que más tumban anuncios de fajas.</p></div></a>
+<a class="t" href="comentarios-de-clientas.csv"><img src="img/2667-05-con-ropa-ni-se-nota.jpg" alt=""><div><span>VOZ DE LA CLIENTA</span><b>3.715 comentarios</b><p>Sin nombres, listos para tu análisis.</p></div></a>
+<a class="t" href="https://joakoestratega.com/editor/" target="_blank" rel="noopener"><img src="img/2667-08-frase-grande.jpg" alt=""><div><span>HERRAMIENTA GRATIS</span><b>Joako Editor</b><p>Edita tus videos sin pagar.</p></div></a>
 </div>
 <h2>Las 10 imágenes que hicimos con base</h2><div class="g"><img src="img/2667-00-otras-vs-nosotros.jpg"><img src="img/2667-01-ficha-flechas.jpg"><img src="img/2667-02-resultado-inmediato.jpg"><img src="img/2667-03-producto-solo.jpg"><img src="img/2667-04-ficha-estrellas.jpg"><img src="img/2667-05-con-ropa-ni-se-nota.jpg"><img src="img/2667-06-antes-despues-ropa.jpg"><img src="img/2667-07-tu-mejor-version.jpg"><img src="img/2667-08-frase-grande.jpg"><img src="img/2667-09-sin-y-con.jpg"></div>
 <h2>Sin base vs. con base</h2><img src="img/sin-base-vs-10.jpg" style="width:100%;border-radius:12px">
