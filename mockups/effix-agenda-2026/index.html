@@ -1,6 +1,5 @@
 <!doctype html>
-<!-- Muestra de la agenda academica Feria Effix 2026 para aprobacion. Sin rastreo y sin indexar.
-     Se genera desde OUTPUT/feria-effix/LANDINGS/agenda-2026/fuente/generar.py -->
+<!-- Muestra de la agenda academica Feria Effix 2026 para aprobacion. Sin rastreo y sin indexar. -->
 <html lang="es">
 <head>
 <meta charset="utf-8">
@@ -108,7 +107,8 @@ img{max-width:100%;height:auto;display:block}
 /* ===== Chips ===== */
 .chip{border-radius:999px;padding:8px 14px;font-size:13px;font-weight:800;background:rgba(0,0,0,.55);border:2px solid rgba(255,255,255,.8);color:#fff;display:inline-flex;align-items:center;gap:7px}
 .chip[aria-pressed=true]{background:#fff;color:#000;border-color:#fff}
-.punto{width:11px;height:11px;border-radius:50%;flex:0 0 auto;box-shadow:0 0 0 2px rgba(255,255,255,.9)}
+.punto{width:11px;height:11px;border-radius:50%;flex:0 0 auto;background:var(--c);box-shadow:0 0 0 2px rgba(255,255,255,.9)}
+.punto.negro{width:14px;height:14px;background:radial-gradient(circle,var(--c) 0 32%,#000 35%);box-shadow:0 0 0 1.5px rgba(255,255,255,.9)}
 
 /* ===== Listado por hora ===== */
 main{padding:22px 18px 70px}
@@ -123,8 +123,8 @@ main{padding:22px 18px 70px}
 .tarjeta.negra:after{content:"";position:absolute;inset:-2px;border-radius:inherit;padding:2px;background:var(--cromo);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none}
 .tarjeta .linea1{display:flex;align-items:center;gap:8px;flex-wrap:wrap;padding-right:40px}
 .aud{font-size:10.5px;font-weight:900;text-transform:uppercase;letter-spacing:.6px;display:inline-flex;align-items:center;gap:6px;background:var(--c);color:var(--ct,#000);border-radius:999px;padding:5px 11px}
-.aud.black{background:var(--cromo);color:#000}
-.aud.black i{font-style:normal;background:#000;color:#fff;border-radius:999px;padding:1px 6px;font-size:9.5px;letter-spacing:.8px}
+.aud.black{background:#000;color:#fff;border:1.5px solid rgba(255,255,255,.75);padding:4px 11px 4px 6px}
+.aud.black .punto.negro{box-shadow:none}
 .hora{font-size:12.5px;font-weight:700;color:#55526a}
 .tarjeta.negra .hora{color:#b9b9c4}
 .nombre{font-weight:900;font-size:18px;line-height:1.12;text-transform:uppercase;letter-spacing:-.2px}
@@ -167,6 +167,7 @@ mark{background:var(--lav2);color:#000;border-radius:4px;padding:0 2px}
 .ponente .mini{display:flex;flex-wrap:wrap;gap:5px;margin-top:8px}
 .ponente .mini i{font-style:normal;font-size:11px;font-weight:800;border-radius:999px;padding:4px 9px;background:var(--lav3);display:inline-flex;gap:6px;align-items:center}
 .ponente .mini .punto{box-shadow:none}
+.ponente .mini .punto.negro{box-shadow:0 0 0 1px #000}
 .letra-h{grid-column:1/-1;margin-top:14px;scroll-margin-top:calc(var(--alto-barra,150px) + 12px)}
 .letra-h span{display:inline-grid;place-items:center;width:52px;height:52px;border-radius:50%;background:var(--lav);font-size:24px;font-weight:900;box-shadow:var(--brillo-lav)}
 
@@ -181,6 +182,7 @@ mark{background:var(--lav2);color:#000;border-radius:4px;padding:0 2px}
 .pin.activo-pin span{display:block;font-size:13px;padding:6px 12px;z-index:2}
 @keyframes salto{to{transform:rotate(-45deg) translate(4px,-4px)}}
 .pin.tenue{opacity:.35}
+.pin.negro i{background:radial-gradient(circle,var(--c) 0 26%,#000 29%)}
 @media(min-width:900px){.pin span{display:block}}
 .leyenda{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:8px;margin-top:14px}
 .leyenda button{display:flex;gap:10px;align-items:center;background:#fff;color:#000;border-radius:var(--r-sm);padding:11px 14px;text-align:left;font-size:13px;font-weight:900;text-transform:uppercase}
@@ -219,6 +221,8 @@ mark{background:var(--lav2);color:#000;border-radius:4px;padding:0 2px}
 .hoja .chip{background:#fff;color:#000;border-color:#000}
 .hoja .chip[aria-pressed=true]{background:#000;color:#fff}
 .hoja .punto{box-shadow:0 0 0 2px #000}
+.hoja .punto.negro{box-shadow:0 0 0 1.5px #000}
+.hoja .aud.black{border-color:#000}
 .pie-hoja{position:sticky;bottom:-26px;background:#fff;padding:14px 0 4px;display:flex;gap:8px;margin-top:16px}
 .pie-hoja .btn{flex:1;justify-content:center}
 .pie-hoja .btn.claro{background:var(--lav3);color:#000;box-shadow:none}
@@ -256,7 +260,18 @@ footer .act{letter-spacing:.3px;font-weight:600;color:var(--lav2);margin-top:8px
   .vista{padding:8px 10px;font-size:11.5px}
   .contador{flex-basis:100%;text-align:right}
   main{padding:18px 14px 60px}
-  .bloque-h b{font-size:21px}
+  .bloque-h{position:static;display:flex;padding:6px 14px;margin-bottom:10px;border-radius:14px;box-shadow:none;gap:10px}
+  .bloque-h b{font-size:17px}
+  .bloque-h span{font-size:10.5px}
+  .bloque{margin-bottom:22px}
+  .barra{padding:8px 0}
+  .buscar{margin-top:8px}
+  .caja input{padding-top:10px;padding-bottom:10px}
+  .vistas{margin-top:8px}
+  .segmento{padding:3px}
+  .vista{padding:7px 10px}
+  .contador{display:none}
+  .dia{padding:7px 12px}
   .nombre{font-size:17px}
   .en-feria .datos{display:none}
   .ahora-fila{grid-auto-columns:minmax(250px,84%)}
@@ -380,8 +395,9 @@ function resaltar(txt){
 const icEstrella='<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.8l2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17.2l-5.7 3.1 1.2-6.4L2.8 9.5l6.4-.8z"/></svg>';
 const icEstrellaV='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2.8l2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17.2l-5.7 3.1 1.2-6.4L2.8 9.5l6.4-.8z"/></svg>';
 
+function punto(a){return `<i class="punto${a.negra?' negro':''}" style="--c:${a.color}"></i>`}
 function etiquetaAud(a){
-  return a.negra?`<span class="aud black"><i>Black</i>${esc(a.corto.replace(/^Black /,''))}</span>`
+  return a.negra?`<span class="aud black">${punto(a)}${esc(a.corto)}</span>`
     :`<span class="aud" style="--c:${a.color};--ct:${a.texto}">${esc(a.corto)}</span>`;
 }
 function tarjeta(s,conDia){
@@ -463,16 +479,16 @@ function vistaPonentes(lista){
   let h=`<nav class="letras" aria-label="Letras">${letras.map(l=>`<a href="#L-${l}">${l}</a>`).join('')}</nav><div class="ponentes">`;let ult='';
   arr.forEach(e=>{const l=clave(e.n)[0].toUpperCase();if(l!==ult){h+=`<div class="letra-h" id="L-${l}"><span>${l}</span></div>`;ult=l}
     e.L.sort((a,b)=>a.dia-b.dia||a.ini-b.ini);
-    h+=`<button class="ponente" data-id="${e.L[0].id}"><b>${resaltar(e.n)}</b><span>${e.L.length} ${e.L.length>1?'charlas':'charla'}</span><div class="mini">${e.L.map(s=>`<i><span class="punto" style="background:${AUD[s.aud].color}"></span>${DIAS_C[s.dia]} ${fh(s.ini)}</i>`).join('')}</div></button>`});
+    h+=`<button class="ponente" data-id="${e.L[0].id}"><b>${resaltar(e.n)}</b><span>${e.L.length} ${e.L.length>1?'charlas':'charla'}</span><div class="mini">${e.L.map(s=>`<i>${punto(AUD[s.aud])}${DIAS_C[s.dia]} ${fh(s.ini)}</i>`).join('')}</div></button>`});
   return h+'</div>';
 }
 function mapaHTML(activo,mini){
   return `<div class="${mini?'mini-mapa':'mapa'}"><img src="mapa-feria-effix-2026.jpg" alt="Mapa de Feria Effix 2026 en Plaza Mayor" loading="lazy">
-   ${ORDEN.filter(a=>!mini||a===activo).map(a=>`<div class="pin ${a===activo?'activo-pin':''} ${activo&&a!==activo?'tenue':''} ${PINES[a][0]<15?'izq':(PINES[a][0]>85||a==='unmerco')?'der':''}" style="left:${PINES[a][0]}%;top:${PINES[a][1]}%;--c:${AUD[a].color}"><i></i>${mini?'':`<span>${esc(AUD[a].corto)}</span>`}</div>`).join('')}</div>`;
+   ${ORDEN.filter(a=>!mini||a===activo).map(a=>`<div class="pin ${a===activo?'activo-pin':''} ${activo&&a!==activo?'tenue':''} ${PINES[a][0]<15?'izq':(PINES[a][0]>85||a==='unmerco')?'der':''} ${AUD[a].negra?'negro':''}" style="left:${PINES[a][0]}%;top:${PINES[a][1]}%;--c:${AUD[a].color}"><i></i>${mini?'':`<span>${esc(AUD[a].corto)}</span>`}</div>`).join('')}</div>`;
 }
 let audMapa=null;
 function vistaMapa(){
-  return mapaHTML(audMapa)+`<div class="leyenda">${ORDEN.map(a=>`<button data-mapa="${a}" aria-pressed="${audMapa===a}"><i class="punto" style="background:${AUD[a].color}"></i><span>${esc(AUD[a].nombre)}<small>${esc(AUD[a].lugar)}</small></span></button>`).join('')}</div>`;
+  return mapaHTML(audMapa)+`<div class="leyenda">${ORDEN.map(a=>`<button data-mapa="${a}" aria-pressed="${audMapa===a}">${punto(AUD[a])}<span>${esc(AUD[a].nombre)}<small>${esc(AUD[a].lugar)}</small></span></button>`).join('')}</div>`;
 }
 function vacio(){
   if(st.dia==='fav'&&!fav.size)return `<div class="vacio"><b>Tu agenda está vacía</b>Toca la ★ en las charlas que quieres ver y aparecen aquí, en orden de hora.</div>`;
@@ -541,7 +557,7 @@ function abrirFicha(id){
 function abrirFiltros(){
   const g=(tit,items)=>`<div class="filtro-g"><h4>${tit}</h4><div class="chips">${items}</div></div>`;
   $('#hoja').innerHTML=`<div class="asa"></div><button class="cerrar" data-cerrar aria-label="Cerrar">×</button><h2 id="hojaTitulo">Filtros</h2>
-   ${g('Auditorio',ORDEN.map(a=>`<button class="chip" data-f="a|${a}" aria-pressed="${st.auds.has(a)}"><i class="punto" style="background:${AUD[a].color}"></i>${esc(AUD[a].corto)}</button>`).join(''))}
+   ${g('Auditorio',ORDEN.map(a=>`<button class="chip" data-f="a|${a}" aria-pressed="${st.auds.has(a)}">${punto(AUD[a])}${esc(AUD[a].corto)}</button>`).join(''))}
    ${g('Tema',TEMAS.map(t=>`<button class="chip" data-f="t|${esc(t)}" aria-pressed="${st.temas.has(t)}">${esc(t)}</button>`).join(''))}
    ${g('Momento del día',Object.entries(FRANJAS).map(([k,v])=>`<button class="chip" data-f="f|${k}" aria-pressed="${st.franjas.has(k)}">${v[0]}</button>`).join(''))}
    <div class="pie-hoja"><button class="btn claro" data-limpiar>Quitar todo</button><button class="btn negro" data-cerrar id="verRes"></button></div>`;
