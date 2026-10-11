@@ -325,6 +325,18 @@ footer .act{letter-spacing:.3px;font-weight:600;color:var(--lav2);margin-top:8px
 @media(max-width:640px){.dia.fav{display:none}.fav-movil{display:inline-flex;padding:12px 12px}#abrirFiltros{padding:12px 12px}}
 @media(max-width:640px){.txt-f{display:none}.dia-black:before{content:'✦ ';color:#d9d9d9}.dia-black[aria-pressed=true]:before{color:#000}}
 @media(max-width:400px){.dias{gap:4px}.dia{padding:7px 7px;font-size:11.5px}}
+
+/* franja Black dentro de la grilla */
+.g-franja{margin:3px;border-radius:14px;background:radial-gradient(120% 200% at 0% 0%,#2b2b2e,#000 60%);border:1.5px solid #bdbdbd;display:flex;flex-wrap:wrap;gap:6px;padding:6px;min-height:20px}
+.g-black{display:flex;align-items:center;gap:10px;flex-wrap:wrap;text-align:left;color:#fff;background:rgba(255,255,255,.06);border-radius:10px;padding:8px 12px;flex:1 1 280px}
+.g-black:hover{background:rgba(255,255,255,.12)}
+.g-black b{font-size:12px;font-weight:800;color:#d6d6de}
+.g-black strong{font-weight:900;text-transform:uppercase;font-size:13.5px}
+.g-black small{font-size:11px;color:#bdbdc8;font-weight:700;text-transform:uppercase;letter-spacing:.6px}
+.g-black i{font-style:normal;color:#f5c400}
+.g-black .aud.exclusivo{font-size:9.5px;padding:4px 9px}
+.g-sigue{margin:3px;border-radius:10px;background:var(--cs,#fff);color:#3c3950;font-size:10.5px;font-weight:800;text-transform:uppercase;letter-spacing:.3px;padding:6px 8px;text-align:center;opacity:.9;border:1.5px dashed rgba(0,0,0,.25)}
+.g-sigue.apagada{opacity:.12}
 </style>
 </head>
 <body>
@@ -515,23 +527,40 @@ function vistaHora(lista){
 }
 function vistaGrilla(){
   if(st.dia==='fav'||!GRILLA[st.dia])return vistaHora(DATA.filter(s=>pasa(s)));
-  const filas=GRILLA[st.dia],dia=st.dia;
+  const dia=st.dia,NC=ORDEN_G.length;
+  const acad=DATA.filter(s=>s.dia===dia&&s.aud!=='black');
   const bl=DATA.filter(s=>s.dia===dia&&s.aud==='black'&&pasa(s)).sort(o);
-  let pre=avisoDia()+(bl.length?`<section class="bloque"><div class="bloque-h"><b>Experiencia Black</b><span>${bl.length} actividades</span></div><div class="ahora-fila">${bl.map(s=>tarjeta(s)).join('')}</div></section>`:'');
-  let h=pre+`<div class="grilla-scroll"><div class="grilla" style="grid-template-columns:84px repeat(${ORDEN_G.length},minmax(210px,1fr));grid-template-rows:auto repeat(${filas.length},minmax(96px,auto))">`;
+  // horas de la fila: las de la grilla del volante mas las horas en que empieza algo Black
+  const T=[...new Set([...GRILLA[dia].map(f=>f[0]),...bl.map(s=>s.ini)])].sort((a,b)=>a-b);
+  // numero de fila de cada hora: si a esa hora empieza algo Black, primero va su franja y debajo las columnas
+  let gr=2;const filaFranja={},filaCeldas={};
+  T.forEach(t=>{if(bl.some(s=>s.ini===t))filaFranja[t]=gr++;filaCeldas[t]=gr++});
+  const conCharla=t=>acad.some(s=>s.ini<=t&&t<s.fin);
+  const deGrilla=new Set(GRILLA[dia].map(f=>f[0])),bandas=new Set(Object.values(filaFranja));
+  const altos=[];for(let r=2;r<gr;r++){const t=T.find(x=>filaCeldas[x]===r);altos.push(t===undefined?'auto':(!conCharla(t)?'0px':(deGrilla.has(t)?'minmax(92px,auto)':'minmax(40px,auto)')))}
+  let h=avisoDia()+`<div class="grilla-scroll"><div class="grilla" style="grid-template-columns:84px repeat(${NC},minmax(210px,1fr));grid-template-rows:auto ${altos.join(' ')}">`;
   h+=`<div class="g-esq" style="grid-row:1;grid-column:1">HORA</div>`;
   ORDEN_G.forEach((a,i)=>{h+=`<div class="g-cab ${AUD[a].negra?'black':''}" style="grid-row:1;grid-column:${i+2};--c:${AUD[a].color};--ct:${AUD[a].texto}">${esc(AUD[a].nombre)}<small>(${esc(AUD[a].lugar)})</small></div>`});
-  filas.forEach((f,r)=>{h+=`<div class="g-hora" style="grid-row:${r+2};grid-column:1">${fh(f[0]).replace(' ','<br>')}</div>`});
+  T.forEach(t=>{const r0=filaFranja[t]||filaCeldas[t];h+=`<div class="g-hora" data-t="${t}" data-fila="${filaCeldas[t]}" style="grid-row:${r0}/${filaCeldas[t]+1};grid-column:1">${fh(t).replace(' ','<br>')}</div>`});
   const ocupado=new Set();
-  DATA.filter(s=>s.dia===dia&&s.aud!=='black').forEach(s=>{
-    const c=ORDEN_G.indexOf(s.aud)+2,r0=filas.findIndex(f=>f[0]===s.ini);
-    let r1=r0;while(r1+1<filas.length&&filas[r1+1][0]<s.fin)r1++;
+  acad.forEach(s=>{
+    const c=ORDEN_G.indexOf(s.aud)+2,r0=filaCeldas[s.ini];
+    let ult=s.ini;T.forEach(t=>{if(t>=s.ini&&t<s.fin)ult=t});
+    const r1=filaCeldas[ult];
     for(let r=r0;r<=r1;r++)ocupado.add(r+'|'+c);
     const a=AUD[s.aud],ok=pasa(s);
-    h+=`<article class="g-celda ${a.negra?'negra':''} ${ok?'':'apagada'} ${fav.has(s.id)?'es-fav':''}" style="grid-row:${r0+2}/${r1+3};grid-column:${c};--cs:${a.claro}" data-id="${s.id}" tabindex="0" role="button">
+    // si una franja Black cae en medio de la charla, la charla se parte: arriba la tarjeta, debajo "sigue"
+    const tramos=[];let ini=r0;for(let r=r0;r<=r1;r++){if(bandas.has(r)){if(r>ini)tramos.push([ini,r-1]);ini=r+1}}if(ini<=r1)tramos.push([ini,r1]);
+    tramos.slice(1).forEach(x=>{h+=`<button class="g-sigue ${ok?'':'apagada'}" style="grid-row:${x[0]}/${x[1]+1};grid-column:${c};--cs:${a.claro}" data-id="${s.id}">↳ Sigue · ${esc(s.nombre)} · hasta ${fh(s.fin)}</button>`});
+    const ra=tramos[0][1];
+    h+=`<article class="g-celda ${a.negra?'negra':''} ${ok?'':'apagada'} ${fav.has(s.id)?'es-fav':''}" style="grid-row:${r0}/${ra+1};grid-column:${c};--cs:${a.claro}" data-id="${s.id}" tabindex="0" role="button">
       <div class="hora">${fh(s.ini)} – ${fh(s.fin)}${fav.has(s.id)?' · ★':''}</div><div class="nombre">${resaltar(s.nombre)}</div>${s.cargo?`<div class="cargo">${resaltar(s.cargo)}</div>`:''}${s.tema?`<div class="tema">${resaltar(s.tema)}</div>`:''}</article>`;
   });
-  filas.forEach((f,r)=>ORDEN_G.forEach((a,i)=>{if(!ocupado.has(r+'|'+(i+2)))h+=`<div class="g-x" style="grid-row:${r+2};grid-column:${i+2}">×</div>`}));
+  // franja Black: todo el ancho, en su hora exacta
+  T.forEach(t=>{const r=filaFranja[t];if(!r)return;const items=bl.filter(s=>s.ini===t);
+    h+=`<div class="g-franja" style="grid-row:${r};grid-column:2/${NC+2}">${items.map(s=>`<button class="g-black" data-id="${s.id}"><span class="aud exclusivo">✦ Exclusivo Experiencia Black</span><b>${fh(s.ini)} – ${fh(s.fin)}</b><strong>${resaltar(s.nombre)}</strong>${s.donde?`<small>${esc(s.donde)}</small>`:''}${fav.has(s.id)?'<i>★</i>':''}</button>`).join('')}</div>`;
+  });
+  T.forEach(t=>{if(!conCharla(t))return;const r=filaCeldas[t];ORDEN_G.forEach((a,i)=>{if(!ocupado.has(r+'|'+(i+2)))h+=`<div class="g-x" style="grid-row:${r};grid-column:${i+2}">×</div>`})});
   return h+'</div></div>';
 }
 function personas(n){
