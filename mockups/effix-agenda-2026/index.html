@@ -1,0 +1,604 @@
+<!doctype html>
+<!-- Muestra de la agenda academica Feria Effix 2026 para aprobacion. Sin rastreo y sin indexar.
+     Se genera desde OUTPUT/feria-effix/LANDINGS/agenda-2026/fuente/generar.py -->
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Agenda académica oficial · Feria Effix 2026</title>
+<meta name="description" content="Agenda académica oficial de Feria Effix 2026: 9 auditorios, viernes 16, sábado 17 y domingo 18 de octubre en Plaza Mayor Medellín.">
+<meta name="theme-color" content="#000000">
+<meta property="og:title" content="Agenda académica oficial · Feria Effix 2026">
+<meta property="og:description" content="Busca por ponente o tema, filtra por auditorio y arma tu agenda.">
+<link rel="icon" href="favicon-32.png" sizes="32x32">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta name="robots" content="noindex, nofollow">
+<meta name="referrer" content="no-referrer">
+<link rel="preload" href="montserrat.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="titulo-agenda-academica.png" as="image">
+<style>@font-face{font-family:"Montserrat";src:url(montserrat.woff2) format("woff2");font-weight:100 900;font-display:swap}
+:root{
+  --negro:#000;--blanco:#fff;--lav:#726E8D;--lav2:#B6B2C9;--lav3:#ECEBF2;--noche:#0A0A0F;
+  --r:25px;--r-sm:16px;--r-lg:50px;
+  --cromo:linear-gradient(135deg,#f4f4f4 0%,#9b9b9b 22%,#ffffff 45%,#7d7d7d 70%,#e9e9e9 100%);
+  --brillo-lav:0 0 0 1px rgba(255,255,255,.08),0 10px 34px rgba(114,110,141,.65);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+body{font-family:"Montserrat",system-ui,sans-serif;background:#07060b;color:#fff;min-height:100vh;line-height:1.4}
+body:before{content:"";position:fixed;inset:0;z-index:-2;background:url(fondo-seda.webp) center/cover no-repeat}
+body:after{content:"";position:fixed;inset:0;z-index:-1;background:
+  url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 .09 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>"),
+  linear-gradient(180deg,rgba(5,4,10,.55),rgba(5,4,10,.82))}
+button,input{font:inherit;color:inherit}
+button{cursor:pointer;border:0;background:none}
+img{max-width:100%;height:auto;display:block}
+:focus-visible{outline:3px solid var(--lav2);outline-offset:3px}
+.contenedor{max-width:1280px;margin:0 auto;padding:0 18px}
+
+/* ===== Portada ===== */
+.portada{position:relative;overflow:hidden;text-align:center;padding:34px 18px 48px;isolation:isolate}
+.portada-foto{position:absolute;inset:0;z-index:-2;background:url(foto-auditorio.webp) center 35%/cover no-repeat;filter:grayscale(.55) contrast(1.1) brightness(.8)}
+.portada-foto:after{content:"";position:absolute;inset:0;background:
+  linear-gradient(180deg,rgba(7,6,11,.55) 0%,rgba(30,27,46,.55) 40%,rgba(7,6,11,.92) 82%,#07060b 100%),
+  linear-gradient(90deg,rgba(114,110,141,.35),rgba(114,110,141,0) 40%,rgba(114,110,141,0) 60%,rgba(114,110,141,.35))}
+.logo-h{width:min(460px,78vw);margin:0 auto 26px;filter:drop-shadow(0 10px 26px rgba(0,0,0,.6))}
+.titulo{position:relative;display:inline-block;margin:0 auto}
+.titulo img{position:relative;z-index:2;width:min(720px,88vw);filter:drop-shadow(0 14px 28px rgba(0,0,0,.55))}
+.titulo h1{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+.rotulo{position:relative;z-index:1;display:inline-block;margin-top:-6px;background:var(--lav);color:#fff;font-weight:800;text-transform:uppercase;letter-spacing:2px;font-size:clamp(13px,2.6vw,17px);padding:12px 26px;border-radius:0 0 22px 22px;box-shadow:0 12px 30px rgba(0,0,0,.4)}
+.datos{display:flex;flex-wrap:wrap;justify-content:center;gap:12px;max-width:1040px;margin:30px auto 0;background:#000;border:1px solid rgba(255,255,255,.14);border-radius:var(--r-lg);padding:14px 18px;box-shadow:0 20px 50px rgba(0,0,0,.55)}
+.dato-p{display:flex;align-items:center;gap:12px;text-align:left;padding:4px 14px;flex:1 1 220px}
+.dato-p .ic{width:46px;height:46px;border-radius:50%;background:#fff;color:#000;display:grid;place-items:center;flex:0 0 auto}
+.dato-p .ic svg{width:22px;height:22px}
+.dato-p b{display:block;font-weight:900;text-transform:uppercase;font-size:15px;letter-spacing:.3px}
+.dato-p span{font-size:13.5px;color:var(--lav2);font-weight:500}
+
+/* ===== Estado (antes / durante) ===== */
+.estado{max-width:1040px;margin:22px auto 0}
+.cuenta-barra{background:var(--lav);border-radius:var(--r-lg);padding:18px 22px;display:flex;align-items:center;justify-content:center;gap:18px;flex-wrap:wrap;box-shadow:var(--brillo-lav)}
+.cuenta-barra p{font-weight:800;text-transform:uppercase;letter-spacing:1px;font-size:15px}
+.digitos{display:flex;gap:14px}
+.grupo{text-align:center}
+.grupo .ds{display:flex;gap:4px}
+.grupo i{font-style:normal;background:#fff;color:#000;font-weight:900;font-size:30px;line-height:1;border-radius:10px;width:36px;padding:8px 0;display:block;box-shadow:inset 0 -3px 0 rgba(0,0,0,.12)}
+.grupo small{display:block;font-size:11px;font-weight:700;margin-top:5px;text-transform:uppercase;letter-spacing:.5px;color:#f1f0f6}
+.interes{margin-top:16px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;justify-content:center}
+.interes b{font-weight:900;text-transform:uppercase;font-size:13px;letter-spacing:1px;margin-right:4px}
+.chips-rapidos{display:flex;gap:8px;flex-wrap:wrap;justify-content:center}
+.caja-blanca{display:inline-block;background:#fff;color:#000;border-radius:var(--r);padding:12px 22px;font-weight:900;text-transform:uppercase;font-size:clamp(18px,3.4vw,26px);line-height:1.05;letter-spacing:.2px}
+.en-vivo{text-align:left}
+.en-vivo h3{display:flex;align-items:center;gap:10px;margin:18px 0 0;font-size:clamp(17px,3vw,22px)}
+.en-vivo h3 small{font-size:12px;font-weight:800;color:var(--lav);letter-spacing:1px}
+.vivo{width:12px;height:12px;border-radius:50%;background:#ff2d2d;box-shadow:0 0 0 0 rgba(255,45,45,.7);animation:pulso 1.6s infinite;flex:0 0 auto}
+@keyframes pulso{70%{box-shadow:0 0 0 10px rgba(255,45,45,0)}100%{box-shadow:0 0 0 0 rgba(255,45,45,0)}}
+.ahora-fila{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(260px,310px);gap:12px;overflow-x:auto;padding:14px 2px 8px;scroll-snap-type:x mandatory}
+.ahora-fila>*{scroll-snap-align:start}
+
+/* ===== Barra pegada ===== */
+.barra{position:sticky;top:0;z-index:30;background:rgba(0,0,0,.9);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid rgba(255,255,255,.1);padding:12px 0;box-shadow:0 14px 30px rgba(0,0,0,.45)}
+.dias{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;align-items:center}
+.dias::-webkit-scrollbar{display:none}
+.dia{flex:0 0 auto;border-radius:999px;padding:10px 18px;font-weight:900;text-transform:uppercase;font-size:14px;letter-spacing:.4px;border:2px solid rgba(255,255,255,.85);color:#fff;white-space:nowrap}
+.dia small{font-weight:600;text-transform:none;letter-spacing:0;opacity:.75;margin-left:4px}
+.dia[aria-pressed=true]{background:#fff;color:#000;border-color:#fff;box-shadow:0 0 22px rgba(255,255,255,.35)}
+.dia.fav{margin-left:auto;background:var(--lav);border-color:var(--lav);box-shadow:var(--brillo-lav)}
+.dia.fav[aria-pressed=true]{background:#fff;color:#000;border-color:#fff}
+.dia.fav b{display:inline-block;min-width:22px;border-radius:999px;background:#fff;color:#000;font-size:12px;padding:1px 7px;margin-left:6px}
+.dia.fav[aria-pressed=true] b{background:var(--lav);color:#fff}
+.buscar{display:flex;gap:8px;margin-top:10px}
+.caja{flex:1;position:relative}
+.caja input{width:100%;border-radius:999px;border:0;background:#fff;color:#000;padding:13px 42px 13px 46px;font-size:16px;font-weight:600}
+.caja input::placeholder{color:#8a879c;font-weight:500}
+.caja svg{position:absolute;left:16px;top:50%;transform:translateY(-50%);width:19px;height:19px;color:#000}
+.caja .x{position:absolute;right:8px;top:50%;transform:translateY(-50%);width:30px;height:30px;border-radius:50%;background:var(--lav3);color:#000;font-weight:900;display:none}
+.btn{border-radius:999px;padding:12px 20px;font-weight:900;font-size:13.5px;text-transform:uppercase;letter-spacing:1px;background:var(--lav);color:#fff;display:inline-flex;align-items:center;gap:8px;white-space:nowrap;box-shadow:var(--brillo-lav)}
+.btn.blanco{background:#fff;color:#000;box-shadow:0 8px 24px rgba(0,0,0,.35)}
+.btn .n{background:#fff;color:#000;border-radius:999px;font-size:11px;padding:1px 7px;letter-spacing:0}
+.vistas{display:flex;align-items:center;gap:10px;margin-top:10px;flex-wrap:wrap}
+.segmento{display:inline-flex;background:#fff;border-radius:999px;padding:4px;gap:2px}
+.vista{border-radius:999px;padding:8px 14px;font-size:12.5px;font-weight:800;text-transform:uppercase;letter-spacing:.4px;color:#000}
+.vista[aria-pressed=true]{background:#000;color:#fff}
+.contador{margin-left:auto;font-size:12.5px;color:var(--lav2);font-weight:700;text-transform:uppercase;letter-spacing:.6px}
+.activos{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.activos:empty{display:none}
+.activo{border-radius:999px;background:var(--lav);font-size:12px;font-weight:800;padding:5px 11px;display:inline-flex;gap:7px;align-items:center;color:#fff}
+.activo button{font-weight:900;color:#fff;opacity:.8}
+
+/* ===== Chips ===== */
+.chip{border-radius:999px;padding:8px 14px;font-size:13px;font-weight:800;background:rgba(0,0,0,.55);border:2px solid rgba(255,255,255,.8);color:#fff;display:inline-flex;align-items:center;gap:7px}
+.chip[aria-pressed=true]{background:#fff;color:#000;border-color:#fff}
+.punto{width:11px;height:11px;border-radius:50%;flex:0 0 auto;box-shadow:0 0 0 2px rgba(255,255,255,.9)}
+
+/* ===== Listado por hora ===== */
+main{padding:22px 18px 70px}
+.bloque{margin-bottom:30px}
+.bloque-h{position:sticky;top:calc(var(--alto-barra,150px) + 8px);z-index:5;display:inline-flex;align-items:baseline;gap:12px;background:#fff;color:#000;border-radius:var(--r);padding:9px 20px;margin-bottom:12px;box-shadow:0 10px 26px rgba(0,0,0,.45)}
+.bloque-h b{font-size:24px;font-weight:900;text-transform:uppercase;letter-spacing:-.3px}
+.bloque-h span{font-size:11.5px;color:var(--lav);font-weight:800;text-transform:uppercase;letter-spacing:1px}
+.rejilla{display:grid;grid-template-columns:repeat(auto-fill,minmax(292px,1fr));gap:14px}
+.tarjeta{position:relative;background:#fff;color:#000;border-radius:var(--r);padding:16px 18px 16px;text-align:left;width:100%;display:flex;flex-direction:column;gap:7px;box-shadow:0 14px 34px rgba(0,0,0,.45);overflow:hidden;transition:transform .15s,box-shadow .15s;cursor:pointer}
+.tarjeta:hover{transform:translateY(-3px);box-shadow:0 18px 40px rgba(0,0,0,.55)}
+.tarjeta.negra{background:linear-gradient(160deg,#1d1d1b 0%,#0b0b0e 60%);color:#fff;border:2px solid transparent;background-clip:padding-box}
+.tarjeta.negra:after{content:"";position:absolute;inset:-2px;border-radius:inherit;padding:2px;background:var(--cromo);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none}
+.tarjeta .linea1{display:flex;align-items:center;gap:8px;flex-wrap:wrap;padding-right:40px}
+.aud{font-size:10.5px;font-weight:900;text-transform:uppercase;letter-spacing:.6px;display:inline-flex;align-items:center;gap:6px;background:var(--c);color:var(--ct,#000);border-radius:999px;padding:5px 11px}
+.aud.black{background:var(--cromo);color:#000}
+.aud.black i{font-style:normal;background:#000;color:#fff;border-radius:999px;padding:1px 6px;font-size:9.5px;letter-spacing:.8px}
+.hora{font-size:12.5px;font-weight:700;color:#55526a}
+.tarjeta.negra .hora{color:#b9b9c4}
+.nombre{font-weight:900;font-size:18px;line-height:1.12;text-transform:uppercase;letter-spacing:-.2px}
+.cargo{font-size:12.5px;color:#55526a;font-weight:500}
+.tarjeta.negra .cargo{color:var(--lav2)}
+.tema{font-size:14.5px;font-weight:600;line-height:1.35}
+.estrella{position:absolute;top:10px;right:10px;width:40px;height:40px;border-radius:50%;display:grid;place-items:center;color:#a5a2b6;z-index:2;background:rgba(255,255,255,0)}
+.estrella svg{width:24px;height:24px}
+.estrella[aria-pressed=true]{color:#fff;background:var(--lav);box-shadow:var(--brillo-lav)}
+.cruce{font-size:11.5px;font-weight:800;color:#8c1d18;background:#fde7e5;border-radius:12px;padding:6px 10px}
+mark{background:var(--lav2);color:#000;border-radius:4px;padding:0 2px}
+.vacio{border-radius:var(--r-lg);background:#fff;color:#000;padding:38px 24px;text-align:center;max-width:620px;margin:20px auto}
+.vacio b{display:block;font-weight:900;text-transform:uppercase;font-size:22px;margin-bottom:8px}
+
+/* ===== Grilla (como el volante) ===== */
+.grilla-scroll{overflow:auto;border-radius:var(--r);max-height:calc(100vh - var(--alto-barra,150px) - 30px);background:#000;border:1px solid rgba(255,255,255,.14);box-shadow:0 20px 50px rgba(0,0,0,.55)}
+.grilla{display:grid;min-width:calc(86px + 9 * 214px)}
+.g-cab{position:sticky;top:0;z-index:4;background:var(--c);color:var(--ct,#000);padding:12px 8px;font-size:12px;font-weight:900;text-transform:uppercase;text-align:center;line-height:1.1;display:flex;flex-direction:column;justify-content:center;gap:3px;border-right:2px solid #000}
+.g-cab.black{background:#000;color:#fff;border-bottom:3px solid #c9c9c9}
+.g-cab small{font-weight:500;text-transform:none;font-size:11.5px;opacity:.85}
+.g-hora{position:sticky;left:0;z-index:3;background:#000;font-weight:900;font-size:14px;padding:10px 6px;text-align:center;border-top:1px solid #222;text-transform:uppercase;line-height:1.05}
+.g-esq{position:sticky;left:0;top:0;z-index:6;background:#000;display:grid;place-items:center;font-weight:900;font-size:12px}
+.g-celda{margin:3px;border-radius:14px;background:var(--cs,#fff);color:#000;padding:10px 10px;text-align:center;position:relative;overflow:hidden;display:flex;flex-direction:column;justify-content:center;gap:3px;min-height:80px;cursor:pointer}
+.g-celda.negra{background:#fff}
+.g-celda .nombre{font-size:12.5px}
+.g-celda .cargo{font-size:11px}
+.g-celda .tema{font-size:11.5px;font-weight:600}
+.g-celda .hora{font-size:10.5px}
+.g-celda.apagada{opacity:.12}
+.g-celda.es-fav{box-shadow:inset 0 0 0 3px var(--lav)}
+.g-x{margin:3px;border-radius:14px;background:rgba(255,255,255,.04);display:grid;place-items:center;color:#444;font-weight:900}
+
+/* ===== Ponentes ===== */
+.letras{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:16px}
+.letras a{width:34px;height:34px;display:grid;place-items:center;border-radius:50%;background:#fff;color:#000;font-weight:900;font-size:13px;text-decoration:none}
+.ponentes{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:10px}
+.ponente{background:#fff;color:#000;border-radius:var(--r);padding:14px 16px;text-align:left;width:100%;box-shadow:0 10px 26px rgba(0,0,0,.4)}
+.ponente b{font-weight:900;text-transform:uppercase;font-size:15px;display:block}
+.ponente span{font-size:12px;color:#55526a;font-weight:600}
+.ponente .mini{display:flex;flex-wrap:wrap;gap:5px;margin-top:8px}
+.ponente .mini i{font-style:normal;font-size:11px;font-weight:800;border-radius:999px;padding:4px 9px;background:var(--lav3);display:inline-flex;gap:6px;align-items:center}
+.ponente .mini .punto{box-shadow:none}
+.letra-h{grid-column:1/-1;margin-top:14px;scroll-margin-top:calc(var(--alto-barra,150px) + 12px)}
+.letra-h span{display:inline-grid;place-items:center;width:52px;height:52px;border-radius:50%;background:var(--lav);font-size:24px;font-weight:900;box-shadow:var(--brillo-lav)}
+
+/* ===== Mapa ===== */
+.mapa{position:relative;border-radius:var(--r);overflow:hidden;background:#111;box-shadow:0 20px 50px rgba(0,0,0,.55)}
+.mapa img{width:100%;height:auto}
+.pin{position:absolute;transform:translate(-50%,-100%);display:flex;flex-direction:column;align-items:center;pointer-events:none}
+.pin i{width:26px;height:26px;border-radius:50% 50% 50% 0;transform:rotate(-45deg);background:var(--c);border:3px solid #fff;box-shadow:0 4px 12px rgba(0,0,0,.55)}
+.pin span{display:none;position:absolute;bottom:calc(100% + 4px);background:#000;color:#fff;font-size:11px;font-weight:900;text-transform:uppercase;border-radius:999px;padding:4px 9px;white-space:nowrap;border:2px solid #fff}
+.pin.izq span{left:-6px}.pin.der span{right:-6px}
+.pin.activo-pin i{width:42px;height:42px;animation:salto 1s infinite alternate}
+.pin.activo-pin span{display:block;font-size:13px;padding:6px 12px;z-index:2}
+@keyframes salto{to{transform:rotate(-45deg) translate(4px,-4px)}}
+.pin.tenue{opacity:.35}
+@media(min-width:900px){.pin span{display:block}}
+.leyenda{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:8px;margin-top:14px}
+.leyenda button{display:flex;gap:10px;align-items:center;background:#fff;color:#000;border-radius:var(--r-sm);padding:11px 14px;text-align:left;font-size:13px;font-weight:900;text-transform:uppercase}
+.leyenda button[aria-pressed=true]{background:var(--lav);color:#fff}
+.leyenda small{display:block;color:#55526a;font-weight:600;text-transform:none}
+.leyenda button[aria-pressed=true] small{color:#eceaf4}
+.mini-mapa{position:relative;border-radius:18px;overflow:hidden;margin-top:14px}
+
+/* ===== Hoja ===== */
+.velo{position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:50;opacity:0;pointer-events:none;transition:opacity .2s}
+.velo.abierto{opacity:1;pointer-events:auto}
+.hoja{position:fixed;left:0;right:0;bottom:0;z-index:60;background:#fff;color:#000;border-radius:32px 32px 0 0;max-height:90vh;overflow:auto;transform:translateY(105%);transition:transform .25s ease;padding:10px 22px calc(26px + env(safe-area-inset-bottom))}
+.hoja.abierta{transform:none}
+@media(min-width:760px){.hoja{left:50%;right:auto;width:660px;bottom:auto;top:50%;border-radius:36px;transform:translate(-50%,-40%) scale(.97);opacity:0;pointer-events:none;transition:all .2s}
+.hoja.abierta{transform:translate(-50%,-50%);opacity:1;pointer-events:auto}}
+.asa{width:46px;height:5px;border-radius:9px;background:#ddd;margin:2px auto 14px}
+.cerrar{position:sticky;top:0;float:right;width:40px;height:40px;border-radius:50%;background:#000;color:#fff;font-weight:900;font-size:18px;z-index:2}
+.hoja h2{font-weight:900;text-transform:uppercase;font-size:26px;line-height:1.05;margin:12px 0 4px;padding-right:46px}
+.hoja .cargo{font-size:14px;color:#55526a}
+.hoja .tema{font-size:19px;font-weight:700;margin-top:12px}
+.dato{display:flex;gap:12px;align-items:center;margin-top:14px;font-size:15px;font-weight:800}
+.dato .ic{width:42px;height:42px;border-radius:50%;background:#000;color:#fff;display:grid;place-items:center;flex:0 0 auto}
+.dato .ic svg{width:20px;height:20px}
+.dato small{display:block;color:#55526a;font-weight:600}
+.acciones{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:8px;margin-top:20px}
+.acciones .btn{justify-content:center;padding:14px 10px;white-space:normal;text-align:center;font-size:12.5px;line-height:1.2}
+.acciones .btn.negro{background:#000;color:#fff;box-shadow:none}
+.acciones .btn.claro{background:var(--lav3);color:#000;box-shadow:none}
+.otras{margin-top:20px}
+.otras h4{font-size:12px;font-weight:900;text-transform:uppercase;letter-spacing:1px;color:var(--lav);margin-bottom:8px}
+.otra{display:block;width:100%;text-align:left;background:var(--lav3);border-radius:16px;padding:11px 14px;margin-bottom:6px;font-size:13px}
+.otra b{font-weight:900}
+.filtro-g{margin-top:16px}
+.filtro-g h4{font-size:12px;font-weight:900;text-transform:uppercase;letter-spacing:1px;color:var(--lav);margin-bottom:8px}
+.filtro-g .chips{display:flex;flex-wrap:wrap;gap:7px}
+.hoja .chip{background:#fff;color:#000;border-color:#000}
+.hoja .chip[aria-pressed=true]{background:#000;color:#fff}
+.hoja .punto{box-shadow:0 0 0 2px #000}
+.pie-hoja{position:sticky;bottom:-26px;background:#fff;padding:14px 0 4px;display:flex;gap:8px;margin-top:16px}
+.pie-hoja .btn{flex:1;justify-content:center}
+.pie-hoja .btn.claro{background:var(--lav3);color:#000;box-shadow:none}
+.pie-hoja .btn.negro{background:#000;color:#fff;box-shadow:none}
+
+.aviso{position:fixed;left:50%;bottom:22px;transform:translateX(-50%) translateY(140px);background:#fff;color:#000;font-weight:800;font-size:14px;border-radius:999px;padding:13px 22px;z-index:80;transition:transform .25s;box-shadow:0 14px 34px rgba(0,0,0,.5);max-width:92vw;text-align:center}
+.aviso.ver{transform:translateX(-50%)}
+footer{padding:34px 18px 46px;text-align:center}
+footer img{width:180px;margin:0 auto 14px;opacity:.95}
+footer p{font-size:12px;font-weight:800;letter-spacing:3px;color:#fff}
+footer .act{letter-spacing:.3px;font-weight:600;color:var(--lav2);margin-top:8px;font-size:12px}
+.corto{display:none}
+
+@media(max-width:640px){
+  .portada{padding:24px 14px 34px}
+  .logo-h{width:72vw;margin-bottom:18px}
+  .datos{border-radius:30px;padding:10px 12px;gap:4px}
+  .dato-p{flex:1 1 100%;padding:4px 2px;gap:10px}
+  .dato-p .ic{width:34px;height:34px}
+  .dato-p .ic svg{width:18px;height:18px}
+  .dato-p b{font-size:13px}
+  .dato-p span{font-size:12.5px}
+  .rotulo{font-size:12px;padding:10px 20px}
+  .datos{margin-top:22px}
+  .cuenta-barra{border-radius:30px;padding:16px 12px;gap:12px}
+  .grupo i{font-size:24px;width:29px;padding:7px 0}
+  .digitos{gap:10px}
+  .chips-rapidos{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;justify-content:flex-start;width:100%;padding-bottom:4px}
+  .chips-rapidos .chip{flex:0 0 auto}
+  .largo{display:none}.corto{display:inline}
+  .dia{padding:9px 13px;font-size:13px}
+  .dia small{display:none}
+  .caja input{padding:12px 34px 12px 42px;font-size:15.5px}
+  .btn{padding:12px 14px;font-size:12.5px}
+  .vista{padding:8px 10px;font-size:11.5px}
+  .contador{flex-basis:100%;text-align:right}
+  main{padding:18px 14px 60px}
+  .bloque-h b{font-size:21px}
+  .nombre{font-size:17px}
+  .en-feria .datos{display:none}
+  .ahora-fila{grid-auto-columns:minmax(250px,84%)}
+}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+.dias .dia{box-shadow:none!important}
+</style>
+</head>
+<body>
+<header class="portada">
+  <div class="portada-foto" aria-hidden="true"></div>
+  <img class="logo-h" src="logo-feria-effix-2026-horizontal.png" alt="Feria Effix 2026" width="1200" height="242">
+  <div class="titulo">
+    <img src="titulo-agenda-academica.png" alt="" width="1400" height="345">
+    <h1>Agenda académica oficial · Feria Effix 2026</h1>
+  </div>
+  <div><span class="rotulo">Programación oficial</span></div>
+  <div class="datos">
+    <div class="dato-p"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="5" width="17" height="15.5" rx="3"/><path d="M3.5 10h17M8 3v4M16 3v4"/></svg></span><div><b>Fechas</b><span>Viernes 16, sábado 17 y domingo 18 de octubre</span></div></div>
+    <div class="dato-p"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.6"/></svg></span><div><b>Lugar</b><span>Plaza Mayor · Medellín</span></div></div>
+    <div class="dato-p"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5.5 11a6.5 6.5 0 0 0 13 0M12 17.5V21M8.5 21h7"/></svg></span><div><b>9 auditorios</b><span><span id="totalCharlas"></span> charlas</span></div></div>
+  </div>
+  <section class="estado" id="estado" aria-live="polite"></section>
+</header>
+
+<div class="barra" id="barra">
+  <div class="contenedor">
+    <div class="dias" role="group" aria-label="Día">
+      <button class="dia" data-dia="16"><span class="largo">Viernes</span><span class="corto">Vie 16</span> <small>16 oct</small></button>
+      <button class="dia" data-dia="17"><span class="largo">Sábado</span><span class="corto">Sáb 17</span> <small>17 oct</small></button>
+      <button class="dia" data-dia="18"><span class="largo">Domingo</span><span class="corto">Dom 18</span> <small>18 oct</small></button>
+      <button class="dia fav" data-dia="fav">★ <span class="largo">Mi agenda</span> <b id="nFav">0</b></button>
+    </div>
+    <div class="buscar">
+      <label class="caja">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+        <input id="q" type="search" placeholder="Ponente o tema" autocomplete="off" enterkeyhint="search" aria-label="Buscar en la agenda">
+        <button class="x" id="limpiarQ" aria-label="Borrar búsqueda">×</button>
+      </label>
+      <button class="btn" id="abrirFiltros"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M4 6h16M7 12h10M10 18h4"/></svg>Filtros <span class="n" id="nFiltros" hidden>0</span></button>
+    </div>
+    <div class="vistas" role="group" aria-label="Vista">
+      <span class="segmento"><button class="vista" data-vista="hora">Por hora</button><button class="vista" data-vista="grilla">Grilla</button><button class="vista" data-vista="ponentes">Ponentes</button><button class="vista" data-vista="mapa">Mapa</button></span>
+      <span class="contador" id="contador"></span>
+    </div>
+    <div class="activos" id="activos"></div>
+  </div>
+</div>
+
+<main class="contenedor" id="principal"></main>
+
+<footer>
+  <img src="logo-feria-effix-2026-horizontal.png" alt="Feria Effix 2026" width="180" height="36" loading="lazy">
+  <p>@FERIAEFFIX · WWW.FERIAEFFIX.COM</p>
+  <p class="act">Programación oficial · actualizada el 10 de octubre de 2026</p>
+  <p class="act" style="opacity:.7">Muestra para aprobación</p>
+</footer>
+
+<div class="velo" id="velo"></div>
+<section class="hoja" id="hoja" role="dialog" aria-modal="true" aria-labelledby="hojaTitulo"></section>
+<div class="aviso" id="aviso" role="status"></div>
+
+<script>
+const DATA=[{"dia":16,"aud":"effix","ini":720,"fin":780,"nombre":"Andrés Bilbao","cargo":"Cofundador de Rappi y 30X","tema":"Máquina de Ventas: un sistema que imprime ingresos","formato":"Conferencia","id":"16-effix-720","tags":["Ventas","Mentalidad y liderazgo","Dinero y finanzas","Operación y logística"]},{"dia":16,"aud":"marketing","ini":720,"fin":780,"nombre":"Santiago Cruz","cargo":"Especialista en ventas por suscripción","tema":"Genera $100K USD al mes sin invertir en anuncios","formato":"Taller","id":"16-marketing-720","tags":["Pauta y anuncios","Ventas","Dinero y finanzas"]},{"dia":16,"aud":"ecommerce","ini":720,"fin":780,"nombre":"Luisa Pardo","cargo":"Fundadora y CEO Cariño Santo","tema":"Que te quieran toma años","formato":"Live Podcast","id":"16-ecommerce-720","tags":["Mentalidad y liderazgo"]},{"dia":16,"aud":"creadores","ini":720,"fin":780,"nombre":"Luisa Lulu \"Lulu99\"","cargo":"Experta en crecimiento digital","tema":"Youtube: La oportunidad que no estás viendo","formato":"Taller","id":"16-creadores-720","tags":["Contenido y redes"]},{"dia":16,"aud":"prendas","ini":720,"fin":780,"nombre":"Antonia Villa","cargo":"","tema":"¿Por qué unirte a una comunidad?","id":"16-prendas-720","tags":[],"formato":""},{"dia":16,"aud":"vitalcom","ini":720,"fin":780,"nombre":"Brahian Stiven Hurtado Gómez","cargo":"","tema":"Pago contra entrega rentable","id":"16-vitalcom-720","tags":["Ecommerce"],"formato":""},{"dia":16,"aud":"unmerco","ini":720,"fin":780,"nombre":"Jhonathan Paez","cargo":"","tema":"No necesitas otro producto ganador","id":"16-unmerco-720","tags":[],"formato":""},{"dia":16,"aud":"convertmate","ini":720,"fin":780,"nombre":"Mateo Costa","cargo":"ConvertMate","tema":"Apertura Auditorio ConvertMate","id":"16-convertmate-720","tags":[],"formato":""},{"dia":16,"aud":"imperio","ini":720,"fin":780,"nombre":"Juano Baquero","cargo":"","tema":"Tu Imperio YouTube: el negocio","id":"16-imperio-720","tags":["Contenido y redes"],"formato":""},{"dia":16,"aud":"effix","ini":780,"fin":840,"nombre":"Regina Carrot","cargo":"CEO Speaker Magnética","tema":"El que Comunica Mejor Gana Mejor","formato":"Taller","id":"16-effix-780","tags":["Mentalidad y liderazgo"]},{"dia":16,"aud":"marketing","ini":780,"fin":840,"nombre":"Alejandra Rincón","cargo":"Consultora de contenido y ventas","tema":"Ser viral NO es negocio","formato":"Taller","id":"16-marketing-780","tags":["Contenido y redes","Ventas"]},{"dia":16,"aud":"ecommerce","ini":780,"fin":840,"nombre":"Sofia Duque","cargo":"CEO de Renesme Hairclips","tema":"Cómo convertir lo que vendes en una historia memorable","formato":"Conferencia","id":"16-ecommerce-780","tags":[]},{"dia":16,"aud":"creadores","ini":780,"fin":840,"nombre":"Natalia Botero","cargo":"Founder Entreaguas","tema":"Marcas con Alma: Contenido Auténtico y una Comunidad Real","formato":"Taller","id":"16-creadores-780","tags":["Contenido y redes","Marca"]},{"dia":16,"aud":"prendas","ini":780,"fin":840,"nombre":"Mateo Costa","cargo":"","tema":"Estrategias de CRO","id":"16-prendas-780","tags":["Pauta y anuncios"],"formato":""},{"dia":16,"aud":"vitalcom","ini":780,"fin":840,"nombre":"Julián Mora","cargo":"","tema":"Cómo Lummia vende millones","id":"16-vitalcom-780","tags":["Ventas","Dinero y finanzas"],"formato":""},{"dia":16,"aud":"unmerco","ini":780,"fin":840,"nombre":"Juan Pablo Lopez","cargo":"","tema":"Finanzas para ecommerce","id":"16-unmerco-780","tags":["Ecommerce","Dinero y finanzas"],"formato":""},{"dia":16,"aud":"convertmate","ini":780,"fin":840,"nombre":"Jesús Carreño","cargo":"Binance","tema":"Binance P2P: pagos y oportunidades","id":"16-convertmate-780","tags":["Dinero y finanzas"],"formato":""},{"dia":16,"aud":"imperio","ini":780,"fin":840,"nombre":"Equipo Tu Imperio YouTube","cargo":"","tema":"Canal con IA en 60 minutos","id":"16-imperio-780","tags":["IA","Contenido y redes"],"formato":""},{"dia":16,"aud":"effix","ini":840,"fin":880,"nombre":"Ana Pierr","cargo":"Experta en ventas y negociación","tema":"Convierte todos tus prospectos en Ventas","formato":"Conferencia","id":"16-effix-840","tags":["Ventas"]},{"dia":16,"aud":"marketing","ini":840,"fin":880,"nombre":"Antonia Villa \"AntoEcom\"","cargo":"Emprendedora experta en e-commerce","tema":"Crea tu presencia online en 20 minutos con IA","formato":"Conferencia","id":"16-marketing-840","tags":["IA","Ecommerce"]},{"dia":16,"aud":"ecommerce","ini":840,"fin":880,"nombre":"Claudia Piedrahita","cargo":"CEO de Ruby Rose y Melu","tema":"“De representar una marca a construir un negocio global”","formato":"Conferencia","id":"16-ecommerce-840","tags":["Marca"]},{"dia":16,"aud":"creadores","ini":840,"fin":880,"nombre":"Cesar Martínez","cargo":"Creador descubriendo sabores","tema":"Cómo utilizar las redes sociales para impulsar tus negocios","formato":"Conferencia","id":"16-creadores-840","tags":["Contenido y redes"]},{"dia":16,"aud":"prendas","ini":840,"fin":880,"nombre":"Esteban Peña","cargo":"","tema":"Como optimizar tus eventos de Meta","id":"16-prendas-840","tags":["Pauta y anuncios"],"formato":""},{"dia":16,"aud":"vitalcom","ini":840,"fin":880,"nombre":"Marlon Iragorri","cargo":"","tema":"Cómo facturar $100M en ecommerce","id":"16-vitalcom-840","tags":["Ecommerce","Dinero y finanzas"],"formato":""},{"dia":16,"aud":"unmerco","ini":840,"fin":880,"nombre":"Carlos Atencio","cargo":"","tema":"Ecommerce en Venezuela: ZOOM","id":"16-unmerco-840","tags":["Ecommerce"],"formato":""},{"dia":16,"aud":"convertmate","ini":840,"fin":880,"nombre":"Juan Garzón","cargo":"SENZA","tema":"Mentalidad del fundador millonario","id":"16-convertmate-840","tags":["Mentalidad y liderazgo"],"formato":""},{"dia":16,"aud":"imperio","ini":840,"fin":880,"nombre":"Simón Acosta","cargo":"","tema":"Sistema de creación con IA","id":"16-imperio-840","tags":["IA","Operación y logística"],"formato":""},{"dia":16,"aud":"effix","ini":880,"fin":920,"nombre":"Valeria Bernardo","cargo":"Creadora Emprendelandia","tema":"Cómo escalar a 13 países con una estrategia de importación","formato":"Conferencia","id":"16-effix-880","tags":["Contenido y redes","Operación y logística"]},{"dia":16,"aud":"marketing","ini":880,"fin":920,"nombre":"Laura Serrano","cargo":"Brand Partnerships Manager, TikTok","tema":"TikTok como potencializador de resultados de negocio","formato":"Conferencia","id":"16-marketing-880","tags":["Contenido y redes","Marca"]},{"dia":16,"aud":"ecommerce","ini":880,"fin":920,"nombre":"Mateo Costa","cargo":"Especialista en CRO para eCommerce","tema":"Cómo duplicar tu facturación sin invertir más en anuncios","formato":"Conferencia","id":"16-ecommerce-880","tags":["Ecommerce","Pauta y anuncios","Dinero y finanzas"]},{"dia":16,"aud":"creadores","ini":880,"fin":920,"nombre":"Andy Molina","cargo":"Autora y empresaria digital","tema":"¿Y qué van a decir? Deja de crear para gustarle a todos","formato":"Conferencia","id":"16-creadores-880","tags":["Mentalidad y liderazgo"]},{"dia":16,"aud":"prendas","ini":880,"fin":920,"nombre":"Mauricio Corzo","cargo":"","tema":"La logística que cambia tu rentabilidad","id":"16-prendas-880","tags":["Operación y logística"],"formato":""},{"dia":16,"aud":"vitalcom","ini":880,"fin":920,"nombre":"César Sánchez","cargo":"","tema":"Vende suplementos con IA","id":"16-vitalcom-880","tags":["IA","Ventas"],"formato":""},{"dia":16,"aud":"unmerco","ini":880,"fin":920,"nombre":"Heder Zamudio","cargo":"","tema":"El negocio no está frenado, tú sí","id":"16-unmerco-880","tags":[],"formato":""},{"dia":16,"aud":"convertmate","ini":880,"fin":920,"nombre":"Camilo Uribe","cargo":"The Gummy Box Wellness","tema":"De ecommerce a marca millonaria","id":"16-convertmate-880","tags":["Ecommerce","Marca"],"formato":""},{"dia":16,"aud":"imperio","ini":880,"fin":920,"nombre":"Equipo Tu Imperio YouTube","cargo":"","tema":"Tu primer infoproducto con IA","id":"16-imperio-880","tags":["IA","Contenido y redes"],"formato":""},{"dia":16,"aud":"effix","ini":920,"fin":960,"nombre":"Lina Cáceres","cargo":"CEO Latin World Digital","tema":"Cómo convertirte en el CEO de tu comunidad digital","formato":"Conferencia","id":"16-effix-920","tags":[]},{"dia":16,"aud":"marketing","ini":920,"fin":960,"nombre":"Carwin Martínez","cargo":"Experto en leads calificados en USA","tema":"El negocio millonario de los leads en Estados Unidos","formato":"Conferencia","id":"16-marketing-920","tags":[]},{"dia":16,"aud":"ecommerce","ini":920,"fin":960,"nombre":"Juan Esteban Peña","cargo":"Experto en píxeles y atribución","tema":"Esto pasa cuando tus datos no son precisos…","formato":"Conferencia","id":"16-ecommerce-920","tags":["Pauta y anuncios"]},{"dia":16,"aud":"creadores","ini":920,"fin":960,"nombre":"Michel Edery","cargo":"Fundador de SmartBeemo","tema":"La Economía del Creador","formato":"Conferencia","id":"16-creadores-920","tags":["Contenido y redes","Mentalidad y liderazgo"]},{"dia":16,"aud":"prendas","ini":920,"fin":1020,"nombre":"Joako Estratega","cargo":"","tema":"Marketing con estrategia","id":"16-prendas-920","tags":[],"formato":""},{"dia":16,"aud":"vitalcom","ini":920,"fin":960,"nombre":"Daniela Cobos","cargo":"","tema":"La realidad detrás de una marca","id":"16-vitalcom-920","tags":["Marca"],"formato":""},{"dia":16,"aud":"unmerco","ini":920,"fin":960,"nombre":"Juan Diego Libreros","cargo":"","tema":"Opera en 5 países sin perder","id":"16-unmerco-920","tags":["Operación y logística"],"formato":""},{"dia":16,"aud":"imperio","ini":920,"fin":960,"nombre":"Lucas Giraldo","cargo":"","tema":"Crea tu ecosistema YouTube","id":"16-imperio-920","tags":["Contenido y redes","Operación y logística"],"formato":""},{"dia":16,"aud":"effix","ini":960,"fin":1020,"nombre":"Álvaro Luque","cargo":"Entrenador de líderes empresariales","tema":"SABIDURÍA EMPRESARIAL: Cómo prosperar en los negocios","formato":"Taller","id":"16-effix-960","tags":["Mentalidad y liderazgo"]},{"dia":16,"aud":"marketing","ini":960,"fin":1020,"nombre":"Rafael Horna","cargo":"Experto en Facebook Ads y CRO","tema":"Mentalidad para escalar tus Ads","formato":"Taller","id":"16-marketing-960","tags":["Pauta y anuncios","Mentalidad y liderazgo","Operación y logística"]},{"dia":16,"aud":"ecommerce","ini":960,"fin":1020,"nombre":"Juliana M, Manuela A y Santiago O","cargo":"Dolce, Click Hair & Strada","tema":"Del feed a la fila: El Mercadillo","formato":"Conversatorio","id":"16-ecommerce-960","tags":[]},{"dia":16,"aud":"creadores","ini":960,"fin":1020,"nombre":"Simón Acosta","cargo":"Creador de contenido con IA","tema":"Construye un Agente que Cree Contenido por Ti","formato":"Taller","id":"16-creadores-960","tags":["IA","Contenido y redes"]},{"dia":16,"aud":"vitalcom","ini":960,"fin":1020,"nombre":"Doctor Bayter","cargo":"","tema":"Monetiza tu marca personal","id":"16-vitalcom-960","tags":["Marca"],"formato":""},{"dia":16,"aud":"unmerco","ini":960,"fin":1020,"nombre":"Mike Munzvil","cargo":"","tema":"Ecommerce con agentes de IA","id":"16-unmerco-960","tags":["IA","Ecommerce"],"formato":""},{"dia":16,"aud":"convertmate","ini":960,"fin":1020,"nombre":"Roosevelt Rodríguez","cargo":"","tema":"Método CAUCE: de ventas a caja","id":"16-convertmate-960","tags":["Ventas","Dinero y finanzas"],"formato":""},{"dia":16,"aud":"imperio","ini":960,"fin":1020,"nombre":"Equipo Tu Imperio YouTube","cargo":"","tema":"Canal con IA en 60 minutos","id":"16-imperio-960","tags":["IA","Contenido y redes"],"formato":""},{"dia":16,"aud":"effix","ini":1020,"fin":1060,"nombre":"Juan Carlos Mallet","cargo":"Estratega internacional de marcas","tema":"¿Cómo quitarle la novia al líder? Estrategia de marca retadora","formato":"Conferencia","id":"16-effix-1020","tags":["Marca","Mentalidad y liderazgo"]},{"dia":16,"aud":"marketing","ini":1020,"fin":1060,"nombre":"Fauadz Kassen","cargo":"Founder de MyHuevos","tema":"¿Cómo se llama la Marca?","formato":"Conferencia","id":"16-marketing-1020","tags":["Marca"]},{"dia":16,"aud":"ecommerce","ini":1020,"fin":1060,"nombre":"Daniel Upegui Londoño","cargo":"VP y Jefe de Marca de Somos Internet","tema":"Construir marca desde cero en el gremio más odiado del país","formato":"Conferencia","id":"16-ecommerce-1020","tags":["Marca"]},{"dia":16,"aud":"creadores","ini":1020,"fin":1060,"nombre":"Stefy Araque","cargo":"CEO Lipo sin cirugía","tema":"El UGC que sí vende: lo que las marcas esperan de ti","formato":"Conferencia","id":"16-creadores-1020","tags":["Contenido y redes","Marca"]},{"dia":16,"aud":"prendas","ini":1020,"fin":1080,"nombre":"Laura Blago","cargo":"","tema":"Vendes más con IA por Laura Blago","id":"16-prendas-1020","tags":["IA"],"formato":""},{"dia":16,"aud":"vitalcom","ini":1020,"fin":1060,"nombre":"Cristian Urrego","cargo":"","tema":"Escala tu ecommerce con TikTok Ads","id":"16-vitalcom-1020","tags":["Ecommerce","Pauta y anuncios","Contenido y redes","Operación y logística"],"formato":""},{"dia":16,"aud":"unmerco","ini":1020,"fin":1060,"nombre":"María Fernanda Ceballos","cargo":"ePayco","tema":"El cerebro de mi empresa con IA","id":"16-unmerco-1020","tags":["IA"],"formato":""},{"dia":16,"aud":"convertmate","ini":1020,"fin":1060,"nombre":"Daniel Díaz","cargo":"Scaling Labs / @danscaler","tema":"De $10K a $100K en 30 días","id":"16-convertmate-1020","tags":[],"formato":""},{"dia":16,"aud":"imperio","ini":1020,"fin":1060,"nombre":"Alexander Arandia y Dayana Gordillo","cargo":"","tema":"Monetiza TikTok con IA","id":"16-imperio-1020","tags":["IA","Contenido y redes"],"formato":""},{"dia":16,"aud":"effix","ini":1060,"fin":1080,"nombre":"Daniel Mesa","cargo":"Binance","tema":"Binance: el futuro del comercio se paga diferente","formato":"Xtage","id":"16-effix-1060","tags":[]},{"dia":16,"aud":"marketing","ini":1060,"fin":1080,"nombre":"Freddy Cevallos","cargo":"American Naturals","tema":"Lanzamiento AN Labs","formato":"Xtage","id":"16-marketing-1060","tags":[]},{"dia":16,"aud":"ecommerce","ini":1060,"fin":1080,"nombre":"Mauricio Cuevas Méndez","cargo":"PANCAKE","tema":"¿Tu WhatsApp está en riesgo? Lo sabes en 60 segundos","formato":"Xtage","id":"16-ecommerce-1060","tags":["Ventas"]},{"dia":16,"aud":"creadores","ini":1060,"fin":1080,"nombre":"Jesús Carreño","cargo":"Binance","tema":"De cobrar a crecer: descubre el ecosistema de Binance","formato":"Xtage","id":"16-creadores-1060","tags":["Operación y logística"]},{"dia":16,"aud":"vitalcom","ini":1060,"fin":1080,"nombre":"Carlos Jiménez y Astrid Cháves","cargo":"","tema":"El lado oscuro de crear tu marca","id":"16-vitalcom-1060","tags":["Marca"],"formato":""},{"dia":16,"aud":"unmerco","ini":1060,"fin":1100,"nombre":"Andrés Restrepo","cargo":"","tema":"Evolución del dropshipping","id":"16-unmerco-1060","tags":["Ecommerce"],"formato":""},{"dia":16,"aud":"convertmate","ini":1060,"fin":1080,"nombre":"Mateo Costa","cargo":"ConvertMate","tema":"Diagnóstico: ¿por qué no vendes?","id":"16-convertmate-1060","tags":[],"formato":""},{"dia":16,"aud":"imperio","ini":1060,"fin":1100,"nombre":"Christian Hernández","cargo":"","tema":"YouTube Music: negocio con IA","id":"16-imperio-1060","tags":["IA","Contenido y redes"],"formato":""},{"dia":16,"aud":"effix","ini":1080,"fin":1100,"nombre":"Andrés & Diego Patarroyo","cargo":"D&A Academy","tema":"Automatización con IA: crea embudos de venta en minutos","formato":"Xtage","id":"16-effix-1080","tags":["IA","Ventas"]},{"dia":16,"aud":"marketing","ini":1080,"fin":1100,"nombre":"Cristian Hernández e Iker Fernández","cargo":"Dropea","tema":"Cómo hacer e-commerce y ganar euros hoy mismo","formato":"Xtage","id":"16-marketing-1080","tags":["Ecommerce"]},{"dia":16,"aud":"ecommerce","ini":1080,"fin":1100,"nombre":"Fabián Camacho","cargo":"VITALCOM","tema":"Construye una marca de bienestar con Vitalcom","formato":"Xtage","id":"16-ecommerce-1080","tags":["Marca"]},{"dia":16,"aud":"creadores","ini":1080,"fin":1100,"nombre":"Juan Andrés S & Katheryn M","cargo":"Foton","tema":"Hey Ruteros! La estrategia digital de Foton","formato":"Xtage","id":"16-creadores-1080","tags":[]},{"dia":16,"aud":"prendas","ini":1080,"fin":1140,"nombre":"Monica Montañez","cargo":"","tema":"Instagram que factura","id":"16-prendas-1080","tags":["Contenido y redes"],"formato":""},{"dia":16,"aud":"vitalcom","ini":1080,"fin":1100,"nombre":"Mauricio Cuevas","cargo":"","tema":"Pancake: centraliza y escala","id":"16-vitalcom-1080","tags":["Operación y logística"],"formato":""},{"dia":16,"aud":"convertmate","ini":1080,"fin":1140,"nombre":"Mateo Vera","cargo":"Fem / Dermafol","tema":"Dispara tus ventas en BFCM","id":"16-convertmate-1080","tags":["Ecommerce","Ventas"],"formato":""},{"dia":16,"aud":"effix","ini":1100,"fin":1140,"nombre":"Héctor Orozco","cargo":"Exdirector McDonald's Colombia","tema":"Uniones que la rompen","formato":"Conferencia","id":"16-effix-1100","tags":[]},{"dia":16,"aud":"marketing","ini":1100,"fin":1140,"nombre":"José Lepage","cargo":"Fundador Carbinox","tema":"Cómo volvería a facturar $60M en E-Commerce desde cero","formato":"Conferencia","id":"16-marketing-1100","tags":["Ecommerce","Mentalidad y liderazgo","Dinero y finanzas"]},{"dia":16,"aud":"ecommerce","ini":1100,"fin":1140,"nombre":"Jose Muñoz Arbelaez","cargo":"Director de diseño en Undergold","tema":"Construcción de Realidades: El valor de crear","formato":"Conferencia","id":"16-ecommerce-1100","tags":[]},{"dia":16,"aud":"creadores","ini":1100,"fin":1140,"nombre":"Valentina Ramirez","cargo":"Comunicadora social y periodista","tema":"Creer para Crear","formato":"Conferencia","id":"16-creadores-1100","tags":["Mentalidad y liderazgo"]},{"dia":16,"aud":"vitalcom","ini":1100,"fin":1140,"nombre":"Antonia Villa","cargo":"","tema":"El futuro del ecommerce con IA","id":"16-vitalcom-1100","tags":["IA","Ecommerce"],"formato":""},{"dia":16,"aud":"imperio","ini":1100,"fin":1140,"nombre":"Juano Baquero y Christian Hernández","cargo":"","tema":"Hablando de YouTube","id":"16-imperio-1100","tags":["Contenido y redes"],"formato":""},{"dia":16,"aud":"effix","ini":1140,"fin":1260,"nombre":"Vilma Nuñez","cargo":"Estratega en marketing y ventas con IA","tema":"GerencIA","formato":"Taller","id":"16-effix-1140","tags":["IA","Ventas"]},{"dia":16,"aud":"marketing","ini":1140,"fin":1260,"nombre":"Victor Heras","cargo":"Experto en viralidad y conversión","tema":"Cómo monetizar tus redes con contenido orgánico","formato":"Taller","id":"16-marketing-1140","tags":["Contenido y redes"]},{"dia":16,"aud":"ecommerce","ini":1140,"fin":1200,"nombre":"Pamela Richter","cargo":"Cofundadora de B2Chat, aliada de Meta","tema":"La revolución de WhatsApp Empresarial: del chat al agente IA","formato":"Conferencia","id":"16-ecommerce-1140","tags":["IA","Ventas","Mentalidad y liderazgo"]},{"dia":16,"aud":"creadores","ini":1140,"fin":1200,"nombre":"Sara Linares","cargo":"Experta en crecimiento y viralidad","tema":"Viralización en Instagram","formato":"Taller","id":"16-creadores-1140","tags":["Contenido y redes"]},{"dia":16,"aud":"prendas","ini":1140,"fin":1200,"nombre":"Majo Books","cargo":"","tema":"Como no perder tu vida","id":"16-prendas-1140","tags":["Mentalidad y liderazgo"],"formato":""},{"dia":16,"aud":"vitalcom","ini":1140,"fin":1200,"nombre":"Equipo Vitalcom","cargo":"","tema":"¿Quién es Vitalcom y Vitalmastery?","id":"16-vitalcom-1140","tags":[],"formato":""},{"dia":16,"aud":"convertmate","ini":1140,"fin":1200,"nombre":"Networking","cargo":"","tema":"","id":"16-convertmate-1140","tags":[],"formato":""},{"dia":16,"aud":"ecommerce","ini":1200,"fin":1260,"nombre":"Leidy Grisales","cargo":"CEO Entallarte y Prendas Control","tema":"Un millón de fajas después","formato":"Live Podcast","id":"16-ecommerce-1200","tags":[]},{"dia":16,"aud":"creadores","ini":1200,"fin":1260,"nombre":"Valentina Rodriguez \"La Favorita\"","cargo":"Mentora de liderazgo femenino","tema":"Vístete de poder","formato":"Taller","id":"16-creadores-1200","tags":["Mentalidad y liderazgo"]},{"dia":16,"aud":"ecommerce","ini":1290,"fin":1440,"nombre":"Hackaecom","cargo":"","tema":"Guerra de Apps: IA en vivo para tu e-commerce. Desarrollo de apps en vivo, Equipos en competencia, DJ en vivo.","formato":"Hackaecom","id":"16-ecommerce-1290","tags":["IA","Ecommerce"]},{"dia":17,"aud":"effix","ini":660,"fin":720,"nombre":"Doctor Bayter","cargo":"Médico y empresario digital","tema":"De médico a empresario digital","formato":"Conferencia","id":"17-effix-660","tags":["Mentalidad y liderazgo"]},{"dia":17,"aud":"marketing","ini":660,"fin":780,"nombre":"Vilma Nuñez","cargo":"Estratega en marketing y ventas con IA","tema":"C-Level Marketing: Marketing para tomadores de decisiones","formato":"Conferencia","id":"17-marketing-660","tags":["IA","Ventas"]},{"dia":17,"aud":"ecommerce","ini":660,"fin":720,"nombre":"Alejandro Celis","cargo":"Cofundador de Melonn","tema":"Recompra: el factor más importante en el valor de un comercio","formato":"Taller","id":"17-ecommerce-660","tags":["Ecommerce","Mentalidad y liderazgo","Operación y logística"]},{"dia":17,"aud":"creadores","ini":660,"fin":720,"nombre":"Ana Maria Franco","cargo":"Fundadora de Mamá con Amor","tema":"Crear comunidad y serSE fiel","formato":"Taller","id":"17-creadores-660","tags":["Mentalidad y liderazgo"]},{"dia":17,"aud":"prendas","ini":660,"fin":720,"nombre":"Ivan Caicedo","cargo":"","tema":"Evento de comunidad","id":"17-prendas-660","tags":[],"formato":""},{"dia":17,"aud":"vitalcom","ini":660,"fin":720,"nombre":"Camilo Mejía Quintero","cargo":"","tema":"Escalado millonario Vital Mastery","id":"17-vitalcom-660","tags":["Operación y logística"],"formato":""},{"dia":17,"aud":"unmerco","ini":660,"fin":720,"nombre":"Jonathan de Drop","cargo":"Dropanas","tema":"Venezuela: joya del ecommerce","id":"17-unmerco-660","tags":["Ecommerce"],"formato":""},{"dia":17,"aud":"imperio","ini":660,"fin":720,"nombre":"Juano Baquero","cargo":"","tema":"Premios Imperio: alumnos ganan","id":"17-imperio-660","tags":[],"formato":""},{"dia":17,"aud":"effix","ini":720,"fin":780,"nombre":"Javier García","cargo":"Fundador Mundo Amazon","tema":"Amazon USA: Cómo vender en el marketplace más grande del mundo","formato":"Taller","id":"17-effix-720","tags":["Ecommerce","Ventas","Mentalidad y liderazgo"]},{"dia":17,"aud":"ecommerce","ini":720,"fin":780,"nombre":"Santiago Naranjo","cargo":"Chief Revenue Officer VTEX","tema":"Growth, Inteligencia Artificial y Liderazgo del futuro","formato":"Conferencia","id":"17-ecommerce-720","tags":["IA","Mentalidad y liderazgo"]},{"dia":17,"aud":"creadores","ini":720,"fin":780,"nombre":"Fabián Camacho","cargo":"CEO Vitalcom","tema":"Una marca es el camino","formato":"Taller","id":"17-creadores-720","tags":["Marca"]},{"dia":17,"aud":"prendas","ini":720,"fin":780,"nombre":"Juan Diego Libreros & Santiago Cruz","cargo":"","tema":"Cómo será el ecommerce en 2027","id":"17-prendas-720","tags":["Ecommerce"],"formato":""},{"dia":17,"aud":"vitalcom","ini":720,"fin":780,"nombre":"Steven Rojas","cargo":"","tema":"800 pedidos diarios sin morir","id":"17-vitalcom-720","tags":["Ecommerce"],"formato":""},{"dia":17,"aud":"unmerco","ini":720,"fin":780,"nombre":"Mateo Vera","cargo":"","tema":"Cómo aumentar la recompra un 60%","id":"17-unmerco-720","tags":["Ecommerce"],"formato":""},{"dia":17,"aud":"convertmate","ini":720,"fin":780,"nombre":"Jacobo Acevedo","cargo":"Social Marketing / @social.ecomagency","tema":"Creativos para vender USD 1 millón","id":"17-convertmate-720","tags":["Ventas","Dinero y finanzas"],"formato":""},{"dia":17,"aud":"imperio","ini":720,"fin":780,"nombre":"Samuel Alba","cargo":"","tema":"Mindset Millonario","id":"17-imperio-720","tags":["Mentalidad y liderazgo"],"formato":""},{"dia":17,"aud":"effix","ini":780,"fin":820,"nombre":"Guillermo Gonzalez Pimiento","cargo":"Experto en LinkedIn B2B","tema":"Venta Silenciosa en un mundo ruidoso","formato":"Conferencia","id":"17-effix-780","tags":["Ventas"]},{"dia":17,"aud":"marketing","ini":780,"fin":820,"nombre":"David Costarrosa","cargo":"Cofundador de Beeping España","tema":"De Dropshipper a Empresario","formato":"Conferencia","id":"17-marketing-780","tags":["Ecommerce","Mentalidad y liderazgo"]},{"dia":17,"aud":"ecommerce","ini":780,"fin":820,"nombre":"Pablo Villegas","cargo":"Growth Lead Rappi Colombia","tema":"La innovación no tiene código postal","formato":"Conferencia","id":"17-ecommerce-780","tags":[]},{"dia":17,"aud":"creadores","ini":780,"fin":820,"nombre":"Valentina Bernal","cargo":"Fundadora de Guayaquiliando","tema":"De cero a viral","formato":"Conferencia","id":"17-creadores-780","tags":["Contenido y redes","Mentalidad y liderazgo"]},{"dia":17,"aud":"prendas","ini":780,"fin":820,"nombre":"Soy Ale Tomate","cargo":"","tema":"Contenido que se convierte en ventas","id":"17-prendas-780","tags":["Contenido y redes","Ventas"],"formato":""},{"dia":17,"aud":"vitalcom","ini":780,"fin":820,"nombre":"Juan Martínez","cargo":"","tema":"Marcas que venden millones","id":"17-vitalcom-780","tags":["Marca","Dinero y finanzas"],"formato":""},{"dia":17,"aud":"unmerco","ini":780,"fin":820,"nombre":"Antonio Yataco","cargo":"Swayp Perú","tema":"Crea un negocio real y rentable","id":"17-unmerco-780","tags":[],"formato":""},{"dia":17,"aud":"convertmate","ini":780,"fin":820,"nombre":"Milton Carmona","cargo":"Sproutt Commerce","tema":"Email Marketing y retención","id":"17-convertmate-780","tags":[],"formato":""},{"dia":17,"aud":"imperio","ini":780,"fin":820,"nombre":"Viani","cargo":"","tema":"Suite Tu Imperio YouTube con IA","id":"17-imperio-780","tags":["IA","Contenido y redes"],"formato":""},{"dia":17,"aud":"effix","ini":820,"fin":860,"nombre":"Teresa Prieto & Daniel Macías","cargo":"Co CEOs de Sandler Dan Macias","tema":"Cómo vender 1M USD trabajando 6 horas","formato":"Conferencia","id":"17-effix-820","tags":["Ventas","Dinero y finanzas"]},{"dia":17,"aud":"marketing","ini":820,"fin":860,"nombre":"JuanADS","cargo":"Experto en marketing digital con IA","tema":"Agent Loop ADS con Claude Code","formato":"Conferencia","id":"17-marketing-820","tags":["IA","Pauta y anuncios"]},{"dia":17,"aud":"ecommerce","ini":820,"fin":860,"nombre":"Santiago Barrientos","cargo":"Cofundador de SBQ","tema":"Propósito que construye marcas","formato":"Conferencia","id":"17-ecommerce-820","tags":["Marca","Mentalidad y liderazgo"]},{"dia":17,"aud":"creadores","ini":820,"fin":860,"nombre":"Andrea Hoyos","cargo":"Experta en marca personal y redes","tema":"Nunca usó algoritmo y sigue en tu mente 2.000 años después","formato":"Conferencia","id":"17-creadores-820","tags":["Contenido y redes","Marca"]},{"dia":17,"aud":"prendas","ini":820,"fin":860,"nombre":"Santiago Ospina","cargo":"","tema":"Legado Strada Brand","id":"17-prendas-820","tags":["Marca"],"formato":""},{"dia":17,"aud":"vitalcom","ini":820,"fin":860,"nombre":"Santiago Cruz","cargo":"","tema":"Mentalidad de millones de dólares","id":"17-vitalcom-820","tags":["Mentalidad y liderazgo","Dinero y finanzas"],"formato":""},{"dia":17,"aud":"unmerco","ini":820,"fin":860,"nombre":"Mercy Pardo","cargo":"","tema":"De investigación a ventas en 1 min","id":"17-unmerco-820","tags":["Ventas"],"formato":""},{"dia":17,"aud":"convertmate","ini":820,"fin":860,"nombre":"Juan Esteban Peña","cargo":"Neosocios","tema":"Cómo facturar hasta un 50% más","id":"17-convertmate-820","tags":["Dinero y finanzas"],"formato":""},{"dia":17,"aud":"imperio","ini":820,"fin":860,"nombre":"Sebastian Velez","cargo":"","tema":"3 herramientas para YouTube","id":"17-imperio-820","tags":["Contenido y redes"],"formato":""},{"dia":17,"aud":"effix","ini":860,"fin":900,"nombre":"Duber Ledesma Vera","cargo":"Director de Somos el Hueco Medellín","tema":"¿Cómo hacer negocios con los empresarios del Hueco?","formato":"Conferencia","id":"17-effix-860","tags":["Mentalidad y liderazgo"]},{"dia":17,"aud":"marketing","ini":860,"fin":900,"nombre":"Mabel Santana","cargo":"Especialista en TikTok Shop","tema":"El efecto TikTok Shop de USA a Latam","formato":"Conferencia","id":"17-marketing-860","tags":["Ecommerce","Contenido y redes"]},{"dia":17,"aud":"ecommerce","ini":860,"fin":900,"nombre":"Susana Goitia","cargo":"Ex CEO de Coca-Cola Ecuador","tema":"CRACK THE MARKET: Autoridad y acceso para crecer B2B","formato":"Conferencia","id":"17-ecommerce-860","tags":[]},{"dia":17,"aud":"creadores","ini":860,"fin":900,"nombre":"Dani Cobos","cargo":"Co-founder Mumu","tema":"De emprendimiento a marca: posiciónate con contenido inolvidable","formato":"Conferencia","id":"17-creadores-860","tags":["Contenido y redes","Marca","Mentalidad y liderazgo"]},{"dia":17,"aud":"prendas","ini":860,"fin":960,"nombre":"Juan Ads","cargo":"","tema":"Taller Sale Ads","id":"17-prendas-860","tags":["Pauta y anuncios"],"formato":""},{"dia":17,"aud":"vitalcom","ini":860,"fin":900,"nombre":"Dani Emprende","cargo":"","tema":"Crece en Instagram sin pauta","id":"17-vitalcom-860","tags":["Pauta y anuncios","Contenido y redes"],"formato":""},{"dia":17,"aud":"unmerco","ini":860,"fin":900,"nombre":"Mauricio Corzo","cargo":"","tema":"90% de efectividad y más utilidad","id":"17-unmerco-860","tags":["Mentalidad y liderazgo"],"formato":""},{"dia":17,"aud":"convertmate","ini":860,"fin":900,"nombre":"Mateo Costa","cargo":"ConvertMate","tema":"Diagnóstico: ¿por qué no vendes?","id":"17-convertmate-860","tags":[],"formato":""},{"dia":17,"aud":"imperio","ini":860,"fin":900,"nombre":"Jhei Trujillo","cargo":"","tema":"Vuélvete viral con IA","id":"17-imperio-860","tags":["IA","Contenido y redes"],"formato":""},{"dia":17,"aud":"effix","ini":900,"fin":960,"nombre":"Kenny","cargo":"Partner Digital y empresario serial","tema":"Así hace millones un Partner Digital","formato":"Taller","id":"17-effix-900","tags":["Mentalidad y liderazgo","Dinero y finanzas"]},{"dia":17,"aud":"marketing","ini":900,"fin":960,"nombre":"Óscar Martan","cargo":"Experto en IA para ventas por chat","tema":"AY AI que rico controlar mi negocio con IA","formato":"Taller","id":"17-marketing-900","tags":["IA","Ventas"]},{"dia":17,"aud":"ecommerce","ini":900,"fin":960,"nombre":"Carlos Trujillo","cargo":"Experto en experimentación y CRO","tema":"El arma silenciosa de las marcas que ganan en grande","formato":"Conferencia","id":"17-ecommerce-900","tags":["Pauta y anuncios","Marca"]},{"dia":17,"aud":"creadores","ini":900,"fin":960,"nombre":"Melisa Escobar","cargo":"Experta en IA aplicada a negocios","tema":"Domina la creación de contenido con IA","formato":"Taller","id":"17-creadores-900","tags":["IA","Contenido y redes"]},{"dia":17,"aud":"vitalcom","ini":900,"fin":960,"nombre":"Santiago Ospina","cargo":"","tema":"Conversatorio: una marca que vuela","id":"17-vitalcom-900","tags":["Marca"],"formato":""},{"dia":17,"aud":"unmerco","ini":900,"fin":960,"nombre":"Lida Arias","cargo":"","tema":"El juego invisible del dinero","id":"17-unmerco-900","tags":["Dinero y finanzas"],"formato":""},{"dia":17,"aud":"convertmate","ini":900,"fin":960,"nombre":"Victor Paytuvi","cargo":"Neural Extension","tema":"Taller Claude Code para ecommerce","id":"17-convertmate-900","tags":["IA","Ecommerce"],"formato":""},{"dia":17,"aud":"imperio","ini":900,"fin":960,"nombre":"Juano Baquero","cargo":"","tema":"Genera ingresos con IA","id":"17-imperio-900","tags":["IA","Dinero y finanzas"],"formato":""},{"dia":17,"aud":"effix","ini":960,"fin":1000,"nombre":"Santos Lever Rivas","cargo":"Estratega comunicacional","tema":"Huella Digital, Crear Marca Personal para generar impacto","formato":"Conferencia","id":"17-effix-960","tags":["Marca","Mentalidad y liderazgo"]},{"dia":17,"aud":"marketing","ini":960,"fin":1000,"nombre":"Carlos Vidal Barrueco","cargo":"Manager Westcol","tema":"Cómo ser INEVITABLE. La fórmula de la viralidad","formato":"Conversatorio","id":"17-marketing-960","tags":["Contenido y redes","Mentalidad y liderazgo"]},{"dia":17,"aud":"ecommerce","ini":960,"fin":1000,"nombre":"Pablo Montalvo & Daniel Montalvo","cargo":"Mayor distribuidor Apple Ecuador","tema":"El Arte de Vender Caro","formato":"Conferencia","id":"17-ecommerce-960","tags":["Ventas"]},{"dia":17,"aud":"creadores","ini":960,"fin":1000,"nombre":"Monik Montañez","cargo":"Estratega en marketing digital","tema":"El secreto de las historias que venden","formato":"Conferencia","id":"17-creadores-960","tags":["Contenido y redes"]},{"dia":17,"aud":"prendas","ini":960,"fin":1060,"nombre":"David Rojas & Leidy Grisales","cargo":"","tema":"Fashion Ecommerce - Leidy Grisales","id":"17-prendas-960","tags":["Ecommerce"],"formato":""},{"dia":17,"aud":"vitalcom","ini":960,"fin":1000,"nombre":"Jhon Hurtado","cargo":"","tema":"Organigrama para sostener 100K","id":"17-vitalcom-960","tags":["Operación y logística"],"formato":""},{"dia":17,"aud":"unmerco","ini":960,"fin":1000,"nombre":"Juan Henao ADS","cargo":"","tema":"Contraté una IA para Meta Ads","id":"17-unmerco-960","tags":["IA","Pauta y anuncios"],"formato":""},{"dia":17,"aud":"convertmate","ini":960,"fin":1000,"nombre":"Juan Esteban Martínez","cargo":"Prosox","tema":"Claves de marcas ecommerce exitosas","id":"17-convertmate-960","tags":["Ecommerce","Marca"],"formato":""},{"dia":17,"aud":"imperio","ini":960,"fin":1000,"nombre":"Sebastián Montoya y Paulina Carmona","cargo":"","tema":"El futuro del ecommerce con IA","id":"17-imperio-960","tags":["IA","Ecommerce"],"formato":""},{"dia":17,"aud":"effix","ini":1000,"fin":1020,"nombre":"Gonzalo Saravia","cargo":"Payoneer","tema":"De vender local a facturar en dólares","formato":"Xtage","id":"17-effix-1000","tags":["Ventas","Dinero y finanzas"]},{"dia":17,"aud":"marketing","ini":1000,"fin":1020,"nombre":"Paul Velasquez","cargo":"Mercately","tema":"Del anuncio al pago: vender a través de conversaciones","formato":"Xtage","id":"17-marketing-1000","tags":["Pauta y anuncios","Ventas"]},{"dia":17,"aud":"ecommerce","ini":1000,"fin":1020,"nombre":"Juan Pablo Pineda","cargo":"Karrot","tema":"Agentic Commerce: de vender a entregar","formato":"Xtage","id":"17-ecommerce-1000","tags":["Ventas"]},{"dia":17,"aud":"creadores","ini":1000,"fin":1020,"nombre":"Pablo Villegas","cargo":"Rappi","tema":"Rappi Creators","formato":"Xtage","id":"17-creadores-1000","tags":[]},{"dia":17,"aud":"vitalcom","ini":1000,"fin":1060,"nombre":"Laura Mira","cargo":"","tema":"¿Cómo delegar tu ecommerce?","id":"17-vitalcom-1000","tags":["Ecommerce","Operación y logística"],"formato":""},{"dia":17,"aud":"unmerco","ini":1000,"fin":1020,"nombre":"Reggie Anastacio","cargo":"","tema":"Ecosistema Unmerco","id":"17-unmerco-1000","tags":["Operación y logística"],"formato":""},{"dia":17,"aud":"convertmate","ini":1000,"fin":1020,"nombre":"Networking","cargo":"","tema":"","id":"17-convertmate-1000","tags":[],"formato":""},{"dia":17,"aud":"imperio","ini":1000,"fin":1020,"nombre":"Juano Baquero y Lucas Giraldo","cargo":"","tema":"Tu canal nace hoy: Juano y Lucas","id":"17-imperio-1000","tags":["Contenido y redes"],"formato":""},{"dia":17,"aud":"effix","ini":1020,"fin":1060,"nombre":"El viejo Heriberto","cargo":"Empresario que vende con historias","tema":"El que muestra el hambre, no vende","formato":"Conferencia","id":"17-effix-1020","tags":["Contenido y redes","Ventas","Mentalidad y liderazgo"]},{"dia":17,"aud":"marketing","ini":1020,"fin":1060,"nombre":"Cristian Hernández e Iker Fernández","cargo":"Cofundadores de Dropea en Europa","tema":"Cómo vender en Europa con menos de 300 USD","formato":"Conferencia","id":"17-marketing-1020","tags":["Ventas","Mentalidad y liderazgo","Dinero y finanzas"]},{"dia":17,"aud":"ecommerce","ini":1020,"fin":1060,"nombre":"Nicolas Moreno & Julian Mora","cargo":"Fundadores de Lummia","tema":"De 20M de pesos a 20M de dólares al año, en 5 años","formato":"Conferencia","id":"17-ecommerce-1020","tags":["Mentalidad y liderazgo","Dinero y finanzas"]},{"dia":17,"aud":"creadores","ini":1020,"fin":1060,"nombre":"Camila Gutierrez","cargo":"Mentora y founder Mujer Divina","tema":"Tu vida es el Funnel","formato":"Conferencia","id":"17-creadores-1020","tags":["Mentalidad y liderazgo"]},{"dia":17,"aud":"unmerco","ini":1020,"fin":1060,"nombre":"Camilo Perez","cargo":"","tema":"Vender es sobrevivir, gerenciar no","id":"17-unmerco-1020","tags":["Ventas"],"formato":""},{"dia":17,"aud":"convertmate","ini":1020,"fin":1060,"nombre":"Carlos Trujillo","cargo":"Intelligems","tema":"Experimentos de marcas en USA","id":"17-convertmate-1020","tags":["Marca"],"formato":""},{"dia":17,"aud":"imperio","ini":1020,"fin":1060,"nombre":"Santi Márquez","cargo":"@santimarquezoficial_","tema":"Tu arsenal de herramientas IA","id":"17-imperio-1020","tags":["IA"],"formato":""},{"dia":17,"aud":"effix","ini":1060,"fin":1100,"nombre":"Laura Blago & Mike Munzvil","cargo":"Empresarios digitales","tema":"De \"tengo una idea\" a \"la estamos rompiendo en ventas\"","formato":"Conferencia","id":"17-effix-1060","tags":["Ventas","Mentalidad y liderazgo"]},{"dia":17,"aud":"marketing","ini":1060,"fin":1100,"nombre":"Mauricio Cuevas","cargo":"CEO de Pancake, experto en WhatsApp","tema":"¿Y si Meta te bloquea mañana? Método Vietnam: chat sin pauta","formato":"Conferencia","id":"17-marketing-1060","tags":["Pauta y anuncios","Ventas"]},{"dia":17,"aud":"ecommerce","ini":1060,"fin":1100,"nombre":"Sebastian Lemus","cargo":"Fundador de Dante en +10 países","tema":"La obsesión se come a la pasión","formato":"Conferencia","id":"17-ecommerce-1060","tags":["Mentalidad y liderazgo"]},{"dia":17,"aud":"creadores","ini":1060,"fin":1100,"nombre":"Daisy Lopez & Jhei Trujillo","cargo":"Empresarios digitales","tema":"De creadores a empresarios: cómo monetizar tu marca personal","formato":"Conferencia","id":"17-creadores-1060","tags":["Contenido y redes","Marca","Mentalidad y liderazgo"]},{"dia":17,"aud":"prendas","ini":1060,"fin":1100,"nombre":"Juan Felipe Céspedes - Pipefy","cargo":"","tema":"Le entregarías tu tienda a una IA","id":"17-prendas-1060","tags":["IA","Ecommerce"],"formato":""},{"dia":17,"aud":"vitalcom","ini":1060,"fin":1100,"nombre":"Mauricio Corzo","cargo":"","tema":"Triplica ventas sin operar","id":"17-vitalcom-1060","tags":["Ventas","Operación y logística"],"formato":""},{"dia":17,"aud":"unmerco","ini":1060,"fin":1100,"nombre":"Esteban Hype","cargo":"","tema":"IA para negocios","id":"17-unmerco-1060","tags":["IA"],"formato":""},{"dia":17,"aud":"convertmate","ini":1060,"fin":1100,"nombre":"Esteban Gómez","cargo":"Plenara","tema":"Cómo llegar a USD 250K al mes","id":"17-convertmate-1060","tags":["Dinero y finanzas"],"formato":""},{"dia":17,"aud":"imperio","ini":1060,"fin":1100,"nombre":"Cristian Torres y Daniel Gomez","cargo":"","tema":"Algoritmo y métricas de YouTube","id":"17-imperio-1060","tags":["Contenido y redes"],"formato":""},{"dia":17,"aud":"effix","ini":1100,"fin":1120,"nombre":"Ricardo Ramirez Lizarralde","cargo":"Hotmart","tema":"Cómo hacer que tu negocio digital crezca con Hotmart","formato":"Xtage","id":"17-effix-1100","tags":[]},{"dia":17,"aud":"marketing","ini":1100,"fin":1120,"nombre":"Juan Carlos García","cargo":"Drop","tema":"Conquista Centroamérica: tu nuevo mercado en 2027","formato":"Xtage","id":"17-marketing-1100","tags":[]},{"dia":17,"aud":"ecommerce","ini":1100,"fin":1120,"nombre":"Jair Báez Ardila","cargo":"Mercado pago","tema":"Escala tu negocio digital, pieza por pieza","formato":"Xtage","id":"17-ecommerce-1100","tags":["Operación y logística"]},{"dia":17,"aud":"creadores","ini":1100,"fin":1140,"nombre":"Majo Montoya \"Majosbook\"","cargo":"Especialista en neuroproductividad","tema":"Neuroproductividad para emprendedores distraídos","formato":"Conferencia","id":"17-creadores-1100","tags":["Mentalidad y liderazgo"]},{"dia":17,"aud":"prendas","ini":1100,"fin":1140,"nombre":"Jose le Vende Icomfly","cargo":"","tema":"Ecosistema ecommerce 100% automático con icomfly","id":"17-prendas-1100","tags":["Ecommerce","Ventas","Operación y logística"],"formato":""},{"dia":17,"aud":"vitalcom","ini":1100,"fin":1120,"nombre":"Alieska Escalona y Joaquín Buelvas","cargo":"","tema":"Conversaciones que venden","id":"17-vitalcom-1100","tags":["Ventas"],"formato":""},{"dia":17,"aud":"unmerco","ini":1100,"fin":1140,"nombre":"Julián Rodríguez","cargo":"","tema":"Meta Ads: 7 palancas para crecer","id":"17-unmerco-1100","tags":["Pauta y anuncios"],"formato":""},{"dia":17,"aud":"convertmate","ini":1100,"fin":1140,"nombre":"Julián Mora y Nicolás Moreno","cargo":"Lummia","tema":"Q&A: Lummia y sus +20M USD","id":"17-convertmate-1100","tags":["Dinero y finanzas"],"formato":""},{"dia":17,"aud":"imperio","ini":1100,"fin":1120,"nombre":"Juano Baquero","cargo":"","tema":"Cómo ser socio de YouTube","id":"17-imperio-1100","tags":["Contenido y redes"],"formato":""},{"dia":17,"aud":"effix","ini":1120,"fin":1140,"nombre":"Juan David Carmona","cargo":"Grupo Effi","tema":"La abundancia del comercio electrónico","formato":"Xtage","id":"17-effix-1120","tags":["Mentalidad y liderazgo"]},{"dia":17,"aud":"marketing","ini":1120,"fin":1140,"nombre":"Mateo Costa","cargo":"ConvertMate","tema":"Diagnóstico en vivo: ¿por qué tu tienda no convierte?","formato":"Xtage","id":"17-marketing-1120","tags":["Ecommerce"]},{"dia":17,"aud":"ecommerce","ini":1120,"fin":1140,"nombre":"Luis Felipe Villegas Aristizabal","cargo":"Sura","tema":"Megatendencias globales","formato":"Xtage","id":"17-ecommerce-1120","tags":[]},{"dia":17,"aud":"imperio","ini":1120,"fin":1140,"nombre":"Juano Baquero","cargo":"","tema":"Tu primer video en 20 minutos","id":"17-imperio-1120","tags":[],"formato":""},{"dia":17,"aud":"effix","ini":1140,"fin":1260,"nombre":"Jürgen Klaric","cargo":"Experto en neuroventas","tema":"El riesgo del E-commerce","formato":"Taller","id":"17-effix-1140","tags":["Ecommerce","Ventas"]},{"dia":17,"aud":"marketing","ini":1140,"fin":1260,"nombre":"Enrique Rocha","cargo":"Experto en Claude para empresas","tema":"Claude como tu mano derecha: cómo usarlo y configurarlo","formato":"Taller","id":"17-marketing-1140","tags":["IA"]},{"dia":17,"aud":"ecommerce","ini":1140,"fin":1200,"nombre":"Don Brandon","cargo":"Estratega de Marca","tema":"Brandalismo: destruyendo el marketing tradicional","formato":"Conferencia","id":"17-ecommerce-1140","tags":["Marca"]},{"dia":17,"aud":"creadores","ini":1140,"fin":1260,"nombre":"Julio Iero","cargo":"Experto en Marketing digital","tema":"Viralidad en libertad financiera","formato":"Taller","id":"17-creadores-1140","tags":["Contenido y redes"]},{"dia":17,"aud":"prendas","ini":1140,"fin":1200,"nombre":"Mike Munzvil & Laura Blago","cargo":"","tema":"Automatizaciones empresariales con IA","id":"17-prendas-1140","tags":["IA","Mentalidad y liderazgo"],"formato":""},{"dia":17,"aud":"convertmate","ini":1140,"fin":1200,"nombre":"Jose Lepage","cargo":"Carbinox","tema":"Q&A: Carbinox y sus +60M USD","id":"17-convertmate-1140","tags":["Dinero y finanzas"],"formato":""},{"dia":17,"aud":"ecommerce","ini":1200,"fin":1260,"nombre":"Carlos Suárez","cargo":"Estratega político presidencial","tema":"El método Estrategia&Poder: liderar la comunicación omnicanal","formato":"Conversatorio","id":"17-ecommerce-1200","tags":["Contenido y redes","Mentalidad y liderazgo"]},{"dia":17,"aud":"ecommerce","ini":1290,"fin":1440,"nombre":"Hackaecom","cargo":"","tema":"E-commerce Extremo: Sitios web, creativos, anuncios y flujos lanzados en vivo","formato":"Hackaecom","id":"17-ecommerce-1290","tags":["Ecommerce","Pauta y anuncios"]},{"dia":18,"aud":"effix","ini":660,"fin":720,"nombre":"Valentina Ortiz","cargo":"Mentora de alto impacto para mujeres","tema":"Empresaria Consciente","formato":"Taller","id":"18-effix-660","tags":["Mentalidad y liderazgo"]},{"dia":18,"aud":"marketing","ini":660,"fin":720,"nombre":"Javi Ruiz","cargo":"Especialista en ventas por WhatsApp","tema":"WhatsApp cambió para siempre ¿Tu empresa está lista?","formato":"Taller","id":"18-marketing-660","tags":["Ventas"]},{"dia":18,"aud":"ecommerce","ini":660,"fin":720,"nombre":"Santiago Sanchez","cargo":"Fundador de Converzzo y estratega","tema":"Anuncios que no parecen anuncios","formato":"Taller","id":"18-ecommerce-660","tags":["Pauta y anuncios","Mentalidad y liderazgo"]},{"dia":18,"aud":"creadores","ini":660,"fin":720,"nombre":"Alejandra Rincón","cargo":"Consultora de contenido y ventas","tema":"¡Hacer contenido no da plata, saber venderse Sí","formato":"Taller","id":"18-creadores-660","tags":["Contenido y redes","Ventas"]},{"dia":18,"aud":"prendas","ini":660,"fin":720,"nombre":"Camilo & Sebas Montes","cargo":"","tema":"Escalado a 20 mil guías mensuales","id":"18-prendas-660","tags":["Operación y logística"],"formato":""},{"dia":18,"aud":"vitalcom","ini":660,"fin":720,"nombre":"Juan Felipe Pinzón Calderón","cargo":"","tema":"Ofertas irresistibles para escalar","id":"18-vitalcom-660","tags":["Ventas","Operación y logística"],"formato":""},{"dia":18,"aud":"unmerco","ini":660,"fin":720,"nombre":"Brian Castellanos","cargo":"","tema":"Meta Ads a prueba de baneos","id":"18-unmerco-660","tags":["Pauta y anuncios"],"formato":""},{"dia":18,"aud":"imperio","ini":660,"fin":720,"nombre":"Juano Baquero","cargo":"","tema":"YouTube 2027: las nuevas reglas","id":"18-imperio-660","tags":["Contenido y redes"],"formato":""},{"dia":18,"aud":"effix","ini":720,"fin":780,"nombre":"Joaco en China","cargo":"Experto en proveedores chinos","tema":"China al descubierto. Exponiendo 10 años de aprendizaje","formato":"Taller","id":"18-effix-720","tags":["Operación y logística"]},{"dia":18,"aud":"marketing","ini":720,"fin":780,"nombre":"Victor Pay \"El Nerdo de la IA\"","cargo":"Constructor de agentes de IA","tema":"Cómo crear agentes IA absurdamente rentables para tu negocio","formato":"Taller","id":"18-marketing-720","tags":["IA"]},{"dia":18,"aud":"ecommerce","ini":720,"fin":780,"nombre":"Mike Munzvil","cargo":"Founder Master","tema":"El método para vender al por mayor con anuncios de Google","formato":"Taller","id":"18-ecommerce-720","tags":["Pauta y anuncios","Ventas"]},{"dia":18,"aud":"creadores","ini":720,"fin":780,"nombre":"Juda Kroonenburg","cargo":"CEO Medeflix","tema":"Convertiendo tu negocio en una serie","formato":"Taller","id":"18-creadores-720","tags":[]},{"dia":18,"aud":"prendas","ini":720,"fin":780,"nombre":"Pablo Financiero","cargo":"","tema":"Tus finanzas personales son el primer paso","id":"18-prendas-720","tags":["Dinero y finanzas"],"formato":""},{"dia":18,"aud":"vitalcom","ini":720,"fin":780,"nombre":"Mateo Vera FEM","cargo":"","tema":"Marca de suplementos irresistible","id":"18-vitalcom-720","tags":["Marca"],"formato":""},{"dia":18,"aud":"unmerco","ini":720,"fin":780,"nombre":"Emilio Zambrano Gitracom","cargo":"","tema":"Revolución logística en LATAM","id":"18-unmerco-720","tags":["Operación y logística"],"formato":""},{"dia":18,"aud":"imperio","ini":720,"fin":780,"nombre":"Samuel Alba","cargo":"","tema":"Mindset Millonario","id":"18-imperio-720","tags":["Mentalidad y liderazgo"],"formato":""},{"dia":18,"aud":"effix","ini":780,"fin":820,"nombre":"Pablo Alexander Torrealba","cargo":"Experto en ventas por Walmart","tema":"El negocio de vender en Walmart marcas que no te pertenecen","formato":"Conferencia","id":"18-effix-780","tags":["Ecommerce","Ventas","Marca"]},{"dia":18,"aud":"marketing","ini":780,"fin":820,"nombre":"David Otálora","cargo":"Experto en viralidad de nicho","tema":"5 pasos para viralizar tu negocio a millones","formato":"Conferencia","id":"18-marketing-780","tags":["Contenido y redes","Dinero y finanzas"]},{"dia":18,"aud":"ecommerce","ini":780,"fin":820,"nombre":"Sara Ramirez","cargo":"Fundadora y CEO de Maralta","tema":"10 errores y las lecciones más valiosas para emprender","formato":"Conferencia","id":"18-ecommerce-780","tags":["Mentalidad y liderazgo"]},{"dia":18,"aud":"creadores","ini":780,"fin":820,"nombre":"Juan Camilo Silva","cargo":"Co-founder Lucid Bot","tema":"El Ecommerce autónomo: Vende, opera y escala con agentes de IA","formato":"Conferencia","id":"18-creadores-780","tags":["IA","Ecommerce","Operación y logística"]},{"dia":18,"aud":"prendas","ini":780,"fin":820,"nombre":"Santiago Sánchez","cargo":"","tema":"Estructuras de contenido que se vuelven virales","id":"18-prendas-780","tags":["Contenido y redes"],"formato":""},{"dia":18,"aud":"vitalcom","ini":780,"fin":820,"nombre":"Kenny Barrios","cargo":"","tema":"El negocio es la marca","id":"18-vitalcom-780","tags":["Marca"],"formato":""},{"dia":18,"aud":"unmerco","ini":780,"fin":820,"nombre":"Jonathan Nuñez de Drop Guatemala","cargo":"","tema":"Dropshipping en Centroamérica","id":"18-unmerco-780","tags":["Ecommerce"],"formato":""},{"dia":18,"aud":"convertmate","ini":780,"fin":820,"nombre":"Santiago Cruz","cargo":"eCom Society","tema":"Q&A: Vender +45M USD en USA","id":"18-convertmate-780","tags":["Ventas","Dinero y finanzas"],"formato":""},{"dia":18,"aud":"imperio","ini":780,"fin":820,"nombre":"Viani","cargo":"","tema":"Suite Tu Imperio YouTube con IA","id":"18-imperio-780","tags":["IA","Contenido y redes"],"formato":""},{"dia":18,"aud":"effix","ini":820,"fin":860,"nombre":"Antonini de Jiménez, Roberto Rave Rios, Alberto J. Castillo","cargo":"ICPA","tema":"¿Qué futuro tienes si la IA piensa por ti?","formato":"Conversatorio","id":"18-effix-820","tags":["IA"]},{"dia":18,"aud":"marketing","ini":820,"fin":860,"nombre":"Jhon Hurtado","cargo":"Especialista en productos y rebranding","tema":"Cómo crear marca a partir de productos “quemados”","formato":"Conferencia","id":"18-marketing-820","tags":["Marca"]},{"dia":18,"aud":"ecommerce","ini":820,"fin":860,"nombre":"Andrés Restrepo MKT","cargo":"Líder de e-commerce en Monastery","tema":"El ecommerce no escala con IA, escala con sistema","formato":"Conferencia","id":"18-ecommerce-820","tags":["IA","Ecommerce","Mentalidad y liderazgo","Operación y logística"]},{"dia":18,"aud":"creadores","ini":820,"fin":860,"nombre":"Daniiemprende","cargo":"Estratega de contenido orgánico","tema":"Vende más con tus historias de Instagram","formato":"Conferencia","id":"18-creadores-820","tags":["Contenido y redes","Ventas"]},{"dia":18,"aud":"prendas","ini":820,"fin":900,"nombre":"Ivan Caicedo","cargo":"","tema":"De cero a comunidad","id":"18-prendas-820","tags":[],"formato":""},{"dia":18,"aud":"vitalcom","ini":820,"fin":860,"nombre":"Juan Felipe Céspedes - Pipefy","cargo":"","tema":"¿Tu marca de salud en manos de IA?","id":"18-vitalcom-820","tags":["IA","Marca"],"formato":""},{"dia":18,"aud":"unmerco","ini":820,"fin":860,"nombre":"Payoneer","cargo":"","tema":"","id":"18-unmerco-820","tags":[],"formato":""},{"dia":18,"aud":"convertmate","ini":820,"fin":860,"nombre":"Juan Felipe León León","cargo":"Gratu Colombia / Bloki Presente / La Real Marketing","tema":"De cero a $50 millones en 2 meses","id":"18-convertmate-820","tags":["Dinero y finanzas"],"formato":""},{"dia":18,"aud":"imperio","ini":820,"fin":860,"nombre":"Equipo Tu Imperio YouTube","cargo":"","tema":"Canal con IA en 60 minutos","id":"18-imperio-820","tags":["IA","Contenido y redes"],"formato":""},{"dia":18,"aud":"effix","ini":860,"fin":900,"nombre":"Michelly Castilla","cargo":"Mentora de negocios y autora best seller","tema":"Founder-Led Commerce: el fundador como motor de conversión","formato":"Conferencia","id":"18-effix-860","tags":["Mentalidad y liderazgo"]},{"dia":18,"aud":"marketing","ini":860,"fin":900,"nombre":"Juan Martínez","cargo":"Creador de marcas de e-commerce","tema":"Crear marca NO es el camino correcto","formato":"Conferencia","id":"18-marketing-860","tags":["Ecommerce","Contenido y redes","Marca"]},{"dia":18,"aud":"ecommerce","ini":860,"fin":900,"nombre":"Wilder Zapata","cargo":"Cofundador y CEO de Action Black","tema":"¿Cómo lo imposible se convierte en inevitable?","formato":"Conferencia","id":"18-ecommerce-860","tags":["Mentalidad y liderazgo"]},{"dia":18,"aud":"creadores","ini":860,"fin":900,"nombre":"Sebastián Flórez & Andres Rivero","cargo":"Cofundadores de Grupo 500","tema":"¿Cómo emprender sin un peso y con menos de 20 años?","formato":"Conferencia","id":"18-creadores-860","tags":["Mentalidad y liderazgo"]},{"dia":18,"aud":"vitalcom","ini":860,"fin":900,"nombre":"Conversatorio","cargo":"","tema":"Vende en 5 países de LATAM","id":"18-vitalcom-860","tags":["Ventas"],"formato":""},{"dia":18,"aud":"unmerco","ini":860,"fin":900,"nombre":"Andres Moreno","cargo":"","tema":"Vender no es cuestión de adivinar","id":"18-unmerco-860","tags":["Ventas"],"formato":""},{"dia":18,"aud":"convertmate","ini":860,"fin":900,"nombre":"Diego Roldán","cargo":"Lummia","tema":"Creatividad para tiendas que escalan","id":"18-convertmate-860","tags":["Ecommerce","Mentalidad y liderazgo","Operación y logística"],"formato":""},{"dia":18,"aud":"imperio","ini":860,"fin":900,"nombre":"José Horacio \"Lacho\" Villanueva Elizondo","cargo":"","tema":"Storytelling viral para YouTube","id":"18-imperio-860","tags":["Contenido y redes"],"formato":""},{"dia":18,"aud":"effix","ini":900,"fin":960,"nombre":"Juan ID","cargo":"Storyteller ganador de 6 Emmy","tema":"El que mejor comunica GANA","formato":"Taller","id":"18-effix-900","tags":["Contenido y redes","Mentalidad y liderazgo"]},{"dia":18,"aud":"marketing","ini":900,"fin":960,"nombre":"Javi Rodriguez","cargo":"Mentor de alto impacto","tema":"Cómo crear una marca con +100M vistas y +US$10M al año","formato":"Taller","id":"18-marketing-900","tags":["Marca"]},{"dia":18,"aud":"ecommerce","ini":900,"fin":960,"nombre":"Eliana Valencia","cargo":"Estratega y Cofundadora de Posbion","tema":"De una idea a un negocio rentable","formato":"Taller","id":"18-ecommerce-900","tags":["Mentalidad y liderazgo"]},{"dia":18,"aud":"creadores","ini":900,"fin":960,"nombre":"David Rodríguez","cargo":"Fundador de IA University","tema":"IA una nueva especie","formato":"Taller","id":"18-creadores-900","tags":["IA","Mentalidad y liderazgo"]},{"dia":18,"aud":"prendas","ini":900,"fin":960,"nombre":"Danii Emprende","cargo":"","tema":"Marca Personal","id":"18-prendas-900","tags":["Marca"],"formato":""},{"dia":18,"aud":"vitalcom","ini":900,"fin":960,"nombre":"Mike Munzvil","cargo":"","tema":"Marca + agentes IA para 2027","id":"18-vitalcom-900","tags":["IA","Marca"],"formato":""},{"dia":18,"aud":"unmerco","ini":900,"fin":960,"nombre":"Laura Blago","cargo":"","tema":"Vende más con IA","id":"18-unmerco-900","tags":["IA","Ventas"],"formato":""},{"dia":18,"aud":"convertmate","ini":900,"fin":960,"nombre":"Rhamses Gabas","cargo":"comercionline.com","tema":"Auditoría: ¿por qué no escalas?","id":"18-convertmate-900","tags":["Operación y logística"],"formato":""},{"dia":18,"aud":"imperio","ini":900,"fin":960,"nombre":"Sebastian Velez","cargo":"","tema":"3 herramientas para YouTube","id":"18-imperio-900","tags":["Contenido y redes"],"formato":""},{"dia":18,"aud":"effix","ini":960,"fin":1000,"nombre":"Manuela Aduanera","cargo":"Abogada aduanera","tema":"Emprender importando legalmente a Colombia","formato":"Conferencia","id":"18-effix-960","tags":["Operación y logística"]},{"dia":18,"aud":"marketing","ini":960,"fin":1000,"nombre":"Juan Tamayo","cargo":"Consultor certificado en Meta Ads","tema":"La IA ya pauta mejor que tú: conoce a Muse, la IA de Meta","formato":"Conferencia","id":"18-marketing-960","tags":["IA","Pauta y anuncios"]},{"dia":18,"aud":"ecommerce","ini":960,"fin":1000,"nombre":"Lacho Villanueva","cargo":"Director creativo de marcas","tema":"Storyfeeling: haz de tu marca una experiencia","formato":"Conferencia","id":"18-ecommerce-960","tags":["Marca"]},{"dia":18,"aud":"creadores","ini":960,"fin":1000,"nombre":"Andrés Atehortua \"AtehoManager\"","cargo":"Especialista en mensajes que conectan","tema":"Monetiza Tu Talento","formato":"Conferencia","id":"18-creadores-960","tags":[]},{"dia":18,"aud":"prendas","ini":960,"fin":1000,"nombre":"Julian & Nicolas Lummia","cargo":"","tema":"Aceleración de marca y posicionamiento","id":"18-prendas-960","tags":["Marca"],"formato":""},{"dia":18,"aud":"vitalcom","ini":960,"fin":1000,"nombre":"Fabian Camacho","cargo":"","tema":"Reto Vitalcom: Mentoría 360","id":"18-vitalcom-960","tags":[],"formato":""},{"dia":18,"aud":"unmerco","ini":960,"fin":1000,"nombre":"Thamara Tacoa","cargo":"ePayco","tema":"Crear o morir en las ventas","id":"18-unmerco-960","tags":["Ventas"],"formato":""},{"dia":18,"aud":"convertmate","ini":960,"fin":1000,"nombre":"José Percy","cargo":"Treli","tema":"Ingresos recurrentes en ecommerce","id":"18-convertmate-960","tags":["Ecommerce","Dinero y finanzas"],"formato":""},{"dia":18,"aud":"imperio","ini":960,"fin":1000,"nombre":"Lucas Giraldo","cargo":"","tema":"El triángulo para vivir de YouTube","id":"18-imperio-960","tags":["Contenido y redes"],"formato":""},{"dia":18,"aud":"effix","ini":1000,"fin":1040,"nombre":"Diego Fonseca","cargo":"Inversor para latinos en USA","tema":"Negocios & Bienes Raíces en USA con Crédito y sin Visa","formato":"Conferencia","id":"18-effix-1000","tags":["Dinero y finanzas"]},{"dia":18,"aud":"marketing","ini":1000,"fin":1040,"nombre":"Miguel Alvira ”El Profe Miguel”","cargo":"Experto en audiencias orgánicas","tema":"Cómo crear contenido orgánico viral","formato":"Conferencia","id":"18-marketing-1000","tags":["Contenido y redes"]},{"dia":18,"aud":"ecommerce","ini":1000,"fin":1040,"nombre":"Santiago Talavera","cargo":"Fundador de Happy Flops en Europa","tema":"Cómo facturé 80 millones de dólares en 3 años: 3 claves","formato":"Conferencia","id":"18-ecommerce-1000","tags":["Mentalidad y liderazgo","Dinero y finanzas"]},{"dia":18,"aud":"creadores","ini":1000,"fin":1040,"nombre":"Mauricio Cuevas","cargo":"CEO de Pancake","tema":"Tu video vende meses y tú cobras una vez. En Asia no","formato":"Conferencia","id":"18-creadores-1000","tags":["Ventas"]},{"dia":18,"aud":"prendas","ini":1000,"fin":1120,"nombre":"Natalia Blanco","cargo":"","tema":"Taller automatización de IA","id":"18-prendas-1000","tags":["IA"],"formato":""},{"dia":18,"aud":"vitalcom","ini":1000,"fin":1040,"nombre":"Freddy Ordoñez y El Chonta","cargo":"","tema":"Así creamos nuestras marcas","id":"18-vitalcom-1000","tags":["Marca"],"formato":""},{"dia":18,"aud":"unmerco","ini":1000,"fin":1040,"nombre":"Antonia Villa","cargo":"","tema":"USD 4.7M con dropshipping","id":"18-unmerco-1000","tags":["Ecommerce","Dinero y finanzas"],"formato":""},{"dia":18,"aud":"convertmate","ini":1000,"fin":1040,"nombre":"Mateo Costa","cargo":"ConvertMate","tema":"Convierte el tráfico en ventas","id":"18-convertmate-1000","tags":["Ventas"],"formato":""},{"dia":18,"aud":"imperio","ini":1000,"fin":1040,"nombre":"Christian Hernández @chrispro","cargo":"","tema":"Cómo vivir de la música con IA","id":"18-imperio-1000","tags":["IA"],"formato":""},{"dia":18,"aud":"effix","ini":1040,"fin":1060,"nombre":"Julio L, Jerson A & Liz M","cargo":"Aliclik","tema":"Perú nos entrenó. LATAM será la consecuencia","formato":"Xtage","id":"18-effix-1040","tags":[]},{"dia":18,"aud":"marketing","ini":1040,"fin":1060,"nombre":"Mike Munzvil","cargo":"Master","tema":"Cómo escalar tiendas online con agentes de IA autónomos","formato":"Xtage","id":"18-marketing-1040","tags":["IA","Ecommerce","Operación y logística"]},{"dia":18,"aud":"ecommerce","ini":1040,"fin":1060,"nombre":"Andrés Vera Arango","cargo":"Inmerxia","tema":"Inmerxia: Semana de la IA","formato":"Xtage","id":"18-ecommerce-1040","tags":["IA"]},{"dia":18,"aud":"creadores","ini":1040,"fin":1080,"nombre":"Paula Karpf","cargo":"Creadora de contenido e influencer","tema":"Tu esencia es tu estrategia","formato":"Conferencia","id":"18-creadores-1040","tags":["Contenido y redes"]},{"dia":18,"aud":"unmerco","ini":1040,"fin":1080,"nombre":"Jhony Caprini","cargo":"","tema":"Google Ads","id":"18-unmerco-1040","tags":["Pauta y anuncios"],"formato":""},{"dia":18,"aud":"imperio","ini":1040,"fin":1080,"nombre":"Equipo Tu Imperio YouTube","cargo":"","tema":"Tu primer infoproducto con IA","id":"18-imperio-1040","tags":["IA","Contenido y redes"],"formato":""},{"dia":18,"aud":"effix","ini":1060,"fin":1080,"nombre":"Andrés Restrepo","cargo":"Unmerco","tema":"Tu mejor aliado no es un proveedor, es un ecosistema","formato":"Xtage","id":"18-effix-1060","tags":["Operación y logística"]},{"dia":18,"aud":"marketing","ini":1060,"fin":1080,"nombre":"Juano Baquero y Lucas Giraldo","cargo":"Tu Imperio YouTube","tema":"Cómo ganar dinero en YouTube con IA sin mostrar tu cara","formato":"Xtage","id":"18-marketing-1060","tags":["IA","Contenido y redes","Dinero y finanzas"]},{"dia":18,"aud":"ecommerce","ini":1060,"fin":1080,"nombre":"Juan Camilo Silva","cargo":"Lucidbot","tema":"E-commerce autónomo: vende y escala con agentes de IA","formato":"Xtage","id":"18-ecommerce-1060","tags":["IA","Ecommerce","Ventas","Operación y logística"]},{"dia":18,"aud":"effix","ini":1080,"fin":1120,"nombre":"Paco Benitez","cargo":"Entrenador de comunicación 6 veces TEDx","tema":"Comunicación para vender","formato":"Conferencia","id":"18-effix-1080","tags":["Ventas","Mentalidad y liderazgo"]},{"dia":18,"aud":"marketing","ini":1080,"fin":1120,"nombre":"Mateo Vera","cargo":"Fundador Fem Probiotics","tema":"Gana el que puede pagar más por cada cliente","formato":"Conferencia","id":"18-marketing-1080","tags":["Mentalidad y liderazgo"]},{"dia":18,"aud":"ecommerce","ini":1080,"fin":1120,"nombre":"David Rojas","cargo":"Fundador de fashion e-commerce","tema":"Agentes IA: el nuevo cerebro de las marcas","formato":"Conferencia","id":"18-ecommerce-1080","tags":["IA","Ecommerce","Marca","Mentalidad y liderazgo"]},{"dia":18,"aud":"unmerco","ini":1080,"fin":1120,"nombre":"Juan Camilo Silva","cargo":"","tema":"Ecommerce autónomo con Lucidbot","id":"18-unmerco-1080","tags":["Ecommerce"],"formato":""},{"dia":18,"aud":"imperio","ini":1080,"fin":1120,"nombre":"Juano Baquero","cargo":"","tema":"El Imperio: próximos pasos","id":"18-imperio-1080","tags":[],"formato":""},{"dia":18,"aud":"effix","ini":1120,"fin":1240,"nombre":"Javi Rodriguez & Valentina Ortiz","cargo":"Mentores de Alto Impacto","tema":"Cómo construir un Imperio en Pareja y en familia","formato":"Taller","id":"18-effix-1120","tags":[]},{"dia":18,"aud":"marketing","ini":1120,"fin":1180,"nombre":"Camilo Uribe","cargo":"Fundador Gummy Box","tema":"De eCommerce a marca: crea un activo que vale millones","formato":"Conversatorio","id":"18-marketing-1120","tags":["Ecommerce","Marca","Mentalidad y liderazgo","Dinero y finanzas"]},{"dia":18,"aud":"ecommerce","ini":1120,"fin":1180,"nombre":"Leandro Petersen & Sergio Goycochea","cargo":"Asociación del Fútbol Argentino","tema":"La expansión global de la marca AFA","formato":"Conversatorio","id":"18-ecommerce-1120","tags":["Marca"]},{"dia":18,"aud":"prendas","ini":1120,"fin":1200,"nombre":"Esteban Hype","cargo":"","tema":"La nueva era del dropshipping con inteligencia artificial","id":"18-prendas-1120","tags":["IA","Ecommerce"],"formato":""},{"dia":18,"aud":"marketing","ini":1180,"fin":1240,"nombre":"Amadeo Llados","cargo":"Mentor de Coaches Online","tema":"Descubre el camino para cumplir todos los deseos de tu corazón","formato":"Taller","id":"18-marketing-1180","tags":["Mentalidad y liderazgo"]},{"dia":18,"aud":"ecommerce","ini":1180,"fin":1240,"nombre":"Isaac Chaparro","cargo":"VP Creativo de Inter Rapidísimo","tema":"Origen: el arte de pensar pequeño","formato":"Taller","id":"18-ecommerce-1180","tags":[]}];
+const GRILLA={"16":[[720,780],[780,840],[840,880],[880,920],[920,960],[960,1020],[1020,1060],[1060,1080],[1080,1100],[1100,1140],[1140,1200],[1200,1260],[1290,1440]],"17":[[660,720],[720,780],[780,820],[820,860],[860,900],[900,960],[960,1000],[1000,1020],[1020,1060],[1060,1100],[1100,1120],[1120,1140],[1140,1200],[1200,1260],[1290,1440]],"18":[[660,720],[720,780],[780,820],[820,860],[860,900],[900,960],[960,1000],[1000,1040],[1040,1060],[1060,1080],[1080,1120],[1120,1180],[1180,1240]]};
+const AUD={"effix":{"nombre":"Auditorio Effix","corto":"Effix","lugar":"Pabellón Verde","color":"#8CC864","texto":"#000","claro":"#E8F3DF","negra":false},"marketing":{"nombre":"Auditorio Marketing","corto":"Marketing","lugar":"Pabellón Amarillo","color":"#E5C24A","texto":"#000","claro":"#FFFBE2","negra":false},"ecommerce":{"nombre":"Auditorio E-commerce","corto":"E-commerce","lugar":"Gran Salón","color":"#7A5BAA","texto":"#fff","claro":"#ECE9F4","negra":false},"creadores":{"nombre":"Auditorio Creadores de Contenido","corto":"Creadores de Contenido","lugar":"Pzta. Interamericana","color":"#7FD3CA","texto":"#000","claro":"#D7F0EC","negra":false},"prendas":{"nombre":"Auditorio Black Prendas Control","corto":"Black Prendas Control","lugar":"Pabellón Azul","color":"#2F62C4","texto":"#fff","claro":"#FFFFFF","negra":true},"vitalcom":{"nombre":"Auditorio Black Vitalcom","corto":"Black Vitalcom","lugar":"Pabellón Amarillo","color":"#E5C24A","texto":"#000","claro":"#FFFFFF","negra":true},"unmerco":{"nombre":"Auditorio Black Unmerco","corto":"Black Unmerco","lugar":"Hall Central","color":"#B6B2C9","texto":"#000","claro":"#FFFFFF","negra":true},"convertmate":{"nombre":"Auditorio Black ConvertMate","corto":"Black ConvertMate","lugar":"Gran Salón","color":"#7A5BAA","texto":"#fff","claro":"#FFFFFF","negra":true},"imperio":{"nombre":"Auditorio Black Tu Imperio YouTube","corto":"Black Tu Imperio YouTube","lugar":"Pabellón Blanco","color":"#E6E6E6","texto":"#000","claro":"#FFFFFF","negra":true}};
+const PINES={"effix":[38.4,25.9],"marketing":[5.0,69.2],"ecommerce":[84.7,52.4],"creadores":[59.9,47.0],"prendas":[24.7,35.1],"vitalcom":[26.4,72.7],"unmerco":[25.1,55.9],"convertmate":[67.2,45.2],"imperio":[32.4,56.3]};
+const ORDEN=Object.keys(AUD);
+const DIAS={16:'Viernes 16 de octubre',17:'Sábado 17 de octubre',18:'Domingo 18 de octubre'};
+const DIAS_C={16:'Vie 16',17:'Sáb 17',18:'Dom 18'};
+const TEMAS=['IA','Ecommerce','Pauta y anuncios','Contenido y redes','Ventas','Marca','Mentalidad y liderazgo','Dinero y finanzas','Operación y logística'];
+const FRANJAS={manana:['Mañana',0,720],tarde:['Tarde',720,1080],noche:['Noche',1080,1500]};
+const $=s=>document.querySelector(s);
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const norm=s=>[...String(s).normalize('NFD')].filter(c=>{const k=c.charCodeAt(0);return k<768||k>879}).join('').toLowerCase();
+
+/* ---------- hora de Colombia (UTC-5, sin horario de verano) ---------- */
+function ahora(){
+  const p=new URLSearchParams(location.search).get('ahora');
+  if(p){const m=p.match(/(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2})/);if(m)return{a:+m[1],m:+m[2],d:+m[3],min:+m[4]*60+ +m[5],ms:Date.UTC(+m[1],+m[2]-1,+m[3],+m[4]+5,+m[5])}}
+  const ms=Date.now(),c=new Date(ms-5*3600e3);
+  return{a:c.getUTCFullYear(),m:c.getUTCMonth()+1,d:c.getUTCDate(),min:c.getUTCHours()*60+c.getUTCMinutes(),ms};
+}
+const msDe=(dia,min)=>Date.UTC(2026,9,dia,0,min)+5*3600e3;
+function fh(min){let h=Math.floor(min/60)%24,m=min%60;const mm=String(m).padStart(2,'0');
+  if(h===12&&m===0)return'12:00 m';if(h===0)return'12:'+mm+' am';
+  return(h>12?h-12:h)+':'+mm+(h>=12?' pm':' am');}
+function dur(a,b){const t=b-a,h=Math.floor(t/60),m=t%60;return h?(h+' h'+(m?' '+m+' min':'')):m+' min';}
+
+/* ---------- estado ---------- */
+const LS='effix26-mi-agenda';
+let fav=new Set(JSON.parse(localStorage.getItem(LS)||'[]').filter(id=>DATA.some(s=>s.id===id)));
+const st={dia:16,q:'',auds:new Set(),temas:new Set(),franjas:new Set(),vista:matchMedia('(min-width:1100px)').matches?'grilla':'hora'};
+const POR_ID=Object.fromEntries(DATA.map(s=>[s.id,s]));
+DATA.forEach(s=>{s._t=norm([s.nombre,s.cargo,s.tema,AUD[s.aud].nombre,AUD[s.aud].lugar,s.formato||'',s.tags.join(' ')].join(' '))});
+
+function guardarFav(){localStorage.setItem(LS,JSON.stringify([...fav]));$('#nFav').textContent=fav.size}
+function cruces(s){return [...fav].map(id=>POR_ID[id]).filter(o=>o&&o.id!==s.id&&o.dia===s.dia&&o.ini<s.fin&&s.ini<o.fin)}
+
+const todosDias=()=>!!st.q&&st.vista!=='grilla'&&st.dia!=='fav';
+function pasa(s){
+  if(st.dia!=='fav'&&!todosDias()&&s.dia!==st.dia)return false;
+  if(st.dia==='fav'&&!fav.has(s.id))return false;
+  if(st.auds.size&&!st.auds.has(s.aud))return false;
+  if(st.temas.size&&!s.tags.some(t=>st.temas.has(t)))return false;
+  if(st.franjas.size&&![...st.franjas].some(f=>s.ini>=FRANJAS[f][1]&&s.ini<FRANJAS[f][2]))return false;
+  if(st.q){const ps=norm(st.q).split(/\s+/).filter(Boolean);if(!ps.every(p=>s._t.includes(p)))return false}
+  return true;
+}
+function resaltar(txt){
+  let h=esc(txt);if(!st.q)return h;
+  norm(st.q).split(/\s+/).filter(p=>p.length>1).forEach(p=>{
+    const base=norm(txt);let out='',i=0,raw=String(txt);const idx=[];let k=base.indexOf(p);
+    while(k>-1){idx.push(k);k=base.indexOf(p,k+p.length)}
+    if(!idx.length)return;
+    idx.forEach(j=>{out+=esc(raw.slice(i,j))+'<mark>'+esc(raw.slice(j,j+p.length))+'</mark>';i=j+p.length});
+    out+=esc(raw.slice(i));h=out;txt=raw;
+  });
+  return h;
+}
+const icEstrella='<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.8l2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17.2l-5.7 3.1 1.2-6.4L2.8 9.5l6.4-.8z"/></svg>';
+const icEstrellaV='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2.8l2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17.2l-5.7 3.1 1.2-6.4L2.8 9.5l6.4-.8z"/></svg>';
+
+function etiquetaAud(a){
+  return a.negra?`<span class="aud black"><i>Black</i>${esc(a.corto.replace(/^Black /,''))}</span>`
+    :`<span class="aud" style="--c:${a.color};--ct:${a.texto}">${esc(a.corto)}</span>`;
+}
+function tarjeta(s,conDia){
+  const a=AUD[s.aud],f=fav.has(s.id),cr=f?cruces(s):[];
+  return `<article class="tarjeta ${a.negra?'negra':''}" style="--c:${a.color}" data-id="${s.id}" tabindex="0" role="button" aria-label="${esc(s.nombre+'. '+s.tema)}">
+    <button class="estrella" data-fav="${s.id}" aria-pressed="${f}" aria-label="${f?'Quitar de':'Guardar en'} mi agenda">${f?icEstrella:icEstrellaV}</button>
+    <div class="linea1">${etiquetaAud(a)}</div>
+    <div class="hora">${conDia?DIAS_C[s.dia]+' · ':''}${fh(s.ini)} – ${fh(s.fin)} · ${dur(s.ini,s.fin)}${s.formato?' · '+esc(s.formato):''}</div>
+    <div class="nombre">${resaltar(s.nombre)}</div>
+    ${s.cargo?`<div class="cargo">${resaltar(s.cargo)}</div>`:''}
+    ${s.tema?`<div class="tema">${resaltar(s.tema)}</div>`:''}
+    ${cr.length?`<div class="cruce">Se cruza con ${esc(cr.map(o=>o.nombre).join(', '))}</div>`:''}
+  </article>`;
+}
+
+/* ---------- panel de estado ---------- */
+function panelEstado(){
+  const n=ahora(),el=$('#estado');
+  const ini=msDe(16,720),fin=msDe(18,24*60);
+  if(n.ms<ini){
+    const t=ini-n.ms,d=Math.floor(t/864e5),h=Math.floor(t%864e5/36e5),m=Math.floor(t%36e5/6e4);
+    const dg=(v,l)=>`<div class="grupo"><div class="ds">${String(v).padStart(2,'0').split('').map(x=>`<i>${x}</i>`).join('')}</div><small>${l}</small></div>`;
+    el.innerHTML=`<div class="cuenta-barra"><p>Arranca el viernes 16 · 12:00 m</p><div class="digitos">${dg(d,'Días')}${dg(h,'Horas')}${dg(m,'Min')}</div></div>
+      <div class="interes"><b>¿Qué te interesa?</b><div class="chips-rapidos">${TEMAS.map(t=>`<button class="chip" data-tema-rapido="${esc(t)}" aria-pressed="${st.temas.has(t)}">${esc(t)}</button>`).join('')}</div></div>`;
+    return;
+  }
+  if(n.ms>=fin){el.innerHTML=`<div class="cuenta-barra"><p>Feria Effix 2026 terminó · aquí queda la agenda completa</p></div>`;return}
+  const dia=n.d,min=n.min,hoy=DATA.filter(s=>s.dia===dia);
+  const ya=hoy.filter(s=>s.ini<=min&&min<s.fin).sort(o);
+  const sigue=hoy.filter(s=>s.ini>min&&s.ini<=min+30).sort(o);
+  let html='';
+  if(ya.length)html+=`<h3><span class="caja-blanca" style="display:inline-flex;align-items:center;gap:10px"><i class="vivo"></i>Ahora · ${fh(min)}</span></h3><div class="ahora-fila">${ya.map(s=>tarjeta(s)).join('')}</div>`;
+  if(sigue.length)html+=`<h3><span class="caja-blanca">Lo que sigue</span><small>Empieza en menos de 30 min</small></h3><div class="ahora-fila">${sigue.map(s=>tarjeta(s)).join('')}</div>`;
+  if(!html){
+    const prox=DATA.filter(s=>msDe(s.dia,s.ini)>n.ms).sort((a,b)=>msDe(a.dia,a.ini)-msDe(b.dia,b.ini))[0];
+    html=prox?`<h3><span class="caja-blanca">Lo que sigue · ${DIAS_C[prox.dia]} ${fh(prox.ini)}</span></h3><div class="ahora-fila">${DATA.filter(s=>s.dia===prox.dia&&s.ini===prox.ini).sort(o).map(s=>tarjeta(s)).join('')}</div>`:'';
+  }
+  el.innerHTML=html?`<div class="en-vivo">${html}</div>`:'';
+}
+const o=(a,b)=>a.ini-b.ini||ORDEN.indexOf(a.aud)-ORDEN.indexOf(b.aud);
+
+/* ---------- vistas ---------- */
+function vistaHora(lista){
+  if(!lista.length)return vacio();
+  const conDia=st.dia==='fav'||todosDias();const g=new Map();
+  lista.sort((a,b)=>a.dia-b.dia||o(a,b)).forEach(s=>{const k=s.dia+'|'+s.ini;if(!g.has(k))g.set(k,[]);g.get(k).push(s)});
+  return [...g].map(([k,L])=>{const[d,i]=k.split('|').map(Number);
+    return `<section class="bloque" data-fin="${Math.max(...L.map(s=>s.fin))}"><div class="bloque-h"><b>${fh(i)}</b><span>${conDia?DIAS_C[d]+' · ':''}${L.length} ${L.length>1?'charlas':'charla'}</span></div><div class="rejilla">${L.map(s=>tarjeta(s,conDia)).join('')}</div></section>`}).join('');
+}
+function vistaGrilla(){
+  if(st.dia==='fav')return vistaHora(DATA.filter(s=>pasa(s)));
+  const filas=GRILLA[st.dia],dia=st.dia;
+  let h=`<div class="grilla-scroll"><div class="grilla" style="grid-template-columns:84px repeat(${ORDEN.length},minmax(210px,1fr));grid-template-rows:auto repeat(${filas.length},minmax(96px,auto))">`;
+  h+=`<div class="g-esq" style="grid-row:1;grid-column:1">HORA</div>`;
+  ORDEN.forEach((a,i)=>{h+=`<div class="g-cab ${AUD[a].negra?'black':''}" style="grid-row:1;grid-column:${i+2};--c:${AUD[a].color};--ct:${AUD[a].texto}">${esc(AUD[a].nombre)}<small>(${esc(AUD[a].lugar)})</small></div>`});
+  filas.forEach((f,r)=>{h+=`<div class="g-hora" style="grid-row:${r+2};grid-column:1">${fh(f[0]).replace(' ','<br>')}</div>`});
+  const ocupado=new Set();
+  DATA.filter(s=>s.dia===dia).forEach(s=>{
+    const c=ORDEN.indexOf(s.aud)+2,r0=filas.findIndex(f=>f[0]===s.ini);
+    let r1=r0;while(r1+1<filas.length&&filas[r1+1][0]<s.fin)r1++;
+    for(let r=r0;r<=r1;r++)ocupado.add(r+'|'+c);
+    const a=AUD[s.aud],ok=pasa(s);
+    h+=`<article class="g-celda ${a.negra?'negra':''} ${ok?'':'apagada'} ${fav.has(s.id)?'es-fav':''}" style="grid-row:${r0+2}/${r1+3};grid-column:${c};--cs:${a.claro}" data-id="${s.id}" tabindex="0" role="button">
+      <div class="hora">${fh(s.ini)} – ${fh(s.fin)}${fav.has(s.id)?' · ★':''}</div><div class="nombre">${resaltar(s.nombre)}</div>${s.cargo?`<div class="cargo">${resaltar(s.cargo)}</div>`:''}${s.tema?`<div class="tema">${resaltar(s.tema)}</div>`:''}</article>`;
+  });
+  filas.forEach((f,r)=>ORDEN.forEach((a,i)=>{if(!ocupado.has(r+'|'+(i+2)))h+=`<div class="g-x" style="grid-row:${r+2};grid-column:${i+2}">×</div>`}));
+  return h+'</div></div>';
+}
+function personas(n){
+  return n.replace(/\s*-\s*Pipefy$/,'').split(/\s*(?:,|&|\sy\s|\se\s)\s*/).map(x=>x.trim()).filter(x=>x.length>2&&!/^(networking|conversatorio|hackaecom)$/i.test(x));
+}
+function clave(p){return norm(p.replace(/["”][^"”]*["”]/g,'')).replace(/[^a-z0-9 ]/g,'').replace(/\s+/g,' ').trim()}
+function vistaPonentes(lista){
+  const m=new Map();
+  lista.forEach(s=>personas(s.nombre).forEach(p=>{const k=clave(p);if(!k)return;if(!m.has(k))m.set(k,{n:p,L:[]});const e=m.get(k);if(p.length>e.n.length)e.n=p;e.L.push(s)}));
+  const arr=[...m.values()].sort((a,b)=>clave(a.n).localeCompare(clave(b.n)));
+  if(!arr.length)return vacio();
+  const letras=[...new Set(arr.map(e=>clave(e.n)[0].toUpperCase()))];
+  let h=`<nav class="letras" aria-label="Letras">${letras.map(l=>`<a href="#L-${l}">${l}</a>`).join('')}</nav><div class="ponentes">`;let ult='';
+  arr.forEach(e=>{const l=clave(e.n)[0].toUpperCase();if(l!==ult){h+=`<div class="letra-h" id="L-${l}"><span>${l}</span></div>`;ult=l}
+    e.L.sort((a,b)=>a.dia-b.dia||a.ini-b.ini);
+    h+=`<button class="ponente" data-id="${e.L[0].id}"><b>${resaltar(e.n)}</b><span>${e.L.length} ${e.L.length>1?'charlas':'charla'}</span><div class="mini">${e.L.map(s=>`<i><span class="punto" style="background:${AUD[s.aud].color}"></span>${DIAS_C[s.dia]} ${fh(s.ini)}</i>`).join('')}</div></button>`});
+  return h+'</div>';
+}
+function mapaHTML(activo,mini){
+  return `<div class="${mini?'mini-mapa':'mapa'}"><img src="mapa-feria-effix-2026.jpg" alt="Mapa de Feria Effix 2026 en Plaza Mayor" loading="lazy">
+   ${ORDEN.filter(a=>!mini||a===activo).map(a=>`<div class="pin ${a===activo?'activo-pin':''} ${activo&&a!==activo?'tenue':''} ${PINES[a][0]<15?'izq':(PINES[a][0]>85||a==='unmerco')?'der':''}" style="left:${PINES[a][0]}%;top:${PINES[a][1]}%;--c:${AUD[a].color}"><i></i>${mini?'':`<span>${esc(AUD[a].corto)}</span>`}</div>`).join('')}</div>`;
+}
+let audMapa=null;
+function vistaMapa(){
+  return mapaHTML(audMapa)+`<div class="leyenda">${ORDEN.map(a=>`<button data-mapa="${a}" aria-pressed="${audMapa===a}"><i class="punto" style="background:${AUD[a].color}"></i><span>${esc(AUD[a].nombre)}<small>${esc(AUD[a].lugar)}</small></span></button>`).join('')}</div>`;
+}
+function vacio(){
+  if(st.dia==='fav'&&!fav.size)return `<div class="vacio"><b>Tu agenda está vacía</b>Toca la ★ en las charlas que quieres ver y aparecen aquí, en orden de hora.</div>`;
+  return `<div class="vacio"><b>No hay charlas con esa búsqueda</b>Prueba con otra palabra o quita algún filtro.<br><br><button class="btn blanco" data-limpiar>Quitar filtros</button></div>`;
+}
+
+function render(){
+  document.querySelectorAll('.dia').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.dia)===String(st.dia)));
+  document.querySelectorAll('.vista').forEach(b=>b.setAttribute('aria-pressed',b.dataset.vista===st.vista));
+  const lista=DATA.filter(s=>pasa(s));
+  const main=$('#principal');
+  if(st.vista==='hora')main.innerHTML=vistaHora(lista);
+  else if(st.vista==='grilla')main.innerHTML=vistaGrilla();
+  else if(st.vista==='ponentes')main.innerHTML=vistaPonentes(lista);
+  else main.innerHTML=vistaMapa();
+  $('#contador').textContent=st.vista==='mapa'?'':`${lista.length} ${lista.length===1?'charla':'charlas'}${todosDias()?' en los 3 días':''}`;
+  const n=st.auds.size+st.temas.size+st.franjas.size;$('#nFiltros').hidden=!n;$('#nFiltros').textContent=n;
+  const act=[...[...st.auds].map(a=>['a',a,AUD[a].corto]),...[...st.temas].map(t=>['t',t,t]),...[...st.franjas].map(f=>['f',f,FRANJAS[f][0]])];
+  $('#activos').innerHTML=act.map(([t,v,l])=>`<span class="activo">${esc(l)}<button data-quitar="${t}|${esc(v)}" aria-label="Quitar ${esc(l)}">×</button></span>`).join('')+(act.length>1?`<button class="activo" data-limpiar>Quitar todo</button>`:'');
+  $('#limpiarQ').style.display=st.q?'block':'none';
+  panelEstado();
+  medirBarra();
+  guardarURL();
+}
+function medirBarra(){document.documentElement.style.setProperty('--alto-barra',$('#barra').offsetHeight+'px')}
+function guardarURL(){const p=new URLSearchParams(location.search);p.set('dia',st.dia);p.set('vista',st.vista);st.q?p.set('q',st.q):p.delete('q');history.replaceState(null,'','?'+p.toString())}
+
+/* ---------- ficha ---------- */
+function ics(lista){
+  const f=d=>new Date(d).toISOString().replace(/[-:]/g,'').replace(/\.\d{3}/,'');
+  const L=['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//Feria Effix 2026//Agenda//ES','CALSCALE:GREGORIAN'];
+  lista.forEach(s=>{L.push('BEGIN:VEVENT','UID:'+s.id+'@agenda.feriaeffix2026','DTSTAMP:'+f(Date.now()),'DTSTART:'+f(msDe(s.dia,s.ini)),'DTEND:'+f(msDe(s.dia,s.fin)),
+    'SUMMARY:'+(s.nombre+(s.tema?' · '+s.tema:'')).replace(/[,;]/g,'\\$&'),'LOCATION:'+(AUD[s.aud].nombre+' ('+AUD[s.aud].lugar+')\\, Plaza Mayor Medellín').replace(/;/g,'\\;'),'DESCRIPTION:Feria Effix 2026 · Agenda académica oficial','END:VEVENT')});
+  L.push('END:VCALENDAR');
+  const b=new Blob([L.join('\r\n')],{type:'text/calendar'}),a=document.createElement('a');
+  a.href=URL.createObjectURL(b);a.download=lista.length>1?'mi-agenda-feria-effix-2026.ics':'feria-effix-2026-'+lista[0].id+'.ics';a.click();
+}
+function textoCharla(s){const a=AUD[s.aud];return `${DIAS[s.dia]} · ${fh(s.ini)} – ${fh(s.fin)}\n${s.nombre}${s.tema?'\n'+s.tema:''}\n${a.nombre} (${a.lugar})`}
+function compartir(txt){
+  const url=location.origin+location.pathname;
+  const full=txt+'\n\nAgenda completa: '+url;
+  if(navigator.share)navigator.share({text:full}).catch(()=>{});
+  else window.open('https://wa.me/?text='+encodeURIComponent(full),'_blank','noopener');
+}
+function abrirFicha(id){
+  const s=POR_ID[id];if(!s)return;const a=AUD[s.aud],f=fav.has(id),cr=cruces(s);
+  const otras=[];personas(s.nombre).forEach(p=>DATA.forEach(x=>{if(x.id!==id&&!otras.includes(x)&&personas(x.nombre).some(q=>clave(q)===clave(p)))otras.push(x)}));
+  otras.sort((x,y)=>x.dia-y.dia||x.ini-y.ini);
+  $('#hoja').innerHTML=`<div class="asa"></div><button class="cerrar" data-cerrar aria-label="Cerrar">×</button>
+   ${etiquetaAud(a)}
+   <h2 id="hojaTitulo">${esc(s.nombre)}</h2>${s.cargo?`<div class="cargo">${esc(s.cargo)}</div>`:''}
+   ${s.tema?`<div class="tema">${esc(s.tema)}</div>`:''}
+   <div class="dato"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></svg></span><div>${DIAS[s.dia]}<small>${fh(s.ini)} – ${fh(s.fin)} · ${dur(s.ini,s.fin)}${s.formato?' · '+esc(s.formato):''}</small></div></div>
+   <div class="dato"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.6"/></svg></span><div>${esc(a.nombre)}<small>${esc(a.lugar)} · Plaza Mayor Medellín</small></div></div>
+   ${cr.length?`<div class="cruce" style="margin-top:12px">Se cruza con ${esc(cr.map(x=>x.nombre+' ('+fh(x.ini)+')').join(', '))}</div>`:''}
+   <div class="acciones">
+     <button class="btn ${f?'claro':'negro'}" data-fav="${id}">${f?'★ Quitar de mi agenda':'☆ Guardar en mi agenda'}</button>
+     <button class="btn claro" data-ics="${id}">Agregar al calendario</button>
+     <button class="btn claro" data-compartir="${id}">Compartir</button>
+     <button class="btn claro" data-ver-mapa="${s.aud}">¿Cómo llego?</button>
+   </div>
+   <div id="miniMapa"></div>
+   ${otras.length?`<div class="otras"><h4>Más charlas de ${esc(personas(s.nombre).length>1?'estos ponentes':'este ponente')}</h4>${otras.map(x=>`<button class="otra" data-id="${x.id}"><b>${DIAS_C[x.dia]} · ${fh(x.ini)}</b> · ${esc(AUD[x.aud].corto)}<br>${esc(x.tema||x.nombre)}</button>`).join('')}</div>`:''}`;
+  abrirHoja();
+}
+function abrirFiltros(){
+  const g=(tit,items)=>`<div class="filtro-g"><h4>${tit}</h4><div class="chips">${items}</div></div>`;
+  $('#hoja').innerHTML=`<div class="asa"></div><button class="cerrar" data-cerrar aria-label="Cerrar">×</button><h2 id="hojaTitulo">Filtros</h2>
+   ${g('Auditorio',ORDEN.map(a=>`<button class="chip" data-f="a|${a}" aria-pressed="${st.auds.has(a)}"><i class="punto" style="background:${AUD[a].color}"></i>${esc(AUD[a].corto)}</button>`).join(''))}
+   ${g('Tema',TEMAS.map(t=>`<button class="chip" data-f="t|${esc(t)}" aria-pressed="${st.temas.has(t)}">${esc(t)}</button>`).join(''))}
+   ${g('Momento del día',Object.entries(FRANJAS).map(([k,v])=>`<button class="chip" data-f="f|${k}" aria-pressed="${st.franjas.has(k)}">${v[0]}</button>`).join(''))}
+   <div class="pie-hoja"><button class="btn claro" data-limpiar>Quitar todo</button><button class="btn negro" data-cerrar id="verRes"></button></div>`;
+  contarRes();abrirHoja();
+}
+function contarRes(){const b=$('#verRes');if(b){const n=DATA.filter(s=>pasa(s)).length;b.textContent=`Ver ${n} ${n===1?'charla':'charlas'}`}}
+let ultimoFoco=null;
+function abrirHoja(){ultimoFoco=document.activeElement;$('#velo').classList.add('abierto');$('#hoja').classList.add('abierta');$('#hoja').scrollTop=0;setTimeout(()=>$('#hoja .cerrar')?.focus(),50)}
+function cerrarHoja(){$('#velo').classList.remove('abierto');$('#hoja').classList.remove('abierta');ultimoFoco?.focus?.()}
+let tAviso;function aviso(t){const a=$('#aviso');a.textContent=t;a.classList.add('ver');clearTimeout(tAviso);tAviso=setTimeout(()=>a.classList.remove('ver'),2400)}
+
+/* ---------- eventos ---------- */
+document.addEventListener('click',e=>{
+  const t=e.target.closest('button,[data-id],a');if(!t)return;
+  if(t.dataset.fav){e.stopPropagation();const id=t.dataset.fav;
+    if(fav.has(id)){fav.delete(id);aviso('Quitada de tu agenda')}else{fav.add(id);const c=cruces(POR_ID[id]);aviso(c.length?'Guardada. Ojo: se cruza con '+c[0].nombre:'Guardada en tu agenda')}
+    guardarFav();render();if($('#hoja').classList.contains('abierta')&&$('#hoja [data-ics]'))abrirFicha(id);return}
+  if(t.dataset.dia){st.dia=t.dataset.dia==='fav'?'fav':+t.dataset.dia;render();window.scrollTo({top:$('#barra').offsetTop,behavior:'smooth'});return}
+  if(t.dataset.vista){st.vista=t.dataset.vista;if(st.vista!=='mapa')audMapa=null;render();return}
+  if(t.dataset.mapa){audMapa=audMapa===t.dataset.mapa?null:t.dataset.mapa;render();$('.mapa')?.scrollIntoView({behavior:'smooth',block:'center'});return}
+  if(t.dataset.temaRapido){const v=t.dataset.temaRapido;st.temas.has(v)?st.temas.delete(v):st.temas.add(v);render();return}
+  if(t.dataset.f){const[k,v]=t.dataset.f.split('|'),S={a:st.auds,t:st.temas,f:st.franjas}[k];S.has(v)?S.delete(v):S.add(v);t.setAttribute('aria-pressed',S.has(v));render();contarRes();return}
+  if(t.dataset.quitar){const[k,v]=t.dataset.quitar.split('|');({a:st.auds,t:st.temas,f:st.franjas})[k].delete(v);render();return}
+  if('limpiar' in t.dataset){st.auds.clear();st.temas.clear();st.franjas.clear();st.q='';$('#q').value='';render();if($('#hoja').classList.contains('abierta')&&$('#verRes'))abrirFiltros();return}
+  if('cerrar' in t.dataset){cerrarHoja();return}
+  if(t.dataset.ics){ics([POR_ID[t.dataset.ics]]);return}
+  if(t.dataset.compartir){compartir(textoCharla(POR_ID[t.dataset.compartir]));return}
+  if(t.dataset.verMapa){$('#miniMapa').innerHTML=mapaHTML(t.dataset.verMapa,true);$('#miniMapa').scrollIntoView({behavior:'smooth',block:'nearest'});return}
+  if(t.id==='abrirFiltros'){abrirFiltros();return}
+  if(t.id==='limpiarQ'){st.q='';$('#q').value='';render();$('#q').focus();return}
+  if(t.dataset.id){abrirFicha(t.dataset.id);return}
+});
+document.addEventListener('keydown',e=>{
+  if(e.key==='Escape')cerrarHoja();
+  if((e.key==='Enter'||e.key===' ')&&e.target.matches('[data-id][role=button]')){e.preventDefault();abrirFicha(e.target.dataset.id)}
+  if(e.key==='/'&&document.activeElement!==$('#q')){e.preventDefault();$('#q').focus()}
+});
+$('#velo').addEventListener('click',cerrarHoja);
+let tq;$('#q').addEventListener('input',e=>{clearTimeout(tq);tq=setTimeout(()=>{st.q=e.target.value.trim();
+  render()},120)});
+addEventListener('resize',medirBarra);
+
+/* ---------- arranque ---------- */
+(function(){
+  const p=new URLSearchParams(location.search),n=ahora();
+  const enFeria=n.a===2026&&n.m===10&&[16,17,18].includes(n.d);
+  st.dia=enFeria?n.d:16;
+  if(p.get('dia'))st.dia=p.get('dia')==='fav'?'fav':(+p.get('dia')||st.dia);
+  if(['hora','grilla','ponentes','mapa'].includes(p.get('vista')))st.vista=p.get('vista');
+  if(p.get('q')){st.q=p.get('q');$('#q').value=st.q}
+  $('#totalCharlas').textContent=DATA.length;
+  if(enFeria)document.body.classList.add('en-feria');
+  guardarFav();render();
+  if(enFeria&&st.dia===n.d&&st.vista==='hora'&&!st.q){const b=[...document.querySelectorAll('.bloque')].find(x=>+x.dataset.fin>n.min);if(b)setTimeout(()=>window.scrollTo({top:b.offsetTop-$('#barra').offsetHeight-8,behavior:'smooth'}),300)}
+  setInterval(panelEstado,30000);
+  if('serviceWorker' in navigator&&location.protocol==='https:')navigator.serviceWorker.register('sw.js').catch(()=>{});
+})();
+</script>
+</body>
+</html>
