@@ -410,6 +410,26 @@ input[type=search]::-webkit-search-cancel-button{-webkit-appearance:none;display
 .tarjeta.exp.todos .estrella{color:#a5a2b6}
 .aud.exclusivo.bc{background:#fff!important;color:#000!important;box-shadow:inset 0 0 0 2px #d9a93c!important;text-shadow:none}
 
+/* tres botones: General, VIP, Black */
+.accesos{grid-template-columns:repeat(3,1fr);max-width:980px}
+.acceso-general{background:#fff;color:#000;box-shadow:0 16px 40px rgba(0,0,0,.45)}
+.acceso-general i{background:#726E8D;color:#fff}
+.acceso small{font-size:11px}
+.acceso b{font-size:clamp(20px,3vw,28px)}
+/* la hora va primero en la tarjeta */
+.tarjeta .hora-1{font-size:15px;font-weight:900;color:#000;padding-right:44px}
+.tarjeta.negra .hora-1{color:#fff}
+.tarjeta.exp.todos .hora-1{color:#000}
+.tarjeta .linea1{padding-right:0}
+@media(max-width:640px){
+  .accesos{grid-template-columns:1fr 1fr 1fr;gap:6px}
+  .acceso{padding:10px 10px 10px 12px;border-radius:16px}
+  .acceso small{font-size:8.5px;letter-spacing:.8px}
+  .acceso b{font-size:15px}
+  .acceso i{display:none}
+  .tarjeta .hora-1{font-size:15.5px}
+}
+
 /* ===== version con accesos ===== */
 .perfil-fila{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:10px}
 .perfil-fila label{font-size:12px;font-weight:900;text-transform:uppercase;letter-spacing:1px;color:#fff}
@@ -469,9 +489,10 @@ input[type=search]::-webkit-search-cancel-button{-webkit-appearance:none;display
     <img src="titulo-programacion.png" alt="" width="1400" height="209">
     <h1>Programación Feria Effix 2026</h1>
   </div>
-  <nav class="accesos" aria-label="Programación exclusiva">
-    <a class="acceso acceso-black" href="black/"><small>Programación</small><b>Experiencia Black</b><i aria-hidden="true">→</i></a>
-    <a class="acceso acceso-vip" href="vip/"><small>Programación</small><b>Zona VIP</b><i aria-hidden="true">→</i></a>
+  <nav class="accesos" aria-label="Programación">
+    <a class="acceso acceso-general" href="#barra" data-ir-agenda><small>Programación</small><b>General</b><i aria-hidden="true">↓</i></a>
+    <a class="acceso acceso-vip" href="vip/"><small>Programación</small><b>VIP</b><i aria-hidden="true">→</i></a>
+    <a class="acceso acceso-black" href="black/"><small>Programación</small><b>Black</b><i aria-hidden="true">→</i></a>
   </nav>
   <section class="estado" id="estado" aria-live="polite"></section>
 </header>
@@ -482,15 +503,15 @@ input[type=search]::-webkit-search-cancel-button{-webkit-appearance:none;display
       <select id="perfil"><option value="">Ver todo</option></select>
       <button class="btn borde-b" data-quien>¿Quién entra?</button></div>
     <div class="dias" role="group" aria-label="Día">
-      <button class="dia dia-black" data-dia="15"><span class="largo">Jueves</span><span class="corto">Jue 15</span> <small>15 oct</small><em class="sub-ex"><span class="largo">Exclusivo </span>Black y VIP</em></button>
+      <button class="dia dia-black" data-dia="15"><span class="largo">Jueves</span><span class="corto">Jue 15</span> <small>15 oct</small></button>
       <button class="dia" data-dia="16"><span class="largo">Viernes</span><span class="corto">Vie 16</span> <small>16 oct</small></button>
       <button class="dia" data-dia="17"><span class="largo">Sábado</span><span class="corto">Sáb 17</span> <small>17 oct</small></button>
       <button class="dia" data-dia="18"><span class="largo">Domingo</span><span class="corto">Dom 18</span> <small>18 oct</small></button>
-      <button class="dia dia-black" data-dia="19"><span class="largo">Lunes</span><span class="corto">Lun 19</span> <small>19 oct</small><em class="sub-ex"><span class="largo">Exclusivo </span>Black y VIP</em></button>
+      <button class="dia dia-black" data-dia="19"><span class="largo">Lunes</span><span class="corto">Lun 19</span> <small>19 oct</small></button>
       <button class="dia fav" data-dia="fav">★ <span class="largo">Mi agenda</span> <b id="nFav">0</b></button>
     </div>
     <div class="vistas" role="group" aria-label="Vista">
-      <span class="segmento"><button class="vista" data-vista="agenda"><span class="largo">Programación oficial</span><span class="corto">Programación</span></button><button class="vista" data-vista="speakers">Speakers</button></span>
+      <span class="segmento"><button class="vista" data-vista="agenda"><span class="largo">Programación general</span><span class="corto">Programación</span></button><button class="vista" data-vista="speakers">Speakers</button></span>
       <button class="btn" id="abrirFiltros" aria-label="Filtros"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M4 6h16M7 12h10M10 18h4"/></svg><span class="txt-f">Filtros</span> <span class="n" id="nFiltros" hidden>0</span></button>
       <button class="btn fav-movil" data-dia="fav" aria-label="Mi agenda">★ <b id="nFav2">0</b></button>
       <span class="contador" id="contador"></span>
@@ -605,8 +626,8 @@ function tarjeta(s,conDia){
   const a=AUD[s.aud],f=fav.has(s.id),cr=f?cruces(s):[];
   return `<article class="tarjeta ${puede(s)?'':'sin-acceso'} ${a.negra?'negra':''} ${a.exp?'exp':''} ${s.acceso==='G'?'todos':''}" style="--c:${a.color}" data-id="${s.id}" tabindex="0" role="button" aria-label="${esc(s.nombre+'. '+s.tema)}">
     <button class="estrella" data-fav="${s.id}" aria-pressed="${f}" aria-label="${f?'Quitar de':'Guardar en'} mi agenda">${f?icEstrella:icEstrellaV}</button>
+    <div class="hora hora-1">${conDia?DIAS_C[s.dia]+' · ':''}${rango(s)}${s.sinfin?'':' · '+dur(s.ini,s.fin)}${s.formato?' · '+esc(s.formato):''}</div>
     <div class="linea1">${etiquetaAud(a,s)}</div>
-    <div class="hora">${conDia?DIAS_C[s.dia]+' · ':''}${rango(s)}${s.sinfin?'':' · '+dur(s.ini,s.fin)}${s.formato?' · '+esc(s.formato):''}</div>
     <div class="nombre">${resaltar(s.nombre)}</div>
     ${s.cargo?`<div class="cargo">${resaltar(s.cargo)}</div>`:''}
     ${s.donde?`<div class="cargo">${esc(s.donde)}</div>`:''}
@@ -787,7 +808,6 @@ function abrirFicha(id){
    <div class="quien-f"><h4>¿Quién tiene acceso?</h4>${chipsAcceso(s,true)}${puede(s)?'':'<div class="no-inc">No incluido en tu entrada</div>'}</div>
    <div class="acciones">
      <button class="btn ${f?'claro':'negro'}" data-fav="${id}">${f?'★ Quitar de mi agenda':'☆ Guardar en mi agenda'}</button>
-     <button class="btn claro" data-ics="${id}">Agregar al calendario</button>
      <button class="btn claro" data-compartir="${id}">Compartir</button>
      ${!a.exp||s.mapa?`<button class="btn claro" data-ver-mapa="${a.exp?s.mapa:s.aud}">¿Cómo llego?</button>`:''}
    </div>
@@ -845,7 +865,7 @@ document.addEventListener('click',e=>{
   if(t.dataset.vista){st.vista=t.dataset.vista;if(!esSp()){st.q='';$('#q').value=''}render();if(esSp())setTimeout(()=>$('#q').focus(),50);return}
   if(t.dataset.mapa){audMapa=audMapa===t.dataset.mapa?null:t.dataset.mapa;render();$('.mapa')?.scrollIntoView({behavior:'smooth',block:'center'});return}
   if(t.dataset.temaRapido){const v=t.dataset.temaRapido;st.temas.has(v)?st.temas.delete(v):st.temas.add(v);if(esSp())st.vista='agenda';render();return}
-  if('irAgenda' in t.dataset){window.scrollTo({top:$('#barra').offsetTop,behavior:'smooth'});return}
+  if('irAgenda' in t.dataset){e.preventDefault();if(esSp())st.vista='agenda';render();window.scrollTo({top:$('#barra').offsetTop,behavior:'smooth'});return}
   if(t.dataset.f){const[k,v]=t.dataset.f.split('|'),S={a:st.auds,t:st.temas,f:st.franjas}[k];S.has(v)?S.delete(v):S.add(v);t.setAttribute('aria-pressed',S.has(v));render();contarRes();return}
   if(t.dataset.quitar){const[k,v]=t.dataset.quitar.split('|');({a:st.auds,t:st.temas,f:st.franjas})[k].delete(v);render();return}
   if('limpiar' in t.dataset){st.auds.clear();st.temas.clear();st.franjas.clear();st.q='';$('#q').value='';render();if($('#hoja').classList.contains('abierta')&&$('#verRes'))abrirFiltros();return}
