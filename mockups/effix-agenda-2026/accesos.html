@@ -453,6 +453,11 @@ input[type=search]::-webkit-search-cancel-button{-webkit-appearance:none;display
 .g-black .acc span{color:#d6d6de}
 .g-black.todos .acc span{color:#55526a}
 .perfil-fila{background:#726E8D;border-radius:18px;padding:10px 12px}
+/* etiquetas largas: bajan de linea, nunca se cortan */
+.acc{min-width:0;max-width:100%}
+.acc .pf{white-space:normal;max-width:100%;overflow-wrap:anywhere;line-height:1.25;text-align:left}
+.g-black{flex-wrap:wrap}
+.g-black .acc{flex:1 1 100%;margin:4px 0 0}
 </style>
 </head>
 <body>
