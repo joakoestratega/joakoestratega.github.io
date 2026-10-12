@@ -380,6 +380,18 @@ footer .act{letter-spacing:.3px;font-weight:600;color:var(--lav2);margin-top:8px
 .ponente .mini i.punto.negro{width:12px;height:12px;background:radial-gradient(circle,var(--c) 0 32%,#000 35%)}
 input[type=search]::-webkit-search-cancel-button{-webkit-appearance:none;display:none}
 .aud.exclusivo.todos{background:#fff;color:#000;box-shadow:none}.g-franja:has(.todos){background:linear-gradient(160deg,#2a2836,#14131b);border-color:var(--lav)}.tarjeta.exp:has(.todos){background:radial-gradient(120% 140% at 0% 0%,#2e2b40 0%,#121118 60%)}.estado:empty{display:none}
+
+/* Para todos los asistentes: lavanda de marca, distinto del negro Black */
+.g-franja.todos{background:linear-gradient(135deg,#8a86a6 0%,#726E8D 55%,#5f5b78 100%);border:1.5px solid #B6B2C9}
+.g-black.todos{background:rgba(255,255,255,.12)}
+.g-black.todos b,.g-black.todos small{color:#f1f0f7}
+.g-black.todos .aud.exclusivo.todos{background:#fff;color:#4a4664}
+.tarjeta.exp.todos{background:linear-gradient(135deg,#8a86a6 0%,#726E8D 55%,#5f5b78 100%)}
+.tarjeta.exp.todos:after{display:none}
+.tarjeta.exp.todos .hora,.tarjeta.exp.todos .tema{color:#f1f0f7}
+.g-franja.todos{background:linear-gradient(135deg,#9d97cf 0%,#7f78b8 50%,#6a6499 100%)!important;border:2px solid #fff}
+.tarjeta.exp.todos{background:linear-gradient(135deg,#9d97cf 0%,#7f78b8 50%,#6a6499 100%)!important}
+.tarjeta.exp.todos .estrella{color:#fff}
 </style>
 </head>
 <body>
@@ -514,7 +526,7 @@ function etiquetaAud(a,s){
 }
 function tarjeta(s,conDia){
   const a=AUD[s.aud],f=fav.has(s.id),cr=f?cruces(s):[];
-  return `<article class="tarjeta ${a.negra?'negra':''} ${a.exp?'exp':''}" style="--c:${a.color}" data-id="${s.id}" tabindex="0" role="button" aria-label="${esc(s.nombre+'. '+s.tema)}">
+  return `<article class="tarjeta ${a.negra?'negra':''} ${a.exp?'exp':''} ${s.acceso==='G'?'todos':''}" style="--c:${a.color}" data-id="${s.id}" tabindex="0" role="button" aria-label="${esc(s.nombre+'. '+s.tema)}">
     <button class="estrella" data-fav="${s.id}" aria-pressed="${f}" aria-label="${f?'Quitar de':'Guardar en'} mi agenda">${f?icEstrella:icEstrellaV}</button>
     <div class="linea1">${etiquetaAud(a,s)}</div>
     <div class="hora">${conDia?DIAS_C[s.dia]+' · ':''}${rango(s)}${s.sinfin?'':' · '+dur(s.ini,s.fin)}${s.formato?' · '+esc(s.formato):''}</div>
@@ -595,7 +607,7 @@ function vistaGrilla(){
   });
   // franja Black: todo el ancho, en su hora exacta
   T.forEach(t=>{const r=filaFranja[t];if(!r)return;const items=bl.filter(s=>s.ini===t);
-    h+=`<div class="g-franja" style="grid-row:${r};grid-column:2/${NC+2}">${items.map(s=>`<button class="g-black" data-id="${s.id}">${sello(s)}<b>${rango(s)}</b><strong>${resaltar(s.nombre)}</strong>${s.donde?`<small>${esc(s.donde)}</small>`:''}${fav.has(s.id)?'<i>★</i>':''}</button>`).join('')}</div>`;
+    h+=`<div class="g-franja ${items.every(x=>x.acceso==='G')?'todos':''}" style="grid-row:${r};grid-column:2/${NC+2}">${items.map(s=>`<button class="g-black ${s.acceso==='G'?'todos':''}" data-id="${s.id}">${sello(s)}<b>${rango(s)}</b><strong>${resaltar(s.nombre)}</strong>${s.donde?`<small>${esc(s.donde)}</small>`:''}${fav.has(s.id)?'<i>★</i>':''}</button>`).join('')}</div>`;
   });
   T.forEach(t=>{if(!conCharla(t))return;const r=filaCeldas[t];ORDEN_G.forEach((a,i)=>{if(!ocupado.has(r+'|'+(i+2)))h+=`<div class="g-x" style="grid-row:${r};grid-column:${i+2}">×</div>`})});
   return h+'</div></div>';
