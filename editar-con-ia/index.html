@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cómo editar con IA | Taller Joako Estratega y Alejandra Rincón</title>
+<meta name="description" content="Instala Claude Code, arma tu director de cine y edita videos de calidad profesional con IA.">
+<meta property="og:title" content="Cómo editar con IA · Taller con Alejandra Rincón y Joako Estratega">
+<meta property="og:description" content="Instala Claude Code, arma tu director de cine y edita videos de calidad profesional con IA.">
+<meta property="og:image" content="https://joakoestratega.com/editar-con-ia/img/portada.jpg">
+<meta property="og:url" content="https://joakoestratega.com/editar-con-ia/">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{--negro:#0F0F14;--negro2:#17171E;--negro3:#22222C;--oro:#F8B400;--oro2:#FFCB3D;--blanco:#fff;--gris:rgba(255,255,255,.64);--linea:rgba(255,255,255,.09);--verde:#3DDC84}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:80px}
+body{font-family:Montserrat,system-ui,sans-serif;background:var(--negro);color:var(--blanco);line-height:1.5;font-size:16px}
+a{color:var(--oro)}
+button{font-family:inherit;cursor:pointer}
+img{display:block;max-width:100%}
+.contenedor{max-width:1160px;margin:0 auto;padding:0 22px}
+nav.menu{position:sticky;top:0;z-index:50;background:rgba(15,15,20,.93);backdrop-filter:blur(10px);border-bottom:1px solid var(--linea)}
+nav.menu .contenedor{display:flex;align-items:center;gap:14px;height:66px}
+.marca{font-weight:900;font-size:15px;white-space:nowrap}.marca b{color:var(--oro)}
+.pestanas{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;flex:1}
+.pestanas::-webkit-scrollbar{display:none}
+.pestanas a{white-space:nowrap;text-decoration:none;color:var(--gris);font-weight:700;font-size:13.5px;padding:9px 14px;border-radius:999px}
+.pestanas a:hover{color:#fff}.pestanas a.activa{color:var(--negro);background:var(--oro)}
+.avance{display:flex;align-items:center;gap:8px;font-size:12px;font-weight:800;color:var(--gris);white-space:nowrap}
+.avance .barra{width:70px;height:6px;background:var(--negro3);border-radius:9px;overflow:hidden}
+.avance .barra i{display:block;height:100%;width:0;background:var(--oro);transition:.4s}
+.portada{padding:70px 0 60px;background:linear-gradient(180deg,rgba(15,15,20,.5),var(--negro) 92%),url(img/fondo.jpg) center 70%/cover}
+.arriba{display:grid;grid-template-columns:1.2fr .8fr;gap:44px;align-items:center}
+.sello{display:inline-block;border:2px solid var(--oro);color:var(--oro);font-weight:800;font-size:12.5px;letter-spacing:1.5px;padding:7px 16px;border-radius:999px}
+h1{font-weight:900;font-size:clamp(40px,6.4vw,76px);line-height:1.02;margin:18px 0 14px;letter-spacing:-1px}h1 span{color:var(--oro)}
+.bajada{font-size:clamp(17px,2vw,20px);color:var(--gris);font-weight:500;max-width:540px}
+.datos{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px}
+.datos div{background:rgba(255,255,255,.06);border:1px solid var(--linea);padding:10px 16px;border-radius:12px;font-weight:700;font-size:14px}.datos b{color:var(--oro)}
+.portada .foto{border-radius:22px;box-shadow:0 30px 80px rgba(0,0,0,.6),0 0 0 1px rgba(248,180,0,.35)}
+.ruta{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:50px}
+.ruta a{text-decoration:none;color:#fff;background:var(--negro2);border:1px solid var(--linea);border-radius:18px;overflow:hidden;transition:.25s}
+.ruta a:hover{border-color:var(--oro);transform:translateY(-3px)}
+.ruta img{width:100%;aspect-ratio:16/9;object-fit:cover;object-position:center 30%}
+.ruta div{padding:16px 18px}
+.ruta small{color:var(--oro);font-weight:800;font-size:12px;letter-spacing:1.2px}
+.ruta strong{display:block;font-size:18px;font-weight:800;margin-top:4px}
+section.bloque{padding:76px 0;border-top:1px solid var(--linea)}
+.etiqueta{color:var(--oro);font-weight:800;font-size:13px;letter-spacing:2px}
+h2{font-weight:900;font-size:clamp(30px,4.2vw,46px);line-height:1.08;margin:8px 0 10px;letter-spacing:-.5px}
+.intro{color:var(--gris);font-size:18px;max-width:680px;margin-bottom:28px}
+.carrusel{background:var(--negro2);border:1px solid var(--linea);border-radius:24px;overflow:hidden}
+.carrusel .cabeza{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:16px 22px;border-bottom:1px solid var(--linea)}
+.puntos{display:flex;gap:7px;flex-wrap:wrap}
+.puntos button{width:30px;height:30px;border-radius:50%;border:2px solid rgba(255,255,255,.2);background:none;color:var(--gris);font-weight:800;font-size:12px}
+.puntos button.ya{border-color:var(--oro);color:var(--oro)}
+.puntos button.aqui{background:var(--oro);border-color:var(--oro);color:var(--negro)}
+.cuenta{font-weight:800;font-size:13px;color:var(--gris)}
+.slide{display:none;grid-template-columns:1fr 1.05fr;gap:34px;padding:34px;align-items:center;animation:entra .35s ease}
+.slide.ver{display:grid}
+.slide.ancha{grid-template-columns:1fr}
+@keyframes entra{from{opacity:0;transform:translateX(18px)}to{opacity:1;transform:none}}
+.slide h3{font-size:clamp(23px,2.6vw,30px);font-weight:900;line-height:1.15;margin-bottom:12px}
+.slide h3 em{font-style:normal;color:var(--oro)}
+.slide p.txt{color:#DCDCDC;font-size:17px;margin-bottom:16px}
+.slide .imagen{border-radius:16px;overflow:hidden;border:1px solid rgba(255,255,255,.12);box-shadow:0 20px 50px rgba(0,0,0,.45);background:#000}
+.pie-carrusel{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:16px 22px;border-top:1px solid var(--linea);background:rgba(0,0,0,.25)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:0;border-radius:12px;padding:13px 20px;font-weight:800;font-size:15px;text-decoration:none;transition:.15s}
+.btn-oro{background:var(--oro);color:var(--negro)}.btn-oro:hover{background:var(--oro2)}
+.btn-linea{background:none;border:1.5px solid rgba(255,255,255,.25);color:#fff}.btn-linea:hover{border-color:var(--oro);color:var(--oro)}
+.btn[disabled]{opacity:.3;pointer-events:none}
+.vasbien{display:flex;gap:12px;align-items:flex-start;margin-top:18px;background:rgba(61,220,132,.08);border:1px solid rgba(61,220,132,.4);border-radius:14px;padding:14px 16px}
+.vasbien b{flex:none;width:28px;height:28px;border-radius:50%;background:var(--verde);color:#062;display:grid;place-items:center;font-size:15px}
+.vasbien span{font-size:15px;color:#E9FFF2}.vasbien strong{color:var(--verde)}
+.ojo{margin-top:12px;font-size:14px;color:var(--gris);border-left:3px solid var(--oro);padding-left:12px}
+.codigo{position:relative;background:#08080B;border:1px solid var(--linea);border-radius:14px;padding:16px 104px 16px 18px;font-family:Consolas,"SF Mono",Menlo,monospace;font-size:14.5px;color:#EDEDED;white-space:pre-wrap;word-break:break-word}
+.codigo.largo{max-height:230px;overflow:auto}
+.copiar{position:absolute;top:10px;right:10px;border:0;background:var(--oro);color:var(--negro);font-weight:800;font-size:12.5px;padding:8px 14px;border-radius:9px}
+.copiar.ok{background:#fff}
+.selector-so{display:inline-flex;background:var(--negro);border:1px solid var(--linea);border-radius:999px;padding:4px}
+.selector-so button{border:0;background:none;color:var(--gris);font-weight:800;font-size:13px;padding:8px 16px;border-radius:999px}
+.selector-so button.activo{background:var(--oro);color:var(--negro)}
+.solo-win,.solo-mac{display:none}
+body.so-win .solo-win{display:block}body.so-mac .solo-mac{display:block}
+.ventana{border-radius:12px;overflow:hidden;background:#1E1E1E;font-size:13px;box-shadow:0 20px 50px rgba(0,0,0,.5);border:1px solid #333}
+.ventana .barra-v{display:flex;align-items:center;gap:7px;height:34px;padding:0 12px;background:#2B2B2B;color:#BBB;font-size:12px}
+.ventana .barra-v i{width:11px;height:11px;border-radius:50%;background:#555}
+.ventana .barra-v i:nth-child(1){background:#FF5F57}.ventana .barra-v i:nth-child(2){background:#FEBC2E}.ventana .barra-v i:nth-child(3){background:#28C840}
+.ventana .barra-v span{margin-left:8px}
+.terminal{background:#0C0C0C;color:#CCC;font-family:Consolas,Menlo,monospace;padding:16px;line-height:1.7;min-height:220px}
+.terminal .pr{color:#7FB3FF}.terminal .ok{color:var(--verde)}.terminal .cmd{color:#fff}
+.vsc{display:grid;grid-template-columns:44px 190px 1fr;min-height:320px;font-family:"Segoe UI",system-ui,sans-serif}
+.vsc .act{background:#333;display:flex;flex-direction:column;align-items:center;gap:16px;padding-top:12px}
+.vsc .act i{width:22px;height:22px;border-radius:5px;border:2px solid #888;display:block}
+.vsc .act i.on{border-color:#fff}
+.vsc .exp{background:#252526;color:#CCC;padding:10px 0;font-size:12.5px}
+.vsc .exp h6{font-size:11px;color:#BBB;padding:0 14px 8px;letter-spacing:.5px}
+.vsc .exp div{padding:3px 14px}.vsc .exp div.sub{padding-left:28px;color:#9CDCFE}
+.vsc .exp div.nuevo{color:var(--oro)}
+.vsc .panel{background:#1E1E1E;display:flex;flex-direction:column;border-left:1px solid #333}
+.vsc .panel header{padding:9px 14px;font-size:12px;color:#ddd;border-bottom:1px solid #333;display:flex;align-items:center;gap:8px}
+.vsc .panel header b{display:inline-block;width:16px;height:16px;border-radius:4px;background:#D97757}
+.vsc .chat{flex:1;padding:12px;display:flex;flex-direction:column;gap:9px}
+.burbuja{max-width:92%;padding:9px 12px;border-radius:11px;font-size:12.5px;line-height:1.45}
+.burbuja.yo{align-self:flex-end;background:#2D4F7C;color:#fff}
+.burbuja.cl{align-self:flex-start;background:#2A2A2A;color:#E6E6E6;border:1px solid #3A3A3A}
+.burbuja.cl .v{color:var(--verde);font-weight:700}
+.vsc .entrada{margin:0 12px 12px;border:1px solid #444;border-radius:9px;padding:9px 11px;color:#888;font-size:12px}
+.ext{background:#252526;padding:14px;font-family:"Segoe UI",system-ui,sans-serif;min-height:300px}
+.ext .buscar{background:#3C3C3C;border:1px solid var(--oro);border-radius:4px;padding:7px 10px;color:#fff;font-size:13px;margin-bottom:12px}
+.ext .item{display:flex;gap:12px;padding:10px;border-radius:6px;background:#04395E}
+.ext .logo{width:46px;height:46px;border-radius:10px;background:#D97757;flex:none;display:grid;place-items:center;color:#fff;font-weight:900;font-size:22px}
+.ext h5{color:#fff;font-size:14px}.ext p{color:#ccc;font-size:12px}.ext .ins{display:inline-block;margin-top:6px;background:#0E639C;color:#fff;font-size:12px;padding:3px 10px;border-radius:3px}
+.ext .item.otro{background:none;opacity:.55;margin-top:6px}
+.tabla-plan{width:100%;border-collapse:collapse;font-size:12px}
+.tabla-plan th{background:#2A2A2A;color:var(--oro);text-align:left;padding:6px 8px}
+.tabla-plan td{border-top:1px solid #333;padding:6px 8px;color:#ddd}
+.resumen{display:flex;flex-wrap:wrap;gap:8px;padding:14px 22px;border-bottom:1px solid var(--linea);background:rgba(248,180,0,.04)}
+.resumen span{font-size:12.5px;font-weight:700;background:var(--negro3);border:1px solid var(--linea);padding:6px 10px;border-radius:8px;color:#ddd}
+.resumen span b{color:var(--oro)}
+.opciones{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:12px}
+.opcion{position:relative;text-align:left;background:var(--negro);border:2px solid var(--linea);border-radius:16px;color:#fff;padding:0;overflow:hidden;transition:.15s}
+.opcion:hover{border-color:rgba(248,180,0,.6)}
+.opcion.on{border-color:var(--oro);box-shadow:0 0 0 3px rgba(248,180,0,.25)}
+.opcion.on:after{content:"✓";position:absolute;top:8px;right:8px;width:28px;height:28px;border-radius:50%;background:var(--oro);color:var(--negro);font-weight:900;display:grid;place-items:center}
+.opcion img{width:100%;aspect-ratio:4/5;object-fit:cover}
+.opcion .t{padding:11px 12px}
+.opcion strong{display:block;font-size:15px;font-weight:800}
+.opcion em{display:block;font-style:normal;font-size:12.5px;color:var(--gris);margin-top:2px}
+.opcion.sin-img{padding:16px}.opcion.sin-img .t{padding:0}
+.opciones.chicas{grid-template-columns:repeat(auto-fill,minmax(130px,1fr))}
+.opciones.chicas img{aspect-ratio:1/1}
+.pregunta{font-size:15px;font-weight:800;margin:4px 0 12px;color:var(--oro)}
+input[type=text]{width:100%;background:var(--negro);border:1.5px solid var(--linea);border-radius:12px;color:#fff;font-family:inherit;font-size:15px;padding:13px 14px}
+input[type=text]:focus{outline:none;border-color:var(--oro)}
+.final{display:grid;grid-template-columns:1.1fr .9fr;gap:24px}
+.prompt-final{background:#08080B;border:1px solid rgba(248,180,0,.45);border-radius:16px;overflow:hidden}
+.prompt-final header{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:12px 14px;background:var(--negro3)}
+.prompt-final pre{padding:16px;font-family:Consolas,Menlo,monospace;font-size:12.5px;line-height:1.6;white-space:pre-wrap;word-break:break-word;max-height:430px;overflow:auto;color:#E8E8E8}
+.prompt-final pre .t{color:var(--oro);font-weight:700}
+.prompt-final .copiar{position:static}
+.linea-tiempo{display:grid;gap:12px}
+.linea-tiempo div{display:grid;grid-template-columns:40px 1fr;gap:12px;align-items:start;background:var(--negro);border:1px solid var(--linea);border-radius:14px;padding:14px}
+.linea-tiempo b{width:40px;height:40px;border-radius:50%;background:var(--oro);color:var(--negro);display:grid;place-items:center;font-weight:900}
+.linea-tiempo strong{display:block;font-size:15px}.linea-tiempo span{font-size:13.5px;color:var(--gris)}
+.filtros{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:22px}
+.filtros button{background:var(--negro2);border:1.5px solid var(--linea);color:#ddd;font-weight:700;font-size:13.5px;padding:9px 14px;border-radius:999px}
+.filtros button.on{background:var(--oro);border-color:var(--oro);color:var(--negro)}
+.efectos{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.efecto{background:var(--negro2);border:1px solid var(--linea);border-radius:18px;overflow:hidden;display:flex;flex-direction:column;transition:.25s}
+.efecto:hover{border-color:rgba(248,180,0,.5);transform:translateY(-3px)}
+.efecto img{width:100%;aspect-ratio:4/5;object-fit:cover}
+.efecto .ico{aspect-ratio:4/5;display:grid;place-items:center;font-size:64px;background:radial-gradient(circle,#2a2416,#111)}
+.efecto .t{padding:14px 16px 16px;display:flex;flex-direction:column;flex:1}
+.efecto h3{font-size:16px;font-weight:800;margin-bottom:4px}
+.efecto p{color:var(--gris);font-size:13.5px;flex:1}
+.efecto .pie{display:flex;justify-content:space-between;align-items:center;margin-top:12px;gap:8px}
+.tag{font-size:11px;font-weight:800;letter-spacing:.5px;color:var(--oro);background:rgba(248,180,0,.1);padding:5px 8px;border-radius:7px}
+.efecto .copiar{position:static}
+details{background:var(--negro2);border:1px solid var(--linea);border-radius:16px;padding:18px 22px;margin-bottom:12px}
+details[open]{border-color:rgba(248,180,0,.45)}
+summary{font-weight:800;font-size:16.5px;cursor:pointer;list-style:none;display:flex;justify-content:space-between;gap:12px}
+summary::-webkit-details-marker{display:none}
+summary:after{content:"+";color:var(--oro);font-size:22px;line-height:1}details[open] summary:after{content:"−"}
+details p,details ul{color:var(--gris);margin-top:12px}details ul{padding-left:20px}
+footer{padding:56px 0;border-top:1px solid var(--linea);text-align:center;color:var(--gris);font-size:14px}
+footer strong{color:#fff;font-size:20px;display:block;margin-bottom:6px}
+.aviso{position:fixed;left:50%;bottom:26px;transform:translate(-50%,40px);opacity:0;background:var(--oro);color:var(--negro);font-weight:800;padding:12px 22px;border-radius:999px;transition:.3s;z-index:99;pointer-events:none}
+.aviso.ver{opacity:1;transform:translate(-50%,0)}
+@media(max-width:900px){
+ .arriba,.slide,.final{grid-template-columns:1fr}
+ .slide{padding:24px;gap:22px}
+ .slide .lado-img{order:-1}
+ .portada .foto{max-width:420px}
+ .ruta{grid-template-columns:1fr 1fr}
+ .efectos{grid-template-columns:1fr 1fr}
+ .avance{display:none}
+ .vsc{grid-template-columns:36px 1fr}.vsc .exp{display:none}
+}
+@media(max-width:600px){
+ .ruta{grid-template-columns:1fr}
+ .marca{display:none}
+ section.bloque{padding:56px 0}
+ .codigo{padding:50px 14px 14px;font-size:13px}
+ .pie-carrusel .btn{padding:12px 14px;font-size:14px}
+ .puntos button{width:26px;height:26px}
+}
+</style>
+</head>
+<body class="so-win">
+
+<nav class="menu"><div class="contenedor">
+ <div class="marca">JOAKO <b>ESTRATEGA</b></div>
+ <div class="pestanas" id="pestanas">
+  <a href="#inicio" class="activa">Inicio</a><a href="#instala">1 · Instala</a><a href="#funciona">2 · Cómo funciona</a><a href="#director">3 · Director de cine</a><a href="#efectos">4 · Efectos top</a><a href="#ayuda">Ayuda</a>
+ </div>
+ <div class="avance"><div class="barra"><i id="barraAvance"></i></div><span id="textoAvance">0/6</span></div>
+</div></nav>
+
+<header class="portada" id="inicio">
+ <div class="contenedor arriba">
+  <div>
+   <span class="sello">TALLER EN VIVO · FERIA EFFIX</span>
+   <h1>Cómo editar<br><span>con IA</span></h1>
+   <p class="bajada">Instala Claude Code, ponle un director de cine a tu computador y edita videos de calidad profesional en minutos.</p>
+   <div class="datos"><div><b>Domingo 18 de octubre</b> · 5:30 p.m.</div><div>Auditorio Comunidades</div><div>Alejandra Rincón <b>+</b> Joako Estratega</div></div>
+  </div>
+  <img class="foto" src="img/portada.jpg" alt="Alejandra Rincón y Joako Estratega">
+ </div>
+ <div class="contenedor"><div class="ruta">
+  <a href="#instala"><img src="img/web-vscode.png" alt=""><div><small>PASO 1</small><strong>Instala</strong></div></a>
+  <a href="#funciona"><img src="img/ef-revision.jpg" alt=""><div><small>PASO 2</small><strong>Entiende cómo funciona</strong></div></a>
+  <a href="#director"><img src="img/estilo-cine.jpg" alt=""><div><small>PASO 3</small><strong>Dirige tu video</strong></div></a>
+  <a href="#efectos"><img src="img/estilo-dinamico.jpg" alt=""><div><small>PASO 4</small><strong>Efectos top</strong></div></a>
+ </div></div>
+</header>
+
+<section class="bloque" id="instala"><div class="contenedor">
+ <span class="etiqueta">PASO 1 · 10 MINUTOS</span>
+ <h2>Instala tu editor con IA</h2>
+ <p class="intro">Un paso por pantalla. Cuando veas en tu computador lo que dice el recuadro verde, dale <b>Siguiente</b>.</p>
+ <div class="carrusel" data-carrusel="instala" data-avance="1">
+  <div class="cabeza"><div class="puntos"></div><div class="selector-so" id="selectorSO"><button data-so="win" class="activo">Windows</button><button data-so="mac">Mac</button></div></div>
+
+  <div class="slide">
+   <div>
+    <h3>Ten un plan <em>Pro o Max</em> de Claude</h3>
+    <p class="txt">Claude Code viene en los planes pagos. El plan gratis no lo trae.</p>
+    <a class="btn btn-oro" href="https://claude.com/pricing" target="_blank" rel="noopener">Ver planes de Claude ↗</a>
+    <div class="vasbien"><b>✓</b><span><strong>Vas bien si</strong> entras a claude.ai con tu cuenta y tu plan dice Pro o Max.</span></div>
+   </div>
+   <div class="lado-img"><div class="imagen"><img src="img/web-planes.png" alt="Página de planes de Claude"></div></div>
+  </div>
+
+  <div class="slide">
+   <div>
+    <h3>Descarga e instala <em>VS Code</em></h3>
+    <p class="txt">Es gratis. Ahí vas a ver tus carpetas, tus videos y a Claude trabajando.</p>
+    <a class="btn btn-oro" href="https://code.visualstudio.com/download" target="_blank" rel="noopener">Descargar VS Code ↗</a>
+    <div class="solo-win"><p class="ojo">En Windows instala también <a href="https://git-scm.com/downloads/win" target="_blank" rel="noopener">Git para Windows</a>: dale Siguiente a todo. Claude lo usa para trabajar mejor.</p></div>
+    <div class="vasbien"><b>✓</b><span><strong>Vas bien si</strong> abres VS Code y ves la pantalla de Bienvenida.</span></div>
+   </div>
+   <div class="lado-img"><div class="imagen"><img src="img/web-vscode.png" alt="Página de descarga de VS Code"></div></div>
+  </div>
+
+  <div class="slide">
+   <div>
+    <h3>Instala <em>Claude Code</em> con una línea</h3>
+    <p class="txt solo-win">Menú inicio → escribe <b>PowerShell</b> → ábrelo → pega esto → Enter.</p>
+    <p class="txt solo-mac">Cmd + espacio → escribe <b>Terminal</b> → ábrela → pega esto → Enter.</p>
+    <div class="codigo solo-win"><button class="copiar">Copiar</button>irm https://claude.ai/install.ps1 | iex</div>
+    <div class="codigo solo-mac"><button class="copiar">Copiar</button>curl -fsSL https://claude.ai/install.sh | bash</div>
+    <p class="ojo">No muestra avance mientras descarga. Espera a que termine, cierra la ventana y abre una nueva. Ahí escribe <b>claude --version</b>.</p>
+    <div class="vasbien"><b>✓</b><span><strong>Vas bien si</strong> aparece un número de versión, como en la imagen.</span></div>
+   </div>
+   <div class="lado-img">
+    <div class="ventana solo-win"><div class="barra-v"><i></i><i></i><i></i><span>Windows PowerShell</span></div>
+     <div class="terminal"><span class="pr">PS C:\Users\TuNombre&gt;</span> <span class="cmd">irm https://claude.ai/install.ps1 | iex</span><br><br><span style="color:#888">(espera, no muestra avance mientras descarga…)</span><br><br><span class="pr">PS C:\Users\TuNombre&gt;</span> <span class="cmd">claude --version</span><br><span class="ok">2.1.292 (Claude Code)</span></div></div>
+    <div class="ventana solo-mac"><div class="barra-v"><i></i><i></i><i></i><span>Terminal</span></div>
+     <div class="terminal"><span class="pr">tunombre@Mac ~ %</span> <span class="cmd">curl -fsSL https://claude.ai/install.sh | bash</span><br><br><span style="color:#888">(espera, no muestra avance mientras descarga…)</span><br><br><span class="pr">tunombre@Mac ~ %</span> <span class="cmd">claude --version</span><br><span class="ok">2.1.292 (Claude Code)</span></div></div>
+   </div>
+  </div>
+
+  <div class="slide">
+   <div>
+    <h3>Conecta Claude con <em>VS Code</em></h3>
+    <p class="txt">En VS Code abre Extensiones (los cuatro cuadritos a la izquierda), busca <b>Claude Code</b> y dale <b>Instalar</b> a la de Anthropic.</p>
+    <div class="vasbien"><b>✓</b><span><strong>Vas bien si</strong> aparece el ícono naranja de Claude arriba a la derecha de VS Code.</span></div>
+   </div>
+   <div class="lado-img"><div class="ventana"><div class="barra-v"><i></i><i></i><i></i><span>Extensiones · VS Code</span></div>
+    <div class="ext"><div class="buscar">claude code</div>
+     <div class="item"><div class="logo">✳</div><div><h5>Claude Code for VS Code</h5><p>Anthropic ✔</p><span class="ins">Instalar</span></div></div>
+     <div class="item otro"><div class="logo" style="background:#555">?</div><div><h5>Otras extensiones parecidas</h5><p>No son oficiales. Escoge la de Anthropic.</p></div></div>
+    </div></div></div>
+  </div>
+
+  <div class="slide">
+   <div>
+    <h3>Crea tu carpeta e <em>inicia sesión</em></h3>
+    <p class="txt">Crea en el escritorio la carpeta <b>editor-videos</b>. En VS Code: Archivo → Abrir carpeta → escógela. Toca el ícono de Claude e inicia sesión con tu cuenta.</p>
+    <div class="vasbien"><b>✓</b><span><strong>Vas bien si</strong> ves tu carpeta a la izquierda y el chat de Claude a la derecha esperando tu mensaje.</span></div>
+   </div>
+   <div class="lado-img"><div class="ventana"><div class="barra-v"><i></i><i></i><i></i><span>editor-videos · VS Code</span></div>
+    <div class="vsc"><div class="act"><i class="on"></i><i></i><i></i><i></i></div>
+     <div class="exp"><h6>EDITOR-VIDEOS</h6><div>📁 editor-videos</div></div>
+     <div class="panel"><header><b></b>Claude Code</header><div class="chat"><div class="burbuja cl">¿Qué quieres hacer hoy?</div></div><div class="entrada">Escribe tu mensaje…</div></div></div></div></div>
+  </div>
+
+  <div class="slide">
+   <div>
+    <h3>Deja que Claude <em>prepare tu computador</em></h3>
+    <p class="txt">Copia esto y pégalo en el chat de Claude. Él instala solo lo que falte. Tarda unos minutos.</p>
+    <div class="codigo largo"><button class="copiar">Copiar</button><span id="promptPreparar"></span></div>
+    <div class="vasbien"><b>✓</b><span><strong>Vas bien si</strong> Claude te entrega la lista con todo en verde y ves las 5 carpetas nuevas.</span></div>
+   </div>
+   <div class="lado-img"><div class="ventana"><div class="barra-v"><i></i><i></i><i></i><span>editor-videos · VS Code</span></div>
+    <div class="vsc"><div class="act"><i class="on"></i><i></i><i></i><i></i></div>
+     <div class="exp"><h6>EDITOR-VIDEOS</h6><div class="sub nuevo">📁 01-material</div><div class="sub nuevo">📁 02-musica</div><div class="sub nuevo">📁 03-broll</div><div class="sub nuevo">📁 04-marca</div><div class="sub nuevo">📁 05-exportados</div></div>
+     <div class="panel"><header><b></b>Claude Code</header><div class="chat"><div class="burbuja yo">Prepara este computador para editar videos…</div><div class="burbuja cl">Listo. Así quedó:<br><span class="v">✓</span> Python<br><span class="v">✓</span> FFmpeg<br><span class="v">✓</span> Whisper<br><span class="v">✓</span> Node.js<br><span class="v">✓</span> Remotion<br><span class="v">✓</span> Carpetas creadas</div></div><div class="entrada">Escribe tu mensaje…</div></div></div></div></div>
+  </div>
+
+  <div class="slide ancha" style="text-align:center;padding:50px 30px">
+   <div>
+    <div style="font-size:60px">🎬</div>
+    <h3 style="font-size:34px">¡Tu editor con IA <em>está listo!</em></h3>
+    <p class="txt" style="max-width:560px;margin:0 auto 20px">Ahora entiende cómo trabaja para sacarle lo mejor.</p>
+   </div>
+  </div>
+  <div class="pie-carrusel"><button class="btn btn-linea atras">← Anterior</button><span class="cuenta"></span><button class="btn btn-oro sigue">Listo, siguiente →</button></div>
+ </div>
+</div></section>
+
+<section class="bloque" id="funciona"><div class="contenedor">
+ <span class="etiqueta">PASO 2</span>
+ <h2>Cómo funciona y cómo lo uso yo</h2>
+ <p class="intro">Claude Code no es un chat de ideas. Trabaja dentro de tu carpeta: ve tus archivos, corre los programas de edición y te entrega el video.</p>
+ <div class="carrusel" data-carrusel="funciona">
+  <div class="cabeza"><div class="puntos"></div><span class="cuenta"></span></div>
+
+  <div class="slide">
+   <div><h3>1. Pones el <em>material</em> en su carpeta</h3>
+    <p class="txt">Tus tomas en 01-material, la música en 02-musica, las tomas de apoyo en 03-broll y tu logo en 04-marca. Así Claude sabe qué es cada cosa.</p>
+    <div class="vasbien"><b>✓</b><span><strong>Antes de grabar:</strong> di el llamado a la acción tal cual («Escríbeme VIDEO…»), graba tomas de apoyo del mismo tema y ten tu logo en PNG sin fondo.</span></div></div>
+   <div class="lado-img"><div class="ventana"><div class="barra-v"><i></i><i></i><i></i><span>editor-videos</span></div>
+    <div class="vsc"><div class="act"><i class="on"></i><i></i><i></i></div>
+     <div class="exp"><h6>EDITOR-VIDEOS</h6><div>📁 01-material</div><div class="sub">🎞 toma-1.MOV</div><div class="sub">🎞 toma-2.MOV</div><div class="sub">🎞 toma-3.MOV</div><div>📁 02-musica</div><div class="sub">🎵 cancion.mp3</div><div>📁 03-broll</div><div>📁 04-marca</div><div class="sub">🖼 logo.png</div><div>📁 05-exportados</div></div>
+     <div class="panel"><header><b></b>Claude Code</header><div class="chat"></div><div class="entrada">Escribe tu mensaje…</div></div></div></div></div>
+  </div>
+
+  <div class="slide">
+   <div><h3>2. Le pides en <em>español</em></h3>
+    <p class="txt">Como le hablarías a tu editor. Mientras más claro, mejor sale. En el paso 3 la página te arma la instrucción completa.</p></div>
+   <div class="lado-img"><div class="ventana"><div class="barra-v"><i></i><i></i><i></i><span>Claude Code</span></div>
+    <div class="vsc" style="grid-template-columns:1fr"><div class="panel" style="border:0"><div class="chat">
+     <div class="burbuja yo">Edita mis tomas como un reel que vende, con subtítulos palabra por palabra y zoom en las frases fuertes.</div>
+     <div class="burbuja cl">Perfecto. Primero reviso el material y transcribo tu voz…</div></div><div class="entrada">Escribe tu mensaje…</div></div></div></div></div>
+  </div>
+
+  <div class="slide">
+   <div><h3>3. Te muestra el <em>plan</em> antes de cortar</h3>
+    <p class="txt">Te dice segundo a segundo qué va a hacer. Si algo no te gusta, lo cambias aquí y te ahorras rehacer el video.</p>
+    <div class="vasbien"><b>✓</b><span><strong>Mi regla #1:</strong> primero el plan, después la edición. Si el plan está mal, el video sale mal.</span></div></div>
+   <div class="lado-img"><div class="ventana"><div class="barra-v"><i></i><i></i><i></i><span>plan.md</span></div>
+    <div style="padding:14px;background:#1E1E1E"><table class="tabla-plan"><tr><th>Tiempo</th><th>Se ve</th><th>Efecto</th></tr>
+     <tr><td>0,0 a 2,5</td><td>«¿Cambiaste la pauta y nada?»</td><td>Gancho + zoom 125 %</td></tr>
+     <tr><td>2,5 a 9,0</td><td>Lo que ya probó</td><td>Cortes rápidos + whoosh</td></tr>
+     <tr><td>9,0 a 18,0</td><td>El problema real</td><td>Subtítulo en amarillo</td></tr>
+     <tr><td>18,0 a 26,0</td><td>La solución</td><td>Música sube</td></tr>
+     <tr><td>26,0 a 30,0</td><td>Escríbeme MENSAJE</td><td>Llamado grande</td></tr></table></div></div></div>
+  </div>
+
+  <div class="slide">
+   <div><h3>4. Revisas una <em>muestra</em> y corriges</h3>
+    <p class="txt">Pide una muestra de 10 segundos antes del video completo. Corrige una cosa a la vez y cada versión queda guardada con número: v1, v2, v3.</p>
+    <div class="vasbien"><b>✓</b><span><strong>Así se corrige:</strong> «Deja todo igual y solo cambia…». El original nunca se toca.</span></div></div>
+   <div class="lado-img"><div class="imagen"><img src="img/ef-revision.jpg" alt="Revisión de fotogramas"></div></div>
+  </div>
+
+  <div class="slide">
+   <div><h3>El secreto: <em>el manual de tu marca</em></h3>
+    <p class="txt">Claude lee un archivo llamado CLAUDE.md cada vez que abres la carpeta. Con tus colores, tu letra y tu ritmo ahí, todos tus videos salen con la misma cara.</p>
+    <div class="codigo largo"><button class="copiar">Copiar</button><span id="promptManual"></span></div></div>
+   <div class="lado-img"><div class="ventana"><div class="barra-v"><i></i><i></i><i></i><span>CLAUDE.md</span></div>
+    <div class="terminal" style="background:#1E1E1E;font-size:12.5px"><span style="color:var(--oro)"># Manual de edición · Mi Marca</span><br><br><span class="pr">## Colores</span><br>Principal #F8B400 · Fondo #0F0F14 · Texto #FFFFFF<br><br><span class="pr">## Letra</span><br>Montserrat Black para títulos<br><br><span class="pr">## Ritmo</span><br>Rápido, sin silencios<br><br><span class="pr">## Subtítulos</span><br>Grandes, blancos, palabra clave en amarillo<br><br><span class="pr">## Nunca</span><br>Logos al inicio · voz hecha con IA</div></div></div>
+  </div>
+  <div class="pie-carrusel"><button class="btn btn-linea atras">← Anterior</button><span class="cuenta"></span><button class="btn btn-oro sigue">Siguiente →</button></div>
+ </div>
+</div></section>
+
+<section class="bloque" id="director"><div class="contenedor">
+ <span class="etiqueta">PASO 3</span>
+ <h2>Tu director de cine</h2>
+ <p class="intro">Responde 5 preguntas con clics. Al final te entrega la instrucción completa para pegar en Claude.</p>
+ <div class="carrusel" data-carrusel="director">
+  <div class="cabeza"><div class="puntos"></div><span class="cuenta"></span></div>
+  <div class="resumen" id="resumen"></div>
+
+  <div class="slide ancha"><div>
+   <h3>¿Empiezas con una <em>receta lista</em>?</h3>
+   <p class="txt">Escoge una y salta al final, o dale Siguiente para armarla a tu gusto.</p>
+   <div class="opciones" id="optRecetas"></div>
+  </div></div>
+
+  <div class="slide ancha"><div>
+   <h3>¿Qué video vas a <em>editar</em>?</h3>
+   <div class="opciones" data-grupo="tipo"></div>
+  </div></div>
+
+  <div class="slide ancha"><div>
+   <h3>¿Dónde lo vas a <em>publicar</em> y cuánto dura?</h3>
+   <p class="pregunta">Formato</p><div class="opciones" data-grupo="formato"></div>
+   <p class="pregunta" style="margin-top:22px">Duración final</p><div class="opciones" data-grupo="duracion"></div>
+  </div></div>
+
+  <div class="slide ancha"><div>
+   <h3>¿Qué <em>estilo</em> de dirección?</h3>
+   <p class="txt">Son fotogramas reales de la misma toma con cada look.</p>
+   <div class="opciones" data-grupo="estilo"></div>
+  </div></div>
+
+  <div class="slide ancha"><div>
+   <h3>¿Qué <em>efectos</em> quieres?</h3>
+   <p class="txt">Toca todos los que quieras. Los marcados ya vienen con la receta.</p>
+   <div class="opciones chicas" data-grupo="efectos"></div>
+  </div></div>
+
+  <div class="slide ancha"><div>
+   <h3>Los <em>últimos detalles</em></h3>
+   <p class="pregunta">Calidad</p><div class="opciones" data-grupo="calidad" style="max-width:520px"></div>
+   <p class="pregunta" style="margin-top:22px">¿Qué debe sentir quien lo ve? (opcional)</p>
+   <input type="text" id="sentir" placeholder="Ejemplo: que confíe en mí y quiera escribirme">
+   <p class="pregunta" style="margin-top:18px">Llamado a la acción (opcional)</p>
+   <input type="text" id="llamado" placeholder="Ejemplo: escríbeme VIDEO por mensaje directo">
+  </div></div>
+
+  <div class="slide ancha"><div class="final">
+   <div class="prompt-final">
+    <header><b>Tu instrucción para Claude</b><div style="display:flex;gap:8px"><button class="btn btn-linea" id="descargar" style="padding:8px 12px;font-size:13px">Descargar</button><button class="copiar" id="copiarDirector">Copiar todo</button></div></header>
+    <pre id="promptDirector"></pre>
+   </div>
+   <div>
+    <h3 style="font-size:22px">Lo que va a pasar <em>después de pegarla</em></h3>
+    <div class="linea-tiempo">
+     <div><b>1</b><p><strong>Revisa y transcribe</strong><span>Mira tus tomas y escribe todo lo que dices.</span></p></div>
+     <div><b>2</b><p><strong>Te muestra el plan</strong><span>Lo lees y respondes «aprobado» o lo que quieras cambiar.</span></p></div>
+     <div><b>3</b><p><strong>Te muestra 10 segundos</strong><span>Si te gusta, respondes «sigue».</span></p></div>
+     <div><b>4</b><p><strong>Entrega el video final</strong><span>Queda en 05-exportados con su número de versión.</span></p></div>
+    </div>
+    <div class="vasbien"><b>✓</b><span><strong>Vas bien si</strong> después de pegarla Claude te muestra una tabla con los tiempos. Si empieza a cortar sin plan, escríbele «detente y muéstrame el plan».</span></div>
+   </div>
+  </div></div>
+  <div class="pie-carrusel"><button class="btn btn-linea atras">← Anterior</button><span class="cuenta"></span><button class="btn btn-oro sigue">Siguiente →</button></div>
+ </div>
+</div></section>
+
+<section class="bloque" id="efectos"><div class="contenedor">
+ <span class="etiqueta">PASO 4</span>
+ <h2>Efectos top para copiar y pegar</h2>
+ <p class="intro">Cada tarjeta es una instrucción completa. Úsalas sobre un video ya editado o para probar un efecto solo.</p>
+ <div class="filtros" id="filtros"></div>
+ <div class="efectos" id="listaEfectos"></div>
+</div></section>
+
+<section class="bloque" id="ayuda"><div class="contenedor">
+ <span class="etiqueta">AYUDA</span>
+ <h2>Si algo no funciona</h2>
+ <p class="intro">Lo que más pasa la primera vez, y cómo se arregla.</p>
+ <details><summary>Escribo «claude» y dice que no lo reconoce</summary><p>Cierra la ventana y abre una nueva: el computador solo ve los programas nuevos en ventanas nuevas. Si sigue igual, reinicia el computador y prueba otra vez <b>claude --version</b>.</p></details>
+ <details><summary>Me pide pagar o no me deja entrar</summary><p>Claude Code necesita un plan Pro, Max, Team o Enterprise. El plan gratis no lo incluye.</p></details>
+ <details><summary>El video tarda mucho en salir</summary><ul><li>Pide primero un borrador y deja la calidad máxima para la versión final.</li><li>Lo más pesado es transcribir. Pide el modelo «small» de Whisper: es rápido y suficiente.</li><li>Un reel de 30 segundos con todos los efectos puede tardar entre 30 y 60 minutos la primera vez. Las siguientes veces es más rápido porque Claude ya tiene armado su proyecto.</li><li>Cierra programas pesados mientras exporta.</li></ul></details>
+ <details><summary>Mi video sale acostado o de lado</summary><p>Pasa con videos de iPhone. Escríbele a Claude: «Revisa la rotación de mis videos y corrígela antes de editar».</p></details>
+ <details><summary>¿Mi video se sube a internet?</summary><p>La edición corre en tu computador. Claude lee la transcripción y los fotogramas que revisa para decidir, pero el archivo de video se queda en tu carpeta.</p></details>
+ <details><summary>¿Cuánto cuesta todo esto?</summary><p>Pagas el plan de Claude. VS Code, FFmpeg y Whisper son gratis. Remotion es gratis para personas y equipos pequeños; si tienes una empresa grande, revisa su licencia en remotion.dev.</p></details>
+ <details><summary>Claude hizo algo que no le pedí</summary><p>Escríbele: «Detente. Vuelve a la versión anterior y explícame qué ibas a hacer». Como cada versión queda guardada con número, nada se pierde.</p></details>
+ <details><summary>Los subtítulos tienen palabras mal escritas</summary><p>Pídele: «Muéstrame la transcripción completa antes de poner subtítulos». La corriges ahí y después él los monta. Los nombres propios y las marcas son lo que más se equivoca.</p></details>
+</div></section>
+
+<footer><div class="contenedor"><strong>Cómo editar con IA</strong>Taller con Alejandra Rincón y Joako Estratega · Feria EFFIX 2026 · <a href="https://joakoestratega.com" target="_blank" rel="noopener">joakoestratega.com</a></div></footer>
+<div class="aviso" id="aviso">Copiado. Pégalo en Claude.</div>
+
+<script>
+const PREPARAR = `Prepara este computador para editar videos con calidad profesional.
+
+1. Revisa qué tengo instalado y lo que falte instálalo: Python 3.11 o más nuevo, FFmpeg, faster-whisper (para transcribir) y Node.js LTS.
+2. En Windows instala con winget. En Mac instala con Homebrew (si no está, instálalo primero).
+3. Crea dentro de esta carpeta estas subcarpetas: 01-material, 02-musica, 03-broll, 04-marca, 05-exportados
+4. Instala Remotion solo para este proyecto: crea un proyecto en la carpeta _remotion, instala remotion, @remotion/cli y @remotion/google-fonts, y agrega las skills oficiales con: npx skills add remotion-dev/skills -y
+5. Prueba cada herramienta: transcribe 5 segundos de audio con faster-whisper y renderiza 1 cuadro con Remotion. Si Remotion no encuentra su navegador, usa --browser-executable con el Chrome que tengo instalado.
+6. Al final dime en una lista corta qué quedó listo y qué no.
+
+Háblame en español sencillo y pídeme permiso solo si algo necesita mi contraseña.`;
+
+const MANUAL = `Crea un archivo CLAUDE.md en esta carpeta con el manual de edición de mi marca. Hazme estas preguntas una por una y después escríbelo:
+
+1. Nombre de mi marca y a quién le hablo.
+2. Mis colores (en código, por ejemplo #F8B400) y cuál es el principal.
+3. Mi tipografía (si no sé, recomiéndame una de Google Fonts).
+4. Dónde está mi logo (en la carpeta 04-marca).
+5. Cómo me gusta el ritmo: calmado, medio o rápido.
+6. Cómo quiero los subtítulos: tamaño, color, posición.
+7. Lo que nunca debe pasar en mis videos.
+
+Desde hoy aplica ese manual en cada video que editemos en esta carpeta.`;
+
+const OPCIONES = {
+ tipo:{unico:true,items:{
+  venta:{n:'Reel que vende',e:'Gancho, problema, solución, llamado',img:'estilo-dinamico',b:'Video corto de venta. Estructura: gancho fuerte en los primeros 3 segundos, el problema que vive quien lo ve, la solución, una prueba y un solo llamado a la acción al final.'},
+  tutorial:{n:'Tutorial o clase',e:'Paso a paso fácil de seguir',img:'estilo-explicador',b:'Video educativo. Cada paso debe verse claro: títulos por paso, zoom a lo importante, ritmo que deje entender, cero relleno.'},
+  testimonio:{n:'Testimonio',e:'Un cliente cuenta su resultado',img:'estilo-documental',b:'Testimonio de cliente. Lo más fuerte que dice va de primero como gancho. Se respeta su voz y su emoción, sin cortar sus frases a la mitad.'},
+  podcast:{n:'Clips de podcast',e:'Los mejores momentos',img:'ef-clips',b:'Video largo de conversación. Encuentra los momentos que se sostienen solos (una idea completa, una frase fuerte o una historia) y conviértelos en clips independientes.'},
+  producto:{n:'Producto',e:'Mostrar y antojar',ico:'🛍️',b:'Video de producto. Detalles en primer plano, el producto en uso, beneficios en texto corto en pantalla y precio o llamado al final.'},
+  historia:{n:'Historia o vlog',e:'Que se sienta película',img:'estilo-cine',b:'Video narrativo. Inicio, tensión y final. La música acompaña la emoción y los cortes siguen la historia.'}}},
+ formato:{unico:true,items:{
+  v916:{n:'Vertical 9:16',e:'Reels, TikTok, Shorts',ico:'📱',b:'Vertical 1080x1920 (9:16).'},
+  c11:{n:'Cuadrado 1:1',e:'Feed',ico:'⬛',b:'Cuadrado 1080x1080 (1:1).'},
+  h169:{n:'Horizontal 16:9',e:'YouTube',ico:'🖥️',b:'Horizontal 1920x1080 (16:9).'}}},
+ duracion:{unico:true,items:{
+  d30:{n:'15 a 30 s',b:'Entre 15 y 30 segundos.'},
+  d60:{n:'30 a 60 s',b:'Entre 30 y 60 segundos.'},
+  d90:{n:'60 a 90 s',b:'Entre 60 y 90 segundos.'},
+  dlibre:{n:'Lo que pida',e:'Sin cortar ideas',b:'Lo que necesite el contenido, sin cortar ideas a la mitad y sin relleno.'}}},
+ estilo:{unico:true,items:{
+  cine:{n:'Cine',e:'Cálido, profundo, con grano',img:'estilo-cine',b:'Look de película: piel cálida y sombras ligeramente frías, contraste suave, grano fino de película, viñeta sutil. Cortes que siguen la acción, transiciones casi invisibles, pausas que dejan respirar. Música ambiental u orquestal.'},
+  dinamico:{n:'Creador dinámico',e:'Rápido, zooms y sonidos',img:'estilo-dinamico',b:'Ritmo de creador: cortes cada 2 a 4 segundos, zooms de impacto en las frases fuertes, sonidos de efecto en transiciones y textos, subtítulos grandes palabra por palabra. Nada de tiempos muertos.'},
+  premium:{n:'Premium elegante',e:'Lujo, calma, limpio',img:'estilo-premium',b:'Look premium: color limpio y elegante, movimientos lentos y suaves, mucho espacio vacío, tipografía fina, transiciones con fundido. Menos efectos y más intención.'},
+  documental:{n:'Documental real',e:'Natural y creíble',img:'estilo-documental',b:'Look documental: color natural, cámara en mano respetada, cortes honestos, textos sobrios con nombre y contexto. Se siente real, no publicidad.'},
+  explicador:{n:'Explicador',e:'Gráficos y listas',img:'estilo-explicador',b:'Estilo explicador: gráficos simples que aparecen cuando se mencionan, flechas y resaltados, listas animadas, ritmo medio y todo muy legible.'}}},
+ efectos:{unico:false,items:{
+  silencios:{n:'Sin silencios',img:'ef-silencios',b:'Quita silencios, respiraciones largas y muletillas ("eh", "este", "o sea"). Los cortes deben quedar limpios, sin saltos bruscos en la voz.'},
+  subs:{n:'Subtítulos',img:'ef-subtitulos',b:'Subtítulos animados que aparecen palabra por palabra, máximo 3 a 4 palabras en pantalla, letra gruesa con borde o sombra, palabras clave resaltadas con el color principal de mi marca.'},
+  zoom:{n:'Zoom de impacto',img:'ef-zoom',b:'Zoom de impacto (entre 110 % y 125 %) en las frases más fuertes, alternando con el plano normal para que parezca grabado con dos cámaras, y acercamientos lentos y suaves en los momentos de tensión. Siempre centrado en la cara.'},
+  color:{n:'Color de cine',img:'ef-color',b:'Corrección de color: piel natural, blancos limpios, contraste con profundidad. Que todas las tomas se vean del mismo color.'},
+  voz:{n:'Voz de estudio',img:'ef-voz',b:'Mejora la voz: quita ruido de fondo, ecualiza para que suene clara y cercana, comprime suave y normaliza el volumen.'},
+  musica:{n:'Música que baja',img:'ef-musica',b:'Pon música de fondo de la carpeta 02-musica. Que baje sola cuando hablo y suba en las pausas, sin tapar nunca la voz.'},
+  sfx:{n:'Sonidos de efecto',img:'ef-sfx',b:'Sonidos de efecto sutiles: un "whoosh" en transiciones y un "pop" suave cuando aparece un texto. Si no tengo sonidos en 02-musica, créalos o dime cuáles conseguir.'},
+  titulos:{n:'Títulos animados',img:'ef-nombre',b:'Títulos y textos animados con Remotion: entrada suave, en mi tipografía y mis colores. Incluye nombre y cargo de quien habla la primera vez que aparece.'},
+  broll:{n:'Tomas de apoyo',img:'ef-transiciones',b:'Usa las tomas de apoyo de la carpeta 03-broll cuando hable de algo que se pueda mostrar. Nunca tapes un momento de emoción en la cara.'},
+  reencuadre:{n:'Sigue la cara',img:'ef-reencuadre',b:'Si el video original es horizontal, reencuádralo siguiendo la cara para que siempre quede centrada en el formato final.'},
+  progreso:{n:'Barra de progreso',img:'ef-progreso',b:'Barra de progreso fina arriba, en el color de mi marca, para que la gente vea que falta poco y se quede.'},
+  gancho:{n:'Gancho 3 s',img:'estilo-dinamico',b:'Gancho visual en los primeros 3 segundos: la frase más fuerte del video de primero, con zoom y texto grande. Nada de logos ni saludos al inicio.'},
+  cierre:{n:'Cierre con llamado',ico:'📣',b:'Cierre con el llamado a la acción en pantalla, grande y claro, sostenido al menos 2 segundos.'},
+  portada:{n:'Portada',img:'ef-portada',b:'Crea la portada: escoge el fotograma con la mejor expresión, ponle un título de máximo 5 palabras y expórtala en el mismo formato del video.'}}},
+ calidad:{unico:true,items:{
+  final:{n:'Final, máxima calidad',e:'Para publicar',b:'final'},
+  borrador:{n:'Borrador rápido',e:'Para revisar en minutos',b:'borrador'}}}
+};
+
+const RECETAS = {
+ venta:{n:'Reel que vende',e:'Vertical, dinámico, 30 s',img:'estilo-dinamico',v:{tipo:'venta',formato:'v916',duracion:'d30',estilo:'dinamico',efectos:['silencios','subs','zoom','voz','musica','sfx','progreso','gancho','cierre','portada'],calidad:'final'}},
+ podcast:{n:'Clips de podcast',e:'Los mejores momentos',img:'ef-clips',v:{tipo:'podcast',formato:'v916',duracion:'d60',estilo:'dinamico',efectos:['silencios','subs','zoom','reencuadre','voz','gancho','titulos','portada'],calidad:'final'}},
+ premium:{n:'Video premium',e:'Elegante, de marca',img:'estilo-premium',v:{tipo:'historia',formato:'v916',duracion:'d60',estilo:'premium',efectos:['color','voz','musica','titulos','broll','cierre'],calidad:'final'}},
+ tutorial:{n:'Tutorial claro',e:'Horizontal, explicador',img:'estilo-explicador',v:{tipo:'tutorial',formato:'h169',duracion:'dlibre',estilo:'explicador',efectos:['silencios','subs','zoom','voz','titulos','musica'],calidad:'final'}}
+};
+
+const EFECTOS = [
+ {c:'Ritmo',img:'ef-silencios',n:'Cortes limpios sin silencios',d:'Quita silencios y muletillas sin que la voz salte.',h:'FFMPEG + WHISPER',p:`Toma el video de 01-material y quítale los silencios de más de 0,4 segundos, las respiraciones largas y las muletillas ("eh", "este", "o sea"). Deja 0,1 segundos de aire antes y después de cada frase para que la voz no salte. Antes de cortar muéstrame la lista de cortes con sus tiempos. Exporta como v1 en 05-exportados.`},
+ {c:'Texto',img:'ef-subtitulos',n:'Subtítulos que retienen',d:'Palabra por palabra, con la palabra clave resaltada.',h:'WHISPER + REMOTION',p:`Pon subtítulos animados al video: transcribe con Whisper con tiempos por palabra y muéstrame la transcripción para corregirla antes de montarla. Estilo: máximo 3 a 4 palabras en pantalla, letra gruesa en blanco con sombra, la palabra que se está diciendo se resalta con el color principal de mi marca y entra con un pequeño rebote. Ubícalos en el centro bajo de la pantalla, fuera de la zona de los botones de la red social.`},
+ {c:'Cámara',img:'ef-zoom',n:'Zoom de impacto',d:'Parece grabado con dos cámaras.',h:'FFMPEG',p:`Lee la transcripción y encuentra las 5 a 8 frases más fuertes del video. En cada una aplica un zoom de impacto al 115 % centrado en la cara, que entre en el corte (sin animación lenta). Entre frases fuertes vuelve al plano normal. El efecto debe parecer que se grabó con dos cámaras. Muéstrame la lista de frases escogidas antes de aplicarlo.`},
+ {c:'Color',img:'ef-color',n:'Look de cine',d:'Color cálido, profundidad, grano y viñeta.',h:'FFMPEG',p:`Dale look de cine al video: primero iguala el color de todas las tomas. Luego piel cálida y natural, sombras ligeramente frías, contraste suave con profundidad, un grano fino de película y una viñeta sutil en los bordes. Que se sienta película, no filtro de Instagram. Exporta una comparación de antes y después de 5 segundos para que la vea.`},
+ {c:'Audio',img:'ef-voz',n:'Voz de estudio',d:'Sin ruido, clara y con buen volumen.',h:'FFMPEG',p:`Mejora el audio de la voz como si fuera grabada en estudio: quita el ruido de fondo y el eco, quita los tonos muy bajos que ensucian, sube un poco la claridad, comprime suave para que el volumen sea parejo y normaliza a -14 LUFS con picos por debajo de -1 dB. Hazme una muestra de 15 segundos de antes y después.`},
+ {c:'Audio',img:'ef-musica',n:'Música que se baja sola',d:'Baja cuando hablas y sube en las pausas.',h:'FFMPEG',p:`Usa la canción de 02-musica como fondo. Que la música baje sola cuando hay voz (unos 18 dB por debajo de la voz) y suba suave en las pausas y al final. Empieza la música con un fundido de 1 segundo y termínala en un momento musical natural, no cortada de golpe.`},
+ {c:'Audio',img:'ef-sfx',n:'Sonidos de efecto',d:'Whoosh, pop y golpes en el momento exacto.',h:'FFMPEG',p:`Agrega sonidos de efecto sutiles: un "whoosh" en cada transición, un "pop" suave cuando aparece un texto y un golpe grave en la frase más fuerte. Si no tengo sonidos en 02-musica, créalos o dime de dónde descargarlos gratis. Que el volumen de los efectos nunca tape la voz.`},
+ {c:'Texto',img:'ef-nombre',n:'Nombre y cargo animado',d:'La barra con tu nombre de los noticieros.',h:'REMOTION',p:`Crea con Remotion una barra de nombre animada para cuando aparezco: mi nombre en grande y mi cargo debajo, con los colores y la tipografía del CLAUDE.md. Entrada deslizando desde la izquierda, se queda 3 segundos y sale suave. Ponla en el segundo 2 del video.`},
+ {c:'Cámara',img:'ef-reencuadre',n:'De horizontal a vertical',d:'Reencuadra siguiendo la cara.',h:'FFMPEG + PYTHON',p:`El video de 01-material es horizontal. Conviértelo a vertical 1080x1920 siguiendo la cara de quien habla para que siempre quede centrada. El movimiento del encuadre debe ser suave, sin saltos. Si hay dos personas, encuadra a la que está hablando en cada momento.`},
+ {c:'Ritmo',img:'ef-clips',n:'Clips de un video largo',d:'Los mejores momentos de un podcast o clase.',h:'WHISPER + FFMPEG',p:`Este es un video largo. Transcríbelo y encuentra los 5 mejores momentos para clips de 30 a 60 segundos: cada uno debe tener una idea completa que se entienda sola y empezar con una frase que enganche. Muéstrame la lista con tiempos, la frase de inicio y por qué lo escogiste. Después de que apruebe, edita cada clip en vertical con subtítulos.`},
+ {c:'Texto',img:'ef-progreso',n:'Barra de progreso',d:'Hace que la gente se quede hasta el final.',h:'FFMPEG',p:`Agrega una barra de progreso fina (6 píxeles) en la parte de arriba del video, en el color principal de mi marca, que avance de izquierda a derecha durante todo el video.`},
+ {c:'Cámara',img:'ef-transiciones',n:'Transiciones de cine',d:'Cortes invisibles y fundidos con intención.',h:'FFMPEG',p:`Revisa los cambios de tema del video. Donde cambia el tema pon un fundido a negro corto (0,3 segundos). Donde la acción continúa usa corte directo coincidiendo con el movimiento. No uses transiciones de plantilla (giros, cubos, destellos).`},
+ {c:'Texto',img:'ef-portada',n:'Portada que da clic',d:'El mejor fotograma con un título corto.',h:'PYTHON',p:`Crea 3 opciones de portada para este video: busca los fotogramas con la expresión más fuerte, ponles un título de máximo 5 palabras con mi tipografía y mis colores, con buen contraste. Exporta las 3 en el formato del video y muéstramelas para escoger.`},
+ {c:'Corregir',ico:'🔁',n:'Corregir sin dañar lo bueno',d:'La forma correcta de pedir cambios.',h:'TODAS',p:`Deja todo exactamente igual a la última versión y solo cambia esto: [escribe aquí el cambio]. Guarda el resultado como una versión nueva con el siguiente número y dime qué cambiaste.`},
+ {c:'Corregir',img:'ef-revision',n:'Revisión de director',d:'Que Claude critique su propio trabajo.',h:'TODAS',p:`Mira la última versión como un director exigente. Saca un fotograma cada 2 segundos y revisa: ¿algo tapa la cara?, ¿algún texto no se lee?, ¿hay un corte que salta?, ¿la música tapa la voz?, ¿los primeros 3 segundos enganchan? Dame la lista de problemas y cómo los arreglarías, y espera mi visto bueno.`}
+];
+
+/* director */
+const estado = Object.assign({...RECETAS.venta.v, efectos:[...RECETAS.venta.v.efectos], sentir:'', llamado:''}, JSON.parse(localStorage.getItem('dir-estado2')||'{}'));
+function tarjeta(it,on){
+ const b=document.createElement('button'); b.type='button';
+ b.className='opcion'+(it.img?'':' sin-img')+(on?' on':'');
+ b.innerHTML=(it.img?`<img src="img/${it.img}.jpg" alt="" loading="lazy">`:(it.ico?`<div style="font-size:34px;margin-bottom:8px">${it.ico}</div>`:''))+`<div class="t"><strong>${it.n}</strong>${it.e?`<em>${it.e}</em>`:''}</div>`;
+ return b;
+}
+function pintarGrupos(){
+ document.querySelectorAll('[data-grupo]').forEach(cont=>{
+  const clave=cont.dataset.grupo, g=OPCIONES[clave]; cont.innerHTML='';
+  for(const [id,it] of Object.entries(g.items)){
+   const b=tarjeta(it,g.unico?estado[clave]===id:estado[clave].includes(id));
+   b.onclick=()=>{ if(g.unico) estado[clave]=id; else estado[clave]=estado[clave].includes(id)?estado[clave].filter(x=>x!==id):[...estado[clave],id]; pintarGrupos(); armarPrompt(); };
+   cont.appendChild(b);
+  }
+ });
+ const r=document.getElementById('optRecetas'); r.innerHTML='';
+ for(const rc of Object.values(RECETAS)){
+  const b=tarjeta(rc,false);
+  b.onclick=()=>{ Object.assign(estado,{...rc.v,efectos:[...rc.v.efectos]}); pintarGrupos(); armarPrompt(); CARRUSELES.director.ir(6); };
+  r.appendChild(b);
+ }
+ const O=OPCIONES;
+ document.getElementById('resumen').innerHTML=`<span>Video: <b>${O.tipo.items[estado.tipo].n}</b></span><span>Formato: <b>${O.formato.items[estado.formato].n}</b></span><span>Duración: <b>${O.duracion.items[estado.duracion].n}</b></span><span>Estilo: <b>${O.estilo.items[estado.estilo].n}</b></span><span>Efectos: <b>${estado.efectos.length}</b></span>`;
+}
+function textoDirector(){
+ const O=OPCIONES, s=estado, vertical=s.formato==='v916';
+ const efectos=s.efectos.map((id,i)=>`${i+1}. ${O.efectos.items[id].b}`).join('\n')||'Ninguno especial. Decide tú lo que el video necesite.';
+ const salida=s.calidad==='final'
+  ?`- Exporta en MP4 H.264, CRF 18, preset slow, yuv420p, con los mismos cuadros por segundo del original.
+- Audio AAC a 48 kHz y 320 kbps, volumen normalizado a -14 LUFS y picos por debajo de -1 dB.`
+  :`- Es un borrador: exporta en 720p, MP4 H.264, CRF 26, preset veryfast, para revisar rápido.
+- Audio AAC a 128 kbps.`;
+ return `Actúa como director cinematográfico y editor senior de video. Tu trabajo es que este video se vea y se sienta de calidad profesional, como si lo hubiera editado una productora.
+
+EL MATERIAL
+El video principal está en 01-material. Música en 02-musica, tomas de apoyo en 03-broll y mi logo y marca en 04-marca. Si existe un CLAUDE.md con mi manual de marca, síguelo. Si falta algo que necesites, dímelo antes de empezar. Revisa también:
+- Si el llamado a la acción no está dicho en la grabación, avísame antes de editar.
+- Usa las tomas de apoyo solo si tienen que ver con lo que digo. Si no, no las uses.
+- El logo solo se usa si es PNG con fondo transparente y se ve bien sobre el video.
+
+EL VIDEO
+- Tipo: ${O.tipo.items[s.tipo].b}
+- Formato: ${O.formato.items[s.formato].b}
+- Duración: ${O.duracion.items[s.duracion].b}${s.sentir?`\n- Quien lo vea debe sentir: ${s.sentir}`:''}${s.llamado?`\n- Llamado a la acción: ${s.llamado}`:''}
+
+ESTILO DE DIRECCIÓN
+${O.estilo.items[s.estilo].b}
+
+EFECTOS
+${efectos}
+
+CÓMO VAS A TRABAJAR
+1. Revisa el material: duración, resolución, cuadros por segundo, rotación y calidad del audio. Transcribe con faster-whisper modelo small, en el procesador, sin texto de guía y con tiempos por palabra. Revisa que no falte la primera palabra de cada toma y muéstrame la transcripción.
+2. Antes de editar, muéstrame el plan: una tabla con segundo de inicio, segundo de fin, qué se ve, qué se escucha, qué efecto va y por qué. Marca cuál es el gancho. Espera mi visto bueno.
+3. Edita con FFmpeg (cortes, color, audio y exportación) y con Remotion (títulos, subtítulos animados y gráficos). Usa en cada parte lo que dé mejor resultado.
+4. Muéstrame primero una muestra de 10 segundos con la parte más difícil.
+5. Revisa tu propio trabajo antes de entregarme: saca fotogramas de cada corte y confirma que nada tape la cara, que los textos se lean, que no haya saltos raros y que el audio no se sature.
+6. Exporta la versión final.
+7. Entrégame el video, dónde quedó guardado y un resumen de 5 líneas de lo que hiciste.
+
+CALIDAD DE SALIDA
+${salida}${vertical?`\n- Zona segura: nada importante en el 15 % de arriba ni en el 20 % de abajo, porque ahí van los botones de la red social.`:''}
+- Los subtítulos nunca van encima de logos o estampados de la ropa. Si no hay espacio, ponles una caja oscura detrás.
+- La barra de progreso va arriba aunque esté en la zona segura.
+- Guarda cada versión con número (v1, v2, v3) en 05-exportados. Nunca toques el archivo original.
+- Si FFmpeg falla al escribir texto sobre el video, haz los textos con Remotion. Guarda las listas de archivos en UTF-8 (las rutas pueden tener tildes).
+
+Háblame siempre en español sencillo.`;
+}
+function armarPrompt(){
+ document.getElementById('promptDirector').innerHTML=textoDirector().replace(/&/g,'&amp;').replace(/</g,'&lt;')
+  .replace(/^(EL MATERIAL|EL VIDEO|ESTILO DE DIRECCIÓN|EFECTOS|CÓMO VAS A TRABAJAR|CALIDAD DE SALIDA)$/gm,'<span class="t">$1</span>');
+ localStorage.setItem('dir-estado2',JSON.stringify(estado));
+}
+document.getElementById('sentir').value=estado.sentir; document.getElementById('llamado').value=estado.llamado;
+document.getElementById('sentir').oninput=e=>{estado.sentir=e.target.value;armarPrompt()};
+document.getElementById('llamado').oninput=e=>{estado.llamado=e.target.value;armarPrompt()};
+
+/* efectos */
+let filtro='Todos';
+function pintarEfectos(){
+ const fz=document.getElementById('filtros'); fz.innerHTML='';
+ ['Todos',...new Set(EFECTOS.map(e=>e.c))].forEach(c=>{const b=document.createElement('button');b.className=c===filtro?'on':'';b.textContent=c;b.onclick=()=>{filtro=c;pintarEfectos()};fz.appendChild(b)});
+ const l=document.getElementById('listaEfectos'); l.innerHTML='';
+ EFECTOS.filter(e=>filtro==='Todos'||e.c===filtro).forEach(e=>{
+  const d=document.createElement('div'); d.className='efecto';
+  d.innerHTML=(e.img?`<img src="img/${e.img}.jpg" alt="" loading="lazy">`:`<div class="ico">${e.ico}</div>`)+`<div class="t"><h3>${e.n}</h3><p>${e.d}</p><div class="pie"><span class="tag">${e.h}</span><button class="copiar">Copiar</button></div></div>`;
+  d.querySelector('.copiar').onclick=ev=>copiar(e.p,ev.target);
+  l.appendChild(d);
+ });
+}
+
+/* carruseles */
+const CARRUSELES={};
+const hechos=new Set(JSON.parse(localStorage.getItem('pasos2')||'[]'));
+function pintarAvance(){
+ const n=Math.min(hechos.size,6);
+ document.getElementById('barraAvance').style.width=(n/6*100)+'%';
+ document.getElementById('textoAvance').textContent=n+'/6';
+ localStorage.setItem('pasos2',JSON.stringify([...hechos]));
+}
+document.querySelectorAll('[data-carrusel]').forEach(c=>{
+ const id=c.dataset.carrusel, slides=[...c.querySelectorAll('.slide')], puntos=c.querySelector('.puntos');
+ const atras=c.querySelector('.atras'), sigue=c.querySelector('.sigue'), cuentas=c.querySelectorAll('.cuenta');
+ const siguienteSeccion={instala:'#funciona',funciona:'#director',director:'#efectos'}[id];
+ let i=0;
+ slides.forEach((s,k)=>{const b=document.createElement('button');b.textContent=k+1;b.onclick=()=>ir(k);puntos.appendChild(b)});
+ function ir(k){
+  i=Math.max(0,Math.min(slides.length-1,k));
+  slides.forEach((s,n)=>s.classList.toggle('ver',n===i));
+  [...puntos.children].forEach((b,n)=>{b.classList.toggle('aqui',n===i);b.classList.toggle('ya',n<i)});
+  atras.disabled=i===0;
+  const ultimo=i===slides.length-1;
+  sigue.textContent=ultimo?'Ir al siguiente paso →':(c.dataset.avance?'Listo, siguiente →':'Siguiente →');
+  cuentas.forEach(x=>x.textContent=`${i+1} de ${slides.length}`);
+  localStorage.setItem('car-'+id,i);
+ }
+ atras.onclick=()=>{ir(i-1);c.scrollIntoView({behavior:'smooth',block:'start'})};
+ sigue.onclick=()=>{
+  if(c.dataset.avance&&i<6){hechos.add(String(i+1));pintarAvance()}
+  if(i===slides.length-1){document.querySelector(siguienteSeccion).scrollIntoView({behavior:'smooth'});return}
+  ir(i+1); c.scrollIntoView({behavior:'smooth',block:'start'});
+ };
+ CARRUSELES[id]={ir};
+ ir(+localStorage.getItem('car-'+id)||0);
+});
+
+/* utilidades */
+function copiar(texto,boton){
+ const listo=()=>{const a=document.getElementById('aviso');a.classList.add('ver');setTimeout(()=>a.classList.remove('ver'),1600);
+  if(boton){const t=boton.textContent;boton.textContent='¡Listo!';boton.classList.add('ok');setTimeout(()=>{boton.textContent=t;boton.classList.remove('ok')},1400)}};
+ if(navigator.clipboard&&isSecureContext){navigator.clipboard.writeText(texto).then(listo)}
+ else{const ta=document.createElement('textarea');ta.value=texto;document.body.appendChild(ta);ta.select();document.execCommand('copy');ta.remove();listo()}
+}
+document.querySelectorAll('.codigo .copiar').forEach(b=>b.onclick=()=>{const c=b.parentElement.cloneNode(true);c.querySelector('.copiar').remove();copiar(c.textContent.trim(),b)});
+document.getElementById('copiarDirector').onclick=e=>copiar(textoDirector(),e.target);
+document.getElementById('descargar').onclick=()=>{const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([textoDirector()],{type:'text/plain'}));a.download='director-de-cine.txt';a.click()};
+function ponerSO(so){document.body.className='so-'+so;document.querySelectorAll('#selectorSO button').forEach(b=>b.classList.toggle('activo',b.dataset.so===so));localStorage.setItem('so',so)}
+document.querySelectorAll('#selectorSO button').forEach(b=>b.onclick=()=>ponerSO(b.dataset.so));
+ponerSO(localStorage.getItem('so')||(/Mac/.test(navigator.platform)?'mac':'win'));
+const enlaces=[...document.querySelectorAll('#pestanas a')];
+const obs=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)enlaces.forEach(a=>a.classList.toggle('activa',a.getAttribute('href')==='#'+e.target.id))}),{rootMargin:'-45% 0px -50% 0px'});
+document.querySelectorAll('#inicio,section.bloque').forEach(s=>obs.observe(s));
+
+document.getElementById('promptPreparar').textContent=PREPARAR;
+document.getElementById('promptManual').textContent=MANUAL;
+pintarGrupos(); armarPrompt(); pintarEfectos(); pintarAvance();
+</script>
+</body>
+</html>
