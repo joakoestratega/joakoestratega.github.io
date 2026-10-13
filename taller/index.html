@@ -7,10 +7,7 @@ h2{color:#F8B400;margin-top:42px}.caja{background:#1c1c24;border-radius:14px;pad
 pre{white-space:pre-wrap;background:#0b0b0f;border:1px solid #2a2a33;border-radius:10px;padding:14px;font-size:.92rem}
 .btn{display:inline-block;background:#F8B400;color:#0F0F14;font-weight:800;padding:12px 22px;border-radius:30px;text-decoration:none}
 .pie{margin-top:60px;padding-top:20px;border-top:1px solid #2a2a33;opacity:.85}
-form{background:#1c1c24;border-radius:16px;padding:20px;max-width:520px}
-label{display:block;margin:12px 0 4px;font-weight:700}
 input[type=text],input[type=tel],input[type=email]{width:100%;box-sizing:border-box;padding:12px;border-radius:10px;border:1px solid #333;background:#0b0b0f;color:#fff;font-size:1rem}
-.chk{display:flex;gap:10px;align-items:flex-start;font-weight:500;font-size:.88rem;opacity:.9}
 .oculto{position:absolute;left:-9999px} button{margin-top:16px;width:100%;border:0;cursor:pointer;font-size:1.05rem}
 
 .topbar{position:sticky;top:0;z-index:20;display:flex;justify-content:space-between;align-items:center;gap:10px;padding:10px 16px;background:#0F0F14;border-bottom:1px solid #2a2a35}
@@ -43,18 +40,7 @@ img.zoom{cursor:zoom-in}
 <h1>Marketing con estrategia<br>el material completo del taller</h1>
 <p>Todo lo que viste, más el paso a paso para hacerlo con tu producto.</p>
 
-<div id="puerta">
-<form id="f" novalidate>
-<label for="nombre">Tu nombre</label><input id="nombre" type="text" autocomplete="name" maxlength="80">
-<label for="tel">Tu WhatsApp</label><input id="tel" type="tel" autocomplete="tel" placeholder="+57 300 000 0000" maxlength="30">
-<label for="correo">Tu correo</label><input id="correo" type="email" autocomplete="email" maxlength="120">
-<input class="oculto" id="empresa" type="text" tabindex="-1" autocomplete="off" aria-hidden="true">
-<label class="chk"><input type="checkbox" id="acepto"><span>Autorizo a Joako Estratega a guardar mi nombre, WhatsApp y correo para enviarme el material del taller y contactarme con contenido y servicios de marketing. Puedo pedir verlos, corregirlos o borrarlos por WhatsApp al +57 302 866 2556 (Ley 1581 de 2012). <a href="https://joakoestratega.com/politica-taller/" target="_blank" rel="noopener">Política de datos del taller</a></span></label>
-<p id="error"></p>
-<button class="btn" type="submit">Ver el material</button>
-</form></div>
-
-<div id="material" hidden>
+<div id="material">
 <p class="intro">Empieza por el paso a paso: ahí están <b>los prompts exactos</b> para que la IA busque, descargue y analice todo por ti.</p>
 <div class="tarjetas">
 <a class="t grande" href="guia.html"><img src="img/2667-04-ficha-estrellas.jpg" alt=""><div><span>EMPIEZA AQUÍ</span><b>El paso a paso con todos los prompts</b><p>Cópialos y pégalos en Claude Code. Desde la web también.</p></div></a>
@@ -72,14 +58,11 @@ img.zoom{cursor:zoom-in}
 <a class="sv" href="https://wa.me/573028662556?text=Hola%20Joako%2C%20estuve%20en%20el%20taller%20y%20quiero%20que%20lideren%20mi%20estrategia%20de%20marketing" target="_blank" rel="noopener"><span>AGENCIA</span><b>Joako Estratega</b>Lideramos tu estrategia de marketing por mínimo 90 días para escalar tus ventas y optimizar tus procesos.<i>Hablemos por WhatsApp →</i></a>
 <a class="sv" href="https://wa.me/573028662556?text=Hola%20Joako%2C%20estuve%20en%20el%20taller%20y%20quiero%20el%20diagn%C3%B3stico%20de%20ventas" target="_blank" rel="noopener"><span>AUDITORÍA</span><b>Diagnóstico de ventas</b>Auditamos tu estrategia de marketing y te entregamos un informe con lo que hay que arreglar.<i>Pídelo por WhatsApp →</i></a>
 <a class="sv" href="https://patoeditor.com" target="_blank" rel="noopener"><span>EDICIÓN DE VIDEO</span><b>PatoEditor</b>Editamos tus videos por ti. No te preocupes más por eso.<i>Conoce PatoEditor →</i></a>
-</div><p class="quien">Joaquín Rojas Peña · CEO de Joako Estratega (agencia) · CEO de PatoEditor · Director de la estrategia de marketing de Feria Effix · <a href="https://wa.me/573028662556?text=Hola%20Joako%2C%20estuve%20en%20el%20taller%20Marketing%20con%20estrategia">+57 302 866 2556</a> · <a href="https://instagram.com/joakoestratega">@joakoestratega</a> · <a href="https://joakoestratega.com">joakoestratega.com</a> · <a href="https://joakoestratega.com/politica-taller/">Política de datos</a></p></div>
+</div><p class="quien">Joaquín Rojas Peña · CEO de Joako Estratega (agencia) · CEO de PatoEditor · Director de la estrategia de marketing de Feria Effix · <a href="https://wa.me/573028662556?text=Hola%20Joako%2C%20estuve%20en%20el%20taller%20Marketing%20con%20estrategia">+57 302 866 2556</a> · <a href="https://instagram.com/joakoestratega">@joakoestratega</a> · <a href="https://joakoestratega.com">joakoestratega.com</a></p></div>
 </div>
 <a class="wa-flota" href="https://wa.me/573028662556?text=Hola%20Joako%2C%20estuve%20en%20el%20taller%20Marketing%20con%20estrategia" target="_blank" rel="noopener">💬 Escríbeme</a>
 <div id="lb"></div>
 <script>
-// Mismo registro que Joako Editor: solo escribe, nunca devuelve datos ([SEG] 2026-09-17).
-const API = 'https://editor-9qb.pages.dev/api/registro';
-const AVISO = 'taller-2026-10-v1', VERSION = 'taller-mkt-2026-10-16', LLAVE = 'taller-mkt-2026';
 const $ = (id) => document.getElementById(id);
 // imágenes y videos que se agrandan al tocarlos
 document.addEventListener('click', (e) => {
@@ -89,19 +72,4 @@ document.addEventListener('click', (e) => {
   if (e.target === lb) { lb.classList.remove('on'); lb.innerHTML = ''; }
 });
 document.addEventListener('keydown', (e) => { if (e.key === 'Escape') { $('lb').classList.remove('on'); $('lb').innerHTML = ''; } });
-function abrir() { $('puerta').hidden = true; $('material').hidden = false; window.scrollTo(0, 0); }
-try { if (localStorage.getItem(LLAVE)) abrir(); } catch (e) {}
-$('f').addEventListener('submit', (ev) => {
-  ev.preventDefault();
-  const nombre = $('nombre').value.trim(), telefono = $('tel').value.trim(), correo = $('correo').value.trim();
-  const decir = (t) => { $('error').textContent = t; };
-  if (nombre.length < 2) return decir('Escribe tu nombre.');
-  if ((telefono.match(/\d/g) || []).length < 7) return decir('Escribe un WhatsApp con el que podamos ubicarte.');
-  if (!/^[^\s@]+@[^\s@]+\.[a-z]{2,}$/i.test(correo)) return decir('Revisa el correo: parece que le falta algo.');
-  if (!$('acepto').checked) return decir('Marca la casilla para autorizar el uso de tus datos.');
-  fetch(API, { method: 'POST', headers: { 'Content-Type': 'application/json' }, keepalive: true,
-    body: JSON.stringify({ nombre, telefono, correo, acepto: true, aviso: AVISO, version: VERSION, trampa: $('empresa').value || '' }) }).catch(() => {});
-  try { localStorage.setItem(LLAVE, '1'); } catch (e) {}
-  abrir();
-});
 </script></body></html>
