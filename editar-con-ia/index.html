@@ -158,6 +158,18 @@ input[type=text]:focus{outline:none;border-color:var(--oro)}
 .efecto .pie{display:flex;justify-content:space-between;align-items:center;margin-top:12px;gap:8px}
 .tag{font-size:11px;font-weight:800;letter-spacing:.5px;color:var(--oro);background:rgba(248,180,0,.1);padding:5px 8px;border-radius:7px}
 .efecto .copiar{position:static}
+.recetas-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;align-items:start}
+.receta-v{background:var(--negro2);border:1px solid var(--linea);border-radius:18px;overflow:hidden}
+.receta-v.antes{border-style:dashed;opacity:.92}
+.receta-v video{width:100%;aspect-ratio:9/16;display:block;background:#000;object-fit:cover}
+.receta-v .t{padding:12px 14px 14px}
+.receta-v small{color:var(--oro);font-weight:800;font-size:11.5px;letter-spacing:1.2px}
+.receta-v strong{display:block;font-size:16px;font-weight:800;margin:2px 0 4px}
+.receta-v p{color:var(--gris);font-size:13px;margin-bottom:10px}
+.receta-v .copiar{position:static;width:100%}
+.kit-caja{display:grid;grid-template-columns:1fr auto;gap:20px;align-items:center;margin-top:26px;background:linear-gradient(90deg,rgba(248,180,0,.12),var(--negro2));border:1px solid rgba(248,180,0,.45);border-radius:20px;padding:24px 26px}
+.kit-caja h3{font-size:22px;font-weight:900;margin-bottom:6px}.kit-caja p{color:#ddd}
+@media(max-width:900px){.recetas-grid{grid-template-columns:1fr 1fr}.kit-caja{grid-template-columns:1fr}}
 details{background:var(--negro2);border:1px solid var(--linea);border-radius:16px;padding:18px 22px;margin-bottom:12px}
 details[open]{border-color:rgba(248,180,0,.45)}
 summary{font-weight:800;font-size:16.5px;cursor:pointer;list-style:none;display:flex;justify-content:space-between;gap:12px}
@@ -196,7 +208,7 @@ footer strong{color:#fff;font-size:20px;display:block;margin-bottom:6px}
 <nav class="menu"><div class="contenedor">
  <div class="marca">JOAKO <b>ESTRATEGA</b></div>
  <div class="pestanas" id="pestanas">
-  <a href="#inicio" class="activa">Inicio</a><a href="#instala">1 · Instala</a><a href="#funciona">2 · Cómo funciona</a><a href="#director">3 · Director de cine</a><a href="#efectos">4 · Efectos top</a><a href="#ayuda">Ayuda</a>
+  <a href="#inicio" class="activa">Inicio</a><a href="#instala">1 · Instala</a><a href="#funciona">2 · Cómo funciona</a><a href="#director">3 · Director de cine</a><a href="#recetas">Recetas</a><a href="#efectos">4 · Efectos top</a><a href="#ayuda">Ayuda</a>
  </div>
  <div class="avance"><div class="barra"><i id="barraAvance"></i></div><span id="textoAvance">0/6</span></div>
 </div></nav>
@@ -434,6 +446,23 @@ footer strong{color:#fff;font-size:20px;display:block;margin-bottom:6px}
    </div>
   </div></div>
   <div class="pie-carrusel"><button class="btn btn-linea atras">← Anterior</button><span class="cuenta"></span><button class="btn btn-oro sigue">Siguiente →</button></div>
+ </div>
+</div></section>
+
+<section class="bloque" id="recetas"><div class="contenedor">
+ <span class="etiqueta">RECETAS</span>
+ <h2>Las mismas tomas, <span style="color:var(--oro)">4 videos distintos</span></h2>
+ <p class="intro">Grabé 9 tomas con el celular. Con el kit, Claude las convirtió en estos 4 reels. Dale play y escoge tu receta.</p>
+ <div class="recetas-grid">
+  <div class="receta-v antes"><video src="video/bruto.mp4" poster="video/bruto.jpg" controls playsinline preload="none"></video><div class="t"><small>ANTES</small><strong>Material en bruto</strong><p>Tomas de iPhone, sin editar.</p></div></div>
+  <div class="receta-v"><video src="video/receta-vende.mp4" poster="video/receta-vende.jpg" controls playsinline preload="none"></video><div class="t"><small>RECETA 1</small><strong>Vende</strong><p>Ritmo de creador, zoom y palabra clave.</p><button class="copiar" data-receta="vende">Copiar receta</button></div></div>
+  <div class="receta-v"><video src="video/receta-cine.mp4" poster="video/receta-cine.jpg" controls playsinline preload="none"></video><div class="t"><small>RECETA 2</small><strong>Cine</strong><p>Color de película, grano y calma.</p><button class="copiar" data-receta="cine">Copiar receta</button></div></div>
+  <div class="receta-v"><video src="video/receta-premium.mp4" poster="video/receta-premium.jpg" controls playsinline preload="none"></video><div class="t"><small>RECETA 3</small><strong>Premium</strong><p>Elegante, por capítulos, letra fina.</p><button class="copiar" data-receta="premium">Copiar receta</button></div></div>
+  <div class="receta-v"><video src="video/receta-explicador.mp4" poster="video/receta-explicador.jpg" controls playsinline preload="none"></video><div class="t"><small>RECETA 4</small><strong>Explicador</strong><p>Tarjetas que aparecen con tus palabras.</p><button class="copiar" data-receta="explicador">Copiar receta</button></div></div>
+ </div>
+ <div class="kit-caja" id="kitCaja">
+  <div><h3>Descarga el kit de recetas</h3><p>Descomprímelo, ábrelo en VS Code y pega: «Instala el kit de esta carpeta siguiendo el CLAUDE.md». Pon tus tomas en 01-material, tu música en 02-musica y copia la receta que quieras. Necesitas 4 GB libres en el disco.</p></div>
+  <a class="btn btn-oro" href="kit-editor.zip" download>Descargar kit ↓</a>
  </div>
 </div></section>
 
@@ -703,6 +732,21 @@ document.querySelectorAll('#inicio,section.bloque').forEach(s=>obs.observe(s));
 document.getElementById('promptPreparar').textContent=PREPARAR;
 document.getElementById('promptManual').textContent=MANUAL;
 pintarGrupos(); armarPrompt(); pintarEfectos(); pintarAvance();
+/* recetas del kit */
+const RECETA_KIT = r => `Abre esta carpeta y sigue el CLAUDE.md al pie de la letra.
+Mis tomas están en 01-material y la música en 02-musica.
+Receta: ${r}
+Gancho en pantalla: "[escribe tu gancho]"
+Llamado a la acción: "[escribe tu llamado]", con la palabra clave resaltada.
+Duración: entre 25 y 35 segundos.
+Corre preparar y transcribir, lee la transcripción y escribe edl.json.
+Muéstrame el plan en una tabla corta y sigue sin esperar.
+Revisa los subtítulos con --solo-linea, renderiza y abre la hoja de fotogramas.
+Si algo falla, corrige edl.json y repite (máximo 3 vueltas).
+Entrégame la ruta del MP4 y lo que quedó pendiente.`;
+document.querySelectorAll('[data-receta]').forEach(b=>{ if(b.tagName==='BUTTON'&&b.classList.contains('copiar')) b.onclick=()=>copiar(RECETA_KIT(b.dataset.receta),b); });
+document.querySelectorAll('.receta-v video').forEach(v=>v.addEventListener('play',()=>document.querySelectorAll('.receta-v video').forEach(o=>{if(o!==v)o.pause()})));
+
 </script>
 </body>
 </html>
