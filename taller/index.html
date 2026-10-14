@@ -21,7 +21,7 @@ input[type=text],input[type=tel],input[type=email]{width:100%;box-sizing:border-
 .sv:hover{border-color:#F8B400;transform:translateY(-3px)}.sv span{color:#F8B400;font-size:.72rem;font-weight:800;letter-spacing:2px}
 .sv b{font-size:1.2rem}.sv i{font-style:normal;color:#F8B400;font-weight:800;margin-top:auto;padding-top:8px}
 .pie-serv .quien{margin-top:18px;font-size:.88rem;opacity:.75}
-@media(max-width:560px){.wa-flota{padding:10px 14px;font-size:.82rem;bottom:12px;right:12px}.topbar b{font-size:.85rem}.topbar a.r{padding:7px 10px;font-size:.78rem}}
+@media(max-width:560px){.wa-flota{padding:0;width:52px;height:52px;border-radius:50%;font-size:0;display:flex;align-items:center;justify-content:center;bottom:14px;right:12px}.wa-flota::before{content:'💬';font-size:24px}.topbar b{font-size:.85rem}.topbar a.r{padding:7px 10px;font-size:.78rem}}
 
 #lb{position:fixed;inset:0;background:rgba(0,0,0,.9);display:none;align-items:center;justify-content:center;z-index:50;cursor:zoom-out}#lb.on{display:flex}#lb img,#lb video{max-width:94vw;max-height:92vh;border-radius:10px}
 img.zoom{cursor:zoom-in}
@@ -36,24 +36,38 @@ img.zoom{cursor:zoom-in}
 .t b{display:block;font-size:1.15rem;margin:4px 0} .t p{margin:0;opacity:.75;font-size:.92rem}
 .t.grande{grid-column:1/-1;flex-direction:row;border:2px solid #F8B400} .t.grande img{width:42%;height:auto;min-height:240px}
 .t.grande div{display:flex;flex-direction:column;justify-content:center;padding:26px} .t.grande b{font-size:1.7rem}
-@media(max-width:640px){.t.grande{flex-direction:column} .t.grande img{width:100%;height:220px}}</style></head><body><div class="w">
-<h1>Marketing con estrategia<br>el material completo del taller</h1>
-<p>Todo lo que viste, más el paso a paso para hacerlo con tu producto.</p>
+@media(max-width:640px){.t.grande{flex-direction:column} .t.grande img{width:100%;height:220px}}
+.indice{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0 6px}.indice a{background:#1c1c24;border:1px solid #2a2a35;color:#fff;text-decoration:none;padding:9px 14px;border-radius:30px;font-weight:700;font-size:.9rem}
+section{margin-top:44px} section h2{display:flex;align-items:center;gap:12px} .n{display:inline-flex;width:38px;height:38px;border-radius:50%;background:#F8B400;color:#0F0F14;align-items:center;justify-content:center;font-weight:900;flex:none}
+.vids{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:16px 0} .vd{position:relative;margin:0} .vd video{width:100%;aspect-ratio:9/16;object-fit:cover;border-radius:12px;background:#000;display:block}
+.vd .play{position:absolute;left:50%;top:40%;transform:translate(-50%,-50%);width:46px;height:46px;border-radius:50%;background:rgba(248,180,0,.92);color:#0F0F14;display:flex;align-items:center;justify-content:center;font-size:20px;pointer-events:none}
+.vd figcaption{margin-top:6px;font-size:.85rem;line-height:1.25} .vd figcaption b{display:block} .vd figcaption span{opacity:.6;font-size:.78rem}
+.imgs{display:grid;grid-template-columns:repeat(2,1fr);gap:10px} @media(min-width:800px){.imgs{grid-template-columns:repeat(5,1fr)}}
+.pz{margin:0} .pz img{width:100%;aspect-ratio:4/5;object-fit:cover;border-radius:10px;display:block;background:#fff}
+.baja{display:block;text-align:center;margin-top:6px;font-size:.8rem;font-weight:800;color:#F8B400;text-decoration:none}
+.btn.todo{display:block;text-align:center;margin:20px 0 8px;font-size:1.05rem} .aviso{font-size:.9rem;opacity:.75} .aviso a{color:#F8B400}
+.t.grande{margin-top:14px} .lista a{display:flex;flex-direction:column;gap:4px} .lista span{opacity:.7;font-size:.9rem}</style></head><body><div class="w">
+<h1>El material del taller<br><span style="color:#fff">gratis y listo para usar</span></h1>
+<nav class="indice"><a href="#listo">1 · Listo para pautar</a><a href="#hazlo">2 · Hazlo con tu producto</a><a href="#investigacion">3 · La investigación</a></nav>
 
-<div id="material">
-<p class="intro">Empieza por el paso a paso: ahí están <b>los prompts exactos</b> para que la IA busque, descargue y analice todo por ti.</p>
-<div class="tarjetas">
-<a class="t grande" href="guia.html"><img src="img/2667-04-ficha-estrellas.jpg" alt=""><div><span>EMPIEZA AQUÍ</span><b>El paso a paso con todos los prompts</b><p>Cópialos y pégalos en Claude Code. Desde la web también.</p></div></a>
-<a class="t" href="informe.html"><img src="img/top10.jpg" alt=""><div><span>INVESTIGACIÓN</span><b>El informe</b><p>468 anuncios de 153 marcas en 4 países.</p></div></a>
-<a class="t" href="top-10.html"><img src="anuncios/4167054630177709.jpg" alt=""><div><span>LO QUE VENDE</span><b>Top 10 en video e imagen</b><p>Los que más tiempo llevan prendidos y por qué.</p></div></a>
-<a class="t" href="politicas.html"><img src="img/2667-06-antes-despues-ropa.jpg" alt=""><div><span>ANTES DE PAUTAR</span><b>¿Meta lo aprueba?</b><p>Las 3 reglas que más tumban anuncios de fajas.</p></div></a>
-<a class="t" href="comentarios-de-clientas.csv"><img src="img/2667-05-con-ropa-ni-se-nota.jpg" alt=""><div><span>VOZ DE LA CLIENTA</span><b>3.715 comentarios</b><p>Sin nombres, listos para tu análisis.</p></div></a>
-<a class="t" href="https://joakoestratega.com/editor/" target="_blank" rel="noopener"><img src="img/joako-editor.jpg" alt="Joako Editor" style="object-position:left center"><div><span>HERRAMIENTA GRATIS</span><b>Joako Editor</b><p>Edita tus videos gratis y rápido: subtítulos automáticos y corte de silencios.</p></div></a>
-</div>
-<h2>Los 3 videos que hicimos</h2><div class="g"><video class="zoom" src="video/01-chicas-miren.mp4" poster="video/01-chicas-miren.jpg" preload="none" playsinline style="width:100%;border-radius:12px;background:#000"></video><video class="zoom" src="video/02-que-si-aprieta.mp4" poster="video/02-que-si-aprieta.jpg" preload="none" playsinline style="width:100%;border-radius:12px;background:#000"></video><video class="zoom" src="video/03-lo-dicen-ellas.mp4" poster="video/03-lo-dicen-ellas.jpg" preload="none" playsinline style="width:100%;border-radius:12px;background:#000"></video></div>
-<h2>Las 10 imágenes que hicimos con base</h2><div class="g"><img class="zoom" loading="lazy" src="img/2667-00-otras-vs-nosotros.jpg"><img class="zoom" loading="lazy" src="img/2667-01-ficha-flechas.jpg"><img class="zoom" loading="lazy" src="img/2667-02-resultado-inmediato.jpg"><img class="zoom" loading="lazy" src="img/2667-03-producto-solo.jpg"><img class="zoom" loading="lazy" src="img/2667-04-ficha-estrellas.jpg"><img class="zoom" loading="lazy" src="img/2667-05-con-ropa-ni-se-nota.jpg"><img class="zoom" loading="lazy" src="img/2667-06-antes-despues-ropa.jpg"><img class="zoom" loading="lazy" src="img/2667-07-tu-mejor-version.jpg"><img class="zoom" loading="lazy" src="img/2667-08-frase-grande.jpg"><img class="zoom" loading="lazy" src="img/2667-09-sin-y-con.jpg"></div>
-<h2>Sin base vs. con base</h2><img class="zoom" loading="lazy" src="img/sin-base-vs-10.jpg" style="width:100%;border-radius:12px">
-</div>
+<section id="listo"><h2><span class="n">1</span>Listo para pautar · faja 2667</h2>
+<p class="intro">3 videos y 10 imágenes hechos con la investigación. Toca para verlos en grande.</p>
+<div class="vids"><figure class="vd"><video class="zoom" src="video/01-chicas-miren.mp4" poster="video/01-chicas-miren.jpg" preload="none" playsinline></video><span class="play">▶</span><figcaption><b>Chicas, miren</b><span>Muestra y explica</span></figcaption><a class="baja" href="video/01-chicas-miren.mp4" download>Descargar</a></figure><figure class="vd"><video class="zoom" src="video/02-que-si-aprieta.mp4" poster="video/02-que-si-aprieta.jpg" preload="none" playsinline></video><span class="play">▶</span><figcaption><b>¿Que si aprieta?</b><span>Humor con la queja</span></figcaption><a class="baja" href="video/02-que-si-aprieta.mp4" download>Descargar</a></figure><figure class="vd"><video class="zoom" src="video/03-lo-dicen-ellas.mp4" poster="video/03-lo-dicen-ellas.jpg" preload="none" playsinline></video><span class="play">▶</span><figcaption><b>Lo dicen ellas</b><span>Otras clientas</span></figcaption><a class="baja" href="video/03-lo-dicen-ellas.mp4" download>Descargar</a></figure></div>
+<div class="imgs"><figure class="pz"><img class="zoom" loading="lazy" src="img/2667-00-otras-vs-nosotros.jpg" alt=""><a class="baja" href="img/2667-00-otras-vs-nosotros.jpg" download>Descargar</a></figure><figure class="pz"><img class="zoom" loading="lazy" src="img/2667-01-ficha-flechas.jpg" alt=""><a class="baja" href="img/2667-01-ficha-flechas.jpg" download>Descargar</a></figure><figure class="pz"><img class="zoom" loading="lazy" src="img/2667-02-resultado-inmediato.jpg" alt=""><a class="baja" href="img/2667-02-resultado-inmediato.jpg" download>Descargar</a></figure><figure class="pz"><img class="zoom" loading="lazy" src="img/2667-03-producto-solo.jpg" alt=""><a class="baja" href="img/2667-03-producto-solo.jpg" download>Descargar</a></figure><figure class="pz"><img class="zoom" loading="lazy" src="img/2667-04-ficha-estrellas.jpg" alt=""><a class="baja" href="img/2667-04-ficha-estrellas.jpg" download>Descargar</a></figure><figure class="pz"><img class="zoom" loading="lazy" src="img/2667-05-con-ropa-ni-se-nota.jpg" alt=""><a class="baja" href="img/2667-05-con-ropa-ni-se-nota.jpg" download>Descargar</a></figure><figure class="pz"><img class="zoom" loading="lazy" src="img/2667-06-antes-despues-ropa.jpg" alt=""><a class="baja" href="img/2667-06-antes-despues-ropa.jpg" download>Descargar</a></figure><figure class="pz"><img class="zoom" loading="lazy" src="img/2667-07-tu-mejor-version.jpg" alt=""><a class="baja" href="img/2667-07-tu-mejor-version.jpg" download>Descargar</a></figure><figure class="pz"><img class="zoom" loading="lazy" src="img/2667-08-frase-grande.jpg" alt=""><a class="baja" href="img/2667-08-frase-grande.jpg" download>Descargar</a></figure><figure class="pz"><img class="zoom" loading="lazy" src="img/2667-09-sin-y-con.jpg" alt=""><a class="baja" href="img/2667-09-sin-y-con.jpg" download>Descargar</a></figure></div>
+<a class="btn todo" href="material-2667.zip" download>⬇ Descargar todo (videos + imágenes)</a>
+<p class="aviso">Antes de pautar, pásalos por <a href="politicas.html">el semáforo de Meta</a>.</p></section>
+
+<section id="hazlo"><h2><span class="n">2</span>Hazlo con tu producto</h2>
+<a class="t grande" href="guia.html"><img src="img/2667-04-ficha-estrellas.jpg" alt=""><div><span>EL PASO A PASO</span><b>Todos los prompts, listos para copiar</b><p>Para hacerlo desde la web o con Claude Code.</p></div></a>
+<a class="t grande editor" href="https://joakoestratega.com/editor/" target="_blank" rel="noopener"><img src="img/joako-editor.jpg" alt="Joako Editor" style="object-position:left center"><div><span>HERRAMIENTA GRATIS</span><b>Joako Editor</b><p>Edita tus videos gratis y rápido: subtítulos automáticos y corte de silencios.</p></div></a></section>
+
+<section id="investigacion"><h2><span class="n">3</span>La investigación</h2>
+<div class="lista">
+<a href="informe.html"><b>El informe</b><span>468 anuncios de 153 marcas en 4 países</span></a>
+<a href="top-10.html"><b>Top 10 en video e imagen</b><span>Los que más tiempo llevan prendidos y por qué</span></a>
+<a href="politicas.html"><b>¿Meta lo aprueba?</b><span>Las 3 reglas que más tumban anuncios de fajas</span></a>
+<a href="comentarios-de-clientas.csv" download><b>3.715 comentarios de clientas</b><span>Sin nombres, listos para tu análisis</span></a>
+</div></section>
 <div class="pie-serv"><h3>Lo que hacemos en Joako Estratega</h3><div class="serv">
 <a class="sv" href="https://wa.me/573028662556?text=Hola%20Joako%2C%20estuve%20en%20el%20taller%20y%20quiero%20que%20lideren%20mi%20estrategia%20de%20marketing" target="_blank" rel="noopener"><span>AGENCIA</span><b>Joako Estratega</b>Lideramos tu estrategia de marketing por mínimo 90 días para escalar tus ventas y optimizar tus procesos.<i>Hablemos por WhatsApp →</i></a>
 <a class="sv" href="https://wa.me/573028662556?text=Hola%20Joako%2C%20estuve%20en%20el%20taller%20y%20quiero%20el%20diagn%C3%B3stico%20de%20ventas" target="_blank" rel="noopener"><span>AUDITORÍA</span><b>Diagnóstico de ventas</b>Auditamos tu estrategia de marketing y te entregamos un informe con lo que hay que arreglar.<i>Pídelo por WhatsApp →</i></a>
