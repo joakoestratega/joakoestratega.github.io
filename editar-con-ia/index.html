@@ -88,6 +88,11 @@ body.so-win .solo-win{display:block}body.so-mac .solo-mac{display:block}
 .ventana .barra-v i{width:11px;height:11px;border-radius:50%;background:#555}
 .ventana .barra-v i:nth-child(1){background:#FF5F57}.ventana .barra-v i:nth-child(2){background:#FEBC2E}.ventana .barra-v i:nth-child(3){background:#28C840}
 .ventana .barra-v span{margin-left:8px}
+body.so-win .ventana .barra-v{background:#1F1F1F;height:32px;padding:0 0 0 12px;gap:0}
+body.so-win .ventana .barra-v i{display:none}
+body.so-win .ventana .barra-v span{margin-left:0;flex:1;font-family:"Segoe UI",system-ui,sans-serif}
+body.so-win .ventana .barra-v span:before{content:"";display:inline-block;width:12px;height:12px;border-radius:2px;background:#2F80ED;margin-right:9px;vertical-align:-1px}
+body.so-win .ventana .barra-v:after{content:"–     □     ✕";color:#ccc;font-size:13px;padding:0 16px;font-family:"Segoe UI",system-ui,sans-serif}
 .terminal{background:#0C0C0C;color:#CCC;font-family:Consolas,Menlo,monospace;padding:16px;line-height:1.7;min-height:220px}
 .terminal .pr{color:#7FB3FF}.terminal .ok{color:var(--verde)}.terminal .cmd{color:#fff}
 .vsc{display:grid;grid-template-columns:44px 190px 1fr;min-height:320px;font-family:"Segoe UI",system-ui,sans-serif}
