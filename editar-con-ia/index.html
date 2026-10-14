@@ -163,6 +163,13 @@ input[type=text]:focus{outline:none;border-color:var(--oro)}
 .efecto .pie{display:flex;justify-content:space-between;align-items:center;margin-top:12px;gap:8px}
 .tag{font-size:11px;font-weight:800;letter-spacing:.5px;color:var(--oro);background:rgba(248,180,0,.1);padding:5px 8px;border-radius:7px}
 .efecto .copiar{position:static}
+.frases{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.frase{text-align:left;background:var(--negro);border:1.5px solid var(--linea);border-radius:14px;padding:14px 16px;color:#E8E8E8;font-size:14px;line-height:1.45;display:flex;flex-direction:column;gap:8px;transition:.15s}
+.frase:hover{border-color:var(--oro)}
+.frase small{color:var(--oro);font-weight:800;font-size:11px;letter-spacing:1.2px;text-transform:uppercase}
+.frase em{font-style:normal;align-self:flex-start;background:var(--oro);color:var(--negro);font-weight:800;font-size:12px;padding:6px 12px;border-radius:8px}
+.frase em.ok{background:#fff}
+@media(max-width:900px){.frases{grid-template-columns:1fr}}
 .recetas-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;align-items:start}
 .receta-v{background:var(--negro2);border:1px solid var(--linea);border-radius:18px;overflow:hidden}
 .receta-v.antes{border-style:dashed;opacity:.92}
@@ -350,7 +357,7 @@ footer strong{color:#fff;font-size:20px;display:block;margin-bottom:6px}
 
   <div class="slide">
    <div><h3>2. Le pides en <em>español</em></h3>
-    <p class="txt">Como le hablarías a tu editor. Mientras más claro, mejor sale. En el paso 3 la página te arma la instrucción completa.</p></div>
+    <p class="txt">Como le hablarías a tu editor. Mientras más claro, mejor sale. En el paso 3 tienes la instrucción para que él dirija todo.</p></div>
    <div class="lado-img"><div class="ventana"><div class="barra-v"><i></i><i></i><i></i><span>Claude Code</span></div>
     <div class="vsc" style="grid-template-columns:1fr"><div class="panel" style="border:0"><div class="chat">
      <div class="burbuja yo">Edita mis tomas como un reel que vende, con subtítulos palabra por palabra y zoom en las frases fuertes.</div>
@@ -390,66 +397,62 @@ footer strong{color:#fff;font-size:20px;display:block;margin-bottom:6px}
 
 <section class="bloque" id="director"><div class="contenedor">
  <span class="etiqueta">PASO 3</span>
- <h2>Tu director de cine</h2>
- <p class="intro">Responde 5 preguntas con clics. Al final te entrega la instrucción completa para pegar en Claude.</p>
+ <h2>La IA es tu director de cine</h2>
+ <p class="intro">Tú no escoges efectos ni música. Le dices qué quieres lograr y él decide todo lo creativo. Tu trabajo es revisar y decirle los detalles.</p>
  <div class="carrusel" data-carrusel="director">
   <div class="cabeza"><div class="puntos"></div><span class="cuenta"></span></div>
-  <div class="resumen" id="resumen"></div>
 
-  <div class="slide ancha"><div>
-   <h3>¿Empiezas con una <em>receta lista</em>?</h3>
-   <p class="txt">Escoge una y salta al final, o dale Siguiente para armarla a tu gusto.</p>
-   <div class="opciones" id="optRecetas"></div>
-  </div></div>
-
-  <div class="slide ancha"><div>
-   <h3>¿Qué video vas a <em>editar</em>?</h3>
-   <div class="opciones" data-grupo="tipo"></div>
-  </div></div>
-
-  <div class="slide ancha"><div>
-   <h3>¿Dónde lo vas a <em>publicar</em> y cuánto dura?</h3>
-   <p class="pregunta">Formato</p><div class="opciones" data-grupo="formato"></div>
-   <p class="pregunta" style="margin-top:22px">Duración final</p><div class="opciones" data-grupo="duracion"></div>
-  </div></div>
-
-  <div class="slide ancha"><div>
-   <h3>¿Qué <em>estilo</em> de dirección?</h3>
-   <p class="txt">Son fotogramas reales de la misma toma con cada look.</p>
-   <div class="opciones" data-grupo="estilo"></div>
-  </div></div>
-
-  <div class="slide ancha"><div>
-   <h3>¿Qué <em>efectos</em> quieres?</h3>
-   <p class="txt">Toca todos los que quieras. Los marcados ya vienen con la receta.</p>
-   <div class="opciones chicas" data-grupo="efectos"></div>
-  </div></div>
-
-  <div class="slide ancha"><div>
-   <h3>Los <em>últimos detalles</em></h3>
-   <p class="pregunta">Calidad</p><div class="opciones" data-grupo="calidad" style="max-width:520px"></div>
-   <p class="pregunta" style="margin-top:22px">¿Qué debe sentir quien lo ve? (opcional)</p>
-   <input type="text" id="sentir" placeholder="Ejemplo: que confíe en mí y quiera escribirme">
-   <p class="pregunta" style="margin-top:18px">Llamado a la acción (opcional)</p>
-   <input type="text" id="llamado" placeholder="Ejemplo: escríbeme VIDEO por mensaje directo">
-  </div></div>
-
-  <div class="slide ancha"><div class="final">
-   <div class="prompt-final">
-    <header><b>Tu instrucción para Claude</b><div style="display:flex;gap:8px"><button class="btn btn-linea" id="descargar" style="padding:8px 12px;font-size:13px">Descargar</button><button class="copiar" id="copiarDirector">Copiar todo</button></div></header>
-    <pre id="promptDirector"></pre>
-   </div>
+  <div class="slide">
    <div>
-    <h3 style="font-size:22px">Lo que va a pasar <em>después de pegarla</em></h3>
-    <div class="linea-tiempo">
-     <div><b>1</b><p><strong>Revisa y transcribe</strong><span>Mira tus tomas y escribe todo lo que dices.</span></p></div>
-     <div><b>2</b><p><strong>Te muestra el plan</strong><span>Lo lees y respondes «aprobado» o lo que quieras cambiar.</span></p></div>
-     <div><b>3</b><p><strong>Te muestra 10 segundos</strong><span>Si te gusta, respondes «sigue».</span></p></div>
-     <div><b>4</b><p><strong>Entrega el video final</strong><span>Queda en 05-exportados con su número de versión.</span></p></div>
-    </div>
-    <div class="vasbien"><b>✓</b><span><strong>Vas bien si</strong> después de pegarla Claude te muestra una tabla con los tiempos. Si empieza a cortar sin plan, escríbele «detente y muéstrame el plan».</span></div>
+    <h3>1. Dale el <em>control creativo</em></h3>
+    <p class="txt">Pon tus tomas en 01-material y 2 o 3 canciones en 02-musica. Llena las 3 líneas con tus palabras y pégalo en Claude.</p>
+    <div class="codigo largo"><button class="copiar">Copiar</button><span id="promptDirector"></span></div>
+    <div class="vasbien"><b>✓</b><span><strong>Vas bien si</strong> Claude te cuenta qué video vio en tus tomas, qué receta y qué música escogió, y arranca solo.</span></div>
    </div>
+   <div class="lado-img"><div class="ventana"><div class="barra-v"><i></i><i></i><i></i><span>Claude Code</span></div>
+    <div class="vsc" style="grid-template-columns:1fr"><div class="panel" style="border:0"><div class="chat">
+     <div class="burbuja yo">Quiero vender mi asesoría a dueños de negocio que pautan y no venden. Al final que me escriban MENSAJE…</div>
+     <div class="burbuja cl">Vi 9 tomas. Lo más fuerte que dices es «el problema no es el dinero»: ese es el gancho.<br>Escogí la receta <b>Vende</b>, la música más enérgica de tu carpeta, golpes en «y nada» y zoom en las 3 frases fuertes.<br><span class="v">Renderizando…</span></div>
+     <div class="burbuja cl">Listo: <b>reel_v1.mp4</b> (30 s). Si tuviera otra vuelta, le daría más aire al final.</div>
+    </div><div class="entrada">Escribe tu mensaje…</div></div></div></div></div>
+  </div>
+
+  <div class="slide">
+   <div>
+    <h3>2. Míralo y <em>dile los detalles</em></h3>
+    <p class="txt">Así salen los mejores videos: conversando. Para que te entienda a la primera, cada detalle lleva 3 cosas:</p>
+    <div class="linea-tiempo">
+     <div><b>1</b><p><strong>El segundo</strong><span>«En el segundo 4…»</span></p></div>
+     <div><b>2</b><p><strong>Lo que ves o escuchas</strong><span>«…el subtítulo tapa el logo de mi camiseta…»</span></p></div>
+     <div><b>3</b><p><strong>Lo que quieres</strong><span>«…súbelo encima de mi cabeza».</span></p></div>
+    </div>
+    <div class="vasbien"><b>✓</b><span><strong>Regla de oro:</strong> un detalle a la vez y «deja todo lo demás igual». Cada corrección sale como versión nueva.</span></div>
+   </div>
+   <div class="lado-img"><div class="ventana"><div class="barra-v"><i></i><i></i><i></i><span>Claude Code</span></div>
+    <div class="vsc" style="grid-template-columns:1fr"><div class="panel" style="border:0"><div class="chat">
+     <div class="burbuja yo">En el segundo 4 el subtítulo tapa el logo de mi camiseta. Súbelo encima de mi cabeza y deja todo lo demás igual.</div>
+     <div class="burbuja cl">Hecho. Lo moví arriba en todo el video para que no vuelva a pasar. <b>reel_v2.mp4</b></div>
+     <div class="burbuja yo">La música está muy suave al final. Que suba cuando aparece el llamado.</div>
+     <div class="burbuja cl">Listo, sube en el cierre. <b>reel_v3.mp4</b></div>
+    </div><div class="entrada">Escribe tu mensaje…</div></div></div></div></div>
+  </div>
+
+  <div class="slide ancha"><div>
+   <h3>Frases listas para <em>pedir detalles</em></h3>
+   <p class="txt">Toca la que necesites, cámbiale lo que está entre corchetes y pégala en Claude.</p>
+   <div class="filtros" id="filtrosFrases"></div>
+   <div class="frases" id="listaFrases"></div>
   </div></div>
+
+  <div class="slide">
+   <div>
+    <h3>3. Pídele que se <em>critique solo</em></h3>
+    <p class="txt">Antes de darlo por terminado, ponlo a revisar su propio video con ojos de director exigente. Encuentra cosas que tú no viste.</p>
+    <div class="codigo largo"><button class="copiar">Copiar</button><span id="promptCritica"></span></div>
+    <div class="vasbien"><b>✓</b><span><strong>Vas bien si</strong> te da una lista corta de detalles con su segundo exacto y cómo los arreglaría.</span></div>
+   </div>
+   <div class="lado-img"><div class="imagen"><img src="img/ef-revision.jpg" alt="Revisión de fotogramas"></div></div>
+  </div>
   <div class="pie-carrusel"><button class="btn btn-linea atras">← Anterior</button><span class="cuenta"></span><button class="btn btn-oro sigue">Siguiente →</button></div>
  </div>
 </div></section>
@@ -520,56 +523,6 @@ const MANUAL = `Crea un archivo CLAUDE.md en esta carpeta con el manual de edici
 
 Desde hoy aplica ese manual en cada video que editemos en esta carpeta.`;
 
-const OPCIONES = {
- tipo:{unico:true,items:{
-  venta:{n:'Reel que vende',e:'Gancho, problema, solución, llamado',img:'estilo-dinamico',b:'Video corto de venta. Estructura: gancho fuerte en los primeros 3 segundos, el problema que vive quien lo ve, la solución, una prueba y un solo llamado a la acción al final.'},
-  tutorial:{n:'Tutorial o clase',e:'Paso a paso fácil de seguir',img:'estilo-explicador',b:'Video educativo. Cada paso debe verse claro: títulos por paso, zoom a lo importante, ritmo que deje entender, cero relleno.'},
-  testimonio:{n:'Testimonio',e:'Un cliente cuenta su resultado',img:'estilo-documental',b:'Testimonio de cliente. Lo más fuerte que dice va de primero como gancho. Se respeta su voz y su emoción, sin cortar sus frases a la mitad.'},
-  podcast:{n:'Clips de podcast',e:'Los mejores momentos',img:'ef-clips',b:'Video largo de conversación. Encuentra los momentos que se sostienen solos (una idea completa, una frase fuerte o una historia) y conviértelos en clips independientes.'},
-  producto:{n:'Producto',e:'Mostrar y antojar',ico:'🛍️',b:'Video de producto. Detalles en primer plano, el producto en uso, beneficios en texto corto en pantalla y precio o llamado al final.'},
-  historia:{n:'Historia o vlog',e:'Que se sienta película',img:'estilo-cine',b:'Video narrativo. Inicio, tensión y final. La música acompaña la emoción y los cortes siguen la historia.'}}},
- formato:{unico:true,items:{
-  v916:{n:'Vertical 9:16',e:'Reels, TikTok, Shorts',ico:'📱',b:'Vertical 1080x1920 (9:16).'},
-  c11:{n:'Cuadrado 1:1',e:'Feed',ico:'⬛',b:'Cuadrado 1080x1080 (1:1).'},
-  h169:{n:'Horizontal 16:9',e:'YouTube',ico:'🖥️',b:'Horizontal 1920x1080 (16:9).'}}},
- duracion:{unico:true,items:{
-  d30:{n:'15 a 30 s',b:'Entre 15 y 30 segundos.'},
-  d60:{n:'30 a 60 s',b:'Entre 30 y 60 segundos.'},
-  d90:{n:'60 a 90 s',b:'Entre 60 y 90 segundos.'},
-  dlibre:{n:'Lo que pida',e:'Sin cortar ideas',b:'Lo que necesite el contenido, sin cortar ideas a la mitad y sin relleno.'}}},
- estilo:{unico:true,items:{
-  cine:{n:'Cine',e:'Cálido, profundo, con grano',img:'estilo-cine',b:'Look de película: piel cálida y sombras ligeramente frías, contraste suave, grano fino de película, viñeta sutil. Cortes que siguen la acción, transiciones casi invisibles, pausas que dejan respirar. Música ambiental u orquestal.'},
-  dinamico:{n:'Creador dinámico',e:'Rápido, zooms y sonidos',img:'estilo-dinamico',b:'Ritmo de creador: cortes cada 2 a 4 segundos, zooms de impacto en las frases fuertes, sonidos de efecto en transiciones y textos, subtítulos grandes palabra por palabra. Nada de tiempos muertos.'},
-  premium:{n:'Premium elegante',e:'Lujo, calma, limpio',img:'estilo-premium',b:'Look premium: color limpio y elegante, movimientos lentos y suaves, mucho espacio vacío, tipografía fina, transiciones con fundido. Menos efectos y más intención.'},
-  documental:{n:'Documental real',e:'Natural y creíble',img:'estilo-documental',b:'Look documental: color natural, cámara en mano respetada, cortes honestos, textos sobrios con nombre y contexto. Se siente real, no publicidad.'},
-  explicador:{n:'Explicador',e:'Gráficos y listas',img:'estilo-explicador',b:'Estilo explicador: gráficos simples que aparecen cuando se mencionan, flechas y resaltados, listas animadas, ritmo medio y todo muy legible.'}}},
- efectos:{unico:false,items:{
-  silencios:{n:'Sin silencios',img:'ef-silencios',b:'Quita silencios, respiraciones largas y muletillas ("eh", "este", "o sea"). Los cortes deben quedar limpios, sin saltos bruscos en la voz.'},
-  subs:{n:'Subtítulos',img:'ef-subtitulos',b:'Subtítulos animados que aparecen palabra por palabra, máximo 3 a 4 palabras en pantalla, letra gruesa con borde o sombra, palabras clave resaltadas con el color principal de mi marca.'},
-  zoom:{n:'Zoom de impacto',img:'ef-zoom',b:'Zoom de impacto (entre 110 % y 125 %) en las frases más fuertes, alternando con el plano normal para que parezca grabado con dos cámaras, y acercamientos lentos y suaves en los momentos de tensión. Siempre centrado en la cara.'},
-  color:{n:'Color de cine',img:'ef-color',b:'Corrección de color: piel natural, blancos limpios, contraste con profundidad. Que todas las tomas se vean del mismo color.'},
-  voz:{n:'Voz de estudio',img:'ef-voz',b:'Mejora la voz: quita ruido de fondo, ecualiza para que suene clara y cercana, comprime suave y normaliza el volumen.'},
-  musica:{n:'Música que baja',img:'ef-musica',b:'Pon música de fondo de la carpeta 02-musica. Que baje sola cuando hablo y suba en las pausas, sin tapar nunca la voz.'},
-  sfx:{n:'Sonidos de efecto',img:'ef-sfx',b:'Sonidos de efecto sutiles: un "whoosh" en transiciones y un "pop" suave cuando aparece un texto. Si no tengo sonidos en 02-musica, créalos o dime cuáles conseguir.'},
-  titulos:{n:'Títulos animados',img:'ef-nombre',b:'Títulos y textos animados con Remotion: entrada suave, en mi tipografía y mis colores. Incluye nombre y cargo de quien habla la primera vez que aparece.'},
-  broll:{n:'Tomas de apoyo',img:'ef-transiciones',b:'Usa las tomas de apoyo de la carpeta 03-broll cuando hable de algo que se pueda mostrar. Nunca tapes un momento de emoción en la cara.'},
-  reencuadre:{n:'Sigue la cara',img:'ef-reencuadre',b:'Si el video original es horizontal, reencuádralo siguiendo la cara para que siempre quede centrada en el formato final.'},
-  progreso:{n:'Barra de progreso',img:'ef-progreso',b:'Barra de progreso fina arriba, en el color de mi marca, para que la gente vea que falta poco y se quede.'},
-  gancho:{n:'Gancho 3 s',img:'estilo-dinamico',b:'Gancho visual en los primeros 3 segundos: la frase más fuerte del video de primero, con zoom y texto grande. Nada de logos ni saludos al inicio.'},
-  cierre:{n:'Cierre con llamado',ico:'📣',b:'Cierre con el llamado a la acción en pantalla, grande y claro, sostenido al menos 2 segundos.'},
-  portada:{n:'Portada',img:'ef-portada',b:'Crea la portada: escoge el fotograma con la mejor expresión, ponle un título de máximo 5 palabras y expórtala en el mismo formato del video.'}}},
- calidad:{unico:true,items:{
-  final:{n:'Final, máxima calidad',e:'Para publicar',b:'final'},
-  borrador:{n:'Borrador rápido',e:'Para revisar en minutos',b:'borrador'}}}
-};
-
-const RECETAS = {
- venta:{n:'Reel que vende',e:'Vertical, dinámico, 30 s',img:'estilo-dinamico',v:{tipo:'venta',formato:'v916',duracion:'d30',estilo:'dinamico',efectos:['silencios','subs','zoom','voz','musica','sfx','progreso','gancho','cierre','portada'],calidad:'final'}},
- podcast:{n:'Clips de podcast',e:'Los mejores momentos',img:'ef-clips',v:{tipo:'podcast',formato:'v916',duracion:'d60',estilo:'dinamico',efectos:['silencios','subs','zoom','reencuadre','voz','gancho','titulos','portada'],calidad:'final'}},
- premium:{n:'Video premium',e:'Elegante, de marca',img:'estilo-premium',v:{tipo:'historia',formato:'v916',duracion:'d60',estilo:'premium',efectos:['color','voz','musica','titulos','broll','cierre'],calidad:'final'}},
- tutorial:{n:'Tutorial claro',e:'Horizontal, explicador',img:'estilo-explicador',v:{tipo:'tutorial',formato:'h169',duracion:'dlibre',estilo:'explicador',efectos:['silencios','subs','zoom','voz','titulos','musica'],calidad:'final'}}
-};
-
 const EFECTOS = [
  {c:'Ritmo',img:'ef-silencios',n:'Cortes limpios sin silencios',d:'Quita silencios y muletillas sin que la voz salte.',h:'FFMPEG + WHISPER',p:`Toma el video de 01-material y quítale los silencios de más de 0,4 segundos, las respiraciones largas y las muletillas ("eh", "este", "o sea"). Deja 0,1 segundos de aire antes y después de cada frase para que la voz no salte. Antes de cortar muéstrame la lista de cortes con sus tiempos. Exporta como v1 en 05-exportados.`},
  {c:'Texto',img:'ef-subtitulos',n:'Subtítulos que retienen',d:'Palabra por palabra, con la palabra clave resaltada.',h:'WHISPER + REMOTION',p:`Pon subtítulos animados al video: transcribe con Whisper con tiempos por palabra y muéstrame la transcripción para corregirla antes de montarla. Estilo: máximo 3 a 4 palabras en pantalla, letra gruesa en blanco con sombra, la palabra que se está diciendo se resalta con el color principal de mi marca y entra con un pequeño rebote. Ubícalos en el centro bajo de la pantalla, fuera de la zona de los botones de la red social.`},
@@ -589,84 +542,49 @@ const EFECTOS = [
 ];
 
 /* director */
-const estado = Object.assign({...RECETAS.venta.v, efectos:[...RECETAS.venta.v.efectos], sentir:'', llamado:''}, JSON.parse(localStorage.getItem('dir-estado2')||'{}'));
-function tarjeta(it,on){
- const b=document.createElement('button'); b.type='button';
- b.className='opcion'+(it.img?'':' sin-img')+(on?' on':'');
- b.innerHTML=(it.img?`<img src="img/${it.img}.jpg" alt="" loading="lazy">`:(it.ico?`<div style="font-size:34px;margin-bottom:8px">${it.ico}</div>`:''))+`<div class="t"><strong>${it.n}</strong>${it.e?`<em>${it.e}</em>`:''}</div>`;
- return b;
-}
-function pintarGrupos(){
- document.querySelectorAll('[data-grupo]').forEach(cont=>{
-  const clave=cont.dataset.grupo, g=OPCIONES[clave]; cont.innerHTML='';
-  for(const [id,it] of Object.entries(g.items)){
-   const b=tarjeta(it,g.unico?estado[clave]===id:estado[clave].includes(id));
-   b.onclick=()=>{ if(g.unico) estado[clave]=id; else estado[clave]=estado[clave].includes(id)?estado[clave].filter(x=>x!==id):[...estado[clave],id]; pintarGrupos(); armarPrompt(); };
-   cont.appendChild(b);
-  }
+const DIRECTOR = `Eres mi director de cine y editor. Tú decides todo lo creativo: qué partes van y en qué orden, el gancho, la receta del kit, la música de 02-musica, los efectos de sonido, los zooms y los textos. Mi trabajo es decirte qué quiero lograr y revisar.
+
+Lo que vendo: [escribe qué vendes]
+A quién le hablo: [escribe quién es tu cliente]
+Qué deben hacer al final: [por ejemplo: escribirme VIDEO por mensaje directo]
+
+1. Mira y escucha todo mi material.
+2. Cuéntame en 5 líneas qué video ves ahí, cuál es el gancho, qué receta y qué música escogiste y por qué.
+3. Hazlo completo sin esperarme.
+4. Antes de entregármelo, revísalo tú como un director exigente (un fotograma cada 1,5 segundos) y corrige lo que no esté top.
+5. Entrégame el video y dime qué cambiarías si tuvieras otra vuelta.
+
+Después yo te digo los detalles. En cada corrección deja todo igual, cambia solo lo que te diga y guárdalo como versión nueva.`;
+const CRITICA = `Mira la última versión como un director exigente que la va a publicar hoy. Saca un fotograma cada segundo y escucha el audio completo. Dame máximo 5 detalles que le bajan el nivel, cada uno con su segundo exacto y cómo lo arreglarías: gancho, ritmo, textos que se pierden o tapan algo, cortes que saltan, música o sonidos que tapan la voz y el cierre. Después arréglalos todos en una versión nueva, sin tocar lo que ya está bien.`;
+const FRASES = [
+ {c:'Gancho',t:'Los primeros 3 segundos no me enganchan. Dame 3 opciones de gancho con frases que yo dije y usa la más fuerte.'},
+ {c:'Gancho',t:'Empieza directo con la frase más fuerte. Nada de saludos ni logos al inicio.'},
+ {c:'Ritmo',t:'Entre el segundo [X] y el [Y] se siente lento. Quita lo que sobra y deja todo lo demás igual.'},
+ {c:'Ritmo',t:'Está muy acelerado, no se entiende. Dale un poco más de aire entre frases.'},
+ {c:'Texto',t:'En el segundo [X] el subtítulo tapa [mi cara / el logo de mi camiseta]. Muévelo y que no vuelva a pasar en todo el video.'},
+ {c:'Texto',t:'En el segundo [X] el subtítulo dice "[palabra mal escrita]" y yo dije "[palabra correcta]". Corrígelo.'},
+ {c:'Texto',t:'Las palabras clave no resaltan. Ponlas más grandes y en el color de mi marca.'},
+ {c:'Audio',t:'La música tapa mi voz en el segundo [X]. Bájala cuando hablo.'},
+ {c:'Audio',t:'Esta música no va con el video. Prueba con otra de 02-musica y explícame por qué la escogiste.'},
+ {c:'Audio',t:'Pon un golpe de sonido cuando digo "[frase]".'},
+ {c:'Imagen',t:'Hazlo más de cine: color más cálido, un poco de grano y más contraste.'},
+ {c:'Imagen',t:'El zoom del segundo [X] se siente brusco. Hazlo suave.'},
+ {c:'Imagen',t:'Prueba el mismo video con la receta [cine / premium / explicador] y compáralo con este.'},
+ {c:'Cierre',t:'El llamado del final dura muy poco. Que se quede 3 segundos y que la palabra clave resalte.'},
+ {c:'Cierre',t:'Hazme 3 portadas con el fotograma de mejor expresión y un título de máximo 5 palabras.'}
+];
+let filtroFrase='Todas';
+function pintarFrases(){
+ const fz=document.getElementById('filtrosFrases'); fz.innerHTML='';
+ ['Todas',...new Set(FRASES.map(f=>f.c))].forEach(c=>{const b=document.createElement('button');b.className=c===filtroFrase?'on':'';b.textContent=c;b.onclick=()=>{filtroFrase=c;pintarFrases()};fz.appendChild(b)});
+ const l=document.getElementById('listaFrases'); l.innerHTML='';
+ FRASES.filter(f=>filtroFrase==='Todas'||f.c===filtroFrase).forEach(f=>{
+  const d=document.createElement('button'); d.className='frase'; d.type='button';
+  d.innerHTML=`<small>${f.c}</small><span>${f.t}</span><em>Copiar</em>`;
+  d.onclick=()=>copiar(f.t,d.querySelector('em'));
+  l.appendChild(d);
  });
- const r=document.getElementById('optRecetas'); r.innerHTML='';
- for(const rc of Object.values(RECETAS)){
-  const b=tarjeta(rc,false);
-  b.onclick=()=>{ Object.assign(estado,{...rc.v,efectos:[...rc.v.efectos]}); pintarGrupos(); armarPrompt(); CARRUSELES.director.ir(6); };
-  r.appendChild(b);
- }
- const O=OPCIONES;
- document.getElementById('resumen').innerHTML=`<span>Video: <b>${O.tipo.items[estado.tipo].n}</b></span><span>Formato: <b>${O.formato.items[estado.formato].n}</b></span><span>Duración: <b>${O.duracion.items[estado.duracion].n}</b></span><span>Estilo: <b>${O.estilo.items[estado.estilo].n}</b></span><span>Efectos: <b>${estado.efectos.length}</b></span>`;
 }
-function textoDirector(){
- const O=OPCIONES, s=estado, vertical=s.formato==='v916';
- const efectos=s.efectos.map((id,i)=>`${i+1}. ${O.efectos.items[id].b}`).join('\n')||'Ninguno especial. Decide tú lo que el video necesite.';
- const salida=s.calidad==='final'
-  ?`- Exporta en MP4 H.264, CRF 18, preset slow, yuv420p, con los mismos cuadros por segundo del original.
-- Audio AAC a 48 kHz y 320 kbps, volumen normalizado a -14 LUFS y picos por debajo de -1 dB.`
-  :`- Es un borrador: exporta en 720p, MP4 H.264, CRF 26, preset veryfast, para revisar rápido.
-- Audio AAC a 128 kbps.`;
- return `Actúa como director cinematográfico y editor senior de video. Tu trabajo es que este video se vea y se sienta de calidad profesional, como si lo hubiera editado una productora.
-
-EL MATERIAL
-El video principal está en 01-material. Música en 02-musica, tomas de apoyo en 03-broll y mi logo y marca en 04-marca. Si existe un CLAUDE.md con mi manual de marca, síguelo. Si falta algo que necesites, dímelo antes de empezar. Revisa también:
-- Si el llamado a la acción no está dicho en la grabación, avísame antes de editar.
-- Usa las tomas de apoyo solo si tienen que ver con lo que digo. Si no, no las uses.
-- El logo solo se usa si es PNG con fondo transparente y se ve bien sobre el video.
-
-EL VIDEO
-- Tipo: ${O.tipo.items[s.tipo].b}
-- Formato: ${O.formato.items[s.formato].b}
-- Duración: ${O.duracion.items[s.duracion].b}${s.sentir?`\n- Quien lo vea debe sentir: ${s.sentir}`:''}${s.llamado?`\n- Llamado a la acción: ${s.llamado}`:''}
-
-ESTILO DE DIRECCIÓN
-${O.estilo.items[s.estilo].b}
-
-EFECTOS
-${efectos}
-
-CÓMO VAS A TRABAJAR
-1. Revisa el material: duración, resolución, cuadros por segundo, rotación y calidad del audio. Transcribe con faster-whisper modelo small, en el procesador, sin texto de guía y con tiempos por palabra. Revisa que no falte la primera palabra de cada toma y muéstrame la transcripción.
-2. Antes de editar, muéstrame el plan: una tabla con segundo de inicio, segundo de fin, qué se ve, qué se escucha, qué efecto va y por qué. Marca cuál es el gancho. Espera mi visto bueno.
-3. Edita con FFmpeg (cortes, color, audio y exportación) y con Remotion (títulos, subtítulos animados y gráficos). Usa en cada parte lo que dé mejor resultado.
-4. Muéstrame primero una muestra de 10 segundos con la parte más difícil.
-5. Revisa tu propio trabajo antes de entregarme: saca fotogramas de cada corte y confirma que nada tape la cara, que los textos se lean, que no haya saltos raros y que el audio no se sature.
-6. Exporta la versión final.
-7. Entrégame el video, dónde quedó guardado y un resumen de 5 líneas de lo que hiciste.
-
-CALIDAD DE SALIDA
-${salida}${vertical?`\n- Zona segura: nada importante en el 15 % de arriba ni en el 20 % de abajo, porque ahí van los botones de la red social.`:''}
-- Los subtítulos nunca van encima de logos o estampados de la ropa. Si no hay espacio, ponles una caja oscura detrás.
-- La barra de progreso va arriba aunque esté en la zona segura.
-- Guarda cada versión con número (v1, v2, v3) en 05-exportados. Nunca toques el archivo original.
-- Si FFmpeg falla al escribir texto sobre el video, haz los textos con Remotion. Guarda las listas de archivos en UTF-8 (las rutas pueden tener tildes).
-
-Háblame siempre en español sencillo.`;
-}
-function armarPrompt(){
- document.getElementById('promptDirector').innerHTML=textoDirector().replace(/&/g,'&amp;').replace(/</g,'&lt;')
-  .replace(/^(EL MATERIAL|EL VIDEO|ESTILO DE DIRECCIÓN|EFECTOS|CÓMO VAS A TRABAJAR|CALIDAD DE SALIDA)$/gm,'<span class="t">$1</span>');
- localStorage.setItem('dir-estado2',JSON.stringify(estado));
-}
-document.getElementById('sentir').value=estado.sentir; document.getElementById('llamado').value=estado.llamado;
-document.getElementById('sentir').oninput=e=>{estado.sentir=e.target.value;armarPrompt()};
-document.getElementById('llamado').oninput=e=>{estado.llamado=e.target.value;armarPrompt()};
 
 /* efectos */
 let filtro='Todos';
@@ -694,7 +612,7 @@ function pintarAvance(){
 document.querySelectorAll('[data-carrusel]').forEach(c=>{
  const id=c.dataset.carrusel, slides=[...c.querySelectorAll('.slide')], puntos=c.querySelector('.puntos');
  const atras=c.querySelector('.atras'), sigue=c.querySelector('.sigue'), cuentas=c.querySelectorAll('.cuenta');
- const siguienteSeccion={instala:'#funciona',funciona:'#director',director:'#efectos'}[id];
+ const siguienteSeccion={instala:'#funciona',funciona:'#director',director:'#recetas'}[id];
  let i=0;
  slides.forEach((s,k)=>{const b=document.createElement('button');b.textContent=k+1;b.onclick=()=>ir(k);puntos.appendChild(b)});
  function ir(k){
@@ -725,8 +643,6 @@ function copiar(texto,boton){
  else{const ta=document.createElement('textarea');ta.value=texto;document.body.appendChild(ta);ta.select();document.execCommand('copy');ta.remove();listo()}
 }
 document.querySelectorAll('.codigo .copiar').forEach(b=>b.onclick=()=>{const c=b.parentElement.cloneNode(true);c.querySelector('.copiar').remove();copiar(c.textContent.trim(),b)});
-document.getElementById('copiarDirector').onclick=e=>copiar(textoDirector(),e.target);
-document.getElementById('descargar').onclick=()=>{const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([textoDirector()],{type:'text/plain'}));a.download='director-de-cine.txt';a.click()};
 function ponerSO(so){document.body.className='so-'+so;document.querySelectorAll('#selectorSO button').forEach(b=>b.classList.toggle('activo',b.dataset.so===so));localStorage.setItem('so',so)}
 document.querySelectorAll('#selectorSO button').forEach(b=>b.onclick=()=>ponerSO(b.dataset.so));
 ponerSO(localStorage.getItem('so')||(/Mac/.test(navigator.platform)?'mac':'win'));
@@ -736,7 +652,7 @@ document.querySelectorAll('#inicio,section.bloque').forEach(s=>obs.observe(s));
 
 document.getElementById('promptPreparar').textContent=PREPARAR;
 document.getElementById('promptManual').textContent=MANUAL;
-pintarGrupos(); armarPrompt(); pintarEfectos(); pintarAvance();
+document.getElementById('promptDirector').textContent=DIRECTOR;document.getElementById('promptCritica').textContent=CRITICA;pintarFrases(); pintarEfectos(); pintarAvance();
 /* recetas del kit */
 const RECETA_KIT = r => `Abre esta carpeta y sigue el CLAUDE.md al pie de la letra.
 Mis tomas están en 01-material y la música en 02-musica.
