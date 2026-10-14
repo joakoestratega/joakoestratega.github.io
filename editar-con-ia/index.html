@@ -592,20 +592,20 @@ Al final renderiza 3 segundos de prueba para que vea cómo quedó.`;
 
 
 /* director */
-const REFERENCIA = `Quiero que mi video tenga el estilo del video que está en 06-referencia. Estúdialo como un editor profesional que lo va a copiar cuadro por cuadro:
+const REFERENCIA = `Quiero que mi video tenga el estilo del video que está en 06-referencia. Estúdialo como un editor profesional que lo va a copiar cuadro por cuadro.
 
-1. Saca fotogramas cada 0,5 segundos y también justo antes y después de cada corte. Detecta los cortes con FFmpeg.
-2. Mide y escribe en ficha-referencia.md:
-- Subtítulos: fuente parecida, tamaño (% del alto), mayúsculas o no, color, borde, sombra o caja, posición, cuántas palabras por pantalla y cómo entran (compara fotogramas seguidos).
+1. Primero dime en una lista corta qué partes de ese estilo puede hacer el kit y cuáles no.
+2. Detecta los cortes con FFmpeg usando un umbral bajo y confírmalos mirando los fotogramas. Saca fotogramas cada 0,5 segundos y justo antes y después de cada corte.
+3. Mide y escribe en ficha-referencia.md:
+- Subtítulos: fuente parecida, tamaño (% del alto), mayúsculas o no, color, borde, sombra o caja, posición, palabras por pantalla y cómo entran (compara fotogramas seguidos).
+- Gancho y títulos: tamaño, caja, color, cuántas líneas y cuánto duran.
 - Ritmo: cuánto dura cada toma en promedio y en el gancho.
-- Zooms: cuánto y cada cuánto, suaves o de golpe.
-- Transiciones: tipo y duración en cuadros.
-- Color: contraste, saturación y tono de piel.
-- Sonido: música, golpes y whoosh en los cortes (busca los picos del audio).
-- Extras: barra de progreso, títulos, emojis, tarjetas.
-3. Crea recetas/mi-referencia.json copiando la receta del kit más parecida y ajustando los valores. Si algo del estilo no se puede hacer con el kit, dímelo.
-4. Edita mi material de 01-material con esa receta.
-5. Arma una comparación lado a lado (la referencia y mi video en los mismos segundos) y ajusta la receta hasta que se parezcan, máximo 3 vueltas.
+- Zooms y transiciones: cuánto, cada cuánto y de qué tipo.
+- Color: mídelo con números (brillo, contraste y saturación promedio). Si el tono de piel viene de la luz o del maquillaje, dímelo, porque eso no se edita.
+- Sonido: música, golpes y whoosh en los cortes (busca los picos del audio) y el volumen general.
+4. Crea recetas/mi-referencia.json partiendo de la receta del kit más parecida. Puedes ajustar edl.json (secciones, tarjetas, llamado) para parecerte; guarda antes una copia como edl.antes-referencia.json.
+5. Ajusta con un pedazo de 8 segundos (render.py --desde 0 --hasta 8) y arma una imagen lado a lado: la referencia arriba y mi video abajo en los mismos segundos. Máximo 3 vueltas.
+6. Cuando se parezcan, renderiza el video completo.
 
 Copia el estilo, no el contenido, la música ni la marca del otro video.`;
 const DIRECTOR = `Eres mi director de cine y editor. Tú decides todo lo creativo: qué partes van y en qué orden, el gancho, la receta del kit, la música de 02-musica, los efectos de sonido, los zooms y los textos. Mi trabajo es decirte qué quiero lograr y revisar.
