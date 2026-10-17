@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Prende tus campañas con IA</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--crema:#FBF7EE;--crema2:#F3ECDC;--negro:#0F0F14;--amarillo:#F8B400;--amarillo2:#FFF3CF;--blanco:#fff;--texto:#2a2a33;--suave:#6b6b75;--verde:#1f9d55;--rojo:#d64545;--borde:#E6DDC8}
+*{box-sizing:border-box}
+html,body{margin:0;overflow-x:hidden}
+body{background:var(--crema);color:var(--texto);font-family:Montserrat,Arial,sans-serif;font-size:18px;line-height:1.55}
+button{font-family:inherit}
+/* barra de arriba */
+.top{position:sticky;top:0;z-index:20;background:var(--crema);border-bottom:1px solid var(--borde)}
+.top .in{max-width:860px;margin:0 auto;padding:12px 16px;display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+.marca{font-weight:800;font-size:15px;margin-right:auto;color:var(--negro)}
+.marca span{background:var(--amarillo);padding:1px 6px;border-radius:4px}
+.so{display:flex;background:var(--blanco);border:1px solid var(--borde);border-radius:999px;padding:3px}
+.so button{background:none;border:0;color:var(--suave);font-weight:700;font-size:14px;padding:7px 16px;border-radius:999px;cursor:pointer}
+.so button.on{background:var(--negro);color:var(--blanco)}
+.etapas{max-width:860px;margin:0 auto;padding:0 16px 12px;display:flex;gap:6px}
+.etapas div{flex:1;height:8px;border-radius:9px;background:var(--crema2);position:relative}
+.etapas div.hecha{background:var(--amarillo)}
+.etapas div.actual{background:linear-gradient(90deg,var(--amarillo) var(--p,0%),var(--crema2) var(--p,0%))}
+.nomEtapa{max-width:860px;margin:0 auto;padding:0 16px 10px;font-size:13px;font-weight:700;color:var(--suave);display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap}
+/* tarjeta del paso */
+main{max-width:860px;margin:0 auto;padding:22px 16px 140px}
+.card{background:var(--blanco);border:1px solid var(--borde);border-radius:22px;padding:28px;box-shadow:0 6px 24px rgba(60,40,0,.06)}
+.cuenta{font-size:14px;font-weight:700;color:var(--suave);margin-bottom:6px}
+h1{font-size:clamp(26px,5vw,36px);line-height:1.15;margin:0 0 10px;color:var(--negro);font-weight:800}
+.que{font-size:19px;margin:0 0 4px}
+.que b{background:var(--amarillo2);padding:0 4px;border-radius:4px}
+ol.mini{margin:16px 0 0;padding-left:0;list-style:none;counter-reset:m}
+ol.mini li{counter-increment:m;position:relative;padding:8px 0 8px 46px;font-size:18px}
+ol.mini li::before{content:counter(m);position:absolute;left:0;top:6px;width:32px;height:32px;border-radius:50%;background:var(--negro);color:var(--amarillo);display:grid;place-items:center;font-weight:800;font-size:15px}
+kbd{display:inline-block;background:var(--blanco);border:1px solid #cfc6b2;border-bottom-width:3px;border-radius:6px;padding:0 8px;font:700 15px Montserrat;color:var(--negro);margin:0 2px}
+/* acciones */
+.copiar{display:flex;margin:16px 0 6px;border:2px solid var(--negro);border-radius:14px;overflow:hidden}
+.copiar code{flex:1;min-width:0;padding:14px 16px;font:16px Consolas,Menlo,monospace;background:#fff;color:var(--negro);overflow-x:auto;white-space:pre-wrap;word-break:break-word}
+.copiar button{border:0;background:var(--amarillo);color:var(--negro);font-weight:800;font-size:16px;padding:0 20px;cursor:pointer;min-width:120px}
+.copiar button.ok{background:var(--verde);color:#fff}
+.abrir{display:inline-flex;align-items:center;gap:10px;background:var(--negro);color:var(--blanco);text-decoration:none;font-weight:800;font-size:17px;padding:14px 22px;border-radius:14px;margin:14px 0 4px}
+.abrir:hover{background:#2a2a33}
+.ojo{background:var(--amarillo2);border-radius:12px;padding:12px 16px;margin:16px 0 0;font-size:16px}
+.ojo b{color:var(--negro)}
+/* dibujos */
+.dib{margin:20px 0 4px;border-radius:16px;overflow:visible;border:1px solid #d9d0bc;background:#eef0f4;position:relative}
+.dib .leyenda{border-radius:16px 16px 0 0;background:var(--crema2);font-size:13px;font-weight:700;color:var(--suave);padding:7px 12px}
+.ventana{margin:16px 16px 40px;border-radius:10px;overflow:visible;box-shadow:0 6px 18px rgba(0,0,0,.18);background:#fff}
+.ventana .barra{border-radius:10px 10px 0 0;background:#e9e9ee;padding:7px 10px;font-size:12px;color:#555;display:flex;gap:6px;align-items:center}
+.ventana .barra i{width:10px;height:10px;border-radius:50%;background:#c9c9cf;display:inline-block}
+.ventana .barra span{margin-left:8px;font-weight:600}
+.term{border-radius:0 0 10px 10px;background:#0c0c10;color:#e8e8e8;font:14px Consolas,Menlo,monospace;padding:14px;min-height:90px;white-space:pre-wrap}
+.term .v{color:#5fd38b}.term .a{color:var(--amarillo)}.term .g{color:#8a8a95}
+.web{padding:16px;font-size:14px;color:#333}
+.web .bt{display:inline-block;background:#1877f2;color:#fff;border-radius:6px;padding:8px 14px;font-weight:700;margin:4px 6px 4px 0}
+.web .bt.gris{background:#e4e6eb;color:#222}
+.web .campo{border:1px solid #ccd0d5;border-radius:6px;padding:8px 10px;margin:6px 0;background:#fff;color:#888}
+.web .fila{display:flex;justify-content:space-between;align-items:center;border:1px solid #e0e0e0;border-radius:8px;padding:9px 12px;margin:6px 0;font:14px Consolas,monospace;background:#fff}
+.chip{font:700 12px Montserrat;padding:4px 9px;border-radius:6px}
+.chip.auth{background:#e3bf86;color:#222}.chip.ok{background:#4bbf73;color:#fff}
+.aqui{position:relative;outline:4px solid var(--amarillo);outline-offset:3px;border-radius:8px;animation:pulso 1.4s infinite}
+.aqui::after{content:"👆 Aquí";position:absolute;right:-6px;bottom:-34px;background:var(--negro);color:var(--amarillo);font:800 12px Montserrat;padding:4px 8px;border-radius:6px;white-space:nowrap;z-index:2}
+@keyframes pulso{0%,100%{outline-color:var(--amarillo)}50%{outline-color:rgba(248,180,0,.35)}}
+.inicio{display:flex;gap:16px;padding:16px;align-items:flex-end}
+.menuWin{background:#f3f3f3;border-radius:10px;padding:12px;width:260px;box-shadow:0 6px 18px rgba(0,0,0,.18);font-size:13px}
+.menuWin .busca{background:#fff;border:2px solid #2b6fd6;border-radius:18px;padding:6px 12px;margin-bottom:10px;color:#222}
+.menuWin .res{display:flex;gap:10px;align-items:center;background:#dfe6f3;border-radius:8px;padding:8px}
+.icoPS{width:28px;height:28px;border-radius:6px;background:#012456;color:#fff;display:grid;place-items:center;font:700 13px Consolas}
+.icoTerm{width:28px;height:28px;border-radius:6px;background:#222;color:#fff;display:grid;place-items:center;font:700 13px Consolas}
+.teclas{font-size:14px;color:#333;padding:0 16px 16px}
+/* ayuda */
+.ayuda{margin-top:22px;border-top:2px dashed var(--borde);padding-top:14px}
+.ayuda>button{background:none;border:0;color:var(--rojo);font-weight:800;font-size:16px;cursor:pointer;padding:6px 0}
+.ayuda .caja{display:none;margin-top:8px}
+.ayuda.abierta .caja{display:block}
+.prob{background:#FFF7F5;border:1px solid #F3D3CC;border-radius:12px;padding:12px 14px;margin:8px 0;font-size:16px}
+.prob b{display:block;color:var(--rojo);margin-bottom:4px}
+/* formulario */
+.form{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:16px}
+.form label{display:flex;flex-direction:column;gap:6px;font-weight:700;font-size:15px;color:var(--negro)}
+.form label small{font-weight:600;color:var(--suave)}
+.form .full{grid-column:1/-1}
+.form input,.form select,.form textarea{background:#fff;border:2px solid var(--borde);color:var(--negro);border-radius:12px;padding:12px;font:16px Montserrat}
+.form input:focus,.form textarea:focus,.form select:focus{border-color:var(--amarillo);outline:none}
+.form textarea{min-height:70px;resize:vertical}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}
+.tabs button{background:#fff;border:2px solid var(--borde);border-radius:999px;padding:8px 16px;font-weight:700;font-size:15px;cursor:pointer}
+.tabs button.on{border-color:var(--negro);background:var(--negro);color:#fff}
+.lista{margin:14px 0 0;padding:0;list-style:none}
+.lista li{display:flex;gap:12px;align-items:center;padding:10px 0;border-top:1px solid var(--borde);font-size:17px}
+.lista li:first-child{border-top:0}
+.lista input{width:24px;height:24px;accent-color:var(--amarillo);flex:0 0 auto}
+/* botonera fija */
+.pie{position:fixed;left:0;right:0;bottom:0;background:rgba(251,247,238,.97);border-top:1px solid var(--borde);z-index:30}
+.pie .in{max-width:860px;margin:0 auto;padding:12px 16px;display:flex;gap:10px;align-items:center}
+.atras{background:#fff;border:2px solid var(--borde);color:var(--negro);border-radius:14px;padding:14px 18px;font-weight:700;font-size:16px;cursor:pointer}
+.sig{flex:1;background:var(--amarillo);border:0;color:var(--negro);border-radius:14px;padding:16px;font-weight:800;font-size:19px;cursor:pointer;box-shadow:0 4px 0 #c98f00}
+.sig:active{transform:translateY(2px);box-shadow:0 2px 0 #c98f00}
+.indice{background:none;border:0;color:var(--suave);font-weight:700;font-size:14px;cursor:pointer;text-decoration:underline}
+.mapa{display:none;position:fixed;inset:0;background:rgba(15,15,20,.45);z-index:40;padding:20px;overflow:auto}
+.mapa.on{display:block}
+.mapa .hoja{max-width:520px;margin:30px auto;background:#fff;border-radius:18px;padding:20px}
+.mapa h3{margin:14px 0 6px;font-size:14px;color:var(--suave);text-transform:uppercase;letter-spacing:.5px}
+.mapa a{display:block;padding:7px 10px;border-radius:8px;color:var(--negro);text-decoration:none;font-size:16px}
+.mapa a:hover{background:var(--crema)}
+.mapa a.hecho::before{content:"✓ ";color:var(--verde);font-weight:800}
+.mapa a.aquiEs{background:var(--amarillo2);font-weight:800}
+.final{text-align:center}
+.final .grande{font-size:64px}
+@media (max-width:640px){body{font-size:17px}.card{padding:20px}.form{grid-template-columns:1fr}.inicio{flex-direction:column;align-items:stretch}.menuWin{width:auto}.copiar{flex-direction:column}.copiar button{padding:12px}}
+</style>
+</head>
+<body>
+<div class="top">
+  <div class="in">
+    <div class="marca">Campañas con IA · <span>Joako Estratega</span></div>
+    <div class="so"><button data-elige="win">Windows</button><button data-elige="mac">Mac</button></div>
+  </div>
+  <div class="etapas" id="etapas"></div>
+  <div class="nomEtapa"><span id="nomEtapa"></span><button class="indice" id="verMapa">Ver todos los pasos</button></div>
+</div>
+
+<main><div class="card" id="card"></div></main>
+
+<div class="pie"><div class="in">
+  <button class="atras" id="atras">← Atrás</button>
+  <button class="sig" id="sig">Ya lo hice →</button>
+</div></div>
+
+<div class="mapa" id="mapa"><div class="hoja" id="hojaMapa"></div></div>
+
+<script>
+var SO='win';
+function W(win,mac){return SO==='mac'?mac:win}
+var VENTANA=function(){return W('PowerShell','Terminal')};
+var PEGAR=function(){return W('<kbd>Ctrl</kbd> + <kbd>V</kbd> (o clic derecho dentro de la ventanita)','<kbd>Cmd</kbd> + <kbd>V</kbd>')};
+
+/* ---------- dibujos ---------- */
+function dibAbrirVentana(){
+  return SO==='mac'
+  ? '<div class="dib"><div class="leyenda">Así se ve</div><div class="inicio"><div class="menuWin" style="border-radius:14px"><div class="busca">🔍 Terminal</div><div class="res aqui"><div class="icoTerm">&gt;_</div><b>Terminal</b></div></div></div><div class="teclas">Teclas: <kbd>Cmd</kbd> + <kbd>Espacio</kbd>, escribes <b>Terminal</b> y <kbd>Enter</kbd></div></div>'
+  : '<div class="dib"><div class="leyenda">Así se ve</div><div class="inicio"><div class="menuWin"><div class="busca">🔍 PowerShell</div><div class="res aqui"><div class="icoPS">&gt;_</div><b>Windows PowerShell</b></div></div></div><div class="teclas">Tecla <kbd>⊞ Windows</kbd>, escribes <b>PowerShell</b> y das clic en el resultado</div></div>';
+}
+function dibTerm(texto,titulo){return '<div class="dib"><div class="leyenda">Así se ve</div><div class="ventana"><div class="barra"><i></i><i></i><i></i><span>'+(titulo||VENTANA())+'</span></div><div class="term">'+texto+'</div></div></div>'}
+function dibWeb(url,html){return '<div class="dib"><div class="leyenda">Así se ve</div><div class="ventana"><div class="barra"><i></i><i></i><i></i><span>🔒 '+url+'</span></div><div class="web">'+html+'</div></div></div>'}
+
+/* ---------- pasos ---------- */
+var URL_KIT='https://joakoestratega.com/campanas-ia';
+var ETAPAS=['Prepárate','Instala','Pixel','Conecta Meta','Creativos','Campaña','Prender','Mejora'];
+function skill(nombre,que){return '<p class="que">Escribe esto en Claude y toca <kbd>Enter</kbd>:</p>'+copiar('/'+nombre)+(que||'')}
+function respuesta(){
+  var d=val('destino')==='whatsapp'?'whatsapp':'web';
+  return d+', '+Number(val('ppto')).toLocaleString('es-CO')+' por conjunto, '+val('paises')+', marca '+val('marca')+
+    (d==='web'?', link '+val('link'):'')+'. '+val('quien');
+}
+var P=[
+ {e:0,t:'Revisa que tengas todo',h:function(){return '<p class="que">Marca cada cosa que ya tienes. Si te falta algo, consíguelo primero.</p><ul class="lista">'+
+  '<li><input type="checkbox"> Un computador con internet</li>'+
+  '<li><input type="checkbox"> Una cuenta de <b>Claude</b> con plan Pro o Max <a href="https://claude.ai/upgrade" target="_blank">(ver planes)</a></li>'+
+  '<li><input type="checkbox"> Tu <b>cuenta publicitaria</b> de Meta con tarjeta para pagar</li>'+
+  '<li><input type="checkbox"> La <b>página de Facebook</b> de tu negocio</li>'+
+  '<li><input type="checkbox"> Tu <b>tienda</b> (por ejemplo Shopify) con el link del producto</li>'+
+  '<li><input type="checkbox"> Tus <b>creativos</b>: imágenes o videos de tus anuncios, ya terminados</li></ul>'}},
+
+ {e:1,t:'Abre la ventanita de órdenes',h:function(){return '<p class="que">Es una ventana donde le escribes órdenes al computador. Se llama <b>'+VENTANA()+'</b>.</p><ol class="mini">'+
+  W('<li>Toca la tecla <kbd>⊞ Windows</kbd> de tu teclado.</li><li>Escribe <b>PowerShell</b>.</li><li>Da clic en <b>Windows PowerShell</b>.</li>','<li>Toca <kbd>Cmd</kbd> + <kbd>Espacio</kbd> al mismo tiempo.</li><li>Escribe <b>Terminal</b>.</li><li>Toca <kbd>Enter</kbd>.</li>')+
+  '</ol>'+dibAbrirVentana()},
+  ayuda:function(){return [['No la encuentro',W('Da clic derecho en el botón de Windows (abajo a la izquierda) y escoge <b>Terminal</b> o <b>Windows PowerShell</b>.','Abre la carpeta <b>Aplicaciones</b> → <b>Utilidades</b> → <b>Terminal</b>.')]]}},
+
+ {e:1,t:'Pega la orden que instala todo',h:function(){return '<p class="que">Con una sola orden se instala Claude, las herramientas de campañas y la conexión con Meta.</p><ol class="mini"><li>Toca el botón amarillo <b>Copiar</b>.</li><li>Da clic dentro de la ventanita.</li><li>Pega con '+PEGAR()+'.</li><li>Toca <kbd>Enter</kbd> y espera unos minutos.</li></ol>'+
+  copiar(W('irm '+URL_KIT+'/instalar.ps1 | iex','curl -fsSL '+URL_KIT+'/instalar.sh | bash'))+
+  dibTerm('== Campañas con IA - Joako Estratega ==\n1/3 Instalando Claude Code...\n2/3 Instalando los skills de campañas...\n3/3 Conectando Meta...\n\n<span class="v">LISTO. Ahora:</span>\n  1. Cierra esta ventana y abre una nueva.')+
+  '<div class="ojo">Sabes que terminó cuando dice <b>LISTO</b>.</div>'},
+  ayuda:function(){return [
+   ['Sale un error rojo que dice que los scripts están deshabilitados',SO==='win'?'Copia esto, pégalo, toca <kbd>Enter</kbd>, escribe <b>S</b> y toca <kbd>Enter</kbd>. Después vuelve a pegar la orden de instalar.'+copiar('Set-ExecutionPolicy -Scope CurrentUser RemoteSigned'):'Revisa que copiaste la orden completa y vuelve a pegarla.'],
+   ['No pasa nada cuando pego','Da clic dentro de la ventanita antes de pegar. En Windows también puedes pegar con clic derecho.']]}},
+
+ {e:1,t:'Abre Claude e inicia sesión',h:function(){return '<ol class="mini"><li>Cierra la ventanita con la <b>X</b> y ábrela otra vez.</li><li>Copia, pega y toca <kbd>Enter</kbd>:</li></ol>'+copiar('claude')+
+  '<ol class="mini" style="counter-reset:m 2"><li>Si te hace preguntas, solo toca <kbd>Enter</kbd>.</li><li>Se abre tu navegador: entra con tu cuenta de Claude y da clic en <b>Autorizar</b>.</li><li>Vuelve a la ventanita.</li></ol>'+
+  dibTerm('<span class="a">✻ Welcome to Claude Code!</span>\n\n<span class="g">&gt;</span> <span class="g">Escribe aquí lo que quieres…</span>')+
+  '<div class="ojo">Cuando ves <b>Welcome to Claude Code</b>, Claude está listo. <b>No cierres esta ventana</b>: aquí vas a trabajar el resto de la guía.</div>'},
+  ayuda:[['Dice "claude no se reconoce" o "command not found"','Cierra la ventanita, ábrela otra vez y vuelve a escribir <b>claude</b>. Si sigue igual, reinicia el computador.'],
+         ['Me pide pagar','Claude Code funciona con los planes Pro o Max. El plan gratis no sirve.']]},
+
+ {e:2,t:'¿Ya tienes pixel?',h:function(){return '<p class="que">El pixel es un pedacito de código que le cuenta a Meta <b>quién compra</b> en tu tienda. Sin él, Meta no sabe a quién buscar.</p><div class="ojo"><b>Si ya tienes un pixel funcionando</b>, toca <b>Ver todos los pasos</b> arriba y salta a <b>Conecta Meta</b>. No crees otro.</div>'}},
+
+ {e:2,t:'Abre el lugar donde viven los pixeles',h:function(){return '<ol class="mini"><li>Toca el botón negro.</li><li>Da clic en el botón azul <b>Conectar orígenes de datos</b>.</li></ol>'+
+  abrir('https://business.facebook.com/events_manager2/','Abrir Administrador de eventos')+
+  dibWeb('business.facebook.com/events_manager','<b>Administrador de eventos</b><br><br><span class="bt aqui">+ Conectar orígenes de datos</span>')}},
+
+ {e:2,t:'Crea tu pixel',h:function(){return '<ol class="mini"><li>Escoge <b>Web</b> y da clic en <b>Conectar</b>.</li><li>Escribe el nombre de tu negocio.</li><li>Da clic en <b>Crear</b>.</li></ol>'+
+  dibWeb('business.facebook.com/events_manager','<b>¿Qué quieres conectar?</b><div class="fila aqui">🌐 Web</div><div class="fila">📱 App</div><div class="fila">🏬 Sin conexión</div><br><span class="bt">Conectar</span>')}},
+
+ {e:2,t:'Conecta el pixel a tu tienda',h:function(){return '<p class="que">Toca el nombre de tu tienda:</p><div class="tabs" id="tabsTienda"><button data-t="shopify">Shopify</button><button data-t="woo">WooCommerce</button><button data-t="otra">Otra</button></div><div id="tienda"></div>'},
+  despues:function(){var cont={
+   shopify:'<ol class="mini"><li>Toca el botón negro.</li><li>Da clic en <b>Instalar</b>.</li><li>Entra con tu Facebook y escoge el pixel que acabas de crear.</li></ol>'+abrir('https://apps.shopify.com/facebook','Abrir la app de Meta en Shopify')+'<div class="ojo">Listo: Shopify le cuenta solo a Meta cada visita, cada carrito y cada compra.</div>',
+   woo:'<ol class="mini"><li>En tu WordPress ve a <b>Plugins</b> → <b>Añadir nuevo</b>.</li><li>Busca <b>Facebook for WooCommerce</b> y da clic en <b>Instalar</b> y <b>Activar</b>.</li><li>Conéctalo con tu Facebook y escoge tu pixel.</li></ol>'+abrir('https://wordpress.org/plugins/facebook-for-woocommerce/','Ver el plugin'),
+   otra:'<p>Pídeselo a Claude. Copia esto, cambia lo que está en mayúsculas y pégalo en Claude:</p>'+copiar('Responde en español. Instala el pixel de Meta número NUMERO_DEL_PIXEL en mi página web que está en LA_CARPETA_O_EL_LINK. Pon el evento Purchase solo en la página de gracias después del pago. Explícame paso a paso.')};
+   function pon(k){guardar('tienda',k);document.querySelectorAll('#tabsTienda button').forEach(function(b){b.classList.toggle('on',b.dataset.t===k)});document.getElementById('tienda').innerHTML=cont[k];activarCopiar()}
+   document.querySelectorAll('#tabsTienda button').forEach(function(b){b.onclick=function(){pon(b.dataset.t)}});pon(leer('tienda')||'shopify')}},
+
+ {e:2,t:'Prueba que tu pixel funciona',h:function(){return '<ol class="mini"><li>En el Administrador de eventos, da clic en tu pixel.</li><li>Arriba, da clic en <b>Probar eventos</b>.</li><li>Abre tu tienda en otra pestaña.</li><li>Vuelve: debe aparecer <b>PageView</b>.</li></ol>'+
+  dibWeb('business.facebook.com/events_manager','<span class="bt gris">Información general</span><span class="bt aqui">Probar eventos</span><br><br><div class="fila">PageView <span class="chip ok">Recibido</span></div>')},
+  ayuda:[['No aparece nada','Espera un minuto y recarga tu tienda. Si tienes un bloqueador de anuncios, apágalo. En Shopify revisa que escogiste el pixel correcto.']]},
+
+ {e:3,t:'Abre la lista de conexiones',h:function(){return '<p class="que">La conexión oficial de Meta ya quedó instalada. Solo falta entrar con tu Facebook.</p><ol class="mini"><li>En Claude escribe <b>/mcp</b> y toca <kbd>Enter</kbd>.</li></ol>'+copiar('/mcp')+
+  dibTerm('<b>MCP servers</b>\n\n  <span class="a">❯ meta-ads</span>            <span class="a">⚠ needs authentication</span>','Claude')},
+  ayuda:[['Dice "Connecting…" y no avanza','Espera 20 segundos, toca <kbd>Esc</kbd> y vuelve a escribir <b>/mcp</b>.'],
+         ['No veo meta-ads en la lista','Sal de Claude con <kbd>Ctrl</kbd> + <kbd>C</kbd> dos veces, pega esto, toca <kbd>Enter</kbd> y vuelve a abrir Claude:'+copiar('claude mcp add --scope user --transport http meta-ads https://mcp.facebook.com/ads')]]},
+
+ {e:3,t:'Entra con tu Facebook',h:function(){return '<ol class="mini"><li>Con las flechas <kbd>↓</kbd> <kbd>↑</kbd> ponte en <b>meta-ads</b> y toca <kbd>Enter</kbd>.</li><li>Ponte en <b>Authenticate</b> y toca <kbd>Enter</kbd>.</li><li>Se abre Facebook: da clic en <b>Continuar</b>.</li><li>Marca <b>tu negocio</b>, tu cuenta publicitaria y tu página, y da clic en <b>Guardar</b>.</li><li>Vuelve a Claude: al lado de meta-ads dice <b>connected</b>. Toca <kbd>Esc</kbd>.</li></ol>'+
+  dibWeb('facebook.com','<b>Claude quiere acceder a tus anuncios</b><br><br><div class="campo">✔ Tu negocio</div><div class="campo">✔ Tu cuenta publicitaria</div><div class="campo">✔ Tu página</div><br><span class="bt aqui">Guardar</span>')},
+  ayuda:[['No se abrió Facebook','Mira si se abrió una pestaña nueva en tu navegador. Si no, en la ventanita aparece un link: cópialo y ábrelo.'],
+         ['No salen mis cuentas después','Al entrar con Facebook no marcaste el negocio o la cuenta. En <b>/mcp</b> → meta-ads escoge desconectar y vuelve a entrar marcando todo.']]},
+
+ {e:4,t:'Junta tus creativos en una carpeta',h:function(){return '<ol class="mini"><li>En tu escritorio crea una carpeta llamada <b>mis-anuncios</b>: clic derecho → '+W('<b>Nuevo</b> → <b>Carpeta</b>','<b>Nueva carpeta</b>')+'.</li><li>Mete ahí las imágenes y los videos de tus anuncios.</li><li>Si un video tiene portada, ponle el mismo nombre del video terminado en <b>-portada</b> (ejemplo: <b>video1-portada.jpg</b>).</li></ol>'+
+  dibWeb('Escritorio','<div class="fila aqui">📁 mis-anuncios</div><div style="padding:6px 12px;color:#666">🖼️ anuncio1.jpg &nbsp; 🖼️ anuncio2.jpg &nbsp; 🎬 video1.mp4 &nbsp; 🖼️ video1-portada.jpg</div>')+
+  '<div class="ojo">Imágenes en JPG o PNG y videos en MP4 o MOV. Videos de hasta 100 MB.</div>'}},
+
+ {e:4,t:'Claude los ordena y los sube',h:function(){return skill('meta-creativos','<ol class="mini"><li>Claude te pregunta en qué carpeta están y qué producto vendes. Contéstale.</li><li>Te muestra una tabla: los creativos <b>agrupados de a 3</b> (C01, C02…) con su nombre nuevo. Si estás de acuerdo, escribe <b>sí</b>.</li><li>Claude los sube a tu cuenta de Meta. Cuando pregunte si puede usar meta-ads, escoge <b>Yes</b>.</li></ol>')+
+  dibTerm('<span class="a">●</span> Así los voy a agrupar:\n  C01  C01-A1-antes-despues.jpg   antes y después\n  C01  C01-A2-no-se-nota.jpg      no se nota\n  C01  C01-A3-envio-gratis.jpg    oferta\n  C02  C02-A1-testimonio.mp4      testimonio\n\n¿Los renombro y los subo?','Claude')+
+  '<div class="ojo">Cada grupo de 3 va a ser un conjunto de tu campaña. Así, después sabes qué creativo vende.</div>'},
+  ayuda:[['Dice que no encuentra la carpeta','Dale la ruta completa. En Windows: clic derecho en la carpeta → <b>Copiar como ruta de acceso</b>, y pégala en Claude.'],
+         ['Un video no sube','Revisa que pese menos de 100 MB. Si pesa más, pídele a Claude que te diga cómo hacerlo más liviano.']]},
+
+ {e:5,t:'Prepara tus respuestas',h:function(){return '<p class="que">Claude te va a hacer estas preguntas. Llénalas aquí y en el siguiente paso te queda lista la respuesta para pegar.</p><div class="form">'+
+  '<label>¿A dónde llevamos a la gente?<select id="f-destino"><option value="web">A mi tienda (compran en la web)</option><option value="whatsapp">A mi WhatsApp</option></select></label>'+
+  campo('ppto','¿Cuánto gastar al día en cada conjunto?','20000','number','En la moneda de tu cuenta')+
+  campo('paises','¿En qué países?','Colombia')+campo('marca','Marca y año (para el nombre)','FAJAS2026')+
+  '<label class="full">Link del producto <small>Solo si es a la tienda</small><input id="f-link" placeholder="https://tutienda.com/faja"></label>'+
+  '<label class="full">¿A quién le vendes y qué problema le resuelves?<textarea id="f-quien" placeholder="Le vendo fajas a mujeres que quieren verse bien con su ropa sin que la faja se note"></textarea></label></div>'}},
+
+ {e:5,t:'Pídele la campaña a Claude',h:function(){return skill('meta-prospeccion','<ol class="mini"><li>Cuando te pregunte, pega tu respuesta:</li></ol>'+copiar(respuesta())+
+  '<ol class="mini" style="counter-reset:m 1"><li>Te muestra 3 textos y 3 títulos. Escoge escribiendo, por ejemplo, <b>T1, A</b>.</li><li>Te muestra <b>el plan</b>: la campaña, un conjunto por grupo y un anuncio por creativo. Si está bien, escribe <b>sí</b>.</li></ol>')+
+  dibTerm('<span class="a">Plan</span>\nCampaña: 🔵 F2(001) | FAJAS2026 | FAJA | PROSPECCION | CO\n  C01 | BROAD | IG-FB   $20.000/día   3 anuncios\n  C02 | BROAD | IG-FB   $20.000/día   1 anuncio\nSin los que ya compraron. Todo queda apagado.','Claude')+
+  '<div class="ojo">Todo se crea <b>apagado</b>. No se gasta un peso hasta que tú lo prendas.</div>'},
+  ayuda:[['Error de pago o cuenta deshabilitada','Revisa tu tarjeta en Meta: <a href="https://adsmanager.facebook.com/billing_hub/" target="_blank">abrir facturación</a>.'],
+         ['Elegí WhatsApp','Antes de prender, abre la vista previa de un anuncio y toca el botón de WhatsApp. El número que abre es al que te van a escribir: lo define tu página de Facebook.']]},
+
+ {e:6,t:'Mira tu campaña',h:function(){return '<ol class="mini"><li>Toca el botón negro.</li><li>Busca tu campaña: empieza por <b>🔵 F2</b> y tiene tu marca.</li><li>Abre cada anuncio y mira la vista previa con el ojo 👁.</li></ol>'+
+  abrir('https://adsmanager.facebook.com/adsmanager/manage/campaigns','Abrir mis campañas')+
+  dibWeb('adsmanager.facebook.com','<div class="fila"><span>◯ 🔵 F2(001) | FAJAS2026 | FAJA | PROSPECCION</span><span class="chip auth">Apagada</span></div>')}},
+
+ {e:6,t:'Préndela',h:function(){return '<ol class="mini"><li>Da clic en el interruptor a la izquierda del nombre. Se pone azul.</li></ol>'+
+  dibWeb('adsmanager.facebook.com','<div class="fila"><span><span class="aqui" style="display:inline-block;width:34px;height:18px;border-radius:9px;background:#1877f2;vertical-align:middle"></span> &nbsp;🔵 F2(001) | FAJAS2026 | FAJA | PROSPECCION</span><span class="chip ok">En revisión</span></div>')+
+  '<p class="que" style="margin-top:20px">O pídeselo a Claude:</p>'+copiar('Préndela')+
+  '<div class="ojo">Meta revisa los anuncios antes de mostrarlos: de minutos a unas horas. <b>Espera 3 días</b> antes de juzgarla.</div>'}},
+
+ {e:7,t:'A los 3 días: mira cómo va',h:function(){return skill('meta-analisis','<ol class="mini"><li>Dile qué periodo quieres revisar y cuánto puedes pagar como máximo por una venta.</li><li>Claude trae los datos y abre un <b>informe</b> en tu navegador: arriba el resumen y abajo el detalle por conjunto y por creativo.</li></ol>')+
+  '<div class="ojo">Primero mira las <b>ventas</b>. Si todavía no hay, el informe te dice en qué paso se cae la gente: el anuncio, la página o el pago.</div>'}},
+
+ {e:7,t:'Apaga lo que no vende',h:function(){return skill('meta-apagar','<ol class="mini"><li>Claude te muestra los creativos perdedores y por qué.</li><li>Dile cuáles apagar. No apaga nada sin tu sí.</li></ol>')}},
+
+ {e:7,t:'Escala lo que vende',h:function(){return skill('meta-escalar','<ol class="mini"><li>Claude toma los creativos que <b>ya venden</b> y los junta de a 3 en una campaña nueva de consolidación.</li><li>Dile cuánto quieres invertir al día en toda la campaña.</li><li>Revisa el plan y escribe <b>sí</b>.</li></ol>')+
+  '<div class="ojo">Para subir el presupuesto después: <b>máximo un 20% cada 3 días</b>. Subirlo de golpe desordena lo que ya funciona.</div>'}},
+
+ {e:7,t:'Véndele a quien casi compra',h:function(){return skill('meta-remarketing','<ol class="mini"><li>Claude crea tus públicos: quienes visitaron tu tienda, dejaron el carrito o empezaron a pagar.</li><li>Arma una campaña solo para ellos, sin los que ya compraron.</li><li>Dile cuánto invertir al día, revisa el plan y escribe <b>sí</b>.</li></ol>')+
+  '<div class="ojo">Los públicos se llenan con el tiempo. Si tu tienda tiene pocas visitas, empieza por prospección.</div>'}},
+
+ {e:7,t:'¡Lo lograste! 🎉',fin:true,h:function(){return '<div class="final"><div class="grande">🎉</div><p class="que">Ya sabes crear, prender, medir y escalar campañas hablándole a la IA.</p><p>¿Quieres que te ayudemos con la estrategia?</p>'+abrir('https://joakoestratega.com','joakoestratega.com')+'</div>'}}
+];
+
+/* ---------- utilidades ---------- */
+function guardar(k,v){try{localStorage.setItem('cm-'+k,v)}catch(e){}}
+function leer(k){try{return localStorage.getItem('cm-'+k)}catch(e){return null}}
+function esc(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;')}
+function copiar(t){return '<div class="copiar"><code>'+esc(t)+'</code><button>Copiar</button></div>'}
+function abrir(u,t){return '<a class="abrir" href="'+u+'" target="_blank">'+t+' ↗</a>'}
+function campo(id,et,ph,tipo,ayuda){return '<label>'+et+(ayuda?' <small>'+ayuda+'</small>':'')+'<input id="f-'+id+'" placeholder="'+ph+'"'+(tipo?' type="'+tipo+'"':'')+'></label>'}
+function val(id){var g=leer('f-'+id);var ph={destino:'web',link:'https://tutienda.com/faja',ppto:'20000',paises:'Colombia',marca:'FAJAS2026',quien:'Le vendo fajas a mujeres que quieren verse bien con su ropa sin que la faja se note'};return (g&&g.trim())||ph[id]}
+function activarCopiar(){document.querySelectorAll('.copiar').forEach(function(c){var b=c.querySelector('button');b.onclick=function(){
+  var t=c.querySelector('code').textContent;var ok=function(){b.textContent='¡Copiado! ✓';b.classList.add('ok');setTimeout(function(){b.textContent='Copiar';b.classList.remove('ok')},1800)};
+  if(navigator.clipboard&&window.isSecureContext){navigator.clipboard.writeText(t).then(ok,viejo)}else viejo();
+  function viejo(){var a=document.createElement('textarea');a.value=t;document.body.appendChild(a);a.select();try{document.execCommand('copy')}catch(e){}a.remove();ok()}}})}
+
+/* ---------- pantalla ---------- */
+var i=Math.min(Number(leer('paso')||0),P.length-1);
+var hp=location.hash.match(/paso-(\d+)/);if(hp)i=Math.min(Number(hp[1])-1,P.length-1);
+function pintar(){
+  var p=P[i];var titulo=typeof p.t==='function'?p.t():p.t;
+  var ay=typeof p.ayuda==='function'?p.ayuda():p.ayuda;
+  var h='<div class="cuenta">Paso '+(i+1)+' de '+P.length+'</div><h1>'+titulo+'</h1>'+p.h();
+  if(ay&&ay.length){h+='<div class="ayuda"><button>🙋 ¿No te salió igual? Toca aquí</button><div class="caja">'+ay.map(function(a){return '<div class="prob"><b>'+a[0]+'</b>'+a[1]+'</div>'}).join('')+'</div></div>'}
+  var card=document.getElementById('card');card.innerHTML=h;
+  var ab=card.querySelector('.ayuda>button');if(ab)ab.onclick=function(){ab.parentNode.classList.toggle('abierta')};
+  if(p.despues)p.despues();
+  // formulario
+  card.querySelectorAll('[id^="f-"]').forEach(function(e){var k=e.id.slice(2);var g=leer('f-'+k);if(g)e.value=g;e.oninput=e.onchange=function(){guardar('f-'+k,e.value)}});
+  activarCopiar();
+  // barra de etapas
+  var et=document.getElementById('etapas');et.innerHTML='';
+  ETAPAS.forEach(function(n,k){var d=document.createElement('div');var enE=P.filter(function(x){return x.e===k});var pos=enE.indexOf(p);
+    if(k<p.e||p.fin)d.className='hecha';else if(k===p.e){d.className='actual';d.style.setProperty('--p',((pos+1)/enE.length*100)+'%')}et.appendChild(d)});
+  document.getElementById('nomEtapa').textContent='Parte '+(p.e+1)+' de '+ETAPAS.length+' · '+ETAPAS[p.e];
+  document.getElementById('atras').style.visibility=i===0?'hidden':'visible';
+  document.getElementById('sig').textContent=p.fin?'Volver a empezar ↺':(i===0?'Tengo todo, empecemos →':'Ya lo hice →');
+  guardar('paso',i);window.scrollTo(0,0);
+}
+document.getElementById('sig').onclick=function(){var vis=JSON.parse(leer('hechos')||'[]');if(vis.indexOf(i)<0)vis.push(i);guardar('hechos',JSON.stringify(vis));i=P[i].fin?0:i+1;pintar()};
+document.getElementById('atras').onclick=function(){if(i>0){i--;pintar()}};
+function so(s){SO=s;document.querySelectorAll('[data-elige]').forEach(function(b){b.classList.toggle('on',b.dataset.elige===s)});guardar('so',s);pintar()}
+document.querySelectorAll('[data-elige]').forEach(function(b){b.onclick=function(){so(b.dataset.elige)}});
+// mapa de pasos
+document.getElementById('verMapa').onclick=function(){
+  var vis=JSON.parse(leer('hechos')||'[]');var h='<b style="font-size:18px">Todos los pasos</b>';
+  ETAPAS.forEach(function(n,k){h+='<h3>'+(k+1)+'. '+n+'</h3>';P.forEach(function(p,j){if(p.e===k){var t=typeof p.t==='function'?p.t():p.t;h+='<a href="#" data-j="'+j+'" class="'+(vis.indexOf(j)>=0?'hecho ':'')+(j===i?'aquiEs':'')+'">'+t+'</a>'}})});
+  h+='<button class="atras" style="margin-top:14px;width:100%" id="cerrarMapa">Cerrar</button>';
+  var m=document.getElementById('mapa');document.getElementById('hojaMapa').innerHTML=h;m.classList.add('on');
+  m.querySelectorAll('a[data-j]').forEach(function(a){a.onclick=function(ev){ev.preventDefault();i=Number(a.dataset.j);m.classList.remove('on');pintar()}});
+  document.getElementById('cerrarMapa').onclick=function(){m.classList.remove('on')};
+};
+document.getElementById('mapa').onclick=function(e){if(e.target.id==='mapa')this.classList.remove('on')};
+so(leer('so')||(/Mac|iPhone|iPad/i.test(navigator.platform||navigator.userAgent)?'mac':'win'));
+</script>
+</body>
+</html>
