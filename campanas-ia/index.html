@@ -51,6 +51,15 @@ kbd{display:inline-block;background:var(--blanco);border:1px solid #cfc6b2;borde
 .ventana .barra{border-radius:10px 10px 0 0;background:#e9e9ee;padding:7px 10px;font-size:12px;color:#555;display:flex;gap:6px;align-items:center}
 .ventana .barra i{width:10px;height:10px;border-radius:50%;background:#c9c9cf;display:inline-block}
 .ventana .barra span{margin-left:8px;font-weight:600}
+.vs{display:flex;min-height:230px;background:#1f1f1f;border-radius:0 0 10px 10px;overflow:hidden;font:13px Consolas,Menlo,monospace}
+.vs .exp{width:30%;background:#181818;color:#ccc;padding:10px;font:12px Montserrat}
+.vs .exp b{display:block;color:#888;font-size:11px;margin-bottom:6px}
+.vs .ed{flex:1;background:#1f1f1f}
+.vs .panel{width:48%;background:#252526;border-left:1px solid #333;color:#e8e8e8;display:flex;flex-direction:column}
+.vs .panel .cab{padding:7px 10px;border-bottom:1px solid #333;font:700 12px Montserrat;color:#f3f3f3}
+.vs .panel .chat{flex:1;padding:10px;white-space:pre-wrap}
+.vs .panel .caja{margin:8px;border:1px solid #555;border-radius:6px;padding:7px;color:#999}
+.vs .v{color:#5fd38b}.vs .a{color:var(--amarillo)}.vs .g{color:#8a8a95}
 .term{border-radius:0 0 10px 10px;background:#0c0c10;color:#e8e8e8;font:14px Consolas,Menlo,monospace;padding:14px;min-height:90px;white-space:pre-wrap}
 .term .v{color:#5fd38b}.term .a{color:var(--amarillo)}.term .g{color:#8a8a95}
 .web{padding:16px;font-size:14px;color:#333}
@@ -143,13 +152,14 @@ function dibAbrirVentana(){
   ? '<div class="dib"><div class="leyenda">Así se ve</div><div class="inicio"><div class="menuWin" style="border-radius:14px"><div class="busca">🔍 Terminal</div><div class="res aqui"><div class="icoTerm">&gt;_</div><b>Terminal</b></div></div></div><div class="teclas">Teclas: <kbd>Cmd</kbd> + <kbd>Espacio</kbd>, escribes <b>Terminal</b> y <kbd>Enter</kbd></div></div>'
   : '<div class="dib"><div class="leyenda">Así se ve</div><div class="inicio"><div class="menuWin"><div class="busca">🔍 PowerShell</div><div class="res aqui"><div class="icoPS">&gt;_</div><b>Windows PowerShell</b></div></div></div><div class="teclas">Tecla <kbd>⊞ Windows</kbd>, escribes <b>PowerShell</b> y das clic en el resultado</div></div>';
 }
-function dibTerm(texto,titulo){return '<div class="dib"><div class="leyenda">Así se ve</div><div class="ventana"><div class="barra"><i></i><i></i><i></i><span>'+(titulo||VENTANA())+'</span></div><div class="term">'+texto+'</div></div></div>'}
+function dibVS(chat,archivos){return '<div class="dib"><div class="leyenda">Así se ve en VS Code</div><div class="ventana"><div class="barra"><i></i><i></i><i></i><span>mis-anuncios · Visual Studio Code</span></div><div class="vs"><div class="exp"><b>EXPLORADOR</b>📁 mis-anuncios<br>'+(archivos||'')+'</div><div class="ed"></div><div class="panel"><div class="cab">✻ Claude</div><div class="chat">'+chat+'</div><div class="caja">Escribe aquí…</div></div></div></div></div>'}
+function dibTerm(texto,titulo){if(titulo==='Claude')return dibVS(texto);return '<div class="dib"><div class="leyenda">Así se ve</div><div class="ventana"><div class="barra"><i></i><i></i><i></i><span>'+(titulo||VENTANA())+'</span></div><div class="term">'+texto+'</div></div></div>'}
 function dibWeb(url,html){return '<div class="dib"><div class="leyenda">Así se ve</div><div class="ventana"><div class="barra"><i></i><i></i><i></i><span>🔒 '+url+'</span></div><div class="web">'+html+'</div></div></div>'}
 
 /* ---------- pasos ---------- */
 var URL_KIT='https://joakoestratega.com/campanas-ia';
 var ETAPAS=['Prepárate','Instala','Pixel','Conecta Meta','Creativos','Campaña','Prender','Mejora'];
-function skill(nombre,que){return '<p class="que">Escribe esto en Claude y toca <kbd>Enter</kbd>:</p>'+copiar('/'+nombre)+(que||'')}
+function skill(nombre,que){return '<p class="que">En el panel de Claude de VS Code, escribe esto y toca <kbd>Enter</kbd>:</p>'+copiar('/'+nombre)+(que||'')}
 function respuesta(){
   var d=val('destino')==='whatsapp'?'whatsapp':'web';
   return d+', '+Number(val('ppto')).toLocaleString('es-CO')+' por conjunto, '+val('paises')+', marca '+val('marca')+
@@ -169,20 +179,20 @@ var P=[
   '</ol>'+dibAbrirVentana()},
   ayuda:function(){return [['No la encuentro',W('Da clic derecho en el botón de Windows (abajo a la izquierda) y escoge <b>Terminal</b> o <b>Windows PowerShell</b>.','Abre la carpeta <b>Aplicaciones</b> → <b>Utilidades</b> → <b>Terminal</b>.')]]}},
 
- {e:1,t:'Pega la orden que instala todo',h:function(){return '<p class="que">Con una sola orden se instala Claude, las herramientas de campañas y la conexión con Meta.</p><ol class="mini"><li>Toca el botón amarillo <b>Copiar</b>.</li><li>Da clic dentro de la ventanita.</li><li>Pega con '+PEGAR()+'.</li><li>Toca <kbd>Enter</kbd> y espera unos minutos.</li></ol>'+
+ {e:1,t:'Pega la orden que instala todo',h:function(){return '<p class="que">Con una sola orden se instala todo: Claude, VS Code (el programa donde vas a trabajar con Claude), las herramientas de campañas y la conexión con Meta.</p><ol class="mini"><li>Toca el botón amarillo <b>Copiar</b>.</li><li>Da clic dentro de la ventanita.</li><li>Pega con '+PEGAR()+'.</li><li>Toca <kbd>Enter</kbd> y espera unos minutos.</li></ol>'+
   copiar(W('irm '+URL_KIT+'/instalar.ps1 | iex','curl -fsSL '+URL_KIT+'/instalar.sh | bash'))+
-  dibTerm('== Campañas con IA - Joako Estratega ==\n1/3 Instalando Claude Code...\n2/3 Instalando los skills de campañas...\n3/3 Conectando Meta...\n\n<span class="v">LISTO. Ahora:</span>\n  1. Cierra esta ventana y abre una nueva.')+
-  '<div class="ojo">Sabes que terminó cuando dice <b>LISTO</b>.</div>'},
+  dibTerm('== Campañas con IA - Joako Estratega ==\n1/6 Git...\n2/6 Claude Code...\n3/6 VS Code...\n4/6 Claude dentro de VS Code...\n5/6 Herramientas de campañas...\n6/6 Conexión con Meta...\n\n<span class="v">LISTO.</span> Se creó la carpeta mis-anuncios en tu escritorio\ny se va a abrir VS Code en ella.')+
+  '<div class="ojo">Tarda unos minutos. Sabes que terminó cuando dice <b>LISTO</b> y se abre VS Code solo. Ya puedes cerrar la ventanita.</div>'},
   ayuda:function(){return [
    ['Sale un error rojo que dice que los scripts están deshabilitados',SO==='win'?'Copia esto, pégalo, toca <kbd>Enter</kbd>, escribe <b>S</b> y toca <kbd>Enter</kbd>. Después vuelve a pegar la orden de instalar.'+copiar('Set-ExecutionPolicy -Scope CurrentUser RemoteSigned'):'Revisa que copiaste la orden completa y vuelve a pegarla.'],
    ['No pasa nada cuando pego','Da clic dentro de la ventanita antes de pegar. En Windows también puedes pegar con clic derecho.']]}},
 
- {e:1,t:'Abre Claude e inicia sesión',h:function(){return '<ol class="mini"><li>Cierra la ventanita con la <b>X</b> y ábrela otra vez.</li><li>Copia, pega y toca <kbd>Enter</kbd>:</li></ol>'+copiar('claude')+
-  '<ol class="mini" style="counter-reset:m 2"><li>Si te hace preguntas, solo toca <kbd>Enter</kbd>.</li><li>Se abre tu navegador: entra con tu cuenta de Claude y da clic en <b>Autorizar</b>.</li><li>Vuelve a la ventanita.</li></ol>'+
-  dibTerm('<span class="a">✻ Welcome to Claude Code!</span>\n\n<span class="g">&gt;</span> <span class="g">Escribe aquí lo que quieres…</span>')+
-  '<div class="ojo">Cuando ves <b>Welcome to Claude Code</b>, Claude está listo. <b>No cierres esta ventana</b>: aquí vas a trabajar el resto de la guía.</div>'},
-  ayuda:[['Dice "claude no se reconoce" o "command not found"','Cierra la ventanita, ábrela otra vez y vuelve a escribir <b>claude</b>. Si sigue igual, reinicia el computador.'],
-         ['Me pide pagar','Claude Code funciona con los planes Pro o Max. El plan gratis no sirve.']]},
+ {e:1,t:'Abre Claude en VS Code e inicia sesión',h:function(){return '<p class="que">VS Code se abrió solo, con tu carpeta <b>mis-anuncios</b> a la izquierda. Aquí vas a trabajar el resto de la guía.</p><ol class="mini"><li>Si pregunta <b>¿Confías en los autores de esta carpeta?</b>, da clic en <b>Sí, confío</b>.</li><li>Arriba a la derecha da clic en el ícono de Claude <b>✻</b>. Se abre el panel de Claude.</li><li>Da clic en <b>Iniciar sesión</b>, escoge tu <b>cuenta de Claude (Pro o Max)</b> y autoriza en el navegador.</li><li>Vuelve a VS Code: el panel queda listo para escribir.</li></ol>'+
+  dibVS('<span class="a">✻ Claude</span>\n\n<span class="g">¿En qué te ayudo hoy?</span>')+
+  '<div class="ojo">De aquí en adelante, cuando la guía diga <b>escribe en Claude</b>, es en este panel: pegas y tocas <kbd>Enter</kbd>.</div>'},
+  ayuda:[['No se abrió VS Code','Búscalo en tu computador como <b>Visual Studio Code</b>, ábrelo y entra a <b>Archivo → Abrir carpeta</b> → <b>Escritorio</b> → <b>mis-anuncios</b>.'],
+         ['No veo el ícono de Claude ✻','Toca <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>X</kbd> (en Mac <kbd>Cmd</kbd> + <kbd>Shift</kbd> + <kbd>X</kbd>), busca <b>Claude Code</b>, instálalo y cierra y abre VS Code.'],
+         ['Me pide pagar','Claude funciona con los planes Pro o Max. El plan gratis no sirve.']]},
 
  {e:2,t:'¿Ya tienes pixel?',h:function(){return '<p class="que">El pixel es un pedacito de código que le cuenta a Meta <b>quién compra</b> en tu tienda. Sin él, Meta no sabe a quién buscar.</p><div class="ojo"><b>Si ya tienes un pixel funcionando</b>, toca <b>Ver todos los pasos</b> arriba y salta a <b>Conecta Meta</b>. No crees otro.</div>'}},
 
@@ -205,24 +215,24 @@ var P=[
   dibWeb('business.facebook.com/events_manager','<span class="bt gris">Información general</span><span class="bt aqui">Probar eventos</span><br><br><div class="fila">PageView <span class="chip ok">Recibido</span></div>')},
   ayuda:[['No aparece nada','Espera un minuto y recarga tu tienda. Si tienes un bloqueador de anuncios, apágalo. En Shopify revisa que escogiste el pixel correcto.']]},
 
- {e:3,t:'Abre la lista de conexiones',h:function(){return '<p class="que">La conexión oficial de Meta ya quedó instalada. Solo falta entrar con tu Facebook.</p><ol class="mini"><li>En Claude escribe <b>/mcp</b> y toca <kbd>Enter</kbd>.</li></ol>'+copiar('/mcp')+
-  dibTerm('<b>MCP servers</b>\n\n  <span class="a">❯ meta-ads</span>            <span class="a">⚠ needs authentication</span>','Claude')},
-  ayuda:[['Dice "Connecting…" y no avanza','Espera 20 segundos, toca <kbd>Esc</kbd> y vuelve a escribir <b>/mcp</b>.'],
-         ['No veo meta-ads en la lista','Sal de Claude con <kbd>Ctrl</kbd> + <kbd>C</kbd> dos veces, pega esto, toca <kbd>Enter</kbd> y vuelve a abrir Claude:'+copiar('claude mcp add --scope user --transport http meta-ads https://mcp.facebook.com/ads')]]},
+ {e:3,t:'Abre la lista de conexiones',h:function(){return '<p class="que">La conexión oficial de Meta ya quedó instalada. Solo falta entrar con tu Facebook.</p><ol class="mini"><li>En el panel de Claude escribe <b>/mcp</b> y toca <kbd>Enter</kbd>.</li><li>Se abre la lista <b>MCP servers</b>. Espera unos segundos a que cargue.</li></ol>'+copiar('/mcp')+
+  dibWeb('MCP servers','<div class="fila">meta-ads <span class="chip auth aqui">⚠ Needs Auth</span></div><div style="height:26px"></div>')},
+  ayuda:[['Dice "Connecting…" y no avanza','Cierra la lista con la <b>X</b>, espera 20 segundos y vuelve a escribir <b>/mcp</b>. Si sigue igual, cierra VS Code y ábrelo otra vez.'],
+         ['No veo meta-ads en la lista','En VS Code abre <b>Terminal → Nueva terminal</b>, pega esto, toca <kbd>Enter</kbd>, y cierra y abre VS Code:'+copiar('claude mcp add --scope user --transport http meta-ads https://mcp.facebook.com/ads')]]},
 
- {e:3,t:'Entra con tu Facebook',h:function(){return '<ol class="mini"><li>Con las flechas <kbd>↓</kbd> <kbd>↑</kbd> ponte en <b>meta-ads</b> y toca <kbd>Enter</kbd>.</li><li>Ponte en <b>Authenticate</b> y toca <kbd>Enter</kbd>.</li><li>Se abre Facebook: da clic en <b>Continuar</b>.</li><li>Marca <b>tu negocio</b>, tu cuenta publicitaria y tu página, y da clic en <b>Guardar</b>.</li><li>Vuelve a Claude: al lado de meta-ads dice <b>connected</b>. Toca <kbd>Esc</kbd>.</li></ol>'+
+ {e:3,t:'Entra con tu Facebook',h:function(){return '<ol class="mini"><li>En la lista, da clic en <b>meta-ads</b> (el que dice <b>Needs Auth</b>).</li><li>Da clic en <b>Authenticate</b>.</li><li>Se abre Facebook: da clic en <b>Continuar</b>.</li><li>Marca <b>tu negocio</b>, tu cuenta publicitaria y tu página, y da clic en <b>Guardar</b>.</li><li>Vuelve a VS Code: meta-ads dice <b>✓ Connected</b> en verde. Cierra la lista con la <b>X</b>.</li></ol>'+
   dibWeb('facebook.com','<b>Claude quiere acceder a tus anuncios</b><br><br><div class="campo">✔ Tu negocio</div><div class="campo">✔ Tu cuenta publicitaria</div><div class="campo">✔ Tu página</div><br><span class="bt aqui">Guardar</span>')},
-  ayuda:[['No se abrió Facebook','Mira si se abrió una pestaña nueva en tu navegador. Si no, en la ventanita aparece un link: cópialo y ábrelo.'],
+  ayuda:[['No se abrió Facebook','Mira si se abrió una pestaña nueva en tu navegador. Si no, en VS Code aparece un link: cópialo y ábrelo.'],
          ['No salen mis cuentas después','Al entrar con Facebook no marcaste el negocio o la cuenta. En <b>/mcp</b> → meta-ads escoge desconectar y vuelve a entrar marcando todo.']]},
 
- {e:4,t:'Junta tus creativos en una carpeta',h:function(){return '<ol class="mini"><li>En tu escritorio crea una carpeta llamada <b>mis-anuncios</b>: clic derecho → '+W('<b>Nuevo</b> → <b>Carpeta</b>','<b>Nueva carpeta</b>')+'.</li><li>Mete ahí las imágenes y los videos de tus anuncios.</li><li>Si un video tiene portada, ponle el mismo nombre del video terminado en <b>-portada</b> (ejemplo: <b>video1-portada.jpg</b>).</li></ol>'+
-  dibWeb('Escritorio','<div class="fila aqui">📁 mis-anuncios</div><div style="padding:6px 12px;color:#666">🖼️ anuncio1.jpg &nbsp; 🖼️ anuncio2.jpg &nbsp; 🎬 video1.mp4 &nbsp; 🖼️ video1-portada.jpg</div>')+
+ {e:4,t:'Junta tus creativos en una carpeta',h:function(){return '<ol class="mini"><li>En tu escritorio ya está la carpeta <b>mis-anuncios</b> (la creó el instalador).</li><li>Copia ahí las imágenes y los videos de tus anuncios. También puedes arrastrarlos a la carpeta que se ve a la izquierda en VS Code.</li><li>Si un video tiene portada, ponle el mismo nombre del video terminado en <b>-portada</b> (ejemplo: <b>video1-portada.jpg</b>).</li></ol>'+
+  dibVS('<span class="g">Escribe /meta-creativos para empezar</span>','&nbsp; 🖼️ anuncio1.jpg<br>&nbsp; 🖼️ anuncio2.jpg<br>&nbsp; 🎬 video1.mp4<br>&nbsp; 🖼️ video1-portada.jpg')+
   '<div class="ojo">Imágenes en JPG o PNG y videos en MP4 o MOV. Videos de hasta 100 MB.</div>'}},
 
- {e:4,t:'Claude los ordena y los sube',h:function(){return skill('meta-creativos','<ol class="mini"><li>Claude te pregunta en qué carpeta están y qué producto vendes. Contéstale.</li><li>Te muestra una tabla: los creativos <b>agrupados de a 3</b> (C01, C02…) con su nombre nuevo. Si estás de acuerdo, escribe <b>sí</b>.</li><li>Claude los sube a tu cuenta de Meta. Cuando pregunte si puede usar meta-ads, escoge <b>Yes</b>.</li></ol>')+
+ {e:4,t:'Claude los ordena y los sube',h:function(){return skill('meta-creativos','<ol class="mini"><li>Claude te pregunta qué producto vendes y con qué página salen los anuncios. Contéstale. Los creativos los toma de la carpeta abierta.</li><li>Te muestra una tabla: los creativos <b>agrupados de a 3</b> (C01, C02…) con su nombre nuevo. Si estás de acuerdo, escribe <b>sí</b>.</li><li>Claude los sube a tu cuenta de Meta. Cuando pregunte si puede usar meta-ads, escoge <b>Yes</b>.</li></ol>')+
   dibTerm('<span class="a">●</span> Así los voy a agrupar:\n  C01  C01-A1-antes-despues.jpg   antes y después\n  C01  C01-A2-no-se-nota.jpg      no se nota\n  C01  C01-A3-envio-gratis.jpg    oferta\n  C02  C02-A1-testimonio.mp4      testimonio\n\n¿Los renombro y los subo?','Claude')+
   '<div class="ojo">Cada grupo de 3 va a ser un conjunto de tu campaña. Así, después sabes qué creativo vende.</div>'},
-  ayuda:[['Dice que no encuentra la carpeta','Dale la ruta completa. En Windows: clic derecho en la carpeta → <b>Copiar como ruta de acceso</b>, y pégala en Claude.'],
+  ayuda:[['Dice que no encuentra los creativos','Revisa que VS Code tenga abierta la carpeta <b>mis-anuncios</b> (su nombre se ve arriba a la izquierda) y que los archivos estén adentro.'],
          ['Un video no sube','Revisa que pese menos de 100 MB. Si pesa más, pídele a Claude que te diga cómo hacerlo más liviano.']]},
 
  {e:5,t:'Prepara tus respuestas',h:function(){return '<p class="que">Claude te va a hacer estas preguntas. Llénalas aquí y en el siguiente paso te queda lista la respuesta para pegar.</p><div class="form">'+
