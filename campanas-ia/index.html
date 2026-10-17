@@ -153,7 +153,7 @@ function skill(nombre,que){return '<p class="que">Escribe esto en Claude y toca 
 function respuesta(){
   var d=val('destino')==='whatsapp'?'whatsapp':'web';
   return d+', '+Number(val('ppto')).toLocaleString('es-CO')+' por conjunto, '+val('paises')+', marca '+val('marca')+
-    (d==='web'?', link '+val('link'):'')+'. '+val('quien');
+    (d==='web'?', link '+val('link'):'')+'. '+val('quien')+'. Ningún creativo está hecho con inteligencia artificial.';
 }
 var P=[
  {e:0,t:'Revisa que tengas todo',h:function(){return '<p class="que">Marca cada cosa que ya tienes. Si te falta algo, consíguelo primero.</p><ul class="lista">'+
@@ -233,7 +233,7 @@ var P=[
   '<label class="full">¿A quién le vendes y qué problema le resuelves?<textarea id="f-quien" placeholder="Le vendo fajas a mujeres que quieren verse bien con su ropa sin que la faja se note"></textarea></label></div>'}},
 
  {e:5,t:'Pídele la campaña a Claude',h:function(){return skill('meta-prospeccion','<ol class="mini"><li>Cuando te pregunte, pega tu respuesta:</li></ol>'+copiar(respuesta())+
-  '<ol class="mini" style="counter-reset:m 1"><li>Te muestra 3 textos y 3 títulos. Escoge escribiendo, por ejemplo, <b>T1, A</b>.</li><li>Te muestra <b>el plan</b>: la campaña, un conjunto por grupo y un anuncio por creativo. Si está bien, escribe <b>sí</b>.</li></ol>')+
+  '<ol class="mini" style="counter-reset:m 1"><li>Te muestra 3 textos y 3 títulos. Escoge escribiendo, por ejemplo, <b>T1, A</b>.</li><li>Si te pregunta algo más (por ejemplo, cuál pixel usar), contéstale con lo que te recomiende.</li><li>Te muestra <b>el plan</b>: la campaña, un conjunto por grupo y un anuncio por creativo. Si está bien, escribe <b>sí</b>.</li></ol>')+
   dibTerm('<span class="a">Plan</span>\nCampaña: 🔵 F2(001) | FAJAS2026 | FAJA | PROSPECCION | CO\n  C01 | BROAD | IG-FB   $20.000/día   3 anuncios\n  C02 | BROAD | IG-FB   $20.000/día   1 anuncio\nSin los que ya compraron. Todo queda apagado.','Claude')+
   '<div class="ojo">Todo se crea <b>apagado</b>. No se gasta un peso hasta que tú lo prendas.</div>'},
   ayuda:[['Error de pago o cuenta deshabilitada','Revisa tu tarjeta en Meta: <a href="https://adsmanager.facebook.com/billing_hub/" target="_blank">abrir facturación</a>.'],
