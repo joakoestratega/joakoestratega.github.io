@@ -51,6 +51,10 @@ kbd{display:inline-block;background:var(--blanco);border:1px solid #cfc6b2;borde
 .ventana .barra{border-radius:10px 10px 0 0;background:#e9e9ee;padding:7px 10px;font-size:12px;color:#555;display:flex;gap:6px;align-items:center}
 .ventana .barra i{width:10px;height:10px;border-radius:50%;background:#c9c9cf;display:inline-block}
 .ventana .barra span{margin-left:8px;font-weight:600}
+.ventana .barra.win{justify-content:space-between;background:#f3f3f3;border-radius:6px 6px 0 0;padding:6px 12px}
+.ventana .barra.win span{margin-left:0}
+.ventana .barra.win .ctl{font-weight:400;color:#333;letter-spacing:1px}
+.menuvs{background:#1f1f1f;color:#ccc;font:12px 'Segoe UI',Montserrat;padding:4px 12px;border-bottom:1px solid #333}
 .vs{display:flex;min-height:230px;background:#1f1f1f;border-radius:0 0 10px 10px;overflow:hidden;font:13px Consolas,Menlo,monospace}
 .vs .exp{width:30%;background:#181818;color:#ccc;padding:10px;font:12px Montserrat}
 .vs .exp b{display:block;color:#888;font-size:11px;margin-bottom:6px}
@@ -152,9 +156,14 @@ function dibAbrirVentana(){
   ? '<div class="dib"><div class="leyenda">Así se ve</div><div class="inicio"><div class="menuWin" style="border-radius:14px"><div class="busca">🔍 Terminal</div><div class="res aqui"><div class="icoTerm">&gt;_</div><b>Terminal</b></div></div></div><div class="teclas">Teclas: <kbd>Cmd</kbd> + <kbd>Espacio</kbd>, escribes <b>Terminal</b> y <kbd>Enter</kbd></div></div>'
   : '<div class="dib"><div class="leyenda">Así se ve</div><div class="inicio"><div class="menuWin"><div class="busca">🔍 PowerShell</div><div class="res aqui"><div class="icoPS">&gt;_</div><b>Windows PowerShell</b></div></div></div><div class="teclas">Tecla <kbd>⊞ Windows</kbd>, escribes <b>PowerShell</b> y das clic en el resultado</div></div>';
 }
-function dibVS(chat,archivos){return '<div class="dib"><div class="leyenda">Así se ve en VS Code</div><div class="ventana"><div class="barra"><i></i><i></i><i></i><span>mis-anuncios · Visual Studio Code</span></div><div class="vs"><div class="exp"><b>EXPLORADOR</b>📁 mis-anuncios<br>'+(archivos||'')+'</div><div class="ed"></div><div class="panel"><div class="cab">✻ Claude</div><div class="chat">'+chat+'</div><div class="caja">Escribe aquí…</div></div></div></div></div>'}
-function dibTerm(texto,titulo){if(titulo==='Claude')return dibVS(texto);return '<div class="dib"><div class="leyenda">Así se ve</div><div class="ventana"><div class="barra"><i></i><i></i><i></i><span>'+(titulo||VENTANA())+'</span></div><div class="term">'+texto+'</div></div></div>'}
-function dibWeb(url,html){return '<div class="dib"><div class="leyenda">Así se ve</div><div class="ventana"><div class="barra"><i></i><i></i><i></i><span>🔒 '+url+'</span></div><div class="web">'+html+'</div></div></div>'}
+function barra(titulo,vs){
+  if(SO==='mac') return '<div class="barra"><i></i><i></i><i></i><span>'+titulo+'</span></div>';
+  return '<div class="barra win"><span>'+titulo+'</span><span class="ctl">─&nbsp;&nbsp;☐&nbsp;&nbsp;✕</span></div>'+
+    (vs?'<div class="menuvs">Archivo&nbsp;&nbsp; Editar&nbsp;&nbsp; Selección&nbsp;&nbsp; Ver&nbsp;&nbsp; Ir&nbsp;&nbsp; Ejecutar&nbsp;&nbsp; Terminal&nbsp;&nbsp; Ayuda</div>':'');
+}
+function dibVS(chat,archivos){return '<div class="dib"><div class="leyenda">Así se ve en VS Code</div><div class="ventana">'+barra('mis-anuncios - Visual Studio Code',true)+'<div class="vs"><div class="exp"><b>EXPLORADOR</b>📁 mis-anuncios<br>'+(archivos||'')+'</div><div class="ed"></div><div class="panel"><div class="cab">✻ Claude</div><div class="chat">'+chat+'</div><div class="caja">Escribe aquí…</div></div></div></div></div>'}
+function dibTerm(texto,titulo){if(titulo==='Claude')return dibVS(texto);var fondo=SO==='win'?' style="background:#012456"':'';return '<div class="dib"><div class="leyenda">Así se ve</div><div class="ventana">'+barra(titulo||VENTANA())+'<div class="term"'+fondo+'>'+texto+'</div></div></div>'}
+function dibWeb(url,html){return '<div class="dib"><div class="leyenda">Así se ve</div><div class="ventana">'+barra('🔒 '+url)+'<div class="web">'+html+'</div></div></div>'}
 
 /* ---------- pasos ---------- */
 var URL_KIT='https://joakoestratega.com/campanas-ia';
