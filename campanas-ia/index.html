@@ -151,7 +151,8 @@ var VENTANA=function(){return W('PowerShell','Terminal')};
 var PEGAR=function(){return W('<kbd>Ctrl</kbd> + <kbd>V</kbd> (o clic derecho dentro de la ventanita)','<kbd>Cmd</kbd> + <kbd>V</kbd>')};
 
 /* ---------- dibujos ---------- */
-function dibAbrirVentana(){
+function dibAbrirVentana(){return '';}
+function _viejo_dibAbrirVentana(){
   return SO==='mac'
   ? '<div class="dib"><div class="leyenda">Así se ve</div><div class="inicio"><div class="menuWin" style="border-radius:14px"><div class="busca">🔍 Terminal</div><div class="res aqui"><div class="icoTerm">&gt;_</div><b>Terminal</b></div></div></div><div class="teclas">Teclas: <kbd>Cmd</kbd> + <kbd>Espacio</kbd>, escribes <b>Terminal</b> y <kbd>Enter</kbd></div></div>'
   : '<div class="dib"><div class="leyenda">Así se ve</div><div class="inicio"><div class="menuWin"><div class="busca">🔍 PowerShell</div><div class="res aqui"><div class="icoPS">&gt;_</div><b>Windows PowerShell</b></div></div></div><div class="teclas">Tecla <kbd>⊞ Windows</kbd>, escribes <b>PowerShell</b> y das clic en el resultado</div></div>';
@@ -161,9 +162,12 @@ function barra(titulo,vs){
   return '<div class="barra win"><span>'+titulo+'</span><span class="ctl">─&nbsp;&nbsp;☐&nbsp;&nbsp;✕</span></div>'+
     (vs?'<div class="menuvs">Archivo&nbsp;&nbsp; Editar&nbsp;&nbsp; Selección&nbsp;&nbsp; Ver&nbsp;&nbsp; Ir&nbsp;&nbsp; Ejecutar&nbsp;&nbsp; Terminal&nbsp;&nbsp; Ayuda</div>':'');
 }
-function dibVS(chat,archivos){return '<div class="dib"><div class="leyenda">Así se ve en VS Code</div><div class="ventana">'+barra('mis-anuncios - Visual Studio Code',true)+'<div class="vs"><div class="exp"><b>EXPLORADOR</b>📁 mis-anuncios<br>'+(archivos||'')+'</div><div class="ed"></div><div class="panel"><div class="cab">✻ Claude</div><div class="chat">'+chat+'</div><div class="caja">Escribe aquí…</div></div></div></div></div>'}
-function dibTerm(texto,titulo){if(titulo==='Claude')return dibVS(texto);var fondo=SO==='win'?' style="background:#012456"':'';return '<div class="dib"><div class="leyenda">Así se ve</div><div class="ventana">'+barra(titulo||VENTANA())+'<div class="term"'+fondo+'>'+texto+'</div></div></div>'}
-function dibWeb(url,html){return '<div class="dib"><div class="leyenda">Así se ve</div><div class="ventana">'+barra('🔒 '+url)+'<div class="web">'+html+'</div></div></div>'}
+function dibVS(chat,archivos){return '';}
+function _viejo_dibVS(chat,archivos){return '<div class="dib"><div class="leyenda">Así se ve en VS Code</div><div class="ventana">'+barra('mis-anuncios - Visual Studio Code',true)+'<div class="vs"><div class="exp"><b>EXPLORADOR</b>📁 mis-anuncios<br>'+(archivos||'')+'</div><div class="ed"></div><div class="panel"><div class="cab">✻ Claude</div><div class="chat">'+chat+'</div><div class="caja">Escribe aquí…</div></div></div></div></div>'}
+function dibTerm(texto,titulo){return '';}
+function _viejo_dibTerm(texto,titulo){if(titulo==='Claude')return dibVS(texto);var fondo=SO==='win'?' style="background:#012456"':'';return '<div class="dib"><div class="leyenda">Así se ve</div><div class="ventana">'+barra(titulo||VENTANA())+'<div class="term"'+fondo+'>'+texto+'</div></div></div>'}
+function dibWeb(url,html){return '';}
+function _viejo_dibWeb(url,html){return '<div class="dib"><div class="leyenda">Así se ve</div><div class="ventana">'+barra('🔒 '+url)+'<div class="web">'+html+'</div></div></div>'}
 
 /* ---------- pasos ---------- */
 var URL_KIT='https://joakoestratega.com/campanas-ia';
