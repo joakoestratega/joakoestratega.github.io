@@ -292,7 +292,7 @@ function leer(k){try{return localStorage.getItem('cm-'+k)}catch(e){return null}}
 function esc(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;')}
 function copiar(t){return '<div class="copiar"><code>'+esc(t)+'</code><button>Copiar</button></div>'}
 function abrir(u,t){return '<a class="abrir" href="'+u+'" target="_blank">'+t+' ↗</a>'}
-function campo(id,et,ph,tipo,ayuda){return '<label>'+et+(ayuda?' <small>'+ayuda+'</small>':'')+'<input id="f-'+id+'" placeholder="'+ph+'"'+(tipo?' type="'+tipo+'"':'')+'></label>'}
+function campo(id,et,ph,tipo,ayuda){return '<label>'+et+(ayuda?' <small>'+ayuda+'</small>':'')+'<input data-clarity-mask="true" id="f-'+id+'" placeholder="'+ph+'"'+(tipo?' type="'+tipo+'"':'')+'></label>'}
 function val(id){var g=leer('f-'+id);var ph={destino:'web',link:'https://tutienda.com/faja',ppto:'20000',paises:'Colombia',marca:'FAJAS2026',quien:'Le vendo fajas a mujeres que quieren verse bien con su ropa sin que la faja se note'};return (g&&g.trim())||ph[id]}
 function activarCopiar(){document.querySelectorAll('.copiar').forEach(function(c){var b=c.querySelector('button');b.onclick=function(){
   var t=c.querySelector('code').textContent;var ok=function(){b.textContent='¡Copiado! ✓';b.classList.add('ok');setTimeout(function(){b.textContent='Copiar';b.classList.remove('ok')},1800)};
@@ -321,6 +321,7 @@ function pintar(){
   document.getElementById('atras').style.visibility=i===0?'hidden':'visible';
   document.getElementById('sig').textContent=p.fin?'Volver a empezar ↺':(i===0?'Tengo todo, empecemos →':'Ya lo hice →');
   guardar('paso',i);window.scrollTo(0,0);
+  if(window.medir)window.medir('paso',{n:i+1,de:P.length});
 }
 document.getElementById('sig').onclick=function(){var vis=JSON.parse(leer('hechos')||'[]');if(vis.indexOf(i)<0)vis.push(i);guardar('hechos',JSON.stringify(vis));i=P[i].fin?0:i+1;pintar()};
 document.getElementById('atras').onclick=function(){if(i>0){i--;pintar()}};
@@ -338,5 +339,5 @@ document.getElementById('verMapa').onclick=function(){
 document.getElementById('mapa').onclick=function(e){if(e.target.id==='mapa')this.classList.remove('on')};
 so(leer('so')||(/Mac|iPhone|iPad/i.test(navigator.platform||navigator.userAgent)?'mac':'win'));
 </script>
-</body>
+<script src="/assets/medir.js" data-pagina="campanas-ia" defer></script></body>
 </html>

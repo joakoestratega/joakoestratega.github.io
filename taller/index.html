@@ -7,6 +7,10 @@ h2{color:#F8B400;margin-top:42px}.caja{background:#1c1c24;border-radius:14px;pad
 pre{white-space:pre-wrap;background:#0b0b0f;border:1px solid #2a2a33;border-radius:10px;padding:14px;font-size:.92rem}
 .btn{display:inline-block;background:#F8B400;color:#0F0F14;font-weight:800;padding:12px 22px;border-radius:30px;text-decoration:none}
 .pie{margin-top:60px;padding-top:20px;border-top:1px solid #2a2a33;opacity:.85}
+form{background:#1c1c24;border-radius:16px;padding:20px;max-width:520px}
+label{display:block;margin:12px 0 4px;font-weight:700}
+.chk{display:flex;gap:10px;align-items:flex-start;font-weight:500;font-size:.88rem;opacity:.9}
+#error{color:#ff8a8a;min-height:1em;margin:10px 0 0}
 input[type=text],input[type=tel],input[type=email]{width:100%;box-sizing:border-box;padding:12px;border-radius:10px;border:1px solid #333;background:#0b0b0f;color:#fff;font-size:1rem}
 .oculto{position:absolute;left:-9999px} button{margin-top:16px;width:100%;border:0;cursor:pointer;font-size:1.05rem}
 
@@ -48,6 +52,19 @@ section{margin-top:44px} section h2{display:flex;align-items:center;gap:12px} .n
 .btn.todo{display:block;text-align:center;margin:20px 0 8px;font-size:1.05rem} .aviso{font-size:.9rem;opacity:.75} .aviso a{color:#F8B400}
 .t.grande{margin-top:14px} .lista a{display:flex;flex-direction:column;gap:4px} .lista span{opacity:.7;font-size:.9rem}</style></head><body><div class="w">
 <h1>El material del taller<br><span style="color:#fff">gratis y listo para usar</span></h1>
+<div id="puerta" data-clarity-mask="true">
+<p>Déjame tus datos y se abre todo al instante.</p>
+<form id="f" novalidate>
+<label for="nombre">Tu nombre</label><input id="nombre" type="text" autocomplete="name" maxlength="80">
+<label for="tel">Tu WhatsApp</label><input id="tel" type="tel" autocomplete="tel" placeholder="+57 300 000 0000" maxlength="30">
+<label for="correo">Tu correo</label><input id="correo" type="email" autocomplete="email" maxlength="120">
+<input class="oculto" id="empresa" type="text" tabindex="-1" autocomplete="off" aria-hidden="true">
+<label class="chk"><input type="checkbox" id="acepto"><span>Autorizo a Joako Estratega a guardar mi nombre, WhatsApp y correo para enviarme el material del taller y contactarme con contenido y servicios de marketing. Puedo pedir verlos, corregirlos o borrarlos por WhatsApp al +57 302 866 2556 (Ley 1581 de 2012). <a href="https://joakoestratega.com/politica-taller/" target="_blank" rel="noopener">Política de datos del taller</a></span></label>
+<p id="error"></p>
+<button class="btn" type="submit">Ver el material</button>
+</form></div>
+
+<div id="material" hidden>
 <nav class="indice"><a href="#listo">1 · Listo para pautar</a><a href="#hazlo">2 · Hazlo con tu producto</a><a href="#investigacion">3 · La investigación</a></nav>
 
 <section id="listo"><h2><span class="n">1</span>Listo para pautar · faja 2667</h2>
@@ -68,11 +85,12 @@ section{margin-top:44px} section h2{display:flex;align-items:center;gap:12px} .n
 <a href="politicas.html"><b>¿Meta lo aprueba?</b><span>Las 3 reglas que más tumban anuncios de fajas</span></a>
 <a href="comentarios-de-clientas.csv" download><b>3.715 comentarios de clientas</b><span>Sin nombres, listos para tu análisis</span></a>
 </div></section>
+</div>
 <div class="pie-serv"><h3>Lo que hacemos en Joako Estratega</h3><div class="serv">
 <a class="sv" href="https://wa.me/573028662556?text=Hola%20Joako%2C%20estuve%20en%20el%20taller%20y%20quiero%20que%20lideren%20mi%20estrategia%20de%20marketing" target="_blank" rel="noopener"><span>AGENCIA</span><b>Joako Estratega</b>Lideramos tu estrategia de marketing por mínimo 90 días para escalar tus ventas y optimizar tus procesos.<i>Hablemos por WhatsApp →</i></a>
 <a class="sv" href="https://wa.me/573028662556?text=Hola%20Joako%2C%20estuve%20en%20el%20taller%20y%20quiero%20el%20diagn%C3%B3stico%20de%20ventas" target="_blank" rel="noopener"><span>AUDITORÍA</span><b>Diagnóstico de ventas</b>Auditamos tu estrategia de marketing y te entregamos un informe con lo que hay que arreglar.<i>Pídelo por WhatsApp →</i></a>
 <a class="sv" href="https://patoeditor.com" target="_blank" rel="noopener"><span>EDICIÓN DE VIDEO</span><b>PatoEditor</b>Editamos tus videos por ti. No te preocupes más por eso.<i>Conoce PatoEditor →</i></a>
-</div><p class="quien">Joaquín Rojas Peña · CEO de Joako Estratega (agencia) · CEO de PatoEditor · Director de la estrategia de marketing de Feria Effix · <a href="https://wa.me/573028662556?text=Hola%20Joako%2C%20estuve%20en%20el%20taller%20Marketing%20con%20estrategia">+57 302 866 2556</a> · <a href="https://instagram.com/joakoestratega">@joakoestratega</a> · <a href="https://joakoestratega.com">joakoestratega.com</a></p></div>
+</div><p class="quien">Joaquín Rojas Peña · CEO de Joako Estratega (agencia) · CEO de PatoEditor · Director de la estrategia de marketing de Feria Effix · <a href="https://wa.me/573028662556?text=Hola%20Joako%2C%20estuve%20en%20el%20taller%20Marketing%20con%20estrategia">+57 302 866 2556</a> · <a href="https://instagram.com/joakoestratega">@joakoestratega</a> · <a href="https://joakoestratega.com">joakoestratega.com</a> · <a href="https://joakoestratega.com/politica-taller/">Política de datos</a></p></div>
 </div>
 <a class="wa-flota" href="https://wa.me/573028662556?text=Hola%20Joako%2C%20estuve%20en%20el%20taller%20Marketing%20con%20estrategia" target="_blank" rel="noopener">💬 Escríbeme</a>
 <div id="lb"></div>
@@ -86,4 +104,23 @@ document.addEventListener('click', (e) => {
   if (e.target === lb) { lb.classList.remove('on'); lb.innerHTML = ''; }
 });
 document.addEventListener('keydown', (e) => { if (e.key === 'Escape') { $('lb').classList.remove('on'); $('lb').innerHTML = ''; } });
-</script></body></html>
+// Mismo registro que Joako Editor: solo escribe, nunca devuelve datos ([SEG] 2026-09-17).
+const API = 'https://editor-9qb.pages.dev/api/registro';
+const AVISO = 'taller-2026-10-v1', VERSION = 'taller-mkt-web-2026-10-22', LLAVE = 'taller-mkt-2026';
+function abrir() { $('puerta').hidden = true; $('material').hidden = false; window.scrollTo(0, 0); }
+try { if (localStorage.getItem(LLAVE)) abrir(); } catch (e) {}
+$('f').addEventListener('submit', (ev) => {
+  ev.preventDefault();
+  const nombre = $('nombre').value.trim(), telefono = $('tel').value.trim(), correo = $('correo').value.trim();
+  const decir = (t) => { $('error').textContent = t; };
+  if (nombre.length < 2) return decir('Escribe tu nombre.');
+  if ((telefono.match(/\d/g) || []).length < 7) return decir('Escribe un WhatsApp con el que podamos ubicarte.');
+  if (!/^[^\s@]+@[^\s@]+\.[a-z]{2,}$/i.test(correo)) return decir('Revisa el correo: parece que le falta algo.');
+  if (!$('acepto').checked) return decir('Marca la casilla para autorizar el uso de tus datos.');
+  fetch(API, { method: 'POST', headers: { 'Content-Type': 'application/json' }, keepalive: true,
+    body: JSON.stringify({ nombre, telefono, correo, acepto: true, aviso: AVISO, version: VERSION, trampa: $('empresa').value || '' }) }).catch(() => {});
+  if (window.medir) { window.medir('registro'); try { fbq('track', 'Lead', { content_name: 'taller' }); gtag('event', 'generate_lead', { regalo: 'taller' }); } catch (e) {} }
+  try { localStorage.setItem(LLAVE, '1'); } catch (e) {}
+  abrir();
+});
+</script><script src="/assets/medir.js" data-pagina="taller" defer></script></body></html>
