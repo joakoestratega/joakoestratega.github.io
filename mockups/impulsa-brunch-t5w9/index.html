@@ -196,7 +196,8 @@ footer a{color:#fff;font-weight:600}
   nav.menu a:hover{color:#fff}
   .wrap{padding:0 20px}
   .hero{padding:48px 0 60px}
-  .hero-grid{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center;padding:0 20px!important}
+  .hero-grid{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center;padding:0 20px!important;max-width:1120px;margin:0 auto}
+  header img{height:40px}
   .hero-grid .wrap{padding:0}
   .hero-img{order:2;border-radius:20px;aspect-ratio:4/5}
   .hero-img::after{display:none}
@@ -210,8 +211,9 @@ footer a{color:#fff;font-weight:600}
   .stats{grid-template-columns:repeat(4,1fr)}
   .pasos{grid-template-columns:repeat(3,1fr)}
   .paso{grid-template-columns:1fr}
-  .etapas{grid-template-columns:1fr 1fr 1.4fr;align-items:stretch}
-  .etapa{flex-direction:column;align-items:flex-start;justify-content:space-between}
+  .etapas{grid-template-columns:1fr 1.3fr;align-items:stretch}
+  .etapa.actual{grid-column:2;grid-row:1/3}
+  .etapa{flex-direction:column;align-items:flex-start;justify-content:center;gap:8px}
 }
 </style>
 </head>
@@ -237,7 +239,7 @@ footer a{color:#fff;font-weight:600}
       <figcaption class="sello">Brunch Empresarial 2025</figcaption>
     </figure>
     <div class="wrap">
-      <span class="tag">Sábado 21 de noviembre · El Carmen de Viboral</span>
+      <span class="tag">Brunch Empresarial 2026 · Sáb. 21 de noviembre</span>
       <h1>Donde los empresarios del Oriente <span class="rojo">se encuentran</span></h1>
       <p class="sub">¿Tienes un negocio en el Oriente? Este evento es para ti. <b>Brunch, 6 charlas y rondas de 5 minutos para conocer a otros empresarios.</b></p>
       <div class="datos">
