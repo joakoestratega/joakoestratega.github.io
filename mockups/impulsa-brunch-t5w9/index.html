@@ -182,6 +182,8 @@ footer{border-top:1px solid var(--linea);padding:32px 0;text-align:center;font-s
 footer img{height:40px;width:auto;margin:0 auto 14px}
 footer a{color:#fff;font-weight:600}
 
+.wa-flota{position:fixed;right:16px;bottom:88px;z-index:61;width:56px;height:56px;border-radius:50%;background:#25D366;color:#fff;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 18px rgba(0,0,0,.45)}
+.wa-flota svg{width:30px;height:30px}
 .sticky{position:fixed;left:0;right:0;bottom:0;z-index:60;background:rgba(5,5,5,.97);border-top:1px solid var(--linea);padding:10px 16px calc(10px + env(safe-area-inset-bottom));display:flex;align-items:center;gap:12px}
 .sticky .p{line-height:1.15;flex:1;min-width:0}
 .sticky .p small{display:block;font-size:11px;color:var(--gris);letter-spacing:.04em}
@@ -192,6 +194,7 @@ footer a{color:#fff;font-weight:600}
 @media (min-width:760px){
   body{padding-bottom:0}
   .sticky{display:none}
+  .wa-flota{bottom:24px;right:24px;width:60px;height:60px}
   nav.menu{display:flex;gap:22px;font-size:14px;font-weight:600}
   nav.menu a{text-decoration:none;color:var(--gris)}
   nav.menu a:hover{color:#fff}
@@ -226,7 +229,7 @@ footer a{color:#fff;font-weight:600}
     <nav class="menu">
       <a href="#dia">El día</a><a href="#speakers">Speakers</a><a href="#agenda">Agenda</a><a href="#lugar">Lugar</a><a href="#precio">Precio</a><a href="#faq">Preguntas</a>
     </nav>
-    <a class="btn wa" data-seccion="encabezado" href="https://wa.me/573226986123?text=Hola%2C%20quiero%20separar%20mi%20cupo%20para%20el%20Brunch%20Empresarial%202026." target="_blank" rel="noopener">Separar cupo</a>
+    <a class="btn compra" data-seccion="encabezado" href="https://impulsaevento.website/checkout?tier=c15e32d3-0f43-4549-bcd7-80682c4e1745">Comprar entrada</a>
   </div>
 </header>
 
@@ -252,7 +255,7 @@ footer a{color:#fff;font-weight:600}
         <div class="antes">Valor antes: <s>$349.900 COP</s></div>
         <div class="ahora">$279.920<small>COP</small></div>
       </div>
-      <a class="btn block wa" data-seccion="primera-pantalla" href="https://wa.me/573226986123?text=Hola%2C%20quiero%20separar%20mi%20cupo%20para%20el%20Brunch%20Empresarial%202026." target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm5.3 14.2c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .1-3.3-.8-2.8-1.1-4.5-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.8 0-1.4.7-2 1-2.3.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.2.1.4 0 .5l-.3.5-.4.4c-.1.2-.3.3-.1.6.2.3.8 1.3 1.6 2 1.1 1 2 1.3 2.3 1.4.3.1.4.1.6-.1l.8-1c.2-.3.4-.2.6-.1l1.9.9c.3.1.5.2.5.3.1.2.1.7-.1 1.3Z"/></svg>Separar mi cupo por WhatsApp</a>
+      <a class="btn block compra" data-seccion="primera-pantalla" href="https://impulsaevento.website/checkout?tier=c15e32d3-0f43-4549-bcd7-80682c4e1745">Comprar mi entrada</a>
       <p class="mini">¿Vienes con tu equipo? <a class="wa" data-seccion="primera-pantalla-equipo" href="https://wa.me/573226986123?text=Hola%2C%20quiero%20ir%20al%20Brunch%20con%20mi%20equipo." target="_blank" rel="noopener">Escríbenos</a></p>
     </div>
   </div>
@@ -296,7 +299,7 @@ footer a{color:#fff;font-weight:600}
       </article>
     </div>
     <div class="frase">"Hay conversaciones que duran cinco minutos y cambian el rumbo de una empresa."<small>Impulsa, organizador del Brunch Empresarial</small></div>
-    <div class="centro"><a class="btn wa" data-seccion="el-dia" href="https://wa.me/573226986123?text=Hola%2C%20quiero%20separar%20mi%20cupo%20para%20el%20Brunch." target="_blank" rel="noopener">Separar mi cupo</a></div>
+    <div class="centro"><a class="btn compra" data-seccion="el-dia" href="https://impulsaevento.website/checkout?tier=c15e32d3-0f43-4549-bcd7-80682c4e1745">Comprar mi entrada</a></div>
   </div>
 </section>
 
@@ -405,13 +408,13 @@ footer a{color:#fff;font-weight:600}
           <li>Brunch tipo bufé incluido</li>
           <li>Cóctel y kit de bienvenida</li>
         </ul>
-        <a class="btn block wa" data-seccion="precio" href="https://wa.me/573226986123?text=Hola%2C%20quiero%20separar%20mi%20cupo%20para%20el%20Brunch%20a%20%24279.920." target="_blank" rel="noopener">Separar mi cupo por WhatsApp</a>
+        <a class="btn block compra" data-seccion="precio" href="https://impulsaevento.website/checkout?tier=c15e32d3-0f43-4549-bcd7-80682c4e1745">Comprar mi entrada</a>
       </div>
     </div>
     <div class="pasos">
-      <div class="paso"><i>1</i><p><b>Nos escribes por WhatsApp.</b> Te respondemos y te pasamos los datos de pago.</p></div>
-      <div class="paso"><i>2</i><p><b>Pagas por transferencia</b> y nos mandas el comprobante por el mismo chat.</p></div>
-      <div class="paso"><i>3</i><p><b>Quedas registrado</b> con tu nombre en la lista de ingreso.</p></div>
+      <div class="paso"><i>1</i><p><b>Compras en línea.</b> Llenas tus datos y pagas en la página segura de la boletería.</p></div>
+      <div class="paso"><i>2</i><p><b>Te llega tu entrada</b> con código QR al correo.</p></div>
+      <div class="paso"><i>3</i><p><b>Llegas con tu QR</b> al Alfahar Hotel y entras.</p></div>
     </div>
   </div>
 </section>
@@ -437,7 +440,7 @@ footer a{color:#fff;font-weight:600}
     <div class="faq">
       <details><summary>¿Qué incluye la entrada?</summary><div class="resp">Acceso de 8:00 a.m. a 3:30 p.m., las 6 charlas, las rondas de networking, las mesas de trabajo, el brunch tipo bufé y el cóctel y kit de bienvenida.</div></details>
       <details><summary>¿Cuánto cuesta?</summary><div class="resp">$279.920 COP. Es la etapa de últimos cupos, con 20% de descuento sobre $349.900.</div></details>
-      <details><summary>¿Cómo pago?</summary><div class="resp">Nos escribes por WhatsApp, te pasamos los datos, pagas por transferencia y nos mandas el comprobante por el mismo chat.</div></details>
+      <details><summary>¿Cómo pago?</summary><div class="resp">Compras en línea en esta página y tu entrada con código QR te llega al correo. Si prefieres pagar por transferencia, escríbenos por WhatsApp y te ayudamos.</div></details>
       <details><summary>¿Y si después no puedo ir?</summary><div class="resp">Puedes pasarle tu cupo a un colega, familiar o socio sin costo. Solo avisa al WhatsApp 322 698 6123 o a impulsamarketing1.0@gmail.com con el nombre, la cédula y la empresa de la persona, mínimo 48 horas antes del evento.</div></details>
       <details><summary>¿Devuelven el dinero?</summary><div class="resp">Se devuelve el 100% solo si lo pides por escrito antes del 31 de octubre de 2026. Después de esa fecha no hay devoluciones, pero sí puedes pasar tu cupo a otra persona.</div></details>
       <details><summary>¿Dónde es y cómo llego?</summary><div class="resp">En el Alfahar Hotel, El Carmen de Viboral, Antioquia. Queda a 1 hora de Medellín y a 30 minutos del aeropuerto José María Córdova.</div></details>
@@ -454,7 +457,7 @@ footer a{color:#fff;font-weight:600}
   <div class="wrap">
     <h2>Nos vemos el <span class="rojo">21 de noviembre</span></h2>
     <p class="lead">Cupos limitados. No te quedes por fuera.</p>
-    <a class="btn wa" data-seccion="cierre" href="https://wa.me/573226986123?text=Hola%2C%20quiero%20separar%20mi%20cupo%20para%20el%20Brunch%20Empresarial%202026." target="_blank" rel="noopener">Separar mi cupo por WhatsApp</a>
+    <a class="btn compra" data-seccion="cierre" href="https://impulsaevento.website/checkout?tier=c15e32d3-0f43-4549-bcd7-80682c4e1745">Comprar mi entrada</a>
   </div>
 </section>
 
@@ -465,18 +468,25 @@ footer a{color:#fff;font-weight:600}
     <img src="img/logo-impulsa.svg" alt="Impulsa" width="160" height="40" loading="lazy">
     <p>Brunch Empresarial 2026 · Alfahar Hotel, El Carmen de Viboral, Antioquia</p>
     <p style="margin-top:6px"><a class="wa" data-seccion="pie" href="https://wa.me/573226986123?text=Hola%2C%20tengo%20una%20pregunta%20sobre%20el%20Brunch." target="_blank" rel="noopener">322 698 6123</a> · <a href="https://www.instagram.com/impulsa_marketing1.0" target="_blank" rel="noopener">@impulsa_marketing1.0</a></p>
-    <p style="margin-top:10px;font-size:12px">Esta página usa el pixel de Meta para medir visitas y clics a WhatsApp. No guarda lo que escribes.</p>
+    <p style="margin-top:10px;font-size:12px">Esta página usa el pixel de Meta para medir visitas y clics a la compra y a WhatsApp. No guarda lo que escribes.</p>
   </div>
 </footer>
 
+<a class="wa wa-flota" data-seccion="boton-flotante" href="https://wa.me/573226986123?text=Hola%2C%20tengo%20una%20pregunta%20sobre%20el%20Brunch." target="_blank" rel="noopener" aria-label="Escríbenos por WhatsApp"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm5.3 14.2c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .1-3.3-.8-2.8-1.1-4.5-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.8 0-1.4.7-2 1-2.3.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.2.1.4 0 .5l-.3.5-.4.4c-.1.2-.3.3-.1.6.2.3.8 1.3 1.6 2 1.1 1 2 1.3 2.3 1.4.3.1.4.1.6-.1l.8-1c.2-.3.4-.2.6-.1l1.9.9c.3.1.5.2.5.3.1.2.1.7-.1 1.3Z"/></svg></a>
+
 <div class="sticky">
   <div class="p"><small>Últimos cupos · 20% DTO</small><b>$279.920</b></div>
-  <a class="btn wa" data-seccion="barra-fija" href="https://wa.me/573226986123?text=Hola%2C%20quiero%20separar%20mi%20cupo%20para%20el%20Brunch." target="_blank" rel="noopener">Separar cupo</a>
+  <a class="btn compra" data-seccion="barra-fija" href="https://impulsaevento.website/checkout?tier=c15e32d3-0f43-4549-bcd7-80682c4e1745">Comprar</a>
 </div>
 
 <script>
-/* Medición: Contact en cada clic a WhatsApp, con la sección. */
+/* Medición: Contact en cada clic a WhatsApp e InitiateCheckout en cada clic a comprar, con la sección. */
 document.addEventListener('click',function(e){
+  var c=e.target.closest('a.compra');
+  if(c){var k=c.getAttribute('data-seccion')||'desconocida';
+    try{if(window.fbq)fbq('track','InitiateCheckout',{content_name:k,value:279920,currency:'COP'});}catch(_){}
+    try{if(window.gtag)gtag('event','compra_click',{seccion:k});}catch(_){}
+    return;}
   var a=e.target.closest('a.wa');if(!a)return;
   var s=a.getAttribute('data-seccion')||'desconocida';
   try{if(window.fbq)fbq('track','Contact',{content_name:s,content_category:'whatsapp'});}catch(_){}
