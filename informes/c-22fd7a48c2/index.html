@@ -1,0 +1,254 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<meta name="referrer" content="no-referrer">
+<title>Mapa del chat AnyVitalPiel</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Atkinson+Hyperlegible:wght@400;700&family=JetBrains+Mono:wght@500&display=swap">
+<style>
+/* Mapa vertical: la conversación baja paso a paso; cada tarjeta dice quién manda el mensaje */
+:root{
+  --bg:#FAF6F3; --card:#FFFFFF; --ink:#2B2427; --muted:#6E6266; --line:#D9CEC8;
+  --persona:#EEE7E2; --persona-ink:#4A3F43;
+  --sistema:#F6E7C8; --sistema-ink:#7A4E07; --sistema-edge:#C8902E;
+  --asesora:#DCEFEC; --asesora-ink:#14524E; --asesora-edge:#2F8F88;
+  --alto:#F7DCDC; --alto-ink:#8A2E2E;
+  --display:"Bricolage Grotesque",ui-sans-serif,system-ui,sans-serif;
+  --body:"Atkinson Hyperlegible",ui-sans-serif,system-ui,sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,Menlo,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#1B1719; --card:#262023; --ink:#F1E9E5; --muted:#B3A6AA; --line:#4A3F43;
+  --persona:#3A3235; --persona-ink:#E6DCD8;
+  --sistema:#4A3816; --sistema-ink:#F5D79A; --sistema-edge:#C8902E;
+  --asesora:#173B39; --asesora-ink:#A8E3DC; --asesora-edge:#3FB0A7;
+  --alto:#4A2424; --alto-ink:#F2B8B8; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#1B1719; --card:#262023; --ink:#F1E9E5; --muted:#B3A6AA; --line:#4A3F43;
+  --persona:#3A3235; --persona-ink:#E6DCD8;
+  --sistema:#4A3816; --sistema-ink:#F5D79A; --sistema-edge:#C8902E;
+  --asesora:#173B39; --asesora-ink:#A8E3DC; --asesora-edge:#3FB0A7;
+  --alto:#4A2424; --alto-ink:#F2B8B8; color-scheme:dark}
+body{background:var(--bg);color:var(--ink);font:16px/1.5 var(--body);
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:28px 56px}
+.wrap{max-width:980px;margin:0 auto;display:grid;gap:28px}
+h1{font:800 clamp(30px,5vw,46px)/1.05 var(--display);margin:0;text-wrap:balance}
+h2{font:700 22px/1.2 var(--display);margin:0;text-wrap:balance}
+.lead{color:var(--muted);max-width:62ch;margin:6px 0 0}
+.leyenda{display:flex;flex-wrap:wrap;gap:10px}
+.chip{display:inline-flex;align-items:center;gap:8px;padding:6px 12px;border-radius:999px;font-size:14px;font-weight:700}
+.c-persona{background:var(--persona);color:var(--persona-ink)}
+.c-sistema{background:var(--sistema);color:var(--sistema-ink)}
+.c-asesora{background:var(--asesora);color:var(--asesora-ink)}
+.reglas{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 18px;display:grid;gap:6px}
+.reglas b{font-family:var(--display)}
+.reglas ul{margin:0;padding-left:20px;display:grid;gap:4px}
+
+/* columna del flujo */
+.flujo{display:grid;gap:0;justify-items:center}
+.paso{width:100%;max-width:640px;display:grid;gap:10px}
+.flecha{width:2px;height:28px;background:var(--line);position:relative;margin:2px 0}
+.flecha::after{content:"";position:absolute;left:-5px;bottom:-2px;border:6px solid transparent;border-top-color:var(--line);border-bottom:0}
+.quien{font:700 12px/1 var(--body);letter-spacing:.08em;text-transform:uppercase}
+.burbuja{border-radius:16px;padding:14px 16px;display:grid;gap:8px;min-width:0}
+.b-persona{background:var(--persona);color:var(--persona-ink);border-bottom-left-radius:4px;max-width:520px}
+.b-sistema{background:var(--sistema);color:var(--sistema-ink);border-left:4px solid var(--sistema-edge)}
+.b-asesora{background:var(--asesora);color:var(--asesora-ink);border-left:4px solid var(--asesora-edge)}
+.texto{font-size:15px}
+.botones{display:flex;flex-wrap:wrap;gap:6px}
+.boton{background:var(--card);color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:4px 10px;font-size:13px;font-weight:700}
+.cod{font:500 13px/1 var(--mono);background:var(--card);color:var(--asesora-ink);border:1px solid var(--asesora-edge);border-radius:6px;padding:3px 7px;white-space:nowrap}
+.nota{font-size:13px;color:var(--muted)}
+
+/* ramas */
+.ramas{width:100%;display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
+.rama{display:grid;gap:8px;align-content:start;min-width:0}
+.si{font:700 13px/1.3 var(--body);color:var(--muted)}
+.si q{color:var(--ink);font-style:italic}
+.tarjeta{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 14px;display:grid;gap:6px;min-width:0}
+.tarjeta .texto{font-size:14px}
+.titulo-rama{font:700 15px/1.2 var(--display)}
+.dos{width:100%;display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}
+.corte{background:var(--alto);color:var(--alto-ink);border-radius:12px;padding:12px 14px;font-weight:700;font-size:14px}
+.sub{display:grid;gap:8px}
+.mini{width:2px;height:16px;background:var(--line);justify-self:center}
+
+/* cualquier momento */
+.cualquier{display:grid;gap:14px}
+.grid-p{display:grid;gap:10px;grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+.pendiente{background:var(--sistema);color:var(--sistema-ink);padding:1px 6px;border-radius:4px;font-weight:700}
+@media (prefers-reduced-motion:no-preference){.burbuja,.tarjeta{transition:transform .15s}.tarjeta:hover{transform:translateY(-2px)}}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <header>
+    <h1>Mapa del chat AnyVitalPiel</h1>
+    <p class="lead">Lo que pasa desde que una persona escribe hasta que queda con cita. Cada tarjeta dice quién manda el mensaje y, si es la asesora, qué fragmento usa. Los fragmentos se abren con el ícono de hoja de la caja del chat y se buscan escribiendo <span class="cod">vp</span> y el número del paso: <span class="cod">vp 1</span>, <span class="cod">vp 2</span>. Todos empiezan por VP y quedan al final de la lista, debajo de los de siempre.</p>
+  </header>
+
+  <div class="leyenda" aria-label="Quién manda cada mensaje">
+    <span class="chip c-persona">Persona que escribe</span>
+    <span class="chip c-sistema">Sale solo (sistema)</span>
+    <span class="chip c-asesora">Asesora, con fragmento</span>
+  </div>
+
+  <section class="reglas">
+    <b>3 reglas para la asesora</b>
+    <ul>
+      <li><b>Un mensaje y esperar.</b> Nunca mandar dos fragmentos seguidos.</li>
+      <li><b>No saludar ni presentarse.</b> Después del audio, la persona está hablando con Any.</li>
+      <li><b>Siempre 1 → 2 → 3.</b> Escuchar, contar el precio y, solo a quien dice «este mes», ofrecer la cita. Lo demás es para preguntas que salgan.</li>
+      <li><b>La cita presencial la ofrece el sistema.</b> La asesora solo pone la etiqueta de la sede y el sistema manda las fechas libres en botones.</li>
+    </ul>
+  </section>
+
+  <section class="flujo" aria-label="Flujo de la conversación">
+
+    <div class="paso">
+      <span class="quien">Persona</span>
+      <div class="burbuja b-persona"><div class="texto">Hola, quiero más información</div></div>
+    </div>
+    <div class="flecha"></div>
+
+    <div class="paso">
+      <span class="quien">Sale solo, al instante</span>
+      <div class="burbuja b-sistema">
+        <div class="texto">¡Hola! Qué bueno que me escribes 💛<br>Soy Any, cosmiatra especialista en manchas y melasma de la cara. Ya he ayudado a más de 400 pacientes a controlarlas, tratando la piel por dentro y por fuera, sin láser.<br><br>Cuéntame, ¿qué ha pasado con tus manchas hasta ahora?</div>
+        <div class="botones"><span class="boton">Se aclaran y vuelven</span><span class="boton">Algo me las empeoró</span><span class="boton">Nunca las he tratado</span></div>
+      </div>
+    </div>
+    <div class="flecha"></div>
+
+    <div class="ramas" aria-label="Audio según el botón">
+      <div class="rama">
+        <div class="si">Si toca <q>Se aclaran y vuelven</q></div>
+        <div class="burbuja b-sistema"><span class="quien">🎙️ Audio 1 de Any</span><div class="texto">«…la crema cuida la piel por fuera y esta mancha también tiene que ver con cómo cuidas tu cuerpo por dentro… ¿hace cuánto la tienes y qué te has aplicado?»</div></div>
+      </div>
+      <div class="rama">
+        <div class="si">Si toca <q>Algo me las empeoró</q></div>
+        <div class="burbuja b-sistema"><span class="quien">🎙️ Audio 2 de Any</span><div class="texto">«…yo no uso láser ni peelings agresivos, uso productos que cuidan tu piel sin dañarla… ¿qué te hiciste y qué te pasó?»</div></div>
+      </div>
+      <div class="rama">
+        <div class="si">Si toca <q>Nunca las he tratado</q></div>
+        <div class="burbuja b-sistema"><span class="quien">🎙️ Audio 3 de Any</span><div class="texto">«…no todas las manchas son iguales… ¿hace cuánto te salió y en qué parte de la cara?»</div></div>
+      </div>
+    </div>
+    <div class="flecha"></div>
+
+    <div class="paso">
+      <span class="quien">Sale solo</span>
+      <div class="burbuja b-sistema"><div class="texto">🔔 Le llega el aviso a la asesora. El chat ya trae la etiqueta del caso.</div></div>
+    </div>
+    <div class="flecha"></div>
+
+    <div class="paso">
+      <span class="quien">Persona</span>
+      <div class="burbuja b-persona"><div class="texto">Cuenta su caso. Ej.: «Llevo como 6 años, me he echado de todo y siempre vuelven»</div></div>
+    </div>
+    <div class="flecha"></div>
+
+    <div class="paso">
+      <h2>Paso 1 · La asesora escribe <span class="cod">vp 1</span> y escoge según lo que contó</h2>
+      <p class="nota">Un solo mensaje. Todos terminan preguntando la ciudad.</p>
+    </div>
+    <div class="flecha"></div>
+    <div class="ramas" aria-label="Fragmentos del paso 1">
+      <div class="tarjeta"><div class="si">Si dice <q>se aclara y vuelve</q></div><span class="cod">VP 1 Vuelve</span><div class="texto">🫶 Comprendo, eso nos lo cuentan muchísimo.<br><br>Pasa porque la crema solo cuida la piel por fuera. Por eso nosotros la trabajamos por fuera y por dentro, para controlarla de verdad.<br><br>📍 La primera cita es una valoración: la hacemos presencial en Medellín, o virtual si estás en otra ciudad.<br><br>👉 ¿Desde qué ciudad nos escribes?</div></div>
+      <div class="tarjeta"><div class="si">Si dice <q>he probado de todo</q></div><span class="cod">VP 1 Probé de todo</span><div class="texto">🫶 Comprendo, y no es que lo hayas hecho mal.<br><br>Casi siempre la mancha se trata solo por fuera, y por eso vuelve. Nosotros la trabajamos por fuera y por dentro, para controlarla de verdad.<br><br>📍 La primera cita es una valoración: la hacemos presencial en Medellín, o virtual si estás en otra ciudad.<br><br>👉 ¿Desde qué ciudad nos escribes?</div></div>
+      <div class="tarjeta"><div class="si">Si dice <q>el láser o una crema me la empeoró</q></div><span class="cod">VP 1 Empeoró</span><div class="texto">🫶 Comprendo, cuánto lo siento.<br><br>Los tratamientos fuertes maltratan la piel y oscurecen la mancha. Por eso no usamos láser: cuidamos tu piel sin dañarla.<br><br>📍 La primera cita es una valoración: la hacemos presencial en Medellín, o virtual si estás en otra ciudad.<br><br>👉 ¿Desde qué ciudad nos escribes?</div></div>
+      <div class="tarjeta"><div class="si">Si dice <q>me salió en el embarazo / menopausia</q></div><span class="cod">VP 1 Hormonas</span><div class="texto">🫶 Comprendo, y más con el cambio hormonal.<br><br>Cuando las hormonas cambian, la mancha sale o se oscurece, y por eso no se va solo con cremas. Nosotros la trabajamos por fuera y por dentro.<br><br>📍 La primera cita es una valoración: la hacemos presencial en Medellín, o virtual si estás en otra ciudad.<br><br>👉 ¿Desde qué ciudad nos escribes?</div></div>
+      <div class="tarjeta"><div class="si">Si dice <q>nunca me he hecho nada</q></div><span class="cod">VP 1 Nunca</span><div class="texto">🫶 Qué bueno que no te has echado cualquier cosa, porque una rutina equivocada puede oscurecer la mancha.<br><br>Lo primero es mirar bien la tuya.<br><br>📍 La primera cita es una valoración: la hacemos presencial en Medellín, o virtual si estás en otra ciudad.<br><br>👉 ¿Desde qué ciudad nos escribes?</div></div>
+    </div>
+    <div class="flecha"></div>
+
+    <div class="paso">
+      <span class="quien">Persona</span>
+      <div class="burbuja b-persona"><div class="texto">«Medellín» o «Cali»</div></div>
+    </div>
+    <div class="flecha"></div>
+
+    <div class="paso">
+      <h2>Paso 2 · La asesora escribe <span class="cod">vp 2</span> y escoge según la ciudad</h2>
+    </div>
+    <div class="flecha"></div>
+    <div class="dos" aria-label="Fragmentos del paso 2">
+      <div class="tarjeta"><div class="si">Si es de Medellín o cerca</div><span class="cod">VP 2 Medellín</span><div class="texto">En la valoración miramos tu piel y te armamos tu rutina.<br><br>💛 El tratamiento completo está entre $590.000 y $640.000, y ese mismo día te llevas todo para empezar.<br><br>👉 Si en la valoración ves que es para ti, ¿cuándo tienes pensado empezar tu tratamiento: este mes o más adelante?</div></div>
+      <div class="tarjeta"><div class="si">Si es de otra ciudad</div><span class="cod">VP 2 Otra ciudad</span><div class="texto">Por videollamada miramos tu piel y te armamos tu rutina.<br><br>💛 El tratamiento completo está entre $590.000 y $640.000, y te lo enviamos a la casa para que empieces de una 📦<br><br>👉 Si en la valoración ves que es para ti, ¿cuándo tienes pensado empezar tu tratamiento: este mes o más adelante?</div></div>
+    </div>
+    <div class="flecha"></div>
+
+    <div class="dos" aria-label="Qué hacer según la respuesta">
+      <div class="rama">
+        <div class="titulo-rama">Si dice «este mes»</div>
+        <div class="sub">
+          <div class="burbuja b-asesora"><span class="quien">Asesora</span><div class="texto">Le pone una etiqueta: <span class="cod">agenda-laureles</span> o <span class="cod">agenda-colores</span> si es de Medellín o cerca, <span class="cod">agenda-virtual</span> si es de otra ciudad. No escribe nada más.</div></div>
+          <div class="mini"></div>
+          <div class="burbuja b-sistema"><span class="quien">Sale solo</span><div class="texto">Tengo estas citas libres en Laureles 👇<br><br>¿Cuál te separo?</div>
+            <div class="botones"><span class="boton">Lun 9 · 4:40 pm</span><span class="boton">Mar 10 · 8:00 am</span><span class="boton">Ver otras fechas</span></div>
+            <div class="nota">Las 2 fechas salen de la agenda de esa sede: la más cercana y otra de otro día. «Ver otras fechas» manda 2 más.</div></div>
+          <div class="mini"></div>
+          <div class="burbuja b-sistema"><span class="quien">Sale solo, al tocar una fecha</span><div class="texto">Listo, te separo el martes 10 de noviembre a las 8:00 am en Laureles 🙌<br><br>Para dejarla a tu nombre, me confirmas por favor nombres y apellidos completos, número de cédula y correo electrónico.</div>
+            <div class="nota">Todavía no se crea la cita: el calendario queda libre hasta que lleguen los datos.</div></div>
+          <div class="mini"></div>
+          <div class="burbuja b-sistema"><span class="quien">Sale solo, cuando llegan los datos</span><div class="texto">Listo, quedó tu valoración para el martes 10 de noviembre a las 8:00 am en Laureles 💛<br><br>📍 Calle 36 # 80B-59, consultorio 202…</div>
+            <div class="nota">El nombre, la cédula y el correo quedan guardados en el contacto, y la cita entra al calendario ya confirmada. Si es virtual, en lugar de la dirección dice que la videollamada es a ese mismo número.</div></div>
+          <div class="mini"></div>
+          <div class="tarjeta"><div class="si">Manda los datos incompletos</div><div class="texto">Sale solo: «Gracias 🙏 Me falta tu número de cédula para dejarla a tu nombre.» La cita se crea cuando completa los tres.</div></div>
+          <div class="tarjeta"><div class="si">No toca ninguna fecha en 1 hora</div><div class="texto">Sale solo: «¿Te separo alguna de las dos? 💛 Los espacios se van llenando rápido.»</div></div>
+          <div class="tarjeta"><div class="si">No manda los datos</div><div class="texto">A las 3 horas sale solo el recordatorio de los datos. A las 20 horas se le avisa que no se alcanzó a dejar y que puede pedir otra cuando quiera. Como nunca se creó la cita, el calendario no queda con citas sin datos.</div></div>
+          <div class="mini"></div>
+          <div class="tarjeta"><div class="si">El día antes de la cita</div><span class="cod">VP C Recordatorio</span><div class="texto">Te esperamos mañana a las [hora] para tu valoración 💛 ¿Me confirmas que vienes? Si no puedes, avísame y te la cambio, así no pierdes tu espacio.</div></div>
+        </div>
+      </div>
+      <div class="rama">
+        <div class="titulo-rama">Si duda</div>
+        <div class="corte">No se le ofrece cita hasta que diga «este mes». Any prefiere un espacio vacío a una valoración sin venta.</div>
+        <div class="tarjeta"><div class="si">Dice <q>lo voy a pensar</q></div><span class="cod">VP D Pensar</span><div class="texto">Claro, piénsalo con calma 💛 Cuéntame, ¿qué te hace dudar: el precio, el tiempo o si te va a funcionar?</div></div>
+        <div class="tarjeta"><div class="si">Dice <q>más adelante</q> o <q>ahorita no me alcanza</q></div><span class="cod">VP D Más adelante</span><div class="texto">Perfecto, sin afán 💛 Te dejo anotado tu caso. Cuando quieras empezar, me escribes la palabra CITA y te busco el primer espacio libre.</div></div>
+        <div class="tarjeta"><div class="si">Dice <q>mañana miro y te confirmo</q></div><span class="cod">VP D Confirmo luego</span><div class="texto">Dale. Te cuento que constantemente estamos agendando y los espacios se van rápido. ¿Te la dejo separada y, si no puedes, me avisas y la movemos?</div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cualquier" aria-label="Fragmentos para cualquier momento">
+    <h2>En cualquier momento, si pregunta algo <span class="cod">vp p</span></h2>
+    <p class="nota">Se contesta en una línea y se sigue con el paso donde iba.</p>
+    <div class="grid-p">
+      <div class="tarjeta"><div class="si"><q>¿Cuánto vale la valoración?</q></div><span class="cod">VP P Valoración gratis</span><div class="texto">La valoración es gratuita 💛</div></div>
+      <div class="tarjeta"><div class="si"><q>¿Sí funciona? ¿Tienen resultados?</q></div><span class="cod">VP P Resultados</span><div class="texto">Estas son algunas de nuestras pacientes 👇 [las fotos de siempre]</div></div>
+      <div class="tarjeta"><div class="si"><q>¿Usan láser?</q></div><span class="cod">VP P Láser</span><div class="texto">No, no usamos láser. Trabajamos con productos para la cara y una guía de batidos e infusiones para cuidarte por dentro, sin maltratar la piel.</div></div>
+      <div class="tarjeta"><div class="si"><q>¿Qué incluye?</q></div><span class="cod">VP P Qué incluye</span><div class="texto">Incluye 8 productos para la cara, una guía de batidos e infusiones y las revisiones para ver cómo vas.</div></div>
+      <div class="tarjeta"><div class="si">Manchas en manos, brazos u otra parte</div><span class="cod">VP P Otra zona</span><div class="texto">Por ahora trabajamos solo manchas y melasma de la cara 🙏</div></div>
+      <div class="tarjeta"><div class="si">Vive fuera de Colombia</div><span class="cod">VP P Exterior</span><div class="texto">Por ahora solo atendemos en Colombia y no hacemos envíos a otros países 🙏</div></div>
+      <div class="tarjeta"><div class="si"><q>¿Atienden hombres?</q></div><span class="cod">VP P Hombres</span><div class="texto">Sí, claro, también atendemos hombres 💛</div></div>
+    </div>
+
+    <h2>Citas y pacientes <span class="cod">vp c</span></h2>
+    <div class="grid-p">
+      <div class="tarjeta"><div class="si">Cancela la cita</div><span class="cod">VP C Reagendar</span><div class="texto">Tranqui, te la cambio 💛 Tengo el [día] a las [hora], ¿te sirve?</div></div>
+      <div class="tarjeta"><div class="si">Paciente pide su revisión</div><span class="cod">VP C Revisión</span><div class="texto">Recuerda que las revisiones son cada dos meses y no tienen costo. Tengo el [día] a las [hora], ¿te la separo?</div></div>
+      <div class="tarjeta"><div class="si">Se despide</div><span class="cod">VP C Cierre</span><div class="texto">Es con mucho gusto. Que tengas una feliz [mañana / tarde / noche] 💛</div></div>
+    </div>
+
+    <h2>Si la agenda con botones no responde <span class="cod">vp 3</span></h2>
+    <p class="nota">Si en 2 minutos no le llegan las fechas a la persona, la cita se ofrece a mano.</p>
+    <div class="grid-p">
+      <div class="tarjeta"><span class="cod">VP 3 Hora presencial</span><div class="texto">💛 La valoración no tiene costo.<br><br>Tengo cita para el [día] a las [hora] en [Laureles / Los Colores], ¿te la separo?</div></div>
+      <div class="tarjeta"><span class="cod">VP 3 Hora virtual</span><div class="texto">💛 La valoración no tiene costo.<br><br>Tengo cita para el [día] a las [hora] por videollamada, ¿te la separo?</div></div>
+      <div class="tarjeta"><div class="si">Esa hora no le sirve</div><span class="cod">VP 3 Otra hora</span><div class="texto">Claro, ya te reviso la agenda. Tengo el [día] a las [hora], ¿te sirve?</div></div>
+      <div class="tarjeta"><div class="si">Acepta la hora</div><span class="cod">VP 3 Datos</span><div class="texto">Listo, te la separo 🙌<br><br>Para dejarla a tu nombre, me confirmas por favor nombres y apellidos completos, número de cédula y correo electrónico.</div></div>
+      <div class="tarjeta"><div class="si">Mandó los datos</div><span class="cod">VP 3 Confirmada</span><div class="texto">Listo, quedó tu valoración para el [día] a las [hora] en [sede] 💛<br><br>Ven sin maquillaje para mirarte bien la piel. Te esperamos.<br><br>Si te sale algo y no puedes venir, avísame y te la cambio.</div></div>
+      <div class="tarjeta"><div class="si">Mandó los datos, virtual</div><span class="cod">VP 3 Confirmada virtual</span><div class="texto">Listo, quedó tu valoración por videollamada para el [día] a las [hora] 💛<br><br>Ese día te hacemos la videollamada a este número; ten unos 40 minutos libres y la cara sin maquillaje.<br><br>Si te sale algo y no puedes, avísame y te la cambio.</div></div>
+      <div class="tarjeta"><div class="si">Después de confirmar, en Laureles</div><span class="cod">VP 3 Laureles</span><div class="texto">Estamos ubicados en la Calle 36 # 80B-59, consultorio 202, barrio Laureles, a una cuadra del Éxito, en el segundo piso de Cristina Sierra Nails. Cuando llegues, toca el citófono 202 para que te abran.</div></div>
+      <div class="tarjeta"><div class="si">Después de confirmar, en Los Colores</div><span class="cod">VP 3 Los Colores</span><div class="texto">Estamos ubicados en el Centro de Belleza y Estética Integral Salud 10, Calle 53 # 78-105, barrio Los Colores, a media cuadra de la iglesia San Clemente y al lado del D1.</div></div>
+    </div>
+  </section>
+</div>
+
+<script src="/assets/medir.js" data-pagina="mapa-chat-anyvitalpiel" defer></script>
+</body>
+</html>
