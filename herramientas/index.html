@@ -23,7 +23,13 @@ h2{font-size:clamp(26px,6vw,34px);font-weight:900;line-height:1.1;margin:6px 0 1
 .card{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:22px}
 .btn{display:inline-flex;justify-content:center;align-items:center;gap:8px;font:inherit;font-weight:900;background:var(--sun);color:var(--bg);border:0;border-radius:10px;padding:15px 20px;text-decoration:none;cursor:pointer}
 .btn.sec{background:transparent;color:var(--sun);border:2px solid var(--sun)}
-#todo{display:flex;flex-direction:column;gap:48px}
+form{display:flex;flex-direction:column;gap:12px;margin-top:18px}
+input{font:inherit;padding:14px 16px;border-radius:10px;border:1px solid var(--line);background:#0b0b10;color:#fff}
+label.ok{font-size:13px;color:var(--mute);display:flex;gap:10px;align-items:flex-start}
+label.ok a{color:var(--sun)}
+#todo{display:none;flex-direction:column;gap:48px}
+body.abierto #todo{display:flex}
+body.abierto #puerta{display:none}
 .regalos{display:grid;gap:14px}
 .regalo{display:flex;gap:18px;align-items:center}
 .regalo img,.regalo .ico{width:84px;height:84px;flex:none;object-fit:contain}
@@ -97,6 +103,17 @@ h2{font-size:clamp(26px,6vw,34px);font-weight:900;line-height:1.1;margin:6px 0 1
     <p class="sub">Un video editado gratis y el paso a paso para que Claude Code trabaje en tu computador.</p>
   </header>
 
+
+  <section id="puerta" class="card">
+    <h2>Ábrelas <em>aquí</em></h2>
+    <form id="f" data-clarity-mask="true">
+      <input name="nombre" placeholder="Tu nombre" required autocomplete="name" maxlength="80">
+      <input name="whatsapp" type="tel" placeholder="Tu WhatsApp" required autocomplete="tel" maxlength="20" pattern="[0-9+ ()-]{7,20}">
+      <input name="correo" type="email" placeholder="Tu correo" required autocomplete="email" maxlength="120">
+      <label class="ok"><input type="checkbox" required> Autorizo a Joako Estratega a guardar mis datos para enviarme estas herramientas y contactarme. Puedo pedir que los borren cuando quiera (Ley 1581 de 2012). <a href="/politica-herramientas/">Política de datos</a></label>
+      <button class="btn">Abrir las herramientas</button>
+    </form>
+  </section>
 
   <div id="todo">
     <section class="regalos">
@@ -242,9 +259,17 @@ h2{font-size:clamp(26px,6vw,34px);font-weight:900;line-height:1.1;margin:6px 0 1
       <a class="btn" href="https://wa.me/573124146643?text=Hola%20Joako%2C%20vengo%20de%20tus%20herramientas%20y%20quiero%20el%20diagn%C3%B3stico%20de%20mi%20negocio%20y%20mi%20embudo%20de%20ventas." target="_blank" rel="noopener" data-ev="diagnostico">Quiero mi diagnóstico</a>
     </section>
   </div>
-  <p class="sub" style="font-size:13px;text-align:center">Esta página mide visitas y clics para mejorar. <a href="/politica-de-privacidad/" style="color:var(--sun)">Política de datos</a></p>
+  <p class="sub" style="font-size:13px;text-align:center">Esta página mide visitas y clics para mejorar. <a href="/politica-herramientas/" style="color:var(--sun)">Política de datos</a></p>
 </div>
 <script>
+const API='https://script.google.com/macros/s/AKfycbxc4Gjiidf8EM6OZBXWmQPJqQkKMoWToTtS0y0brxLHPubeaX-pyqoyW4962kSErmzy/exec';
+const EVENTO=(new URLSearchParams(location.search).get('e')||'directo').replace(/[^a-z0-9-]/gi,'').slice(0,40);
+function abrir(){document.body.classList.add('abierto')}
+try{if(localStorage.getItem('herramientas-ia'))abrir()}catch(_){}
+document.getElementById('f').addEventListener('submit',e=>{e.preventDefault();const f=e.target;if(!f.checkValidity())return f.reportValidity();
+  const d={producto:'Herramientas IA',estado:'Registro',aviso:'herramientas-2026-11-v1',evento:EVENTO,origen:location.origin+location.pathname,nombre:f.nombre.value.trim(),whatsapp:f.whatsapp.value.trim(),correo:f.correo.value.trim()};
+  fetch(API,{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(d)}).catch(()=>{});
+  try{localStorage.setItem('herramientas-ia','1')}catch(_){}abrir();scrollTo(0,0);window.medir&&window.medir('registro',{evento:EVENTO})});
 const CMD={win:'irm https://claude.ai/install.ps1 | iex',mac:'curl -fsSL https://claude.ai/install.sh | bash'};
 document.querySelectorAll('[data-so]').forEach(b=>b.onclick=()=>{document.querySelectorAll('[data-so]').forEach(x=>x.classList.toggle('on',x===b));const s=b.dataset.so;document.getElementById('cmd').textContent=CMD[s];document.querySelectorAll('.w-win').forEach(x=>x.hidden=s!=='win');document.querySelectorAll('.w-mac').forEach(x=>x.hidden=s!=='mac');window.medir&&window.medir('so-'+s)});
 document.querySelectorAll('[data-copy]').forEach(b=>b.onclick=()=>{navigator.clipboard.writeText(document.getElementById(b.dataset.copy).textContent);const t=b.textContent;b.textContent='¡Copiado!';setTimeout(()=>b.textContent=t,1500);window.medir&&window.medir('copiar-'+b.dataset.copy)});
