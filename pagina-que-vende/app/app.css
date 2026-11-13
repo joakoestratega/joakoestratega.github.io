@@ -17,14 +17,14 @@ a{color:inherit}
 .logo{display:flex;align-items:center;gap:10px;font-weight:800;font-size:18px;text-decoration:none;letter-spacing:-.02em}
 .logo-m{display:grid;place-items:center;width:30px;height:30px;border-radius:9px;background:var(--ac);color:var(--ac-tx);font-size:16px}
 .pasos-app{display:flex;gap:6px;list-style:none;margin:0 auto;counter-reset:p}
-.pasos-app li{counter-increment:p;display:flex;align-items:center;gap:8px;font-size:13px;color:var(--tx3);padding:6px 12px;border-radius:99px}
+.pasos-app li{counter-increment:p;display:flex;align-items:center;gap:8px;font-size:13px;color:var(--tx3);padding:6px 10px;border-radius:99px;white-space:nowrap}
 .pasos-app li::before{content:counter(p);display:grid;place-items:center;width:20px;height:20px;border-radius:50%;border:1px solid var(--linea2);font-size:11px;font-weight:700}
 .pasos-app li.hecho{color:var(--tx2)}
 .pasos-app li.hecho::before{content:"✓";background:var(--bg3);border-color:transparent;color:var(--ac)}
 .pasos-app li.actual{color:var(--tx);background:var(--bg3)}
 .pasos-app li.actual::before{background:var(--ac);color:var(--ac-tx);border-color:transparent}
 .barra-der{min-width:120px;text-align:right;font-size:13px;color:var(--tx2)}
-@media (max-width:980px){.pasos-app li{font-size:0;gap:0;padding:6px}.barra-der{min-width:0}}
+@media (max-width:1240px){.pasos-app li{font-size:0;gap:0;padding:6px}.barra-der{min-width:0}}
 
 /* pantallas */
 .pant{display:none;min-height:calc(100vh - 64px)}
@@ -245,7 +245,7 @@ h2 em,h1 em{font-style:normal;color:var(--ac)}
 .creada img{height:44px;width:auto}
 @media (max-width:700px){.by span{display:none}.by{margin-left:8px;padding-left:8px}.by img{height:20px}}
 .logo{white-space:nowrap;flex:none}
-@media (max-width:700px){.pasos-app{display:none}.logo-txt{font-size:17px}.barra{gap:10px;padding:0 16px}.pill{font-size:13px}}
+@media (max-width:700px){.pasos-app{display:none}.logo-txt{font-size:15px}.barra{gap:10px;padding:0 16px}.pill{font-size:13px}}
 
 .camino-kit{display:flex;align-items:center;justify-content:space-between;gap:16px;margin:22px 0 8px;padding:16px 20px;border:1px solid rgba(248,180,0,.45);border-radius:14px;background:rgba(248,180,0,.06);color:#fff;text-decoration:none;transition:background .2s,border-color .2s}
 .camino-kit:hover{background:rgba(248,180,0,.12);border-color:#F8B400}

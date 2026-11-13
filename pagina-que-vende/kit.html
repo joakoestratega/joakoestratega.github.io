@@ -66,8 +66,8 @@ pre mark{background:rgba(248,180,0,.18);color:var(--a);border-radius:4px;padding
   <p class="sub">Sin herramienta. Abre <a href="https://gemini.google.com/app" target="_blank" rel="noopener" style="color:var(--a)">gemini.google.com</a> con tu Gmail y pega los prompts en orden, en el mismo chat.</p>
   <div id="camino1"></div>
 
-  <h2>Camino 2: <span>con Página que Vende</span></h2>
-  <p class="sub">La herramienta te da los prompts sola y arma la página con un diseño ya probado. Solo copias y pegas 3 veces en tu Gemini. <a href="./" style="color:var(--a)">Abrir Página que Vende</a></p>
+  <h2>Camino 2: <span>con el Creador de Páginas que Venden</span></h2>
+  <p class="sub">La herramienta te da los prompts sola y arma la página con un diseño ya probado. Solo copias y pegas 3 veces en tu Gemini. <a href="./" style="color:var(--a)">Abrir el Creador de Páginas que Venden</a></p>
   <div id="camino2"></div>
 
   <h2>Para <span>publicar</span></h2>
@@ -140,7 +140,7 @@ Sin texto, sin letras, sin logos y sin marcas de agua. Formato horizontal.` },
 ];
 
 const CAMINO2 = [
-  { t: 'Lo que escribes en la herramienta', d: 'En el primer recuadro de Página que Vende. Después escoge "Usar mi chat".', p: d => `${d.vende}. Para ${d.quien.charAt(0).toLowerCase() + d.quien.slice(1)}. Precio: ${d.precio}.` },
+  { t: 'Lo que escribes en la herramienta', d: 'En el primer recuadro del Creador de Páginas que Venden. Después escoge "Usar mi chat".', p: d => `${d.vende}. Para ${d.quien.charAt(0).toLowerCase() + d.quien.slice(1)}. Precio: ${d.precio}.` },
   { t: 'Los datos de la marca (paso 4)', d: 'Para llenar el formulario "Cuéntanos de tu marca" sin pensar.', p: d =>
 `Nombre: ${d.marca}
 Qué vendes: ${d.vende}
