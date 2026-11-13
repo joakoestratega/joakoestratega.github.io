@@ -43,7 +43,7 @@
       <span class="camino-kit-btn">Abrir el kit →</span>
     </a>
     <p class="creada">Creada por <img src="app/joako-estratega.png" alt="Joako Estratega"></p>
-    <p class="nota-medicion">Contamos visitas y clics para mejorar la herramienta. Lo que escribes solo va a la inteligencia artificial que tú escojas; nosotros no lo guardamos. <a href="politica.html" target="_blank" rel="noopener">Política de datos</a></p>
+    <p class="nota-medicion">Guardamos tu nombre, tu WhatsApp, tu correo y qué vendes para ayudarte con tu página. Lo demás que escribes solo va a la inteligencia artificial que tú escojas. También contamos visitas y clics. <a href="politica.html" target="_blank" rel="noopener">Política de datos</a></p>
   </section>
 </main>
 
@@ -145,6 +145,23 @@
     </aside>
   </div>
 </main>
+
+<!-- Ventana: registro -->
+<div class="modal" id="m-registro">
+  <form class="modal-caja chica registro" id="f-registro">
+    <button type="button" class="cerrar" data-cerrar>✕</button>
+    <span class="pill">Gratis</span>
+    <h3>¿A quién le hacemos la página?</h3>
+    <p>Déjanos tus datos y empezamos. Así te podemos ayudar si te atascas.</p>
+    <input id="r-web" name="web" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0">
+    <label>Tu nombre<input id="r-nombre" required autocomplete="name" maxlength="80"></label>
+    <label>Tu WhatsApp<input id="r-whatsapp" required type="tel" autocomplete="tel" inputmode="tel" maxlength="25" placeholder="Ej: 300 123 4567"></label>
+    <label>Tu correo<input id="r-email" required type="email" autocomplete="email" maxlength="120"></label>
+    <label class="acepto"><input type="checkbox" id="r-acepto" required><span>Acepto la <a href="politica.html" target="_blank" rel="noopener">política de datos</a>.</span></label>
+    <label class="acepto"><input type="checkbox" id="r-mensajes"><span>Quiero que Joako Estratega me escriba por WhatsApp o correo sobre talleres y servicios.</span></label>
+    <button class="b-prim ancho" type="submit">Empezar mi página →</button>
+  </form>
+</div>
 
 <!-- Ventana: conectar -->
 <div class="modal" id="m-conectar">

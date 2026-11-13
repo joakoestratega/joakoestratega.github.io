@@ -68,8 +68,51 @@ $('#f-negocio').onsubmit = async e => {
   e.preventDefault();
   E.negocio = $('#negocio').value.trim();
   if (E.negocio.length < 8) return aviso('Cuéntanos un poco más de tu negocio.', true);
+  if (!REGISTRO.hecho()) return abrir('#m-registro');
+  seguirDespuesDeRegistro();
+};
+function seguirDespuesDeRegistro() {
   if (IA.listo()) return arrancarInvestigacion();
   abrir('#m-conectar');
+}
+
+// Registro: cada persona queda en la hoja de Joako Estratega (Leads Generales, producto "Creador de Páginas").
+const REGISTRO = {
+  URL: 'https://script.google.com/macros/s/AKfycbxc4Gjiidf8EM6OZBXWmQPJqQkKMoWToTtS0y0brxLHPubeaX-pyqoyW4962kSErmzy/exec',
+  leer(k) { try { return localStorage.getItem(k); } catch { return null; } },
+  poner(k, v) { try { localStorage.setItem(k, v); } catch {} },
+  hecho() { return !!REGISTRO.leer('pqv_registro'); },
+  visita() {
+    let v = REGISTRO.leer('pqv_visita');
+    if (!v) { v = 'v' + Date.now().toString(36) + Math.random().toString(36).slice(2, 7); REGISTRO.poner('pqv_visita', v); }
+    return v;
+  },
+};
+// Con el mismo código se encuentra la grabación de esa persona en Clarity (filtro "ID personalizado").
+setTimeout(() => { try { window.clarity && window.clarity('identify', REGISTRO.visita()); } catch {} }, 1500);
+
+$('#f-registro').onsubmit = async e => {
+  e.preventDefault();
+  const datos = {
+    producto: 'Creador de Páginas',
+    nombre: $('#r-nombre').value.trim().slice(0, 80),
+    whatsapp: $('#r-whatsapp').value.trim().slice(0, 25),
+    email: $('#r-email').value.trim().slice(0, 120),
+    negocio: E.negocio.slice(0, 300),
+    acepta_mensajes: $('#r-mensajes').checked ? 'si' : 'no',
+    visita: REGISTRO.visita(),
+    origen: location.origin + location.pathname,
+  };
+  if ($('#r-web').value) { $('#m-registro').classList.remove('abierto'); return seguirDespuesDeRegistro(); }
+  if (datos.nombre.length < 2) return aviso('Escribe tu nombre.', true);
+  if (datos.whatsapp.replace(/\D/g, '').length < 7) return aviso('Revisa tu número de WhatsApp.', true);
+  // Se manda por detrás (keepalive) para que la persona siga sin esperar a la hoja.
+  try { fetch(REGISTRO.URL, { method: 'POST', mode: 'no-cors', keepalive: true, headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify(datos) }).catch(() => {}); } catch {}
+  REGISTRO.poner('pqv_registro', '1');
+  try { window.medir && window.medir('registro', { visita: datos.visita }); } catch {}
+  try { window.clarity && (window.clarity('identify', datos.visita), window.clarity('set', 'registrado', 'si')); } catch {}
+  $('#m-registro').classList.remove('abierto');
+  seguirDespuesDeRegistro();
 };
 
 $('#b-llave').onclick = async () => {
