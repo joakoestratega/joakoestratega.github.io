@@ -1,0 +1,231 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Página que Vende · Crea tu página de venta con IA, gratis · Joako Estratega</title>
+<meta name="description" content="Escribe qué vendes. Revisamos las páginas que más venden en tu negocio en todo el mundo y te armamos la tuya. Gratis.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Bebas+Neue&display=swap" rel="stylesheet">
+<script>document.write('<link rel="stylesheet" href="app/app.css?v='+Date.now()+'">')</script>
+</head>
+<body data-clarity-mask="true">
+
+<nav class="barra">
+  <a class="logo" href="./"><span class="logo-txt">Página que <b>Vende</b></span><span class="by"><span>creada por</span><img src="app/joako-estratega.png" alt="Joako Estratega"></span></a>
+  <ol class="pasos-app" id="pasos">
+    <li data-p="1">Tu negocio</li><li data-p="2">Investigación</li><li data-p="3">Estilo</li><li data-p="4">Tu marca</li><li data-p="5">Fotos y publicar</li>
+  </ol>
+  <span class="barra-der" id="barra-der"></span>
+</nav>
+
+<!-- 1. INICIO -->
+<main class="pant activa" id="p-inicio">
+  <section class="inicio">
+    <span class="pill">Gratis · Con inteligencia artificial · Publicada hoy</span>
+    <h1>Crea tu página de venta con lo que <em>ya vende</em> en tu negocio.</h1>
+    <p class="sub">Escribe qué vendes. Revisamos las páginas que más venden en tu negocio en todo el mundo y armamos la tuya con eso, con tus fotos y tu marca.</p>
+    <form class="caja-negocio" id="f-negocio">
+      <textarea id="negocio" rows="3" required placeholder="Ej: Vendo café de especialidad de Colombia en bolsas de 500 g, para personas que toman café en casa todos los días"></textarea>
+      <div class="caja-pie">
+        <div class="ejemplos" id="ejemplos"></div>
+        <button class="b-prim" type="submit">Investigar mi mercado <span>→</span></button>
+      </div>
+    </form>
+    <div class="como">
+      <div><b>1</b><span>Revisamos las páginas que más venden en tu negocio</span></div>
+      <div><b>2</b><span>Te mostramos 3 estilos armados con lo que funciona</span></div>
+      <div><b>3</b><span>Le pones tu marca y tus fotos, y la publicas</span></div>
+    </div>
+    <p class="demos" id="demos"></p>
+    <p class="nota-medicion" style="font-size:14px;margin-top:6px">¿Prefieres hacerlo directo en tu Gemini? <a href="kit.html" style="color:var(--ac);font-weight:700">Usa el kit de prompts</a></p>
+    <p class="creada">Creada por <img src="app/joako-estratega.png" alt="Joako Estratega"></p>
+    <p class="nota-medicion">Contamos visitas y clics para mejorar la herramienta. Lo que escribes solo va a la inteligencia artificial que tú escojas; nosotros no lo guardamos. <a href="politica.html" target="_blank" rel="noopener">Política de datos</a></p>
+  </section>
+</main>
+
+<!-- 2. INVESTIGANDO -->
+<main class="pant" id="p-investigando">
+  <section class="envoltura">
+    <span class="pill pulso" id="inv-fase">Investigando</span>
+    <h2 id="inv-titulo">Buscando las páginas que más venden…</h2>
+    <p class="sub" id="inv-sub"></p>
+    <div class="progreso"><i id="inv-barra"></i></div>
+    <div class="grilla-paginas" id="inv-grilla"></div>
+  </section>
+</main>
+
+<!-- 3. ESTILOS -->
+<main class="pant" id="p-estilos">
+  <section class="envoltura">
+    <div class="cab-pant">
+      <div>
+        <span class="pill" id="est-pill">Informe listo</span>
+        <h2>Elige el estilo de tu página</h2>
+        <p class="sub" id="est-sub">Cada uno está armado con lo que hacen las páginas que más venden en tu negocio.</p>
+      </div>
+      <button class="b-sec" id="b-informe">Ver el informe completo</button>
+    </div>
+    <div class="estilos" id="estilos"></div>
+  </section>
+</main>
+
+<!-- 4. MARCA -->
+<main class="pant" id="p-marca">
+  <section class="envoltura angosta">
+    <span class="pill">Último paso antes de tu página</span>
+    <h2>Cuéntanos de tu marca</h2>
+    <p class="sub">Con esto escribimos todos los textos para ti. Lo que no sepas, déjalo en blanco.</p>
+    <form class="form" id="f-marca">
+      <label class="c2">Nombre de tu marca *<input name="nombre" required placeholder="Ej: Café Montaña"></label>
+      <label class="c2">¿Qué vendes exactamente? *<textarea name="que_vende" rows="2" required></textarea></label>
+      <label>Precio<input name="precio" placeholder="Ej: $45.000"></label>
+      <label>Precio antes (si hay descuento)<input name="precio_antes" placeholder="Ej: $60.000"></label>
+      <label>WhatsApp (con código de país)<input name="whatsapp" inputmode="tel" placeholder="Ej: 57 300 123 4567"></label>
+      <label>Link de compra (opcional)<input name="link_compra" type="url" placeholder="Ej: tu producto en Shopify"></label>
+      <label class="c2">¿Qué te hace diferente?<textarea name="diferencial" rows="2" placeholder="Ej: Lo tostamos el mismo día que lo enviamos"></textarea></label>
+      <label>Garantía u oferta<input name="garantia" placeholder="Ej: Si no te gusta, te devolvemos tu dinero"></label>
+      <label>Ciudad y país<input name="ciudad" placeholder="Ej: Medellín, Colombia"></label>
+      <label class="color">Color de tu marca (opcional)<span><input name="color" type="color" value="#000000"><em>Usar el del estilo</em></span></label>
+      <button class="b-prim c2" type="submit">Crear mi página <span>→</span></button>
+    </form>
+  </section>
+</main>
+
+<!-- 5. EDITOR -->
+<main class="pant" id="p-editor">
+  <div class="editor">
+    <div class="vista">
+      <div class="vista-barra">
+        <span class="ayuda">Toca cualquier texto para cambiarlo</span>
+        <div class="seg"><button class="on" data-ancho="100%">Computador</button><button data-ancho="400px">Celular</button></div>
+      </div>
+      <div class="marco"><iframe id="vista" title="Tu página" sandbox="allow-scripts"></iframe></div>
+    </div>
+    <aside class="panel">
+      <div class="tabs"><button class="on" data-tab="fotos" id="tab-fotos">Fotos</button><button data-tab="publicar">Publicar</button></div>
+      <div class="aviso" id="revisar-promesas"></div>
+      <div class="tab activa" id="t-fotos">
+        <p class="panel-int">Tu página ya funciona. Cambia las fotos de referencia por las tuyas para que sea 100% tuya.</p>
+        <div id="lista-fotos"></div>
+      </div>
+      <div class="tab" id="t-publicar">
+        <div class="aviso" id="aviso-fotos"></div>
+        <div class="pub">
+          <h4>Publícala gratis con Google</h4>
+          <p>Queda en internet con tu cuenta de Gmail y un link listo para compartir.</p>
+          <button class="b-prim" id="b-sites">Copiar mi página</button>
+          <ol class="ia-pasos" id="pasos-sites">
+            <li>Abre <a href="https://sites.google.com/new" target="_blank" rel="noopener">Google Sites</a> con tu Gmail y toca <b>Sitio en blanco</b>.</li>
+            <li>A la derecha toca <b>Páginas</b>. Pon el mouse sobre el <b>+</b> de abajo y elige <b>Incorporación de página completa</b>. Ponle nombre y toca <b>Listo</b>.</li>
+            <li>Toca <b>Incorporar elemento</b>, luego la pestaña <b>Incorporar código</b>. Pega tu página y toca <b>Siguiente</b> e <b>Insertar</b>.</li>
+            <li>En los tres puntos de tu página elige <b>Usar como página principal</b>. Después toca <b>Publicar</b>, escribe el nombre de tu link y vuelve a tocar <b>Publicar</b>.</li>
+            <li><a href="guias/google-sites.html" target="_blank" rel="noopener">Ver la guía completa</a></li>
+          </ol>
+          <div id="pub-res"></div>
+        </div>
+        <div class="pub">
+          <h4>Llévala a tu tienda</h4>
+          <p>Copia tu página y pégala en tu tienda en 3 pasos.</p>
+          <div class="pub-btns">
+            <a class="b-sec" href="guias/shopify.html" target="_blank">Shopify</a>
+            <a class="b-sec" href="guias/wordpress.html" target="_blank">WordPress</a>
+          </div>
+          <button class="b-sec ancho" id="b-copiar">Copiar el código de mi página</button>
+        </div>
+        <div class="pub">
+          <h4>Descárgala</h4>
+          <p>Un archivo que puedes subir a cualquier hosting.</p>
+          <button class="b-sec ancho" id="b-descargar">Descargar mi página</button>
+        </div>
+      </div>
+    </aside>
+  </div>
+</main>
+
+<!-- Ventana: conectar -->
+<div class="modal" id="m-conectar">
+  <div class="modal-caja motor">
+    <button class="cerrar" data-cerrar>✕</button>
+    <span class="pill">Gratis, siempre</span>
+    <h3>¿Cómo quieres que trabaje la inteligencia artificial?</h3>
+    <p class="sub chico">Las dos formas son gratis. Nada se cobra ni te pide tarjeta.</p>
+    <div class="motores">
+      <div class="motor-op recomendado">
+        <span class="etq-rec">Más rápido</span>
+        <h4>Automático, con tu llave gratis de Google</h4>
+        <p>Lo hace todo solo. Te toma 1 minuto la primera vez.</p>
+        <ol class="mini-pasos">
+          <li><span>Abre <a href="https://aistudio.google.com/apikey" target="_blank" rel="noopener">Google AI Studio</a> con tu correo de Gmail.</span></li>
+          <li><span>Toca <b>Create API key</b> y luego <b>Copy</b>.</span></li>
+          <li><span>Pégala aquí abajo.</span></li>
+        </ol>
+        <input id="in-llave" placeholder="Pega aquí tu llave (empieza por AIza…)" autocomplete="off" spellcheck="false">
+        <button class="b-prim ancho" id="b-llave">Guardar y empezar</button>
+        <small class="nota-p">Tu llave se queda solo en este navegador. Nadie más la ve.</small>
+      </div>
+      <div class="motor-op">
+        <h4>Con tu chat de siempre</h4>
+        <p>Usa tu ChatGPT, Gemini o Claude gratis. Copias y pegas 3 veces y listo. No necesitas nada más.</p>
+        <button class="b-sec ancho" id="b-chat">Usar mi chat</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Ventana: copiar y pegar en el chat -->
+<div class="modal" id="m-chat">
+  <div class="modal-caja chat-caja">
+    <span class="pill" id="ch-paso">Paso 1 de 3</span>
+    <h3 id="ch-titulo">Pídeselo a tu chat</h3>
+    <ol class="mini-pasos grande">
+      <li><span>Toca <button class="b-prim chico-b" id="ch-copiar">Copiar instrucciones</button></span></li>
+      <li><span>Abre tu chat:
+        <a class="b-sec chico-b" href="https://chatgpt.com/" target="_blank" rel="noopener">ChatGPT</a>
+        <a class="b-sec chico-b" href="https://gemini.google.com/app" target="_blank" rel="noopener">Gemini</a>
+        <a class="b-sec chico-b" href="https://claude.ai/new" target="_blank" rel="noopener">Claude</a></span></li>
+      <li><span id="ch-pegar-txt">Pega, envía y espera a que termine de responder.</span></li>
+      <li><span>Copia toda la respuesta (el botón <b>Copiar</b> del recuadro de código) y pégala aquí:</span></li>
+    </ol>
+    <textarea id="ch-resp" rows="5" placeholder="Pega aquí la respuesta del chat"></textarea>
+    <p class="ch-error" id="ch-error"></p>
+    <div class="ch-btns"><button class="b-sec" id="ch-portapapeles">Pegar lo que copié</button><button class="b-prim" id="ch-listo">Continuar</button></div>
+    <button class="b-link" id="ch-cambiar">Prefiero el modo automático</button>
+  </div>
+</div>
+
+<!-- Ventana: informe -->
+<div class="modal" id="m-informe">
+  <div class="modal-caja grande">
+    <button class="cerrar" data-cerrar>✕</button>
+    <div id="informe"></div>
+  </div>
+</div>
+
+<!-- Ventana: vista grande de un estilo -->
+<div class="modal" id="m-vista">
+  <div class="modal-caja pantalla">
+    <div class="vista-barra">
+      <strong id="mv-nombre"></strong>
+      <div class="seg"><button class="on" data-ancho="100%">Computador</button><button data-ancho="400px">Celular</button></div>
+      <button class="b-prim" id="mv-elegir">Usar este estilo</button>
+      <button class="cerrar rel" data-cerrar>✕</button>
+    </div>
+    <div class="marco"><iframe id="mv-iframe" title="Vista previa" sandbox="allow-scripts"></iframe></div>
+  </div>
+</div>
+
+<div class="cargando" id="cargando"><div><span class="giro"></span><p id="cargando-txt">Un momento…</p></div></div>
+<div class="toast" id="toast"></div>
+<input type="file" id="subir" accept="image/*" hidden>
+
+<script>document.write('<script src="app/temas.js?v='+Date.now()+'"><\/script>')</script>
+<script>document.write('<script src="app/construir.js?v='+Date.now()+'"><\/script>')</script>
+<script>document.write('<script src="secciones/lista.js?v='+Date.now()+'"><\/script>')</script>
+<script>document.write('<script src="app/ia.js?v='+Date.now()+'"><\/script>')</script>
+<script>document.write('<script src="app/investigar.js?v='+Date.now()+'"><\/script>')</script>
+<script>document.write('<script src="app/generar.js?v='+Date.now()+'"><\/script>')</script>
+<script>document.write('<script src="app/app.js?v='+Date.now()+'"><\/script>')</script>
+<script src="/assets/medir.js" data-pagina="pagina-que-vende" defer></script>
+</body>
+</html>

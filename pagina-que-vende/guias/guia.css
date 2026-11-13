@@ -1,0 +1,17 @@
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#0F0F14;color:#fff;font-family:'Montserrat',system-ui,sans-serif;line-height:1.6;-webkit-font-smoothing:antialiased}
+.g{width:min(760px,100% - 40px);margin:0 auto;padding:56px 0 80px;display:grid;gap:22px}
+.g a.volver{color:rgba(244,244,245,.6);font-size:14px}
+.g h1{font-size:clamp(32px,5vw,48px);letter-spacing:-.03em;line-height:1.05;font-weight:900}
+.g h1 em{font-style:normal;color:#F8B400}
+.g .sub{color:rgba(244,244,245,.62);font-size:17px}
+.paso{display:grid;grid-template-columns:44px 1fr;gap:16px;padding:22px;border:1px solid rgba(255,255,255,.08);border-radius:16px;background:#17171e}
+.paso b.n{display:grid;place-items:center;width:44px;height:44px;border-radius:12px;background:#F8B400;color:#0F0F14;font-size:18px}
+.paso h3{font-size:18px;margin-bottom:6px}
+.paso p{color:rgba(244,244,245,.7);font-size:15px}
+.paso strong{color:#fff}
+.paso img{width:100%;border-radius:10px;margin-top:14px;border:1px solid rgba(255,255,255,.1)}
+.tip{padding:18px 20px;border-radius:14px;background:rgba(248,180,0,.06);border:1px solid rgba(248,180,0,.25);font-size:15px;color:rgba(244,244,245,.8)}
+
+.marca-g{display:flex;align-items:center;gap:10px;font-size:12px;font-weight:600;color:rgba(255,255,255,.45);text-transform:uppercase;letter-spacing:.1em}
+.marca-g img{height:30px;width:auto}

@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Kit de prompts · Tu página de venta con IA · Joako Estratega</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Bebas+Neue&display=swap" rel="stylesheet">
+<style>
+:root{--n:#0F0F14;--n2:#17171e;--n3:#202029;--a:#F8B400;--b:#fff;--t2:rgba(255,255,255,.62);--t3:rgba(255,255,255,.4);--l:rgba(255,255,255,.1)}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--n);color:var(--b);font-family:Montserrat,system-ui,sans-serif;line-height:1.55;-webkit-font-smoothing:antialiased}
+.w{width:min(1080px,100% - 32px);margin:0 auto;padding:40px 0 80px}
+.top{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;margin-bottom:28px}
+.top img{height:40px}
+.tag{font-family:'Bebas Neue',sans-serif;letter-spacing:.08em;color:var(--a);font-size:18px}
+h1{font-size:clamp(30px,5vw,52px);font-weight:900;letter-spacing:-.03em;line-height:1.05}
+h1 b{color:var(--a)}
+h2{font-size:26px;font-weight:900;margin:44px 0 6px;letter-spacing:-.02em}
+h2 span{color:var(--a)}
+.sub{color:var(--t2);font-size:16px;max-width:70ch;margin-top:10px}
+.caja{background:var(--n2);border:1px solid var(--l);border-radius:18px;padding:22px;margin-top:18px}
+.ej{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
+.ej button,.cp{font:700 14px Montserrat;border-radius:99px;padding:9px 16px;cursor:pointer;border:1px solid var(--l);background:var(--n3);color:var(--b)}
+.ej button:hover{border-color:var(--a);color:var(--a)}
+.f{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.f label{display:grid;gap:6px;font-size:13px;font-weight:700;color:var(--t2)}
+.f .c2{grid-column:1/-1}
+.f input,.f textarea{background:var(--n);border:1px solid var(--l);border-radius:10px;padding:11px 12px;color:var(--b);font:500 15px Montserrat;resize:vertical}
+.f input:focus,.f textarea:focus{outline:none;border-color:var(--a)}
+.p{background:var(--n2);border:1px solid var(--l);border-radius:18px;margin-top:16px;overflow:hidden}
+.p-cab{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:16px 20px;border-bottom:1px solid var(--l)}
+.p-cab h3{font-size:17px;font-weight:800}
+.p-cab small{display:block;color:var(--t3);font-weight:600;font-size:13px;margin-top:2px}
+.n{display:inline-grid;place-items:center;width:30px;height:30px;border-radius:50%;background:var(--a);color:var(--n);font-weight:900;margin-right:10px;flex:none}
+.p-cab>div{display:flex;align-items:center}
+.cp{background:var(--a);color:var(--n);border:0;white-space:nowrap}
+.cp.ok{background:#3ccf72}
+pre{white-space:pre-wrap;padding:18px 20px;font:500 14px/1.6 Montserrat;color:rgba(255,255,255,.85);max-height:340px;overflow:auto}
+pre mark{background:rgba(248,180,0,.18);color:var(--a);border-radius:4px;padding:0 3px}
+.donde{font-size:14px;color:var(--t2);padding:0 20px 18px}
+.donde a{color:var(--a)}
+@media(max-width:700px){.f{grid-template-columns:1fr}.p-cab{flex-direction:column;align-items:flex-start}}
+</style>
+</head>
+<body data-clarity-mask="true">
+<main class="w">
+  <div class="top"><span class="tag">Taller · Tu página de venta con IA</span><img src="app/joako-estratega.png" alt="Joako Estratega"></div>
+  <h1>Kit de prompts para <b>copiar y pegar</b></h1>
+  <p class="sub">Llena los datos del negocio una sola vez. Todos los prompts de abajo se completan solos. Lo que quede en amarillo es lo que falta por llenar.</p>
+
+  <div class="caja">
+    <div class="ej" id="ejemplos"></div>
+    <form class="f" id="f">
+      <label>Nombre de la marca<input name="marca"></label>
+      <label>Ciudad y país<input name="ciudad"></label>
+      <label class="c2">¿Qué vendes? (con detalle)<textarea name="vende" rows="2"></textarea></label>
+      <label class="c2">¿A quién le vendes?<input name="quien"></label>
+      <label>Precio<input name="precio"></label>
+      <label>Garantía<input name="garantia"></label>
+      <label class="c2">¿Qué te hace diferente?<input name="diferente"></label>
+      <label>¿A dónde lleva el botón? (link o WhatsApp)<input name="boton"></label>
+      <label>Colores de la marca<input name="colores"></label>
+    </form>
+  </div>
+
+  <h2>Camino 1: <span>directo en Gemini</span></h2>
+  <p class="sub">Sin herramienta. Abre <a href="https://gemini.google.com/app" target="_blank" rel="noopener" style="color:var(--a)">gemini.google.com</a> con tu Gmail y pega los prompts en orden, en el mismo chat.</p>
+  <div id="camino1"></div>
+
+  <h2>Camino 2: <span>con Página que Vende</span></h2>
+  <p class="sub">La herramienta te da los prompts sola y arma la página con un diseño ya probado. Solo copias y pegas 3 veces en tu Gemini. <a href="./" style="color:var(--a)">Abrir Página que Vende</a></p>
+  <div id="camino2"></div>
+
+  <h2>Para <span>publicar</span></h2>
+  <div id="publicar"></div>
+</main>
+
+<script>
+const EJEMPLOS = {
+  'Ropa': { marca: '[Nombre de tu marca]', ciudad: 'Bogotá, Colombia', vende: 'Ropa casual para mujer: blusas, jeans y vestidos en tallas S a XL, con envíos a toda Colombia', quien: 'Mujeres de 25 a 45 años que quieren verse bien sin gastar de más', precio: '$89.000', garantia: 'Cambio de talla gratis en 30 días', diferente: 'Cada prenda se prueba en tallas reales antes de publicarla', boton: 'WhatsApp [tu número]', colores: '' },
+  'Zapatos': { marca: '[Nombre de tu marca]', ciudad: 'Bucaramanga, Colombia', vende: 'Zapatos de cuero para hombre hechos a mano: mocasines, botas y zapatos de vestir', quien: 'Hombres de 30 a 55 años que trabajan en oficina y quieren zapatos que duren', precio: '$220.000', garantia: '6 meses de garantía en costuras y suela', diferente: 'Cuero real y suela cosida, hechos a mano en Bucaramanga', boton: 'WhatsApp [tu número]', colores: '' },
+  'Manicure': { marca: '[Nombre de tu marca]', ciudad: 'Medellín, Colombia', vende: 'Manicure y pedicure a domicilio: semipermanente, acrílicas y uñas en gel', quien: 'Mujeres que no tienen tiempo de ir al salón', precio: '$45.000', garantia: 'Si se te levanta una uña en 5 días, te la arreglamos gratis', diferente: 'Vamos a tu casa con todo el material esterilizado', boton: 'WhatsApp [tu número]', colores: '' },
+  'Pijamas': { marca: '[Nombre de tu marca]', ciudad: 'Cali, Colombia', vende: 'Pijamas de algodón para mujer y niña, y conjuntos de mamá e hija, con envío a todo el país', quien: 'Mamás que buscan pijamas cómodas y regalos para su familia', precio: '$75.000', garantia: 'Si no te queda, te la cambiamos sin costo', diferente: 'Algodón suave que no se encoge al lavarlo', boton: 'WhatsApp [tu número]', colores: '' },
+  'PatoEditor (el de la clase)': { marca: 'PatoEditor', ciudad: 'Medellín, Colombia', vende: 'Edición de videos cortos para Reels, TikTok y Shorts. La persona graba con su celular, sube el video y lo recibe editado con cortes, subtítulos animados, música y su marca', quien: 'Emprendedores y creadores de contenido que tienen que publicar seguido y no tienen tiempo de editar', precio: 'USD 10 por video. Desde 20 videos baja a USD 5 por video', garantia: 'Cambios sin costo hasta que quede como lo pediste, durante 15 días', diferente: 'Lo edita una inteligencia artificial y un editor humano lo revisa antes de entregarlo', boton: 'https://patoeditor.com', colores: 'Negro #0F0F14 y amarillo #F8B400. Letra Montserrat' },
+};
+
+const CAMINO1 = [
+  { t: 'Investiga a la competencia', d: 'Activa la búsqueda en internet si tu Gemini la muestra. Tarda 1 o 2 minutos.', p: d =>
+`Busca en internet las 8 páginas de venta que más venden de este negocio: ${d.vende}.
+Pueden ser de cualquier país. No cuentes Amazon, MercadoLibre, blogs ni redes sociales. Abre cada página para confirmar que existe y que vende exactamente esto.
+
+Hazme un resumen corto y sencillo:
+1. La lista de las páginas con su link.
+2. El orden de secciones que más se repite.
+3. Qué prometen en el titular.
+4. Qué precios manejan.
+5. Qué garantías dan.
+6. Qué tipo de fotos usan.
+7. Lo que casi ninguna hace y yo podría usar para diferenciarme.` },
+  { t: 'Crea la página', d: 'En el mismo chat. Gemini la arma en Canvas y la puedes ver ahí mismo.', p: d =>
+`Con lo que encontraste, hazme una página de venta de una sola página para mi negocio, en un solo archivo HTML, lista para publicar.
+
+MI NEGOCIO
+- Marca: ${d.marca}
+- Qué vendo: ${d.vende}
+- A quién le vendo: ${d.quien}
+- Precio: ${d.precio}
+- Lo que me hace diferente: ${d.diferente}
+- Garantía: ${d.garantia}
+- El botón lleva a: ${d.boton}
+- Ciudad: ${d.ciudad}
+- Colores de mi marca: ${d.colores || 'escoge 2 colores que vayan con lo que vendo, sin morado ni degradados'}
+
+ESTRUCTURA, EN ESTE ORDEN
+1. Titular que dice lo que gana mi cliente, un subtítulo y el botón.
+2. El problema que ya tiene mi cliente, dicho como lo diría él.
+3. Cómo funciona, en 3 pasos.
+4. Lo que gana con mi producto (4 beneficios).
+5. La oferta: precio y garantía.
+6. Cierre con el mismo botón.
+
+REGLAS
+- Usa solo los datos que te di. No inventes cifras, testimonios, clientes, premios ni años de experiencia.
+- Un solo botón, el mismo en toda la página.
+- Español sencillo y frases cortas. No uses palabras como "transforma", "descubre", "revoluciona" ni "potencia".
+- Háblale de tú, como se habla en Colombia. No uses "vos" (nada de "grabás", "tenés" o "subís").
+- Que se vea muy bien en el celular.
+- Donde vaya una foto, deja un recuadro gris que diga "Tu foto aquí".` },
+  { t: 'Ajusta lo que no te guste', d: 'Pide un cambio a la vez. Estos son los que más se usan.', p: d =>
+`Cambia solo esto y deja todo lo demás igual:
+- El titular por: "[escribe tu titular]"
+- Haz la página más corta: quita lo que se repita.
+- Que el botón diga: "[texto del botón]"
+- Usa estos colores: ${d.colores || '[tus colores]'}` },
+  { t: 'Crea una foto que no se note hecha con IA', d: 'En un chat nuevo de Gemini. Si tienes foto real de tu producto, adjúntala con el + y úsala de referencia.', p: d =>
+`Usa la foto que te adjunto como referencia del producto, sin cambiarlo.
+Foto publicitaria de ${d.vende.split(':')[0].toLowerCase()}, luz natural de ventana, fondo limpio, estilo foto de celular bien tomada, colores reales.
+Sin texto, sin letras, sin logos y sin marcas de agua. Formato horizontal.` },
+  { t: 'Saca el código de tu página', d: 'Cuando la página te guste. Copia el recuadro completo con su botón Copiar.', p: () =>
+`Pásame el código HTML completo de la página en un solo bloque de código, sin cambiar nada. Pon las fotos como recuadros "Tu foto aquí" si no tienes el link de la foto.` },
+];
+
+const CAMINO2 = [
+  { t: 'Lo que escribes en la herramienta', d: 'En el primer recuadro de Página que Vende. Después escoge "Usar mi chat".', p: d => `${d.vende}. Para ${d.quien.charAt(0).toLowerCase() + d.quien.slice(1)}. Precio: ${d.precio}.` },
+  { t: 'Los datos de la marca (paso 4)', d: 'Para llenar el formulario "Cuéntanos de tu marca" sin pensar.', p: d =>
+`Nombre: ${d.marca}
+Qué vendes: ${d.vende}
+Precio: ${d.precio}
+Lo que te hace diferente: ${d.diferente}
+Garantía: ${d.garantia}
+WhatsApp o link de compra: ${d.boton}
+Ciudad: ${d.ciudad}` },
+];
+
+const PUBLICAR = [
+  { t: 'Google Sites, paso a paso', d: 'Gratis con tu Gmail. Se hace en computador.', p: () =>
+`1. Entra a sites.google.com/new y toca "Sitio en blanco".
+2. A la derecha toca "Páginas". Pon el mouse sobre el + de abajo y elige "Incorporación de página completa". Ponle nombre y toca "Listo".
+3. Toca "Incorporar elemento" y la pestaña "Incorporar código". Pega tu página, toca "Siguiente" y "Insertar".
+4. En los tres puntos de tu página elige "Usar como página principal". Borra la "Página principal" vacía.
+5. Arriba a la izquierda escribe el nombre de tu marca.
+6. Toca "Publicar", escribe el nombre de tu link y vuelve a tocar "Publicar".
+Tu link queda: sites.google.com/view/tu-marca` },
+];
+
+const esc = s => String(s).replace(/[&<>]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;' }[c]));
+const f = document.getElementById('f');
+function datos() {
+  const d = {};
+  [...f.elements].forEach(e => { if (e.name) d[e.name] = e.value.trim() || `[${e.closest('label').childNodes[0].textContent.trim().toLowerCase()}]`; });
+  return d;
+}
+function pintar(id, lista) {
+  const d = datos();
+  document.getElementById(id).innerHTML = lista.map((x, i) => {
+    const txt = x.p(d);
+    return `<div class="p"><div class="p-cab"><div><span class="n">${i + 1}</span><div><h3>${x.t}</h3><small>${x.d}</small></div></div><button class="cp" data-i="${id}-${i}">Copiar</button></div><pre id="${id}-${i}">${esc(txt).replace(/\[[^\]]+\]/g, m => `<mark>${m}</mark>`)}</pre></div>`;
+  }).join('');
+}
+function todo() { pintar('camino1', CAMINO1); pintar('camino2', CAMINO2); pintar('publicar', PUBLICAR); }
+document.getElementById('ejemplos').innerHTML = '<span style="color:var(--t3);font-size:13px;font-weight:700;align-self:center">Ejemplos:</span>' + Object.keys(EJEMPLOS).map(k => `<button type="button">${k}</button>`).join('');
+document.querySelectorAll('#ejemplos button').forEach(b => b.onclick = () => { const e = EJEMPLOS[b.textContent]; Object.entries(e).forEach(([k, v]) => f.elements[k].value = v); todo(); });
+f.addEventListener('input', todo);
+document.addEventListener('click', async e => {
+  const b = e.target.closest('.cp'); if (!b) return;
+  const txt = document.getElementById(b.dataset.i).textContent;
+  try { await navigator.clipboard.writeText(txt); } catch { const r = document.createRange(); r.selectNodeContents(document.getElementById(b.dataset.i)); getSelection().removeAllRanges(); getSelection().addRange(r); }
+  b.textContent = '¡Copiado!'; b.classList.add('ok'); setTimeout(() => { b.textContent = 'Copiar'; b.classList.remove('ok'); }, 1600);
+});
+todo();
+</script>
+<script src="/assets/medir.js" data-pagina="pagina-que-vende-kit" defer></script>
+</body>
+</html>
