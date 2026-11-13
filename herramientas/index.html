@@ -1,0 +1,255 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Herramientas con IA · Joako Estratega</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700;800;900&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0F0F14;--panel:#17171F;--line:#2A2A36;--sun:#F8B400;--fg:#fff;--mute:rgba(255,255,255,.65);--f:"Montserrat",system-ui,sans-serif;--m:"JetBrains Mono",Consolas,monospace}
+*{box-sizing:border-box;margin:0}
+html,body{overflow-x:hidden}
+body{background:var(--bg);color:var(--fg);font-family:var(--f);font-size:17px;line-height:1.55}
+.w{max-width:760px;margin:0 auto;padding:28px 16px 80px;display:flex;flex-direction:column;gap:48px}
+.w,#todo,#todo>*,.paso>div,.caso,.tuyo{min-width:0}
+.top{display:flex;justify-content:space-between;align-items:center;font-weight:900;letter-spacing:.04em}
+.top span{color:var(--sun)}
+.kick{font-family:var(--m);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--sun);font-weight:700}
+h1{font-size:clamp(34px,8vw,54px);font-weight:900;line-height:1;letter-spacing:-.02em;margin-top:8px}
+h1 em,h2 em{font-style:normal;color:var(--sun)}
+h2{font-size:clamp(26px,6vw,34px);font-weight:900;line-height:1.1;margin:6px 0 16px}
+.sub{color:var(--mute);margin-top:12px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:22px}
+.btn{display:inline-flex;justify-content:center;align-items:center;gap:8px;font:inherit;font-weight:900;background:var(--sun);color:var(--bg);border:0;border-radius:10px;padding:15px 20px;text-decoration:none;cursor:pointer}
+.btn.sec{background:transparent;color:var(--sun);border:2px solid var(--sun)}
+#todo{display:flex;flex-direction:column;gap:48px}
+.regalos{display:grid;gap:14px}
+.regalo{display:flex;gap:18px;align-items:center}
+.regalo img,.regalo .ico{width:84px;height:84px;flex:none;object-fit:contain}
+.regalo .ico{border-radius:16px;background:var(--sun);color:var(--bg);display:grid;place-items:center;font-family:var(--m);font-size:28px;font-weight:700}
+.regalo b{display:block;font-size:20px;font-weight:900;line-height:1.15}
+.regalo p{color:var(--mute);font-size:15px;margin:4px 0 12px}
+.indice{display:flex;flex-wrap:wrap;gap:8px}
+.indice a{color:var(--sun);text-decoration:none;border:1px solid var(--line);border-radius:999px;padding:8px 14px;font-weight:800;font-size:14px}
+.sec{display:flex;flex-direction:column;gap:18px}
+.so{display:flex;gap:8px}
+.so button{font:inherit;font-size:14px;font-weight:800;padding:8px 16px;border-radius:999px;border:1px solid var(--line);background:transparent;color:var(--mute);cursor:pointer}
+.so button.on{background:var(--sun);color:var(--bg);border-color:var(--sun)}
+.paso{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:20px;display:flex;flex-direction:column;gap:14px}
+.paso .n{font-family:var(--m);font-size:13px;letter-spacing:.14em;color:var(--sun);font-weight:700}
+.paso h3{font-size:22px;font-weight:900;line-height:1.15}
+.paso ol{padding-left:22px;display:flex;flex-direction:column;gap:6px}
+.paso li::marker{color:var(--sun);font-weight:900}
+.paso a{color:var(--sun)}
+.paso b{color:#fff}
+.paso .nota{color:var(--mute);font-size:15px}
+.paso .alerta{color:var(--sun);font-weight:800;font-size:15px}
+.paso img{width:100%;border-radius:10px;border:1px solid var(--line);display:block}
+.cmd{display:flex;gap:8px;align-items:stretch}
+.cmd code{flex:1;min-width:0;font-family:var(--m);font-size:13px;background:#000;border:1px solid var(--line);border-radius:8px;padding:12px;color:var(--sun);overflow-x:auto;white-space:nowrap}
+.copy{font:inherit;font-size:13px;font-weight:800;border:0;border-radius:8px;background:var(--sun);color:var(--bg);padding:0 14px;cursor:pointer;flex:none}
+.tuyo{background:#000;border:1px dashed var(--sun);border-radius:12px;padding:16px;display:flex;flex-direction:column;gap:10px}
+.tuyo small{font-family:var(--m);font-size:11px;letter-spacing:.14em;color:var(--sun)}
+.tuyo p{font-family:var(--m);font-size:14px;overflow-wrap:anywhere}
+.tuyo .copy{align-self:flex-start;padding:10px 14px}
+.malbien{display:grid;gap:12px}
+.mal,.bien{border-radius:14px;padding:18px;display:flex;flex-direction:column;gap:8px}
+.mal{background:#fff;color:var(--bg)}.bien{background:var(--panel);border:1px solid var(--sun)}
+.malbien small{font-family:var(--m);font-size:11px;letter-spacing:.14em;font-weight:700}
+.mal small{color:#C0392B}.bien small{color:var(--sun)}
+.malbien p{font-family:var(--m);font-size:14px}
+.mal span{font-size:14px;opacity:.7}
+.lista{display:flex;flex-direction:column;gap:10px}
+.lista div{display:flex;gap:14px;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+.lista i{font-style:normal;font-family:var(--m);color:var(--bg);background:var(--sun);border-radius:50%;width:28px;height:28px;display:grid;place-items:center;flex:none;font-weight:700;font-size:13px}
+.lista span{color:var(--mute)}
+.truco{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:18px;display:flex;flex-direction:column;gap:10px}
+.truco b{font-size:19px}
+.truco span{color:var(--mute)}
+.caso{display:flex;flex-direction:column;gap:12px}
+.area{align-self:flex-start;background:var(--sun);color:var(--bg);font-weight:900;font-size:12px;letter-spacing:.1em;text-transform:uppercase;padding:4px 10px;border-radius:4px}
+.caso h3{font-size:20px;font-weight:900;line-height:1.15}
+.dije{border-left:4px solid var(--sun);padding:4px 0 4px 14px}
+.dije small{display:block;font-family:var(--m);font-size:11px;letter-spacing:.14em;color:var(--sun);margin-bottom:4px}
+.dije q{font-family:var(--m);font-size:14px;quotes:none;color:#ddd;overflow-wrap:anywhere}
+.res{font-weight:700}.res b{color:var(--sun)}
+.mas{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px}
+.mas a{color:inherit;text-decoration:none}
+.mas .card{height:100%;display:flex;flex-direction:column;gap:6px}
+.mas b{font-size:18px}.mas span{color:var(--mute);font-size:14px}
+.mas em{font-style:normal;color:var(--sun);font-weight:800;font-size:14px;margin-top:auto}
+.yo{display:flex;gap:16px;align-items:center}
+.yo img{width:72px;height:72px;border-radius:50%;object-fit:cover;border:3px solid var(--sun)}
+.yo p{color:var(--mute);font-size:15px}
+.redes{display:flex;flex-wrap:wrap;gap:10px}
+.redes a{font-weight:800;color:var(--sun);text-decoration:none;border:1px solid var(--line);border-radius:999px;padding:8px 14px;font-size:15px}
+[hidden]{display:none!important}
+</style>
+</head>
+<body>
+<div class="w">
+  <div class="top">JOAKO <span>ESTRATEGA</span></div>
+
+  <header>
+    <div class="kick">Herramientas gratis</div>
+    <h1>Pon la IA a <em>trabajar</em> para ti.</h1>
+    <p class="sub">Un video editado gratis y el paso a paso para que Claude Code trabaje en tu computador.</p>
+  </header>
+
+
+  <div id="todo">
+    <section class="regalos">
+      <div class="card regalo"><img src="img/pato.png" alt=""><div><b>1 video editado gratis</b><p>Sube tu video y PatoEditor te lo entrega editado, con subtítulos, cortes y música.</p><a class="btn" href="https://patoeditor.com/regalo/lgbFxQmi0YsMzuDY6VWA0SNu" target="_blank" rel="noopener" data-ev="patoeditor">Reclamar mi video</a></div></div>
+      <div class="card regalo"><div class="ico">&gt;_</div><div><b>Kit Claude Code</b><p>Instálalo, aprende a hablarle y copia mis pedidos, paso a paso y con imágenes.</p>
+        <div class="indice"><a href="#instalar">1 · Instalarlo</a><a href="#hablarle">2 · Hablarle</a><a href="#trucos">3 · Trucos</a><a href="#ejemplos">Ejemplos</a></div></div></div>
+    </section>
+
+    <section id="instalar" class="sec">
+      <div><div class="kick">Kit Claude Code · 1</div><h2>Instálalo en <em>10 minutos</em></h2>
+      <p class="sub">Necesitas un computador con Windows o Mac, internet y un plan Pro de Claude.</p></div>
+      <div class="so"><button class="on" data-so="win">Tengo Windows</button><button data-so="mac">Tengo Mac</button></div>
+
+      <div class="paso"><span class="n">PASO 1</span><h3>Activa el plan Pro de Claude</h3>
+        <ol><li>Entra a <a href="https://claude.com/pricing" target="_blank" rel="noopener">claude.com/pricing</a>.</li><li>Escoge <b>Pro</b>: USD 20 al mes, o 17 al mes si pagas el año.</li><li>Crea tu cuenta y paga.</li></ol>
+        <img src="img/tuto/web-claude.jpg" alt="Planes de Claude con Pro marcado" loading="lazy">
+        <p class="nota">El plan gratis no trae Claude Code.</p></div>
+
+      <div class="paso"><span class="n">PASO 2</span><h3>Instala VS Code</h3>
+        <ol><li>Entra a <a href="https://code.visualstudio.com/" target="_blank" rel="noopener">code.visualstudio.com</a>.</li><li>Toca el botón azul de <b>Download</b>.</li><li>Abre el archivo que bajó y dale <b>Siguiente</b> a todo.</li></ol>
+        <img src="img/tuto/web-vscode.jpg" alt="Página de VS Code con el botón de descarga marcado" loading="lazy"></div>
+
+      <div class="paso w-win"><span class="n">PASO 2 + · SOLO WINDOWS</span><h3>Instala Git</h3>
+        <ol><li>Entra a <a href="https://git-scm.com/downloads/win" target="_blank" rel="noopener">git-scm.com/downloads/win</a>.</li><li>Toca <b>Click here to download</b>.</li><li>Abre el archivo y dale <b>Siguiente</b> a todo.</li></ol>
+        <img src="img/tuto/web-git.jpg" alt="Página de Git con el enlace de descarga marcado" loading="lazy"></div>
+
+      <div class="paso"><span class="n">PASO 3</span>
+        <div class="w-win"><h3>Abre PowerShell</h3><ol><li>Toca la tecla <b>Windows</b> de tu teclado.</li><li>Escribe <b>powershell</b>.</li><li>Abre <b>Windows PowerShell</b>.</li></ol>
+        <img src="img/tuto/inicio.jpg" alt="Menú de inicio buscando PowerShell" loading="lazy" style="margin-top:12px"></div>
+        <div class="w-mac" hidden><h3>Abre Terminal</h3><ol><li>Toca <b>Cmd + espacio</b>.</li><li>Escribe <b>Terminal</b> y ábrela.</li></ol></div>
+      </div>
+
+      <div class="paso"><span class="n">PASO 4</span><h3>Pega esta línea y toca Enter</h3>
+        <div class="cmd"><code id="cmd">irm https://claude.ai/install.ps1 | iex</code><button class="copy" data-copy="cmd">Copiar</button></div>
+        <img class="w-win" src="img/tuto/powershell.jpg" alt="PowerShell con la línea pegada" loading="lazy">
+        <p class="nota">Espera a que termine, porque no muestra avance mientras descarga.</p>
+        <div class="w-win"><p class="nota"><b>¿Sale un error rojo?</b> Pega esto, toca Enter, escribe S, toca Enter otra vez y vuelve a pegar la línea de arriba:</p>
+        <div class="cmd" style="margin-top:8px"><code id="cmd2">Set-ExecutionPolicy -Scope CurrentUser RemoteSigned</code><button class="copy" data-copy="cmd2">Copiar</button></div></div>
+      </div>
+
+      <div class="paso"><span class="n">PASO 5</span><h3>Instala la extensión oficial en VS Code</h3>
+        <ol><li>Crea en tu escritorio una carpeta, por ejemplo <b>mi-negocio</b>.</li><li>En VS Code ve a <b>Archivo › Abrir carpeta</b> y escógela.</li><li>Toca el ícono de <b>Extensiones</b> (los cuadritos de la izquierda) y busca <b>Claude Code</b>.</li><li>Instala la de <b>Anthropic</b>, la que tiene el chulo azul.</li></ol>
+        <img src="img/tuto/extension.jpg" alt="Extensión oficial de Claude Code marcada" loading="lazy">
+        <p class="alerta">Ojo: salen muchas parecidas que no son oficiales.</p></div>
+
+      <div class="paso"><span class="n">PASO 6</span><h3>Dile que confías en la carpeta</h3>
+        <ol><li>Si te sale <b>modo restringido</b>, no te asustes.</li><li>Toca <b>Confiar</b>.</li></ol>
+        <img src="img/tuto/confiar.jpg" alt="Ventana de modo restringido con el botón Confiar marcado" loading="lazy">
+        <p class="nota">Sin ese paso, Claude no puede trabajar en tu carpeta.</p></div>
+
+      <div class="paso"><span class="n">PASO 7</span><h3>Abre Claude</h3>
+        <ol><li>Toca el ícono de Claude en la barra de la izquierda.</li><li>Toca <b>New session</b>.</li><li>La primera vez, <b>inicia sesión</b> con tu cuenta.</li></ol>
+        <img src="img/tuto/panel.jpg" alt="Panel de Claude Code con New session marcado" loading="lazy"></div>
+
+      <div class="paso"><span class="n">PASO 8</span><h3>Escríbele tu primer mensaje</h3>
+        <div class="cmd"><code id="hola">hola, ¿qué hay en esta carpeta?</code><button class="copy" data-copy="hola">Copiar</button></div>
+        <img src="img/tuto/respuesta.jpg" alt="Claude respondiendo qué hay en la carpeta" loading="lazy">
+        <p class="nota">Él revisa la carpeta por su cuenta y te responde. Si ves esto, ya quedó instalado.</p></div>
+    </section>
+
+    <section id="hablarle" class="sec">
+      <div><div class="kick">Kit Claude Code · 2</div><h2>Háblale como a un <em>empleado nuevo</em></h2>
+      <p class="sub">Es muy capaz, pero no conoce tu negocio, así que todo lo que no le digas lo va a adivinar.</p></div>
+      <div class="malbien">
+        <div class="mal"><small>✕ ASÍ NO</small><p>hazme el informe de ventas</p><span>No sabe dónde están los datos, cómo lo quieres ni para quién es, así que va a inventar.</span></div>
+        <div class="bien"><small>✓ ASÍ SÍ</small><p>en la carpeta ventas está el informe de octubre. hazme el de noviembre igual, con los datos del Excel que está al lado. es para mi socio, así que corto y con gráficas. antes de empezar, pregúntame lo que no entiendas</p></div>
+      </div>
+      <h3 style="font-size:20px;font-weight:900">Lo que debe llevar tu pedido</h3>
+      <div class="lista">
+        <div><i>1</i><p><b>Dónde están las cosas.</b> <span>«en la carpeta ventas está el de octubre»</span></p></div>
+        <div><i>2</i><p><b>Qué es tu negocio.</b> <span>A quién le vendes y qué vendes.</span></p></div>
+        <div><i>3</i><p><b>Qué resultado quieres.</b> <span>Deja que él ponga el cómo.</span></p></div>
+        <div><i>4</i><p><b>Un ejemplo de cómo lo quieres.</b> <span>Un trabajo viejo vale más que diez párrafos.</span></p></div>
+        <div><i>5</i><p><b>Que te pregunte antes de empezar.</b> <span>«antes de empezar, pregúntame lo que no entiendas»</span></p></div>
+      </div>
+      <div class="truco"><b>🔐 Te va a pedir permiso</b><span>Antes de crear o cambiar un archivo, o de abrir un programa, te pregunta. Lee qué va a hacer y dale Sí.</span></div>
+      <div class="truco"><b>🗣️ Corrígelo sin miedo</b><span>Si algo no te gusta, díselo como se lo dirías a una persona, y no hace falta empezar de cero.</span></div>
+    </section>
+
+    <section id="trucos" class="sec">
+      <div><div class="kick">Kit Claude Code · 3</div><h2>Los trucos que uso <em>todos los días</em></h2></div>
+      <div class="truco"><b>📁 Una carpeta por proyecto</b><span>Claude trabaja dentro de la carpeta que abres, así que pon ahí los archivos de ese trabajo y solo esos.</span></div>
+      <div class="truco"><b>🗺️ Pídele el plan antes</b><span>Para un trabajo grande, escríbele primero:</span><div class="cmd"><code id="t1">antes de hacer nada, dime tu plan</code><button class="copy" data-copy="t1">Copiar</button></div></div>
+      <div class="truco"><b>📸 Pásale pantallazos</b><span>Si no sabes qué botón tocar, toma una foto de la pantalla, pégala en el chat y pregúntale.</span></div>
+      <div class="truco"><b>🔍 Exígele prueba</b><span>Cuando te diga «listo», no le creas todavía y escríbele:</span><div class="cmd"><code id="t2">muéstrame cómo comprobaste que funciona</code><button class="copy" data-copy="t2">Copiar</button></div></div>
+      <div class="truco"><b>🧠 Dale memoria</b><span>Claude Code lee un archivo llamado CLAUDE.md cada vez que abres la carpeta, así que lo que escribas ahí no tienes que repetirlo nunca más.</span>
+        <div class="tuyo"><small>CÓPIALO Y LLÉNALO</small><p id="t3">crea un archivo CLAUDE.md con lo que debes saber de mi negocio: [qué vendo, a quién, cómo hablo y qué no debes hacer nunca]</p><button class="copy" data-copy="t3">Copiar</button></div></div>
+      <div class="truco"><b>✍️ Tu primer pedido</b><span>Escoge una tarea que hagas a mano cada semana y pégale esto:</span>
+        <div class="tuyo"><small>CÓPIALO Y LLÉNALO</small><p id="t4">esto lo hago a mano cada semana: [explícalo como se lo explicarías a un empleado nuevo]. ¿cómo lo automatizamos? pregúntame lo que necesites</p><button class="copy" data-copy="t4">Copiar</button></div></div>
+    </section>
+
+    <section id="ejemplos" class="sec">
+      <div><div class="kick">Así lo uso yo</div><h2>4 trabajos reales y <em>lo que le escribí</em></h2></div>
+
+      <article class="card caso"><span class="area">Administración</span><h3>El informe del mes que se hizo solo</h3>
+        <div class="dije"><small>LO QUE YO LE ESCRIBÍ</small><q>necesito crear un informe de gestión del mes de agosto [...] en Descargas encuentras el de julio, quiero que lo leas y me digas qué información necesaria necesitas [...] pregunta lo que necesites</q></div>
+        <p class="res">Leyó <b>40 correos</b> y <b>10 reuniones</b> de mi Outlook, y en <b>27 minutos</b> dejó el informe listo.</p>
+        <div class="tuyo"><small>CÓPIALO ASÍ</small><p id="p1">necesito crear [el informe] de [mes] de [proyecto]. en [carpeta] está el del mes pasado, léelo y dime qué información necesitas para hacer el nuevo. pregunta lo que necesites</p><button class="copy" data-copy="p1">Copiar</button></div>
+      </article>
+
+      <article class="card caso"><span class="area">Contabilidad</span><h3>Un programa de botones para el contador</h3>
+        <div class="dije"><small>LO QUE YO LE ESCRIBÍ</small><q>un humano entra manualmente, entra a cada botón, ve la información que tiene y le da guardar en PDF [...] quiero automatizar ese proceso.</q></div>
+        <div class="dije"><small>Y CUANDO ME DIJO «LISTO»</small><q>cómo garantizo que realmente sí es confiable [...] NO MÁS ERRORES DE IA</q></div>
+        <p class="res">El contador lo abre con <b>doble clic</b>: tiene <b>10 botones</b> y <b>3 revisiones</b> que se vigilan entre ellas.</p>
+        <div class="tuyo"><small>CÓPIALO ASÍ</small><p id="p2">en [carpeta] está [el archivo]. una persona hoy hace esto a mano: [paso 1, paso 2, paso 3]. quiero automatizar ese proceso. cuando termines muéstrame cómo comprobaste que funciona</p><button class="copy" data-copy="p2">Copiar</button></div>
+      </article>
+
+      <article class="card caso"><span class="area">Ventas</span><h3>¿Por qué no compran los que escriben?</h3>
+        <div class="dije"><small>LO QUE YO LE ESCRIBÍ</small><q>hacer la evaluación de los mensajes para ver qué está pasando, porque no cierran tanto</q></div>
+        <div class="dije"><small>Y CUANDO NO LE CREÍ</small><q>necesito que leas texto por texto todas las conversaciones</q></div>
+        <p class="res">Leyó <b>4.304 conversaciones</b>. Con audio del equipo agenda el <b>74 %</b> de la gente, y con solo texto, el <b>12 %</b>.</p>
+        <div class="tuyo"><small>CÓPIALO ASÍ</small><p id="p4">en [carpeta] están las conversaciones con mis clientes. léelas todas, una por una, y dime por qué no compran, en qué parte se van y qué les debo decir distinto</p><button class="copy" data-copy="p4">Copiar</button></div>
+      </article>
+
+      <article class="card caso"><span class="area">Redes</span><h3>Las redes que se publican solas</h3>
+        <div class="dije"><small>LO QUE YO LE ESCRIBÍ</small><q>la idea es programar, usar unos en reels de prueba, otros en feed, otros en TikTok, en la cuenta de PatoEditor, bueno, organizar todo</q></div>
+        <p class="res">Dejó <b>15 publicaciones</b> de Instagram en <b>2 cuentas</b> saliendo solas, cada una a la hora que escogió después de medir <b>95 reels</b>.</p>
+        <div class="tuyo"><small>CÓPIALO ASÍ</small><p id="p3">en [carpeta] están mis videos. organiza cuál va en cada red, qué día y a qué hora, y déjalos programados. muéstrame el calendario antes de programar</p><button class="copy" data-copy="p3">Copiar</button></div>
+      </article>
+    </section>
+
+    <section>
+      <div class="kick">Más herramientas gratis</div>
+      <h2>Mi caja de <em>herramientas</em></h2>
+      <div class="mas">
+        <a href="https://joakoestratega.com/campanas-ia/" data-ev="campanas-ia"><div class="card"><b>Campañas con IA</b><span>Prende tus campañas de Meta con Claude Code.</span><em>Abrir →</em></div></a>
+        <a href="https://joakoestratega.com/pagina-que-vende/" data-ev="pagina-que-vende"><div class="card"><b>Página que Vende</b><span>Crea tu página de venta con IA, gratis.</span><em>Abrir →</em></div></a>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="yo"><img src="img/joako.jpg" alt="Joako"><div><b>Joako Estratega</b><p>Muestro más herramientas como estas en mis redes.</p></div></div>
+      <div class="redes" style="margin-top:16px">
+        <a href="https://instagram.com/joakoestratega" target="_blank" rel="noopener">@joakoestratega</a>
+        <a href="https://instagram.com/soypatoeditor" target="_blank" rel="noopener">@soypatoeditor</a>
+      </div>
+    </section>
+
+    <section class="card regalo" style="display:block">
+      <div class="kick">Si quieres ir más allá</div>
+      <h2>¿Quieres un diagnóstico de tu negocio y tu <em>embudo de ventas?</em></h2>
+      <p><b>USD 300.</b> Escríbeme por WhatsApp y lo agendamos.</p>
+      <a class="btn" href="https://wa.me/573124146643?text=Hola%20Joako%2C%20vengo%20de%20tus%20herramientas%20y%20quiero%20el%20diagn%C3%B3stico%20de%20mi%20negocio%20y%20mi%20embudo%20de%20ventas." target="_blank" rel="noopener" data-ev="diagnostico">Quiero mi diagnóstico</a>
+    </section>
+  </div>
+  <p class="sub" style="font-size:13px;text-align:center">Esta página mide visitas y clics para mejorar. <a href="/politica-de-privacidad/" style="color:var(--sun)">Política de datos</a></p>
+</div>
+<script>
+const CMD={win:'irm https://claude.ai/install.ps1 | iex',mac:'curl -fsSL https://claude.ai/install.sh | bash'};
+document.querySelectorAll('[data-so]').forEach(b=>b.onclick=()=>{document.querySelectorAll('[data-so]').forEach(x=>x.classList.toggle('on',x===b));const s=b.dataset.so;document.getElementById('cmd').textContent=CMD[s];document.querySelectorAll('.w-win').forEach(x=>x.hidden=s!=='win');document.querySelectorAll('.w-mac').forEach(x=>x.hidden=s!=='mac');window.medir&&window.medir('so-'+s)});
+document.querySelectorAll('[data-copy]').forEach(b=>b.onclick=()=>{navigator.clipboard.writeText(document.getElementById(b.dataset.copy).textContent);const t=b.textContent;b.textContent='¡Copiado!';setTimeout(()=>b.textContent=t,1500);window.medir&&window.medir('copiar-'+b.dataset.copy)});
+document.querySelectorAll('[data-ev]').forEach(a=>a.addEventListener('click',()=>window.medir&&window.medir('clic-'+a.dataset.ev)));
+</script>
+<script src="/assets/medir.js" data-pagina="herramientas" defer></script>
+</body>
+</html>
