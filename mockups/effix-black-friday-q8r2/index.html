@@ -406,6 +406,7 @@ footer{padding:28px 0;text-align:center;color:var(--gris2);font-size:13px;border
   function tick(){
     var ahora=Date.now(),meta,fase;
     if(ahora<INICIO){meta=INICIO;fase='antes'}else if(ahora<=FIN){meta=FIN;fase=(FIN-ahora<86400000)?'ultimo':'durante'}else{meta=ahora;fase='fin'}
+    var VER=(location.search.match(/fase=(antes|durante|ultimo|fin)/)||[])[1];if(VER){fase=VER;if(VER==='durante'||VER==='ultimo')meta=ahora+(VER==='ultimo'?9*36e5:2*864e5+14*36e5)}
     var r=Math.max(0,meta-ahora),d=Math.floor(r/864e5),h=Math.floor(r/36e5)%24,m=Math.floor(r/6e4)%60,s=Math.floor(r/1e3)%60;
     txt('[data-d]',dos(d));txt('[data-h]',dos(h));txt('[data-m]',dos(m));txt('[data-s]',dos(s));
     txt('[data-reloj-mini]',(fase==='ultimo'?'':dos(d)+'d ')+dos(h)+'h '+dos(m)+'m '+dos(s)+'s');
