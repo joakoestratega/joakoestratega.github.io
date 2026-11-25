@@ -362,9 +362,13 @@ function pintarEstilos() {
 
 function verGrande(i) {
   $('#mv-nombre').textContent = E.estilos[i].nombre || TEMAS[E.estilos[i].tema].nombre;
-  $('#mv-iframe').srcdoc = construirPagina(E.estilos[i], {}, E.refs[i], { modo: 'vista' });
+  // Recuadro nuevo cada vez: al reusar el mismo, Chrome lo dejaba en blanco desde la segunda vez.
+  const viejo = $('#mv-iframe'), nuevo = viejo.cloneNode(false);
+  nuevo.removeAttribute('srcdoc');
+  viejo.replaceWith(nuevo);
   $('#mv-elegir').onclick = () => { $('#m-vista').classList.remove('abierto'); elegir(i); };
   abrir('#m-vista');
+  requestAnimationFrame(() => { nuevo.srcdoc = construirPagina(E.estilos[i], {}, E.refs[i], { modo: 'vista' }); });
 }
 
 function elegir(i) {
