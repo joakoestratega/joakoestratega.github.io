@@ -71,7 +71,10 @@ $('#f-negocio').onsubmit = async e => {
   if (!REGISTRO.hecho()) return abrir('#m-registro');
   seguirDespuesDeRegistro();
 };
+let despuesDeRegistro = null;
 function seguirDespuesDeRegistro() {
+  if (despuesDeRegistro) { const f = despuesDeRegistro; despuesDeRegistro = null; return f(); }
+  if (!E.negocio) return $('#negocio').focus();
   if (IA.listo()) return arrancarInvestigacion();
   abrir('#m-conectar');
 }
@@ -88,6 +91,17 @@ const REGISTRO = {
     return v;
   },
 };
+// Link de Joako para presentar: ?modo=joako entra sin registro y no manda nada a la hoja.
+if (PARAMS.get('modo') === 'joako') REGISTRO.poner('pqv_registro', '1');
+const EVENTO = (PARAMS.get('e') || '').replace(/[^\w-]/g, '').slice(0, 40);
+// El registro se pide apenas entra la persona, así nadie se lo salta yendo al kit.
+setTimeout(() => { if (!REGISTRO.hecho() && !PARAMS.get('demo')) abrir('#m-registro'); }, 300);
+document.querySelectorAll('a.camino-kit').forEach(a => a.addEventListener('click', ev => {
+  if (REGISTRO.hecho()) return;
+  ev.preventDefault();
+  despuesDeRegistro = () => { location.href = a.href; };
+  abrir('#m-registro');
+}));
 // Con el mismo código se encuentra la grabación de esa persona en Clarity (filtro "ID personalizado").
 setTimeout(() => { try { window.clarity && window.clarity('identify', REGISTRO.visita()); } catch {} }, 1500);
 
@@ -98,13 +112,16 @@ $('#f-registro').onsubmit = async e => {
     nombre: $('#r-nombre').value.trim().slice(0, 80),
     whatsapp: $('#r-whatsapp').value.trim().slice(0, 25),
     email: $('#r-email').value.trim().slice(0, 120),
-    negocio: E.negocio.slice(0, 300),
+    dedica: $('#r-dedica').value.trim().slice(0, 120),
+    negocio: (E.negocio || $('#r-dedica').value.trim()).slice(0, 300),
+    evento: EVENTO,
     acepta_mensajes: $('#r-mensajes').checked ? 'si' : 'no',
     visita: REGISTRO.visita(),
     origen: location.origin + location.pathname,
   };
   if ($('#r-web').value) { $('#m-registro').classList.remove('abierto'); return seguirDespuesDeRegistro(); }
   if (datos.nombre.length < 2) return aviso('Escribe tu nombre.', true);
+  if (datos.dedica.length < 3) return aviso('Cuéntanos de qué es tu negocio.', true);
   if (datos.whatsapp.replace(/\D/g, '').length < 7) return aviso('Revisa tu número de WhatsApp.', true);
   // Se manda por detrás (keepalive) para que la persona siga sin esperar a la hoja.
   try { fetch(REGISTRO.URL, { method: 'POST', mode: 'no-cors', keepalive: true, headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify(datos) }).catch(() => {}); } catch {}
@@ -184,6 +201,8 @@ async function arrancarInvestigacion() {
   const barra = $('#inv-barra');
   let total = 20, listas = 0;
   barra.style.width = '6%';
+  E.leidas = {}; E.urls = {};
+  $('#inv-escoger').hidden = true;
 
   try {
     E.informe = await investigar(E.negocio, ev => {
@@ -200,6 +219,7 @@ async function arrancarInvestigacion() {
         barra.style.width = '12%';
       }
       if (ev.fase === 'leyendo') {
+        E.urls[ev.k] = ev.url;
         const c = $(`#pag-${ev.k}`); c?.classList.add('leyendo');
         c && (c.querySelector('.pag-estado').textContent = 'Leyendo…');
       }
@@ -212,6 +232,7 @@ async function arrancarInvestigacion() {
         c.classList.add('leida');
         c.querySelector('.pag-estado').textContent = ev.pagina?.fuente === 'chat' ? '✓ Según tu chat' : '✓ Revisada';
         const p = ev.pagina;
+        E.leidas[ev.k] = p;
         const img = new Image(); img.referrerPolicy = 'no-referrer';
         img.onload = () => img.classList.add('ok');
         img.onerror = () => { if (p.imagen && img.src !== p.imagen) img.src = p.imagen; };
@@ -227,7 +248,7 @@ async function arrancarInvestigacion() {
       }
     });
     barra.style.width = '100%';
-    await crearEstilos();
+    escogerPaginas();
   } catch (e) {
     console.error(e, e.original);
     $('#inv-fase').textContent = 'Se detuvo';
@@ -235,6 +256,49 @@ async function arrancarInvestigacion() {
     $('#inv-titulo').textContent = 'La investigación se detuvo';
     mostrarError('#inv-grilla', e, arrancarInvestigacion);
   }
+}
+
+// Paso 2b: la persona ve las páginas encontradas y escoge hasta 3 que le gusten.
+function escogerPaginas() {
+  const MAX = 3;
+  const elegidas = new Set();
+  $('#inv-fase').textContent = 'Escoge';
+  $('#inv-fase').classList.remove('pulso');
+  $('#inv-titulo').textContent = '¿Cuáles te gustan? Escoge hasta 3';
+  $('#inv-sub').textContent = 'Ábrelas para verlas completas. Tu página va a seguir el orden y el estilo de las que escojas.';
+  const pintar = () => {
+    $('#inv-cuenta').textContent = elegidas.size ? `Escogiste ${elegidas.size} de ${MAX}` : `Toca hasta ${MAX} páginas que te gusten.`;
+    $('#b-disenar').disabled = !elegidas.size;
+  };
+  Object.entries(E.leidas).forEach(([k, p]) => {
+    const c = $(`#pag-${k}`); if (!c) return;
+    c.classList.add('elegible');
+    const url = p.url || E.urls[k] || '';
+    if (/^https?:\/\//.test(url) && !c.querySelector('.pag-ver')) {
+      c.querySelector('.pag-info').insertAdjacentHTML('beforeend', `<a class="pag-ver" href="${escHTML(url)}" target="_blank" rel="noopener noreferrer">Ver la página ↗</a>`);
+    }
+    c.querySelector('.pag-estado').textContent = 'Tocar para escoger';
+    c.onclick = ev => {
+      if (ev.target.closest('a')) return;
+      if (elegidas.has(k)) { elegidas.delete(k); c.classList.remove('elegida'); c.querySelector('.pag-estado').textContent = 'Tocar para escoger'; }
+      else {
+        if (elegidas.size >= MAX) return aviso(`Puedes escoger hasta ${MAX}. Quita una para cambiarla.`, true);
+        elegidas.add(k); c.classList.add('elegida'); c.querySelector('.pag-estado').textContent = '✓ Escogida';
+      }
+      pintar();
+    };
+  });
+  const seguir = async lista => {
+    $('#inv-escoger').hidden = true;
+    E.informe = armarInforme(E.negocio, lista);
+    E.estilos = [];
+    try { window.medir && window.medir('paginas_escogidas', { cuantas: lista.length }); } catch {}
+    await crearEstilos();
+  };
+  $('#b-disenar').onclick = () => seguir([...elegidas].map(k => E.leidas[k]));
+  $('#b-todas').onclick = () => seguir(Object.values(E.leidas));
+  $('#inv-escoger').hidden = false;
+  pintar();
 }
 
 // Caja de error visible, con el detalle técnico escondido para quien lo necesite.

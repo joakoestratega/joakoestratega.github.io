@@ -118,7 +118,11 @@ JSON: {"paginas":[{"url":"https://...","marca":"...","pais":"...","titular":"...
   })).filter(p => p && p.titulos.length);
 
   if (analizadas.length < 2) throw new Error('Pudimos leer muy pocas páginas (algunas marcas bloquean las visitas automáticas). Intenta de nuevo o describe tu negocio con otras palabras.');
+  return armarInforme(negocio, analizadas);
+}
 
+// El informe se arma con las páginas que se le pasen: todas, o las que escogió la persona.
+function armarInforme(negocio, analizadas) {
   // Conteo real de gatillos.
   const conteo = {};
   analizadas.forEach(p => p.gatillos.forEach(g => conteo[g] = (conteo[g] || 0) + 1));
@@ -134,3 +138,4 @@ JSON: {"paginas":[{"url":"https://...","marca":"...","pais":"...","titular":"...
 }
 
 window.investigar = investigar;
+window.armarInforme = armarInforme;

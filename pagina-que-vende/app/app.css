@@ -262,3 +262,14 @@ h2 em,h1 em{font-style:normal;color:var(--ac)}
 .registro input:focus{outline:2px solid var(--ac);border-color:transparent}
 .registro .acepto{display:flex;align-items:center;gap:8px;font-weight:500;color:var(--tx2)}
 .registro .acepto a{color:var(--ac)}
+
+/* Paso 2: la persona escoge hasta 3 páginas */
+.pag.elegible{cursor:pointer;transition:transform .15s,box-shadow .15s}
+.pag.elegible:hover{transform:translateY(-2px)}
+.pag.elegida{box-shadow:0 0 0 3px var(--ac)}
+.pag.elegida .pag-estado{background:var(--ac);color:var(--ac-tx)}
+.pag-ver{font-size:12px;font-weight:700;color:var(--ac);text-decoration:none}
+.escoger{position:sticky;bottom:16px;margin-top:18px;display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between;background:var(--bg2);border:1px solid var(--linea2);border-radius:var(--r);padding:14px 16px;z-index:5}
+.escoger span{font-weight:700}
+.escoger-botones{display:flex;flex-wrap:wrap;gap:10px}
+.escoger button:disabled{opacity:.4;cursor:not-allowed}

@@ -85,7 +85,35 @@ function leer(obj, ruta) {
   return ruta.split('.').reduce((o, k) => (o == null ? o : o[k]), obj);
 }
 
+// Formulario de pedidos de Google Forms: se acepta el link o el código para insertar, y solo de Google.
+function linkFormulario(n) {
+  let v = String(n.formulario || '').trim();
+  const src = v.match(/src="([^"]+)"/); if (src) v = src[1];
+  v = v.replace(/&amp;/g, '&');
+  if (!/^https:\/\/(docs\.google\.com\/forms\/|forms\.gle\/)/.test(v)) return '';
+  if (/docs\.google\.com\/forms\//.test(v)) {
+    try {
+      const u = new URL(v);
+      u.pathname = u.pathname.replace(/\/(edit|prefill)$/, '/viewform');
+      u.searchParams.set('embedded', 'true');
+      v = u.toString();
+    } catch { return ''; }
+  }
+  return v;
+}
+
+function seccionPedido(form, negocio) {
+  return `<section class="sec alt pedido" id="pedido"><div class="cont">
+  <h2 class="tit t2">Haz tu pedido aquí</h2>
+  <p class="lead">Déjanos tus datos y te lo enviamos${negocio.ciudad ? ' desde ' + esc(negocio.ciudad) : ''}. Pagas cuando lo recibes.</p>
+  <iframe src="${esc(form)}" title="Formulario de pedido" loading="lazy">Cargando el formulario…</iframe>
+</div></section>`;
+}
+const PEDIDO_CSS = `.pedido .cont{display:grid;gap:18px;justify-items:center;text-align:center}
+.pedido iframe{width:min(720px,100%);height:1150px;border:0;border-radius:18px;background:#fff}`;
+
 function linkAccion(n) {
+  if (linkFormulario(n)) return '#pedido';
   if (n.link_compra) return n.link_compra;
   const num = String(n.whatsapp || '').replace(/\D/g, '');
   if (num) return `https://wa.me/${num}?text=${encodeURIComponent(`Hola, quiero ${n.nombre ? 'info de ' + n.nombre : 'más información'}`)}`;
@@ -105,7 +133,7 @@ function construirPagina(estilo, negocio = {}, fotos = {}, opciones = {}) {
   }
   const link = linkAccion(negocio);
   const cssUsado = new Set();
-  const cuerpo = (estilo.secciones || []).map((s, i) => {
+  const partes = (estilo.secciones || []).map((s, i) => {
     const def = _G.SECCIONES[s.tipo];
     if (!def) return '';
     cssUsado.add(def.id);
@@ -144,9 +172,18 @@ function construirPagina(estilo, negocio = {}, fotos = {}, opciones = {}) {
       },
     };
     try { return def.html(h); } catch (e) { console.error('Sección', s.tipo, e); return ''; }
-  }).join('\n');
+  });
+  // Con formulario de pedidos, va incrustado después de la oferta (o antes del pie) y los botones bajan a él.
+  const form = linkFormulario(negocio);
+  if (form) {
+    const tipos = (estilo.secciones || []).map(s => s.tipo);
+    let donde = tipos.lastIndexOf('oferta') + 1;
+    if (!donde) { const pie = tipos.indexOf('pie'); donde = pie >= 0 ? pie : partes.length; }
+    partes.splice(donde, 0, seccionPedido(form, negocio));
+  }
+  const cuerpo = partes.join('\n');
 
-  const css = BASE_CSS + [...cssUsado].map(id => _G.SECCIONES[id].css || '').join('\n') + (modo === 'vista' ? EDITOR_CSS : '');
+  const css = BASE_CSS + (form ? PEDIDO_CSS : '') + [...cssUsado].map(id => _G.SECCIONES[id].css || '').join('\n') + (modo === 'vista' ? EDITOR_CSS : '');
   const raiz = Object.entries(vars).map(([k, v]) => `${k}:${v}`).join(';');
   const titulo = negocio.nombre ? `${negocio.nombre}${negocio.frase ? ' · ' + negocio.frase : ''}` : (estilo.nombre || 'Mi página');
   const desc = (estilo.secciones?.find(s => s.tipo === 'hero')?.datos?.subtitulo) || '';
