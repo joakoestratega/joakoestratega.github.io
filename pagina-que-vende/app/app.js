@@ -280,10 +280,11 @@ function escogerPaginas() {
     if (/^https?:\/\//.test(url) && !c.querySelector('.pag-ver')) {
       c.querySelector('.pag-info').insertAdjacentHTML('beforeend', `<a class="pag-ver" href="${escHTML(url)}" target="_blank" rel="noopener noreferrer">Ver la página ↗</a>`);
     }
-    c.querySelector('.pag-estado').textContent = 'Tocar para escoger';
+    c.querySelector('.pag-estado').textContent = p.esTienda ? 'Parece tienda, no landing' : 'Tocar para escoger';
+    if (p.esTienda) c.classList.add('tienda');
     c.onclick = ev => {
       if (ev.target.closest('a')) return;
-      if (elegidas.has(k)) { elegidas.delete(k); c.classList.remove('elegida'); c.querySelector('.pag-estado').textContent = 'Tocar para escoger'; }
+      if (elegidas.has(k)) { elegidas.delete(k); c.classList.remove('elegida'); c.querySelector('.pag-estado').textContent = p.esTienda ? 'Parece tienda, no landing' : 'Tocar para escoger'; }
       else {
         if (elegidas.size >= MAX) return aviso(`Puedes escoger hasta ${MAX}. Quita una para cambiarla.`, true);
         elegidas.add(k); c.classList.add('elegida'); c.querySelector('.pag-estado').textContent = '✓ Escogida';

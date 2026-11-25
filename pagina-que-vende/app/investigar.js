@@ -1,6 +1,9 @@
 // Investigación: busca las páginas que más venden en el nicho, las lee una por una
 // y saca lo que usan. Los conteos salen de las páginas reales, no de la IA.
 
+const RUTA_TIENDA = /\/(products?|productos?|collections?|colecciones|categor(y|ies|ia|ias)|shop|tienda|store|catalog(o)?)(\/|$)/i;
+// Señales de ficha de producto de tienda (carrito y variantes) contra señales de landing (muchas secciones).
+const CARRITO_RE = /add to cart|agregar al carrito|a[ñn]adir al carrito|a[ñn]adir a la cesta|add to bag|agregar a la bolsa|data-product-id|variant-selector|product-form/i;
 const GATILLOS = {
   'Garantía': /garant[ií]a|guarantee|money.?back|devoluci[oó]n|reembolso|refund/i,
   'Envío gratis': /env[ií]o gratis|free shipping|env[ií]o sin costo/i,
@@ -69,14 +72,19 @@ async function investigar(negocio, avisar = () => {}) {
 "${negocio}"
 
 Prioriza marcas que venden mucho, con páginas cuidadas, de varios países (Estados Unidos, España, Latinoamérica, Europa). Evita Amazon, MercadoLibre, Wikipedia, blogs, directorios y redes sociales.
-Usa la página de venta de ese producto o servicio (que abra sin iniciar sesión). NO uses la página de inicio de una tienda con catálogo ni páginas con muchos productos: si la marca es una tienda, busca la landing de su producto estrella o de una promoción.
-Si el negocio es un servicio (consultorio, uñas, asesoría, clases), busca la página donde se vende y se agenda ese servicio.
+UNA LANDING PAGE ES: una página larga de una sola oferta que se lee de arriba abajo, con titular grande, el problema, beneficios, cómo funciona, testimonios, la oferta con precio o garantía, preguntas frecuentes y el mismo botón repetido varias veces. Casi nunca tiene menú de tienda.
+NO ES una landing: la ficha de producto de una tienda (foto, precio, tallas o variantes, "agregar al carrito" y productos relacionados), la página de inicio de una tienda, una categoría o colección. No traigas esas.
+Dónde suelen estar las landings: las páginas a las que llevan los anuncios de Facebook, Instagram o Google; subdominios como lp., go., oferta. o landing.; páginas hechas en Hotmart, ClickFunnels, Leadpages, Systeme.io o GoHighLevel; páginas de un lanzamiento o de una promoción.
+Si el negocio es un servicio (consultorio, uñas, asesoría, clases), busca la landing donde se vende y se agenda ese servicio.
+Abre cada página y confirma que de verdad es una landing antes de ponerla en la lista.
 Solo marcas que venden este mismo producto o servicio.
 De cada página escribe su titular principal, 3 a 6 títulos de sus secciones, el texto de sus botones, sus precios y cuáles de estas cosas usa: Garantía, Envío gratis, Testimonios, Urgencia, Descuento, Preguntas frecuentes, Pago seguro, Pago contra entrega, WhatsApp, Video.
 JSON: {"paginas":[{"url":"https://...","marca":"...","pais":"...","titular":"...","titulos":["..."],"botones":["..."],"precios":["..."],"usa":["Garantía","..."]}]}`, { buscar: true, paso: 1 });
 
   const lista = (encontradas.paginas || encontradas || [])
     .filter(p => p && /^https?:\/\//.test(p.url))
+    // Fichas de producto, colecciones y categorías de tienda no son landings.
+    .filter(p => !RUTA_TIENDA.test(new URL(p.url).pathname))
     .filter((p, i, a) => a.findIndex(q => new URL(q.url).hostname === new URL(p.url).hostname) === i)
     .slice(0, 12);
   if (!lista.length) throw new Error('No encontramos páginas para ese negocio. Prueba describiéndolo con otras palabras.');
@@ -106,7 +114,7 @@ JSON: {"paginas":[{"url":"https://...","marca":"...","pais":"...","titular":"...
       const a = analizarHTML(html, p.url);
       if (!a.titulos.length) throw new Error('página bloqueada o vacía');
       if (/for sale|buy this domain|domain is for sale|este dominio est[aá] a la venta|parked/i.test(a.titulo + ' ' + a.titulos.join(' '))) throw new Error('dominio en venta');
-      const r = { ...a, marca: p.marca || a.dominio, pais: p.pais || '' };
+      const r = { ...a, marca: p.marca || a.dominio, pais: p.pais || '', esTienda: CARRITO_RE.test(html) && a.titulos.length < 8 };
       avisar({ fase: 'leida', k, pagina: r });
       return r;
     } catch (e) {
@@ -118,6 +126,8 @@ JSON: {"paginas":[{"url":"https://...","marca":"...","pais":"...","titular":"...
     }
   })).filter(p => p && p.titulos.length);
 
+  const landings = analizadas.filter(p => !p.esTienda);
+  if (landings.length >= 3) analizadas.splice(0, analizadas.length, ...landings);
   if (analizadas.length < 2) throw new Error('Pudimos leer muy pocas páginas (algunas marcas bloquean las visitas automáticas). Intenta de nuevo o describe tu negocio con otras palabras.');
   return armarInforme(negocio, analizadas);
 }

@@ -273,3 +273,4 @@ h2 em,h1 em{font-style:normal;color:var(--ac)}
 .escoger span{font-weight:700}
 .escoger-botones{display:flex;flex-wrap:wrap;gap:10px}
 .escoger button:disabled{opacity:.4;cursor:not-allowed}
+.pag.tienda{opacity:.55}.pag.tienda .pag-estado{color:var(--mal)}
