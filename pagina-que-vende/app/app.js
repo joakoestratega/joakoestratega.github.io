@@ -19,6 +19,7 @@ const DEMOS = []; // ej: ['cafe', 'odontologia'] → archivos demo/cafe.json
 
 // ---------- utilidades ----------
 function ir(id, paso) {
+  pantallaActual = { id, paso };
   $$('.pant').forEach(p => p.classList.toggle('activa', p.id === id));
   $$('#pasos li').forEach(li => {
     const n = +li.dataset.p;
@@ -192,6 +193,8 @@ IA.alChat = (prompt, { paso = 1, json = false } = {}) => new Promise((ok, no) =>
 
 // ---------- 2. investigación ----------
 async function arrancarInvestigacion() {
+  borrarProgreso();
+  Object.assign(E, { estilos: [], elegido: null, final: null, guia: [], fotos: {} });
   ir('p-investigando', 2);
   $('#inv-fase').classList.add('pulso');
   $$('.error-caja').forEach(c => c.remove());
@@ -603,6 +606,37 @@ $('#b-copiar').onclick = async () => {
 $$('[data-cerrar]').forEach(b => b.onclick = () => cerrar(b));
 $$('.modal').forEach(m => m.onclick = e => { if (e.target === m) m.classList.remove('abierto'); });
 
+// ---------- progreso: se guarda en este navegador para no perderlo al recargar ----------
+const PROGRESO = 'pqv_progreso';
+var pantallaActual = { id: 'p-inicio', paso: 1 };
+function guardarProgreso() {
+  if (E.demo || !E.estilos.length) return;
+  const base = { v: 1, fecha: Date.now(), pantalla: pantallaActual, negocio: E.negocio, informe: E.informe, estilos: E.estilos,
+    elegido: E.elegido, marca: E.marca, final: E.final, guia: E.guia };
+  // Primero con las fotos; si no caben, sin las fotos subidas.
+  for (const fotos of [E.fotos, Object.fromEntries(Object.entries(E.fotos || {}).filter(([, f]) => f?.tipo !== 'cliente'))]) {
+    try { localStorage.setItem(PROGRESO, JSON.stringify({ ...base, fotos })); return; } catch {}
+  }
+}
+function borrarProgreso() { try { localStorage.removeItem(PROGRESO); } catch {} }
+async function recuperarProgreso() {
+  let d; try { d = JSON.parse(localStorage.getItem(PROGRESO) || 'null'); } catch { d = null; }
+  if (!d || d.v !== 1 || !Array.isArray(d.estilos) || !d.estilos.length) return false;
+  if (Date.now() - (d.fecha || 0) > 14 * 864e5) { borrarProgreso(); return false; }
+  Object.assign(E, { negocio: d.negocio || '', informe: d.informe, estilos: d.estilos.map(normalizarEstilo), elegido: d.elegido ?? null,
+    marca: d.marca || {}, final: d.final || null, guia: d.guia || [], fotos: d.fotos || {} });
+  $('#negocio').value = E.negocio;
+  const f = $('#f-marca');
+  Object.entries(E.marca).forEach(([k, v]) => { if (f[k] && f[k].type !== 'color') f[k].value = v; });
+  if (E.final && d.pantalla?.id === 'p-editor') abrirEditor();
+  else if (E.elegido != null && d.pantalla?.id === 'p-marca') elegir(E.elegido);
+  else { E.refs = E.estilos.map((es, n) => referenciasIniciales(es, E.informe, n)); ir('p-estilos', 3); pintarEstilos(); }
+  aviso('Seguimos donde ibas.');
+  return true;
+}
+setInterval(guardarProgreso, 5000);
+addEventListener('pagehide', guardarProgreso);
+
 // ---------- demo y guardado ----------
 // ?demo=nombre carga demo/nombre.json (investigación + estilos ya hechos).
 // &estilo=N salta directo al editor con ese estilo y la marca guardada en el demo.
@@ -639,6 +673,8 @@ if (PARAMS.has('admin')) {
   pintarInicio();
   if (PARAMS.get('demo')) {
     try { await cargarDemo(PARAMS.get('demo')); } catch (e) { console.error(e); aviso('No encontramos ese ejemplo.', true); }
+  } else {
+    try { await recuperarProgreso(); } catch (e) { console.error(e); borrarProgreso(); }
   }
 })();
 

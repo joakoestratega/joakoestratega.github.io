@@ -41,7 +41,35 @@ JSON:
 {"informe":{"resumen":"3 frases: qué hacen las que más venden","estructura":["orden de secciones que más se repite"],"promesas":["5 ganchos de titular que usan"],"estilo_imagen":"qué fotos y videos usan","precios":"rango de precios y cómo los presentan","oportunidad":"qué NO hace casi nadie"},
  "estilos":[{"tema":"impacto","nombre":"nombre corto","por_que":"una frase basada en el informe","acento":"#hex","secciones":[{"tipo":"hero","datos":{}}]}]}`, { paso: 2 });
   for (const [k, v] of Object.entries(r.informe || {})) if (!["__proto__", "constructor", "prototype"].includes(k)) informe[k] = v;
-  return (r.estilos || []).filter(e => TEMAS[e.tema] && Array.isArray(e.secciones)).slice(0, 3);
+  return (r.estilos || []).filter(e => e && TEMAS[e.tema]).map(normalizarEstilo).slice(0, 3);
+}
+
+const ALIAS_SECCIONES = {
+  testimonios: 'confianza', testimonio: 'confianza', resenas: 'confianza', 'reseñas': 'confianza', prueba: 'confianza', garantia: 'confianza',
+  beneficio: 'beneficios', ventajas: 'beneficios', caracteristicas: 'beneficios',
+  pasos: 'como-funciona', proceso: 'como-funciona', como_funciona: 'como-funciona', 'como funciona': 'como-funciona',
+  precio: 'oferta', precios: 'oferta', planes: 'oferta', cta: 'cta-final', cierre: 'cta-final', cta_final: 'cta-final',
+  footer: 'pie', portada: 'hero', encabezado: 'hero', dolor: 'problema', urgencia: 'anuncio', barra: 'anuncio',
+};
+function normalizarEstilo(e) {
+  const tipoValido = t => {
+    const k = String(t || '').trim().toLowerCase();
+    return SECCIONES[k] ? k : (SECCIONES[ALIAS_SECCIONES[k]] ? ALIAS_SECCIONES[k] : null);
+  };
+  let secs = (Array.isArray(e.secciones) ? e.secciones : [])
+    .map(s => (typeof s === 'string' ? { tipo: s, datos: {} } : s))
+    .map(s => s && tipoValido(s.tipo) ? { tipo: tipoValido(s.tipo), datos: (s.datos && typeof s.datos === 'object') ? s.datos : {} } : null)
+    .filter(Boolean);
+  const vistos = new Set(); secs = secs.filter(s => !vistos.has(s.tipo) && vistos.add(s.tipo));
+  const ejemplo = t => ({ tipo: t, datos: JSON.parse(JSON.stringify(SECCIONES[t]?.ejemplo || {})) });
+  // Una sección sin textos se llena con el ejemplo de la biblioteca; en "Tu marca" se reescribe con los datos reales.
+  secs = secs.map(s => (Object.keys(s.datos).length ? s : ejemplo(s.tipo)));
+  const tiene = t => secs.some(s => s.tipo === t);
+  if (!tiene('hero') && SECCIONES.hero) secs.unshift(ejemplo('hero'));
+  ['beneficios', 'oferta', 'cta-final', 'pie'].forEach(t => { if (!tiene(t) && SECCIONES[t]) secs.push(ejemplo(t)); });
+  const orden = t => (t === 'anuncio' ? -2 : t === 'hero' ? -1 : t === 'cta-final' ? 98 : t === 'pie' ? 99 : 0);
+  secs = secs.map((s, i) => ({ s, i })).sort((a, b) => (orden(a.s.tipo) - orden(b.s.tipo)) || (a.i - b.i)).map(x => x.s);
+  return { ...e, secciones: secs };
 }
 
 function fotosDelEstilo(estilo) {
