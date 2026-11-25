@@ -337,6 +337,7 @@ async function crearEstilos() {
       return;
     }
   }
+  try { await prepararFotos(E.informe); } catch (e) { console.error(e); }
   E.refs = E.estilos.map((es, n) => referenciasIniciales(es, E.informe, n));
   pintarEstilos();
 }

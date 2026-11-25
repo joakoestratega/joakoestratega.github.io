@@ -38,7 +38,7 @@ Cada propuesta: entre 6 y 9 secciones, empieza con "hero" (o "anuncio" y luego "
 ${REGLAS_TEXTO}
 
 JSON:
-{"informe":{"resumen":"3 frases: qué hacen las que más venden","estructura":["orden de secciones que más se repite"],"promesas":["5 ganchos de titular que usan"],"estilo_imagen":"qué fotos y videos usan","precios":"rango de precios y cómo los presentan","oportunidad":"qué NO hace casi nadie"},
+{"informe":{"resumen":"3 frases: qué hacen las que más venden","estructura":["orden de secciones que más se repite"],"promesas":["5 ganchos de titular que usan"],"estilo_imagen":"qué fotos y videos usan","precios":"rango de precios y cómo los presentan","oportunidad":"qué NO hace casi nadie","buscar_fotos":"2 o 3 palabras genéricas en inglés del tipo de producto o servicio, sin nombres de marca ni datos de la persona"},
  "estilos":[{"tema":"impacto","nombre":"nombre corto","por_que":"una frase basada en el informe","acento":"#hex","secciones":[{"tipo":"hero","datos":{}}]}]}`, { paso: 2 });
   for (const [k, v] of Object.entries(r.informe || {})) if (!["__proto__", "constructor", "prototype"].includes(k)) informe[k] = v;
   return (r.estilos || []).filter(e => e && TEMAS[e.tema]).map(normalizarEstilo).slice(0, 3);
@@ -79,8 +79,44 @@ function fotosDelEstilo(estilo) {
 }
 
 // Pone fotos reales de la investigación en los huecos, como referencia.
+// Fotos de referencia que de verdad cargan: las de las páginas reales y, si no alcanzan, fotos libres de Wikimedia Commons.
+function cargaBien(src, ms = 6000) {
+  return new Promise(ok => {
+    const img = new Image(); img.referrerPolicy = 'no-referrer';
+    const t = setTimeout(() => ok(false), ms);
+    img.onload = () => { clearTimeout(t); ok(img.naturalWidth >= 300 && img.naturalHeight >= 200); };
+    img.onerror = () => { clearTimeout(t); ok(false); };
+    img.src = src;
+  });
+}
+async function fotosLibres(termino, n = 12) {
+  try {
+    const q = encodeURIComponent('filetype:bitmap ' + String(termino).slice(0, 80));
+    const r = await fetch(`https://commons.wikimedia.org/w/api.php?action=query&generator=search&gsrsearch=${q}&gsrnamespace=6&gsrlimit=${n}&prop=imageinfo&iiprop=url&iiurlwidth=1200&format=json&origin=*`);
+    const d = await r.json();
+    return Object.values(d?.query?.pages || {}).map(p => p.imageinfo?.[0]?.thumburl).filter(u => /^https:\/\/(upload|thumb)\.wikimedia\.org\//.test(u || ''))
+      .map(src => ({ src, marca: 'Foto libre de referencia' }));
+  } catch { return []; }
+}
+async function prepararFotos(informe) {
+  if (Array.isArray(informe.fotosOk) && informe.fotosOk.length >= 6) return informe.fotosOk;
+  const candidatas = informe.paginas.flatMap(p => (p.imagenes || []).map(src => ({ src, marca: p.marca }))).filter(x => x.src).slice(0, 40);
+  const pruebas = await Promise.all(candidatas.map(x => cargaBien(x.src)));
+  let ok = candidatas.filter((x, i) => pruebas[i]);
+  if (ok.length < 6) {
+    for (const termino of [informe.buscar_fotos].filter(Boolean)) {
+      const libres = await fotosLibres(termino);
+      const bien = await Promise.all(libres.map(x => cargaBien(x.src)));
+      ok = ok.concat(libres.filter((x, i) => bien[i]));
+      if (ok.length >= 6) break;
+    }
+  }
+  informe.fotosOk = ok;
+  return ok;
+}
+
 function referenciasIniciales(estilo, informe, n = 0) {
-  const imgs = informe.paginas.flatMap(p => p.imagenes.map(src => ({ src, marca: p.marca }))).filter(x => x.src);
+  const imgs = (informe.fotosOk && informe.fotosOk.length ? informe.fotosOk : informe.paginas.flatMap(p => p.imagenes.map(src => ({ src, marca: p.marca })))).filter(x => x.src);
   const fotos = {};
   fotosDelEstilo(estilo).forEach((f, i) => {
     const x = imgs[(i * 3 + n * 5) % Math.max(imgs.length, 1)];
@@ -91,7 +127,7 @@ function referenciasIniciales(estilo, informe, n = 0) {
 
 async function personalizar(estilo, negocio, informe) {
   const huecos = fotosDelEstilo(estilo);
-  const refs = informe.paginas.flatMap(p => p.imagenes.slice(0, 2).map(src => ({ src, marca: p.marca }))).slice(0, 30);
+  const refs = (informe.fotosOk && informe.fotosOk.length ? informe.fotosOk : informe.paginas.flatMap(p => p.imagenes.slice(0, 2).map(src => ({ src, marca: p.marca })))).slice(0, 30);
   const r = await IA.json(`Personaliza esta página de venta para una marca real.
 
 MARCA:
