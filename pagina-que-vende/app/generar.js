@@ -33,7 +33,7 @@ DESPUÉS crea 3 propuestas de página MUY distintas entre sí:
 1. tema "impacto": la que copia lo que más vende en el informe (directa, fuerte, oferta clara).
 2. tema "editorial": premium y aspiracional (vende por deseo y confianza).
 3. tema "limpio": la que aprovecha "lo que casi nadie hace" para diferenciarse.
-Cada propuesta: entre 6 y 9 secciones, empieza con "hero" (o "anuncio" y luego "hero"), incluye "oferta" y termina con "cta-final" y "pie". Escribe los textos completos para este negocio. Elige un color de acento hexadecimal que encaje con el negocio y el tema.
+Cada propuesta es una landing de alta conversión, entre 8 y 11 secciones, en este orden base: "hero" (o "anuncio" y luego "hero"), "problema", "beneficios", "como-funciona", "testimonios", "oferta", "preguntas", "cta-final" y "pie". Puedes sumar "confianza" y cambiar el orden del medio si el informe lo justifica, pero nunca quites testimonios, oferta ni preguntas. Escribe los textos completos para este negocio. Elige un color de acento hexadecimal que encaje con el negocio y el tema.
 
 ${REGLAS_TEXTO}
 
@@ -67,6 +67,10 @@ function normalizarEstilo(e) {
   const tiene = t => secs.some(s => s.tipo === t);
   if (!tiene('hero') && SECCIONES.hero) secs.unshift(ejemplo('hero'));
   ['beneficios', 'oferta', 'cta-final', 'pie'].forEach(t => { if (!tiene(t) && SECCIONES[t]) secs.push(ejemplo(t)); });
+  // Prueba social antes de la oferta y preguntas después: sin eso no es una landing de alta conversión.
+  const ofe = () => secs.findIndex(s => s.tipo === 'oferta');
+  if (!tiene('testimonios') && SECCIONES.testimonios) secs.splice(ofe(), 0, ejemplo('testimonios'));
+  if (!tiene('preguntas') && SECCIONES.preguntas) secs.splice(ofe() + 1, 0, ejemplo('preguntas'));
   const orden = t => (t === 'anuncio' ? -2 : t === 'hero' ? -1 : t === 'cta-final' ? 98 : t === 'pie' ? 99 : 0);
   secs = secs.map((s, i) => ({ s, i })).sort((a, b) => (orden(a.s.tipo) - orden(b.s.tipo)) || (a.i - b.i)).map(x => x.s);
   return { ...e, secciones: secs };
@@ -141,6 +145,7 @@ PÁGINA ELEGIDA (tema ${estilo.tema}):
 ${JSON.stringify(estilo.secciones)}
 
 1. Reescribe TODOS los textos para esta marca: usa su nombre, su producto, su precio y su forma de comprar. Mantén los mismos tipos de sección y los mismos campos. En "pie", pon el nombre de la marca y su contacto (WhatsApp si lo dio).
+1b. En "testimonios" escribe solo etiqueta y titulo, y deja "items": [] (los mensajes reales los pone el dueño). En "preguntas" escribe 4 a 6 dudas reales de este cliente (pago, envío, garantía, tiempos, cómo se usa) respondidas SOLO con datos de MARCA; si no hay dato para una pregunta, no la pongas.
 2. NO INVENTES NADA. Usa solo el precio, la garantía, los envíos y las formas de pago que aparecen en MARCA. Si MARCA no dice envío gratis, pago contra entrega, pago al recibir, descuentos, cifras de clientes, testimonios, años de experiencia ni correos, quita esas frases aunque estén en la página elegida. No pongas un precio distinto ni un "precio antes" que la marca no dio.
 3. Para cada foto de esta lista, dile al dueño cómo tomarla con su celular y escribe un prompt en inglés para crearla con IA (Gemini), alta calidad, estilo fotografía profesional de producto/publicidad, sin texto en la imagen, sin rostros de personas famosas. Elige de las referencias la imagen que más se parezca a lo que debe ir (índice).
 

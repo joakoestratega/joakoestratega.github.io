@@ -653,7 +653,7 @@ addEventListener('pagehide', guardarProgreso);
 async function cargarDemo(nombre) {
   const r = await fetch(`demo/${nombre}.json`);
   const d = await r.json();
-  Object.assign(E, { negocio: d.informe.negocio, informe: d.informe, estilos: d.estilos, demo: true });
+  Object.assign(E, { negocio: d.informe.negocio, informe: d.informe, estilos: d.estilos.map(normalizarEstilo), demo: true });
   $('#negocio').value = E.negocio;
   await crearEstilos();
   if (PARAMS.has('estilo')) {

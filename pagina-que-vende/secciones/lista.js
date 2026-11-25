@@ -7,7 +7,9 @@ const LISTA_SECCIONES = [
   'problema',
   'beneficios',
   'como-funciona',
+  'testimonios',
   'oferta',
+  'preguntas',
   'cta-final',
   'pie',
 ];
