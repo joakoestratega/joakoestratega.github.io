@@ -65,11 +65,12 @@ async function enParalelo(items, max, fn) {
 async function investigar(negocio, avisar = () => {}) {
   avisar({ fase: 'buscar', msg: 'Buscando en todo el mundo las páginas que más venden en tu negocio…' });
 
-  const encontradas = await IA.json(`Busca en internet, en cualquier país e idioma, las 12 mejores páginas de venta (landing pages o páginas de producto/servicio) de este negocio:
+  const encontradas = await IA.json(`Busca en internet, en cualquier país e idioma, las 12 mejores landing pages de este negocio: páginas de venta de UN solo producto o UN solo servicio, con un botón para comprar, pedir o agendar:
 "${negocio}"
 
 Prioriza marcas que venden mucho, con páginas cuidadas, de varios países (Estados Unidos, España, Latinoamérica, Europa). Evita Amazon, MercadoLibre, Wikipedia, blogs, directorios y redes sociales.
-Usa la página principal o la página de venta de cada marca (que abra sin iniciar sesión).
+Usa la página de venta de ese producto o servicio (que abra sin iniciar sesión). NO uses la página de inicio de una tienda con catálogo ni páginas con muchos productos: si la marca es una tienda, busca la landing de su producto estrella o de una promoción.
+Si el negocio es un servicio (consultorio, uñas, asesoría, clases), busca la página donde se vende y se agenda ese servicio.
 Solo marcas que venden este mismo producto o servicio.
 De cada página escribe su titular principal, 3 a 6 títulos de sus secciones, el texto de sus botones, sus precios y cuáles de estas cosas usa: Garantía, Envío gratis, Testimonios, Urgencia, Descuento, Preguntas frecuentes, Pago seguro, Pago contra entrega, WhatsApp, Video.
 JSON: {"paginas":[{"url":"https://...","marca":"...","pais":"...","titular":"...","titulos":["..."],"botones":["..."],"precios":["..."],"usa":["Garantía","..."]}]}`, { buscar: true, paso: 1 });
