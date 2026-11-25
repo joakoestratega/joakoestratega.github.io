@@ -274,3 +274,6 @@ h2 em,h1 em{font-style:normal;color:var(--ac)}
 .escoger-botones{display:flex;flex-wrap:wrap;gap:10px}
 .escoger button:disabled{opacity:.4;cursor:not-allowed}
 .pag.tienda{opacity:.55}.pag.tienda .pag-estado{color:var(--mal)}
+.wa-joako{position:fixed;left:max(16px,env(safe-area-inset-left,0px));bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:40;display:flex;align-items:center;gap:8px;background:#25D366;color:#06210F;font-weight:800;font-size:14px;padding:11px 16px;border-radius:99px;text-decoration:none;box-shadow:0 10px 30px -8px rgba(0,0,0,.6)}
+.wa-joako:hover{filter:brightness(1.05)}
+@media (max-width:600px){.wa-joako span{display:none}.wa-joako{padding:13px}}

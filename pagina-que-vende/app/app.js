@@ -612,6 +612,8 @@ $('#b-copiar').onclick = async () => {
 $$('[data-cerrar]').forEach(b => b.onclick = () => cerrar(b));
 $$('.modal').forEach(m => m.onclick = e => { if (e.target === m) m.classList.remove('abierto'); });
 
+$('#wa-joako').addEventListener('click', () => { try { window.medir && window.medir('whatsapp_joako', { paso: pantallaActual.paso }); } catch {} });
+
 // ---------- progreso: se guarda en este navegador para no perderlo al recargar ----------
 const PROGRESO = 'pqv_progreso';
 var pantallaActual = { id: 'p-inicio', paso: 1 };
