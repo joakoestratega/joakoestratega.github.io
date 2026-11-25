@@ -617,7 +617,7 @@ const PROGRESO = 'pqv_progreso';
 var pantallaActual = { id: 'p-inicio', paso: 1 };
 function guardarProgreso() {
   if (E.demo || !E.estilos.length) return;
-  const base = { v: 1, fecha: Date.now(), pantalla: pantallaActual, negocio: E.negocio, informe: E.informe, estilos: E.estilos,
+  const base = { v: 1, fotosV2: true, fecha: Date.now(), pantalla: pantallaActual, negocio: E.negocio, informe: E.informe, estilos: E.estilos,
     elegido: E.elegido, marca: E.marca, final: E.final, guia: E.guia };
   // Primero con las fotos; si no caben, sin las fotos subidas.
   for (const fotos of [E.fotos, Object.fromEntries(Object.entries(E.fotos || {}).filter(([, f]) => f?.tipo !== 'cliente'))]) {
@@ -629,6 +629,7 @@ async function recuperarProgreso() {
   let d; try { d = JSON.parse(localStorage.getItem(PROGRESO) || 'null'); } catch { d = null; }
   if (!d || d.v !== 1 || !Array.isArray(d.estilos) || !d.estilos.length) return false;
   if (Date.now() - (d.fecha || 0) > 14 * 864e5) { borrarProgreso(); return false; }
+  if (d.informe && !d.fotosV2) delete d.informe.fotosOk;
   Object.assign(E, { negocio: d.negocio || '', informe: d.informe, estilos: d.estilos.map(normalizarEstilo), elegido: d.elegido ?? null,
     marca: d.marca || {}, final: d.final || null, guia: d.guia || [], fotos: d.fotos || {} });
   $('#negocio').value = E.negocio;
@@ -636,7 +637,7 @@ async function recuperarProgreso() {
   Object.entries(E.marca).forEach(([k, v]) => { if (f[k] && f[k].type !== 'color') f[k].value = v; });
   if (E.final && d.pantalla?.id === 'p-editor') abrirEditor();
   else if (E.elegido != null && d.pantalla?.id === 'p-marca') elegir(E.elegido);
-  else { E.refs = E.estilos.map((es, n) => referenciasIniciales(es, E.informe, n)); ir('p-estilos', 3); pintarEstilos(); }
+  else { try { await prepararFotos(E.informe); } catch {} E.refs = E.estilos.map((es, n) => referenciasIniciales(es, E.informe, n)); ir('p-estilos', 3); pintarEstilos(); }
   aviso('Seguimos donde ibas.');
   return true;
 }

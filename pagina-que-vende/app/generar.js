@@ -84,7 +84,8 @@ function cargaBien(src, ms = 6000) {
   return new Promise(ok => {
     const img = new Image(); img.referrerPolicy = 'no-referrer';
     const t = setTimeout(() => ok(false), ms);
-    img.onload = () => { clearTimeout(t); ok(img.naturalWidth >= 300 && img.naturalHeight >= 200); };
+    // Solo fotos grandes y de proporción normal: los avisos, sellos y franjas son muy anchos o muy chicos.
+    img.onload = () => { clearTimeout(t); const w = img.naturalWidth, h = img.naturalHeight, r = w / Math.max(h, 1); ok(w >= 500 && h >= 350 && r >= 0.6 && r <= 2); };
     img.onerror = () => { clearTimeout(t); ok(false); };
     img.src = src;
   });
@@ -98,9 +99,12 @@ async function fotosLibres(termino, n = 12) {
       .map(src => ({ src, marca: 'Foto libre de referencia' }));
   } catch { return []; }
 }
+// Imágenes que no son del producto: medios de pago, sellos, logos, banderas, íconos.
+const FOTO_BASURA = /afterpay|clearpay|bnpl|installment|cuotas|addi|trustpilot|judge.me|yotpo|stamped|okendo|loox|fbcdn|facebook|doubleclick|gstatic|cookie|promo|klarna|sezzle|affirm|paypal|visa|mastercard|amex|apple-?pay|google-?pay|gpay|shop-?pay|payment|pago|badge|sello|trust|seal|logo|icon|flag|bandera|banner|stars?|rating|review|avatar|sprite|placeholder|\.svg|\.gif/i;
 async function prepararFotos(informe) {
   if (Array.isArray(informe.fotosOk) && informe.fotosOk.length >= 6) return informe.fotosOk;
-  const candidatas = informe.paginas.flatMap(p => (p.imagenes || []).map(src => ({ src, marca: p.marca }))).filter(x => x.src).slice(0, 40);
+  const candidatas = informe.paginas.flatMap(p => (p.imagenes || []).map(src => ({ src, marca: p.marca })))
+    .filter(x => x.src && !FOTO_BASURA.test(x.src)).slice(0, 40);
   const pruebas = await Promise.all(candidatas.map(x => cargaBien(x.src)));
   let ok = candidatas.filter((x, i) => pruebas[i]);
   if (ok.length < 6) {
