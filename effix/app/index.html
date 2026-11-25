@@ -4,10 +4,12 @@
 (function(){
   var ua = navigator.userAgent || '';
   var ios = /iPhone|iPad|iPod/i.test(ua) || (/Macintosh/.test(ua) && 'ontouchend' in document);
-  var destino = ios ? 'https://apps.apple.com/co/app/feria-effix/id6809923531'
-                    : 'https://play.google.com/store/apps/details?id=com.feriaeffix.app';
   var p = new URLSearchParams(location.search);
   var campana = (p.get('c') || 'sin_campana').replace(/[^a-z0-9_-]/gi, '').slice(0, 40);
+  // Cada tienda guarda de donde vino la descarga: Play por el referrer, App Store por ct.
+  var destino = ios ? 'https://apps.apple.com/co/app/feria-effix/id6809923531?ct=meta_' + campana
+                    : 'https://play.google.com/store/apps/details?id=com.feriaeffix.app&referrer='
+                      + encodeURIComponent('utm_source=meta&utm_medium=paid&utm_campaign=' + campana);
   var px = 'https://www.facebook.com/tr?id=992672605090646&noscript=1&ev=';
   var extra = '&cd[plataforma]=' + (ios ? 'ios' : 'android') + '&cd[campana]=' + campana;
   new Image().src = px + 'PageView';
