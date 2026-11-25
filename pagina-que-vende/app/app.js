@@ -69,7 +69,6 @@ $('#f-negocio').onsubmit = async e => {
   e.preventDefault();
   E.negocio = $('#negocio').value.trim();
   if (E.negocio.length < 8) return aviso('Cuéntanos un poco más de tu negocio.', true);
-  if (!REGISTRO.hecho()) return abrir('#m-registro');
   seguirDespuesDeRegistro();
 };
 let despuesDeRegistro = null;
@@ -95,43 +94,10 @@ const REGISTRO = {
 // Link de Joako para presentar: ?modo=joako entra sin registro y no manda nada a la hoja.
 if (PARAMS.get('modo') === 'joako') REGISTRO.poner('pqv_registro', '1');
 const EVENTO = (PARAMS.get('e') || '').replace(/[^\w-]/g, '').slice(0, 40);
-// El registro se pide apenas entra la persona, así nadie se lo salta yendo al kit.
-setTimeout(() => { if (!REGISTRO.hecho() && !PARAMS.get('demo')) abrir('#m-registro'); }, 300);
-document.querySelectorAll('a.camino-kit').forEach(a => a.addEventListener('click', ev => {
-  if (REGISTRO.hecho()) return;
-  ev.preventDefault();
-  despuesDeRegistro = () => { location.href = a.href; };
-  abrir('#m-registro');
-}));
 // Con el mismo código se encuentra la grabación de esa persona en Clarity (filtro "ID personalizado").
 setTimeout(() => { try { window.clarity && window.clarity('identify', REGISTRO.visita()); } catch {} }, 1500);
 
-$('#f-registro').onsubmit = async e => {
-  e.preventDefault();
-  const datos = {
-    producto: 'Creador de Páginas',
-    nombre: $('#r-nombre').value.trim().slice(0, 80),
-    whatsapp: $('#r-whatsapp').value.trim().slice(0, 25),
-    email: $('#r-email').value.trim().slice(0, 120),
-    dedica: $('#r-dedica').value.trim().slice(0, 120),
-    negocio: (E.negocio || $('#r-dedica').value.trim()).slice(0, 300),
-    evento: EVENTO,
-    acepta_mensajes: $('#r-mensajes').checked ? 'si' : 'no',
-    visita: REGISTRO.visita(),
-    origen: location.origin + location.pathname,
-  };
-  if ($('#r-web').value) { $('#m-registro').classList.remove('abierto'); return seguirDespuesDeRegistro(); }
-  if (datos.nombre.length < 2) return aviso('Escribe tu nombre.', true);
-  if (datos.dedica.length < 3) return aviso('Cuéntanos de qué es tu negocio.', true);
-  if (datos.whatsapp.replace(/\D/g, '').length < 7) return aviso('Revisa tu número de WhatsApp.', true);
-  // Se manda por detrás (keepalive) para que la persona siga sin esperar a la hoja.
-  try { fetch(REGISTRO.URL, { method: 'POST', mode: 'no-cors', keepalive: true, headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify(datos) }).catch(() => {}); } catch {}
-  REGISTRO.poner('pqv_registro', '1');
-  try { window.medir && window.medir('registro', { visita: datos.visita }); } catch {}
-  try { window.clarity && (window.clarity('identify', datos.visita), window.clarity('set', 'registrado', 'si')); } catch {}
-  $('#m-registro').classList.remove('abierto');
-  seguirDespuesDeRegistro();
-};
+// Sin registro (2026-11-25): no se piden ni se guardan datos de quien usa la herramienta.
 
 $('#b-llave').onclick = async () => {
   const b = $('#b-llave'); b.disabled = true; b.textContent = 'Revisando tu llave…';
