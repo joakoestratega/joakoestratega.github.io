@@ -1,0 +1,242 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Pago aprobado · Black Friday Feria Effix 2027</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --negro:#000;--carbon:#0b0b0d;--grafito:#141418;--linea:#26262c;
+  --blanco:#fff;--gris:#a7a7b0;--gris2:#6d6d76;
+  --rojo:#e3122b;--rojo2:#ff2a44;--verde:#22c55e;
+  --cromo:linear-gradient(180deg,#ffffff 0%,#e6e6ea 38%,#9b9ba3 62%,#f4f4f6 100%);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:radial-gradient(900px 520px at 50% 0%,#1d1d22 0%,#000 70%) #000;color:#fff;font-family:Montserrat,system-ui,sans-serif;line-height:1.5;-webkit-font-smoothing:antialiased;min-height:100vh}
+img{max-width:100%;display:block}
+a{color:inherit}
+.wrap{width:min(760px,100% - 32px);margin-inline:auto}
+.top{border-bottom:1px solid var(--linea);background:rgba(0,0,0,.7)}
+.top .wrap{display:flex;align-items:center;justify-content:space-between;padding:14px 0;gap:12px}
+.top img{width:150px}
+.seguro{font-size:12px;font-weight:700;color:var(--gris)}
+
+.ok{text-align:center;padding:42px 0 8px}
+.check{width:72px;height:72px;border-radius:50%;margin:0 auto 18px;display:grid;place-items:center;background:rgba(34,197,94,.14);border:2px solid var(--verde)}
+.check svg{width:34px;height:34px}
+.ok h1{font-size:clamp(28px,6vw,42px);font-weight:900;line-height:1.05;text-transform:uppercase}
+.ok p{color:#d9d9de;font-size:17px;margin-top:12px}
+.ok p b{color:#fff}
+
+.resumen{margin:26px 0 0;padding:18px 22px;border-radius:18px;background:var(--grafito);border:1px solid var(--linea);display:grid;grid-template-columns:1fr auto;gap:6px 16px;font-size:15px}
+.resumen span{color:var(--gris);white-space:nowrap}
+.resumen b{text-align:right}
+.resumen .total b{font-size:18px}
+
+.pasos{display:flex;gap:8px;justify-content:center;margin:34px 0 8px;font-size:12px;font-weight:800;letter-spacing:.1em;text-transform:uppercase}
+.pasos div{display:flex;align-items:center;gap:8px;color:var(--gris2)}
+.pasos div i{width:24px;height:24px;border-radius:50%;display:grid;place-items:center;font-style:normal;background:#1b1b20;border:1px solid #2e2e35}
+.pasos div.hecho{color:var(--verde)}.pasos div.hecho i{background:rgba(34,197,94,.14);border-color:var(--verde)}
+.pasos div.ahora{color:#fff}.pasos div.ahora i{background:linear-gradient(180deg,var(--rojo2),var(--rojo));border-color:transparent}
+.pasos .raya{width:26px;height:1px;background:#33333a;align-self:center}
+
+.caja{margin:18px 0 0;padding:30px 26px;border-radius:24px;background:linear-gradient(180deg,#17171b,#0c0c0f);border:1px solid #2a2a31}
+.caja h2{font-size:clamp(22px,4.4vw,30px);font-weight:900;text-transform:uppercase;line-height:1.1}
+.caja .bajada{color:var(--gris);margin-top:8px;font-size:16px}
+.persona{margin-top:26px;padding:22px 20px;border-radius:18px;border:1px solid var(--linea);background:#0f0f12}
+.persona h3{display:flex;align-items:center;gap:10px;font-size:15px;font-weight:900;letter-spacing:.08em;text-transform:uppercase}
+.persona h3 .num{width:30px;height:30px;border-radius:50%;display:grid;place-items:center;background:var(--cromo);color:#000;font-size:15px}
+.persona h3 .tag{margin-left:auto;font-size:11px;font-weight:800;letter-spacing:.1em;padding:5px 10px;border-radius:999px;background:rgba(227,18,43,.16);border:1px solid rgba(227,18,43,.5)}
+.soyyo{display:flex;align-items:center;gap:10px;margin-top:14px;font-size:15px;font-weight:600;cursor:pointer}
+.soyyo input{width:20px;height:20px;accent-color:var(--rojo)}
+.campos{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:16px}
+.campo{display:flex;flex-direction:column;gap:6px}
+.campo.ancho{grid-column:1/-1}
+.campo label{font-size:13px;font-weight:700;color:#d9d9de}
+.campo input,.campo select{width:100%;padding:14px 14px;border-radius:12px;border:1px solid #33333a;background:#18181c;color:#fff;font:600 16px Montserrat,sans-serif;outline:none}
+.campo input:focus,.campo select:focus{border-color:var(--rojo2);box-shadow:0 0 0 3px rgba(227,18,43,.25)}
+.campo input::placeholder{color:#5f5f68;font-weight:500}
+.doc{display:grid;grid-template-columns:110px 1fr;gap:8px}
+.error{display:none;font-size:13px;color:#ff6b7c;font-weight:600}
+.campo.mal input{border-color:var(--rojo2)}.campo.mal .error{display:block}
+
+.btn{display:flex;width:100%;align-items:center;justify-content:center;gap:10px;margin-top:26px;padding:19px 24px;border-radius:999px;font:900 17px Montserrat,sans-serif;letter-spacing:.04em;text-transform:uppercase;cursor:pointer;border:0;color:#fff;background:linear-gradient(180deg,var(--rojo2),var(--rojo));box-shadow:0 0 0 1px rgba(255,255,255,.18) inset,0 10px 40px rgba(227,18,43,.4);transition:transform .15s}
+.btn:hover{transform:translateY(-2px)}
+.despues{display:block;text-align:center;margin-top:16px;font-size:14px;color:var(--gris);font-weight:600;background:none;border:0;width:100%;cursor:pointer;font-family:inherit;text-decoration:underline}
+.nota{margin-top:18px;font-size:13px;color:var(--gris2);text-align:center}
+
+.app{margin:18px 0 0;padding:24px 22px;border-radius:20px;border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.04);display:flex;gap:18px;align-items:center}
+.app .ico{flex:none;width:58px;height:58px;border-radius:16px;background:var(--cromo);display:grid;place-items:center}
+.app .ico svg{width:30px;height:30px}
+.app h4{font-size:17px;font-weight:900}
+.app p{color:var(--gris);font-size:15px;margin-top:2px}
+.tiendas{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
+.tiendas a{padding:10px 16px;border-radius:12px;background:#fff;color:#000;font-weight:800;font-size:13px;text-decoration:none}
+
+.listo{display:none}
+body.enviado .formulario{display:none}
+body.enviado .listo{display:block}
+.asignada{display:flex;align-items:center;gap:14px;margin-top:14px;padding:16px 18px;border-radius:16px;background:#0f0f12;border:1px solid var(--linea)}
+.asignada .num{flex:none;width:34px;height:34px;border-radius:50%;display:grid;place-items:center;background:rgba(34,197,94,.14);border:1px solid var(--verde);color:var(--verde);font-weight:900}
+.asignada b{display:block;font-size:16px}
+.asignada span{color:var(--gris);font-size:14px}
+
+footer{padding:40px 0 30px;text-align:center;color:var(--gris2);font-size:12px}
+@media (max-width:600px){
+  .caja{padding:24px 16px}
+  .persona{padding:18px 14px}
+  .campos{grid-template-columns:1fr}
+  .pasos{gap:6px;font-size:10px}.pasos .raya{width:12px}
+  .app{flex-direction:column;align-items:flex-start}
+  .resumen{font-size:14px}
+}
+</style>
+</head>
+<body>
+
+<div class="top"><div class="wrap">
+  <img src="assets/logo-bf.png" alt="Black Friday Feria Effix">
+  <span class="seguro">🔒 Pago 100% seguro</span>
+</div></div>
+
+<main class="wrap">
+
+  <section class="ok">
+    <div class="check"><svg viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7"/></svg></div>
+    <h1>Tu pago fue aprobado</h1>
+    <p>Compraste <b data-nombre>Pasaporte VIP</b> en 2x1. <b>Tienes 2 entradas</b> para la Feria Effix 2027.</p>
+  </section>
+
+  <div class="resumen">
+    <span>Entrada</span><b data-nombre>Pasaporte VIP</b>
+    <span>Cantidad</span><b>2 entradas (2x1)</b>
+    <span>Días</span><b data-dias>Del 26 al 30 de agosto de 2027</b>
+    <span>Lugar</span><b>Plaza Mayor, Medellín</b>
+    <span>Número de compra</span><b>BF27-004821</b>
+    <span class="total">Total pagado</span><b class="total" data-precio>$1.155.000 COP</b>
+  </div>
+
+  <div class="pasos" aria-hidden="true">
+    <div class="hecho"><i>✓</i>Pago</div><span class="raya"></span>
+    <div class="ahora formulario-paso"><i>2</i>Quién va</div><span class="raya"></span>
+    <div class="fin-paso"><i>3</i>Listo</div>
+  </div>
+
+  <!-- PASO 2: datos de las dos personas -->
+  <section class="caja formulario">
+    <h2>¿Quiénes van a usar las 2 entradas?</h2>
+    <p class="bajada">Escribe los datos de cada persona. La entrada queda a su nombre y con ese documento entra a la feria.</p>
+
+    <form id="f" novalidate data-clarity-mask="true">
+      <div class="persona">
+        <h3><span class="num">1</span>Entrada 1 <span class="tag" data-nombre>Pasaporte VIP</span></h3>
+        <label class="soyyo"><input type="checkbox" id="soyyo" checked> Esta entrada es para mí</label>
+        <div class="campos" id="p1">
+          <div class="campo ancho"><label for="n1">Nombre y apellido</label><input id="n1" value="Laura Gómez Restrepo" autocomplete="name" required><span class="error">Escribe el nombre y el apellido.</span></div>
+          <div class="campo"><label for="d1">Documento</label><div class="doc"><select aria-label="Tipo de documento"><option>C.C.</option><option>C.E.</option><option>Pasaporte</option><option>T.I.</option></select><input id="d1" value="1036654321" inputmode="numeric" required></div><span class="error">Escribe el número de documento.</span></div>
+          <div class="campo"><label for="c1">Celular (WhatsApp)</label><input id="c1" value="300 123 4567" inputmode="tel" required><span class="error">Escribe un celular de 10 números.</span></div>
+          <div class="campo ancho"><label for="e1">Correo</label><input id="e1" type="email" value="laura.gomez@correo.com" required><span class="error">Escribe un correo válido.</span></div>
+        </div>
+      </div>
+
+      <div class="persona">
+        <h3><span class="num">2</span>Entrada 2 <span class="tag" data-nombre>Pasaporte VIP</span></h3>
+        <div class="campos">
+          <div class="campo ancho"><label for="n2">Nombre y apellido</label><input id="n2" placeholder="Ej: Andrés Pérez Gómez" autocomplete="off" required><span class="error">Escribe el nombre y el apellido.</span></div>
+          <div class="campo"><label for="d2">Documento</label><div class="doc"><select aria-label="Tipo de documento"><option>C.C.</option><option>C.E.</option><option>Pasaporte</option><option>T.I.</option></select><input id="d2" placeholder="Número" inputmode="numeric" required></div><span class="error">Escribe el número de documento.</span></div>
+          <div class="campo"><label for="c2">Celular (WhatsApp)</label><input id="c2" placeholder="300 000 0000" inputmode="tel" required><span class="error">Escribe un celular de 10 números.</span></div>
+          <div class="campo ancho"><label for="e2">Correo</label><input id="e2" type="email" placeholder="nombre@correo.com" required><span class="error">Escribe un correo válido.</span></div>
+        </div>
+      </div>
+
+      <button class="btn" type="submit">Enviar datos</button>
+      <button class="despues" type="button" id="despues">Todavía no tengo los datos de la segunda persona</button>
+    </form>
+  </section>
+
+  <!-- PASO 3: confirmación -->
+  <section class="caja listo">
+    <h2>Listo. Tus 2 entradas quedaron asignadas</h2>
+    <p class="bajada">Cada persona entra a la feria con su documento.</p>
+    <div class="asignada"><div class="num">1</div><div><b id="r1">Laura Gómez Restrepo</b><span id="rd1">C.C. 1036654321</span></div></div>
+    <div class="asignada"><div class="num">2</div><div><b id="r2">Andrés Pérez Gómez</b><span id="rd2">C.C. 1017123456</span></div></div>
+  </section>
+
+  <div class="app">
+    <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="2.5" width="12" height="19" rx="2.5"/><path d="M10.5 18.5h3"/></svg></div>
+    <div>
+      <h4>Mira o cambia tus entradas en la app de Feria Effix</h4>
+      <p>Entra con el correo de tu compra. Ahí ves tus 2 entradas y puedes cambiar los datos de cada persona.</p>
+      <div class="tiendas"><a href="#">Descargar en App Store</a><a href="#">Descargar en Google Play</a></div>
+    </div>
+  </div>
+
+  <p class="nota">También te enviamos el resumen de tu compra al correo.</p>
+</main>
+
+<footer>© Feria Effix · feriaeffix.com · @feriaeffix · Aplican términos y condiciones</footer>
+
+<script>
+(function(){
+  var E={general:{n:'Pasaporte General 3 días',d:'27, 28 y 29 de agosto de 2027',p:'$201.300 COP'},
+         vip:{n:'Pasaporte VIP',d:'Del 26 al 30 de agosto de 2027',p:'$1.155.000 COP'},
+         black:{n:'Experiencia Black',d:'Del 26 al 30 de agosto de 2027',p:'$3.997.000 COP'}};
+  var q=new URLSearchParams(location.search), t=E[q.get('entrada')]||E.vip;
+  document.querySelectorAll('[data-nombre]').forEach(function(x){x.textContent=t.n});
+  document.querySelector('[data-dias]').textContent=t.d;
+  document.querySelector('[data-precio]').textContent=t.p;
+
+  var guardado={n1:'',d1:'',c1:'',e1:''};
+  document.getElementById('soyyo').addEventListener('change',function(){
+    ['n1','d1','c1','e1'].forEach(function(id){
+      var i=document.getElementById(id);
+      if(this.checked){i.value=guardado[id]||i.defaultValue}else{guardado[id]=i.value;i.value=''}
+    },this);
+  });
+
+  function ok(id){
+    var i=document.getElementById(id), v=i.value.trim(), c=i.closest('.campo'), b=true;
+    if(id[0]==='n') b=v.split(/\s+/).length>=2;
+    if(id[0]==='d') b=v.replace(/\D/g,'').length>=5;
+    if(id[0]==='c') b=v.replace(/\D/g,'').length===10;
+    if(id[0]==='e') b=/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(v);
+    c.classList.toggle('mal',!b); return b;
+  }
+  function pasoFinal(){
+    document.body.classList.add('enviado');
+    var p=document.querySelectorAll('.pasos div');
+    p[1].className='hecho';p[1].querySelector('i').textContent='✓';p[2].className='ahora';
+    window.scrollTo({top:document.querySelector('.pasos').offsetTop-20,behavior:'smooth'});
+  }
+  document.getElementById('f').addEventListener('submit',function(e){
+    e.preventDefault();
+    var ids=['n1','d1','c1','e1','n2','d2','c2','e2'], todo=true;
+    ids.forEach(function(id){ if(!ok(id)) todo=false });
+    if(!todo){ document.querySelector('.campo.mal input').focus(); return }
+    var docs=document.querySelectorAll('.doc select');
+    document.getElementById('r1').textContent=document.getElementById('n1').value.trim();
+    document.getElementById('rd1').textContent=docs[0].value+' '+document.getElementById('d1').value.trim();
+    document.getElementById('r2').textContent=document.getElementById('n2').value.trim();
+    document.getElementById('rd2').textContent=docs[1].value+' '+document.getElementById('d2').value.trim();
+    if(window.medir) window.medir('enviar_datos_entradas');
+    pasoFinal();
+  });
+  document.getElementById('despues').addEventListener('click',function(){
+    var l=document.querySelector('.listo');
+    l.querySelector('h2').textContent='Tu entrada 2 queda pendiente';
+    l.querySelector('.bajada').textContent='Puedes asignarla cuando quieras desde la app de Feria Effix. Mientras tanto, las 2 entradas están a tu nombre.';
+    document.getElementById('r2').textContent='Sin asignar';
+    document.getElementById('rd2').textContent='Asígnala en la app de Feria Effix';
+    document.getElementById('r1').textContent=document.getElementById('n1').value.trim()||'Tú';
+    if(window.medir) window.medir('asignar_despues');
+    pasoFinal();
+  });
+})();
+</script>
+<script src="/assets/medir.js" data-pagina="mockup-effix-black-friday-gracias" defer></script>
+</body>
+</html>
